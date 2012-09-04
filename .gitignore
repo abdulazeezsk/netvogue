@@ -5,6 +5,7 @@ build
 target
 *.swp
 */target
+*/tomcat.8080
 
 .project
 .settings
