@@ -1,4 +1,4 @@
-server="/Azeez/code/netvogue/Server"
+server="/Azeez/code/netvoguegit/Server"
 jboss="/Azeez/Softwares/jboss-as-7.1.1.Final"
 
 cd $server

@@ -1,0 +1,15 @@
+**/.DS_Store
+manifest.mf
+build.xml
+build
+target
+*.swp
+*/target
+
+.project
+.settings
+.idea/*
+.DS_Store
+script.bat
+org.eclipse.core.resources.prefs
+Server/netvogue_web/.settings/org.eclipse.core.resources.prefs
