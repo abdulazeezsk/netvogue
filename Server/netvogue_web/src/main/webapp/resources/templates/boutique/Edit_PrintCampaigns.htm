@@ -1,0 +1,81 @@
+<div class="container minumum_height">
+    <div class="row">
+        <!-- right pannel -->
+        <div class="span3">
+         
+            <div>
+                <span class="left">
+                    <h4 class="subHeading_no_underline">
+                        Print Campaign</h4>
+                </span><span class="right"><a href="#" class="add_edit"></a></span>
+                <div class="divi2 topborderline">
+                </div>
+            </div>
+            <ul class="thumbnails">
+                <li class="span3" ng-repeat="printcampign in printcampaigns | limitTo:1">
+                    <div>
+                        <a href="#/{{printcampign.printcampaignlistitemid}/profile">
+                            <img alt="" ng-src="{{printcampign.printcampaigncoverpic}}" class="pull-left"></a>
+                        <a href="#/{{printcampign.printcampaignlistitemid}}/profile" class="brandname_title">
+                            {{printcampign.printcampaignname}}</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- right pannel -->
+        <!-- left pannel -->
+        <div class="span9">
+            <div>
+                <span class="left">
+                    <h4 class="subHeading_no_underline">
+                        Edit Print Campaign</h4>
+                </span><span class="right"><a href="#{{backButton}}" class="add_edit">Back</a></span>
+                <div class="divi2 topborderline">
+                </div>
+            </div>
+            <form novalidate class="form-horizontal css-form" name="form" id="Form1" action="server/php/"
+            method="POST" enctype="multipart/form-data">
+            <!-- data pannel -->
+            <div class="control-group pull-left">
+                <label class="control-label">
+                    Campaign Name</label>
+                <div class="controls">
+                    <input type="text" class="span4" placeholder="Title" id="txtSeason" maxlength="25"
+                        ng-model="printcampaign.title" name="uSeason" required />
+                    <div ng-show="form.uSeason.$dirty && form.uSeason.$invalid">
+                        <span ng-show="form.uSeason.$error.required" class="validation_msg">Title Is Required</span>
+                    </div>
+                </div>
+                <div class="divi2">
+                </div>
+                <label class="control-label">
+                    Description</label>
+                <div class="controls">
+                    <textarea class="span4" id="txtDescription" placeholder="Description" rows="5" ng-model="printcampaign.description"
+                        name="uDescription" ng-maxlength="200" required></textarea>
+                    <div ng-show="form.uDescription.$dirty && form.uDescription.$invalid">
+                        <span ng-show="form.uDescription.$error.required" class="validation_msg">Description
+                            is Required</span> <span ng-show="form.uDescription.$error.maxlength" class="validation_msg">
+                                Description Not To Exceed 200 Characters</span>
+                    </div>
+                </div>
+                <div class="divi2">
+                </div>
+                <label class="control-label">
+                    Privacy</label>
+                <div class="controls">
+                    <select id="ddlPrivacy" class="span4" ng-model="printcampaign.privacytype" ng-init="printcampaign.privacytype = privacyset[0]"
+                        ng-options="privacy.privacytype for privacy in privacyset">
+                    </select>
+                </div>
+                <div class="divi2">
+                </div>
+                <div class="span-update">
+                    <input type="button" class="btn btn-primary pull-right" value="Update & Exit" ng-disabled="form.$invalid"
+                        ng-click="UpdatePrintcampaign(printcampaign)" /></div>
+            </div>
+            </form>
+        </div>
+        <!-- left pannel -->
+    </div>
+</div>

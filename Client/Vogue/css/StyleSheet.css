@@ -1,0 +1,37 @@
+﻿        .btn-primary {
+  background-color: #0074cc !important;
+  *background-color: #0055cc !important;
+  background-repeat: repeat-x !important;
+   border-left-color: #0055cc;
+    border-right-color: #0055cc;
+    border-top-color: #0055cc;
+    border-bottom-color: #003580;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25) !important;
+ background-image: none;
+    filter: none;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+  background-color: #0055cc !important;
+  *background-color: #004ab3 !important;
+}
+
+.btn-primary:active,
+.btn-primary.active {
+  background-color: #004099 \9 !important;
+}
+
+
+
+.small_brandprofile , .small_boutiqueprofile
+{
+color: black;
+font:normal 14px Verdana;
+text-transform:uppercase;
+border-bottom:solid 1px rgba(0, 0, 0, 1);
+width:130px;
+}

@@ -1,0 +1,205 @@
+<!--body-->
+<div class="container minumum_height">
+    <div class="row">
+        <!-- left pannel -->
+        <div ng-include src="'templates/boutique/LeftMain_Panel.htm'">
+        </div>
+        <!-- left pannel -->
+        <!-- middle pannel -->
+        <div class="span7">
+            <div>
+                <div style="border-bottom: 1px solid Black;">
+                    <span class="subHeading_no_underline">{{entityname}}<span class="right" ng-show="isMyProfile"><a
+                        href="#profilesettings?t=0" class="add_edit adjust_height">EDIT</a></span> </span>
+                </div>
+               <div ui-if="null == aboutus || '' == aboutus">
+                    <p class="noInfo">
+                        No Info Available
+                    </p>
+                </div>
+                <br />
+                <ul class="thumbnails" ui-if="null != aboutus && '' != aboutus">
+                    <li>
+                        <div>
+                             <p>{{aboutus}}</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <div style="border-bottom: 1px solid Black;">
+                    <span class="subHeading_no_underline">Product Line<span class="right" ng-show="isMyProfile"><a
+                        href="#profilesettings?t=1" class="add_edit adjust_height">EDIT</a></span> </span>
+                </div>
+                <div ui-if="0 == productline.length">
+                    <p class="noInfo">
+                        No Info Available
+                    </p>
+                </div>
+                <div class="ProductLine" ui-if="0 != productline.length">
+                    <ul>
+                        <li ng-repeat="product in productline | orderBy:product.productlinename" ng-show="product.selected">
+                            <div>
+                                 <input type="checkbox" class="productline_text" checked="checked" disabled="disabled" />
+                                {{product.productlinename}}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                 <div class="divi2"></div>
+            </div>
+            <div>
+                <div style="border-bottom: 1px solid Black;">
+                    <span class="subHeading_no_underline" ui-if="!iambrand">Brands Carried <span class="right" ng-show="isMyProfile">
+                        <a href="#profilesettings?t=2" class="add_edit adjust_height">EDIT</a></span>
+                    </span>
+                    <span class="subHeading_no_underline" ui-if="iambrand">Stockists <span class="right" ng-show="isMyProfile">
+                        <a href="#profilesettings?t=2" class="add_edit adjust_height">EDIT</a></span>
+                    </span>
+                </div>
+                <div ui-if="0 == brandscarried.length">
+                    <p class="noInfo">
+                        No Info Available
+                    </p>
+                </div>
+                <div class="BrandsCarried" ui-if="0 != brandscarried.length">
+                    <ul>
+                        <li ng-repeat="brand in brandscarried">
+                            <div class="thumbnail_noborder">
+                                <img src="http://profile.ak.fbcdn.net/hprofile-ak-snc4/157978_103633389671658_279995887_n.jpg" alt="">
+                                <h5 class="brandscarried_text">
+                                    {{brand.brandname}}</h5>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="divi2"></div>
+            </div>
+            <div>
+                <div style="border-bottom: 1px solid Black;">
+                    <span class="subHeading_no_underline">Contact Info<span class="right" ng-show="isMyProfile"><a
+                        href="#profilesettings?t=4" class="add_edit adjust_height">EDIT</a></span> </span>
+                </div>
+                <br />
+                <div ui-if="null == contactinfo">
+                    <p class="noInfo">
+                        No Info Available
+                    </p>
+                </div>
+                <div ui-if="null != contactinfo">
+                      <ul style="list-style-type: none;">
+                        <li>
+                            <div>
+                                <p>
+                                    <span class="contatus_profile">Email: {{contactinfo.email}}</span></p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <p>
+                                    <span class="contatus_profile">Mobile: {{contactinfo.mobile}}</span></p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <p>
+                                    <span class="contatus_profile">Landline: {{contactinfo.landline1}}</span></p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <p>
+                                    <span class="contatus_profile">Address: {{contactinfo.address}}</span></p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <p>
+                                    <span class="contatus_profile">City: {{contactinfo.city}}</span></p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <p>
+                                    <span class="contatus_profile">Zip: {{contactinfo.zip}}</span></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- middle pannel -->
+        <!-- right pannel -->
+        <div class="span3">
+            <div ng-show="{{myfriend}}">
+                <ul class="thumbnails">
+                    <li class="span2">
+                        <div class="add_to_network">
+                            <a data-toggle="modal" href="#myModal" style="text-decoration: none;">
+                                <button type="submit" onclick="#myModal" class="btn btn-primary">
+                                    Add to my network</button>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="subHeading_advertisement">
+                    TRENDING</h4>
+                <div class="divi2">
+                </div>
+                <ul class="nav nav-tab nav-stacked">
+                    <li ng-repeat="trend in trending">
+                        <div class="advertisementfeed">
+                            <div class="brand_image">
+                                <a href="#/{{trend.trendlistitemID}}">
+                                    <img alt="" ng-src="{{trend.trendpiclink}}" class="pull-left"></a></div>
+                            <div class="advertisement_text">
+                                <h3>
+                                    <a href="#/{{trend.trendlistitemID}}" title="">{{trend.trendlistitem}}</a></h3>
+                                <p>
+                                    {{trend.post}}</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- right pannel -->
+    </div>
+</div>
+<!-- modal -->
+<div class="modal  hide" id="myModal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+        </button>
+        <h4 class="subHeading_no_underline">
+            Add To Network</h4>
+    </div>
+    <!--<div class="modal-body">
+        <textarea style="width: 500px;" rows="9" placeholder="Type a message"></textarea>
+    </div>-->
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a> <a href="#" class="btn btn-primary">
+            Send Request</a>
+    </div>
+</div>
+<!-- modal -->
+<!-- modal -->
+<div class="modal  hide" id="invite">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+        </button>
+        <h4 class="subHeading_no_underline">
+            Send Invite</h4>
+    </div>
+    <div class="modal-body">
+        <input type="text" style="width: 500px;" placeholder="Enter email" />
+        <textarea style="width: 500px;" rows="9" placeholder="Type a message"></textarea>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a> <a href="#" class="btn btn-primary">
+            Send Request</a>
+    </div>
+</div>
+<!-- modal -->

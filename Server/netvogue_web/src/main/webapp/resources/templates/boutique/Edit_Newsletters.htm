@@ -1,0 +1,97 @@
+<div class="container minumum_height">
+    <div class="row">
+        <!-- left pannel -->
+        <div class="span3">
+            <h4 class="subHeading_advertisement">
+                Editorial(cover)</h4>
+            <div class="divi2">
+            </div>
+            <ul class="thumbnails">
+                <li class="span3" ng-repeat="newsletter in newsletterscover">
+                    <div>
+                        <a href="#/{{newsletter.newsletterlistitemid}/profile">
+                            <img alt="" ng-src="{{newsletter.newslettercoverpic}}" class="pull-left"></a>
+                        <a href="#/{{newsletter.newsletterlistitemid}}/profile" class="brandname_title">{{linesheet.linesheetseason}}</a>
+                    </div>
+                </li>
+            </ul>
+            <div>
+                <h4 class="subHeading_advertisement">
+                    Editorial</h4>
+                <div class="divi2">
+                </div>
+                <ul class="nav nav-tab nav-stacked">
+                    <li ng-repeat="newsletter in newsletters">
+                        <div class="advertisementfeed">
+                            <div class="brand_image">
+                                <a href="#/{{newsletter.newsletterlistitemid}}">
+                                    <img alt="" ng-src="{{newsletter.newslettercoverpic}}" class="pull-left"></a></div>
+                            <div class="advertisement_text">
+                                <h3>
+                                    <a href="#/{{newsletter.newsletterlistitemid}}" title="">{{style.stylename}}</a></h3>
+                                <p>
+                                    {{style.stylename}}</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- left pannel -->
+        <!-- right pannel -->
+        <div class="span9">
+            <div>
+                <span class="left">
+                    <h4 class="subHeading_no_underline">
+                        Edit Etidtorial</h4>
+                </span><span id="span1" class="right"><a href="#{{backButton}}" class="add_edit adjust_height">
+                    Back</a></span>
+                <div class="divi2 topborderline">
+                </div>
+            </div>
+            <form novalidate class="form-horizontal css-form" name="form" id="Form1" action="server/php/"
+            method="POST" enctype="multipart/form-data">
+            <!-- data pannel -->
+            <div class="control-group pull-left">
+                <label class="control-label">
+                    Title</label>
+                <div class="controls">
+                    <input type="text" class="span4" placeholder="Title" maxlength="25" ng-model="newsletter.title"
+                        name="uTitle" required />
+                    <div ng-show="form.uTitle.$dirty && form.uTitle.$invalid">
+                        <span ng-show="form.uTitle.$error.required" class="validation_msg">Title Is Required</span>
+                    </div>
+                </div>
+                <div class="divi2">
+                </div>
+                <label class="control-label">
+                    Description</label>
+                <div class="controls">
+                    <textarea class="span4" id="txtDescription" placeholder="Description" rows="5" ng-model="newsletter.description"
+                        name="uDescription" ng-maxlength="200" required></textarea>
+                    <div ng-show="form.uDescription.$dirty && form.uDescription.$invalid">
+                        <span ng-show="form.uDescription.$error.required" class="validation_msg">Description
+                            is Required</span> <span ng-show="form.uDescription.$error.maxlength" class="validation_msg">
+                                Description Not To Exceed 200 Characters</span>
+                    </div>
+                </div>
+                <div class="divi2">
+                </div>
+                <label class="control-label">
+                    Privacy</label>
+                <div class="controls">
+                    <select id="ddlPrivacy" class="span4" ng-model="newsletter.privacytype" ng-init="newsletter.privacytype = privacyset[0]"
+                        ng-options="privacy.privacytype for privacy in privacyset">
+                    </select>
+                </div>
+                <div class="divi2">
+                </div>
+                <div class="span-update">
+                    <input type="button" class="btn btn-primary pull-right" value="Update & exit" ng-disabled="form.$invalid"
+                        ng-click="UpdateNewsletter(newsletter)" /></div>
+            </div>
+            </form>
+        </div>
+        <!-- right pannel -->
+    </div>
+</div>

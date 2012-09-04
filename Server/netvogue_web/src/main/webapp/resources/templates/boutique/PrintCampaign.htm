@@ -1,0 +1,87 @@
+<!--body-->
+<div class="container">
+    <div class="row">
+        <!-- left-pannel -->
+        <div class="span2">
+            <h4 class="small_boutiqueprofile">
+                Boutique</h4>
+            <div class="divi2">
+            </div>
+            <ul class="thumbnails">
+                <li class="span2">
+                    <div>
+                        <a href="#profile">
+                            <img alt="" src="http://9.mshcdn.com/follow/uploads/topic/image/56/95/2d/9f/81/84/thumb_fashion-d0326c6d2d.jpeg" class="pull-left"></a> <a href="#profile"
+                                class="brandname_title">{{entityname}}</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="search_box">
+                <h2>
+                    FILTERS</h2>
+                <div class="advanced_search">
+                    <h4>
+                        Title</h4>
+                    <input type="text" class="adv_sch" />
+                    <h4>
+                        DESCRIPTION</h4>
+                    <input type="text" class="adv_sch" />
+                </div>
+            </div>
+        </div>
+        <!-- left-pannel -->
+        <!-- right pannel -->
+        <div class="span10">
+            <div>
+                <span class="left">
+                    <h4 class="subHeading_no_underline">
+                        Print Campaign</h4>
+                </span><span class="right"><a ng-href="#{{backButton}}" class="add_edit adjust_height">
+                    Back</a></span>
+                <div class="divi2 topborderline">
+                </div>
+                <span class="left">
+                    <h5 class="info">
+                        Find Print Campaigns using the filters</h5>
+                </span><span id="span_btns" class="right" ng-show="isMyProfile"><a href="#/addprintcampaign"
+                    class="add_edit adjust_height">Add</a></span>
+                <div class="divi2 topborderline">
+                </div>
+                <ul class="thumbnails">
+                    <li ng-repeat="printcampign in printcampaigns">
+                        <div class="view view-first">
+                            <a href="#/{{printcampign.campaignlistitemid}}">
+                                <img src="{{printcampign.campaigncoverpic}}" alt=""></a>
+                            <div class="mask">
+                            </div>
+                            <div class="content">
+                                <div class="mask">
+                                    <ul ng-show="isMyProfile">
+                                        <li><a href="#" title="Delete"><i class="icon-trash icon-white"></i></a></li>
+                                        <li><a href="#/editprintcampaigns" title="Edit"><i class="icon-edit icon-white"></i>
+                                        </a></li>
+                                    </ul>
+                                    <p>
+                                        <u>{{printcampign.campaignname}}</u>
+                                        <br />
+                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                        Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                        unknown printer took a galley of type i</p>
+                                    <h1>
+                                        <a href="#/printcampaign/:printid" class="mask_edit">view</a></h1>
+                                </div>
+                            </div>
+                            <div class="divi2">
+                            </div>
+                        </div>
+                        <div class="brandtitle_price">
+                            <h3>
+                                {{printcampign.campaignname}}</h3>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- right pannel -->
+</div>

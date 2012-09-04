@@ -1,0 +1,361 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Linesheets</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/StyleSheet.css" rel="stylesheet" />
+    <link href="css/datepicker.css" rel="Stylesheet" />
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="css/jquery.tree.css" />
+    <!-- start tree configuration -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tree.js"></script>
+    <script type="text/javascript" src="js/jquery.treeajax.js"></script>
+    <script type="text/javascript" src="js/jquery.treecheckbox.js"></script>
+    <script type="text/javascript" src="js/jquery.treecollapse.js"></script>
+    <script type="text/javascript" src="js/jquery.treecontextmenu.js"></script>
+    <script type="text/javascript" src="js/jquery.treednd.js"></script>
+    <!--    <script type="text/javascript" src="src/js/jquery.treemanipulate.js"></script> -->
+    <script type="text/javascript" src="js/jquery.treeselect.js"></script>
+    <script type="text/javascript">
+        //<!--
+        $(document).ready(function () {
+            $("#accordion").accordion({
+                'collapsible': true,
+                'active': -1
+            });
+            $('.jquery').each(function () {
+                eval($(this).html());
+            });
+            $('.button').button();
+        });
+        //-->
+    </script>
+    <style type="text/css">
+        body
+        {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+    </style>
+</head>
+<body>
+    <!-- header -->
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
+                    class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </a><a class="brand span2" href="boutique_Corner.htm">Net Vogue</a>
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li><a href="#"><i class="icon-envelope icon-Black"></i></a></li>
+                        <li><a href="#"><i class="icon-globe icon-Black"></i></a></li>
+                    </ul>
+                    <form class="navbar-search" action="">
+                    <input type="text" class="search-query span3" placeholder="Search">
+                    </form>
+                    <ul class="nav">
+                    </ul>
+                    <ul class="nav pull-right">
+                        <li><a href="boutique_Profile.htm">Boutique Name</a></li>
+                        <!--  <li><a href="#">My shop</a></li>
+                        <li><a href="#">My Cart</a></li>-->
+                        <li><a href="boutique_AdvSearch.htm">Find Brands</a></li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Account
+                            <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="boutique_Account_Settings.htm">Account settings</a></li>
+                                <li><a href="boutique_Proile_Settings.htm">Profile settings</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Sign out</a></li>
+                    </ul>
+                </div>
+                <!-- /.nav-collapse -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.navbar-inner -->
+    </div>
+    <!-- /.navbar -->
+    <!-- header -->
+    <!--body-->
+    <div class="container">
+        <div class="row">
+            <!-- left-pannel -->
+            <div class="span2">
+                <h4 class="small_boutiqueprofile">
+                    Boutique</h4>
+                <div class="divi2">
+                </div>
+                <ul class="thumbnails">
+                    <li class="span2">
+                        <div>
+                            <a href="boutique_Profile.htm">
+                                <img alt="" src="http://placehold.it/50x50" class="pull-left"></a> <a href="boutique_Profile.htm"
+                                    class="brandname_title">Boutique Name</a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="search_box">
+                    <h2>
+                        FILTERS</h2>
+                    <div class="advanced_search">
+                        <h4>
+                            Season</h4>
+                        <input type="text" class="adv_sch" />
+                    </div>
+                    <div class="advanced_search">
+                        <h4>
+                            DELIVERY DATE</h4>
+                        <h4>
+                            FROM</h4>
+                        <input type="text" class="adv_sch" id="dp1" />
+                        <h4>
+                            TO</h4>
+                        <input type="text" class="adv_sch" id="dp2" />
+                    </div>
+                    <div class="clr">
+                    </div>
+                    <h3>
+                        category</h3>
+                    <div class="clr">
+                    </div>
+                    <div>
+                        <div id="category">
+                            <div style="border-color: White; width: 150px;">
+                                <ul>
+                                    <li class="collapsed">
+                                        <input type="checkbox" /><span class="checkbox_font_main">APPAREL</span>
+                                        <ul>
+                                            <li class="collapsed">
+                                                <input type="checkbox" /><span class="checkbox_font">WOMEN’S RTW</span></li>
+                                        </ul>
+                                        <ul>
+                                            <li class="collapsed">
+                                                <input type="checkbox" /><span class="checkbox_font">MEN’S RTW</span></li>
+                                        </ul>
+                                        <ul>
+                                            <li class="collapsed">
+                                                <input type="checkbox" /><span class="checkbox_font">OUTERWEAR</span></li>
+                                        </ul>
+                                        <ul>
+                                            <li class="collapsed">
+                                                <input type="checkbox" /><span class="checkbox_font">DENIM</span></li>
+                                        </ul>
+                                        <ul>
+                                            <li class="collapsed">
+                                                <input type="checkbox" /><span class="checkbox_font"> ACTIVE WEAR</span></li>
+                                        </ul>
+                                        <ul>
+                                            <li class="collapsed">
+                                                <input type="checkbox" /><span class="checkbox_font">LOUNGE WEAR</span></li>
+                                        </ul>
+                                        <ul>
+                                            <li class="collapsed">
+                                                <input type="checkbox" /><span class="checkbox_font">YOGA</span></li>
+                                        </ul>
+                                        <ul>
+                                            <li class="collapsed">
+                                                <input type="checkbox" /><span class="checkbox_font">SWIM WEAR</span></li>
+                                        </ul>
+                                    </li>
+                                    <li class="collapsed">
+                                        <input type="checkbox" /><span class="checkbox_font_main">SHOES</span>
+                                        <ul>
+                                            <li class="collapsed">
+                                                <input type="checkbox" /><span class="checkbox_font">WOMEN'S SHOES</span></li>
+                                        </ul>
+                                        <ul>
+                                            <li class="collapsed">
+                                                <input type="checkbox" /><span class="checkbox_font">MEN'S SHOES</span></li>
+                                        </ul>
+                                    </li>
+                                    <li class="collapsed">
+                                        <input type="checkbox" /><span class="checkbox_font_main">HANDBAGS</span>
+                                        <ul>
+                                            <li class="collapsed">
+                                                <input type="checkbox" /><span class="checkbox_font">WOMEN'S HANDBAGS</span></li>
+                                        </ul>
+                                    </li>
+                                    <li class="collapsed">
+                                        <input type="checkbox" /><span class="checkbox_font_main">WATCHES</span>
+                                        <ul>
+                                            <li class="collapsed">
+                                                <input type="checkbox" /><span class="checkbox_font">WOMEN'S WATCHES</span></li>
+                                        </ul>
+                                        <ul>
+                                            <li class="collapsed">
+                                                <input type="checkbox" /><span class="checkbox_font">MEN'S WATCHES</span></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- left-pannel -->
+            <!-- right pannel -->
+            <div class="span10">
+                <div>
+                    <span class="left">
+                        <h4 class="subHeading_no_underline">
+                            Line Sheets</h4>
+                    </span><span class="right"><a href="boutique_Profile.htm" class="add_edit adjust_height">
+                        Back</a></span>
+                    <div class="divi2 topborderline">
+                    </div>
+                    <span class="left">
+                        <h5 class="info">
+                            Find Video Campaigns using the filters</h5>
+                    </span>
+                    <div class="divi2 topborderline">
+                    </div>
+                    <ul class="thumbnails">
+                        <li>
+                            <div class="thumbnail_noborder">
+                                <a href="boutique_Styles.htm">
+                                    <img src="http://placehold.it/231x306" alt=""></a>
+                                <div class="brandtitle_price">
+                                    <h3>
+                                        Season</h3>
+                                    <h4>
+                                        DELIVERY DATE: 25/04/2012</h4>
+                                    <p>
+                                        Brand Name</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="thumbnail_noborder">
+                                <a href="boutique_Styles.htm">
+                                    <img src="http://placehold.it/231x306" alt=""></a>
+                                <div class="brandtitle_price">
+                                    <h3>
+                                        Season</h3>
+                                    <h4>
+                                        DELIVERY DATE: 25/04/2012</h4>
+                                    <p>
+                                        Brand Name</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="thumbnail_noborder">
+                                <a href="boutique_Styles.htm">
+                                    <img src="http://placehold.it/231x306" alt=""></a>
+                                <div class="brandtitle_price">
+                                    <h3>
+                                        Season</h3>
+                                    <h4>
+                                        DELIVERY DATE: 25/04/2012</h4>
+                                    <p>
+                                        Brand Name</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="thumbnail_noborder">
+                                <a href="boutique_Styles.htm">
+                                    <img src="http://placehold.it/231x306" alt=""></a>
+                                <div class="brandtitle_price">
+                                    <h3>
+                                        Season</h3>
+                                    <h4>
+                                        DELIVERY DATE: 25/04/2012</h4>
+                                    <p>
+                                        Brand Name</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="thumbnail_noborder">
+                                <a href="boutique_Styles.htm">
+                                    <img src="http://placehold.it/231x306" alt=""></a>
+                                <div class="brandtitle_price">
+                                    <h3>
+                                        Season</h3>
+                                    <h4>
+                                        DELIVERY DATE: 25/04/2012</h4>
+                                    <p>
+                                        Brand Name</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="thumbnail_noborder">
+                                <a href="boutique_Styles.htm">
+                                    <img src="http://placehold.it/231x306" alt=""></a>
+                                <div class="brandtitle_price">
+                                    <h3>
+                                        Season</h3>
+                                    <h4>
+                                        DELIVERY DATE: 25/04/2012</h4>
+                                    <p>
+                                        Brand Name</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="thumbnail_noborder">
+                                <a href="boutique_Styles.htm">
+                                    <img src="http://placehold.it/231x306" alt=""></a>
+                                <div class="brandtitle_price">
+                                    <h3>
+                                        Season</h3>
+                                    <h4>
+                                        DELIVERY DATE: 25/04/2012</h4>
+                                    <p>
+                                        Brand Name</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="thumbnail_noborder">
+                                <a href="boutique_Styles.htm">
+                                    <img src="http://placehold.it/231x306" alt=""></a>
+                                <div class="brandtitle_price">
+                                    <h3>
+                                        Season</h3>
+                                    <h4>
+                                        DELIVERY DATE: 25/04/2012</h4>
+                                    <p>
+                                        Brand Name</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="thumbnail_noborder">
+                                <a href="boutique_Styles.htm">
+                                    <img src="http://placehold.it/231x306" alt=""></a>
+                                <div class="brandtitle_price">
+                                    <h3>
+                                        Season</h3>
+                                    <h4>
+                                        DELIVERY DATE: 25/04/2012</h4>
+                                    <p>
+                                        Brand Name</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- right pannel -->
+        </div>
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        <div class="footer_in">
+            <span>© 2012 NET VOGUE</span></div>
+    </div>
+    <!-- footer -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <code class="jquery" lang="text/javascript" style="display: none;">$('#category div').tree({
+        components: ['checkbox', 'collapse'], onCheck: { node: 'expand' }, onUncheck: {
+        node: 'collapse' } }); </code>
+</body>
+</html>

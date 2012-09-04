@@ -1,0 +1,86 @@
+<!--body-->
+<div class="container minumum_height">
+    <div class="row">
+        <!-- right pannel -->
+        <div class="span3">
+            <div>
+                <span class="left">
+                    <h4 class="subHeading_no_underline">
+                        Video</h4>
+                </span><span class="right"><a href="#" class="add_edit"></a></span>
+                <div class="divi2 topborderline">
+                </div>
+            </div>
+            <ul class="thumbnails">
+                <li ng-repeat="videocampign in videocampaigns">
+                    <div>
+                        <a href="#/{{videocampign.videocampaignlistitemid}}">
+                            <img src="{{videocampign.videocampaigncoverpic}}" alt="">
+                            <!--{{videocampign.videocampaignname}}--></a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- right pannel -->
+        <!-- left pannel -->
+        <div class="span9">
+            <div>
+                <span class="left">
+                    <h4 class="subHeading_no_underline">
+                        Edit Video Campaign</h4>
+                </span><span id="span_btns" class="right"><a href="#{{backButton}}" class="add_edit adjust_height">
+                    Back</a></span>
+                <div class="divi2 topborderline">
+                </div>
+            </div>
+            <div>
+                <!-- data pannel -->
+                <div>
+                    <form novalidate class="form-horizontal css-form" name="form" id="fileupload" action="server/php/"
+                    method="POST" enctype="multipart/form-data">
+                    <div class="control-group pull-left">
+                        <label class="control-label">
+                            Title</label>
+                        <div class="controls">
+                            <input type="text" class="span4" placeholder="Title" maxlength="25" ng-model="video.title"
+                                name="uTitle" required />
+                            <div ng-show="form.uTitle.$dirty && form.uTitle.$invalid">
+                                <span ng-show="form.uTitle.$error.required" class="validation_msg">Title Is Required</span>
+                            </div>
+                        </div>
+                        <div class="divi2">
+                        </div>
+                        <label class="control-label">
+                            Description</label>
+                        <div class="controls">
+                            <textarea class="span4" id="txtDescription" placeholder="Description" rows="5" ng-model="video.description"
+                                name="uDescription" ng-maxlength="200" required></textarea>
+                            <div ng-show="form.uDescription.$dirty && form.uDescription.$invalid">
+                                <span ng-show="form.uDescription.$error.required" class="validation_msg">Description
+                                    is Required</span> <span ng-show="form.uDescription.$error.maxlength" class="validation_msg">
+                                        Description Not To Exceed 200 Characters</span>
+                            </div>
+                        </div>
+                        <div class="divi2">
+                        </div>
+                        <label class="control-label">
+                            Privacy</label>
+                        <div class="controls">
+                            <select id="Select1" class="span4" ng-model="video.privacytype" ng-init="video.privacytype = privacyset[0]"
+                                ng-options="privacy.privacytype for privacy in privacyset">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="divi2">
+                    </div>
+                    <div class="span-update">
+                        <input type="button" class="btn btn-primary pull-right" value="Update & Exit" ng-disabled="form.$invalid"
+                            ng-click="UpdateVideocampaign(video)" /></div>
+                    </form>
+                </div>
+            </div>
+            <!-- data pannel -->
+        </div>
+        <!-- left pannel -->
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:neo4j="http://www.springframework.org/schema/data/neo4j"
+        xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/data/neo4j
+            http://www.springframework.org/schema/data/neo4j/spring-neo4j.xsd">
+            
+	<context:annotation-config />
+	<context:spring-configured />
+	
+    <!-- Neo4j configuration (creates Neo4jTemplate) -->
+    <neo4j:config graphDatabaseService="graphDatabaseService"/>
+    
+    <!-- Configuration for embedded server  
+    
+    <bean id="graphDatabaseService" class="org.neo4j.kernel.EmbeddedGraphDatabase"
+          destroy-method="shutdown" scope="singleton">
+        <constructor-arg index="0" value="target/config-test"/>
+    </bean>
+    
+     -->
+    <!-- REST Connection to Neo4j server -->
+    <bean id="graphDatabaseService" class="org.springframework.data.neo4j.rest.SpringRestGraphDatabase" scope="singleton">
+         <constructor-arg index="0" value="http://localhost:7474/db/data/" />
+    </bean>
+    
+	<!-- Package w/ automagic repositories -->
+	<neo4j:repositories base-package="org.netvogue.server.neo4japi.repository" />
+	
+	<context:component-scan base-package="org.netvogue.server.neo4japi"/>
+	
+    <context:property-placeholder location="classpath*:*.properties"/>
+	
+	<bean id="BoutiqueService" class="org.netvogue.server.neo4japi.service.BoutiqueServiceImpl" />
+	<bean id="BrandService" class="org.netvogue.server.neo4japi.service.BrandServiceImpl" />
+	<bean id="UserService" class="org.netvogue.server.neo4japi.service.UserServiceImpl" />
+	<bean id="fileManager" class="org.netvogue.server.aws.core.FileManager" factory-method="getSharedInstance"/>
+	<bean id="uploadManager" class="org.netvogue.server.aws.core.UploadManager" />
+</beans>

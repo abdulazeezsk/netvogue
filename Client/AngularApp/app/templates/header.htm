@@ -1,0 +1,124 @@
+<!-- header -->
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
+                class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            </a><a class="brand span2" href="#/corner.htm">Net Vogue</a>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li><a href="#"><i class="icon-envelope icon-Black"></i></a></li>
+                    <!-- <li><a href="#"><i class="icon-globe icon-Black"></i><span class="bubble">1</span></a></li> -->
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                        class="icon-globe icon-Black"></i><span class="bubble">{{notifications.Totalnotifications}}</span>
+                        <b class="caret"></b></a>
+                        <ul id="notification-comments" class="notification-menu span5 notify-info">
+                            <li ng-repeat="item in searchResults | filter:searchText"><a class="auto" ng-href="#/notification">
+                                <div class="clearfix">
+                                    <div class="MercuryThreadImage _8o _8s lfloat">
+                                        <img class="_s0 _rw img" src="http://placehold.it/50x50" alt=""></div>
+                                    <div class="_8m ">
+                                        <div class="content fsm fwn fcg">
+                                            <div class="author">
+                                                <strong>{{item.name}}</strong></div>
+                                            <div class="preview fsm fwn fcg">
+                                                <span>has sent you a network request request request request request</span></div>
+                                            <div class="time">
+                                                <abbr class="timestamp">
+                                                    23 August</abbr></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a></li>
+                            <div class="jewelFooter">
+                                <a class="seeMore" href="#/notification" accesskey="5"><span>Show All Notifications</span></a></div>
+                        </ul>
+            </div>
+            <form class="navbar-search dropdown" ng-class="{open: focused && searchText.length > 0}"
+             action=""  method="POST">
+            <input type="text" ng-model="searchText" style="width:310px;" class="search-query data-toggle" placeholder="Search"
+                focused="focused">
+            <ul id="Ul1" class="notification-menu span5 notify-info">
+                <li ng-repeat="item in searchResults | filter:searchText"><a class="auto" ng-href="#/advancesearch">
+                    <div class="clearfix">
+                        <div class="MercuryThreadImage _8o _8s lfloat">
+                            <img class="_s0 _rw img" src="http://placehold.it/50x50" alt=""></div>
+                        <div class="_8m ">
+                            <div class="content fsm fwn fcg">
+                                <div class="author">
+                                    <strong>{{item.name}}</strong></div>
+                                <div class="preview fsm fwn fcg">
+                                    <span>India - Hyderabad</span></div>
+                                <div class="time">
+                                    <abbr class="timestamp">
+                                        Estd August-2000</abbr></div>
+                            </div>
+                        </div>
+                    </div>
+                </a></li>
+                <div class="jewelFooter">
+                    <a class="seeMore" href="#/advancesearch" accesskey="5"><span>Show More Results</span></a></div>
+            </ul>
+            </form>
+            <ul class="nav">
+            </ul>
+            <ul class="nav pull-right">
+                <li><a href="#/profile">{{entityname}}</a></li>
+                <!--  <li><a href="#">My shop</a></li>
+                        <li><a href="#">My Cart</a></li>-->
+                <li><a href="#/advancesearch">Directory</a></li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings
+                    <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/accountsettings">Account settings</a></li>
+                        <li><a href="#/profilesettings">Profile settings</a></li>
+                        <li><a href="#/privacysettings">Privacy settings</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Account
+                    <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <!--   <li><a href="#invite" data-toggle="modal">Send Invite</a></li>-->
+                        <li><a href="#help">Help</a></li>
+                        <li><a href="userLogout">Sign out</a></li>
+                    </ul>
+                </li>
+                <!--    <li><a href="userLogout">Sign out</a></li>-->
+            </ul>
+        </div>
+        <!-- /.nav-collapse -->
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.navbar-inner -->
+<!-- /.navbar -->
+<!-- header -->
+<script type="text/javascript">
+
+    /*var counterValue = parseInt($('.bubble').html());
+
+    $('#decrement').on('click',function(){
+    counterValue--;
+    $('.bubble').html(counterValue);
+    })
+ 
+    $('#increment').on('click',function(){
+    counterValue++;
+    $('.bubble').html(counterValue);
+    var newLi = $("<li class='notification-list-item'></li>");
+		  
+    var newarch = $("<a></a>").attr('href', '#').appendTo(newLi);  
+    $("<div class='unread-ntf'></div>").text('comment testing testing testing testing testing testing testing').appendTo(newarch);
+    newLi.prependTo('#notification-comments');   
+    })	
+	
+    $('#notification-comments li').live('click', function ()
+    {
+    if($(this).find('div').hasClass('unread-ntf')){
+    $(this).find('div').removeClass('unread-ntf').addClass('read-ntf');
+    counterValue--;
+    $('.bubble').html(counterValue);
+    }
+    });*/
+
+</script>

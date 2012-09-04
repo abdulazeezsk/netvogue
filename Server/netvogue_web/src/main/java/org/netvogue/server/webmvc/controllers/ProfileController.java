@@ -1,0 +1,193 @@
+package org.netvogue.server.webmvc.controllers;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.validation.Valid;
+
+import org.netvogue.server.webmvc.domain.BoutiqueNew;
+import org.netvogue.server.webmvc.domain.BrandsCarried;
+import org.netvogue.server.webmvc.domain.JsonResponse;
+import org.netvogue.server.webmvc.domain.ProductLine;
+import org.netvogue.server.webmvc.domain.ProfileInfo;
+import org.netvogue.server.webmvc.domain.ContactInfo;
+import org.netvogue.server.neo4japi.common.ProductLines;
+import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.neo4japi.domain.*;
+import org.netvogue.server.neo4japi.service.BoutiqueService;
+import org.netvogue.server.neo4japi.service.UserService;
+import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+//This controllers handles both profile and profile settings page
+@Controller
+public class ProfileController {
+	
+	@Autowired NetvogueUserDetailsService userDetailsService;
+	@Autowired UserService 		userService;
+	@Autowired BoutiqueService  boutiqueService;
+
+	@RequestMapping(value = {"/profile/", "/profile/{profileid}"}, method=RequestMethod.GET)
+	public @ResponseBody ProfileInfo getProfileInfo(@ModelAttribute("profileid") String profileid) {
+		System.out.println("ProfileInfo: id is:" + profileid);
+		User loggedinUser = userDetailsService.getUserFromSession();
+		ProfileInfo profile = new ProfileInfo();
+		if(profileid.isEmpty()) {
+			profile.setName(loggedinUser.getName());
+			profile.setAboutus(loggedinUser.getAboutUs());
+			
+			//Get ContactInfo
+			ContactInfo contactInfo = new ContactInfo();
+			contactInfo.setAddress(loggedinUser.getAddress());
+			contactInfo.setCity(loggedinUser.getCity());
+			contactInfo.setState(loggedinUser.getState());
+			contactInfo.setCountry(loggedinUser.getCountry());
+			contactInfo.setZip(String.valueOf(loggedinUser.getZipCode()));
+			contactInfo.setEmail(loggedinUser.getEmail());
+			contactInfo.setLandline1(String.valueOf(loggedinUser.getTelephoneNo1()));
+			contactInfo.setLandline2(String.valueOf(loggedinUser.getTelephoneNo2()));
+			contactInfo.setMobile(String.valueOf(loggedinUser.getMobileNo()));
+			contactInfo.setWebsite(loggedinUser.getWebsite());
+			contactInfo.setYearest(loggedinUser.getYearofEst());
+			//Add it to profile Info
+			profile.setContactinfo(contactInfo);
+			
+			//Get Productlines Info			
+			Set<Category> productsCarried = loggedinUser.getProductLinesCarried();
+			int size = productsCarried.size();
+			Set<ProductLine> productLine = new HashSet<ProductLine>();
+			for(Category product: productsCarried) {
+				System.out.println("Name:" +  product.getProductLine().getDesc() + "- size:" + size );
+				ProductLine productTemp = new ProductLine();
+				productTemp.setProductlinename(product.getProductLine().getDesc());
+				productTemp.setSelected(true);
+				productLine.add(productTemp);
+			}
+			profile.setProductlines(productLine);
+			
+			//Get Brands/Stockists carried info
+			Set<User> brandsCarried = loggedinUser.getUsersCarried();
+			Set<BrandsCarried> brands = new HashSet<BrandsCarried>();
+			for(User product: brandsCarried) {
+				System.out.println("Name:" +  product.getName() + "username:" + product.getUsername());
+				BrandsCarried brand = new BrandsCarried();
+				brand.setBrandname(product.getName());
+				brand.setBrandusername(product.getUsername());
+				brands.add(brand);
+			}
+			profile.setBrandscarried(brands);
+		}
+		return profile;
+	}
+	
+	@RequestMapping(value = "/profile/aboutus", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse setAboutus(@RequestBody String aboutUs) {
+		JsonResponse status = new JsonResponse();
+		User user = userDetailsService.getUserFromSession();
+		try {
+			user.setAboutUs(aboutUs);
+			
+			String error = new String();
+			if(ResultStatus.SUCCESS == userService.SaveUser(user, error))
+				status.setStatus(true);
+			else
+				status.setError(error);
+		} catch(Exception e) {
+			status.setError(e.toString());
+		}
+		return status;
+	}
+	
+	@RequestMapping(value = "/profile/contactinfo", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse setContactInfo(@RequestBody ContactInfo contactInfo) {
+		JsonResponse status = new JsonResponse();
+		User user = userDetailsService.getUserFromSession();
+		try {
+		
+		//if(ResultStatus.SUCCESS == userService.ValidateEmailAndId(contactInfo.getEmail(), user.getNodeId())) { 
+			user.setAddress(contactInfo.getAddress());
+			user.setCity(contactInfo.getCity());
+			user.setState(contactInfo.getState());
+			user.setCountry(contactInfo.getCountry());
+			user.setZipCode(Integer.parseInt(contactInfo.getZip()));
+			user.setEmail(contactInfo.getEmail());
+			user.setTelephoneNo1(Integer.parseInt(contactInfo.getLandline1()));
+			user.setTelephoneNo1(Integer.parseInt(contactInfo.getLandline1()));
+			user.setMobileNo(Long.parseLong(contactInfo.getMobile()));
+			user.setWebsite(contactInfo.getWebsite());
+			user.setYearofEst(contactInfo.getYearest());
+			
+			String error = new String();
+			if(ResultStatus.SUCCESS == userService.SaveUser(user, error))
+				status.setStatus(true);
+			else
+				status.setError(error);
+		/*} else {
+			status.setError("Email is already existing.Try another one");
+		}*/
+		} catch(Exception e) {
+			status.setError(e.toString());
+		}
+		return status;
+	}
+	
+	@RequestMapping(value = "/profile/productline", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse setProductline(@RequestBody ArrayList<String> productLines) {
+		JsonResponse status = new JsonResponse();
+		User user = userDetailsService.getUserFromSession();
+		try {
+			//First remove all the existing categories and replace with the new one
+			user.deleteCategories();
+			//for(Map<String, String> productline: productLines) {
+			//ProductLines productLine = ProductLines.getValueOf(productline.get("productlinename"));
+			for(String productline: productLines) {
+				ProductLines productLine = ProductLines.getValueOf(productline);
+				Category cat = boutiqueService.getOrCreateCategory(productLine);
+				user.updateCategories(cat);
+			}
+			String error = new String();
+			if(ResultStatus.SUCCESS == userService.SaveUser(user, error))
+				status.setStatus(true);
+			else
+				status.setError(error);
+		} catch(Exception e) {
+			System.out.println("Exception is:" + e.getMessage());
+			status.setError(e.toString());
+		}
+		return status;
+	}
+	
+	@RequestMapping(value = "/profile/brandscarried", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse setBrandsCarried(@RequestBody ArrayList<String> brandsCarried) {
+		JsonResponse status = new JsonResponse();
+		User user = userDetailsService.getUserFromSession();
+		try {
+			//First remove all the existing categories and replace with the new one
+			user.deleteUsersCarried();
+			for(String productline: brandsCarried) {
+				User newUser = boutiqueService.GetOrCreateUser(productline);
+				user.updateUsersCarried(newUser);
+			}
+			String error = new String();
+			if(ResultStatus.SUCCESS == userService.SaveUser(user, error))
+				status.setStatus(true);
+			else
+				status.setError(error);
+		} catch(Exception e) {
+			System.out.println("Exception is:" + e.getMessage());
+			status.setError(e.toString());
+		}
+		return status;
+	}
+}

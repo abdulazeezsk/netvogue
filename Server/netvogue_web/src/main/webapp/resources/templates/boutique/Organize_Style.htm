@@ -1,0 +1,56 @@
+﻿<!--body-->
+<div class="container minumum_height">
+    <div class="row">
+        <!-- left pannel -->
+        <div class="span3">
+            <h4 class="subHeading_advertisement">
+                Style</h4>
+            <div class="divi2">
+            </div>
+            <ul class="thumbnails">
+                <li class="span3" ng-repeat="linesheet in linesheets | limitTo:4">
+                    <div>
+                        <a href="#/{{linesheet.linesheetlistitemid}/profile">
+                            <img alt="" ng-src="{{linesheet.linesheetcoverpic}}" class="pull-left"></a>
+                        <a href="#/{{linesheet.linesheetlistitemid}}/profile" class="brandname_title">{{linesheet.linesheetseason}}</a>
+                    </div>
+                </li>
+            </ul>
+            <div>
+                <h4 class="subHeading_advertisement">
+                    Styles</h4>
+                <div class="divi2">
+                </div>
+                <ul class="nav nav-tab nav-stacked">
+                    <li ng-repeat="style in styles">
+                        <div class="advertisementfeed">
+                            <div class="brand_image">
+                                <a href="#/{{style.stylelistitemid}}">
+                                    <img alt="" ng-src="{{style.stylecoverpic}}" class="pull-left"></a></div>
+                            <div class="advertisement_text">
+                                <h3>
+                                    <a href="#/{{trend.trendlistitemID}}" title="">{{style.stylename}}</a></h3>
+                                <p>
+                                    {{style.stylename}}</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- left pannel -->
+        <!-- right pannel -->
+        <div class="span9">
+            <div>
+                <span class="left">
+                    <h4 class="subHeading_no_underline">
+                        Add Style</h4>
+                </span><span id="span_btns" class="right"><a href="#{{backButton}}" class="add_edit adjust_height">
+                    Back</a></span>
+                <div class="divi2 topborderline">
+                </div>
+            </div>
+        </div>
+        <!-- right pannel -->
+    </div>
+</div>
