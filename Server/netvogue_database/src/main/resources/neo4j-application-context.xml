@@ -26,8 +26,11 @@
     
      -->
     <!-- REST Connection to Neo4j server -->
-    <bean id="graphDatabaseService" class="org.springframework.data.neo4j.rest.SpringRestGraphDatabase" scope="singleton">
-         <constructor-arg index="0" value="http://5841206db:0c786e125@de63f2274.hosted.neo4j.org:7684/db/data/" />
+    <bean class="org.springframework.data.neo4j.rest.SpringRestGraphDatabase" id="graphDatabaseService">
+		<constructor-arg index="0" value="#{systemEnvironment['NEO4J_REST_URL']}"/>
+		<constructor-arg index="1" value="#{systemEnvironment['NEO4J_LOGIN']}"/>
+		<constructor-arg index="2" value="#{systemEnvironment['NEO4J_PASSWORD']}"/>
+		<!--<constructor-arg index="0" value="http://localhost:7474/db/data" />-->
     </bean>
     
 	<!-- Package w/ automagic repositories -->
