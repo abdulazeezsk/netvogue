@@ -6,11 +6,13 @@ target
 *.swp
 */target
 */tomcat.8080
+*/work/
 
 .project
 .settings
 .idea/*
 .DS_Store
+.class
 script.bat
 org.eclipse.core.resources.prefs
 Server/netvogue_web/.settings/org.eclipse.core.resources.prefs
