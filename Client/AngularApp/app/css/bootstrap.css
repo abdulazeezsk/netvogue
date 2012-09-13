@@ -4764,7 +4764,7 @@ input.adv_sch_price {
 }
 
 .brandname_title,.boutiquename_title {
-	width: 80px;
+	width: 150px;
 	float: left;
 	margin: 0 0 0 8px;
 	word-wrap: break-word;
@@ -4785,7 +4785,7 @@ input.adv_sch_price {
 	width: 225px;
 	margin: 10px auto 0;
 	text-align: center;
-	padding: 0 0 10px 0;
+	padding: 0 0 5px 0;
 	border-bottom: solid 1px #666666;
 	min-height: 59px;
 }
@@ -10062,7 +10062,7 @@ input.adv_sch_price {
 }
 
 .brandname_title,.boutiquename_title {
-	width: 80px;
+	width: 150px;
 	float: left;
 	margin: 0 0 0 8px;
 	word-wrap: break-word;
@@ -10080,7 +10080,7 @@ input.adv_sch_price {
 }
 
 .brandtitle_price {
-	width: 225px;
+	width: 210px;
 	margin: 10px auto 0;
 	text-align: center;
 	padding: 0 0 10px 0;
@@ -11229,4 +11229,46 @@ a.messagesContent:hover .preview {
 
 .modal-open .login-menu {
 	z-index: 2050;
+}
+
+.moreviews {
+	min-height: 100px;
+	float: left;
+	list-style-type: none;
+}
+
+
+.moreviews ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+.moreviews li {
+	float: right;
+	min-height: 130px;
+	padding: 10px 0px;
+	list-style-type: none;
+	list-style-position: inside;
+	text-align: center;
+	font: normal 10px Verdana;
+	text-transform: uppercase;
+}
+
+.gallerytitle {
+	width: 210px;
+	margin: 5px auto 0;
+	text-align: center;
+	padding: 0 0 5px 0;
+	border-bottom: solid 1px #666666;
+	min-height: 10px;
+}
+
+.gallerytitle h3 {
+	font: normal 13px Verdana;
+	text-transform: uppercase;
+}
+.Profile-small
+{
+    width: 50px;
+    height:50px;
 }
