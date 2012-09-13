@@ -1,10 +1,27 @@
 <!--body-->
-<div class="container">
+<div class="container minumum_height">
     <div class="row">
-        <!-- <!-- left-pannel -->
+       <!-- left-pannel -->
+        <div class="span3">
+            <h4 class="subHeading_advertisement">
+                Boutique</h4>
+            <div class="divi2">
+            </div>
+            <ul class="thumbnails">
+                <li class="span3">
+                    <div>
+                  	<span> <a href="#profile"> <img alt=""
+								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
+								class="pull-left Profile-small"></a> </span>
+								<span> <a href="#profile" class="brandname_title">{{entityname}}</a>
+						</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
         <!-- left-pannel -->
         <!-- right pannel -->
-        <div class="span12">
+        <div class="span9">
             <span class="left">
                 <h4 class="subHeading_no_underline">
                     Profile Settings</h4>
@@ -29,10 +46,10 @@
                     </h4>
                     <div class="divi2 topborderline">
                     </div>
-                    <div style="width: 920px; height: 400px;">
-                        <textarea id="textarea" rows="20" style="width: 920px;" ng-model="aboutus"></textarea>
+                    <div style="width: 740px; height: 400px;">
+                        <textarea id="textarea" rows="20" style="width: 740px;" ng-model="aboutus"></textarea>
                     </div>
-                    <div style="padding-left: 830px;">
+                    <div style="padding-left: 640px;">
                         <button type="submit" class="btn btn-primary" style="" data-loading-text="Loading..."
                             ng-click="updateaboutus(aboutus)">
                             Save changes</button>
@@ -51,13 +68,13 @@
                             <input type="checkbox" ng-model="line.selected" ng-true-value="yes" ng-false-value="no" /><span
                                 class="Title">{{line.productlinename}}</span></div>
                     </div>
-                    <div style="padding-left: 830px;">
+                    <div style="padding-left: 600px;">
                         <button type="submit" class="btn btn-primary" style="" ng-click="updateproductline(productline))">
                             Save changes</button>
                     </div>
                 </div>
                 <div class="tab-pane" ng-class="{active: tabposition == 2}" id="brands_carried">
-                    <div class="span11">
+                    <div>
                         <h4 class="subHeading_no_underline">
                             Brands Carrried
                         </h4>
@@ -98,7 +115,7 @@
                     <div class="divi2 topborderline">
                     </div>
                     <form class="form-horizontal">
-                    <div class="control-group pull-left span11">
+                    <div class="control-group pull-left span9">
                         <label class="control-label">
                             Country</label>
                         <div class="controls">

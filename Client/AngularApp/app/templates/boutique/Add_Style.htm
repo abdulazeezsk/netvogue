@@ -1,26 +1,11 @@
-﻿<!--body-->
+<!--body-->
 <div class="container minumum_height">
     <div class="row">
         <!-- right pannel -->
         <div class="span3">
             <h4 class="subHeading_advertisement">
-                LineSheet</h4>
-            <div class="divi2">
-            </div>
-            <ul class="thumbnails">
-                <li class="span3" ng-repeat="linesheet in linesheets | limitTo:4">
-                    <div>
-                        <a href="#/{{linesheet.linesheetlistitemid}/profile">
-                            <img alt="" ng-src="{{linesheet.linesheetcoverpic}}" class="pull-left"></a>
-                        <a href="#/{{linesheet.linesheetlistitemid}}/profile" class="brandname_title">{{linesheet.linesheetseason}}</a>
-                    </div>
-                </li>
-            </ul>
-            <div>
-                <h4 class="subHeading_advertisement">
-                    Styles</h4>
-                <div class="divi2">
-                </div>
+                Styles</h4>
+           
                 <ul class="nav nav-tab nav-stacked">
                     <li ng-repeat="style in styles">
                         <div class="advertisementfeed">
@@ -36,7 +21,7 @@
                         </div>
                     </li>
                 </ul>
-            </div>
+            
         </div>
         <!-- right pannel -->
         <!-- left pannel -->
@@ -107,7 +92,24 @@
                         <label class="control-label">
                             Colors</label>
                         <div class="controls">
-                            <input type="text" class="span4" placeholder="Color" id="Text11" />
+<ul>
+    <!-- ngRepeat: color in colors --><li ng-repeat="color in colors" class="ng-scope">
+      Name: <input ng-model="color.name" class="ng-pristine ng-valid">
+      [<a href="" ng-click="colors.splice($index, 1)">X</a>]
+    </li><li ng-repeat="color in colors" class="ng-scope">
+      Name: <input ng-model="color.name" class="ng-pristine ng-valid">
+      [<a href="" ng-click="colors.splice($index, 1)">X</a>]
+    </li><li ng-repeat="color in colors" class="ng-scope">
+      Name: <input ng-model="color.name" class="ng-pristine ng-valid">
+      [<a href="" ng-click="colors.splice($index, 1)">X</a>]
+    </li><li ng-repeat="color in colors" class="ng-scope">
+      Name: <input ng-model="color.name" class="ng-pristine ng-valid">
+      [<a href="" ng-click="colors.splice($index, 1)">X</a>]
+    </li>
+    <li>
+      [<a href="" ng-click="colors.push({})">add</a>]
+    </li>
+  </ul>
                         </div>
                         <div class="divi2">
                         </div>
@@ -129,7 +131,7 @@
                                 <i class=""></i><span>Save</span>
                             </button>
                             <button type="button" class="btn">
-                                <i class=""></i><span>Cancel</span>
+                                <i class=""></i><span>Exit</span>
                             </button>
                         </div>
                         <div class="divi2">

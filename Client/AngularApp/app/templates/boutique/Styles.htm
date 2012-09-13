@@ -2,61 +2,65 @@
 <div class="container">
     <div class="row">
         <!-- left-pannel -->
-        <div class="span2">
-            <h4 class="small_boutiqueprofile">
+        <div class="span3">
+            <h4 class="subHeading_advertisement">
                 Boutique</h4>
             <div class="divi2">
             </div>
             <ul class="thumbnails">
-                <li class="span2">
+                <li class="span3">
                     <div>
-                        <a href="#profile">
-                            <img alt="" src="http://placehold.it/50x50" class="pull-left"></a> <a href="#profile"
-                                class="brandname_title">Boutique Name</a>
+                           <span> <a href="#profile"> <img alt=""
+								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
+								class="pull-left Profile-small"></a> </span>
+								<span> <a href="#profile" class="brandname_title">{{entityname}}</a>
+						</span>
                     </div>
                 </li>
             </ul>
-            <div class="search_box">
-                <h2>
-                    FILTERS</h2>
-                <div class="advanced_search">
-                    <h4>
-                        Brand</h4>
-                    <input type="text" class="adv_sch" />
+           <div>
+                <h4 class="subHeading_advertisement">
+                    Line sheets</h4>
+                <div class="divi2">
                 </div>
-                <div class="advanced_search">
-                    <h4>
-                        Season</h4>
-                    <input type="text" class="adv_sch" />
-                </div>
-                <div class="advanced_search">
-                    <h4>
-                        DELIVERY DATE</h4>
-                    <input type="text" class="adv_sch" />
-                </div>
-                <div class="clr">
-                </div>
-            </div>
-            <div>
-                <div>
-                    <h3 class="treeview-heading">
-                        category</h3>
-                </div>
-                <div checkbox-tree ng-model="searchFilter">
-                </div>
+              <!--   <div style="overflow-y:scroll;overflow-x:auto;" > -->
+                <ul class="nav nav-tab nav-stacked">
+                    <li ng-repeat="style in styles">
+                        <div class="advertisementfeed">
+                            <div class="brand_image">
+                                <a href="#/{{style.stylelistitemid}}">
+                                    <img alt="" ng-src="{{style.stylecoverpic}}" class="pull-left"></a></div>
+                            <div class="advertisement_text">
+                                <h3>
+                                    <a href="#/{{trend.trendlistitemID}}" title="">{{style.stylebrandname}}</a></h3>
+                                <p>
+                                    {{style.stylename}}</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+               <!--  </div> -->
             </div>
         </div>
         <!-- left-pannel -->
         <!-- right pannel -->
-        <div class="span10">
-            <div>
+        <div class="span9">
+               <div>
                 <span class="left">
                     <h4 class="subHeading_no_underline">
-                        STYLES - {{stylesseason.seasonname}}</h4>
-                </span><span id="span_btns"><span class="right"><a href="#{{backButton}}" class="add_edit adjust_height">
-                    Back to Line sheets</a></span></span>
+                        Line sheets</h4>
+                </span>
                 <div class="divi2 topborderline">
                 </div>
+                  <span class="left">
+                    <h5 class="info">
+                        <a href="#/linesheets">Line Sheets</a><span style="padding-right: 3px; padding-left: 3px;"
+							class="divider">/ Untitled</h5>
+                </span>
+                 <div class="divi2 topborderline">
+                </div>
+                </div>
+                <div>
                 <ul class="thumbnails">
                     <li ng-repeat="style in styles">
                         <div class="view view-first">

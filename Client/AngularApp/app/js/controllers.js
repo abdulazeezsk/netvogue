@@ -214,75 +214,75 @@ function MyCtrlGallery($scope, $routeParams, currentvisitedprofile, srvprofile) 
     $scope.photogallery = [
 	                   {
 	                       "photolistitemid": "photogalleryId",
-	                       "photoame": "Studded Winston",
+	                       "photoname": "Studded Winston",
 	                       "photodescription": "Spring 2012",
 	                       "photodate": "25/04/2012",
-	                       "photocoverpic": "http://placehold.it/231x306"
+	                       "photocoverpic": "http://placehold.it/220x150"
 
 	                   },
                        {
                            "photolistitemid": "photogalleryId",
-                           "photoame": "Studded Winston",
+                           "photoname": "Studded Winston",
                            "photodescription": "Spring 2012",
                            "photodate": "25/04/2012",
-                           "photocoverpic": "http://placehold.it/231x306"
+                           "photocoverpic": "http://placehold.it/220x150"
 
                        },
                        {
                            "photolistitemid": "photogalleryId",
-                           "photoame": "Studded Winston",
+                           "photoname": "Studded Winston",
                            "photodescription": "Spring 2012",
                            "photodate": "25/04/2012",
-                           "photocoverpic": "http://placehold.it/231x306"
+                           "photocoverpic": "http://placehold.it/220x150"
 
                        },
                        {
                            "photolistitemid": "photogalleryId",
-                           "photoame": "Studded Winston",
+                           "photoname": "Studded Winston",
                            "photodescription": "Spring 2012",
                            "photodate": "25/04/2012",
-                           "photocoverpic": "http://placehold.it/231x306"
+                           "photocoverpic": "http://placehold.it/220x150"
 
                        },
                        {
                            "photolistitemid": "photogalleryId",
-                           "photoame": "Studded Winston",
+                           "photoname": "Studded Winston",
                            "photodescription": "Spring 2012",
                            "photodate": "25/04/2012",
-                           "photocoverpic": "http://placehold.it/231x306"
+                           "photocoverpic": "http://placehold.it/220x150"
 
                        },
                        {
                            "photolistitemid": "photogalleryId",
-                           "photoame": "Studded Winston",
+                           "photoname": "Studded Winston",
                            "photodescription": "Spring 2012",
                            "photodate": "25/04/2012",
-                           "photocoverpic": "http://placehold.it/231x306"
+                           "photocoverpic": "http://placehold.it/220x150"
 
                        },
                        {
                            "photolistitemid": "photogalleryId",
-                           "photoame": "Studded Winston",
+                           "photoname": "Studded Winston",
                            "photodescription": "Spring 2012",
                            "photodate": "25/04/2012",
-                           "photocoverpic": "http://placehold.it/231x306"
+                           "photocoverpic": "http://placehold.it/220x150"
 
                        },
                        {
                            "photolistitemid": "photogalleryId",
-                           "photoame": "Studded Winston",
+                           "photoname": "Studded Winston",
                            "photodescription": "Spring 2012",
                            "photodate": "25/04/2012",
-                           "photocoverpic": "http://placehold.it/231x306"
+                           "photocoverpic": "http://placehold.it/220x150"
 
                        },
 
                        {
                            "photolistitemid": "photogalleryId",
-                           "photoame": "Studded Winston",
+                           "photoname": "Studded Winston",
                            "photodescription": "Spring 2012",
                            "photodate": "25/04/2012",
-                           "photocoverpic": "http://placehold.it/231x306"
+                           "photocoverpic": "http://placehold.it/220x150"
 
                        }
                        ];
@@ -423,7 +423,7 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile) {
 	                       "styleseason": "Spring 2012",
 	                       "styledeliverydate": "25/04/2012",
 	                       "styleprice": "5000",
-	                       "stylecoverpic": "http://placehold.it/231x306"
+	                       "stylecoverpic": "http://placehold.it/220x320"
 
 	                   },
                        {
@@ -433,7 +433,7 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile) {
                            "styleseason": "Spring 2012",
                            "styledeliverydate": "25/04/2012",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/231x306"
+                           "stylecoverpic": "http://placehold.it/220x320"
 
                        },
                        {
@@ -443,7 +443,7 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile) {
                            "styleseason": "Spring 2012",
                            "styledeliverydate": "25/04/2012",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/231x306"
+                           "stylecoverpic": "http://placehold.it/220x320"
 
                        },
                        {
@@ -453,7 +453,7 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile) {
                            "styleseason": "Spring 2012",
                            "styledeliverydate": "25/04/2012",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/231x306"
+                           "stylecoverpic": "http://placehold.it/220x320"
 
                        },
                        {
@@ -463,7 +463,7 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile) {
                            "styleseason": "Spring 2012",
                            "styledeliverydate": "25/04/2012",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/231x306"
+                           "stylecoverpic": "http://placehold.it/220x320"
 
                        },
                        {
@@ -473,7 +473,7 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile) {
                            "styleseason": "Spring 2012",
                            "styledeliverydate": "25/04/2012",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/231x306"
+                           "stylecoverpic": "http://placehold.it/220x320"
 
                        },
                        {
@@ -483,7 +483,7 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile) {
                            "styleseason": "Spring 2012",
                            "styledeliverydate": "25/04/2012",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/231x306"
+                           "stylecoverpic": "http://placehold.it/220x320"
 
                        },
                        {
@@ -493,7 +493,7 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile) {
                            "styleseason": "Spring 2012",
                            "styledeliverydate": "25/04/2012",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/231x306"
+                           "stylecoverpic": "http://placehold.it/220x320"
 
                        },
                        {
@@ -503,7 +503,7 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile) {
                            "styleseason": "Spring 2012",
                            "styledeliverydate": "25/04/2012",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/231x306"
+                           "stylecoverpic": "http://placehold.it/220x320"
 
                        },
 
@@ -514,7 +514,7 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile) {
                            "styleseason": "Spring 2012",
                            "styledeliverydate": "25/04/2012",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/231x306"
+                           "stylecoverpic": "http://placehold.it/220x320"
 
                        }
                        ];

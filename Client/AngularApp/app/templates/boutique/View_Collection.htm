@@ -1,38 +1,39 @@
 
 <!--body-->
 <div class="container minumum_height">
-    <div class="row">
-        <!-- Main pannel -->
-        <div class="span12">
-            <div>
-                <span class="left">
-                    <h4 class="subHeading_no_underline">
-                        Collection - {{collectionseason.seasonname}}</h4>
-                </span><span id="span1"><span class="right"><a href="#/{{backButton}}" class="add_edit adjust_height">
-                    Back to Collections</a></span></span>
-                <div class="divi2 topborderline">
-                </div>
-                <span class="left">
-                    <h5 class="info">
-                        {{collectionseason.collectionlikes}}</h5>
-                </span><span id="span_btns" class="right"><a href="#" class="add_edit adjust_height">
-                    Like</a></span>
-                <div class="divi2 topborderline">
-                </div>
-                <div id="myCarousel" class="carousel slide">
-                    <!-- Carousel items -->
-                    <div class="carousel-inner">
-                        <div class="item" ng-repeat="collection in viewcollections" ng-class="{active: $first}">
-                            <img src="{{collection.collectionpic}}" alt="" />
-                        </div>
-                    </div>
-                    <!-- Carousel nav -->
-                    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-                </div>
-            </div>
-        </div>
-        <!-- Main pannel -->
-    </div>
+	<div class="row">
+		<!-- Main pannel -->
+		<div class="span12">
+			<div>
+				<span class="left">
+					<h5 class="subHeading_no_underline">
+						<a href="#/collections">Collections</a><span
+							style="padding-right: 3px; padding-left: 3px;" class="divider">/
+							Untitled
+					</h5>
+				</span>
+				<div class="divi2 topborderline"></div>
+				<span class="left">
+					<h5 class="info">{{collectionseason.collectionlikes}}</h5>
+				</span><span id="span_btns" class="right"><a href="#"
+					class="add_edit adjust_height"> Like</a></span>
+				<div class="divi2 topborderline"></div>
+				<div id="myCarousel" class="carousel slide">
+					<!-- Carousel items -->
+					<div class="carousel-inner">
+						<div class="item" ng-repeat="collection in viewcollections"
+							ng-class="{active: $first}">
+							<img src="{{collection.collectionpic}}" alt="" />
+						</div>
+					</div>
+					<!-- Carousel nav -->
+					<a class="carousel-control left" href="#myCarousel"
+						data-slide="prev">&lsaquo;</a> <a class="carousel-control right"
+						href="#myCarousel" data-slide="next">&rsaquo;</a>
+				</div>
+			</div>
+		</div>
+		<!-- Main pannel -->
+	</div>
 </div>
 <!--body-->

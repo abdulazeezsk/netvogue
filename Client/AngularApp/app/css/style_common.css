@@ -1,6 +1,6 @@
 .view
 {
-    width: 231px;
+    width: 220px;
     float: left;
     overflow: hidden;
     position: relative;
@@ -10,7 +10,7 @@
 }
 .view .mask, .view .content
 {
-    width: 231px;
+    width: 220px;
     height: 306px;
     position: absolute;
     overflow: hidden;
@@ -92,18 +92,19 @@ padding:0px 7px 0px 0px;
 
 .viewls
 {
-    width: 231px;
+    width: 220px;
     float: left;
     overflow: hidden;
     position: relative;
     text-align: center;
     cursor: default;
+      height:145px;
      
 }
 .viewls .maskls, .viewls .contentls
 {
-    width: 231px;
-    height: 152px;
+    width: 220px;
+    height: 145px;
     position: absolute;
     overflow: hidden;
     top: 0;
@@ -261,3 +262,15 @@ padding:0px 7px 0px 0px;
         
  
 /*---------- profile picture -------------*/
+
+
+.galleryview
+{
+    width: 220px;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    cursor: default;
+    height:150px;
+}
