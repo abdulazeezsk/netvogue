@@ -11357,7 +11357,28 @@ font-size:14px;
 	text-decoration: none;
 }
 
+.title {
+	width: 210px;
+	margin: 10px auto 0;
+	text-align: center;
+	padding: 0 0 10px 0;
+	border-bottom: solid 1px #666666;
+	min-height: 59px;
+}
 
+.title h3 {
+	font: normal 13px Verdana;
+	text-transform: uppercase;
+}
+
+.title h4 {
+	font: normal 13px Verdana;
+	text-transform: uppercase;
+}
+
+.title p {
+	font: normal 11px Verdana;
+}
 
 
 

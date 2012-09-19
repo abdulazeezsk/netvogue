@@ -31,8 +31,6 @@
 			<div>
 				<div checkbox-tree ng-model="searchFilter"></div>
 			</div>
-
-
 		</div>
 		<!-- left pane -->
 		<!-- right pane -->
@@ -50,8 +48,7 @@
                 </div>
 				<div>
 					<ul class="thumbnails">
-						<li
-							ng-repeat="brand in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize">
+						<li ng-repeat="brand in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize">
 							<div class="viewls view-firstls">
 								<a href="#/{{brand.brandlistitemid}}"> <img
 									src="{{brand.brandprofilepic}}" alt=""></a>
@@ -68,7 +65,7 @@
 								</div>
 								<div class="divi2"></div>
 							</div>
-							<div class="brandtitle_price">
+							<div class="title">
 								<!--<h3>
                                 {{linesheet.linesheetseason}}</h3>-->
 								<h3>{{brand.brandname}}</h3>
