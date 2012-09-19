@@ -1,9 +1,9 @@
 <!--body-->
 <div class="container">
     <div class="row">
-        <!-- left-pannel -->
+        <!-- left-pane -->
         <div class="span3">
-            <h4 class="subHeading_advertisement">
+            <h4 class="leftpane_entity_heading">
                 Boutique</h4>
             <div class="divi2">
             </div>
@@ -12,43 +12,44 @@
                     <div>
                         	<span> <a href="#profile"> <img alt=""
 								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
-								class="pull-left Profile-small"></a> </span>
-								<span> <a href="#profile" class="brandname_title">{{entityname}}</a>
+								class="pull-left leftpane_profile_img"></a> </span>
+								<span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
                     </div>
                 </li>
             </ul>
-            <div class="underline">
+            <div class="leftpane_filter_heading underline">
              FILTERS
             </div>
              <div class="divi2">
             </div>
-            <div>
+            <div class="leftpane_filter_name">
                         TITLE
-                    <input type="text" class="adv_sch" />
-                    
+             <input type="text" class="span3" />
                         DESCRIPTION
-                    <input type="text" class="adv_sch" />
+             <input type="text" class="span3" />
            </div>
             
         </div>
-        <!-- left-pannel -->
-        <!-- right-pannel -->
+        <!-- left-pane -->
+        <!-- right-pane -->
         <div class="span9">
             <div>
-                <span class="left">
-                    <h4 class="subHeading_no_underline">
-                        Editorials</h4>
-                </span><span class="right"><a ng-href="#{{backButton}}" class="add_edit adjust_height">
+                <span class="left rightpane_subHeading">
+                        Editorials
+                </span>
+                <span class="right">
+                <a ng-href="#{{backButton}}" class="rightpane_back_btn">
                     Back</a></span>
-                <div class="divi2 topborderline">
+                <div class="divi2 right_pane_underline">
                 </div>
-                <span class="left">
-                    <h5 class="info">
-                        Find Editorials using the filters</h5>
-                </span><span id="span_btns" class="right" ng-show="isMyProfile"><a href="#/addnewsletter"
-                    class="add_edit adjust_height">Add</a></span>
-                <div class="divi2 topborderline">
+                <span class="left right_pane_info">
+                        Find Editorials using the filters
+                </span>
+                <span class="right" ng-show="isMyProfile">
+                <a href="#/addnewsletter" class="rightpane_add_btn">Add</a>
+                </span>
+                <div class="divi2 right_pane_underline">
                 </div>
                 <div>
                     <ul class="thumbnails">
@@ -87,6 +88,7 @@
                 </div>
             </div>
         </div>
-        <!-- right-pannel -->
+        <!-- right-pane -->
     </div>
 </div>
+<!--body-->

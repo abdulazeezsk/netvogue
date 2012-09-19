@@ -1,56 +1,54 @@
 <!--body-->
-<div class="container">
+<div class="container minimum_height">
 	<div class="row">
-		<!-- left-pannel -->
+		<!-- left-pane -->
 		<div class="span3">
-			<h4 class="subHeading_advertisement">Boutique</h4>
+			<h4 class="leftpane_entity_heading">Boutique</h4>
 			<div class="divi2"></div>
 			<ul class="thumbnails">
 				<li class="span3">
 					<div>
 						<span> <a href="#profile"> <img alt=""
 								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
-								class="pull-left Profile-small"></a>
-						</span> <span> <a href="#profile" class="brandname_title">{{entityname}}</a>
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
 					</div>
 				</li>
 			</ul>
-			<div class="underline">FILTERS</div>
+			<div class="leftpane_filter_heading underline">FILTERS</div>
 			<div class="divi2"></div>
-			<div>
-
-
-
-				BRAND <input type="text" class="adv_sch" /> SEASON <input
-					type="text" class="adv_sch" /> DELIVERY DATE <input type="text"
-					class="adv_sch" />
-
-
+			<div class="leftpane_filter_name">
+				BRAND <input type="text" class="span3" /> 
+				SEASON <input type="text" class="span3" /> 
 			</div>
-			<div>CATEGORY</div>
+			<div class="leftpane_filter_name">
+			CATEGORY</div>
 			<div>
-
 				<div checkbox-tree ng-model="searchFilter"></div>
 			</div>
 		</div>
-		<!-- left-pannel -->
-		<!-- right pannel -->
+		<!-- left-pane -->
+		<!-- right pane -->
 		<div class="span9">
 			<div>
-				<span class="left">
-					<h4 class="subHeading_no_underline">Line Sheets</h4>
-				</span><span class="right"><a ng-href="#{{backButton}}"
-					class="add_edit adjust_height"> Back</a></span>
-				<div class="divi2 topborderline"></div>
-				<span class="left">
-					<h5 class="info">Find Linesheets using the filters</h5> <!-- <a data-toggle="modal" href="#Createlinesheet" style="text-decoration: none;">
-                              
+				<span class="left rightpane_subHeading">
+			 	Line Sheets
+				</span>
+				<span class="right">
+				<a ng-href="#{{backButton}}"
+					class="rightpane_back_btn">Back</a></span>
+				<div class="divi2 right_pane_underline"></div>
+				<span class="left right_pane_info">
+					Find linesheets using the filters
+					 <!-- <a data-toggle="modal" href="#Createlinesheet" style="text-decoration: none;">
                                     Create line sheet</button>
                             </a> -->
-				</span><span id="span_btns" class="right" ng-show="isMyProfile && iambrand"><a
-					href="#/addlinesheets" class="add_edit adjust_height"> Add</a> </span>
-				<div class="divi2 topborderline"></div>
+				</span>
+				<span class="right" ng-show="isMyProfile && iambrand">
+				<a href="#/addlinesheets" class="rightpane_add_btn"> Add</a> 
+				</span>
+				<div class="divi2 right_pane_underline"></div>
 				<ul class="thumbnails">
 					<li ng-repeat="linesheet in linesheets">
 						<div class="view view-first">
@@ -92,9 +90,10 @@
 				</ul>
 			</div>
 		</div>
-		<!-- right pannel -->
+		<!-- right pane -->
 	</div>
 </div>
+<!--body-->
 <!-- modal -->
 <div class="modal  hide" id="Createlinesheet">
 	<div class="modal-header">

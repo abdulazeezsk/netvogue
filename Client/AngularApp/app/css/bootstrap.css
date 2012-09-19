@@ -5235,13 +5235,7 @@ input.adv_sch_price {
 	top: 3px;
 }
 
-.left {
-	float: left;
-}
 
-.right {
-	float: right;
-}
 
 .spacer {
 	color: #050404;
@@ -11272,3 +11266,100 @@ a.messagesContent:hover .preview {
     width: 50px;
     height:50px;
 }
+
+
+/*----- this is -----*/
+.minimum_height {
+	min-height: 571px;
+}
+
+.left {
+	float: left;
+}
+
+.leftpane_entity_heading{
+	color: black;
+	font: normal 14px Verdana;
+	text-transform: uppercase;
+	border-bottom: solid 1px rgba(0, 0, 0, 1);
+	width: 220x;
+}
+.leftpane_entity_name{
+	width: 150px;
+	float: left;
+	margin: 0 0 0 8px;
+	word-wrap: break-word;
+	font: normal 10px Verdana;
+	font-weight: bold;
+}
+
+.leftpane_profile_img{
+    width: 50px;
+    height:50px;
+}
+
+leftpane_filter_heading{
+font-family:verdana;
+font-size:14px;	
+}
+
+leftpane_filter_name{
+font-family:verdana;
+font-size:14px;	
+}
+
+.right{
+	float: right;
+}
+
+.rightpane_subHeading{
+	color: black;
+	font: normal 14px Verdana;
+	text-transform: uppercase;
+}
+
+.right_pane_underline {
+	border-top: solid 1px rgba(0, 0, 0, 1);
+}
+
+/* info para at the top of the page */
+.right_pane_info{
+	font: normal 10px Verdana;
+	text-transform: uppercase;
+	padding: 5px 0px 5px 0px;
+}
+
+.rightpane_add_btn{
+	width: 80px;
+	margin: 0 0 0 8px;
+	font: normal 10px Verdana;
+	font-weight: bold;
+	text-transform: uppercase;
+	position: relative;
+	top: 3px;
+}
+
+.rightpane_add_btn a:hover{
+	text-decoration: none;
+}
+.rightpane_back_btn
+{
+	width: 80px;
+	margin: 0 0 0 8px;
+	font: normal 10px Verdana;
+	font-weight: bold;
+	text-transform: uppercase;
+	position: relative;
+	top: 3px;
+}
+
+.rightpane_back_btn a:hover{
+	text-decoration: none;
+}
+
+
+
+
+
+
+
