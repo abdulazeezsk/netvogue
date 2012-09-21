@@ -23,9 +23,8 @@
 						<li ng-repeat="photo in photos">
 							<div class="leftpanefeed">
 								<div class="feedimage">
-									<a href="#/{{photo.photolistitemid}}"> <img
-										alt="" ng-src="{{photo.photopic}}"
-										class="pull-left"></a>
+									<a href="#/{{photo.photolistitemid}}"> <img alt=""
+										ng-src="{{photo.photopic}}" class="pull-left"></a>
 								</div>
 								<div class="leftpanefeed_text">
 									<h3>
@@ -41,29 +40,29 @@
 		<!-- left pane -->
 		<!-- right pane -->
 		<div class="span9">
-			<span class="left heading_btn"> <a href="#/printcampaign">print
-					campaign</a> <span class="divider">/</span> <span>Untitled</span>
-			</span>
-			<div class="divi2 right_pane_underline"></div>
-			<div id="myCarousel" class="carousel slide">
-				<!-- Carousel items -->
-				<div class="carousel-inner">
-					<div class="item"
-						ng-repeat="viewPhoto in viewPhotos"
-						ng-class="{active: $first}">
-						<img src="{{viewPhoto.photopic}}" alt="">
-						<div class="carousel-caption">
-							<h4>
-								{{viewPhoto.photoname}}</h4>
-							<p>{{viewPhoto.photodescription}}</p>
+			<span class="left heading_btn"> <a href="#/gallery">Gallery</a>
+				<span class="divider">/</span> <span><a href="#/photos">Untitled</a>
+			</span></span>
+
+
+				<div class="divi2 right_pane_underline"></div>
+				<div id="myCarousel" class="carousel slide">
+					<!-- Carousel items -->
+					<div class="carousel-inner">
+						<div class="item" ng-repeat="viewPhoto in viewPhotos"
+							ng-class="{active: $first}">
+							<img src="{{viewPhoto.photopic}}" alt="">
+							<div class="carousel-caption">
+								<h4>{{viewPhoto.photoname}}</h4>
+								<p>{{viewPhoto.photodescription}}</p>
+							</div>
 						</div>
 					</div>
+					<!-- Carousel nav -->
+					<a class="carousel-control left" href="#myCarousel"
+						data-slide="prev">&lsaquo;</a> <a class="carousel-control right"
+						href="#myCarousel" data-slide="next">&rsaquo;</a>
 				</div>
-				<!-- Carousel nav -->
-				<a class="carousel-control left" href="#myCarousel"
-					data-slide="prev">&lsaquo;</a> <a class="carousel-control right"
-					href="#myCarousel" data-slide="next">&rsaquo;</a>
-			</div>
 		</div>
 		<!-- right pane -->
 	</div>
