@@ -1,16 +1,16 @@
 <!--body-->
-<div class="container minumum_height">
+<div class="container minimum_height">
     <div class="row">
-        <!-- left pannel -->
+        <!-- left pane -->
         <div ng-include src="'templates/boutique/LeftMain_Panel.htm'">
         </div>
-        <!-- left pannel -->
-        <!-- middle pannel -->
+        <!-- left pane -->
+        <!-- middle pane -->
         <div class="span7">
             <div>
-                <div style="border-bottom: 1px solid Black;">
+                <div class="underline">
                     <span class="subHeading_no_underline">{{entityname}}<span class="right" ng-show="isMyProfile"><a
-                        href="#profilesettings?t=0" class="add_edit adjust_height">EDIT</a></span> </span>
+                        href="#profilesettings?t=0" class="add_edit">EDIT</a></span> </span>
                 </div>
                <div ui-if="null == aboutus || '' == aboutus">
                     <p class="noInfo">
@@ -27,9 +27,9 @@
                 </ul>
             </div>
             <div>
-                <div style="border-bottom: 1px solid Black;">
+                <div class="underline">
                     <span class="subHeading_no_underline">Product Line<span class="right" ng-show="isMyProfile"><a
-                        href="#profilesettings?t=1" class="add_edit adjust_height">EDIT</a></span> </span>
+                        href="#profilesettings?t=1" class="add_edit">EDIT</a></span> </span>
                 </div>
                 <div ui-if="0 == productline.length">
                     <p class="noInfo">
@@ -49,12 +49,12 @@
                  <div class="divi2"></div>
             </div>
             <div>
-                <div style="border-bottom: 1px solid Black;">
+                <div class="underline">
                     <span class="subHeading_no_underline" ui-if="!iambrand">Brands Carried <span class="right" ng-show="isMyProfile">
-                        <a href="#profilesettings?t=2" class="add_edit adjust_height">EDIT</a></span>
+                        <a href="#profilesettings?t=2" class="add_edit">EDIT</a></span>
                     </span>
                     <span class="subHeading_no_underline" ui-if="iambrand">Stockists <span class="right" ng-show="isMyProfile">
-                        <a href="#profilesettings?t=2" class="add_edit adjust_height">EDIT</a></span>
+                        <a href="#profilesettings?t=2" class="add_edit">EDIT</a></span>
                     </span>
                 </div>
                 <div ui-if="0 == brandscarried.length">
@@ -76,9 +76,9 @@
                 <div class="divi2"></div>
             </div>
             <div>
-                <div style="border-bottom: 1px solid Black;">
+                <div class="underline">
                     <span class="subHeading_no_underline">Contact Info<span class="right" ng-show="isMyProfile"><a
-                        href="#profilesettings?t=4" class="add_edit adjust_height">EDIT</a></span> </span>
+                        href="#profilesettings?t=4" class="add_edit">EDIT</a></span> </span>
                 </div>
                 <br />
                 <div ui-if="null == contactinfo">
@@ -128,8 +128,8 @@
                 </div>
             </div>
         </div>
-        <!-- middle pannel -->
-        <!-- right pannel -->
+        <!-- middle pane -->
+        <!-- right pane -->
         <div class="span3">
             <div ng-show="{{myfriend}}">
                 <ul class="thumbnails">
@@ -144,17 +144,17 @@
                 </ul>
             </div>
             <div>
-                <h4 class="subHeading_advertisement">
+                <h4 class="trending_head">
                     TRENDING</h4>
                 <div class="divi2">
                 </div>
                 <ul class="nav nav-tab nav-stacked">
                     <li ng-repeat="trend in trending">
-                        <div class="advertisementfeed">
-                            <div class="brand_image">
+                        <div class="trendfeed">
+                            <div class="img">
                                 <a href="#/{{trend.trendlistitemID}}">
                                     <img alt="" ng-src="{{trend.trendpiclink}}" class="pull-left"></a></div>
-                            <div class="advertisement_text">
+                            <div class="trendfeed_text">
                                 <h3>
                                     <a href="#/{{trend.trendlistitemID}}" title="">{{trend.trendlistitem}}</a></h3>
                                 <p>
@@ -165,7 +165,7 @@
                 </ul>
             </div>
         </div>
-        <!-- right pannel -->
+        <!-- right pane -->
     </div>
 </div>
 <!-- modal -->

@@ -16,14 +16,16 @@
 					</div>
 				</li>
 			</ul>
-			<div class="leftpane_filter_heading underline">FILTERS</div>
+			<div class="leftpane_subheading">FILTERS</div>
 			<div class="divi2"></div>
-			<div class="leftpane_filter_name">
-				BRAND <input type="text" class="span3" /> 
-				SEASON <input type="text" class="span3" /> 
+			<div>
+				<span class="leftpane_filter_name">BRAND</span> <input type="text"
+					class="span3" /> <span class="leftpane_filter_name">SEASON</span>
+				<input type="text" class="span3" />
 			</div>
-			<div class="leftpane_filter_name">
-			CATEGORY</div>
+			<div>
+				<span class="leftpane_filter_name">CATEGORY</span>
+			</div>
 			<div>
 				<div checkbox-tree ng-model="searchFilter"></div>
 			</div>
@@ -32,23 +34,22 @@
 		<!-- right pane -->
 		<div class="span9">
 			<div>
-				<span class="left rightpane_subHeading">
-			 	Line Sheets
-				</span>
-				<span class="right">
-				<a ng-href="#{{backButton}}"
+				<span class="left rightpane_subHeading"> Line Sheets </span>
+				 <span	class="right"> <a ng-href="#{{backButton}}"
 					class="rightpane_back_btn">Back</a></span>
 				<div class="divi2 right_pane_underline"></div>
-				<span class="left right_pane_info">
-					Find linesheets using the filters
-					 <!-- <a data-toggle="modal" href="#Createlinesheet" style="text-decoration: none;">
+				<span class="left right_pane_info"> Find linesheets using the
+					filters <!-- <a data-toggle="modal" href="#Createlinesheet" style="text-decoration: none;">
                                     Create line sheet</button>
                             </a> -->
-				</span>
-				<span class="right" ng-show="isMyProfile && iambrand">
-				<a href="#/addlinesheets" class="rightpane_add_btn"> Add</a> 
+				</span> <span class="right" ng-show="isMyProfile && iambrand"> <a
+					href="#/addlinesheets" class="rightpane_add_btn"> Add</a>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
+			</div>
+
+
+			<div>
 				<ul class="thumbnails">
 					<li ng-repeat="linesheet in linesheets">
 						<div class="view view-first">
@@ -80,7 +81,7 @@
 							</div>
 							<div class="divi2"></div>
 						</div>
-						<div class="brandtitle_price">
+						<div class="title">
 							<!--<h3>
                                 {{linesheet.linesheetseason}}</h3>-->
 							<h4>DELIVERY DATE: {{linesheet.linesheetdeliverydate}}</h4>
@@ -89,6 +90,7 @@
 					</li>
 				</ul>
 			</div>
+
 		</div>
 		<!-- right pane -->
 	</div>

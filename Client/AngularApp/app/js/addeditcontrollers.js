@@ -66,7 +66,7 @@ function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile) {
 	                       "styleseason": "Spring 2012",
 	                       "styledeliverydate": "25/04/2012",
 	                       "styleprice": "5000",
-	                       "stylecoverpic": "http://placehold.it/231x306"
+	                       "stylecoverpic": "http://placehold.it/90x119"
 
 	                   },
                        {
@@ -76,7 +76,7 @@ function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile) {
                            "styleseason": "Spring 2012",
                            "styledeliverydate": "25/04/2012",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/231x306"
+                           "stylecoverpic": "http://placehold.it/90x119"
 
                        },
                        {
@@ -86,7 +86,7 @@ function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile) {
                            "styleseason": "Spring 2012",
                            "styledeliverydate": "25/04/2012",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/231x306"
+                           "stylecoverpic": "http://placehold.it/90x119"
 
                        }
                        ];
@@ -448,7 +448,7 @@ function MyCtrlEditStyles($scope, $routeParams, currentvisitedprofile) {
 	                       "styledeliverydate": "25/04/2012",
 	                       "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
 	                       "styleprice": "5000",
-	                       "stylecoverpic": "http://placehold.it/70x90"
+	                       "stylecoverpic": "http://placehold.it/90x119"
 
 	                   },
                        {
@@ -459,7 +459,7 @@ function MyCtrlEditStyles($scope, $routeParams, currentvisitedprofile) {
                            "styledeliverydate": "25/04/2012",
                            "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/70x90"
+                           "stylecoverpic": "http://placehold.it/90x119"
 
                        },
                        {
@@ -470,7 +470,7 @@ function MyCtrlEditStyles($scope, $routeParams, currentvisitedprofile) {
                            "styledeliverydate": "25/04/2012",
                            "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/70x90"
+                           "stylecoverpic": "http://placehold.it/90x119"
 
                        }
                        ];
@@ -489,7 +489,7 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
 	                       "styledeliverydate": "25/04/2012",
 	                       "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
 	                       "styleprice": "5000",
-	                       "stylecoverpic": "http://placehold.it/70x90"
+	                       "stylecoverpic": "http://placehold.it/90x119"
 
 	                   },
                        {
@@ -500,7 +500,7 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
                            "styledeliverydate": "25/04/2012",
                            "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/70x90"
+                           "stylecoverpic": "http://placehold.it/90x119"
 
                        },
                        {
@@ -511,7 +511,7 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
                            "styledeliverydate": "25/04/2012",
                            "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/70x90"
+                           "stylecoverpic": "http://placehold.it/90x119"
 
                        }
                        ];

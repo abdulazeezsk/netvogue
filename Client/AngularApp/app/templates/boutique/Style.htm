@@ -1,158 +1,131 @@
-
 <!--body-->
-<div class="container">
-    <div class="row">
-        <!-- left pannel -->
-        <div class="span3">
-            <h4 class="subHeading_advertisement">
-                Boutique</h4>
-            <div class="divi2">
-            </div>
-            <ul class="thumbnails">
-                <li class="span3">
-                    <div>
-                          <span> <a href="#profile"> <img alt=""
+<div class="container minimum_height">
+	<div class="row">
+		<!-- left pane -->
+		<div class="span3">
+			<h4 class="leftpane_entity_heading">Boutique</h4>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> <a href="#profile"> <img alt=""
 								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
-								class="pull-left Profile-small"></a> </span>
-								<span> <a href="#profile" class="brandname_title">{{entityname}}</a>
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
-                    </div>
-                </li>
-            </ul>
-            <div>
-           
-           </div>
-            <div>
-                <h4 class="subHeading_advertisement">
-                    Line Sheet name</h4>
-                <div class="divi2">
-                </div>
-                <ul class="nav nav-tab nav-stacked">
-                    <li ng-repeat="style in styles">
-                        <div class="advertisementfeed">
-                            <div class="brand_image">
-                                <a href="#/{{style.stylelistitemid}}">
-                                    <img alt="" ng-src="{{style.stylecoverpic}}" class="pull-left"></a></div>
-                            <div class="advertisement_text">
-                                <h3>
-                                    <a href="#/{{trend.trendlistitemID}}" title="">{{style.stylebrandname}}</a></h3>
-                                <p>
-                                    {{style.stylename}}</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- left pannel -->
-        <!-- right pannel -->
-        <div class="span9">
-            <div>
-                <span class="left">
-                    <h4 class="subHeading_no_underline">
-                        Line Sheets</h4>
-                </span>
-                <div class="divi2 topborderline">
-                </div>
-                              <span class="left">
-                    <h5 class="info">
-                        <a href="#/linesheets">Line Sheets</a><span style="padding-right: 3px; padding-left: 3px;"
-							class="divider">/<a href="#/linesheets/:lineid">Linesheet name</a><span style=" padding-left: 3px;"
-							class="divider">/Style name</h5>
-                </span>
-                 <div class="divi2 topborderline">
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="divi2">
-                    </div>
-                    <div>
-                        <ul style="list-style-type:none;float:left;">
-                            <li>
-                                <img src="http://placehold.it/290x400" alt="">
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="span5  pull-left">
-                        <div class="style_description">
-                            <h2 class="subHeading_no_underline">
-                                {{styletdetails.stylename}}</h2>
-                            <p>
-                                {{styletdetails.styledescription}}
-                            </p>
-                            <div class="h_line">
-                            </div>
-                            <div class="style_dimentions">
-                                <div class="styl_number">
-                                    <p>
-                                        Style No:</p>
-                                    <h4>
-                                        {{styletdetails.stylenumber}}</h4>
-                                </div>
-                                <div class="styl_number">
-                                    <p>
-                                        Sizes</p>
-                                    <h4>
-                                        {{styletdetails.stylesize}}</h4>
-                                </div>
-                                <div class="clr">
-                                </div>
-                                <div class="style_colors">
-                                    <p>
-                                        Colors</p>
-                                    <div class="color_pallet">
-                                        <span></span><span style="background: #0066FF;"></span><span style="background: #666666;">
-                                        </span><span style="background: #009900;"></span><span style="background: #CC9900;">
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="style_type_cost">
-                                <div class="style_cloth">
-                                    <p>
-                                        Fabrication:</p>
-                                    <h4>
-                                        {{styletdetails.stylefabricarion}}</h4>
-                                </div>
-                                <div class="delevry_date">
-                                    <p>
-                                        Delivery Date:</p>
-                                    <h4>
-                                        {{styletdetails.stylederliverydate}}</h4>
-                                </div>
-                                <div class="price">
-                                    <p>
-                                        Price</p>
-                                    <h4>
-                                        {{styletdetails.styleprice}}</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="moreviews">
-                    <ul>
-                        <li>
-                         <div class="thumbnail_noborder">
-                                <img src="http://placehold.it/85x114" alt="">
-                            </div>
-                        </li>
-                        <li>
-                        <div class="thumbnail_noborder">
-                                <img src="http://placehold.it/85x114" alt="">
-                            </div></li>
-                        <li>
-                        <div class="thumbnail_noborder">
-                                <img src="http://placehold.it/85x114" alt="">
-                            </div></li>
-                            <div class="thumbnail_noborder">
-                                <img src="http://placehold.it/85x114" alt="">
-                            </div></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- right pannel -->
-    </div>
+					</div>
+				</li>
+			</ul>
+			<div></div>
+			<div>
+				<h4 class="leftpane_subheading">Styles</h4>
+				<div class="divi2"></div>
+				<ul class="nav nav-tab nav-stacked">
+					<li ng-repeat="style in styles">
+						<div class="leftpanefeed">
+							<div class="feedimage">
+								<a href="#/{{style.stylelistitemid}}"> <img alt=""
+									ng-src="{{style.stylecoverpic}}" class="pull-left"></a>
+							</div>
+							<div class="leftpanefeed_text">
+								<h3>
+									<a href="#/{{style.stylelistitemid}}" title="">{{style.stylename}}</a>
+								</h3>
+								<p>{{style.stylename}}</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- left pane -->
+		<!-- right pane -->
+		<div class="span9">
+
+			<div>
+				<span class="left heading_btn"> <a href="#/linesheets">Line
+						sheets</a> <span class="divider">/</span> <span><a
+						href="#/linesheets/:lineid">Linesheet name</a></span> <span
+					class="divider">/</span> <span>Untitled</span>
+				</span> <span class="right"> <a ng-href="#{{backButton}}"
+					class="rightpane_back_btn">Back</a></span>
+				<div class="divi2 right_pane_underline"></div>
+			</div>
+
+			<div class="container">
+				<div class="row">
+					<div class="divi2"></div>
+					<div>
+						<ul class="styleimg">
+							<li><img src="http://placehold.it/290x400" alt=""></li>
+						</ul>
+					</div>
+					<div class="span5  pull-left">
+						<div>
+							<p class="subHeading">{{styletdetails.stylename}}</p>
+							<p>{{styletdetails.styledescription}}</p>
+						</div>
+						<div class="style_description">
+							<div class="underline"></div>
+							<div class="style_dimentions">
+								<div class="styl_number">
+									<p>Style No:</p>
+									<h4>{{styletdetails.stylenumber}}</h4>
+								</div>
+								<div class="styl_number">
+									<p>Sizes</p>
+									<h4>{{styletdetails.stylesize}}</h4>
+								</div>
+								<div class="clr"></div>
+								<div class="style_colors">
+									<p>Colors</p>
+									<div class="color_pallet">
+										<span></span><span style="background: #0066FF;"></span><span
+											style="background: #666666;"> </span><span
+											style="background: #009900;"></span><span
+											style="background: #CC9900;"> </span>
+									</div>
+								</div>
+							</div>
+							<div class="style_type_cost">
+								<div class="style_cloth">
+									<p>Fabrication:</p>
+									<h4>{{styletdetails.stylefabricarion}}</h4>
+								</div>
+								<div class="delevry_date">
+									<p>Delivery Date:</p>
+									<h4>{{styletdetails.stylederliverydate}}</h4>
+								</div>
+								<div class="price">
+									<p>Price</p>
+									<h4>{{styletdetails.styleprice}}</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="moreviews">
+					<ul>
+						<li>
+							<div class="thumbnail_noborder">
+								<img src="http://placehold.it/85x114" alt="">
+							</div>
+						</li>
+						<li>
+							<div class="thumbnail_noborder">
+								<img src="http://placehold.it/85x114" alt="">
+							</div>
+						</li>
+						<li>
+							<div class="thumbnail_noborder">
+								<img src="http://placehold.it/85x114" alt="">
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- right pane -->
+	</div>
 </div>
+	<!-- body -->

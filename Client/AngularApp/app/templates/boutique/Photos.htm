@@ -1,0 +1,63 @@
+<!--body-->
+<div class="container minimum_height">
+	<div class="row">
+		<!-- left-pane -->
+		<div class="span3">
+			<h4 class="leftpane_entity_heading">Boutique</h4>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> <a href="#profile"> <img alt=""
+								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+					</div>
+				</li>
+			</ul>
+			<div class="leftpane_subheading">FILTERS</div>
+			<div class="divi2"></div>
+			<div class="leftpane_filter_name">
+				<span class="leftpane_filter_name">Photo name</span> <input type="text"
+				placeholder="Photo name" class="span3" />
+			</div>
+		</div>
+		<!-- left pane -->
+		<!-- right pane-->
+		<div class="span9">
+			<div>
+				<span class="left heading_btn"> <a href="#/gallery">Gallery
+				</a> <span class="divider">/</span> <span>Untitled</span>
+				</span> <span class="right"> <a ng-href="#{{backButton}}"
+					class="rightpane_back_btn">Back</a></span>
+				<div class="divi2 right_pane_underline"></div>
+				<span class="left right_pane_info"> Find Photos using the
+					filters </span> <span class="right"> <a href="#/addgallery"
+					class="rightpane_add_btn"> Add</a>
+				</span>
+				<div class="divi2 right_pane_underline"></div>
+			</div>
+
+			<div>
+				<ul class="thumbnails">
+					<li ng-repeat="photo in photogallery">
+						<div class="galleryview">
+							<a href="#/viewphotos"> <img
+								src="{{photo.photocoverpic}}" alt=""></a>
+							<div class="divi2"></div>
+						</div>
+						<div class="gallerytitle">
+							<h5>{{photo.photoname}}</h5>
+						</div>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+		<!-- right pane -->
+	</div>
+	
+</div>
+
+<!--body-->

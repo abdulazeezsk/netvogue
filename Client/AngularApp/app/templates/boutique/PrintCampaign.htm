@@ -18,13 +18,13 @@
                     </div>
                 </li>
             </ul>
-             <div class="leftpane_filter_heading  underline">
+             <div class="leftpane_subheading">
              FILTERS
             </div>
              <div class="divi2">
             </div>
            <div class="leftpane_filter_name">
-            Campaign Name
+            <span class="leftpane_filter_name">Campaign Name</span> 
             <input type="text" class="span3" placeholder="Campaign name"/>
            </div>
         </div>
@@ -32,9 +32,8 @@
         <!-- right pane -->
         <div class="span9">
             <div>
-                <span class="left">
-                    <h4 class="rightpane_subHeading">
-                        Print Campaigns</h4>
+                <span class="left rightpane_subHeading">
+                        Print Campaigns
                 </span>
                 <span class="right">
                 <a ng-href="#{{backButton}}" class="rightpane_back_btn">
@@ -42,14 +41,17 @@
                 </span>
                 <div class="divi2 right_pane_underline">
                 </div>
-                <span class="left">
-                    <h5 class="right_pane_info">
-                        Find Print Campaigns using the filters</h5>
+                <span class="left right_pane_info">
+                        Find Print Campaigns using the filters
                 </span>
                 <span  class="right" ng-show="isMyProfile">
                 <a href="#/addprintcampaign" class="rightpane_add_btn">Add</a></span>
                 <div class="divi2 right_pane_underline">
                 </div>
+             </div>
+                
+                
+                <div>
                 <ul class="thumbnails">
                     <li ng-repeat="printcampign in printcampaigns">
                         <div class="view view-first">
@@ -77,13 +79,13 @@
                             <div class="divi2">
                             </div>
                         </div>
-                        <div class="brandtitle_price">
+                        <div class="title">
                             <h3>
                                 {{printcampign.campaignname}}</h3>
                         </div> 
                     </li>
                 </ul>
-            </div>
+               </div>
         </div>
         <!-- right pane -->
     </div>

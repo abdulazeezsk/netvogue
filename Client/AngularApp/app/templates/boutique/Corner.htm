@@ -43,7 +43,7 @@
         <!-- middle pannel -->
         <!-- right pannel -->
         <div class="span3">
-            <h4 class="subHeading_advertisement">
+            <h4 class="trending_head">
                 Network</h4>
             <div class="divi2">
             </div>
@@ -52,22 +52,22 @@
                     <div>
                         <a href="#/{{network.networklistitemID}}/profile">
                             <img alt="" ng-src="{{network.profilepiclink}}" class="pull-left"></a> <a href="#/{{network.networklistitemID}}/profile"
-                                class="brandname_title">{{network.networklistitem}}</a>
+                                class="network_entity_name">{{network.networklistitem}}</a>
                     </div>
                 </li>
             </ul>
             <div>
-                <h4 class="subHeading_advertisement">
+                <h4 class="trending_head">
                     TRENDING</h4>
                 <div class="divi2">
                 </div>
                 <ul class="nav nav-tab nav-stacked">
                     <li ng-repeat="trend in trending">
-                        <div class="advertisementfeed">
-                            <div class="brand_image">
+                        <div class="trendfeed">
+                            <div class="img">
                                 <a href="#/{{trend.trendlistitemID}}">
                                     <img alt="" ng-src="{{trend.trendpiclink}}" class="pull-left"></a></div>
-                            <div class="advertisement_text">
+                            <div class="trendfeed_text">
                                 <h3>
                                     <a href="#/{{trend.trendlistitemID}}" title="">{{trend.trendlistitem}}</a></h3>
                                 <p>

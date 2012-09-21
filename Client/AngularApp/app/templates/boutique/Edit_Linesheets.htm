@@ -23,8 +23,8 @@
             </div>
             <div class="divi2">
             </div>
-           <div class="leftpane_filter_name">
-            Style name
+           <div>
+            <span class="leftpane_filter_name">Style name</span> 
             <input type="text" class="span3" />
            </div>
             <div class="leftpane_subheading">
@@ -32,11 +32,11 @@
             <div>
                 <ul class="nav nav-tab nav-stacked">
                     <li ng-repeat="style in styles">
-                        <div class="advertisementfeed">
-                            <div class="brand_image">
+                        <div class="leftpanefeed">
+                            <div class="feedimage">
                                 <a href="#/{{style.stylelistitemid}}">
                                     <img alt="" ng-src="{{style.stylecoverpic}}" class="pull-left"></a></div>
-                            <div class="advertisement_text">
+                            <div class="leftpanefeed_text">
                                 <h3>
                                     <a href="#/{{trend.trendlistitemID}}" title="">{{style.stylename}}</a></h3>
                                 <p>
@@ -151,7 +151,6 @@
                 </div>
               </li>
             </ul>
-                
                 </div>
                 <!-- data pannel -->
             </div>

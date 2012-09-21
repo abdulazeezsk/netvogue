@@ -1,67 +1,57 @@
 <!--body-->
 <div class="container minimum_height">
-    <div class="row">
-        <!-- left-pane -->
-        <div class="span3">
-            <h4 class="leftpane_entity_heading">
-                Boutique</h4>
-            <div class="divi2">
-            </div>
-            <ul class="thumbnails">
-                <li class="span3">
-                    <div>
-                       	<span> <a href="#profile"> <img alt=""
+	<div class="row">
+		<!-- left-pane -->
+		<div class="span3">
+			<h4 class="leftpane_entity_heading">Boutique</h4>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> <a href="#profile"> <img alt=""
 								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
-								class="pull-left leftpane_profile_img"></a> </span>
-								<span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
-                    </div>
-                </li>
-            </ul>
-             <div class="leftpane_filter_heading underline">
-             FILTERS
-            </div>
-             <div class="divi2">
-            </div>
-           <div class="leftpane_filter_name">
-            Title
-            <input type="text" class="span3" />
-           </div>
-        </div>
-        <!-- left pane -->
-        <!-- right pane-->
-        <div class="span9">
-            <div>
-                <span class="left">
-                    <h4 class="rightpane_subHeading">
-                        Gallery</h4>
-                </span>
-                <div class="divi2 right_pane_underline">
-                </div>
-                <span class="left right_pane_info">
-                        Find gallaries using the filters
-                </span>
-                <span class="right" >
-                <a href="#/addgallery" class="rightpane_add_btn">Add</a>
-                </span>
-                <div class="divi2 right_pane_underline">
-                </div>
-                <ul class="thumbnails">
-                    <li ng-repeat="photo in photogallery">
-                        <div class=".galleryview">
-                            <a href="#/{{photo.photogalleryId}}">
-                                <img src="{{photo.photocoverpic}}" alt=""></a>
-                            <div class="divi2">
-                            </div>
-                        </div>
-                        <div class="gallerytitle">
-                                <h5>
-                                    {{photo.photoname}}</h5>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- right pane -->
-    </div>
+					</div>
+				</li>
+			</ul>
+			<div class="leftpane_subheading">FILTERS</div>
+			<div class="divi2"></div>
+			<div class="leftpane_filter_name">
+				<span class="leftpane_filter_name">GALLERY NAME</span> <input
+					type="text" placeholder="Gallery name" class="span3" />
+			</div>
+		</div>
+		<!-- left pane -->
+		<!-- right pane-->
+		<div class="span9">
+			<div>
+				<span class="left heading_btn">Gallery
+				</span> <span class="right"> <a ng-href="#{{backButton}}"
+					class="rightpane_back_btn">Back</a></span>
+				<div class="divi2 right_pane_underline"></div>
+				<span class="left right_pane_info"> Find galleries using the
+					filters </span> <span class="right"> <a href="#/addgallery"
+					class="rightpane_add_btn"> Add</a>
+				</span>
+				<div class="divi2 right_pane_underline"></div>
+			</div>
+			<div>
+				<ul class="thumbnails">
+					<li ng-repeat="gallery in galleries">
+						<div class="galleryview">
+							<a href="#/photos"> <img src="{{gallery.gallerypic}}" alt=""></a>
+							<div class="divi2"></div>
+						</div>
+						<div class="gallerytitle">
+							<h5>{{gallery.galleryname}}</h5>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- right pane -->
+	</div>
 </div>
+<!--body-->

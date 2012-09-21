@@ -17,20 +17,19 @@
 				</li>
 			</ul>
 			<div>
-				<div class="divi2"></div>
 				<div>
-					<h4 class="leftpane_subheading">Print Campaigns</h4>
+					<h4 class="leftpane_subheading">Photos</h4>
 					<ul class="nav nav-tab nav-stacked">
-						<li ng-repeat="printcampaign in printcampaigns">
+						<li ng-repeat="photo in photos">
 							<div class="leftpanefeed">
 								<div class="feedimage">
-									<a href="#/{{printcampaign.printcampaignlistitemid}}"> <img
-										alt="" ng-src="{{printcampaign.printcampaignpic}}"
+									<a href="#/{{photo.photolistitemid}}"> <img
+										alt="" ng-src="{{photo.photopic}}"
 										class="pull-left"></a>
 								</div>
 								<div class="leftpanefeed_text">
 									<h3>
-										<a href="#/{{printcampaign.printcampaignlistitemid}}" title="">{{printcampaign.printcampaignname}}</a>
+										<a href="#/{{photo.photolistitemid}}" title="">{{photo.photoname}}</a>
 									</h3>
 								</div>
 							</div>
@@ -50,13 +49,13 @@
 				<!-- Carousel items -->
 				<div class="carousel-inner">
 					<div class="item"
-						ng-repeat="viewPrintcampaign in viewPrintcampaigns"
+						ng-repeat="viewPhoto in viewPhotos"
 						ng-class="{active: $first}">
-						<img src="{{viewPrintcampaign.printcampaignpic}}" alt="">
+						<img src="{{viewPhoto.photopic}}" alt="">
 						<div class="carousel-caption">
 							<h4>
-								{{viewPrintcampaign.printcampaignname}}{{viewPrintcampaign.printcampaignseason}}</h4>
-							<p>{{viewPrintcampaign.printcampaigndescription}}</p>
+								{{viewPhoto.photoname}}</h4>
+							<p>{{viewPhoto.photodescription}}</p>
 						</div>
 					</div>
 				</div>
