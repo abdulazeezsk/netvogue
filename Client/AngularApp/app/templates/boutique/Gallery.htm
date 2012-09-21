@@ -32,8 +32,8 @@
 					class="rightpane_back_btn">Back</a></span>
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info"> Find galleries using the
-					filters </span> <span class="right"> <a href="#/addgallery"
-					class="rightpane_add_btn"> Add</a>
+					filters </span> <span class="right"> <a data-toggle="modal"
+					href="#CreateGallery"class="rightpane_add_btn"> Add</a>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 			</div>
@@ -55,3 +55,23 @@
 	</div>
 </div>
 <!--body-->
+
+<!-- modal -->
+<div class="modal  hide" id="CreateGallery">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"></button>
+		<h4 class="subHeading_no_underline">Create Gallery</h4>
+	</div>
+	<div class="modal-body">
+		<!-- <div>Style sheet Name</div> -->
+		<div>
+			<input type="text" class="span4" placeholder="Gallery Name" />
+		</div>
+		</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
+			class="btn btn-primary" data-dismiss="modal" href="#/addgallery">
+			Create Gallery</a>
+	</div>
+</div>
+<!-- modal -->
