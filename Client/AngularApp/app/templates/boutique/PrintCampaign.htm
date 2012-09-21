@@ -63,7 +63,7 @@
                                 <div class="mask">
                                     <ul ng-show="isMyProfile">
                                         <li><a href="#" title="Delete"><i class="icon-trash icon-white"></i></a></li>
-                                        <li><a data-toggle="modal" href="#CreatePrintcampaign" title="Edit"><i class="icon-edit icon-white"></i>
+                                        <li><a data-toggle="modal" href="#EditPrintcampaign" title="Edit"><i class="icon-edit icon-white"></i>
                                         </a></li>
                                     </ul>
                                     <p>
@@ -108,6 +108,27 @@
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
 			class="btn btn-primary" data-dismiss="modal" href="#/addprintcampaign">
 			Create print campaign</a>
+	</div>
+</div>
+<!-- modal -->
+
+
+<!-- modal -->
+<div class="modal  hide" id="EditPrintcampaign">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"></button>
+		<h4 class="subHeading_no_underline">Edit Print Campaign</h4>
+	</div>
+	<div class="modal-body">
+		<div>
+			<input type="text" class="span4" placeholder="Print campaign name" />
+			 <textarea style="width: 500px;" rows="9" placeholder="Enter description"></textarea>
+		</div>
+		</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
+			class="btn btn-primary" data-dismiss="modal" href="#/addprintcampaign">
+			Update print campaign</a>
 	</div>
 </div>
 <!-- modal -->
