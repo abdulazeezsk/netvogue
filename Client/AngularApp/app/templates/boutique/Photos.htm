@@ -40,7 +40,7 @@
 			</div>
 
 			<div>
-				<ul class="thumbnails">
+				<!-- <ul class="thumbnails">
 					<li ng-repeat="photo in photogallery">
 						<div class="galleryview">
 							<a href="#/viewphotos"> <img src="{{photo.photocoverpic}}"
@@ -51,7 +51,37 @@
 							<h5>{{photo.photoname}}</h5>
 						</div>
 					</li>
-				</ul>
+				</ul> -->
+				
+					<ul class="thumbnails">
+						<li ng-repeat="photo in photogallery">
+							<div class="galleryview galleryview-firstglry">
+								<a href="#/{{photo.photolistitemid}}"> <img
+									src="{{photo.photocoverpic}}" alt=""></a>
+								<div class="maskglry mask-1"></div>
+								<div class="maskglry mask-2">
+									<p>
+										<u>{{gallery.galleryname}}</u>
+									</p>
+								</div>
+								<div class="contentglry">
+								<ul class="maskls" ng-show="isMyProfile">
+                                        <li><a href="#" title="Delete"><i class="icon-trash icon-white"></i></a></li>
+                                        <li><a href="#/editgallery" title="Edit"><i class="icon-edit icon-white"></i>
+                                        </a></li>
+                                    </ul>
+									<h1>
+										<a href="#/viewphotos" class="mask_edit">View</a>
+									</h1>
+								</div>
+								<div class="divi2"></div>
+							</div>
+							<div class="title">
+								<h3>{{gallery.galleryname}}</h3>
+							</div>
+						</li>
+					</ul>
+					
 			</div>
 
 		</div>

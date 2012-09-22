@@ -38,7 +38,7 @@
 				<div class="divi2 right_pane_underline"></div>
 			</div>
 			<div>
-				<ul class="thumbnails">
+				<!-- <ul class="thumbnails">
 					<li ng-repeat="gallery in galleries">
 						<div class="galleryview">
 							<a href="#/photos"> <img src="{{gallery.gallerypic}}" alt=""></a>
@@ -48,7 +48,37 @@
 							<h5>{{gallery.galleryname}}</h5>
 						</div>
 					</li>
-				</ul>
+				</ul> -->
+				
+				
+					<ul class="thumbnails">
+						<li ng-repeat="gallery in galleries">
+							<div class="galleryview galleryview-firstglry">
+								<a href="#/{{gallery.gallerylistitemid}}"> <img
+									src="{{gallery.gallerypic}}" alt=""></a>
+								<div class="maskglry mask-1"></div>
+								<div class="maskglry mask-2">
+									<p>
+										<u>{{gallery.galleryname}}</u>
+									</p>
+								</div>
+								<div class="contentglry">
+								<ul class="maskls" ng-show="isMyProfile">
+                                        <li><a href="#" title="Delete"><i class="icon-trash icon-white"></i></a></li>
+                                        <li><a data-toggle="modal" href="#EditGallery" title="Edit"><i class="icon-edit icon-white"></i>
+                                        </a></li>
+                                    </ul>
+									<h1>
+										<a href="#/photos" class="mask_edit">View</a>
+									</h1>
+								</div>
+								<div class="divi2"></div>
+							</div>
+							<div class="title">
+								<h3>{{gallery.galleryname}}</h3>
+							</div>
+						</li>
+					</ul>
 			</div>
 		</div>
 		<!-- right pane -->
@@ -71,6 +101,27 @@
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
 			class="btn btn-primary" data-dismiss="modal" href="#/addgallery">
 			Create gallery</a>
+	</div>
+</div>
+<!-- modal -->
+
+
+
+<!-- modal -->
+<div class="modal  hide" id="EditGallery">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"></button>
+		<h4 class="subHeading_no_underline">Edit Gallery</h4>
+	</div>
+	<div class="modal-body">
+		<div>
+			<input type="text" class="span4" placeholder="Gallery name" />
+		</div>
+		</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
+			class="btn btn-primary" data-dismiss="modal" href="#/addgallery">
+			Update gallery</a>
 	</div>
 </div>
 <!-- modal -->
