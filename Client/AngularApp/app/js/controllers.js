@@ -1204,3 +1204,108 @@ function MyCtrlViewPhotos($scope, $routeParams, currentvisitedprofile) {
 
 }
 
+function MyCtrlStylesPreview($scope, currentvisitedprofile) {
+
+	$scope.$parent.title = 'Style';
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+	$scope.stylethumbnails = [ {
+		"stylethumbnailsid" : "videoid",
+		"stylethumbnail" : "img/donna_karan_adriana_lima_1.jpg"
+
+	}, {
+		"stylethumbnailsid" : "videoid",
+		"stylethumbnail" : "img/donna_karan_adriana_lima_2.jpg"
+
+	}, {
+		"stylethumbnailsid" : "videoid",
+		"stylethumbnail" : "img/donna_karan_adriana_lima_3.jpg"
+
+	}
+
+	];
+
+	$scope.styletdetails = {
+		"styleid" : "styleid",
+		"stylename" : "becky red jacket",
+		"styledescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
+				+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
+		"stylefabricarion" : "Cotton",
+		"stylenumber" : "RBK2345",
+		"stylederliverydate" : "24/08/2012",
+		"stylesize" : "S M L XL",
+		"styleprice" : "12000",
+		"stylecover" : $scope.stylethumbnails[0].stylethumbnail//"http://placehold.it/290x400"
+	};
+	
+	$scope.SetmainImage=function(index)
+	{
+		$scope.styletdetails.stylecover = $scope.stylethumbnails[index].stylethumbnail;//"http://placehold.it/290x400"
+	}
+
+	$scope.styles = [
+	 {
+		"stylelistitemid" : "styleId",
+		"stylename" : "Studded Winston",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/90x119"
+
+	},
+	{
+		"stylelistitemid" : "styleId",
+		"stylename" : "Smith trench",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/90x119"
+
+	},
+	{
+		"stylelistitemid" : "styleId",
+		"stylename" : "Smith trench",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/90x119"
+
+	},
+	{
+		"stylelistitemid" : "styleId",
+		"stylename" : "Smith trench",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/90x119"
+
+	},
+	{
+		"stylelistitemid" : "styleId",
+		"stylename" : "Smith trench",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/90x119"
+
+	},
+	{
+		"stylelistitemid" : "styleId",
+		"stylename" : "Smith trench",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/90x119"
+
+	} 
+	
+	];
+	
+	
+
+}
