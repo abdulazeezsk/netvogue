@@ -19,22 +19,22 @@
 			<div class="leftpane_subheading">FILTERS</div>
 			<div class="divi2"></div>
 			<div class="leftpane_filter_name">
-				<span class="leftpane_filter_name">Photo name</span> <input type="text"
-				placeholder="Photo name" class="span3" />
+				<span class="leftpane_filter_name">Photo name</span> <input
+					type="text" placeholder="Photo name" class="span3" />
 			</div>
 		</div>
 		<!-- left pane -->
 		<!-- right pane-->
 		<div class="span9">
 			<div>
-				<span class="left heading_btn"> <a href="#/gallery">Gallery
-				</a> <span class="divider">/</span> <span>Untitled</span>
-				</span> <span class="right"> <a ng-href="#{{backButton}}"
-					class="rightpane_back_btn">Back</a></span>
+				<span class="left heading_btn"> <a href="#/gallery">Gallery</a>
+					<span class="divider">/</span> <span><a href="#/photos">Untitled</a>
+				</span></span>
+
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info"> Find Photos using the
-					filters </span> <span class="right"> <a href="#/addgallery"
-					class="rightpane_add_btn"> Add</a>
+					filters </span> <span class="right"> <a href="#/editgallery"
+					class="rightpane_add_btn">Edit</a>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 			</div>
@@ -43,8 +43,8 @@
 				<ul class="thumbnails">
 					<li ng-repeat="photo in photogallery">
 						<div class="galleryview">
-							<a href="#/viewphotos"> <img
-								src="{{photo.photocoverpic}}" alt=""></a>
+							<a href="#/viewphotos"> <img src="{{photo.photocoverpic}}"
+								alt=""></a>
 							<div class="divi2"></div>
 						</div>
 						<div class="gallerytitle">
@@ -53,11 +53,11 @@
 					</li>
 				</ul>
 			</div>
-			
+
 		</div>
 		<!-- right pane -->
 	</div>
-	
+
 </div>
 
 <!--body-->
