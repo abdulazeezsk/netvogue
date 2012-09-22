@@ -20,6 +20,7 @@ angular.module('netVogue', ['netVogue.filters', 'netVogue.services', 'netVogue.d
 	  $routeProvider.when('/addvideocampaign', 			{templateUrl: 'templates/boutique/Add_VideoCampaign.htm', 			controller: MyCtrlAddVideoCampaign});
 	  $routeProvider.when('/advancesearch', 			{templateUrl: 'templates/boutique/AdvSearch.htm', 					controller: MyCtrlAdvancedSearch });
 	  $routeProvider.when('/collections', 				{templateUrl: 'templates/boutique/Collections.htm', 				controller: MyCtrlCollections });
+	  $routeProvider.when('/collection', 				{templateUrl: 'templates/boutique/Collection.htm', 					controller: MyCtrlCollection });
 	  $routeProvider.when('/collections/:collectionid', {templateUrl: 'templates/boutique/View_Collection.htm', 			controller: MyCtrlViewcollection });
 	  $routeProvider.when('/:profileid/collections', 	{templateUrl: 'templates/boutique/Collections.htm', 				controller: MyCtrlCollections });
 	  $routeProvider.when('/:profileid/collections/:collectionid', {templateUrl: 'templates/boutique/View_Collection.htm', 	controller: MyCtrlViewcollection });

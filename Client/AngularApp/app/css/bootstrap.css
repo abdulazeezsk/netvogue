@@ -4850,6 +4850,12 @@ font-size:14px;
 	float:left;
 }
 
+.spanstyle
+{
+	width:290px;
+	height:400px;
+}
+
 .style_description {
 	width: 412px;
 	float: left;
@@ -4947,6 +4953,12 @@ font-size:14px;
 	min-height: 100px;
 	float: left;
 	list-style-type: none;
+}
+
+.spanviews
+{
+width: 85px;
+height: 114px;
 }
 
 

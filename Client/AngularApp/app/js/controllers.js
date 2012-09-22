@@ -478,6 +478,20 @@ function MyCtrlCollections($scope, $routeParams, currentvisitedprofile,
 
 	$scope.searchFilter = new netvogue.searchFilter();
 }
+
+function MyCtrlCollection($scope, $routeParams, currentvisitedprofile,
+		srvprofile) {
+
+	$scope.$parent.title = "Collection";
+	$scope.entityname = currentvisitedprofile.getEntityName();
+	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
+
+	$scope.links = currentvisitedprofile.getleftpanellinks();
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+	$scope.collections = srvprofile.getcollections($routeParams);
+
+	$scope.searchFilter = new netvogue.searchFilter();
+}
 function MyCtrlLinesheets($scope, $routeParams, currentvisitedprofile,
 		srvprofile) {
 
