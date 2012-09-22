@@ -57,7 +57,9 @@
 					<div class="divi2"></div>
 					<div>
 						<ul class="styleimg">
-							<li><img src="http://placehold.it/290x400" alt=""></li>
+							<li class="span4"><!-- <img src="http://placehold.it/290x400" alt=""> -->
+							<img src="{{styletdetails.stylecover}}" alt="">
+							</li>
 						</ul>
 					</div>
 					<div class="span5  pull-left">
@@ -106,21 +108,14 @@
 				</div>
 				<div class="moreviews">
 					<ul>
-						<li>
+						<li class="span2" ng-repeat="styletemp in stylethumbnails" ng-click="SetmainImage($index)">
 							<div class="thumbnail_noborder">
-								<img src="http://placehold.it/85x114" alt="">
+								<!-- <img src="http://placehold.it/85x114" alt=""> -->
+								<img src="{{styletemp.stylethumbnail}}" alt="">
+								
 							</div>
 						</li>
-						<li>
-							<div class="thumbnail_noborder">
-								<img src="http://placehold.it/85x114" alt="">
-							</div>
-						</li>
-						<li>
-							<div class="thumbnail_noborder">
-								<img src="http://placehold.it/85x114" alt="">
-							</div>
-						</li>
+						
 					</ul>
 				</div>
 			</div>
