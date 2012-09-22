@@ -718,25 +718,22 @@ function MyCtrlVideos($scope, $routeParams, currentvisitedprofile) {
 
 }
 
-function MyCtrlStyle($scope) {
+function MyCtrlStyle($scope, currentvisitedprofile) {
 
 	$scope.$parent.title = 'Style';
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	$scope.stylethumbnails = [ {
 		"stylethumbnailsid" : "videoid",
-		"stylethumbnail" : "http://placehold.it/85x114"
+		"stylethumbnail" : "img/donna_karan_adriana_lima_1.jpg"
 
 	}, {
 		"stylethumbnailsid" : "videoid",
-		"stylethumbnail" : "http://placehold.it/85x114"
+		"stylethumbnail" : "img/donna_karan_adriana_lima_2.jpg"
 
 	}, {
 		"stylethumbnailsid" : "videoid",
-		"stylethumbnail" : "http://placehold.it/85x114"
+		"stylethumbnail" : "img/donna_karan_adriana_lima_3.jpg"
 
-	}, {
-		"stylethumbnailsid" : "videoid",
-		"stylethumbnail" : "http://placehold.it/85x114"
 	}
 
 	];
@@ -751,8 +748,13 @@ function MyCtrlStyle($scope) {
 		"stylederliverydate" : "24/08/2012",
 		"stylesize" : "S M L XL",
 		"styleprice" : "12000",
-		"stylecover" : "http://placehold.it/290x400"
+		"stylecover" : $scope.stylethumbnails[0].stylethumbnail//"http://placehold.it/290x400"
 	};
+	
+	$scope.SetmainImage=function(index)
+	{
+		$scope.styletdetails.stylecover = $scope.stylethumbnails[index].stylethumbnail;//"http://placehold.it/290x400"
+	}
 
 	$scope.styles = [
 	 {
@@ -833,7 +835,7 @@ function MyCtrlViewcollection($scope, $routeParams, currentvisitedprofile) {
 	$scope.collectionseason = {
 		"seasonname" : "Spring 2012",
 		"collectionlikes" : "10 people like this"
-	}
+	};
 	$scope.viewcollections = [
 			{
 				"collectionlistitemid" : "collectionId",
