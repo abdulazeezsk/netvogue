@@ -806,7 +806,7 @@ function MyCtrlViewcollection($scope, $routeParams, currentvisitedprofile) {
 	$scope.collectionseason = {
 		"seasonname" : "Spring 2012",
 		"collectionlikes" : "10 people like this"
-	}
+	};
 	$scope.viewcollections = [
 			{
 				"collectionlistitemid" : "collectionId",

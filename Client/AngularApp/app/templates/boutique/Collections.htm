@@ -45,8 +45,8 @@
 				<span class="left right_pane_info">
 					Find Collections using the filters
 				</span>
-				<span class="right" ng-show="isMyProfile && iambrand"><a
-					href="#/addcollections" class="rightpane_add_btn">Add</a></span>
+				<span class="right" >
+				<a data-toggle="modal"	href="#CreateCollection" class="rightpane_add_btn">Add</a></span>
 				<div class="divi2 right_pane_underline"></div>
 				<ul class="thumbnails">
 					<li ng-repeat="collection in collections">
@@ -56,10 +56,10 @@
 							<div class="mask"></div>
 							<div class="content">
 								<div class="mask">
-									<ul ng-show="isMyProfile && iambrand">
+									<ul>
 										<li><a href="#" title="Delete"><i
 												class="icon-trash icon-white"></i></a></li>
-										<li><a href="#/editcollections" title="Edit"><i
+										<li><a data-toggle="modal"	href="#EditCollection" title="Edit"><i
 												class="icon-edit icon-white"></i></a></li>
 									</ul>
 									<p>
@@ -89,3 +89,46 @@
 	</div>
 </div>
 	<!--body-->
+	
+
+
+	<!-- modal -->
+<div class="modal  hide" id="CreateCollection">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"></button>
+		<h4 class="subHeading_no_underline">Create Collection</h4>
+	</div>
+	<div class="modal-body">
+		<div>
+			<input type="text" class="span4" placeholder="Collection name" />
+			<textarea style="width: 500px;" rows="9" placeholder="Enter description"></textarea>
+		</div>
+		</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
+			class="btn btn-primary" data-dismiss="modal" href="#/addcollections">
+			Create collection</a>
+	</div>
+</div>
+<!-- modal -->
+
+
+	<!-- modal -->
+<div class="modal  hide" id="EditCollection">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"></button>
+		<h4 class="subHeading_no_underline">Edit Collection</h4>
+	</div>
+	<div class="modal-body">
+		<div>
+			<input type="text" class="span4" placeholder="Collection name" />
+			<textarea style="width: 500px;" rows="9" placeholder="Enter description"></textarea>
+		</div>
+		</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
+			class="btn btn-primary" data-dismiss="modal" href="#">
+			Update collection</a>
+	</div>
+</div>
+<!-- modal -->
