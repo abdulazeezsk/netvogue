@@ -404,6 +404,20 @@ function MyCtrlNewsletter($scope, $routeParams, currentvisitedprofile,
 
 }
 
+function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile,
+		srvprofile) {
+
+	$scope.$parent.title = 'Newsletter';
+
+	$scope.entityname = currentvisitedprofile.getEntityName();
+	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
+
+	$scope.links = currentvisitedprofile.getleftpanellinks();
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+	$scope.newsletters = srvprofile.getnewsletters($routeParams);
+
+}
+
 function MyCtrlProfileSettings($scope, $routeParams, myprofile) {
 
 	$scope.$parent.title = "Profile Settings";

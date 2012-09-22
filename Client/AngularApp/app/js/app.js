@@ -39,6 +39,7 @@ angular.module('netVogue', ['netVogue.filters', 'netVogue.services', 'netVogue.d
 	  $routeProvider.when('/network', 					{templateUrl: 'templates/boutique/Network.htm', 					controller: MyCtrlNetwork});
 	  $routeProvider.when('/:profileid/network', 		{templateUrl: 'templates/boutique/Network.htm', 					controller: MyCtrlNetwork});
 	  $routeProvider.when('/newsletter', 				{templateUrl: 'templates/boutique/Newsletter.htm', 					controller: MyCtrlNewsletter });
+	  $routeProvider.when('/editorial', 				{templateUrl: 'templates/boutique/Editorial.htm', 					controller: MyCtrlEditorial });
 	  $routeProvider.when('/newsletter/:newsid', 		{templateUrl: 'templates/boutique/View_Newsletter.htm', 			controller: MyCtrlViewNewsLetters });
 	  $routeProvider.when('/:profileid/newsletter', 	{templateUrl: 'templates/boutique/Newsletter.htm', 					controller: MyCtrlNewsletter });
 	  $routeProvider.when('/:profileid/newsletter/:newsid', 		{templateUrl: 'templates/boutique/View_Newsletter.htm', controller: MyCtrlViewNewsLetters });
