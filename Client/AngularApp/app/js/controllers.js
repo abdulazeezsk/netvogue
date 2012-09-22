@@ -689,7 +689,7 @@ function MyCtrlVideos($scope, $routeParams, currentvisitedprofile) {
 
 }
 
-function MyCtrlStyle($scope) {
+function MyCtrlStyle($scope, currentvisitedprofile) {
 
 	$scope.$parent.title = 'Style';
 	$scope.backButton = currentvisitedprofile.getBackHistory();
@@ -804,7 +804,7 @@ function MyCtrlViewcollection($scope, $routeParams, currentvisitedprofile) {
 	$scope.collectionseason = {
 		"seasonname" : "Spring 2012",
 		"collectionlikes" : "10 people like this"
-	}
+	};
 	$scope.viewcollections = [
 			{
 				"collectionlistitemid" : "collectionId",
