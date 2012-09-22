@@ -43,6 +43,7 @@ angular.module('netVogue', ['netVogue.filters', 'netVogue.services', 'netVogue.d
 	  $routeProvider.when('/:profileid/newsletter', 	{templateUrl: 'templates/boutique/Newsletter.htm', 					controller: MyCtrlNewsletter });
 	  $routeProvider.when('/:profileid/newsletter/:newsid', 		{templateUrl: 'templates/boutique/View_Newsletter.htm', controller: MyCtrlViewNewsLetters });
 	  $routeProvider.when('/printcampaign', 			{templateUrl: 'templates/boutique/PrintCampaign.htm', 				controller: MyCtrlPrintcampaign });
+	  $routeProvider.when('/campaign',				{ templateUrl: 'templates/boutique/campaign.htm',         		 	controller: MyCtrlCampaign });
 	  $routeProvider.when('/printcampaign/:printid', 	{templateUrl: 'templates/boutique/View_PrintCampaign.htm', 			controller: MyCtrlviewPrintcampaign });
 	  $routeProvider.when('/:profileid/printcampaign', 	{templateUrl: 'templates/boutique/PrintCampaign.htm', 				controller: MyCtrlPrintcampaign });
 	  $routeProvider.when('/:profileid/printcampaign/:printid', 	{templateUrl: 'templates/boutique/View_PrintCampaign.htm', 			controller: MyCtrlviewPrintcampaign });
@@ -65,7 +66,8 @@ angular.module('netVogue', ['netVogue.filters', 'netVogue.services', 'netVogue.d
 	  $routeProvider.when('/stylesheets',             	{ templateUrl: 'templates/boutique/Stylesheets.htm',              	controller: MyCtrlStylesheets });
 	  $routeProvider.when('/stylesheet',             	{ templateUrl: 'templates/boutique/Stylesheet.htm',              	controller: MyCtrlStylesheet });
 	  $routeProvider.when('/photos',             		{ templateUrl: 'templates/boutique/Photos.htm',           		   	controller: MyCtrlPhotos });
-	  $routeProvider.when('/viewphotos',             	{ templateUrl: 'templates/boutique/View_Photos.htm',          	controller: MyCtrlViewPhotos });
+	  $routeProvider.when('/viewphotos',             	{ templateUrl: 'templates/boutique/View_Photos.htm',     	     	controller: MyCtrlViewPhotos });
+	  $routeProvider.when('/campaign',				{ templateUrl: 'templates/boutique/campaign.htm',         		 	controller: MyCtrlCampaign });
 
 	 
 	  $routeProvider.otherwise({redirectTo: homepage});

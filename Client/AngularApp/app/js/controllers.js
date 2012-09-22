@@ -352,6 +352,18 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, srvprofile) {
 function MyCtrlPrintcampaign($scope, $routeParams, currentvisitedprofile,
 		srvprofile) {
 
+	$scope.$parent.title = 'Printcampaigns';
+
+	$scope.entityname = currentvisitedprofile.getEntityName();
+	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
+
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+	$scope.printcampaigns = srvprofile.getprintcampaigns($routeParams);
+
+}
+function MyCtrlCampaign($scope, $routeParams, currentvisitedprofile,
+		srvprofile) {
+
 	$scope.$parent.title = 'Printcampaign';
 
 	$scope.entityname = currentvisitedprofile.getEntityName();
@@ -361,6 +373,9 @@ function MyCtrlPrintcampaign($scope, $routeParams, currentvisitedprofile,
 	$scope.printcampaigns = srvprofile.getprintcampaigns($routeParams);
 
 }
+
+
+
 function MyCtrlVideocampaign($scope, $routeParams, currentvisitedprofile,
 		srvprofile) {
 
