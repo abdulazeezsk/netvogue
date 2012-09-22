@@ -493,6 +493,8 @@ function MyCtrlLinesheets($scope, $routeParams, currentvisitedprofile,
 	});
 
 	$scope.searchFilter = new netvogue.searchFilter();
+	
+	$scope.immediate = "true";
 
 }
 

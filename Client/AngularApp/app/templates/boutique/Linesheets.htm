@@ -172,17 +172,17 @@
 		<div>
 			<ul class="nav nav-horizontal left">
 				<li>
-				<span class="left" ng-show="isMyProfile"> <input
-						type="radio" name="Date" value="Public" checked>
-						Immediates <input type="radio" name="Date" value="Private">
-						Delivery date
+				<span class="left" ng-show="isMyProfile"> 
+					<input type="radio" name="Date" checked value="true"  ng-model="immediate" > Immediates 
+					<input type="radio" name="Date" value="false" ng-model="immediate"> Delivery date
 				</span>
 				</li>
 			</ul>
 		</div>
 		<div class="divi2"></div>
 		<div>
-		<input type="text" class="span4" placeholder="Enter delivery date" />
+		<input type="text" class="span4" placeholder="Enter delivery date" ng-model="date" ui-date 
+					ng-hide="immediate == 'true'"/>
 		</div>
 	</div>
 	<div class="modal-footer">
