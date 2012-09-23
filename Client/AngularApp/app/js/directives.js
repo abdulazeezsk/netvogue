@@ -68,7 +68,7 @@ angular.module('netVogue.directives', []).
 		    });
     	});
 		scope.progressVisible = true;
-		scope.progress = 10;
+		scope.progress = 60;
 	};
 	return {
 		templateUrl	: 'templates/fileupload_plugin.htm',
