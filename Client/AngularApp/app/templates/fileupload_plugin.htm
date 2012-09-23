@@ -1,5 +1,5 @@
 <ul class="thumbnails">
-	<li ng-repeat="eachfile in newfiles">
+	<li ng-repeat="eachfile in newfiles" class="span3">>
     	<div class="thumbnail">
 	       	<img ng-src={{eachfile.piclink}} alt="">
 	       	<div class="caption">
@@ -9,7 +9,7 @@
 	       	</div>
      	</div>
 	</li>
-	<li ng-repeat="eachfile in existingfiles">
+	<li ng-repeat="eachfile in existingfiles" class="span3">
     	<div class="thumbnail">
 	       	<img ng-src={{eachfile.piclink}} alt="">
 	       	<div class="caption">
