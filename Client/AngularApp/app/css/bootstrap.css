@@ -5204,6 +5204,13 @@ height: 114px;
 	width:100%;
 }
 
+.addimg
+{
+	position: relative;
+	top: -5px;
+	right:25px;
+}
+
 
 .spanpreview_details {
 	width: 376px;
