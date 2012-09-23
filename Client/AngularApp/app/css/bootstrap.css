@@ -5210,17 +5210,17 @@ height: 114px;
 }
 
 .progress-bar {
-    width: 300px; height: 14px;
+    width: 100%; height: 1px;
     border-radius: 10px;
-    border: 1px solid #CCC;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#6666cc), to(#4b4b95));
+    border: 1px solid #CCC; 
+    background-image: -webkit-gradient(linear, left top, left bottom, from(), to());
     border-image: initial;
 }
 .uploaded {
     padding: 0;
-    height: 14px;
+    height: 1px;
     border-radius: 10px;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#66cc00), to(#4b9500));
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#0055cc), to(#0055cc));
     border-image: initial;
 }
 
