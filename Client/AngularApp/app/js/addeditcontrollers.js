@@ -531,7 +531,7 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
 function MyCtrlAddGallery($scope) {
 	$scope.newfiles = [];
 	$scope.existingfiles = [
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "img/donna_karan_adriana_lima_1.jpg"),
 	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
 	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
 	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
