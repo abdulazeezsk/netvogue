@@ -58,7 +58,7 @@ angular.module('netVogue.directives', []).
 		    	var loadingImage = window.loadImage(
 		    			files[i],
 		    	        function (img) {
-		    	            document.body.appendChild(img);
+		    	            
 		    	        },
 		    	        {maxWidth: 600}
 		    	    );
