@@ -152,6 +152,24 @@ function MyCtrlAddPrintCampaign($scope, $routeParams, currentvisitedprofile) {
                        }
 
                        ];
+    
+    $scope.newfiles = [];
+	$scope.existingfiles = [
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "img/donna_karan_adriana_lima_1.jpg"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300")
+	                        ];
+	$scope.filesadded	= function(element) {
+		$scope.$apply(function($scope) {
+			// Turn the FileList object into an Array
+			$scope.$broadcast('filesadded', element.files);
+		});
+	};
 }
 
 function MyCtrlAddVideoCampaign($scope, $routeParams, currentvisitedprofile) {
