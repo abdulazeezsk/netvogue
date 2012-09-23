@@ -675,8 +675,7 @@ angular.module('netVogue.services', []).
               return advancedsearch;
           }
       };
-  });
-  service('notifiaction', function () {
+  }).service('notification', function () {
         var notification = [
   	                          new netvogue.notification("Id", "Calvin Klien", "Calvin Klien", "India", "Hyderabad", "August 2000", "http://placehold.it/231x145"),
                               new netvogue.notification("Id", "Calvin Klien", "Calvin Klien", "India", "Hyderabad", "August 2000", "http://placehold.it/231x145"),
