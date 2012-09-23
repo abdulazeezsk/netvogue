@@ -63,7 +63,7 @@ angular.module('netVogue', ['netVogue.filters', 'netVogue.services', 'netVogue.d
 	  $routeProvider.when('/privacysettings',           { templateUrl: 'templates/boutique/Privacy_Settings.htm',           controller: MyCtrlPrivacySettings });
 	  $routeProvider.when('/organizestyle',             { templateUrl: 'templates/boutique/Organize_Style.htm',             controller: MyCtrlOrganizestyle });
 	  $routeProvider.when('/notification',              { templateUrl: 'templates/boutique/Notifications.htm',              controller: MyCtrlNotifications });
-	  $routeProvider.when('/addgallery',              	{ templateUrl: 'templates/boutique/Add_Gallery.htm',              	controller: MyCtrlNotifications });
+	  $routeProvider.when('/addgallery',              	{ templateUrl: 'templates/boutique/Add_Gallery.htm',              	controller: MyCtrlAddGallery });
 	  $routeProvider.when('/editgallery',             	{ templateUrl: 'templates/boutique/Edit_Gallery.htm',               controller: MyCtrlNotifications });
 	  $routeProvider.when('/stylesheets',             	{ templateUrl: 'templates/boutique/Stylesheets.htm',              	controller: MyCtrlStylesheets });
 	  $routeProvider.when('/stylesheet',             	{ templateUrl: 'templates/boutique/Stylesheet.htm',              	controller: MyCtrlStylesheet });

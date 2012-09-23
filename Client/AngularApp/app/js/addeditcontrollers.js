@@ -527,3 +527,28 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
                        ];
 
 }
+
+function MyCtrlAddGallery($scope) {
+	$scope.newfiles = [];
+	$scope.existingfiles = [
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150")
+	                        ];
+	$scope.newfiles		= [];
+	$scope.filesadded	= function(element) {
+		$scope.$apply(function($scope) {
+			// Turn the FileList object into an Array
+			$scope.newfiles = [];
+		    for (var i = 0; i < element.files.length; i++) {
+		    	//$scope.newfiles.push(element.files[i]);
+		    	$scope.newfiles.push(new netvogue.photo(element.files[i].name, "UNTITLED", "http://placehold.it/210x150"));
+		    }
+		});
+	};
+}

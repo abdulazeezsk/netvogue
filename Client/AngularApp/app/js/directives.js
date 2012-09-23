@@ -49,7 +49,24 @@ angular.module('netVogue.directives', []).
 	        restrict: 'A',
 	        link: linkFn
 	    };
-  }).directive('smartWizard', function() {
+}).directive('fileuploadPlugin', function() {
+	var linkFn;
+	linkFn = function(scope, element, attrs) {
+		scope.$watch('newfiles', function() {
+			//alert("azeez");
+		});
+	};
+	return {
+		templateUrl	: 'templates/fileupload_plugin.htm',
+		replace		: true,
+		restrict	: 'A',
+		scope		: {
+			newfiles		: '=newFiles',
+			existingfiles	: '=ngModel',
+		},
+		link		: linkFn
+	};	
+}).directive('smartWizard', function() { // This is used in initiate page
 	    var linkFn;
 	    linkFn = function(scope, element, attrs, $timeout) {
 	    	angular.element(element).ready(function() {
@@ -63,7 +80,7 @@ angular.module('netVogue.directives', []).
 	        restrict: 'A',
 	        link: linkFn
 	    };
-  }).directive('searchDropdown', function() {
+}).directive('searchDropdown', function() { //This is used in search bar
 	  var linkFn;
 	  linkFn = function(scope, element, attrs) {
 		  
@@ -78,7 +95,7 @@ angular.module('netVogue.directives', []).
 		  restrict	: 'A',
 	      link		: linkFn
 	  };
-  }).directive('focused', function($timeout) {
+}).directive('focused', function($timeout) { ////This is used in search bar
 	  return function(scope, element, attrs) {
 		    element[0].focus();
 		    element.bind('focus', function() {
