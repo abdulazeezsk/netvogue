@@ -55,6 +55,9 @@ angular.module('netVogue.directives', []).
 		scope.$watch('newfiles', function() {
 			//alert("azeez");
 		});
+		
+		scope.progressVisible = true;
+		scope.progress = 10;
 	};
 	return {
 		templateUrl	: 'templates/fileupload_plugin.htm',
