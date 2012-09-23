@@ -3,16 +3,18 @@
 		<div class="thumbnail">
 			<img ng-src={{eachfile.piclink}} alt="" ng-style="{'max-height': maxheight, 'min-height': minheight}">
 			<div class="caption">
-				<h5>{{eachfile.label}}</h5>
-				<h6>
+				<h5 style="visibility:hidden;">{{eachfile.label}}</h5>
+				<h6 style="visibility:hidden;">
 					<p>{{eachfile.seasonname}}</p>
 				</h6>
-				<div ng-show="progressVisible">
+				<p>
+				<div ng-show="progressVisible" style="height:12px;">
             		<div class="percent">{{progress}}%</div>
             		<div class="progress-bar">
                 		<div class="uploaded" ng-style="{'width': progress+'%'}"></div>
             		</div>
         		</div>
+				</p>
 			</div>
 		</div>
 	</li>
@@ -24,7 +26,7 @@
 				<h6>
 					<p>{{eachfile.seasonname}}</p>
 				</h6>
-				<p>
+				<p style="text-align:right;">
 			     <a style="text-decoration:none;">Remove</a>
 				</p>
 			</div>
