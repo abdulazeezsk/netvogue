@@ -54,8 +54,7 @@ angular.module('netVogue.directives', []).
 	linkFn = function(scope, element, attrs) {
 		scope.$on('filesadded', function(e, files) {
 			scope.newfiles = [];
-			alert(scope.newfiles);
-		    for (var i = 0; i < files.length; i++) {
+			for (var i = 0; i < files.length; i++) {
 		    	var loadingImage = window.loadImage(
 		    			files[i],
 		    	        function (img) {
@@ -64,7 +63,7 @@ angular.module('netVogue.directives', []).
 		    	        {maxWidth: 600}
 		    	    );
 		    	if (!loadingImage) {
-		    	        // Alternative code ...
+		    		loadingImage.src = "http://placehold.it/210x150";
 		    	}
 		    	scope.newfiles.push(new netvogue.photo(files[i].name, "UNTITLED", loadingImage.src));
 		    }
@@ -83,6 +82,7 @@ angular.module('netVogue.directives', []).
 	return {
 		templateUrl	: 'templates/fileupload_plugin.htm',
 		replace		: true,
+		transclude	: true,
 		restrict	: 'A',
 		scope		: {
 			newfiles		: '=newFiles',
