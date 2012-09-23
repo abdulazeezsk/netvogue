@@ -5204,6 +5204,11 @@ height: 114px;
 	width:100%;
 }
 
+
+.spanpreview_details {
+	width: 376px;
+}
+
 .progress-bar {
     width: 300px; height: 14px;
     border-radius: 10px;

@@ -43,31 +43,31 @@
 		<div class="span9">
 			<div>
 				<span class="left heading_btn"> <a href="#/linesheets">Line
-						sheets</a> <span class="divider">/</span> <span><a
-						href="#/linesheets/:lineid">untitled Linesheet</a></span> <span
-					class="divider">/</span> <span><a href="#/style">untitled
-							style</a></span>
+						sheets</a> <span class="divider">/</span> <span><a href="#/linesheets/:lineid">Untitled</a></span>
 				</span> <span class="right"> <a ng-href="#{{backButton}}"
 					class="rightpane_back_btn">Back</a></span>
 				<div class="divi2 right_pane_underline"></div>
 			</div>
 
-			<div class="container">
-				<div class="row">
-					<div class="divi2"></div>
-					<div>
-						<ul class="styleimg">
-							<li class="spanstyle"><img
-								src="{{styletdetails.stylecover}}" alt=""></li>
-						</ul>
-					</div>
-					<div class="span5  pull-left">
-						<div>
-							<p class="subHeading">{{styletdetails.stylename}}</p>
-							<p>{{styletdetails.styledescription}}</p>
-						</div>
-						<div class="style_description">
-							<div class="underline"></div>
+		</div>
+
+		<div>
+			<div class="span4" style="height: 400px">
+				<ul class="thumbnails">
+					<li class="spanstyle" style="display: inline;"><img
+						src="{{styletdetails.stylecover}}" alt=""></li>
+				</ul>
+
+			</div>
+
+			<div class="spanpreview_details" style="height: 400px;">
+				<div>
+					<p class="subHeading">{{styletdetails.stylename}}</p>
+					<p>{{styletdetails.styledescription}}</p>
+				</div>
+				<div class="underline"></div>
+				<div class="style_description">
+							
 							<div class="style_dimentions">
 								<div class="styl_number">
 									<p>Style No:</p>
@@ -103,18 +103,16 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="moreviews">
-					<ul>
-						<li class="spanviews" ng-repeat="styletemp in stylethumbnails"
-							ng-click="SetmainImage($index)">
-							<div class="thumbnail_noborder">
-								<img src="{{styletemp.stylethumbnail}}" alt="">
-							</div>
-						</li>
-					</ul>
-				</div>
+			</div>
+			<div class="span4" style="height: 300px;">
+				<ul class="thumbnails">
+					<li class="spanviews" ng-repeat="styletemp in stylethumbnails"
+						ng-click="SetmainImage($index)">
+						<div class="thumbnail_noborder">
+							<img src="{{styletemp.stylethumbnail}}" alt="">
+						</div>
+					</li>
+				</ul>
 			</div>
 		</div>
 		<!-- right pane -->
