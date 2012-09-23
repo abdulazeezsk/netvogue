@@ -87,6 +87,7 @@ angular.module('netVogue.directives', []).
 		scope		: {
 			newfiles		: '=newFiles',
 			existingfiles	: '=ngModel',
+			maxheight		: '=maxHeight',
 			minheight		: '=minHeight'
 		},
 		link		: linkFn
