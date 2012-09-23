@@ -52,18 +52,28 @@ angular.module('netVogue.directives', []).
 }).directive('fileuploadPlugin', function() {
 	var linkFn;
 	linkFn = function(scope, element, attrs) {
-		scope.$watch('newfiles', function() {
-			alert("azeez");
+		scope.$on('filesadded', function(e, files) {
+			scope.newfiles = [];
+			alert(scope.newfiles);
+		    for (var i = 0; i < files.length; i++) {
+		    	var loadingImage = window.loadImage(
+		    			files[i],
+		    	        function (img) {
+		    	            document.body.appendChild(img);
+		    	        },
+		    	        {maxWidth: 600}
+		    	    );
+		    	if (!loadingImage) {
+		    	        // Alternative code ...
+		    	}
+		    	scope.newfiles.push(new netvogue.photo(files[i].name, "UNTITLED", loadingImage.src));
+		    }
 		});
-		
 		angular.element(element).ready(function() {
 			jQuery('#fileupload').fileupload({
 		        dataType: 'json',
 		        done: function (e, data) {
 		        	alert("Done");
-		            /*$.each(data.result, function (index, file) {
-		                $('<p/>').text(file.name).appendTo(document.body);
-		            });*/
 		        }
 		    });
     	});

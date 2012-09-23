@@ -543,23 +543,7 @@ function MyCtrlAddGallery($scope) {
 	$scope.filesadded	= function(element) {
 		$scope.$apply(function($scope) {
 			// Turn the FileList object into an Array
-			$scope.newfiles = [];
-		    for (var i = 0; i < element.files.length; i++) {
-		    	//$scope.newfiles.push(element.files[i]);
-		    	var loadingImage = window.loadImage(
-		    			element.files[i],
-		    	        function (img) {
-		    	            document.body.appendChild(img);
-		    	        },
-		    	        {maxWidth: 600}
-		    	    );
-		    	if (!loadingImage) {
-		    	        // Alternative code ...
-		    	}
-		    	alert(loadingImage.src);
-		    	$scope.newfiles.push(new netvogue.photo(element.files[i].name, "UNTITLED", loadingImage.src));
-		    	
-		    }
+			$scope.$broadcast('filesadded', element.files);
 		});
 	};
 }
