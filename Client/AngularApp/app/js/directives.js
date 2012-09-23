@@ -53,11 +53,22 @@ angular.module('netVogue.directives', []).
 	var linkFn;
 	linkFn = function(scope, element, attrs) {
 		scope.$watch('newfiles', function() {
-			//alert("azeez");
+			alert("azeez");
 		});
 		
+		angular.element(element).ready(function() {
+			jQuery('#fileupload').fileupload({
+		        dataType: 'json',
+		        done: function (e, data) {
+		        	alert("Done");
+		            /*$.each(data.result, function (index, file) {
+		                $('<p/>').text(file.name).appendTo(document.body);
+		            });*/
+		        }
+		    });
+    	});
 		scope.progressVisible = true;
-		scope.progress = 90;
+		scope.progress = 10;
 	};
 	return {
 		templateUrl	: 'templates/fileupload_plugin.htm',
