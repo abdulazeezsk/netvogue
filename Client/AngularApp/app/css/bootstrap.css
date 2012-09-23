@@ -5197,7 +5197,12 @@ height: 114px;
 	top: 7px;
 }
 
-
+.demo
+{
+	background-color:#0055cc;
+	height:2px;
+	width:100%;
+}
 
 /* -----------------------------------------------------Miscellaneous styles End-----------------------------------------*/
 

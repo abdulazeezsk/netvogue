@@ -1,22 +1,33 @@
 <ul class="thumbnails">
-	<li ng-repeat="eachfile in newfiles" class="span3">>
-    	<div class="thumbnail">
-	       	<img ng-src={{eachfile.piclink}} alt="">
-	       	<div class="caption">
-	        	<h5>{{eachfile.label}}</h5>
-	        	<h6><p>{{eachfile.seasonname}}</p></h6>
-	         	<p><a href="#" class="btn btn-primary">Remove</a> </p>
-	       	</div>
-     	</div>
+	<li ng-repeat="eachfile in newfiles" class="span3">
+		<div class="thumbnail">
+			<img ng-src={{eachfile.piclink}} alt="">
+			<div class="caption">
+				<h5>{{eachfile.label}}</h5>
+				<h6>
+					<p>{{eachfile.seasonname}}</p>
+				</h6>
+				<div class="demo">
+			<div id="progressbar"></div>
+				</div>
+				<!-- <p>
+					<a href="#" class="btn btn-primary">Remove</a>
+				</p> -->
+			</div>
+		</div>
 	</li>
 	<li ng-repeat="eachfile in existingfiles" class="span3">
-    	<div class="thumbnail">
-	       	<img ng-src={{eachfile.piclink}} alt="">
-	       	<div class="caption">
-	        	<h5>{{eachfile.label}}</h5>
-	        	<h6><p>{{eachfile.seasonname}}</p></h6>
-	         	<p><a href="#" class="btn btn-primary">Remove</a> </p>
-	       	</div>
-     	</div>
+		<div class="thumbnail">
+			<img ng-src={{eachfile.piclink}} alt="">
+			<div class="caption">
+				<h5>{{eachfile.label}}</h5>
+				<h6>
+					<p>{{eachfile.seasonname}}</p>
+				</h6>
+				<p>
+					<a href="#" class="btn btn-primary">Remove</a>
+				</p>
+			</div>
+		</div>
 	</li>
 </ul>
