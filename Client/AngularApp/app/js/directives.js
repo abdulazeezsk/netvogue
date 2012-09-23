@@ -40,7 +40,7 @@ angular.module('netVogue.directives', []).
 	    	};
 	    };
 	    return {
-	    	templateUrl:'templates/boutique/CheckboxTree.htm',
+	    	templateUrl:'templates/CheckboxTree.htm',
 	    	replace: true,
 	    	transclude: true,
 	    	scope: {
