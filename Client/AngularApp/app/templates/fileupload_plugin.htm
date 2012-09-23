@@ -1,7 +1,7 @@
 <ul class="thumbnails">
-	<li ng-repeat="eachfile in newfiles" class="span3">
+	<li ng-repeat="eachfile in newfiles" class="span3 gallery_height">
 		<div class="thumbnail">
-			<img ng-src={{eachfile.piclink}} alt="">
+			<img ng-src={{eachfile.piclink}} alt="" style="max-height:150px;">
 			<div class="caption">
 				<h5>{{eachfile.label}}</h5>
 				<h6>
@@ -16,9 +16,9 @@
 			</div>
 		</div>
 	</li>
-	<li ng-repeat="eachfile in existingfiles" class="span3">
+	<li ng-repeat="eachfile in existingfiles" class="span3 gallery_height">
 		<div class="thumbnail">
-			<img ng-src={{eachfile.piclink}} alt="">
+			<img ng-src={{eachfile.piclink}} alt="" style="max-height:150px;">
 			<div class="caption">
 				<h5>{{eachfile.label}}</h5>
 				<h6>
