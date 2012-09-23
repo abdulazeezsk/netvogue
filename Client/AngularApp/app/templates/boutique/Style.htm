@@ -41,12 +41,12 @@
 		<!-- left pane -->
 		<!-- right pane -->
 		<div class="span9">
-
 			<div>
 				<span class="left heading_btn"> <a href="#/linesheets">Line
 						sheets</a> <span class="divider">/</span> <span><a
-						href="#/linesheets/:lineid">Linesheet name</a></span> <span
-					class="divider">/</span> <span>Untitled</span>
+						href="#/linesheets/:lineid">untitled Linesheet</a></span> <span
+					class="divider">/</span> <span><a href="#/style">untitled
+							style</a></span>
 				</span> <span class="right"> <a ng-href="#{{backButton}}"
 					class="rightpane_back_btn">Back</a></span>
 				<div class="divi2 right_pane_underline"></div>
@@ -57,9 +57,8 @@
 					<div class="divi2"></div>
 					<div>
 						<ul class="styleimg">
-							<li class="span4"><!-- <img src="http://placehold.it/290x400" alt=""> -->
-							<img src="{{styletdetails.stylecover}}" alt="">
-							</li>
+							<li class="spanstyle"><img
+								src="{{styletdetails.stylecover}}" alt=""></li>
 						</ul>
 					</div>
 					<div class="span5  pull-left">
@@ -108,14 +107,12 @@
 				</div>
 				<div class="moreviews">
 					<ul>
-						<li class="span2" ng-repeat="styletemp in stylethumbnails" ng-click="SetmainImage($index)">
+						<li class="spanviews" ng-repeat="styletemp in stylethumbnails"
+							ng-click="SetmainImage($index)">
 							<div class="thumbnail_noborder">
-								<!-- <img src="http://placehold.it/85x114" alt=""> -->
 								<img src="{{styletemp.stylethumbnail}}" alt="">
-								
 							</div>
 						</li>
-						
 					</ul>
 				</div>
 			</div>
@@ -123,4 +120,4 @@
 		<!-- right pane -->
 	</div>
 </div>
-	<!-- body -->
+<!-- body -->

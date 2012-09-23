@@ -70,7 +70,7 @@ angular.module('netVogue', ['netVogue.filters', 'netVogue.services', 'netVogue.d
 	  $routeProvider.when('/stylepreview',             	{ templateUrl: 'templates/boutique/Style_Preview.htm',              controller: MyCtrlStylesPreview });
 	  $routeProvider.when('/photos',             		{ templateUrl: 'templates/boutique/Photos.htm',           		   	controller: MyCtrlPhotos });
 	  $routeProvider.when('/viewphotos',             	{ templateUrl: 'templates/boutique/View_Photos.htm',     	     	controller: MyCtrlViewPhotos });
-	  $routeProvider.when('/campaign',				{ templateUrl: 'templates/boutique/campaign.htm',         		 	controller: MyCtrlCampaign });
+	  $routeProvider.when('/campaign',				{ templateUrl: 'templates/boutique/campaign.htm',         			 	controller: MyCtrlCampaign });
 
 	 
 	  $routeProvider.otherwise({redirectTo: homepage});
