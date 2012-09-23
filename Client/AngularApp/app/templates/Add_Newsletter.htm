@@ -29,132 +29,14 @@
 						<a href="#/editorial" >Untitled
 						Editorial</a></span>
 				</span> <span class="right fileinput-button"> <span
-					class="rightpane_add_btn">Upload Editorials</span> <input type="file"
-					name="files[]" multiple="">
+					class="rightpane_add_btn">Upload Editorials</span> 
+					<input id="fileupload" type="file" name="files[]" multiple 
+                			onchange="angular.element(this).scope().filesadded(this)" >
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 			</div>
-			<div>
-				<!-- data pannel -->
-				<div>
-					<ul class="thumbnails">
-						<li>
-							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
-								<div class="caption">
-									<h5>Thumbnail label</h5>
-									<h6>
-										<p>Season Name</p>
-									</h6>
-									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
-								<div class="caption">
-									<h5>Thumbnail label</h5>
-									<h6>
-										<p>Season Name</p>
-									</h6>
-									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
-								<div class="caption">
-									<h5>Thumbnail label</h5>
-									<h6>
-										<p>Season Name</p>
-									</h6>
-									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
-								<div class="caption">
-									<h5>Thumbnail label</h5>
-									<h6>
-										<p>Season Name</p>
-									</h6>
-									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
-								<div class="caption">
-									<h5>Thumbnail label</h5>
-									<h6>
-										<p>Season Name</p>
-									</h6>
-									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
-								<div class="caption">
-									<h5>Thumbnail label</h5>
-									<h6>
-										<p>Season Name</p>
-									</h6>
-									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
-								<div class="caption">
-									<h5>Thumbnail label</h5>
-									<h6>
-										<p>Season Name</p>
-									</h6>
-									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
-								<div class="caption">
-									<h5>Thumbnail label</h5>
-									<h6>
-										<p>Season Name</p>
-									</h6>
-									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
-							</div>
-						</li>
-					</ul>
-
-				</div>
-				<!-- data pane -->
-			</div>
+			<div fileupload-plugin ng-model="existingfiles" new-files="newfiles" min-height="300" max-height="300">
+            </div>
 		</div>
 		<!-- right pane -->
 	</div>
