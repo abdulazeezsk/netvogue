@@ -1,7 +1,7 @@
 <ul class="thumbnails">
 	<li ng-repeat="eachfile in newfiles" class="span3 gallery_height">
 		<div class="thumbnail">
-			<img ng-src={{eachfile.piclink}} alt="" style="max-height:150px;">
+			<img ng-src={{eachfile.piclink}} alt="" ng-style="{'max-height': minheight}">
 			<div class="caption">
 				<h5>{{eachfile.label}}</h5>
 				<h6>
