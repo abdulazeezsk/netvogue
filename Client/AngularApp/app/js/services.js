@@ -7,8 +7,8 @@
 // In this case it is a simple value service.
 angular.module('netVogue.services', []).
 	value('version', '0.1').
-	service('myprofile', function () {
-	    var aboutus = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
+	service('myprofile', function ($http) {
+	    /*var aboutus = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
         "ipsum vel enim. Aliquam erat volutpat. Etiam a dui at neque semper ornare. Mauris" +
         "lacus tortor, sagittis eu, dictum sit amet, facilisis eu, mauris. Praesent molestie" +
         "ante non nibh. Suspendisse placerat eros vel velit. Vestibulum ante ipsum primis" +
@@ -55,40 +55,79 @@ angular.module('netVogue.services', []).
 		                     new netvogue.brandscarried("Ritu Beri", "http://placehold.it/132x89"),
 		                     new netvogue.brandscarried("Jason Myers", "http://placehold.it/132x89"),
 		                     new netvogue.brandscarried("Maria will", "http://placehold.it/132x89")
-	                        ];
-
+	                        ];*/
+		var profileinfo = new netvogue.profile();
 
 	    return {
+	    	getprofileinfo: function() {
+	    		return profileinfo;
+	    	},
+	    	setprofileinfo: function(profile) {
+	    		angular.copy(profile, profileinfo);
+	    	},
+	    	getname: function() {
+	    		if(angular.isUndefined(profileinfo.name))
+	        		return "";
+	    		return profileinfo.name;
+	    	},
+	    	setname: function(name) {
+	    		profileinfo.name = name;
+	    	},
 	        getaboutus: function () {
-	            return aboutus;
+	        	if(angular.isUndefined(profileinfo.aboutus))
+	        		return "";
+	            return profileinfo.aboutus;
 	        },
-	        updateaboutus: function (aboutme) {
-	            aboutus = aboutme;
+	        setaboutus: function (aboutme) {
+	        	profileinfo.aboutus = aboutme;
 
 	        },
-	        getcontactinfo: function () {
-	            return contactinfo;
+	        getemail: function() {
+	        	if(angular.isUndefined(profileinfo.contactinfo))
+	        		return "";
+	            return profileinfo.contactinfo.email;
 	        },
-	        updatecontactinfo: function (contactinfotemp) {
-	            angular.copy(contactinfo, contactinfotemp);
+	        setemail: function(email) {
+	        	if(!angular.isUndefined(profileinfo.contactinfo))
+	        		profileinfo.contactinfo.email = email;
+	        },
+	        getcontactinfo: function () {
+	        	if(angular.isUndefined(profileinfo.contactinfo))
+	        		return {};
+	            return profileinfo.contactinfo;
+	        },
+	        setcontactinfo: function (contactinfotemp) {
+	        	profileinfo.contactinfo =  angular.copy(contactinfotemp);
 	        },
 	        getproductline: function () {
-	            return productline;
+	        	if(angular.isUndefined(profileinfo.productlines))
+	        		return [];
+	            return profileinfo.productlines;
 	        },
-	        updateproductline: function (productlinetemp) {
-	            angular.copy(productline, productlinetemp);
+	        setproductline: function (productlinetemp) {
+	        	profileinfo.productlines = angular.copy(productlinetemp);
 	        },
 	        getbrandscarried: function () {
-	            return brandscarried;
+	        	if(angular.isUndefined(profileinfo.brandscarried))
+	        		return [];
+	            return profileinfo.brandscarried;
 	        },
-	        updatebrandscarried: function (brandscarriedtemp) {
-	            angular.copy(brandscarried, brandscarriedtemp);
+	        setbrandscarried: function (brandscarriedtemp) {
+	        	profileinfo.brandscarried = angular.copy(brandscarriedtemp);
+	        },
+	        posttoserver: function(profiledata, url) {
+	        	var config = {
+	                      method: "POST",
+	                      data: profiledata,
+	                      url: "profile/" + url
+	                };
+	        	return $http(config);
 	        }
 	    };
 	}).
-  service('srvprofile', function (myprofile, mynetwork, myprintcampaigns, myvideocampaigns, mynewsletters, mycollections, mylinesheets) {
-      var profiles = [
-	                  {
+  service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, myvideocampaigns, mynewsletters, mycollections, mylinesheets) {
+      var profiles = [];
+	                  /*{
 	                      "profileid": "profileid1",
 	                      "aboutus": "aboutus1",
 	                      "contactinfo": new netvogue.contactinfo(
@@ -141,7 +180,7 @@ angular.module('netVogue.services', []).
 	                  { "profileid": "profileid8", "aboutus": "aboutus8" },
 	                  { "profileid": "profileid9", "aboutus": "aboutus9" },
 	                  { "profileid": "profileid10", "aboutus": "aboutus10" },
-	                  ];
+	                  ];*/
       var networks = new netvogue.hashtable();
       networks.setItem("profileid1",
 			  					[
@@ -228,29 +267,38 @@ angular.module('netVogue.services', []).
 					              new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x306")
 								  ]);
       return {
-          profileinfo: function (routeparams, profile, updateserver) {
+          profileinfo: function (routeparams) {
               var profileid = "";
               if (!angular.isUndefined(routeparams.profileid)) {
                   profileid = routeparams.profileid;
               }
-
-              if (angular.isUndefined(profile)) {
-                  var config = {
-                      method: "GET",
-                      url: "profile/" + profileid
-                  };
-                  return $http(config);
-              }
-              //Save it locally first
-              if (angular.isUndefined(updateserver) || true == updateserver) {
-                  var config = {
-                      method: "POST",
-                      data: profile,
-                      url: "profile/" + profileid
-                  };
-                  return $http(config);
+              var config = {
+                  method: "GET",
+                  url: "profile/" + profileid
+              };
+              return $http(config);
+          },
+          setProfileLocally: function(profiledata) {
+        	  netvogue.yettocontact = false;
+              if ("" == profiledata.profileid) {
+            	  myprofile.setprofileinfo(profiledata);
+              } else {
+            	  profiles.push(angular.copy(profiledata));
               }
           },
+          getname: function(routeparams) {
+        	  var result;
+              if (angular.isUndefined(routeparams.profileid)) {
+                  return myprofile.getname();
+              } else {
+                  angular.forEach(profiles, function (profile) {
+                      if (angular.equals(profile['profileid'], routeparams.profileid)) {
+                          result = profile['aboutus'];
+                      }
+                  });
+              }
+              return result;
+	    	},
           getaboutus: function (routeparams) {
               var result;
               if (angular.isUndefined(routeparams.profileid)) {
@@ -468,7 +516,6 @@ angular.module('netVogue.services', []).
                   "videocampaign": "#/videocampaign",
                   "newsletter": "#/newsletter",
                   "linesheets": "#/linesheets",
-                  "stylesheets": "#/stylesheets",
                   "collections": "#/collections"
               };
               if (currentProfileID != "") {
@@ -539,19 +586,17 @@ angular.module('netVogue.services', []).
   service('myprintcampaigns', function () {
       var printcampaigns = [
 	                        new netvogue.campaign("PrintcampaignId1", "Matches", "Matches Sprixzcng 2012", "http://www.withnina.com/images/paste4.jpg"),
-	                        new netvogue.campaign("PrintcampaignId2", "Matches", "Matches Spring 2012", "http://geniusbeauty.com/wp-content/uploads/2009/06/donna-karan-black-evening-gown.jpg"),
-	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://geniusbeauty.com/wp-content/uploads/2009/06/donna-karan-pink-chiffon-blouse.jpg"),
-	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://geniusbeauty.com/wp-content/uploads/2009/06/donna-karan-black-and-bright-scarlett-skirt.jpg"),
-	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://geniusbeauty.com/wp-content/uploads/2009/06/donna-karan-manhattan-tango-collection.jpg"),
-	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://wpc.4d27.edgecastcdn.net/004D27/Collections/DonnaKaranResort2013/Donna+Karan+Resort+2013+1.jpg"),
-	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://bestfashionworld.com/wp-content/uploads/2011/03/Kilian_Kerner_Fashion_Collection_2011_24.jpg"),
-                            new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://bestfashionworld.com/wp-content/uploads/2011/03/Kilian_Kerner_Fashion_Collection_2011_10.jpg"),
-                            new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://bestfashionworld.com/wp-content/uploads/2011/03/Kilian_Kerner_Fashion_Collection_2011_6.jpg"),
-                            new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://bestfashionworld.com/wp-content/uploads/2011/03/Kilian_Kerner_Fashion_Collection_2011_46.jpg"),
-                            new netvogue.campaign("PrintcampaignId1", "Matches", "Matches Sprixzcng 2012", "http://bestfashionworld.com/wp-content/uploads/2011/03/Kilian_Kerner_Fashion_Collection_2011_48.jpg"),
-	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://www1.pictures.zimbio.com/fp/Milan+Fashion+Week+Alberta+Ferretti+Fashion+7JaqmvWfqJ1l.jpg"),
-	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://placehold.it/220x320")
-	 	                   
+	                        new netvogue.campaign("PrintcampaignId2", "Matches", "Matches Spring 2012", "http://www.withnina.com/images/paste2.jpg"),
+	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://www.withnina.com/images/paste.jpg"),
+	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://www.withnina.com/images/paste5.jpg"),
+	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://www.withnina.com/images/paste6.jpg"),
+	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://www.schramm-badenhop.de/files/velvet_2012.jpg"),
+	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://www.harpersbazaar.com.au/assets/images/articles/migrated/fashion/fashionflash/HB_AMANDAANTMWINNERCOVER_001.jpg"),
+                            new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://www.harpersbazaar.com.au/assets/images/migrated/HB_130810_ProenzaSchouler_001.jpg"),
+                            new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://i653.photobucket.com/albums/uu257/paisleyrosevintage/RED/DianevonFurstenbergMikhailiaBellSleeveCoat400.jpg"),
+                            new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://www.azcentral.com/style/pics/020408nyfashion.jpg"),
+                            new netvogue.campaign("PrintcampaignId1", "Matches", "Matches Sprixzcng 2012", "http://media.tumblr.com/tumblr_ls1ppm1xBI1qfkreb.png"),
+	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306")
 	                       ];
       return {
           getprintcampaigns: function () {
@@ -580,16 +625,16 @@ angular.module('netVogue.services', []).
   service('mynewsletters', function () {
       var newsletters = [
 	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "images/paste2.jpg"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x322"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x322"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x322"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x322"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x322"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x322"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x322"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x322"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x322"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x322")
+	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
+	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
+	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
+	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
+	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
+	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
+	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
+	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
+	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
+	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306")
 	                     ];
       return {
           getnewsletters: function () {
@@ -600,17 +645,17 @@ angular.module('netVogue.services', []).
   service('mycollections', function () { //This is collections of his network collections in case of Boutique/In case of brand, it is his own collections
       var collections = [
 	                     new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "images/paste2.jpg"),
-	                     new netvogue.collection("collectionId", "Donna karan", "Spring 2012", "http://placehold.it/220x320"),
-	                     new netvogue.collection("collectionId", "Catherine jones", "Spring 2012", "http://placehold.it/220x320"),
-	                     new netvogue.collection("collectionId", "Rebecca Jonson", "Spring 2012", "http://placehold.it/220x320"),
-	                     new netvogue.collection("collectionId", "Givenchy", "Spring 2012", "http://placehold.it/220x320"),
-	                     new netvogue.collection("collectionId", "Valentino", "Spring 2012", "http://placehold.it/220x320"),
-	                     new netvogue.collection("collectionId", "DKNY", "Spring 2012", "http://placehold.it/220x320"),
-	                     new netvogue.collection("collectionId", "Rebecca Minkoff", "Spring 2012", "http://placehold.it/220x320"),
-	                     new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/220x320"),
-	                     new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/220x320"),
-	                     new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/220x320"),
-	                     new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/220x320")
+	                     new netvogue.collection("collectionId", "Donna karan", "Spring 2012", "http://placehold.it/231x306"),
+	                     new netvogue.collection("collectionId", "Catherine jones", "Spring 2012", "http://placehold.it/231x306"),
+	                     new netvogue.collection("collectionId", "Rebecca Jonson", "Spring 2012", "http://placehold.it/231x306"),
+	                     new netvogue.collection("collectionId", "Givenchy", "Spring 2012", "http://placehold.it/231x306"),
+	                     new netvogue.collection("collectionId", "Valentino", "Spring 2012", "http://placehold.it/231x306"),
+	                     new netvogue.collection("collectionId", "DKNY", "Spring 2012", "http://placehold.it/231x306"),
+	                     new netvogue.collection("collectionId", "Rebecca Minkoff", "Spring 2012", "http://placehold.it/231x306"),
+	                     new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/231x306"),
+	                     new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/231x306"),
+	                     new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/231x306"),
+	                     new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/231x306")
 	                    ];
 
       return {
@@ -622,15 +667,16 @@ angular.module('netVogue.services', []).
   service('mylinesheets', function () { //This is collections of his network linesheets in case of Boutique/In case of brand, it is his own linesheets
       var linesheets = [
 	                    new netvogue.linesheet("linesheetId", "Calvin Klien", "Spring 2012", "25/04/2012", "images/paste2.jpg"),
-	                    new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x322"),
-	                    new netvogue.linesheet("linesheetId", "Catherine jones", "Spring 2012", "25/04/2012", "http://placehold.it/231x322"),
-	                    new netvogue.linesheet("linesheetId", "Rebecca Jonson", "Spring 2012", "25/04/2012", "http://placehold.it/231x322"),
-	                    new netvogue.linesheet("linesheetId", "Givenchy", "Spring 2012", "25/04/2012", "http://placehold.it/231x322"),
-	                    new netvogue.linesheet("linesheetId", "Valentino", "Spring 2012", "25/04/2012", "http://placehold.it/231x322"),
-	                    new netvogue.linesheet("linesheetId", "DKNY", "Spring 2012", "25/04/2012", "http://placehold.it/231x322"),
-	                    new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x322"),
-	                    new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x322")
-	                   
+	                    new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
+	                    new netvogue.linesheet("linesheetId", "Catherine jones", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
+	                    new netvogue.linesheet("linesheetId", "Rebecca Jonson", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
+	                    new netvogue.linesheet("linesheetId", "Givenchy", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
+	                    new netvogue.linesheet("linesheetId", "Valentino", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
+	                    new netvogue.linesheet("linesheetId", "DKNY", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
+	                    new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
+	                    new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
+	                    new netvogue.linesheet("linesheetId", "Rebecca Minkoff", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
+	                    new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x306")
 	                   ];
       return {
           getlinesheets: function () {
@@ -642,50 +688,38 @@ angular.module('netVogue.services', []).
       var advancedsearch = [
 	                        new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
 	                        		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                                    "ipsum vel enim.", "http://placehold.it/220x145"),
+                                    "ipsum vel enim.", "http://placehold.it/231x145"),
                             new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
                             		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                                     "ipsum vel enim.", "http://placehold.it/220x145"),
+                                     "ipsum vel enim.", "http://placehold.it/231x145"),
                             new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
                             		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/220x145"),
+                            		"ipsum vel enim.", "http://placehold.it/231x145"),
                             new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
                             		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/220x145"),
+                            		"ipsum vel enim.", "http://placehold.it/231x145"),
                             new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
                             		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/220x145"),
+                            		"ipsum vel enim.", "http://placehold.it/231x145"),
                             new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
                             		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/220x145"),
+                            		"ipsum vel enim.", "http://placehold.it/231x145"),
                             new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
                             		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/220x145"),
+                            		"ipsum vel enim.", "http://placehold.it/231x145"),
                             new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
                             		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/220x145"),
+                            		"ipsum vel enim.", "http://placehold.it/231x145"),
                             new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
                             		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/220x145"),
+                            		"ipsum vel enim.", "http://placehold.it/231x145"),
                             new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
                             		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/220x145"),
+                            		"ipsum vel enim.", "http://placehold.it/231x145"),
 	                     ];
       return {
           getsearchresults: function () {
               return advancedsearch;
-          }
-      };
-  }).service('notification', function () {
-        var notification = [
-  	                          new netvogue.notification("Id", "Calvin Klien", "Calvin Klien", "India", "Hyderabad", "August 2000", "http://placehold.it/231x145"),
-                              new netvogue.notification("Id", "Calvin Klien", "Calvin Klien", "India", "Hyderabad", "August 2000", "http://placehold.it/231x145"),
-                              new netvogue.notification("Id", "Calvin Klien", "Calvin Klien", "India", "Hyderabad", "August 2000", "http://placehold.it/231x145"),
-                              new netvogue.notification("Id", "Calvin Klien", "Calvin Klien", "India", "Hyderabad", "August 2000", "http://placehold.it/231x145"),
-	                     ];
-      return {
-          getnotification: function () {
-                return notification;
           }
       };
   });
