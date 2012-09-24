@@ -516,6 +516,7 @@ angular.module('netVogue.services', []).
                   "videocampaign": "#/videocampaign",
                   "newsletter": "#/newsletter",
                   "linesheets": "#/linesheets",
+                  "stylesheets": "#/stylesheets",
                   "collections": "#/collections"
               };
               if (currentProfileID != "") {
