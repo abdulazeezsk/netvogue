@@ -63,7 +63,7 @@
                 </div>
                 <ul class="nav nav-tab nav-stacked">
                     <li ng-repeat="trend in trending">
-                        <div class="trendfeed">
+                        <div class="trendfeedlast">
                             <div class="img">
                                 <a href="#/{{trend.trendlistitemID}}">
                                     <img alt="" ng-src="{{trend.trendpiclink}}" class="pull-left"></a></div>
@@ -72,6 +72,28 @@
                                     <a href="#/{{trend.trendlistitemID}}" title="">{{trend.trendlistitem}}</a></h3>
                                 <p>
                                     {{trend.post}}</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="divi2" ></div>
+             <div>
+                <h4 class="trending_head">
+                    Recommendations</h4>
+                <div class="divi2">
+                </div>
+                <ul class="nav nav-tab nav-stacked">
+                    <li ng-repeat="reco in recommendations">
+                        <div class="trendfeedlast">
+                            <div class="img">
+                                <a href="#">
+                                    <img alt="" ng-src="{{reco.recommendationpiclink}}" class="pull-left"></a></div>
+                            <div class="trendfeed_text">
+                                <h3>
+                                    <a href="#/{{reco.recommendationlistitemID}}" title="">{{reco.recommendationlistitem}}</a></h3>
+                                <p>
+                                    {{reco.post}}</p>
                             </div>
                         </div>
                     </li>

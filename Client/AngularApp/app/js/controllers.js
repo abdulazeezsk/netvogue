@@ -17,7 +17,7 @@ function MyCtrlInitiate($scope, $location) {
 	});
 }
 
-function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, trending, mynetwork) {
+function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, trending, mynetwork,recommendations) {
     $scope.navClass = function (page1) {
         return {
             //last: this.$last,
@@ -53,10 +53,11 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
     $scope.trending = trending.getTrending();
     $scope.myfriend = mynetwork.ismyfriend($routeParams);
     $scope.links = currentvisitedprofile.getleftpanellinks();
+    $scope.recommendations = recommendations.getRecommendations();
 }
 
 function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
-		srvprofile, trending) {
+		srvprofile, trending,recommendations) {
 	$scope.navClass = function(page1) {
 		return {
 			// last: this.$last,
@@ -71,6 +72,7 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 
 	$scope.mynetwork = srvprofile.getnetwork($routeParams);
 	$scope.trending = trending.getTrending();
+	$scope.recommendations = recommendations.getRecommendations();
 	$scope.contactinfo = myprofile.getcontactinfo();
 	$scope.getcontactinfo = function() {
 		return addresstostring($scope.contactinfo);
@@ -78,7 +80,7 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 }
 
 function MyCtrlCorner($scope, $routeParams, srvprofile, currentvisitedprofile,
-		mynetwork, trending) {
+		mynetwork, trending,recommendations) {
 	$scope.navClass = function(page1) {
 		return {
 			// last: this.$last,
@@ -93,6 +95,7 @@ function MyCtrlCorner($scope, $routeParams, srvprofile, currentvisitedprofile,
 	$scope.mynetwork = mynetwork.getmynetwork();
 	$scope.trending = trending.getTrending();
 	$scope.contactinfo = srvprofile.getcontactinfo($routeParams);
+	$scope.recommendations = recommendations.getRecommendations();
 	$scope.getcontactinfo = function() {
 		return addresstostring($scope.contactinfo);
 	};
