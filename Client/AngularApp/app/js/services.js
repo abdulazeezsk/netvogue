@@ -538,7 +538,7 @@ angular.module('netVogue.services', []).
                   },
                   {
                       "trendlistitem": "Trend3",
-                      "trendpiclink": "images/rebecca-minkoff-spring-2012-dress-profile.jpeg",
+                      "trendpiclink": "img/donna-karan-manhattan-tango-collection.jpeg",
                       "post": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui.",
                       "trendlistitemID": "trendname3"
                   }
