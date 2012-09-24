@@ -5037,9 +5037,15 @@ height: 114px;
 
 .footer .footer_in {
 	width: 940px;
-	padding: 11px 0 0 30px;
+	padding: 11px 0 0 170px;
 }
-
+.menu {
+margin: 0;
+padding: 0;
+}
+.social {
+float: right;
+}
 /* ----------------------------------------------------------Footer Style Begin---------------------------------------*/
 
 
