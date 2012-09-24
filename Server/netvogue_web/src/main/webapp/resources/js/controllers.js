@@ -396,8 +396,6 @@ function MyCtrlCampaign($scope, $routeParams, currentvisitedprofile,
 
 }
 
-
-
 function MyCtrlVideocampaign($scope, $routeParams, currentvisitedprofile,
 		srvprofile) {
 

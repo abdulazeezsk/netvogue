@@ -11,7 +11,7 @@ angular.module('netVogue', ['netVogue.filters', 'netVogue.services', 'netVogue.d
 	  if(true == netvogue.firsttimeLogin) {
 		  homepage = '/initiate';
 	  }
-	  $routeProvider.when('/accountsettings',			{templateUrl: 'templates/Account_Settings.htm', 					controller: MyCtrl1});
+	  $routeProvider.when('/accountsettings',			{templateUrl: 'templates/Account_Settings.htm', 					controller: MyCtrlAccountSettings});
 	  $routeProvider.when('/addcollections',			{templateUrl: 'templates/brand/Add_Collections.htm', 				controller: MyCtrlAddCollections});
 	  $routeProvider.when('/addlinesheets',             {templateUrl: 'templates/brand/Add_Linesheets.htm',              	controller: MyCtrlAddLinesheets });
 	  $routeProvider.when('/addstyle',                  {templateUrl: 'templates/brand/Add_Style.htm',                   	controller: MyCtrlAddStyle});
