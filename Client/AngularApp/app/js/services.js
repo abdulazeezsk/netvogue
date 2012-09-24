@@ -8,7 +8,7 @@
 angular.module('netVogue.services', []).
 	value('version', '0.1').
 	service('myprofile', function ($http) {
-	    /*var aboutus = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
+	    var aboutus = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
         "ipsum vel enim. Aliquam erat volutpat. Etiam a dui at neque semper ornare. Mauris" +
         "lacus tortor, sagittis eu, dictum sit amet, facilisis eu, mauris. Praesent molestie" +
         "ante non nibh. Suspendisse placerat eros vel velit. Vestibulum ante ipsum primis" +
@@ -55,8 +55,8 @@ angular.module('netVogue.services', []).
 		                     new netvogue.brandscarried("Ritu Beri", "http://placehold.it/132x89"),
 		                     new netvogue.brandscarried("Jason Myers", "http://placehold.it/132x89"),
 		                     new netvogue.brandscarried("Maria will", "http://placehold.it/132x89")
-	                        ];*/
-		var profileinfo = new netvogue.profile();
+	                        ];
+		var profileinfo = new netvogue.profile("Azeez", "Azeez", aboutus, contactinfo);
 
 	    return {
 	    	getprofileinfo: function() {
