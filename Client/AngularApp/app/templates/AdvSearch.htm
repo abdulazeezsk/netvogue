@@ -5,30 +5,45 @@
 		<div class="span3">
 			<h4 class="leftpane_entity_heading">Boutique</h4>
 			<div class="divi2"></div>
-			   <ul class="thumbnails">
-                <li class="span3">
-                    <div>
-                       <span> <a href="#profile"> <img alt=""
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> <a href="#profile"> <img alt=""
 								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
-								class="pull-left leftpane_profile_img"></a> </span>
-								<span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
-                    </div>
-                </li>
-            </ul>
+					</div>
+				</li>
+			</ul>
 			<div class="leftpane_subheading">FILTERS</div>
-			<div class="divi2">
+			<div class="divi2"></div>
+			<div>
+				<div>
+					<input type="radio" name="Date" checked value="true" checked>
+					Brands
+				</div>
+				<div>
+					<input type="radio" name="Date" value="false"> Boutiques
+				</div>
+			</div>
+			<div class="divi2"></div>
+			<div>
+				<span class="leftpane_filter_name">BRAND</span> <input type="text"
+					class="span3"  placeholder="Brand name" /> <span class="leftpane_filter_name" >Stockists
+					</span> <input type="text" class="span3" placeholder="Stockists" /> <span
+					class="leftpane_filter_name">LOCATION</span> <input type="text"
+					class="span3" placeholder="Location" />
+			</div>
+			<div ng-show="false">
+				<span class="leftpane_filter_name">Boutique</span> <input type="text"
+					class="span3"  placeholder="Boutique name" /> <span class="leftpane_filter_name">
+					Brands CARRIED</span> <input type="text" class="span3" placeholder="Brands carried" /> <span
+					class="leftpane_filter_name">LOCATION</span> <input type="text"
+					class="span3" placeholder="Location" />
 			</div>
 			<div>
-				 <span class="leftpane_filter_name">BRAND</span>
-				 <input type="text" class="span3" />
-				  <span class="leftpane_filter_name">BRANDS CARRIED</span>
-				 <input type="text" class="span3" />  
-				  <span class="leftpane_filter_name">LOCATION</span>
-				 <input type="text" class="span3" />
-			</div>
-			<div>
-			<span class="leftpane_filter_name">CATEGORY</span> 
+				<span class="leftpane_filter_name">CATEGORY</span>
 			</div>
 			<div>
 				<div checkbox-tree ng-model="searchFilter"></div>
@@ -38,19 +53,15 @@
 		<!-- right pane -->
 		<div class="span9">
 			<div>
-				  <span class="left rightpane_subHeading">
-                        Brands
-                </span>
-                <div class="divi2 right_pane_underline">
-                </div>
-                <span class="left right_pane_info">
-                        Find Brands and Boutiques using the filters
-                </span>
-                <div class="divi2 right_pane_underline">
-                </div>
+				<span class="left rightpane_subHeading"> Directory </span>
+				<div class="divi2 right_pane_underline"></div>
+				<span class="left right_pane_info"> Find Brands and Boutiques
+					using the filters </span>
+				<div class="divi2 right_pane_underline"></div>
 				<div>
 					<ul class="thumbnails">
-						<li ng-repeat="brand in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize">
+						<li
+							ng-repeat="brand in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize">
 							<div class="viewls view-firstls">
 								<a href="#/{{brand.brandlistitemid}}"> <img
 									src="{{brand.brandprofilepic}}" alt=""></a>
