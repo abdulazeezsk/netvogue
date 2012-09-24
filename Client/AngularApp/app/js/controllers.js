@@ -17,7 +17,7 @@ function MyCtrlInitiate($scope, $location) {
 	});
 }
 
-function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, trending, mynetwork) {
+function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, trending, mynetwork,recommendations) {
     $scope.navClass = function (page1) {
         return {
             //last: this.$last,
@@ -53,6 +53,7 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
     $scope.trending = trending.getTrending();
     $scope.myfriend = mynetwork.ismyfriend($routeParams);
     $scope.links = currentvisitedprofile.getleftpanellinks();
+    $scope.recommendations = recommendations.getRecommendations();
 }
 
 function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,

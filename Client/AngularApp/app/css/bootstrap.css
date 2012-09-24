@@ -5184,6 +5184,8 @@ height: 114px;
 .add_to_network {
 	position: relative;
 	top: -7px;
+	left:87px;
+	width:220px;
 }
 
 .addbrands_btn {
@@ -5626,6 +5628,23 @@ padding:0px 7px 0px 0px;
 
 .trendfeed_text p {
 	font: normal 9px Verdana;
+}
+
+.trendfeedlast {
+	width: 100%;
+	padding: 5px 0 5px 0;
+	min-height: 25px;
+	position: relative;
+	float: left;
+	clear: both;
+}
+
+.trendfeedlast .img {
+	float: left;
+	margin: 0 10px 0 0;
+	width: 90px;
+	min-height: 72px;
+	overflow-x: hidden;
 }
 
 /* ---------------------------------------------------Trending styles End---------------------------------------------*/
