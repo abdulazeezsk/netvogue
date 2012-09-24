@@ -532,19 +532,13 @@ angular.module('netVogue.services', []).
       var trending = [
                   {
                       "trendlistitem": "Trend1",
-                      "trendpiclink": "images/images.jpg",
+                      "trendpiclink": "images/rebecca-minkoff-spring-2012-dress-profile.jpeg",
                       "post": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui.",
                       "trendlistitemID": "trendname1"
                   },
                   {
-                      "trendlistitem": "Trend2",
-                      "trendpiclink": "http://placehold.it/90x72",
-                      "post": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui.",
-                      "trendlistitemID": "trendname2"
-                  },
-                  {
                       "trendlistitem": "Trend3",
-                      "trendpiclink": "http://placehold.it/90x72",
+                      "trendpiclink": "images/rebecca-minkoff-spring-2012-dress-profile.jpeg",
                       "post": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui.",
                       "trendlistitemID": "trendname3"
                   }
@@ -552,6 +546,34 @@ angular.module('netVogue.services', []).
       return {
           getTrending: function () {
               return trending;
+          }
+      };
+
+  }).
+  service('recommendations', function () {
+      var recommendations = [
+                  {
+                      "recommendationlistitem": "Minkoff",
+                      "recommendationpiclink": "img/donna_karan_adriana_lima_1.jpg",
+                      "post": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui.",
+                      "recommendationlistitemID": "trendname2"
+                  },
+                  {
+                      "recommendationlistitem": "Adrian Lyne",
+                      "recommendationpiclink": "img/donna_karan_adriana_lima_2.jpg",
+                      "post": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui.",
+                      "recommendationlistitemID": "trendname2"
+                  },
+                  {
+                      "recommendationlistitem": "Daonna Karan",
+                      "recommendationpiclink": "img/donna_karan_adriana_lima_3.jpg",
+                      "post": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui.",
+                      "recommendationlistitemID": "trendname3"
+                  }
+                  ];
+      return {
+          getRecommendations: function () {
+              return recommendations;
           }
       };
 

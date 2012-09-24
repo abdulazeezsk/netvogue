@@ -71,6 +71,7 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 
 	$scope.mynetwork = srvprofile.getnetwork($routeParams);
 	$scope.trending = trending.getTrending();
+	
 	$scope.contactinfo = myprofile.getcontactinfo();
 	$scope.getcontactinfo = function() {
 		return addresstostring($scope.contactinfo);
@@ -78,7 +79,7 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 }
 
 function MyCtrlCorner($scope, $routeParams, srvprofile, currentvisitedprofile,
-		mynetwork, trending) {
+		mynetwork, trending,recommendations) {
 	$scope.navClass = function(page1) {
 		return {
 			// last: this.$last,
@@ -93,6 +94,7 @@ function MyCtrlCorner($scope, $routeParams, srvprofile, currentvisitedprofile,
 	$scope.mynetwork = mynetwork.getmynetwork();
 	$scope.trending = trending.getTrending();
 	$scope.contactinfo = srvprofile.getcontactinfo($routeParams);
+	$scope.recommendations = recommendations.getRecommendations();
 	$scope.getcontactinfo = function() {
 		return addresstostring($scope.contactinfo);
 	};
