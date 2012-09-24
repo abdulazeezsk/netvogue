@@ -56,7 +56,7 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
 }
 
 function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
-		srvprofile, trending) {
+		srvprofile, trending,recommendations) {
 	$scope.navClass = function(page1) {
 		return {
 			// last: this.$last,
@@ -71,7 +71,7 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 
 	$scope.mynetwork = srvprofile.getnetwork($routeParams);
 	$scope.trending = trending.getTrending();
-	
+	$scope.recommendations = recommendations.getRecommendations();
 	$scope.contactinfo = myprofile.getcontactinfo();
 	$scope.getcontactinfo = function() {
 		return addresstostring($scope.contactinfo);
