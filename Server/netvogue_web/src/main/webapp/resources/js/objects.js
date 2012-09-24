@@ -197,7 +197,7 @@ netvogue.photo = function(label, seasonname, piclink ) {
 	this.label 			= label;
     this.seasonname 	= seasonname;
     this.piclink		= piclink;
-    this.thumbnaillink 	= "";
+    this.thumbnail_url 	= piclink;
     this.deleteurl		= "";
     this.deletetype		= "delete";
 };

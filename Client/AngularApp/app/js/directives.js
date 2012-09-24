@@ -71,13 +71,24 @@ angular.module('netVogue.directives', []).
 		angular.element(element).ready(function() {
 			jQuery('#fileupload').fileupload({
 		        dataType: 'json',
+		        progressall: function (e, data) {
+		        	var progtemp = parseInt(data.loaded / data.total * 100, 10);
+		        	scope.$apply(function(scope) {
+		        		scope.progress = progtemp;
+		        	});
+		        },
 		        done: function (e, data) {
-		        	alert("Done");
+		        	scope.$apply(function(scope) {
+		        		for(var i=0; i < data.result.length; i++){
+		        			scope.existingfiles.push(new netvogue.photo("Thumbnail Azeez", "Season Name", data.result[i].url));
+		        		};
+		        		scope.newfiles = [];
+		        	});
 		        }
 		    });
     	});
 		scope.progressVisible = true;
-		scope.progress = 60;
+		scope.progress = 0;
 	};
 	return {
 		templateUrl	: 'templates/fileupload_plugin.htm',

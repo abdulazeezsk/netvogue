@@ -10,7 +10,11 @@ public enum Size {
 	S7 (4,4),
 	S8 (4,4),
 	S9 (4,4),
-	S10 (4,4);
+	S10 (4,4),
+	GThumb(220, 150),
+	GAdd(210, 150),
+	GLeft(130, 100),
+	GMain(400, 400);
 	
 	private final int width;   // in pixels
     private final int height; // in pixels
