@@ -1,58 +1,50 @@
 <div class="span2">
-	<ul class="thumbnails">
-		<li class="span2">
-			<div class="viewprofile view-firstprofile">
-				<a href="#"> <img
-					src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
-					alt="" /></a>
-				<div class="contentprofile">
-					<div class="maskprofile"></div>
-					<h1 ng-show="isMyProfile">
-						<span class="right fileinput-button"> <span
-							class="rightpane_add_btn"><i class="icon-edit icon-white"></i>Change
-								Image</span> <input type="file" name="files[]">
-						</span>
-					</h1>
-				</div>
-			</div>
-			<div class="underline">
-				<div class="profile-address">
-					<h5 ng-bind="entityname"></h5>
-					<address ng-bind="getcontactinfo()"></address>
-				</div>
-			</div>
-			<ul class="nav nav-list" id="leftmenu">
-				<li class="nav-header">Favourites</li>
-				<li class="ng-scope leftmenu_tabs" ng-class="navClass('Corner')"><a
-					ng-href="{{links.corner}}">Corner</a></li>
-				<li class="ng-scope leftmenu_tabs" ng-class="navClass('Profile')"><a
-					ng-href="{{links.profile}}">Profile</a></li>
-				<li class="ng-scope leftmenu_tabs" ng-class="navClass('Network')"><a
-					ng-href="{{links.network}}">Network</a></li>
-				<li class="ng-scope leftmenu_tabs" ng-class="navClass('Gallery')"><a
-					ng-href="{{links.gallery}}">Gallery</a></li>
-				<li class="nav-header">Press</li>
-				<li class="leftmenu_tabs"><a ng-href="{{links.printcampaign}}">Print
-						Campaign</a></li>
-				<!--   <li class="leftmenu_tabs"><a ng-href="{{links.videocampaign}}">Video Campaign</a> </li> -->
-				<li class="leftmenu_tabs"><a ng-href="{{links.newsletter}}">Editorials</a>
-				</li>
-				<li class="nav-header" ng-hide="iambrand">My Shop</li>
-				<li class="nav-header" ng-show="iambrand">My Works</li>
-				<li class="leftmenu_tabs"><a ng-href="{{links.linesheets}}">Line
-						Sheets</a></li>
-				<li class="leftmenu_tabs"><a ng-href="{{links.stylesheets}}">Style
-						Sheets</a></li>
-				<li class="leftmenu_tabs"><a ng-href="{{links.collections}}">Collections</a>
-				</li>
-				<li class="nav-header">Invite</li>
-				<li class="nav-header" ng-show="iambrand">Invite</li>
-				<li class="leftmenu_tabs"><a href="#invite" data-toggle="modal">Send
-						Invite</a></li>
-				<!--     <li class="nav-header">Inspire </li>
+    <ul class="thumbnails">
+        <li class="span2">
+            <div class="viewprofile view-firstprofile">
+                <a href="#">
+                    <img src="http://profile.ak.fbcdn.net/hprofile-ak-snc4/157978_103633389671658_279995887_n.jpg" alt="" /></a>
+                <div class="contentprofile">
+                    <div class="maskprofile">
+                    </div>
+                    <h1 ng-show="isMyProfile">
+                        <a href="#" title="Edit" style="color: White;"><i class="icon-edit icon-white"></i>Edit
+                            Image</a>
+                    </h1>
+                </div>
+            </div>
+            <div class="underline">
+                <div class="profile-address">
+                    <h5 ng-bind="entityname">
+                    </h5>
+                    <address ng-bind="getcontactinfo">
+                    </address>
+                </div>
+            </div>
+<ul class="nav nav-list" id="leftmenu">
+    <li class="nav-header">Favourites</li>
+    <li class="ng-scope leftmenu_tabs" ng-class="navClass('Corner')"><a ng-href="{{links.corner}}">Corner</a>
+    </li>
+    <li class="ng-scope leftmenu_tabs" ng-class="navClass('Profile')"><a ng-href="{{links.profile}}">Profile</a>
+    </li>
+    <li class="ng-scope leftmenu_tabs" ng-class="navClass('Network')"><a ng-href="{{links.network}}">Network</a>
+    </li>
+    <li class="ng-scope leftmenu_tabs" ng-class="navClass('Gallery')"><a ng-href="{{links.gallery}}">Gallery</a>
+    </li>
+    <li class="nav-header">Press </li>
+    <li class="leftmenu_tabs"><a ng-href="{{links.printcampaign}}">Print Campaign</a> </li>
+    <li class="leftmenu_tabs"><a ng-href="{{links.videocampaign}}">Video Campaign</a> </li>
+    <li class="leftmenu_tabs"><a ng-href="{{links.newsletter}}">Editorials</a> </li>
+    <li class="nav-header" ng-hide="iambrand">My Shop </li>
+    <li class="nav-header" ng-show="iambrand">My Works </li>
+    <li class="leftmenu_tabs"><a ng-href="{{links.linesheets}}">Line Sheets</a> </li>
+    <li class="leftmenu_tabs"><a ng-href="{{links.stylesheets}}">StyleSheets</a></li>
+    <li class="leftmenu_tabs"><a ng-href="{{links.collections}}">Collections</a> </li>
+    <li class="nav-header">Invite</li>
+    <li class="leftmenu_tabs"><a href="#invite" data-toggle="modal">Send Invite</a></li>
+    <!--     <li class="nav-header">Inspire </li>
     <li><a ng-href="{{links.printcampaign}}">Blog</a> </li>-->
-			</ul>
-		</li>
-	</ul>
-</div>
+</ul>
+</li> </ul>
+ </div>
 <!-- left pannel -->
