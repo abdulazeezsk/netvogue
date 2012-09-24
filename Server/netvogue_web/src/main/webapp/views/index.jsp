@@ -31,9 +31,11 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="lib/jquery/jquery.js" type="text/javascript"></script>
     <script src="lib/jquery/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="lib/jquery/jquery.placeholder.js"  type="text/javascript"></script>
     <script src="lib/bootstrap/bootstrap.min.js" 	type="text/javascript"></script>
-    <script src="lib/bootstrap/bootstrap-navlist.js" type="text/javascript"></script>
+    <script src="lib/jquery/jquery.progressbar.js" 	type="text/javascript"></script>
     <script src="lib/angular/angular.js" 			type="text/javascript"></script>
+    <script src="lib/bootstrap/bootstrap-navlist.js" type="text/javascript"></script>
     <div style="display: none;">
     	<div id="firsttimelogin">${firsttimelogin}</div>
     	<div id="isbrand">${isbrand}</div>
@@ -48,5 +50,10 @@
     <script src="js/directives.js" 					type="text/javascript"></script>
     <script src="js/main.js" 						type="text/javascript"></script>
     <script src="js/utils.js" 						type="text/javascript"></script>
+    
+    <script src="lib/fileupload/vendor/jquery.ui.widget.js"></script>
+	<script src="lib/fileupload/jquery.iframe-transport.js"></script>
+	<script src="lib/fileupload/jquery.fileupload.js"></script>
+	<script src="lib/fileupload/load-image.min.js"></script>
 </body>
 </html>

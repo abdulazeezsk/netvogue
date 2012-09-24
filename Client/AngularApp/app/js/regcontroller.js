@@ -1,6 +1,89 @@
 if (!netvogue )
 	var netvogue = {};
 
+netvogue.hashtable = function(obj)
+{
+    this.length = 0;
+    this.items = {};
+    for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            this.items[p] = obj[p];
+            this.length++;
+        }
+    }
+
+    this.setItem = function(key, value)
+    {
+        var previous = undefined;
+        if (this.hasItem(key)) {
+            previous = this.items[key];
+        }
+        else {
+            this.length++;
+        }
+        this.items[key] = value;
+        return previous;
+    };
+
+    this.getItem = function(key) {
+        return this.hasItem(key) ? this.items[key] : undefined;
+    };
+
+    this.hasItem = function(key)
+    {
+        return this.items.hasOwnProperty(key);
+    };
+   
+    this.removeItem = function(key)
+    {
+        if (this.hasItem(key)) {
+            previous = this.items[key];
+            this.length--;
+            delete this.items[key];
+            return previous;
+        }
+        else {
+            return undefined;
+        }
+    };
+
+    this.keys = function()
+    {
+        var keys = [];
+        for (var k in this.items) {
+            if (this.hasItem(k)) {
+                keys.push(k);
+            }
+        }
+        return keys;
+    };
+
+    this.values = function()
+    {
+        var values = [];
+        for (var k in this.items) {
+            if (this.hasItem(k)) {
+                values.push(this.items[k]);
+            }
+        }
+        return values;
+    };
+
+    this.each = function(fn) {
+        for (var k in this.items) {
+            if (this.hasItem(k)) {
+                fn(k, this.items[k]);
+            }
+        }
+    };
+
+    this.clear = function()
+    {
+        this.items = {};
+        this.length = 0;
+    };
+};
+
 netvogue.productline 	= function(productlinename, selected) {
 	this.productlinename	= productlinename;
    	this.selected			= selected;
@@ -33,13 +116,14 @@ var app = angular.module('netVogue', []);
 
 function MyCtrlRegistration($scope, $http, $timeout, $location) {
 	$scope.entity 		= new netvogue.entity();
-	$scope.brandscarried= "";
-	$scope.brands = [
-	                 'Calvin klein', 'Donna Karan', 'Rebecca Minkoff', 'Manish Arora', 
-	                 'Rohit Bal', 'Tarun Tahiliani', 'Wendell Rodricks', 'Ritu Beri', 'Manish Malhotra'
-	                ];
-	$scope.availablebrands = [];
 	
+	//Related to brands carried/Stockists
+	$scope.brandsentered	= ""; //USer input in text box
+	$scope.brands 			= []; //List of brands for searching
+	$scope.brandscarried	= new netvogue.hashtable();  //Names entered in control
+	var brandsReceived		= new netvogue.hashtable();
+	
+	//Cities related information
 	$scope.cities = [
 	                 'Hyderabad', 'Bangalore', 'New Delhi', 'Mumbai', 'Madras', 'Kolkatta'
 	                ];
@@ -63,26 +147,20 @@ function MyCtrlRegistration($scope, $http, $timeout, $location) {
 		                	   	new netvogue.productline("Gifts", 		 "no"),
 		                	   	new netvogue.productline("Candles", 	 "no")
 		                 	 ];
-	$scope.brandsselected = [];
 	$scope.addBrandsCarried = function(brandscarried) {
 		if("" == brandscarried) {
 			return;
 		}
-		for(brand in $scope.brandsselected) {
-			if($scope.brandsselected[brand] == brandscarried)
-				return;
-		}
-		$scope.brandsselected.push(brandscarried);
-		$scope.brandscarried = "";
-		for(var bnd in $scope.availablebrands) {
-			if($scope.availablebrands[bnd].name == brandscarried)
-				$scope.entity.brandsselected.push($scope.availablebrands[bnd].username);
-		}
 		
+		var username = brandsReceived.getItem(brandscarried);
+		if(null == username)
+			username = brandscarried;
+    	
+		$scope.brandscarried.setItem(brandscarried, username);
+		$scope.brandsentered = "";
 	};
-	$scope.removeBrandsCarried = function(index) {
-		$scope.brandsselected.splice(index, 1);
-		$scope.entity.brandsselected.splice(index, 1);
+	$scope.removeBrandsCarried = function(key) {
+		$scope.brandscarried.removeItem(key);
 	};
 	$scope.emailchanged = function(email, ctrl, key) {
 		if("" == email) {
@@ -96,7 +174,7 @@ function MyCtrlRegistration($scope, $http, $timeout, $location) {
                 params: datatosend,
                 url: entity + "/emailavailability"
             };
-        $http(config).success(function(data) {
+        /*$http(config).success(function(data) {
             if(data == "false") {
             	ctrl.$setValidity(key, false);
             } else {
@@ -104,7 +182,7 @@ function MyCtrlRegistration($scope, $http, $timeout, $location) {
             }
         }).error(function(data) {
         	ctrl.$setValidity(key, false);
-        });
+        });*/
 	};
 	
 	$scope.usernamechanged = function(username, ctrl, key) {
@@ -119,7 +197,7 @@ function MyCtrlRegistration($scope, $http, $timeout, $location) {
                 params: datatosend,
                 url: entity + "/usernameavailability"
             };
-        $http(config).success(function(data) {
+        /*$http(config).success(function(data) {
             if(data == "false") {
             	ctrl.$setValidity(key, false);
             } else {
@@ -127,40 +205,44 @@ function MyCtrlRegistration($scope, $http, $timeout, $location) {
             }
         }).error(function(data) {
         	ctrl.$setValidity(key, false);
-        });
+        });*/
 	};
-	$scope.brandscarriedchanged = function(userinput) {
-		if("" == userinput){
+	$scope.brandsenteredchanged = function(brandsentered) {
+		if("" == brandsentered){
 			return
 		}
 		var datatosend = {
-				"username" : userinput
+				"username" : brandsentered
 		};
 		var config = {
                 method: "GET",
                 params: datatosend,
                 url: entity + "/usersavailable"
             };
-        $http(config).success(function(data) {
+        /*$http(config).success(function(data) {
+            $scope.brands.splice(0, $scope.brands.length);
         	for(var user in data){
-            	$scope.brands.push(data[user].name);
-            	$scope.availablebrands.push(new netvogue.brandsavailable(data[user].name, data[user].username));
+        		//Check if this data is already in brands carried. Then dont add it here.
+        		if(undefined == $scope.brandscarried.getItem(data[user].name))
+        			$scope.brands.push(data[user].name);
+            	brandsReceived.setItem(data[user].name, data[user].username);
             };
-        });
+        });*/
 	};
-	$scope.addEntity	= function() {
-		jQuery('#submitbtn').button('loading');
+	$scope.addEntity	= function(event) {
+		angular.element(event.srcElement).button('loading');
 		for(brand in $scope.productscarried) {
 			if($scope.productscarried[brand].selected == true) {
 				$scope.entity.productlines.push($scope.productscarried[brand].id);
 			}
 		}
+		$scope.entity.brandsselected = $scope.brandscarried.values();
 		var config = {
                 method: "POST",
                 data: $scope.entity,
                 url: entity + "/doregistration"
             };
-        $http(config).success(function(data) {
+        /*$http(config).success(function(data) {
             if(data.status == true) {
             	alert('Registration is Successful');
             	$('#registration').html("<span style='display:block;height:200px;padding-top:150px;'>You have been registered successfully.Our team will contact you shortly</span>");
@@ -170,15 +252,15 @@ function MyCtrlRegistration($scope, $http, $timeout, $location) {
             	alert('Registration is Successful2');
             	
             } else {
-            	jQuery('#submitbtn').button('reset');
+            	angular.element(event.srcElement).button('reset');
             	alert('Registration is unsuccessful due to:' + data.error);
             	$scope.entity.productlines.splice(0, $scope.entity.productlines.length);
             }
         }).error(function(data) {
-        	jQuery('#submitbtn').button('reset');
+        	angular.element(event.srcElement).button('reset');
         	alert('Registration is unsuccessful due to bad request:' + data);
         	$scope.entity.productlines.splice(0, $scope.entity.productlines.length);
-        });
+        });*/
 	};
 }
 
@@ -273,7 +355,7 @@ app.directive('uiJq', ['ui.config', function(uiConfig) {
 					});
 				}
 				elm[attrs.uiJq].apply(elm, linkOptions);
-				scope.$watch(brands, function() {
+				scope.$watch('scope.brands', function() {
 					elm[attrs.uiJq].apply(elm, linkOptions);
 				});
 			};

@@ -8,7 +8,7 @@ if ( !window.netvogue ) {
 netvogue.yettocontact  	= true;
 netvogue.firsttimeLogin = false;
 netvogue.isbrand		= false;
-netvogue.entityname		= "";
+netvogue.entityname		= "Matches";
 netvogue.initialize		= function() {
 	var ele = jQuery('#firsttimelogin').text();
 	if(null != ele && ele == "true") {
@@ -185,6 +185,25 @@ netvogue.network = function(networklistitem, profilepiclink, networklistitemID) 
 /*************************************************************************/
 /************************End of*******************************************/
 /*********************Network Objects*************************************/
+/*************************************************************************/
+
+/*************************************************************************/
+/***********************Start of******************************************/
+/*********************Gallery Objects*************************************/
+/*************************************************************************/
+
+netvogue.photo = function(label, seasonname, piclink ) {
+	this.label 			= label;
+    this.seasonname 	= seasonname;
+    this.piclink		= piclink;
+    this.thumbnaillink 	= "";
+    this.deleteurl		= "";
+    this.deletetype		= "delete";
+};
+
+/*************************************************************************/
+/************************End of*******************************************/
+/*********************Profile Objects*************************************/
 /*************************************************************************/
 
 /*************************************************************************/

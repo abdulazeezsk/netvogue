@@ -40,7 +40,7 @@ angular.module('netVogue.directives', []).
 	    	};
 	    };
 	    return {
-	    	templateUrl:'templates/boutique/CheckboxTree.htm',
+	    	templateUrl:'templates/CheckboxTree.htm',
 	    	replace: true,
 	    	transclude: true,
 	    	scope: {
@@ -49,7 +49,50 @@ angular.module('netVogue.directives', []).
 	        restrict: 'A',
 	        link: linkFn
 	    };
-  }).directive('smartWizard', function() {
+}).directive('fileuploadPlugin', function() {
+	var linkFn;
+	linkFn = function(scope, element, attrs) {
+		scope.$on('filesadded', function(e, files) {
+			scope.newfiles = [];
+			for (var i = 0; i < files.length; i++) {
+		    	var loadingImage = window.loadImage(
+		    			files[i],
+		    	        function (img) {
+		    	            
+		    	        },
+		    	        {maxWidth: 600}
+		    	    );
+		    	if (!loadingImage) {
+		    		loadingImage.src = "http://placehold.it/210x150";
+		    	}
+		    	scope.newfiles.push(new netvogue.photo(files[i].name, "UNTITLED", loadingImage.src));
+		    }
+		});
+		angular.element(element).ready(function() {
+			jQuery('#fileupload').fileupload({
+		        dataType: 'json',
+		        done: function (e, data) {
+		        	alert("Done");
+		        }
+		    });
+    	});
+		scope.progressVisible = true;
+		scope.progress = 60;
+	};
+	return {
+		templateUrl	: 'templates/fileupload_plugin.htm',
+		replace		: true,
+		transclude	: true,
+		restrict	: 'A',
+		scope		: {
+			newfiles		: '=newFiles',
+			existingfiles	: '=ngModel',
+			maxheight		: '=maxHeight',
+			minheight		: '=minHeight'
+		},
+		link		: linkFn
+	};	
+}).directive('smartWizard', function() { // This is used in initiate page
 	    var linkFn;
 	    linkFn = function(scope, element, attrs, $timeout) {
 	    	angular.element(element).ready(function() {
@@ -63,7 +106,7 @@ angular.module('netVogue.directives', []).
 	        restrict: 'A',
 	        link: linkFn
 	    };
-  }).directive('searchDropdown', function() {
+}).directive('searchDropdown', function() { //This is used in search bar
 	  var linkFn;
 	  linkFn = function(scope, element, attrs) {
 		  
@@ -78,7 +121,7 @@ angular.module('netVogue.directives', []).
 		  restrict	: 'A',
 	      link		: linkFn
 	  };
-  }).directive('focused', function($timeout) {
+}).directive('focused', function($timeout) { ////This is used in search bar
 	  return function(scope, element, attrs) {
 		    element[0].focus();
 		    element.bind('focus', function() {
@@ -93,22 +136,22 @@ angular.module('netVogue.directives', []).
 		    });
 		    scope.$eval(attrs.focused + '=true');
 	};
-  }).directive('sameAs', function () {
-	    return {
-	        require: 'ngModel',
-	        link: function (scope, elm, attrs, ctrl) {
-	            ctrl.$parsers.unshift(function (viewValue) {
-	            	if (viewValue === attrs.sameAs) {
-	                    ctrl.$setValidity('sameAs', true);
-	                    return viewValue;
-	                } else {
-	                    ctrl.$setValidity('sameAs', false);
-	                    return undefined;
-	                }
-	            });
-	        }
-	    };
-	}).value('ui.config', {
+}).directive('sameAs', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, elm, attrs, ctrl) {
+            ctrl.$parsers.unshift(function (viewValue) {
+            	if (viewValue === attrs.sameAs) {
+                    ctrl.$setValidity('sameAs', true);
+                    return viewValue;
+                } else {
+                    ctrl.$setValidity('sameAs', false);
+                    return undefined;
+                }
+            });
+        }
+    };
+}).value('ui.config', {
 	   // The ui-jq directive namespace
 	   jq: {
 	      // The qtip namespace
@@ -120,7 +163,7 @@ angular.module('netVogue.directives', []).
 	         }
 	      }*/
 	   }
-	}).directive('uiJq', ['ui.config', function(uiConfig) {
+}).directive('uiJq', ['ui.config', function(uiConfig) {
 	return {
 		restrict: 'A',
 		compile: function(tElm, tAttrs) {  
@@ -187,4 +230,63 @@ angular.module('netVogue.directives', []).
 		      };
 		    }
 		  };
-}]);
+}]).directive('uiDate', ['ui.config', function (uiConfig) {
+	  'use strict';
+	  var options;
+	  options = {};
+	  if (angular.isObject(uiConfig.date)) {
+	    angular.extend(options, uiConfig.date);
+	  }
+	  return {
+	    require:'?ngModel',
+	    link:function (scope, element, attrs, controller) {
+	      var getOptions = function () {
+	        return angular.extend({}, uiConfig.date, scope.$eval(attrs.uiDate));
+	      };
+	      var initDateWidget = function () {
+	        var opts = getOptions();
+
+	        // If we have a controller (i.e. ngModelController) then wire it up
+	        if (controller) {
+	          var updateModel = function () {
+	            scope.$apply(function () {
+	              controller.$setViewValue(element.datepicker("getDate"));
+	            });
+	          };
+	          if (opts.onSelect) {
+	            // Caller has specified onSelect, so call this as well as updating the model
+	            var userHandler = opts.onSelect;
+	            opts.onSelect = function (value, picker) {
+	              updateModel();
+	              return userHandler(value, picker);
+	            };
+	          } else {
+	            // No onSelect already specified so just update the model
+	            opts.onSelect = updateModel;
+	          }
+	          // In case the user changes the text directly in the input box
+	          element.bind('change', updateModel);
+
+	          // Update the date picker when the model changes
+	          controller.$render = function () {
+	            var date = controller.$viewValue;
+	            element.datepicker("setDate", date);
+	            // Update the model if we received a string
+	            if (angular.isString(date)) {
+	              controller.$setViewValue(element.datepicker("getDate"));
+	            }
+	          };
+	        }
+	        // If we don't destroy the old one it doesn't update properly when the config changes
+	        element.datepicker('destroy');
+	        // Create the new datepicker widget
+	        element.datepicker(opts);
+	        // Force a render to override whatever is in the input text box
+	        controller.$render();
+	      };
+	      // Watch for changes to the directives options
+	      scope.$watch(getOptions, initDateWidget, true);
+	    }
+	  };
+	}
+]);

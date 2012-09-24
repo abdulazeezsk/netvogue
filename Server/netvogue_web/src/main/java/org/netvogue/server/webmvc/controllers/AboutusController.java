@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("about_Us.htm")
+@RequestMapping("about_Us.html")
 public class AboutusController {
 	
 	@RequestMapping(method=RequestMethod.GET)

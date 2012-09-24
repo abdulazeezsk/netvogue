@@ -136,6 +136,21 @@ angular.module('netVogue.directives', []).
 		    });
 		    scope.$eval(attrs.focused + '=true');
 	};
+}).directive('sameAs', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, elm, attrs, ctrl) {
+            ctrl.$parsers.unshift(function (viewValue) {
+            	if (viewValue === attrs.sameAs) {
+                    ctrl.$setValidity('sameAs', true);
+                    return viewValue;
+                } else {
+                    ctrl.$setValidity('sameAs', false);
+                    return undefined;
+                }
+            });
+        }
+    };
 }).value('ui.config', {
 	   // The ui-jq directive namespace
 	   jq: {
@@ -177,6 +192,9 @@ angular.module('netVogue.directives', []).
 					});
 				}
 				elm[attrs.uiJq].apply(elm, linkOptions);
+				scope.$watch('scope.brands', function() {
+					elm[attrs.uiJq].apply(elm, linkOptions);
+				});
 			};
 		}
 	};

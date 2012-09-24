@@ -5,9 +5,10 @@ if ( !window.netvogue ) {
 	window.netvogue = netvogue;
 }
 
+netvogue.yettocontact  	= true;
 netvogue.firsttimeLogin = false;
 netvogue.isbrand		= false;
-netvogue.entityname		= "";
+netvogue.entityname		= "Matches";
 netvogue.initialize		= function() {
 	var ele = jQuery('#firsttimelogin').text();
 	if(null != ele && ele == "true") {
@@ -123,17 +124,19 @@ netvogue.contactinfo	= function(email, mobile, landline1, landline2, address, ci
     this.yearest	= yearest;
 };
 
-netvogue.productline 	= function(productlinename, selected) {
+netvogue.productline 	= function(productlinename) {
 	this.productlinename	= productlinename;
-   	this.selected			= selected;
+   	this.selected			= false;
+   	this.id					= productlinename;
 };
 
-netvogue.brandscarried	= function(brandlistitem, brandprofilepic) {
-	this.brandlistitem 		= brandlistitem;
-	this.brandprofilepic	= brandprofilepic;
+netvogue.brandscarried	= function(brandlistitem, brandusername) {
+	this.brandname 		= brandlistitem;
+	this.brandusername	= brandusername;
 };
 
-netvogue.profile 		= function(profileId, aboutus, contactinfo, productlines, brandscarried) {
+netvogue.profile 		= function(name, profileid, aboutus, contactinfo) {
+	this.name			= name;
 	this.profileid		= profileid;
 	this.aboutus		= aboutus;
 	this.contactinfo	= contactinfo; 		//netvogue.contactinfo
@@ -141,6 +144,28 @@ netvogue.profile 		= function(profileId, aboutus, contactinfo, productlines, bra
 	this.brandscarried	= [];	//netvogue.brandscarried
   	    	               
 };
+
+//Default Productlines
+netvogue.defaultproductlines = [
+                                new netvogue.productline("Womens RTW"),
+								new netvogue.productline("Womens Shoe"),
+							   	new netvogue.productline("Denim"),
+							   	new netvogue.productline("Outerwear"),
+							   	new netvogue.productline("Activewear"),
+							   	new netvogue.productline("Mens RTW"),
+							   	new netvogue.productline("Mens Shoe"),
+							   	new netvogue.productline("Mens Bags"),
+							   	new netvogue.productline("Handbags"),
+							   	new netvogue.productline("Lingerie"),
+							   	new netvogue.productline("Jewelry"),
+							   	new netvogue.productline("Swimwear"),
+							   	new netvogue.productline("Kids"),
+							   	new netvogue.productline("Watches"),
+							   	new netvogue.productline("Hats"),
+							   	new netvogue.productline("Luggage"),
+							   	new netvogue.productline("Gifts"),
+							   	new netvogue.productline("Candles")
+                                ];
 /*************************************************************************/
 /************************End of*******************************************/
 /*********************Profile Objects*************************************/
@@ -159,7 +184,7 @@ netvogue.network = function(networklistitem, profilepiclink, networklistitemID) 
 
 /*************************************************************************/
 /************************End of*******************************************/
-/*********************Gallery Objects*************************************/
+/*********************Network Objects*************************************/
 /*************************************************************************/
 
 /*************************************************************************/

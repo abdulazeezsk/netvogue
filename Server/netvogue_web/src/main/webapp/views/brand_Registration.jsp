@@ -32,7 +32,7 @@
                         </li>
                         <li class="dropdown" id="menu1"><a class="dropdown-toggle" data-toggle="dropdown"
                             href="#menu1">Login <b class="caret"></b></a>
-                            <div class="dropdown-menu">
+                            <div class="login-menu">
                                 <form style="margin: 0px" accept-charset="UTF-8" action="j_spring_security_check" method="post">
                                 <fieldset class='textbox' style="padding: 10px">
                                     <div>
@@ -43,9 +43,11 @@
                                         <div>
                                             <input type="checkbox" />
                                             <span class="checkbx_text">Remember me</span> <span class="checkbx_text">|</span>
-                                            <span class="checkbx_text">Forgot password</span> <span class="login_btn">
+                                            <span class="checkbx_text"><a href="resend_password.html">Forgot password</a></span> <span class="login_btn pull-right">
                                                 <button type="submit" class="btn btn-primary">
-                                                    Log In</button></span></div>
+                                                    Log In</button>
+                                            </span>
+                                        </div>
                                     </div>
                                 </fieldset>
                                 </form>

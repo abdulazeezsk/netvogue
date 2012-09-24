@@ -18,11 +18,11 @@
             <div class="container">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
                     class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                </a><a class="brand" href="Netvogue.htm">Net Vogue</a>
+                </a><a class="brand" href="Netvogue.html">Net Vogue</a>
                 <div class="nav-collapse pull-right">
                     <ul class="nav">
-                        <li><a href="blog.htm">Blog</a></li>
-                        <li><a href="about_Us.htm">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about_Us.html">About Us</a></li>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign
                             Up <b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -32,7 +32,7 @@
                         </li>
                         <li class="dropdown" id="menu1"><a class="dropdown-toggle" data-toggle="dropdown"
                             href="#menu1">Login <b class="caret"></b></a>
-                            <div class="dropdown-menu">
+                            <div class="login-menu">
                                 <form style="margin: 0px" accept-charset="UTF-8" action="j_spring_security_check" method="post">
                                 <fieldset class='textbox' style="padding: 10px">
                                     <div>
@@ -43,9 +43,11 @@
                                         <div>
                                             <input type="checkbox" />
                                             <span class="checkbx_text">Remember me</span> <span class="checkbx_text">|</span>
-                                            <span class="checkbx_text">Forgot password</span> <span class="login_btn">
+                                            <span class="checkbx_text"><a href="resend_password.html">Forgot password</a></span> <span class="login_btn pull-right">
                                                 <button type="submit" class="btn btn-primary">
-                                                    Log In</button></span></div>
+                                                    Log In</button>
+                                            </span>
+                                        </div>
                                     </div>
                                 </fieldset>
                                 </form>
@@ -64,14 +66,15 @@
     <!--body-->
     <div>
         <div class="row">
-            <div class="minumum_height">
+            <div class="minimum_height">
             </div>
         </div>
-    </div>
+	</div>
     <!-- footer -->
     <div class="footer">
         <div class="footer_in">
-            <span>© 2012 NET VOGUE</span></div>
+            <span>© 2012 NET VOGUE</span>
+        </div>
     </div>
     <!-- footer -->
     <!-- Placed at the end of the document so the pages load faster -->
