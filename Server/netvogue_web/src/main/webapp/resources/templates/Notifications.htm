@@ -1,0 +1,53 @@
+<!--body-->
+<div class="container minimum_height">
+    <div class="row">
+        <!-- left-pane -->
+        <div class="span3">
+            <h4 class="leftpane_entity_heading">
+                Boutique</h4>
+            <div class="divi2">
+            </div>
+           <ul class="thumbnails">
+                <li class="span3">
+                    <div>
+                       	<span> <a href="#profile"> <img alt=""
+								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
+								class="pull-left leftpane_profile_img"></a> </span>
+								<span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- left-pane -->
+        <!-- right pane -->
+         <div class="span9">
+             <span class="left rightpane_subHeading">
+                        Notification
+            </span>
+                <div class="divi2 right_pane_underline">
+                </div>
+            <ul class="nav nav-tab nav-stacked">
+                <li ng-repeat="network in mynetwork">
+                    <div class="network">
+                        <span class="brand_image"><a href="#/{{network.networklistitemID}}/profile">
+                            <img alt="" src="{{network.profilepiclink}}" class="pull-left"></a> </span><span
+                                class="network_text">
+                                <h3>
+                                    <span><a href="#/{{network.networklistitemID}}/profile">{{network.networklistitem}}</a></span></h3>
+                            </span><span class="btn-group pull-right">
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    Action <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Accept</a></li>
+                                    <li><a href="#">Delete</a></li>
+                                </ul>
+                            </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- right pane -->
+    </div>
+</div>

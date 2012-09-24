@@ -1,0 +1,81 @@
+<!--body-->
+<div class="container minimum_height">
+	<div class="row">
+		<!-- left pane -->
+		<div class="span3">
+			<h4 class="leftpane_entity_heading">Boutique</h4>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> <a href="#profile"> <img alt=""
+								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
+								class="pull-left leftpane_profile_img"></a> </span>
+								<span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+					</div>
+				</li>
+			</ul>
+			<!-- <div class="leftpane_subheading">FILTERS</div>
+			<div class="divi2"></div>
+			<div>
+				<span class="leftpane_filter_name">Name</span> 
+				<input type="text" class="span3" placeholder="Search by name" />
+			</div> -->
+		</div>
+		<!-- left pane -->
+		<!-- right pane -->
+		<div class="span9">
+			<div>
+					<span class="left heading_btn"> <a href="#/collections">
+						collection</a> <span class="divider">/</span> <span> <a
+						href="#/collection"> Untitled</a></span>
+				</span>
+				<div class="divi2 right_pane_underline"></div>
+				<span class="left right_pane_info">
+					<!-- Find Collections using the filters -->
+				</span>
+				<span class="right" >
+				<a 	href="#/addcollections" class="rightpane_add_btn">add collection</a></span>
+				<div class="divi2 right_pane_underline"></div>
+				<ul class="thumbnails">
+					<li ng-repeat="collection in collections">
+						<div class="view view-first">
+							<a href="#/{{collection.collectionlistitemid}}"> <img
+								src="{{collection.collectioncoverpic}}" alt=""></a>
+							<div class="mask"></div>
+							<div class="content">
+								<div class="mask">
+									<ul>
+										<li><a href="#" title="Delete"><i
+												class="icon-trash icon-white"></i></a></li>
+										<li><a data-toggle="modal"	href="#/editcollections" title="Edit"><i
+												class="icon-edit icon-white"></i></a></li>
+									</ul>
+									<p>
+										<u>{{collection.collectionseason}}</u> <br /> Lorem Ipsum is
+										simply dummy text of the printing and typesetting industry.
+										Lorem Ipsum has been the industry's standard dummy text ever
+										since the 1500s, when an unknown printer took a galley of type
+										i
+									</p>
+									<h1>
+										<a href="#/collections/:collectionid" class="mask_edit">view</a>
+									</h1>
+								</div>
+							</div>
+							<div class="divi2"></div>
+						</div>
+						<div class="title">
+							<!--  <h3>
+                                    {{collection.collectionseason}}</h3>-->
+							<h3>{{collection.collectionbrandname}}</h3>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- right pane -->
+	</div>
+</div>
+	<!--body-->

@@ -1,0 +1,101 @@
+<!--body-->
+<div class="container minumum_height">
+    <div class="row">
+        <!-- left pannel -->
+        <div ng-include src="'templates/LeftMain_Panel.htm'">
+        </div>
+        <!-- left pannel -->
+        <!-- middle pannel -->
+        <div class="span7">
+            <h6>
+                Update status</h6>
+            <textarea class="span7" id="textarea" rows="3" placeholder="Whats on your mind..."></textarea>
+            <button class="btn btn-primary pull-right">
+                Post</button>
+            <div class="divi2">
+            </div>
+            <span class="btn-group pull-right">
+                <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+                    sort <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">My Timeline</a></li>
+                    <li><a href="#">Everyone</a></li>
+                </ul>
+            </span>
+            <ul class="nav nav-tab nav-stacked">
+                <li ng-repeat="news in newsfeeds">
+                    <div class="newsfeed">
+                        <div class="brand_image">
+                            <a href="#">
+                                <img alt="" ng-src="{{news.profilepiclink}}" class="pull-left"></a></div>
+                        <div class="newsfeed_text">
+                            <h3>
+                                <a href="#" title="">{{news.boutiquename}}</a></h3>
+                            <p>
+                                {{news.post}}
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- middle pannel -->
+        <!-- right pannel -->
+        <div class="span3">
+            <h4 class="trending_head">
+                Network</h4>
+            <div class="divi2">
+            </div>
+            <ul class="thumbnails">
+                <li class="span3" ng-repeat="network in networkfeed | limitTo:4">
+                    <div>
+                        <a href="#/{{network.networklistitemID}}/profile">
+                            <img alt="" ng-src="{{network.profilepiclink}}" class="pull-left"></a> <a href="#/{{network.networklistitemID}}/profile"
+                                class="network_entity_name">{{network.networklistitem}}</a>
+                    </div>
+                </li>
+            </ul>
+            <div>
+                <h4 class="trending_head">
+                    TRENDING</h4>
+                <div class="divi2">
+                </div>
+                <ul class="nav nav-tab nav-stacked">
+                    <li ng-repeat="trend in trending">
+                        <div class="trendfeed">
+                            <div class="img">
+                                <a href="#/{{trend.trendlistitemID}}">
+                                    <img alt="" ng-src="{{trend.trendpiclink}}" class="pull-left"></a></div>
+                            <div class="trendfeed_text">
+                                <h3>
+                                    <a href="#/{{trend.trendlistitemID}}" title="">{{trend.trendlistitem}}</a></h3>
+                                <p>
+                                    {{trend.post}}</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- right pannel -->
+    </div>
+</div>
+<!-- modal -->
+<div class="modal  hide" id="invite">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+        </button>
+        <h4 class="subHeading_no_underline">
+            Send Invite</h4>
+    </div>
+    <div class="modal-body">
+        <input type="text" style="width: 500px;" placeholder="Enter email" />
+        <textarea style="width: 500px;" rows="9" placeholder="Type a message"></textarea>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a> <a href="#" class="btn btn-primary">
+            Send Request</a>
+    </div>
+</div>
+<!-- modal -->

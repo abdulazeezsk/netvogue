@@ -1,0 +1,110 @@
+<!--body-->
+<div class="container minimum_height">
+	<div class="row">
+		<!-- left-pane -->
+		<div class="span3">
+			<h4 class="leftpane_entity_heading">Boutique</h4>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> <a href="#profile"> <img alt=""
+								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+					</div>
+				</li>
+			</ul>
+
+			<div class="leftpane_subheading">FILTERS</div>
+			<div class="divi2"></div>
+			<div class="leftpane_filter_name">
+				<span class="leftpane_filter_name">Style name</span> <input
+					type="text" placeholder="Style name" class="span3" /> <span
+					class="leftpane_filter_name">Style number</span> <input type="text"
+					placeholder="Style number" class="span3" /> <span
+					class="leftpane_filter_name">Fabrication</span> <input type="text"
+					placeholder="Fabrication" class="span3" /> <span
+					class="leftpane_filter_name">Price</span> <input type="text"
+					class="span3" />
+			</div>
+			<div>
+				<h4 class="leftpane_subheading">Line sheets</h4>
+				<ul class="nav nav-tab nav-stacked">
+					<li ng-repeat="linesheet in linesheets">
+						<div class="leftpanefeed">
+							<div class="feedimage">
+								<a href="#/{{linesheet.linesheetlistitemid}}"> <img alt=""
+									ng-src="{{linesheet.linesheetcoverpic}}" class="pull-left"></a>
+							</div>
+							<div class="leftpanefeed_text">
+								<h3>
+									<a href="#/{{linesheet.linesheetlistitemid}}" title="">{{linesheet.linesheetname}}</a>
+								</h3>
+								<p>{{style.stylename}}</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- left-pane -->
+		<!-- right pane -->
+		<div class="span9">
+			<div>
+				<div>
+					<span class="left heading_btn"> <a href="#/linesheets">Line
+							sheets</a> <span class="divider">/</span> <span><a href="#/linesheets/:lineid">Untitled</a></span>
+					</span> <span class="right"> <a ng-href="#{{backButton}}"
+						class="rightpane_back_btn">Back</a></span>
+					<div class="divi2 right_pane_underline"></div>
+					<span class="left right_pane_info"> Find styles using the
+						filters </span> <span class="right"> <a href="#/addlinesheets"
+						class="rightpane_add_btn">Edit</a>
+					</span>
+					<div class="divi2 right_pane_underline"></div>
+				</div>
+
+				<div>
+					<ul class="thumbnails">
+						<li ng-repeat="style in styles">
+							<div class="view view-first">
+								<a href="#/{{style.stylelistitemid}}"> <img
+									src="{{style.stylecoverpic}}" alt=""></a>
+								<div class="mask"></div>
+								<div class="content">
+									<div class="mask">
+										<!-- <ul ng-show="isMyProfile">
+											<li><a href="#" title="Delete"><i
+													class="icon-trash icon-white"></i></a></li>
+											<li><a href="#/editstyles" title="Edit"><i
+													class="icon-edit icon-white"></i></a></li>
+										</ul> -->
+										<p>
+											<u>{{style.stylename}}</u> <br /> Lorem Ipsum is simply
+											dummy text of the printing and typesetting industry. Lorem
+											Ipsum has been the industry's standard dummy text ever since
+											the 1500s, when an unknown printer took a galley of type i
+										</p>
+										<h1>
+											<a href="#/style" class="mask_edit">view</a>
+										</h1>
+									</div>
+								</div>
+								<div class="divi2"></div>
+							</div>
+							<div class="title">
+								<h3>{{style.stylename}}</h3>
+								<h3>{{style.stylebrandname}}</h3>
+								<h3>{{style.styleprice}}</h3>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- right pane -->
+		</div>
+	</div>
+</div>
+<!--body-->

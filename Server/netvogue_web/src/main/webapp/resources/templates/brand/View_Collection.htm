@@ -1,0 +1,38 @@
+<!--body-->
+<div class="container minimum_height">
+	<div class="row">
+		<!-- Main pane -->
+		<div class="span12">
+			<div>
+				<span class="left heading_btn">
+						<a href="#/collections">Collections</a>
+						<span class="divider">/</span>
+						<span><a href="#/collection">Untitled</a></span>	
+				</span>
+				<div class="divi2 right_pane_underline"></div>
+				<span class="left right_pane_info">
+				{{collectionseason.collectionlikes}}
+				</span>
+				<span class="right">
+				<a href="#" class="rightpane_like_btn"> Like</a>
+				</span>
+				<div class="divi2 right_pane_underline"></div>
+				<div id="myCarousel" class="carousel slide">
+					<!-- Carousel items -->
+					<div class="carousel-inner">
+						<div class="item" ng-repeat="collection in viewcollections"
+							ng-class="{active: $first}">
+							<img src="{{collection.collectionpic}}" alt="" />
+						</div>
+					</div>
+					<!-- Carousel nav -->
+					<a class="carousel-control left" href="#myCarousel"
+						data-slide="prev">&lsaquo;</a> <a class="carousel-control right"
+						href="#myCarousel" data-slide="next">&rsaquo;</a>
+				</div>
+			</div>
+		</div>
+		<!-- Main pane -->
+	</div>
+</div>
+<!--body-->

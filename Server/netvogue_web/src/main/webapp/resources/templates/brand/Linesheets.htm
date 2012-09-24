@@ -1,0 +1,195 @@
+<!--body-->
+<div class="container minimum_height">
+	<div class="row">
+		<!-- left-pane -->
+		<div class="span3">
+			<h4 class="leftpane_entity_heading">Boutique</h4>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> <a href="#profile"> <img alt=""
+								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+					</div>
+				</li>
+			</ul>
+			<div class="leftpane_subheading">FILTERS</div>
+			<div class="divi2"></div>
+			<div>
+				<span class="leftpane_filter_name">BRAND</span> <input type="text"
+					class="span3" /> <span class="leftpane_filter_name">SEASON</span>
+				<input type="text" class="span3" />
+			</div>
+			<div>
+				<span class="leftpane_filter_name">CATEGORY</span>
+			</div>
+			<div>
+				<div checkbox-tree ng-model="searchFilter"></div>
+			</div>
+		</div>
+		<!-- left-pane -->
+		<!-- right pane -->
+		<div class="span9">
+			<div>
+				<span class="left rightpane_subHeading"> Line Sheets </span> <span
+					class="right"> <a ng-href="#{{backButton}}"
+					class="rightpane_back_btn">Back</a></span>
+				<div class="divi2 right_pane_underline"></div>
+				<span class="left right_pane_info"> Find linesheets using the
+					filters </span> <span class="right"> <a data-toggle="modal"
+					href="#Createlinesheet" class="rightpane_add_btn">Create line sheet</a>
+				</span>
+				<div class="divi2 right_pane_underline"></div>
+			</div>
+
+
+			<div>
+				<ul class="thumbnails">
+					<li ng-repeat="linesheet in linesheets">
+						<div class="view view-first">
+							<a href="#/{{linesheet.linesheetlistitemid}}"> <img
+								src="{{linesheet.linesheetcoverpic}}" alt=""></a>
+							<div class="mask"></div>
+
+							<div class="content">
+								<div class="mask">
+									<ul ng-show="isMyProfile && iambrand">
+										<li><a href="#" title="Delete"><i
+												class="icon-trash icon-white"></i></a></li>
+										<li><a href="#/Createlinesheet" title="Edit"><i
+												class="icon-edit icon-white"></i></a></li>
+									</ul>
+									<p>
+										<u>{{linesheet.linesheetseason}}</u> <br /> Lorem Ipsum is
+										simply dummy text of the printing and typesetting industry.
+										Lorem Ipsum has been the industry's standard dummy text ever
+										since the 1500s, when an unknown printer took a galley of type
+										i
+									</p>
+
+
+									<h1>
+										<a href="#/linesheets/:lineid" class="mask_edit">view</a>
+									</h1>
+								</div>
+							</div>
+							<div class="divi2"></div>
+						</div>
+						<div class="title">
+							<!--<h3>
+                                {{linesheet.linesheetseason}}</h3>-->
+							<h4>DELIVERY DATE: {{linesheet.linesheetdeliverydate}}</h4>
+							<h3>{{linesheet.linesheetbrandname}}</h3>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+		<!-- right pane -->
+	</div>
+</div>
+<!--body-->
+<!-- modal -->
+<div class="modal  hide" id="Createlinesheet">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"></button>
+		<h4 class="subHeading_no_underline">Create Line sheet</h4>
+	</div>
+	<div class="modal-body">
+		<div>
+			<input type="text" class="span4" placeholder="Enter line sheet name" />
+		</div>
+		<div class="divi2"></div>
+		<div>
+			<select id="e1" class="populate span4">
+				<optgroup label="Alaskan/Hawaiian Time Zone">
+					<option value="AK">Alaska</option>
+					<option value="HI">Hawaii</option>
+				</optgroup>
+				<optgroup label="Pacific Time Zone">
+					<option value="CA">California</option>
+					<option value="NV">Nevada</option>
+					<option value="OR">Oregon</option>
+					<option value="WA">Washington</option>
+				</optgroup>
+				<optgroup label="Mountain Time Zone">
+					<option value="AZ">Arizona</option>
+					<option value="CO">Colorado</option>
+					<option value="ID">Idaho</option>
+					<option value="MT">Montana</option>
+					<option value="NE">Nebraska</option>
+					<option value="NM">New Mexico</option>
+					<option value="ND">North Dakota</option>
+					<option value="UT">Utah</option>
+					<option value="WY">Wyoming</option>
+				</optgroup>
+				<optgroup label="Central Time Zone">
+					<option value="AL">Alabama</option>
+					<option value="AR">Arkansas</option>
+					<option value="IL">Illinois</option>
+					<option value="IA">Iowa</option>
+					<option value="KS">Kansas</option>
+					<option value="KY">Kentucky</option>
+					<option value="LA">Louisiana</option>
+					<option value="MN">Minnesota</option>
+					<option value="MS">Mississippi</option>
+					<option value="MO">Missouri</option>
+					<option value="OK">Oklahoma</option>
+					<option value="SD">South Dakota</option>
+					<option value="TX">Texas</option>
+					<option value="TN">Tennessee</option>
+					<option value="WI">Wisconsin</option>
+				</optgroup>
+				<optgroup label="Eastern Time Zone">
+					<option value="CT">Connecticut</option>
+					<option value="DE">Delaware</option>
+					<option value="FL">Florida</option>
+					<option value="GA">Georgia</option>
+					<option value="IN">Indiana</option>
+					<option value="ME">Maine</option>
+					<option value="MD">Maryland</option>
+					<option value="MA">Massachusetts</option>
+					<option value="MI">Michigan</option>
+					<option value="NH">New Hampshire</option>
+					<option value="NJ">New Jersey</option>
+					<option value="NY">New York</option>
+					<option value="NC">North Carolina</option>
+					<option value="OH">Ohio</option>
+					<option value="PA">Pennsylvania</option>
+					<option value="RI">Rhode Island</option>
+					<option value="SC">South Carolina</option>
+					<option value="VT">Vermont</option>
+					<option value="VA">Virginia</option>
+					<option value="WV">West Virginia</option>
+				</optgroup>
+			</select>
+		</div>
+		<div class="divi2"></div>
+		<div>
+			<ul class="nav nav-horizontal left">
+				<li>
+				<span class="left" ng-show="isMyProfile"> 
+					<input type="radio" name="Date" checked value="true"  ng-model="immediate" > Immediates 
+					<input type="radio" name="Date" value="false" ng-model="immediate"> Delivery date
+				</span>
+				</li>
+			</ul>
+		</div>
+		<div class="divi2"></div>
+		<div>
+		<input type="text" class="span4" placeholder="Enter delivery date" ng-model="date" ui-date 
+					ng-hide="immediate == 'true'"/>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
+			class="btn btn-primary" data-dismiss="modal" href="#/addlinesheets">
+			Create linesheet</a>
+	</div>
+</div>
+<!-- modal -->
+

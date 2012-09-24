@@ -1,0 +1,124 @@
+<!--body-->
+<div class="container minimum_height">
+	<div class="row">
+		<!-- left-pane -->
+		<div class="span3">
+			<h4 class="leftpane_entity_heading">Boutique</h4>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> <a href="#profile"> <img alt=""
+								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+					</div>
+				</li>
+			</ul>
+			<div class="leftpane_subheading">FILTERS</div>
+			<div class="divi2"></div>
+			<div class="leftpane_filter_name">
+				<span class="leftpane_filter_name">TITLE</span> <input type="text"
+					class="span3" /> <span class="leftpane_filter_name">DESCRIPTION</span>
+				<input type="text" class="span3" />
+			</div>
+
+		</div>
+		<!-- left-pane -->
+		<!-- right-pane -->
+		<div class="span9">
+			<div>
+				<span class="left rightpane_subHeading"> Editorials </span> <span
+					class="right"> <a ng-href="#{{backButton}}"
+					class="rightpane_back_btn"> Back</a></span>
+				<div class="divi2 right_pane_underline"></div>
+				<span class="left right_pane_info"> Find Editorials using the
+					filters </span> <span class="right" ng-show="isMyProfile"> <a
+					data-toggle="modal" href="#CreateEditorial" class="rightpane_add_btn">Create Editorial</a>
+				</span>
+				<div class="divi2 right_pane_underline"></div>
+			</div>
+
+			<div>
+				<ul class="thumbnails">
+					<li ng-repeat="newsletter in newsletters">
+						<div class="view view-first">
+							<a href="#/{{newsletter.campaignlistitemid}}"> <img
+								src="{{newsletter.campaigncoverpic}}" alt=""></a>
+							<div class="mask"></div>
+							<div class="content">
+								<div class="mask">
+									<ul ng-show="isMyProfile">
+										<li><a href="#" title="Delete"><i
+												class="icon-trash icon-white"></i></a></li>
+										<li><a data-toggle="modal" href="#EditEditorial"  title="Edit"><i
+												class="icon-edit icon-white"></i></a></li>
+									</ul>
+									<p>
+										<u>{{newsletter.newslettername}}</u> <br /> Lorem Ipsum is
+										simply dummy text of the printing and typesetting industry.
+										Lorem Ipsum has been the industry's standard dummy text ever
+										since the 1500s, when an unknown printer took a galley of type
+										i
+									</p>
+									<h1>
+										<a href="#/editorial" class="mask_edit">view</a>
+									</h1>
+								</div>
+							</div>
+							<div class="divi2"></div>
+						</div>
+						<div class="title">
+							<h5>{{newsletter.campaignname}}</h5>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+		<!-- right-pane -->
+	</div>
+</div>
+<!--body-->
+
+<!-- modal -->
+<div class="modal  hide" id="CreateEditorial">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"></button>
+		<h4 class="subHeading_no_underline">Create Editorial</h4>
+	</div>
+	<div class="modal-body">
+		<div>
+			<input type="text" class="span4" placeholder="Editorial name" />
+			<textarea style="width: 500px;" rows="9" placeholder="Enter description"></textarea>
+		</div>
+		</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
+			class="btn btn-primary" data-dismiss="modal" href="#/addnewsletter">
+			Create editorial</a>
+	</div>
+</div>
+<!-- modal -->
+
+
+<!-- modal -->
+<div class="modal  hide" id="EditEditorial">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"></button>
+		<h4 class="subHeading_no_underline">Edit Editorial</h4>
+	</div>
+	<div class="modal-body">
+		<div>
+			<input type="text" class="span4" placeholder="Editorial name" />
+			<textarea style="width: 500px;" rows="9" placeholder="Enter description"></textarea>
+		</div>
+		</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
+			class="btn btn-primary" data-dismiss="modal" href="#">
+			Update editorial</a>
+	</div>
+</div>
+<!-- modal -->

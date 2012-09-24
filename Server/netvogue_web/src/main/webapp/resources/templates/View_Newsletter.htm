@@ -1,0 +1,70 @@
+<!--body-->
+<div class="container minimum_height">
+    <div class="row">
+        <!-- left pane -->
+        <div class="span3">
+            <h4 class="leftpane_entity_heading">
+                Boutique</h4>
+            <div class="divi2">
+            </div>
+            <ul class="thumbnails">
+                <li class="span3">
+                    <div>
+                    <span> <a href="#profile"> <img alt=""
+								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+                    </div>
+                </li>
+            </ul>
+                <div>
+                <h4 class="subHeading_advertisement">Editorials</h4>
+                <ul class="nav nav-tab nav-stacked">
+                    <li ng-repeat="editorial in Editorials">
+                        <div class="leftpanefeed">
+                            <div class="feedimage">
+                                <a href="#/{{editorial.newsletterlistitemid}}">
+                                    <img alt="" ng-src="{{editorial.newsletterpic}}" class="pull-left"></a></div>
+                            <div class="leftpanefeed_text">
+                                <h3>
+                                    <a href="#/{{editorial.newsletterlistitemid}}" title="">{{editorial.newslettername}}</a></h3>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- left pane -->
+        <!-- right pane -->
+        <div class="span9">
+               <span class="left heading_btn">
+                        <a href="#/newsletter">Editorials</a>
+                        <span class="divider">/</span>
+                        <span><a
+						href="#/editorial"> Untitled</a></span>
+                </span>
+            <div class="divi2 right_pane_underline">
+            </div>
+            <div id="myCarousel" class="carousel slide">
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    <div class="item" ng-repeat="newsletter in viewnewsletters" ng-class="{active: $first}">
+                        <img src="{{newsletter.newsletterpic}}" alt="">
+                        <div class="carousel-caption">
+                            <h4>
+                                {{newsletter.newsletterbrand}}{{newsletter.newsletterseason}}</h4>
+                            <p>
+                                {{newsletter.newsletterdescription}}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Carousel nav -->
+                <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+            </div>
+        </div>
+        <!-- right pane -->
+    </div>
+</div>
+<!--body-->

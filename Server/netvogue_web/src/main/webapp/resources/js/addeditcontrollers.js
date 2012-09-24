@@ -38,6 +38,23 @@ function MyCtrlAddCollections($scope, $routeParams, currentvisitedprofile) {
                            "privacytype": "NETWORK"
                        }
                        ];
+    $scope.newfiles = [];
+	$scope.existingfiles = [
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "img/donna_karan_adriana_lima_1.jpg"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300")
+	                        ];
+	$scope.filesadded	= function(element) {
+		$scope.$apply(function($scope) {
+			// Turn the FileList object into an Array
+			$scope.$broadcast('filesadded', element.files);
+		});
+	};
 }
 
 function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile) {
@@ -66,7 +83,7 @@ function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile) {
 	                       "styleseason": "Spring 2012",
 	                       "styledeliverydate": "25/04/2012",
 	                       "styleprice": "5000",
-	                       "stylecoverpic": "http://placehold.it/231x306"
+	                       "stylecoverpic": "http://placehold.it/90x119"
 
 	                   },
                        {
@@ -76,7 +93,7 @@ function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile) {
                            "styleseason": "Spring 2012",
                            "styledeliverydate": "25/04/2012",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/231x306"
+                           "stylecoverpic": "http://placehold.it/90x119"
 
                        },
                        {
@@ -86,7 +103,7 @@ function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile) {
                            "styleseason": "Spring 2012",
                            "styledeliverydate": "25/04/2012",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/231x306"
+                           "stylecoverpic": "http://placehold.it/90x119"
 
                        }
                        ];
@@ -113,6 +130,24 @@ function MyCtrlAddNewsletter($scope, $routeParams, currentvisitedprofile) {
                            "privacytype": "NETWORK"
                        }
                        ];
+    
+    $scope.newfiles = [];
+	$scope.existingfiles = [
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "img/donna_karan_adriana_lima_1.jpg"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300")
+	                        ];
+	$scope.filesadded	= function(element) {
+		$scope.$apply(function($scope) {
+			// Turn the FileList object into an Array
+			$scope.$broadcast('filesadded', element.files);
+		});
+	};
 }
 
 function MyCtrlAddPrintCampaign($scope, $routeParams, currentvisitedprofile) {
@@ -152,6 +187,24 @@ function MyCtrlAddPrintCampaign($scope, $routeParams, currentvisitedprofile) {
                        }
 
                        ];
+    
+    $scope.newfiles = [];
+	$scope.existingfiles = [
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "img/donna_karan_adriana_lima_1.jpg"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300")
+	                        ];
+	$scope.filesadded	= function(element) {
+		$scope.$apply(function($scope) {
+			// Turn the FileList object into an Array
+			$scope.$broadcast('filesadded', element.files);
+		});
+	};
 }
 
 function MyCtrlAddVideoCampaign($scope, $routeParams, currentvisitedprofile) {
@@ -448,7 +501,7 @@ function MyCtrlEditStyles($scope, $routeParams, currentvisitedprofile) {
 	                       "styledeliverydate": "25/04/2012",
 	                       "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
 	                       "styleprice": "5000",
-	                       "stylecoverpic": "http://placehold.it/70x90"
+	                       "stylecoverpic": "http://placehold.it/90x119"
 
 	                   },
                        {
@@ -459,7 +512,7 @@ function MyCtrlEditStyles($scope, $routeParams, currentvisitedprofile) {
                            "styledeliverydate": "25/04/2012",
                            "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/70x90"
+                           "stylecoverpic": "http://placehold.it/90x119"
 
                        },
                        {
@@ -470,7 +523,7 @@ function MyCtrlEditStyles($scope, $routeParams, currentvisitedprofile) {
                            "styledeliverydate": "25/04/2012",
                            "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/70x90"
+                           "stylecoverpic": "http://placehold.it/90x119"
 
                        }
                        ];
@@ -489,7 +542,7 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
 	                       "styledeliverydate": "25/04/2012",
 	                       "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
 	                       "styleprice": "5000",
-	                       "stylecoverpic": "http://placehold.it/70x90"
+	                       "stylecoverpic": "http://placehold.it/90x119"
 
 	                   },
                        {
@@ -500,7 +553,7 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
                            "styledeliverydate": "25/04/2012",
                            "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/70x90"
+                           "stylecoverpic": "http://placehold.it/90x119"
 
                        },
                        {
@@ -511,7 +564,7 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
                            "styledeliverydate": "25/04/2012",
                            "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
                            "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/70x90"
+                           "stylecoverpic": "http://placehold.it/90x119"
 
                        }
                        ];
@@ -526,4 +579,24 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
 	                   }
                        ];
 
+}
+
+function MyCtrlAddGallery($scope) {
+	$scope.newfiles = [];
+	$scope.existingfiles = [
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "img/donna_karan_adriana_lima_1.jpg"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
+	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150")
+	                        ];
+	$scope.filesadded	= function(element) {
+		$scope.$apply(function($scope) {
+			// Turn the FileList object into an Array
+			$scope.$broadcast('filesadded', element.files);
+		});
+	};
 }

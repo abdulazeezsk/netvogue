@@ -1,0 +1,116 @@
+<!-- body -->
+<div class="container minimum_height">
+    <div class="row">
+        <!-- left-pane -->
+        <div class="span3">
+            <h4 class="leftpane_entity_heading">
+                Boutique</h4>
+            <div class="divi2">
+            </div>
+            <ul class="thumbnails">
+                <li class="span3">
+                    <div>
+                  <span> <a href="#profile"> <img alt=""
+								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
+								class="pull-left leftpane_profile_img"></a> </span>
+								<span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- left-pane -->
+        <!-- right pane -->
+        <div class="span9">
+            <div>
+             <span class="left rightpane_subHeading">
+                    privacy Settings
+            </span>
+            <span class="right">
+            <a href="#profile" class="rightpane_back_btn">Back</a>
+            </span>
+            <div class="divi2 right_pane_underline">
+            </div>
+                <span class="left right_pane_info">
+                        Change Privacy Settings as preferred by you
+                </span>
+                <div class="divi2 topborderline">
+                </div>
+                <ul class="nav nav-tab nav-stacked">
+                    <div class="privacysettingsfeed">
+                        <li><span>Corner</span> <span class="right" ng-show="isMyProfile">
+                            <input type="radio" name="Corner" value="Public" checked>
+                            Public
+                            <input type="radio" name="Corner" value="Private">
+                            Private
+                            <input type="radio" name="Corner" value="Network">Network </span></li>
+                    </div>
+                    <div class="privacysettingsfeed">
+                        <li><span>Profile</span> <span class="right" ng-show="isMyProfile">
+                            <input type="radio" name="Profile" value="Public" checked>
+                            Public
+                            <input type="radio" name="Profile" value="Private">
+                            Private
+                            <input type="radio" name="Profile" value="Network">Network </span></li>
+                    </div>
+                    <div class="privacysettingsfeed">
+                        <li><span>Network</span> <span class="right" ng-show="isMyProfile">
+                            <input type="radio" name="Network" value="Public" checked>
+                            Public
+                            <input type="radio" name="Network" value="Private">
+                            Private
+                            <input type="radio" name="Network" value="Network">Network </span></li>
+                    </div>
+                    <div class="privacysettingsfeed">
+                        <li><span>PrintCampaign</span> <span class="right" ng-show="isMyProfile">
+                            <input type="radio" name="PrintCampaign" value="Public">
+                            Public
+                            <input type="radio" name="PrintCampaign" value="Private">
+                            Private
+                            <input type="radio" name="PrintCampaign" value="Network" checked>Network </span>
+                        </li>
+                    </div>
+                    <div class="privacysettingsfeed">
+                        <li><span>Editorials</span> <span class="right" ng-show="isMyProfile">
+                            <input type="radio" name="Editorials" value="Public">
+                            Public
+                            <input type="radio" name="Editorials" value="Private">
+                            Private
+                            <input type="radio" name="Editorials" value="Network" checked>Network </span>
+                        </li>
+                    </div>
+                    <div class="advertisementfeed">
+                        <li><span>LineSheets</span> <span class="right" ng-show="isMyProfile">
+                            <input type="radio" name="LineSheets" value="Public">
+                            Public
+                            <input type="radio" name="LineSheets" value="Private">
+                            Private
+                            <input type="radio" name="LineSheets" value="Network" checked>Network </span>
+                        </li>
+                    </div>
+                    <div class="privacysettingsfeed">
+                        <li><span>Collections</span> <span class="right" ng-show="isMyProfile">
+                            <input type="radio" name="Collections" value="Public">
+                            Public
+                            <input type="radio" name="Collections" value="Private">
+                            Private
+                            <input type="radio" name="Collections" value="Network" checked>Network </span>
+                        </li>
+                    </div>
+                    <div class="divi2">
+                    </div>
+                    <div class="controls pull-right">
+                        <button type="button" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="Updateprivacysettings(privacysettings)">
+                            <i class=""></i><span>Save</span>
+                        </button>
+                        <button type="button" class="btn">
+                            <i class=""></i><span>Cancel</span>
+                        </button>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- right pane -->
+</div>
+<!-- body -->

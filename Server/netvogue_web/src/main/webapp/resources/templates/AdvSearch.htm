@@ -1,0 +1,96 @@
+<!--body-->
+<div class="container minimum_height">
+	<div class="row">
+		<!-- left pane -->
+		<div class="span3">
+			<h4 class="leftpane_entity_heading">Boutique</h4>
+			<div class="divi2"></div>
+			   <ul class="thumbnails">
+                <li class="span3">
+                    <div>
+                       <span> <a href="#profile"> <img alt=""
+								src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg"
+								class="pull-left leftpane_profile_img"></a> </span>
+								<span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+                    </div>
+                </li>
+            </ul>
+			<div class="leftpane_subheading">FILTERS</div>
+			<div class="divi2">
+			</div>
+			<div>
+				 <span class="leftpane_filter_name">BRAND</span>
+				 <input type="text" class="span3" />
+				  <span class="leftpane_filter_name">BRANDS CARRIED</span>
+				 <input type="text" class="span3" />  
+				  <span class="leftpane_filter_name">LOCATION</span>
+				 <input type="text" class="span3" />
+			</div>
+			<div>
+			<span class="leftpane_filter_name">CATEGORY</span> 
+			</div>
+			<div>
+				<div checkbox-tree ng-model="searchFilter"></div>
+			</div>
+		</div>
+		<!-- left pane -->
+		<!-- right pane -->
+		<div class="span9">
+			<div>
+				  <span class="left rightpane_subHeading">
+                        Brands
+                </span>
+                <div class="divi2 right_pane_underline">
+                </div>
+                <span class="left right_pane_info">
+                        Find Brands and Boutiques using the filters
+                </span>
+                <div class="divi2 right_pane_underline">
+                </div>
+				<div>
+					<ul class="thumbnails">
+						<li ng-repeat="brand in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize">
+							<div class="viewls view-firstls">
+								<a href="#/{{brand.brandlistitemid}}"> <img
+									src="{{brand.brandprofilepic}}" alt=""></a>
+								<div class="maskls mask-1"></div>
+								<div class="maskls mask-2">
+									<p>
+										<u>{{brand.brandname}}</u> <br /> {{brand.brandlocation}}
+									</p>
+								</div>
+								<div class="contentls">
+									<h1>
+										<a href="#/{{brand.brandlistitemid}}" class="mask_edit">View</a>
+									</h1>
+								</div>
+								<div class="divi2"></div>
+							</div>
+							<div class="title">
+								<!--<h3>
+                                {{linesheet.linesheetseason}}</h3>-->
+								<h3>{{brand.brandname}}</h3>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="pagination"
+					style="margin-left: auto; margin-right: auto; width: 35%;">
+					<ul>
+						<li><a ng-disabled="pagenumber == 0"
+							ng-click="pagenumber=pagenumber-1" class="bx-prev"> Prev</a></li>
+						<li ng-repeat="number in pagenumbers"
+							ng-class="{active: $index == pagenumber}"><a href="#">{{number}}</a>
+						</li>
+						<li><a
+							ng-disabled="currentPage >= advancedsearch.length/pageSize - 1"
+							ng-click="pagenumber=pagenumber+1" class="bx-next">Next</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- right pane -->
+	</div>
+</div>
+<!--body-->
