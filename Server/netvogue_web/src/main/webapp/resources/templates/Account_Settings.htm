@@ -37,12 +37,11 @@
                             <div class="accordion-inner">
                                 <form class="span3">
                                 <label class="control-label">
-                                    Boutique Name</label>
-                                <input type="text" class="span3" placeholder="Boutique Name">
+                                <input type="text" class="span3" ng-model="newname" placeholder="Boutique Name">
                                 <label class="control-label">
                                     Password</label>
-                                <input type="password" class="span3" placeholder="Password">
-                                <button type="submit" class="btn btn-primary">
+                                <input type="password" class="span3" ng-model="$scope.password" placeholder="Password">
+                                <button type="submit" class="btn btn-primary" ng-click="updatename(newname)">
                                     Save changes</button>
                                 </form>
                             </div>
@@ -58,11 +57,11 @@
                                 <form class="span3">
                                 <label class="control-label">
                                     Email</label>
-                                <input type="text" class="span3" placeholder="Email">
+                                <input type="text" class="span3" ng-model="newemail" placeholder="Email">
                                 <label class="control-label">
                                     Password</label>
-                                <input type="password" class="span3" placeholder="Password">
-                                <button type="submit" class="btn btn-primary">
+                                <input type="password" class="span3" ng-model="$scope.password" placeholder="Password">
+                                <button type="submit" class="btn btn-primary" ng-click="updateemail(newemail)">
                                     Save changes</button>
                                 </form>
                             </div>
@@ -78,14 +77,20 @@
                                 <form class="span3">
                                 <label class="control-label">
                                     Old password</label>
-                                <input type="password" class="span3" placeholder="Old Password">
+                                <input type="password" class="span3" ng-model="$scope.password" placeholder="Old Password">
                                  <label class="control-label">
                                     New password</label>
-                                <input type="password" class="span3" placeholder="New Password">
+                                <input type="password" class="span3" ng-model="newpassword" placeholder="New Password">
                                  <label class="control-label">
                                     Confirm password</label>
-                                <input type="password" class="span3" placeholder="Confirm Password">
-                                <button type="submit" class="btn btn-primary">
+                                <input type="password" class="span3" ng-model="confirmpassword" placeholder="Confirm Password"
+                                	name="uConfirmPassword" required maxlength="10" same-as="{{newpassword}}">
+	                                <div ng-show="form.uConfirmPassword.$dirty && form.uConfirmPassword.$invalid">
+	                                <span ng-show="form.uConfirmPassword.$error.required" class="validation_msg">Confirm
+	                                    Password Is Required</span> <span ng-show="form.uConfirmPassword.$error.sameAs" class="validation_msg">
+	                                        Password Is Not Matching</span>
+	                            	</div>
+                                <button type="submit" class="btn btn-primary" ng-click="updatepassword(newpassword)">
                                     Save changes</button>
                                 </form>
                             </div>

@@ -35,8 +35,10 @@
                     Us</a></li>
                 <li ng-class="{active: tabposition == 1}"><a href="#product_line" data-toggle="tab">
                     Product Line</a></li>
-                <li ng-class="{active: tabposition == 2}"><a href="#brands_carried" data-toggle="tab">
+                <li ng-class="{active: tabposition == 2}" ui-if="!iambrand"><a href="#brands_carried" data-toggle="tab">
                     Brands Carried</a></li>
+                <li ng-class="{active: tabposition == 2}" ui-if="iambrand"><a href="#brands_carried" data-toggle="tab">
+                    Stockists</a></li>
                 <li ng-class="{active: tabposition == 4}"><a href="#contact_info" data-toggle="tab">
                     Contact Info</a></li>
             </ul>
@@ -51,8 +53,8 @@
                         <textarea id="textarea" rows="18" style="width: 680px;" ng-model="aboutus"></textarea>
                     </div>
                     <div style="padding-left: 585px;">
-                        <button type="submit" class="btn btn-primary" style="" data-loading-text="Loading..."
-                            ng-click="updateaboutus(aboutus)">
+                        <button type="submit" class="btn btn-primary" style="" data-loading-text="Saving..."
+                            ng-click="updateaboutus(aboutus, $event)">
                             Save changes</button>
                     </div>
                 </div>
@@ -66,11 +68,12 @@
                         <div class="divi2">
                         </div>
                         <div class="ProductCategory" ng-repeat="line in productline">
-                            <input type="checkbox" ng-model="line.selected" ng-true-value="yes" ng-false-value="no" /><span
+                            <input type="checkbox" ng-model="line.selected" /><span
                                 class="Title">{{line.productlinename}}</span></div>
                     </div>
                     <div class="pull-right">
-                        <button type="submit" class="btn btn-primary" style="" ng-click="updateproductline(productline))">
+                        <button type="submit" class="btn btn-primary" style="" data-loading-text="Saving..."
+                        	ng-click="updateproductline(productline, $event)">
                             Save changes</button>
                     </div>
                 </div>
@@ -81,9 +84,13 @@
                         </h4>
                         <div class="divi2 right_pane_underline">
                         </div>
-                        <input type="text" id="txt_brands_carried" class="span3" placeholder="Enter Brand Name" />
-                        <button class="btn btn-primary  addbrands_btn">
+                        <input type="text" id="txt_brands_carried" class="span3" placeholder="Enter Brand Name" 
+                        	 	ng-model="brandsentered" ng-change="brandsenteredchanged(brandsentered)" ui-jq="typeahead" ui-options="{ source: brands }"/>
+                        <button class="btn btn-primary  addbrands_btn" ui-if="!iambrand" ng-click="addBrandsCarried(brandsentered)">
                             ADD BRAND
+                        </button>
+                        <button class="btn btn-primary  addbrands_btn" ui-if="iambrand" ng-click="addBrandsCarried(brandsentered)">
+                            ADD STOCKIST
                         </button>
                         <div class="divi2 right_pane_underline">
                         </div>
@@ -188,7 +195,8 @@
                         <div class="divi2">
                         </div>
                         <div class="controls" style="padding-left: 390px;">
-                            <button type="submit" class="btn btn-primary" ng-click="updatecontactinfo(contactinfo)">
+                            <button type="submit" class="btn btn-primary" data-loading-text="Saving..."
+                            	ng-click="updatecontactinfo(contactinfo, $event)">
                                 Save Changes</button>
                         </div>
                     </div>

@@ -38,7 +38,7 @@
                 </div>
                 <div class="ProductLine" ui-if="0 != productline.length">
                     <ul>
-                        <li ng-repeat="product in productline | orderBy:product.productlinename" ng-show="product.selected=='yes'">
+                        <li ng-repeat="product in productline | orderBy:product.productlinename" ng-show="product.selected">
                             <div>
                                  <input type="checkbox" class="productline_text" checked="checked" disabled="disabled" />
                                 {{product.productlinename}}
@@ -68,7 +68,7 @@
                             <div class="thumbnail_noborder">
                                 <img src="{{brand.brandprofilepic}}" alt="">
                                 <h5 class="brandscarried_text">
-                                    {{brand.brandlistitem}}</h5>
+                                    {{brand.brandname}}</h5>
                             </div>
                         </li>
                     </ul>

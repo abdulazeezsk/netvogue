@@ -130,9 +130,10 @@ netvogue.productline 	= function(productlinename) {
    	this.id					= productlinename;
 };
 
-netvogue.brandscarried	= function(brandlistitem, brandusername) {
+netvogue.brandscarried	= function(brandlistitem, brandusername, brandprofilepic) {
 	this.brandname 		= brandlistitem;
 	this.brandusername	= brandusername;
+	this.brandprofilepic= brandprofilepic; 
 };
 
 netvogue.profile 		= function(name, profileid, aboutus, contactinfo) {
