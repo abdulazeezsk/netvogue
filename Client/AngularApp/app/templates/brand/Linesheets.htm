@@ -20,10 +20,40 @@
 			<div class="divi2"></div>
 			<div>
 				<span class="leftpane_filter_name">BRAND</span> <input type="text"
-					class="span3" /> <span class="leftpane_filter_name">SEASON</span>
-				<input type="text" class="span3" />
+					class="span3" placeholder="Brand name" /> <span class="leftpane_filter_name">SEASON</span>
+				<input type="text" class="span3" placeholder="Season name" />
 			</div>
 			<div>
+				<!-- <div class="leftpane_subheading">DELIVERY DATE</div> -->
+				<span class="leftpane_filter_name">DELIVERY DATE</span>
+				<!-- <div class="divi2"></div> -->
+				<div>
+					<div>
+						<input type="radio" name="Date" checked value="true"
+							ng-model="deliverydate"> All Available
+					</div>
+					<div>
+						<input type="radio" name="Date" checked value="true"
+							ng-model="deliverydate"> Immediates
+					</div>
+					<div>
+
+						<input type="radio" name="Date" value="false"
+							ng-model="deliverydate"> Select Date Range
+					</div>
+				</div>
+				<div class="divi2"></div>
+				<div  ng-hide="deliverydate == 'true'" >
+					<span class="leftpane_filter_name">From</span> <input type="text"
+						class="span3" placeholder="Enter from date" ng-model="fromdate"
+						ui-date /> 
+						
+						<span
+						class="leftpane_filter_name">To</span> <input type="text"
+						class="span3" placeholder="Enter to date" ng-model="todate"
+						ui-date />
+				</div>
+				<div class="divi2"></div>
 				<span class="leftpane_filter_name">CATEGORY</span>
 			</div>
 			<div>
@@ -40,7 +70,8 @@
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info"> Find linesheets using the
 					filters </span> <span class="right"> <a data-toggle="modal"
-					href="#Createlinesheet" class="rightpane_add_btn">Create line sheet</a>
+					href="#Createlinesheet" class="rightpane_add_btn">Create line
+						sheet</a>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 			</div>
@@ -171,18 +202,17 @@
 		<div class="divi2"></div>
 		<div>
 			<ul class="nav nav-horizontal left">
-				<li>
-				<span class="left" ng-show="isMyProfile"> 
-					<input type="radio" name="Date" checked value="true"  ng-model="immediate" > Immediates 
-					<input type="radio" name="Date" value="false" ng-model="immediate"> Delivery date
-				</span>
-				</li>
+				<li><span class="left" ng-show="isMyProfile"> <input
+						type="radio" name="Date" checked value="true" ng-model="immediate">
+						Immediates <input type="radio" name="Date" value="false"
+						ng-model="immediate"> Delivery date
+				</span></li>
 			</ul>
 		</div>
 		<div class="divi2"></div>
 		<div>
-		<input type="text" class="span4" placeholder="Enter delivery date" ng-model="date" ui-date 
-					ng-hide="immediate == 'true'"/>
+			<input type="text" class="span4" placeholder="Enter delivery date"
+				ng-model="date" ui-date ng-hide="immediate == 'true'" />
 		</div>
 	</div>
 	<div class="modal-footer">
