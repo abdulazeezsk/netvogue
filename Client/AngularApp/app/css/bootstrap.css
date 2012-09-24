@@ -5211,6 +5211,10 @@ height: 114px;
 	right:25px;
 }
 
+.hgt
+{
+	height:170px;
+}
 
 .spanpreview_details {
 	width: 376px;
@@ -5223,7 +5227,7 @@ height: 114px;
 
 .progress-bar {
     width: 100%; height: 1px;
-    border-radius: 10px;
+    border-radius: 1px;
     border: 1px solid #CCC; 
     background-image: -webkit-gradient(linear, left top, left bottom, from(), to());
     border-image: initial;
