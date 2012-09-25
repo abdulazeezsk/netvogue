@@ -5037,9 +5037,15 @@ height: 114px;
 
 .footer .footer_in {
 	width: 940px;
-	padding: 11px 0 0 30px;
+	padding: 11px 0 0 170px;
 }
-
+.menu {
+margin: 0;
+padding: 0;
+}
+.social {
+float: right;
+}
 /* ----------------------------------------------------------Footer Style Begin---------------------------------------*/
 
 
@@ -5184,6 +5190,8 @@ height: 114px;
 .add_to_network {
 	position: relative;
 	top: -7px;
+	left:87px;
+	width:220px;
 }
 
 .addbrands_btn {
@@ -5204,6 +5212,17 @@ height: 114px;
 	width:100%;
 }
 
+.addimg
+{
+	position: relative;
+	top: -5px;
+	right:25px;
+}
+
+.hgt
+{
+	height:170px;
+}
 
 .spanpreview_details {
 	width: 376px;
@@ -5216,7 +5235,7 @@ height: 114px;
 
 .progress-bar {
     width: 100%; height: 1px;
-    border-radius: 10px;
+    border-radius: 1px;
     border: 1px solid #CCC; 
     background-image: -webkit-gradient(linear, left top, left bottom, from(), to());
     border-image: initial;
@@ -5615,6 +5634,23 @@ padding:0px 7px 0px 0px;
 
 .trendfeed_text p {
 	font: normal 9px Verdana;
+}
+
+.trendfeedlast {
+	width: 100%;
+	padding: 5px 0 5px 0;
+	min-height: 25px;
+	position: relative;
+	float: left;
+	clear: both;
+}
+
+.trendfeedlast .img {
+	float: left;
+	margin: 0 10px 0 0;
+	width: 90px;
+	min-height: 72px;
+	overflow-x: hidden;
 }
 
 /* ---------------------------------------------------Trending styles End---------------------------------------------*/

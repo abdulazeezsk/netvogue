@@ -16,12 +16,25 @@
 					</div>
 				</li>
 			</ul>
-			<!-- <div class="leftpane_subheading">FILTERS</div>
-			<div class="divi2"></div>
-			<div>
-				<span class="leftpane_filter_name">Name</span> 
-				<input type="text" class="span3" placeholder="Search by name" />
-			</div> -->
+				<div>
+				<h4 class="leftpane_subheading">Collections</h4>
+				<ul class="nav nav-tab nav-stacked">
+					<li ng-repeat="collection in collections">
+						<div class="leftpanefeed">
+							<div class="feedimage">
+								<a href="#/{{collection.collectionlistitemid}}"> <img alt=""
+									ng-src="{{collection.collectioncoverpic}}" class="pull-left"></a>
+							</div>
+							<div class="leftpanefeed_text">
+								<h3>
+									<a href="#/{{collection.collectionlistitemid}}" title="">{{collection.collectionbrandname}}</a>
+								</h3>
+								<p>{{collection.collectionseasonname}}</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
 		</div>
 		<!-- left pane -->
 		<!-- right pane -->
