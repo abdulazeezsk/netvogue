@@ -5562,6 +5562,11 @@ galleryview .maskglry, .galleryview .contentglry
     box-shadow: 0 0 5px #000;
 }
 
+.gallery_photosheader_width
+{
+width:600px;
+}
+
 .maskglry ul{
   display: inline-block;
   *display: inline;
