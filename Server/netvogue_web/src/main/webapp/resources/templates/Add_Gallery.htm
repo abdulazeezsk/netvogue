@@ -31,7 +31,7 @@
                 <span class="left right_pane_info">
                     <a href="#/gallery">Gallery</a>
                     <span class="divider">/</span>
-                    <span><a href="#/photos">Untitled Gallery</a></span>
+                    <span><a ng-href="#/photos?id={{galleryid}}">{{galleryname}}</a></span>
                 </span>
                 <span class="right fileinput-button"> 
                 	<span class="rightpane_add_btn">Upload Photos</span> 
@@ -43,7 +43,8 @@
             </div>
             <div>
                 <!-- data pannel -->
-            <div fileupload-plugin ng-model="existingfiles" new-files="newfiles" min-height="150" max-height="150">
+            <div fileupload-plugin ng-model="existingfiles" new-files="newfiles" 
+            			min-height="150" max-height="150" gallery-id="galleryid">
             </div>
                 <!-- data pannel -->
             </div>

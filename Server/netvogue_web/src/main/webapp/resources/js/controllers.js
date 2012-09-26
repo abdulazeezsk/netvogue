@@ -152,175 +152,98 @@ function MyCtrlCorner($scope, $routeParams, srvprofile, currentvisitedprofile,
 
 }
 
-function MyCtrlGallery($scope, $routeParams, currentvisitedprofile, srvprofile) {
+function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, srvgallery, mygallery) {
 
+	$scope.galleryname = "";
 	$scope.$parent.title = 'Gallery';
-	$scope.entityname = currentvisitedprofile.getEntityName();
+	
+	//$scope.entityname = currentvisitedprofile.getEntityName();
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 
 	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.galleries = [ 
-	{
-		"gallerylistitemid" : "galleryId",
-		"galleryname" : "Studded Winston",
-		"gallerydescription" : "Spring 2012",
-		"gallerydate" : "25/04/2012",
-		"gallerypic" : "http://placehold.it/220x150"
-
-	},
-	{
-		"gallerylistitemid" : "galleryId",
-		"galleryname" : "Studded Winston",
-		"gallerydescription" : "Spring 2012",
-		"gallerydate" : "25/04/2012",
-		"gallerypic" : "http://placehold.it/220x150"
-
-	},
-	{
-		"gallerylistitemid" : "galleryId",
-		"galleryname" : "Studded Winston",
-		"gallerydescription" : "Spring 2012",
-		"gallerydate" : "25/04/2012",
-		"gallerypic" : "http://placehold.it/220x150"
-
-	},
-	{
-		"gallerylistitemid" : "galleryId",
-		"galleryname" : "Studded Winston",
-		"gallerydescription" : "Spring 2012",
-		"gallerydate" : "25/04/2012",
-		"gallerypic" : "http://placehold.it/220x150"
-
-	}, 
-	{
-		"gallerylistitemid" : "galleryId",
-		"galleryname" : "Studded Winston",
-		"gallerydescription" : "Spring 2012",
-		"gallerydate" : "25/04/2012",
-		"gallerypic" : "http://placehold.it/220x150"
-
-	},
-	{
-		"gallerylistitemid" : "galleryId",
-		"galleryname" : "Studded Winston",
-		"gallerydescription" : "Spring 2012",
-		"gallerydate" : "25/04/2012",
-		"gallerypic" : "http://placehold.it/220x150"
-
-	},
-	{
-		"gallerylistitemid" : "galleryId",
-		"galleryname" : "Studded Winston",
-		"gallerydescription" : "Spring 2012",
-		"gallerydate" : "25/04/2012",
-		"gallerypic" : "http://placehold.it/220x150"
-
-	},
-	{
-		"gallerylistitemid" : "galleryId",
-		"galleryname" : "Studded Winston",
-		"gallerydescription" : "Spring 2012",
-		"gallerydate" : "25/04/2012",
-		"gallerypic" : "http://placehold.it/220x150"
-
-	},
-	{
-		"gallerylistitemid" : "galleryId",
-		"galleryname" : "Studded Winston",
-		"gallerydescription" : "Spring 2012",
-		"gallerydate" : "25/04/2012",
-		"gallerypic" : "http://placehold.it/220x150"
-
-	} 
-	];
+	/*$scope.galleries = [
+	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
+	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
+	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
+	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
+	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
+	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
+	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
+	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
+	                    ];*/
+	
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleries		= srvgallery.getgalleries($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    srvgallery.galleries($routeParams).success(function(data) {
+    	srvgallery.setgallerylocally(data, $routeParams);
+    	$scope.updatedata();
+    }).error(function(data) {
+    	
+    });
+    $scope.updatedata();
+    
+    $scope.creategallery = function() {
+    	mygallery.creategallery($scope.galleryname).success(function(data) {
+    		if(data.status == true) {
+    			$location.url("addgallery?id=" + data.idcreated);
+    		}
+        }).error(function(data) {
+        	
+        });
+    };
 
 }
 
-function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, srvprofile) {
+function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, srvgallery, mygallery) {
 
 	$scope.$parent.title = 'Gallery';
-	$scope.entityname = currentvisitedprofile.getEntityName();
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 
 	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.photogallery = [ {
-		"photolistitemid" : "photogalleryId",
-		"photoname" : "Studded Winston",
-		"photodescription" : "Spring 2012",
-		"photodate" : "25/04/2012",
-		"photocoverpic" : "http://placehold.it/220x150"
-
-	}, {
-		"photolistitemid" : "photogalleryId",
-		"photoname" : "Studded Winston",
-		"photodescription" : "Spring 2012",
-		"photodate" : "25/04/2012",
-		"photocoverpic" : "http://placehold.it/220x150"
-
-	}, {
-		"photolistitemid" : "photogalleryId",
-		"photoname" : "Studded Winston",
-		"photodescription" : "Spring 2012",
-		"photodate" : "25/04/2012",
-		"photocoverpic" : "http://placehold.it/220x150"
-
-	}, {
-		"photolistitemid" : "photogalleryId",
-		"photoname" : "Studded Winston",
-		"photodescription" : "Spring 2012",
-		"photodate" : "25/04/2012",
-		"photocoverpic" : "http://placehold.it/220x150"
-
-	}, {
-		"photolistitemid" : "photogalleryId",
-		"photoname" : "Studded Winston",
-		"photodescription" : "Spring 2012",
-		"photodate" : "25/04/2012",
-		"photocoverpic" : "http://placehold.it/220x150"
-
-	}, {
-		"photolistitemid" : "photogalleryId",
-		"photoname" : "Studded Winston",
-		"photodescription" : "Spring 2012",
-		"photodate" : "25/04/2012",
-		"photocoverpic" : "http://placehold.it/220x150"
-
-	}, {
-		"photolistitemid" : "photogalleryId",
-		"photoname" : "Studded Winston",
-		"photodescription" : "Spring 2012",
-		"photodate" : "25/04/2012",
-		"photocoverpic" : "http://placehold.it/220x150"
-
-	}, {
-		"photolistitemid" : "photogalleryId",
-		"photoname" : "Studded Winston",
-		"photodescription" : "Spring 2012",
-		"photodate" : "25/04/2012",
-		"photocoverpic" : "http://placehold.it/220x150"
-
-	},
-
-	{
-		"photolistitemid" : "photogalleryId",
-		"photoname" : "Studded Winston",
-		"photodescription" : "Spring 2012",
-		"photodate" : "25/04/2012",
-		"photocoverpic" : "http://placehold.it/220x150"
-
+	$scope.galleryid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.galleryid = $routeParams.id;
 	}
-	];
+	/*$scope.photogallery = [ 
+	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
+	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
+	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
+	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
+	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
+	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
+	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
+	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
+	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
+	                   	];*/
 
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
+	    $scope.photogallery		= srvgallery.getphotos($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    srvgallery.photos($routeParams, $scope.galleryid, false).success(function(data) {
+    	srvgallery.setphotoslocally(data, $routeParams);
+    	$scope.updatedata();
+    }).error(function(data) {
+    	
+    });
+    $scope.updatedata();
 }
 
-function MyCtrlViewPhotos($scope, $routeParams, currentvisitedprofile) {
+function MyCtrlViewPhotos($scope, $routeParams, currentvisitedprofile, srvgallery) {
 
 	$scope.$parent.title = 'ViewPhotos';
 
-	$scope.entityname = currentvisitedprofile.getEntityName();
-
 	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.viewPhotos = [
+	/*$scope.viewPhotos = [
 			{
 				"photolistitemid" : "printcampaignId",
 				"photoname" : "Calvin Klien",
@@ -367,7 +290,19 @@ function MyCtrlViewPhotos($scope, $routeParams, currentvisitedprofile) {
 		"photopic" : "http://placehold.it/130x100"
 
 	}
-	];
+	];*/
+	
+	$scope.photoid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.photoid = $routeParams.id;
+	}
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
+	    $scope.viewPhotos		= srvgallery.getphotos($routeParams);
+    };
+    
+    $scope.updatedata();
 
 }
 

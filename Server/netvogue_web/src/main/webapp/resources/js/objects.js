@@ -193,13 +193,21 @@ netvogue.network = function(networklistitem, profilepiclink, networklistitemID) 
 /*********************Gallery Objects*************************************/
 /*************************************************************************/
 
-netvogue.photo = function(label, seasonname, piclink ) {
+netvogue.gallery = function(galleryid, galleryname, gallerypic, gallerydesc, gallerydate) {
+	this.galleryid		= galleryid;
+	this.galleryname	= galleryname;
+	this.gallerypic		= gallerypic;
+	this.gallerydesc	= gallerydesc;
+	this.gallerydate	= gallerydate;
+};
+
+netvogue.photo = function(label, seasonname, piclink, id) {
+	this.uniqueid		= id;
 	this.label 			= label;
     this.seasonname 	= seasonname;
     this.piclink		= piclink;
     this.thumbnail_url 	= piclink;
-    this.deleteurl		= "";
-    this.deletetype		= "delete";
+    this.left_url		= piclink;
 };
 
 /*************************************************************************/

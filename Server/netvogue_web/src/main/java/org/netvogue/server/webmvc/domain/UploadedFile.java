@@ -8,18 +8,18 @@ public class UploadedFile implements Serializable{
 	private Integer size;
 	private String url;
 	private String thumbnail_url;
-	private String delete_url;
-	private String delete_type;
+	private String uniqueid;
 
 	public UploadedFile() {
 		super();
 	}
 
-	public UploadedFile(String name, Integer size, String url) {
+	public UploadedFile(String name, Integer size, String url, String uniqueid) {
 		super();
 		this.name = name;
 		this.size = size;
 		this.url = url;
+		this.uniqueid = uniqueid;
 	}
 
 	public UploadedFile(String name, Integer size, String url,
@@ -29,8 +29,6 @@ public class UploadedFile implements Serializable{
 		this.size = size;
 		this.url = url;
 		this.thumbnail_url = thumbnail_url;
-		this.delete_url = delete_url;
-		this.delete_type = delete_type;
 	}
 
 	public String getName() {
@@ -63,22 +61,6 @@ public class UploadedFile implements Serializable{
 
 	public void setThumbnail_url(String thumbnail_url) {
 		this.thumbnail_url = thumbnail_url;
-	}
-
-	public String getDelete_url() {
-		return delete_url;
-	}
-
-	public void setDelete_url(String delete_url) {
-		this.delete_url = delete_url;
-	}
-
-	public String getDelete_type() {
-		return delete_type;
-	}
-
-	public void setDelete_type(String delete_type) {
-		this.delete_type = delete_type;
 	}
 
 	public static long getSerialversionuid() {

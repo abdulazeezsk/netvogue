@@ -68,9 +68,14 @@ angular.module('netVogue.directives', []).
 		    	scope.newfiles.push(new netvogue.photo(files[i].name, "UNTITLED", loadingImage.src));
 		    }
 		});
+		var galleryid = {
+				"galleryid" : scope.galleryid
+		};
 		angular.element(element).ready(function() {
 			jQuery('#fileupload').fileupload({
 		        dataType: 'json',
+		        singleFileUploads: false,
+		        formData: galleryid,
 		        progressall: function (e, data) {
 		        	var progtemp = parseInt(data.loaded / data.total * 100, 10);
 		        	scope.$apply(function(scope) {
@@ -79,10 +84,15 @@ angular.module('netVogue.directives', []).
 		        },
 		        done: function (e, data) {
 		        	scope.$apply(function(scope) {
-		        		for(var i=0; i < data.result.length; i++){
-		        			scope.existingfiles.push(new netvogue.photo("Thumbnail Azeez", "Season Name", data.result[i].url));
-		        		};
-		        		scope.newfiles = [];
+		        		if(data.result.status == true) {
+		        			for(var i=0; i < data.result.filesuploaded.length; i++){
+		        				scope.existingfiles.push(
+		        						new netvogue.photo("Thumbnail Azeez", "Season Name", data.result.filesuploaded[i].url, data.result.filesuploaded[i].uniqueid));
+		        			};
+		        			scope.newfiles = [];
+		        		} else {
+		        			alert("error");
+		        		}
 		        	});
 		        }
 		    });
@@ -99,7 +109,8 @@ angular.module('netVogue.directives', []).
 			newfiles		: '=newFiles',
 			existingfiles	: '=ngModel',
 			maxheight		: '=maxHeight',
-			minheight		: '=minHeight'
+			minheight		: '=minHeight',
+			galleryid		: '=galleryId'
 		},
 		link		: linkFn
 	};	

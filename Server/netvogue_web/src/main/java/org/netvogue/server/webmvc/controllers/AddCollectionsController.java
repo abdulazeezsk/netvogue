@@ -51,7 +51,7 @@ public class AddCollectionsController {
 			String imagePath = (String)uploadMap.get(UploadManager.QUERY_STRING);
 		
 			UploadedFile fileUploaded = new UploadedFile(fileupload.getOriginalFilename(),
-				Long.valueOf(fileupload.getSize()).intValue(), imagePath);
+				Long.valueOf(fileupload.getSize()).intValue(), imagePath, (String)uploadMap.get(UploadManager.FILE_ID));
 			JSONFileData.add(fileUploaded);
 		}
 		/*if ( collection.getFileData() instanceof MultipartFile )

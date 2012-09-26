@@ -28,12 +28,12 @@
 		<div class="span9">
 			<div>
 				<span class="left heading_btn"> <a href="#/gallery">Gallery</a>
-					<span class="divider">/</span> <span><a href="#/photos">Untitled</a>
+					<span class="divider">/</span> <span><a ng-href="#/photos?id={{galleryid}}">{{galleryname}}</a>
 				</span></span>
 
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info"> Find Photos using the
-					filters </span> <span class="right"> <a href="#/addgallery"
+					filters </span> <span class="right"> <a ng-href="#/addgallery?id={{galleryid}}"
 					class="rightpane_add_btn">Add photos</a>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
@@ -56,25 +56,25 @@
 					<ul class="thumbnails">
 						<li ng-repeat="photo in photogallery">
 							<div class="galleryview galleryview-firstglry">
-								<a href="#/{{photo.photolistitemid}}"> <img
-									src="{{photo.photocoverpic}}" alt=""></a>
+								<a ng-href="#/{{photo.uniqueid}}"> <img
+									ng-src="{{photo.thumbnail_url}}" alt=""></a>
 								<div class="maskglry mask-1"></div>
 								<div class="maskglry mask-2">
 								</div>
 								<div class="contentglry">
 								<ul class="maskls" ng-show="isMyProfile">
-                                        <li><a href="#" title="Delete"><i class="icon-trash icon-white"></i></a></li>
-                                        <li><a href="#/editgallery" title="Edit"><i class="icon-edit icon-white"></i>
+                                        <li><a ng-href="#" title="Delete"><i class="icon-trash icon-white"></i></a></li>
+                                        <li><a ng-href="#/editgallery" title="Edit"><i class="icon-edit icon-white"></i>
                                         </a></li>
                                     </ul>
 									<h1>
-										<a href="#/viewphotos" class="mask_edit">View</a>
+										<a ng-href="#/viewphotos?id={{photo.uniqueid}}" class="mask_edit">View</a>
 									</h1>
 								</div>
 								<div class="divi2"></div>
 							</div>
 							<div class="title">
-								<h3>{{photo.photoname}}</h3>
+								<h3>{{photo.label}}</h3>
 							</div>
 						</li>
 					</ul>

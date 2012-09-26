@@ -1,7 +1,7 @@
 <ul class="thumbnails">
 	<li ng-repeat="eachfile in newfiles" class="span3">
 		<div class="thumbnail">
-			<img ng-src={{eachfile.piclink}} alt="" ng-style="{'max-height': maxheight, 'min-height': minheight}">
+			<img ng-src={{eachfile.thumbnail_url}} alt="" ng-style="{'max-height': maxheight, 'min-height': minheight}">
 			<div style="min-height:84px; max-height:84px;">
 			<!-- <h5>{{eachfile.label}}</h5>
 				<h6>
@@ -18,7 +18,7 @@
 	</li>
 	<li ng-repeat="eachfile in existingfiles" class="span3">
 		<div class="thumbnail">
-			<img ng-src={{eachfile.piclink}} alt="" ng-style="{'max-height': maxheight, 'min-height': minheight}">
+			<img ng-src={{eachfile.thumbnail_url}} alt="" ng-style="{'max-height': maxheight, 'min-height': minheight}">
 			<div style="min-height:75px; max-height:75px;">
 				<h5>{{eachfile.label}}</h5>
 				<h6>

@@ -581,9 +581,14 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
 
 }
 
-function MyCtrlAddGallery($scope) {
+function MyCtrlAddGallery($scope, $routeParams, srvgallery) {
 	$scope.newfiles = [];
-	$scope.existingfiles = [
+	$scope.galleryid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.galleryid = $routeParams.id;
+	}
+	
+	/*$scope.existingfiles = [
 	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "img/donna_karan_adriana_lima_1.jpg"),
 	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
 	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
@@ -592,7 +597,22 @@ function MyCtrlAddGallery($scope) {
 	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
 	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
 	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150")
-	                        ];
+	                        ];*/
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
+	    $scope.existingfiles	= srvgallery.getphotos($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    srvgallery.photos($routeParams, $scope.galleryid, false).success(function(data) {
+    	srvgallery.setphotoslocally(data, $routeParams);
+    	$scope.updatedata();
+    }).error(function(data) {
+    	
+    });
+    $scope.updatedata();
 	$scope.filesadded	= function(element) {
 		$scope.$apply(function($scope) {
 			// Turn the FileList object into an Array

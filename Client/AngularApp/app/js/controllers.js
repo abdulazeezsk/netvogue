@@ -155,7 +155,7 @@ function MyCtrlCorner($scope, $routeParams, srvprofile, currentvisitedprofile,
 
 }
 
-function MyCtrlGallery($scope, $routeParams, currentvisitedprofile, srvprofile) {
+function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, srvprofile) {
 
 	$scope.$parent.title = 'Gallery';
 	$scope.entityname = currentvisitedprofile.getEntityName();
@@ -236,6 +236,12 @@ function MyCtrlGallery($scope, $routeParams, currentvisitedprofile, srvprofile) 
 
 	} 
 	];
+	
+	$scope.creategallery = function() {
+    	alert("Path:" + $location.path() + "URL:" + $location.url());
+    	
+    	$location.url("addgallery?id=1");
+    };
 
 }
 

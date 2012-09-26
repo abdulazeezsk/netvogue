@@ -125,63 +125,12 @@ angular.module('netVogue.services', []).
 	        }
 	    };
 	}).
-  service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, myvideocampaigns, mynewsletters, mycollections, mylinesheets) {
+service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, myvideocampaigns, mynewsletters, mycollections, mylinesheets) {
       var profiles = [];
-	                  /*{
-	                      "profileid": "profileid1",
-	                      "aboutus": "aboutus1",
-	                      "contactinfo": new netvogue.contactinfo(
-	              		        "Boutiquename@gmail.com", "9949879098", "040-23371149", "040-23371149",
-	            		        "Lorem ipsum dolor sit amet\, consectetuer adipiscing elit. Vivamus dui.",
-	            		        "Hyderabad", "500009", "Andhra Pradesh", "India", "netvogue.org", "2012"
-	            		    	),
-	                      "productline": [ //	productlinename, productlinepic, selected
-		           	                	   	new netvogue.productline("Womens RTW", "http://placehold.it/100x72", "yes"),
-		        	                	   	new netvogue.productline("Womens Shoe", "http://placehold.it/100x72", "no"),
-		        	                	   	new netvogue.productline("Denim", "http://placehold.it/100x72", "no"),
-		        	                	   	new netvogue.productline("Outerwear", "http://placehold.it/100x72", "yes"),
-		        	                	   	new netvogue.productline("Activewear", "http://placehold.it/100x72", "yes"),
-		        	                	   	new netvogue.productline("Mens RTW", "http://placehold.it/100x72", "no"),
-		        	                	   	new netvogue.productline("Mens Shoe", "http://placehold.it/100x72", "no"),
-		        	                	   	new netvogue.productline("Mens Bags", "http://placehold.it/100x72", "no"),
-		        	                	   	new netvogue.productline("Handbags", "http://placehold.it/100x72", "no"),
-		        	                	   	new netvogue.productline("Lingerie", "http://placehold.it/100x72", "yes"),
-		        	                	   	new netvogue.productline("Jewelry", "http://placehold.it/100x72", "no"),
-		        	                	   	new netvogue.productline("Swimwear", "http://placehold.it/100x72", "no"),
-		        	                	   	new netvogue.productline("Kids", "http://placehold.it/100x72", "yes"),
-		        	                	   	new netvogue.productline("Watches", "http://placehold.it/100x72", "no"),
-		        	                	   	new netvogue.productline("Hats", "http://placehold.it/100x72", "no"),
-		        	                	   	new netvogue.productline("Luggage", "http://placehold.it/100x72", "no"),
-		        	                	   	new netvogue.productline("Gifts", "http://placehold.it/100x72", "no"),
-		        	                	   	new netvogue.productline("Candles", "http://placehold.it/100x72", "no")
-		        						  ],
-	                      "brandscarried":
-		   		            	   			[ //brandlistitem , brandprofilepic
-		   		  		                     new netvogue.brandscarried("Calvin klein", "http://placehold.it/100x72"),
-		   				                     new netvogue.brandscarried("Rebecca  Minkoff Minkoff", "http://placehold.it/100x72"),
-		   				                     new netvogue.brandscarried("Donna Karan", "http://placehold.it/100x72"),
-		   				                     new netvogue.brandscarried("Ritu Beri", "http://placehold.it/100x72"),
-		   				                     new netvogue.brandscarried("Jason Myers", "http://placehold.it/100x72"),
-		   				                     new netvogue.brandscarried("Maria will", "http://placehold.it/100x72")
-		   		  		                     ]
-	                  },
-	                  {
-	                      "profileid": "profileid2",
-	                      "aboutus": "aboutus2"
-	                  },
-	                  {
-	                      "profileid": "profileid3",
-	                      "aboutus": "aboutus3"
-	                  },
-	                  { "profileid": "profileid4", "aboutus": "aboutus4" },
-	                  { "profileid": "profileid5", "aboutus": "aboutus5" },
-	                  { "profileid": "profileid6", "aboutus": "aboutus6" },
-	                  { "profileid": "profileid7", "aboutus": "aboutus7" },
-	                  { "profileid": "profileid8", "aboutus": "aboutus8" },
-	                  { "profileid": "profileid9", "aboutus": "aboutus9" },
-	                  { "profileid": "profileid10", "aboutus": "aboutus10" },
-	                  ];*/
-      var networks = new netvogue.hashtable();
+      var galleries= new netvogue.hashtable();
+      
+      /*********************************/
+	  var networks = new netvogue.hashtable();
       networks.setItem("profileid1",
 			  					[
 			  					 	new netvogue.network("Calvin klein", "http://placehold.it/100x72", "profileid1"),
@@ -526,6 +475,127 @@ angular.module('netVogue.services', []).
               }
               return leftpanellinks;
           }
+      };
+  }).
+  service('mygallery', function ($http) {
+		var name;
+		var galleryname;
+		var galleries = [];
+		var photos    = [];
+		return {
+			getgalleries: function() {
+	    		return galleries;
+	    	},
+	    	setgalleries: function(galleriestemp) {
+	    		name = galleriestemp.name;
+	    		angular.copy(galleriestemp.galleries, galleries);
+	    	},
+	    	getname: function() {
+	    		if(angular.isUndefined(name))
+	        		return "";
+	    		return name;
+	    	},
+	    	setname: function(name) {
+	    		this.name = name;
+	    	},
+	    	getgalleryname: function() {
+	    		if(angular.isUndefined(galleryname))
+	        		return "";
+	    		return galleryname;
+	    	},
+	    	setgalleryname: function(name) {
+	    		this.galleryname = name;
+	    	},
+	    	creategallery: function(name) {
+	    		var config = {
+    				method: "POST",
+    				data: name,
+                    url: "creategallery"
+                };
+                return $http(config);
+	    	},
+	    	getphotos: function() {
+	    		return photos;
+	    	},
+	    	setphotos: function(photostemp) {
+	    		name = photostemp.name;
+	    		galleryname = photostemp.galleryname;
+	    		angular.copy(photostemp.photos, photos);
+	    	}
+		};
+  }).
+  service('srvgallery', function ($http, mygallery) {
+      var galleries= new netvogue.hashtable();
+      return {
+    	  getname: function(routeparams) {
+        	  var result;
+              if (angular.isUndefined(routeparams.profileid)) {
+                  return mygallery.getname();
+              } else {
+                  /*angular.forEach(profiles, function (profile) {
+                      if (angular.equals(profile['profileid'], routeparams.profileid)) {
+                          result = profile['aboutus'];
+                      }
+                  });*/
+              }
+              return result;
+    	  },
+    	  getgalleryname: function (routeparams) {
+	          if (angular.isUndefined(routeparams.profileid)) {
+	        	  return mygallery.getgalleryname();
+	          }
+	    	},
+    	  getgalleries: function (routeparams) {
+	          if (angular.isUndefined(routeparams.profileid)) {
+	        	  return mygallery.getgalleries();
+	          }
+	      },
+    	  galleries: function (routeparams) {
+	          var profileid = "";
+	          if (!angular.isUndefined(routeparams.profileid)) {
+	        	  profileid = routeparams.profileid;
+	          }
+	          var config = {
+	              method: "GET",
+	              url: "getgalleries/" + profileid
+	          };
+	          return $http(config);
+	      },
+	      photos: function (routeparams, galleryid, addphotos) {
+	          var profileid = "";
+	          if (!angular.isUndefined(routeparams.profileid)) {
+	        	  profileid = routeparams.profileid;
+	          }
+	          var datatosend = {
+	  				"addphotos" : addphotos,
+	  				"galleryid" : galleryid
+	  		};
+	          var config = {
+	              method: "GET",
+	              params: datatosend,
+	              url: "getphotos/" + profileid
+	          };
+	          return $http(config);
+	      },
+	      setgallerylocally: function(galleriesdata, routeparams) {
+	    	  if (angular.isUndefined(routeparams.profileid)) {
+	        	  mygallery.setgalleries(galleriesdata);
+	          } else {
+	        	  //galleries.push(angular.copy(galleriesdata));
+	          }
+	      },
+	      setphotoslocally: function(galleriesdata, routeparams) {
+	    	  if (angular.isUndefined(routeparams.profileid)) {
+	        	  mygallery.setphotos(galleriesdata);
+	          } else {
+	        	  //galleries.push(angular.copy(galleriesdata));
+	          }
+	      },
+	      getphotos: function (routeparams) {
+	          if (angular.isUndefined(routeparams.profileid)) {
+	        	  return mygallery.getphotos();
+	          }
+	      }
       };
   }).
   service('trending', function () {

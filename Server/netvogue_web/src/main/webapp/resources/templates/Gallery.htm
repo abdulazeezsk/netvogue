@@ -54,8 +54,8 @@
 					<ul class="thumbnails">
 						<li ng-repeat="gallery in galleries">
 							<div class="galleryview galleryview-firstglry">
-								<a href="#/{{gallery.gallerylistitemid}}"> <img
-									src="{{gallery.gallerypic}}" alt=""></a>
+								<a ng-href="#/{{gallery.galleryid}}"> <img
+									ng-src="{{gallery.gallerypic}}" alt=""></a>
 								<div class="maskglry mask-1"></div>
 								<div class="maskglry mask-2">
 									<p>
@@ -69,7 +69,7 @@
                                         </a></li>
                                     </ul>
 									<h1>
-										<a href="#/photos" class="mask_edit">View</a>
+										<a ng-href="#/photos?id={{gallery.galleryid}}" class="mask_edit">View</a>
 									</h1>
 								</div>
 								<div class="divi2"></div>
@@ -94,12 +94,12 @@
 	</div>
 	<div class="modal-body">
 		<div>
-			<input type="text" class="span4" placeholder="Gallery name" />
+			<input type="text" class="span4" ng-model="galleryname" placeholder="Gallery name" />
 		</div>
 		</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" data-dismiss="modal" href="#/addgallery">
+			class="btn btn-primary" data-dismiss="modal" ng-click="creategallery()">
 			Create gallery</a>
 	</div>
 </div>

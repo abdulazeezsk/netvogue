@@ -24,4 +24,7 @@ public interface UserRepository extends GraphRepository<User> {
 			"skip {pagenumber*pagesize} limit{pagesize}")
 	Iterable<User> doAdvancedSearch(@Param("SelCategories") List<String> Categories, @Param("searchindex") Map<String, String> searchIndex,
 									@Param("pagenumber") long pagenumber, @Param("pagesize") long pagesize);
+	
+	@Query( "START n=node:username(username={0}) MATCH n-[:GALLERY]->g RETURN g")
+	Iterable<Gallery> getGalleries(String username);
 }

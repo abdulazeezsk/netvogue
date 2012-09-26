@@ -581,7 +581,7 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
 
 }
 
-function MyCtrlAddGallery($scope) {
+function MyCtrlAddGallery($scope, $routeParams) {
 	$scope.newfiles = [];
 	$scope.existingfiles = [
 	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "images/rebecca-minkoff-spring-2012-dress-profile.jpeg"),

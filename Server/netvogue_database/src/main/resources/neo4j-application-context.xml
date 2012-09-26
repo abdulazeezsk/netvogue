@@ -40,9 +40,10 @@
 	
     <context:property-placeholder location="classpath*:*.properties"/>
 	
-	<bean id="BoutiqueService" class="org.netvogue.server.neo4japi.service.BoutiqueServiceImpl" />
-	<bean id="BrandService" class="org.netvogue.server.neo4japi.service.BrandServiceImpl" />
-	<bean id="UserService" class="org.netvogue.server.neo4japi.service.UserServiceImpl" />
+	<bean id="BoutiqueService" 	class="org.netvogue.server.neo4japi.service.BoutiqueServiceImpl" />
+	<bean id="BrandService" 	class="org.netvogue.server.neo4japi.service.BrandServiceImpl" />
+	<bean id="UserService" 		class="org.netvogue.server.neo4japi.service.UserServiceImpl" />
+	<bean id="GalleryService" 	class="org.netvogue.server.neo4japi.service.GalleryServiceImpl" />
 	<bean id="fileManager" class="org.netvogue.server.aws.core.FileManager" factory-method="getSharedInstance"/>
 	<bean id="uploadManager" class="org.netvogue.server.aws.core.UploadManager" />
 </beans>

@@ -45,7 +45,7 @@ public class UploadManager {
 	        metaData.setContentType(file.getContentType());
 	        metaData.setContentLength(file.getSize());
 	        
-	        String bucketName = "netvoguedev";
+	        String bucketName = BucketName.DEV.getName();
 	        
 //			ProgressListener progressListener = new ProgressListener() {
 //          public void progressChanged(ProgressEvent progressEvent) {
@@ -82,14 +82,14 @@ public class UploadManager {
 	
 	public String getQueryString(String key, ImageType imageType) {
 		String RESTLink = null;
-        String bucketName = "netvoguedev";
+        String bucketName = BucketName.DEV.getName();
 		RESTLink = transferManager.getQueryString(bucketName+"/"+ imageType.getKey(), key);
 		return RESTLink;
 	}
 	
 	public String getQueryString(String key, ImageType imageType, Size imageSize) {
 		String RESTLink = null;
-        String bucketName = "netvoguedev";
+        String bucketName = BucketName.DEV.getName();
 		RESTLink = transferManager.getQueryString(bucketName+"/"+ imageType.getKey(), key + "-" + imageSize.toString());
 		return RESTLink;
 	}
