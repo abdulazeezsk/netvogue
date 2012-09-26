@@ -3,7 +3,7 @@ package org.netvogue.server.aws.core;
 public enum ImageType {
 	
 	PROFILE_PIC					("profiles"			,new Size[]{Size.S1,Size.S2,Size.S3,Size.S4}),
-	GALLERY						("gallery"			,new Size[]{Size.GThumb,Size.GAdd,Size.GLeft,Size.GMain}),
+	GALLERY						("gallery"			,new Size[]{Size.GThumb,Size.GAdd,Size.GLeft}),
 	COLLECTIONS_COVER_IMAGE		("collectionCovers"	,new Size[]{Size.S1}),
 	COLLECTIONS					("collections"		,new Size[]{Size.S1}),
 	LINESHEETS_COVER_IMAGE		("linesheets"		,new Size[]{Size.S1}),

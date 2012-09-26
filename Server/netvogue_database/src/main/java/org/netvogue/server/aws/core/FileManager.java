@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.ProgressEvent;
+import com.amazonaws.services.s3.model.ProgressListener;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
 
@@ -184,6 +186,21 @@ public class FileManager extends TransferManager {
 		ByteArrayInputStream input = new ByteArrayInputStream(bytes);
 		metadata.setContentLength(bytes.length);
 		Upload upload = upload(bucketName, key, input, metadata);
+		System.out.println("is Upload done:" + upload.isDone());
+		System.out.println("state of this transfer:" + upload.getState());
+		System.out.println("progress of this transfer:" + upload.getProgress());
+		ProgressListener listener = new ProgressListener() {
+			
+			@Override
+			public void progressChanged(ProgressEvent progressEvent) {
+				if(progressEvent.COMPLETED_EVENT_CODE == progressEvent.getEventCode()) {
+					System.out.println("Transfer is successfull" + progressEvent.getBytesTransfered());
+				} else if(progressEvent.FAILED_EVENT_CODE == progressEvent.getEventCode()) {
+					System.out.println("Transfer is failed" + progressEvent.getBytesTransfered());
+				}
+			}
+		};
+		upload.addProgressListener(listener);
 		return upload;
 	}
 
