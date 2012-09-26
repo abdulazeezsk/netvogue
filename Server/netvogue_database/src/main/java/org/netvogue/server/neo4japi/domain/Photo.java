@@ -33,7 +33,8 @@ public class Photo {
 	
 	public Photo(String photouniqueid) {
 		this.photouniqueid = photouniqueid;
-		
+		this.name = "UNTITLED";
+		this.name = "UNTITLED SEASON";
 		createdDate = System.currentTimeMillis();
 	}
 	public Long getNodeId() {
