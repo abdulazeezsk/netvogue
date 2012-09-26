@@ -9,7 +9,7 @@ public class GalleryConverter implements Converter<org.netvogue.server.neo4japi.
 	public Gallery convert(org.netvogue.server.neo4japi.domain.Gallery dbGallery) {
 	    Gallery gallery = new Gallery();
 	    gallery.setGalleryid(dbGallery.getGalleryid());
-	    gallery.setGaleryname(dbGallery.getGalleryname());
+	    gallery.setGalleryname(dbGallery.getGalleryname());
 	    gallery.setGallerypic(dbGallery.getProfilePicLink());
 	    gallery.setGallerydesc(dbGallery.getDescription());
 		return gallery;

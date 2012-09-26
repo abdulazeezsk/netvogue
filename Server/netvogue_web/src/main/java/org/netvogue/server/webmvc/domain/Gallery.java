@@ -2,7 +2,7 @@ package org.netvogue.server.webmvc.domain;
 
 public class Gallery {
 	String galleryid;
-	String galeryname;
+	String galleryname;
 	String gallerypic;
 	String gallerydesc;
 	String gallerydate;
@@ -17,11 +17,11 @@ public class Gallery {
 	public void setGalleryid(String galleryid) {
 		this.galleryid = galleryid;
 	}
-	public String getGaleryname() {
-		return galeryname;
+	public String getGalleryname() {
+		return galleryname;
 	}
-	public void setGaleryname(String galeryname) {
-		this.galeryname = galeryname;
+	public void setGalleryname(String galleryname) {
+		this.galleryname = galleryname;
 	}
 	public String getGallerypic() {
 		return gallerypic;

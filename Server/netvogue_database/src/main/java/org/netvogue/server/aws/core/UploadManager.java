@@ -74,6 +74,7 @@ public class UploadManager {
 	        map.put(UPLOAD_REFERENCE, upload);
 	        
 		} catch (Exception e) {
+			System.out.println("There was an error in transfer manager while uploading" +  " - " + e.toString());
 			e.printStackTrace();
 		}
         

@@ -137,10 +137,11 @@ public class FileManager extends TransferManager {
 		try {
 			for ( Size size : sizes ) {
 				Upload temp = upload(bucketName,imageKey+ "-" + size.toString(), buffer, metadata, size);
-				System.out.println("input" + buffer.toString() + " : "+ temp.getDescription());
+				System.out.println("input" + buffer + " : "+ temp.getDescription());
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			System.out.println("There was an error in Upload manager while uploading different sizes" +  
+													" - " + e.toString());
 			e.printStackTrace();
 		}
 		Upload upload = null;
@@ -148,7 +149,8 @@ public class FileManager extends TransferManager {
 			upload = upload(bucketName, imageKey, buffer, metadata);
 			System.out.println("input" + buffer.toString() + " : " + upload.getDescription());
 		} catch (Exception e) {
-			
+			System.out.println("There was an error in Upload manager while uploading original image" +  
+					" - " + e.toString());
 		}
 		return upload;
 	}
@@ -162,8 +164,11 @@ public class FileManager extends TransferManager {
 			fileExtension = fileExtension.substring(fileExtension.indexOf(".")+1);
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			ImageIO.write(ResizedImage,fileExtension,output);
+			System.out.println("Size of buffer is " + output.size());
 			return upload(bucketName, key, output.toByteArray(), metaData);
 		} catch (Exception e) {
+			System.out.println("There was an error in Upload manager main API" +  
+					" - " + e.toString());
 			e.printStackTrace();
 		}
 		
