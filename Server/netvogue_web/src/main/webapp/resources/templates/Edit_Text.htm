@@ -1,0 +1,4 @@
+<input type="text" ng-show="isEditMode" ng-dblclick="switchToPreview()" ng-model="textValue">
+</input>
+<div ng-hide="isEditMode" ng-dblclick="switchToEdit()" ng-bind-html-unsafe="textValue">
+</div>
