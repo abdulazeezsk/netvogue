@@ -56,11 +56,7 @@ angular.module('netVogue.directives', []).
 	        scope: {
 	            textValue: '=ngModel'
 	        },
-	        template:
-	          '<input type="text" ng-show="isEditMode" ng-dblclick="switchToPreview()" ng-model="textValue">'+
-	        '</input>' +
-	        '<div ng-hide="isEditMode" ng-dblclick="switchToEdit()" ng-bind-html-unsafe="textValue">'+
-	        '</div>',
+	        templateUrl: 'templates/Edit_Text.htm',
 	        link: function(scope, elm, attrs) {
 	            scope.isEditMode = false;
 
