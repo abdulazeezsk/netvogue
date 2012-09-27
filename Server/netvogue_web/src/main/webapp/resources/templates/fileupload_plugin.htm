@@ -20,7 +20,7 @@
 		<div class="thumbnail">
 			<img ng-src={{eachfile.thumbnail_url}} alt="" ng-style="{'max-height': maxheight, 'min-height': minheight}">
 			<div style="min-height:75px; max-height:75px;">
-				<h5>{{eachfile.label}}</h5>
+				<div edit-text ng-model="eachfile.label"></div>
 				<h6>
 					<p>{{eachfile.seasonname}}</p>
 				</h6>

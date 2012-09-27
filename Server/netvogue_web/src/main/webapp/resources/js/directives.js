@@ -49,6 +49,29 @@ angular.module('netVogue.directives', []).
 	        restrict: 'A',
 	        link: linkFn
 	    };
+ }).directive('editText', function () {        
+	    return {
+	        restrict:'A',
+	        require: 'ngModel',
+	        scope: {
+	            textValue: '=ngModel'
+	        },
+	        template:
+	          '<input type="text" ng-show="isEditMode" ng-dblclick="switchToPreview()" ng-model="textValue">'+
+	        '</input>' +
+	        '<div ng-hide="isEditMode" ng-dblclick="switchToEdit()" ng-bind-html-unsafe="textValue">'+
+	        '</div>',
+	        link: function(scope, elm, attrs) {
+	            scope.isEditMode = false;
+
+	            scope.switchToPreview = function () {
+	                scope.isEditMode = false;
+	            };
+	            scope.switchToEdit = function () {
+	                scope.isEditMode = true;
+	            };
+	        }
+	    };
 }).directive('fileuploadPlugin', function() {
 	var linkFn;
 	linkFn = function(scope, element, attrs) {

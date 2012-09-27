@@ -606,7 +606,7 @@ function MyCtrlAddGallery($scope, $routeParams, srvgallery) {
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    srvgallery.photos($routeParams, $scope.galleryid, false).success(function(data) {
+    srvgallery.photos($routeParams, $scope.galleryid, "").success(function(data) {
     	srvgallery.setphotoslocally(data, $routeParams);
     	$scope.updatedata();
     }).error(function(data) {
