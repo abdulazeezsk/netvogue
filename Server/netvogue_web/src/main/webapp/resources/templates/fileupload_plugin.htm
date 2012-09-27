@@ -20,10 +20,10 @@
 		<div class="thumbnail">
 			<img ng-src={{eachfile.thumbnail_url}} alt="" ng-style="{'max-height': maxheight, 'min-height': minheight}">
 			<div style="min-height:75px; max-height:75px;">
-				<div edit-text title="eachfile.label" season="eachfile.seasonname" 
-					 edit-mode="isEditMode" update-data="updateData()"></div>
+				<div edit-text data="eachfile" 
+					 edit-mode="isEditMode" update-data="updatedata(label, seasonname, photoid)"></div>
 				<p style="text-align:right;">
-			     <a ng-hide="isEditMode"style="text-decoration:none;">Remove</a>
+			     <a ng-hide="isEditMode" ng-click="deletedata({photoid:eachfile.uniqueid})" style="text-decoration:none;">Remove</a>
 				</p>
 			</div>
 		</div>

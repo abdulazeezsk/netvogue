@@ -265,11 +265,11 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, srvgallery, m
     
     $scope.deletephoto = function(uniqueid) {
     	mygallery.deletephoto(uniqueid).success(function(data) {
-    		mygallery.deletephotolocally(uniqueid);
-    		$scope.photogallery		= srvgallery.getphotos($routeParams);
-    	}).error(function(data) {
-    		alert("error");
-    	});
+			mygallery.deletephotoslocally(uniqueid);
+			$scope.photogallery	= srvgallery.getphotos($routeParams);
+		}).error(function(data) {
+			alert("error");
+		});
     };
 }
 

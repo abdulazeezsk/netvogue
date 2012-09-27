@@ -581,7 +581,7 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
 
 }
 
-function MyCtrlAddGallery($scope, $routeParams, srvgallery) {
+function MyCtrlAddGallery($scope, $routeParams, srvgallery, mygallery) {
 	$scope.newfiles = [];
 	$scope.galleryid = "";
 	if (!angular.isUndefined($routeParams.id)) {
@@ -617,6 +617,24 @@ function MyCtrlAddGallery($scope, $routeParams, srvgallery) {
 		$scope.$apply(function($scope) {
 			// Turn the FileList object into an Array
 			$scope.$broadcast('filesadded', element.files);
+		});
+	};
+	
+	$scope.updatephoto = function(label, seasonname, photoid) {
+		mygallery.savephotoinfo(label, seasonname, photoid).success(function(data) {
+			alert("Updated successfully");
+		}).error(function(data) {
+			
+		});
+		alert(label + seasonname + photoid);
+	};
+	
+	$scope.deletephoto = function(photoid) {
+		mygallery.deletephoto(photoid).success(function(data) {
+			mygallery.deletephotoslocally(photoid);
+			$scope.existingfiles	= srvgallery.getphotos($routeParams);
+		}).error(function(data) {
+			alert("error: " + data.error);
 		});
 	};
 }

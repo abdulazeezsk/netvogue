@@ -539,6 +539,19 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	    		galleryname = photostemp.galleryname;
 	    		angular.copy(photostemp.photos, photos);
 	    	},
+	    	savephotoinfo: function(label, seasonname, photoid) {
+	    		var datatosend = {
+	    				"photoname" : label,
+	    				"seasonname": seasonname,
+	    				"photoid"	: photoid
+	    		};
+	    		var config = {
+	    				method: "POST",
+	    				data: datatosend,
+	                    url: "editphotoinfo"
+	                };
+	            return $http(config);
+	    	},
 	    	deletephoto: function(photoid) {
 	    		var config = {
 	    			method: "POST",

@@ -117,6 +117,21 @@ public class UserServiceImpl implements UserService{
 		return galleryRepo.searchPhotosByName(galleryid, query);
 	}
 	
+	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, String error) {
+		if(photoId.isEmpty()) {
+			error = "photoid is empty";
+			return ResultStatus.FAILURE;
+		}
+		try {
+			galleryRepo.editPhotoName(photoId, name);
+			return ResultStatus.SUCCESS;
+		} catch(Exception e) {
+			System.out.println("There was an error while editing photo name" + photoId + " - " + e.toString());
+			error = e.toString();
+			return ResultStatus.FAILURE;
+		}
+	}
+	
 	public ResultStatus editPhotoName(String photoId, String name, String error) {
 		try {
 			galleryRepo.editPhotoName(photoId, name);
@@ -141,6 +156,10 @@ public class UserServiceImpl implements UserService{
 	
 	
 	public ResultStatus deletePhoto(String photoId, String error)  {
+		if(photoId.isEmpty()){
+			error = "Photoid is empty";
+			return ResultStatus.FAILURE;
+		}
 		try {
 			galleryRepo.deletePhoto(photoId);
 			return ResultStatus.SUCCESS;

@@ -25,10 +25,11 @@ public interface UserRepository extends GraphRepository<User> {
 	Iterable<User> doAdvancedSearch(@Param("SelCategories") List<String> Categories, @Param("searchindex") Map<String, String> searchIndex,
 									@Param("pagenumber") long pagenumber, @Param("pagesize") long pagesize);
 	
-	@Query( "START n=node:username(username={0}) MATCH n-[:GALLERY]->g RETURN g")
+	@Query( "START n=node:username(username={0}) MATCH n-[:GALLERY]->g RETURN g ORDER BY g.createdDate DESC")
 	Iterable<Gallery> getGalleries(String username);
 	
-	@Query( "START n=node:username(username={0}) MATCH n-[:GALLERY]->g WHERE g.galleryname =~ {1} RETURN g")
+	@Query( "START n=node:username(username={0}) MATCH n-[:GALLERY]->g WHERE g.galleryname =~ {1} " +
+			"RETURN g ORDER BY g.createdDate DESC")
 	Iterable<Gallery> searchGalleryByName(String username, String galleryname);
 	
 }

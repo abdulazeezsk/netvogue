@@ -17,6 +17,7 @@ import org.netvogue.server.webmvc.domain.Galleries;
 import org.netvogue.server.webmvc.domain.Gallery;
 import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
+import org.netvogue.server.webmvc.domain.PhotoInfo;
 import org.netvogue.server.webmvc.domain.PhotoWeb;
 import org.netvogue.server.webmvc.domain.Photos;
 import org.netvogue.server.webmvc.domain.UploadedFile;
@@ -127,7 +128,7 @@ public class GalleryController {
 	}
 	
 	@RequestMapping(value="editgalleryname", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse EditGalleryName(@RequestParam JsonRequest request) {
+	public @ResponseBody JsonResponse EditGalleryName(@RequestBody JsonRequest request) {
 		System.out.println("Edit Gallery Name");
 		String error = "";
 		
@@ -204,8 +205,23 @@ public class GalleryController {
 		return response;
 	}
 	
+	@RequestMapping(value="editphotoinfo", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse EditPhotoInfo(@RequestBody PhotoInfo photoInfo) {
+		System.out.println("Edit Photo Info:" + photoInfo.toString());
+		String error = "";
+		JsonResponse response = new JsonResponse();
+		
+		if(ResultStatus.SUCCESS == userService.editPhotoInfo(photoInfo.getPhotoid(), photoInfo.getPhotoname(), 
+													photoInfo.getSeasonname(), error))
+			response.setStatus(true);
+		else
+			response.setError(error);
+		
+		return response;
+	}
+	
 	@RequestMapping(value="editphotoname", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse EditPhotoName(@RequestParam JsonRequest request) {
+	public @ResponseBody JsonResponse EditPhotoName(@RequestBody JsonRequest request) {
 		System.out.println("Edit Photo Name");
 		String error = "";
 		
@@ -220,13 +236,15 @@ public class GalleryController {
 	}
 	
 	@RequestMapping(value="editphotoseasonname", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse EditPhotoSeasonName(@RequestParam JsonRequest request) {
+	public @ResponseBody JsonResponse EditPhotoSeasonName(@RequestParam("photoname") String photoname,
+														  @RequestParam("seasonname") String seasonname, 
+														  @RequestParam("photoid") String photoid) {
 		System.out.println("Edit Photo Name");
 		String error = "";
 		
 		JsonResponse response = new JsonResponse();
 		
-		if(ResultStatus.SUCCESS == userService.editPhotoSeasonName(request.getId(), request.getValue(), error))   
+		if(ResultStatus.SUCCESS == userService.editPhotoInfo(photoid, photoname, seasonname, error))   
 			response.setStatus(true);
 		else
 			response.setError(error);
@@ -235,18 +253,20 @@ public class GalleryController {
 	}
 
 	@RequestMapping(value="deletephoto", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse DeletePhoto(@RequestParam String photoid) {
-		System.out.println("Delete Photo");
+	public @ResponseBody JsonResponse DeletePhoto(@RequestBody String photoid) {
+		System.out.println("Delete Photo:" + photoid);
 		String error = "";
-		User loggedinUser = userDetailsService.getUserFromSession();
 		
 		JsonResponse response = new JsonResponse();
-		
-		if(ResultStatus.SUCCESS == userService.deletePhoto(photoid, error)) {  
-			response.setStatus(true);
+		if(!photoid.isEmpty()) {
+			if(ResultStatus.SUCCESS == userService.deletePhoto(photoid, error)) {  
+				response.setStatus(true);
+			}
+			else
+				response.setError(error);
+		} else {
+			response.setError("photoid is empty");
 		}
-		else
-			response.setError(error);
 		
 		return response;
 	}

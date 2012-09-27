@@ -22,6 +22,7 @@ public interface UserService {
 	public Iterable<Photo> GetPhotos(String galleryId);
 	public Iterable<Photo> searchPhotoByName(Gallery gallery, String name);
 	public Iterable<Photo> searchPhotoByName(String galleryid, String name);
+	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, String error);
 	public ResultStatus editPhotoName(String photoId, String name, String error);
 	public ResultStatus editPhotoSeasonName(String photoId, String name, String error);
 	public ResultStatus deletePhoto(String photoId, String error);

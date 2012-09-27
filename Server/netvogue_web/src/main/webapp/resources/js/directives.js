@@ -53,8 +53,7 @@ angular.module('netVogue.directives', []).
 	    return {
 	        restrict:'A',
 	        scope: {
-	            titleValue	: '=title',
-	            seasonValue	: '=season',
+	            data		: '=data',
 	            isEditMode	: '=editMode',
 	            updateData	: '&updateData'
 	        },
@@ -64,7 +63,7 @@ angular.module('netVogue.directives', []).
 
 	            scope.switchToPreview = function () {
 	                scope.isEditMode = false;
-	                scope.updateData();
+	                scope.updateData({label:scope.data.label, seasonname:scope.data.seasonname, photoid: scope.data.uniqueid});
 	            };
 	            scope.switchToEdit = function () {
 	                scope.isEditMode = true;
@@ -75,9 +74,6 @@ angular.module('netVogue.directives', []).
 	var linkFn;
 	linkFn = function(scope, element, attrs) {
 		scope.isEditMode = false;
-		scope.updateData = function() {
-			
-		};
 		scope.$on('filesadded', function(e, files) {
 			scope.newfiles = [];
 			for (var i = 0; i < files.length; i++) {
@@ -136,7 +132,9 @@ angular.module('netVogue.directives', []).
 			existingfiles	: '=ngModel',
 			maxheight		: '=maxHeight',
 			minheight		: '=minHeight',
-			galleryid		: '=galleryId'
+			galleryid		: '=galleryId',
+			updatedata		: '&updateData',
+			deletedata		: '&deleteData'
 		},
 		link		: linkFn
 	};	
