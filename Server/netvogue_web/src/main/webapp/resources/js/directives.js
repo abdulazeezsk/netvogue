@@ -119,6 +119,9 @@ angular.module('netVogue.directives', []).
 		        }
 		    });
     	});
+		scope.updatedataToParent = function(label, seasonname, photoid) {
+			scope.updatedata({label:label, seasonname:seasonname, photoid:photoid});
+		};
 		scope.progressVisible = true;
 		scope.progress = 0;
 	};

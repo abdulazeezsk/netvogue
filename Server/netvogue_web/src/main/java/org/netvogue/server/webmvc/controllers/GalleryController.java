@@ -210,7 +210,9 @@ public class GalleryController {
 		System.out.println("Edit Photo Info:" + photoInfo.toString());
 		String error = "";
 		JsonResponse response = new JsonResponse();
-		
+		String photoId = photoInfo.getPhotoid();
+		if(null == photoId || photoId.isEmpty())
+			response.setError("photoid is empty");
 		if(ResultStatus.SUCCESS == userService.editPhotoInfo(photoInfo.getPhotoid(), photoInfo.getPhotoname(), 
 													photoInfo.getSeasonname(), error))
 			response.setStatus(true);

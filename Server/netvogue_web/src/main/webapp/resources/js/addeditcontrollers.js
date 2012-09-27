@@ -622,7 +622,9 @@ function MyCtrlAddGallery($scope, $routeParams, srvgallery, mygallery) {
 	
 	$scope.updatephoto = function(label, seasonname, photoid) {
 		mygallery.savephotoinfo(label, seasonname, photoid).success(function(data) {
-			alert("Updated successfully");
+			if(data.status == true) {
+				alert("Updated successfully");
+			}
 		}).error(function(data) {
 			
 		});
