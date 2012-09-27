@@ -52,9 +52,11 @@ angular.module('netVogue.directives', []).
  }).directive('editText', function () {        
 	    return {
 	        restrict:'A',
-	        require: 'ngModel',
 	        scope: {
-	            textValue: '=ngModel'
+	            titleValue	: '=title',
+	            seasonValue	: '=season',
+	            isEditMode	: '=editMode',
+	            updateData	: '&updateData'
 	        },
 	        templateUrl: 'templates/Edit_Text.htm',
 	        link: function(scope, elm, attrs) {
@@ -62,6 +64,7 @@ angular.module('netVogue.directives', []).
 
 	            scope.switchToPreview = function () {
 	                scope.isEditMode = false;
+	                scope.updateData();
 	            };
 	            scope.switchToEdit = function () {
 	                scope.isEditMode = true;
@@ -71,6 +74,10 @@ angular.module('netVogue.directives', []).
 }).directive('fileuploadPlugin', function() {
 	var linkFn;
 	linkFn = function(scope, element, attrs) {
+		scope.isEditMode = false;
+		scope.updateData = function() {
+			
+		};
 		scope.$on('filesadded', function(e, files) {
 			scope.newfiles = [];
 			for (var i = 0; i < files.length; i++) {

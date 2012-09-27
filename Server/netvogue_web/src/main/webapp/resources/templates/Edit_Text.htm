@@ -1,4 +1,8 @@
-<input type="text" ng-show="isEditMode" ng-dblclick="switchToPreview()" ng-model="textValue">
+<input type="text" ng-show="isEditMode" ng-dblclick="switchToPreview()" ng-model="titleValue">
 </input>
-<div ng-hide="isEditMode" ng-dblclick="switchToEdit()" ng-bind-html-unsafe="textValue">
+<div ng-hide="isEditMode" ng-dblclick="switchToEdit()" ng-bind-html-unsafe="titleValue">
+</div>
+<input type="text" ng-show="isEditMode" ng-dblclick="switchToPreview()" ng-model="seasonValue">
+</input>
+<div ng-hide="isEditMode" ng-dblclick="switchToEdit()" ng-bind-html-unsafe="seasonValue">
 </div>
