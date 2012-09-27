@@ -5248,6 +5248,44 @@ float: right;
     border-image: initial;
 }
 
+.spotlight{
+   opacity: 1;
+   transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+   }
+ 
+.spotlight:hover
+ {
+ background-color:#F5F5F5;
+     /* opacity: 0.5;*/
+ }
+ 
+ .fade_spot {
+   opacity: 1;
+   transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+   }
+ 
+.fade_spot:hover
+ {
+ opacity: 0.5;
+ }
+ 
+  .fade_spot_header {
+   opacity: 1;
+   transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+   }
+ 
+.fade_spot_header:hover
+ {
+ opacity: 0.8;
+ }
+ 
+
 /* -----------------------------------------------------Miscellaneous styles End-----------------------------------------*/
 
 /* ---------------------------------------------------Left Menu pannel styles Begin--------------------------------------*/
