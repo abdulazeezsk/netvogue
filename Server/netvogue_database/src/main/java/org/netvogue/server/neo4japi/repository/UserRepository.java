@@ -27,4 +27,8 @@ public interface UserRepository extends GraphRepository<User> {
 	
 	@Query( "START n=node:username(username={0}) MATCH n-[:GALLERY]->g RETURN g")
 	Iterable<Gallery> getGalleries(String username);
+	
+	@Query( "START n=node:username(username={0}) MATCH n-[:GALLERY]->g WHERE g.galleryname =~ {1} RETURN g")
+	Iterable<Gallery> searchGalleryByName(String username, String galleryname);
+	
 }

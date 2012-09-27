@@ -514,6 +514,23 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
                 };
                 return $http(config);
 	    	},
+	    	deletegallery: function(galleryid) {
+	    		var config = {
+	    			method: "POST",
+	    			data: galleryid,
+	                url: "deletegallery"
+	            };
+	    		return $http(config);
+	    	},
+	    	deletegallerylocally: function(galleryid) {
+	    		var index=0;
+	    		for(index=0; index <  galleries.length; index++) {
+	    			if(galleries[index].galleryid == galleryid) {
+	    				break;
+	    			}
+	    		}
+	    		galleries.splice(index, 1);
+	    	},
 	    	getphotos: function() {
 	    		return photos;
 	    	},
@@ -521,6 +538,23 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	    		name = photostemp.name;
 	    		galleryname = photostemp.galleryname;
 	    		angular.copy(photostemp.photos, photos);
+	    	},
+	    	deletephoto: function(photoid) {
+	    		var config = {
+	    			method: "POST",
+	    			data: photoid,
+	                url: "deletephoto"
+	            };
+	    		return $http(config);
+	    	},
+	    	deletephotoslocally: function(photoid) {
+	    		var i=0;
+	    		for(i=0; i <  photos.length; i++) {
+	    			if(photos[i].uniqueid == photoid) {
+	    				break;
+	    			}
+	    		}
+	    		photos.splice(i, 1);
 	    	}
 		};
   }).
@@ -550,24 +584,28 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	        	  return mygallery.getgalleries();
 	          }
 	      },
-    	  galleries: function (routeparams) {
-	          var profileid = "";
-	          if (!angular.isUndefined(routeparams.profileid)) {
-	        	  profileid = routeparams.profileid;
-	          }
-	          var config = {
-	              method: "GET",
-	              url: "getgalleries/" + profileid
-	          };
-	          return $http(config);
-	      },
-	      photos: function (routeparams, galleryid, addphotos) {
+    	  galleries: function (routeparams, galleryname) {
 	          var profileid = "";
 	          if (!angular.isUndefined(routeparams.profileid)) {
 	        	  profileid = routeparams.profileid;
 	          }
 	          var datatosend = {
-	  				"addphotos" : addphotos,
+		  				"galleryname" : galleryname
+		  	};
+	          var config = {
+	              method: "GET",
+	              params: datatosend,
+	              url: "getgalleries/" + profileid
+	          };
+	          return $http(config);
+	      },
+	      photos: function (routeparams, galleryid, photoname) {
+	          var profileid = "";
+	          if (!angular.isUndefined(routeparams.profileid)) {
+	        	  profileid = routeparams.profileid;
+	          }
+	          var datatosend = {
+	  				"photoname" : photoname,
 	  				"galleryid" : galleryid
 	  		};
 	          var config = {

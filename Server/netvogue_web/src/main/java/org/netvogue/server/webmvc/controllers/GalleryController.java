@@ -15,6 +15,7 @@ import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.domain.Galleries;
 import org.netvogue.server.webmvc.domain.Gallery;
+import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.PhotoWeb;
 import org.netvogue.server.webmvc.domain.Photos;
@@ -42,24 +43,25 @@ public class GalleryController {
 
 	@Autowired
 	private UploadManager uploadManager;
-	
-	/*@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView ShowAddCollections(Model model) throws Exception {
-		System.out.println("Comming to Add Collections");
-		final User user = userDetailsService.getUserFromSession();
-		return new ModelAndView("AddCollections2", "Collections", new Collections());
-
-	}*/
-	
+		
 	@RequestMapping(value="getgalleries", method=RequestMethod.GET)
-	public @ResponseBody Galleries GetGalleries(@ModelAttribute("profileid") String profileid) {
-		System.out.println("Get Galleries");
+	public @ResponseBody Galleries GetGalleries(@ModelAttribute("profileid") String profileid, 
+												@RequestParam("galleryname") String galleryname) {
+		System.out.println("Get Galleries: " + galleryname);
 		Galleries galleries = new Galleries();
 		User loggedinUser = userDetailsService.getUserFromSession();
 		if(profileid.isEmpty()) {
 			galleries.setName(loggedinUser.getName());
 			Set<Gallery> galleriesTemp = new HashSet<Gallery>();
-			Iterable<org.netvogue.server.neo4japi.domain.Gallery> dbGalleries = userService.GetGalleries(loggedinUser);
+			Iterable<org.netvogue.server.neo4japi.domain.Gallery> dbGalleries;
+			if(galleryname.isEmpty()) {
+				dbGalleries = userService.GetGalleries(loggedinUser);
+			} else {
+				dbGalleries = userService.searchGalleryByName(loggedinUser, galleryname);
+			}
+			if(null == dbGalleries) {
+				return galleries;
+			}
 			Iterator<org.netvogue.server.neo4japi.domain.Gallery> first = dbGalleries.iterator();
 			while ( first.hasNext() ){
 				org.netvogue.server.neo4japi.domain.Gallery dbGallery = first.next() ;
@@ -72,8 +74,10 @@ public class GalleryController {
 	
 	@RequestMapping(value="getphotos", method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
-											 @RequestParam("galleryid") String galleryid) {
-		System.out.println("Get Galleries");
+										  @RequestParam("galleryid") String galleryid,
+										  @RequestParam("photoname") String photoname
+											 ) {
+		System.out.println("Get Galleries: " + photoname);
 		Photos photos = new Photos();
 		User loggedinUser = userDetailsService.getUserFromSession();
 		if(galleryid.isEmpty()) {
@@ -84,7 +88,12 @@ public class GalleryController {
 			photos.setName(loggedinUser.getName());
 			photos.setGalleryname(userService.GetGallery(galleryid).getGalleryname());
 			Set<PhotoWeb> photosTemp = new HashSet<PhotoWeb>();
-			Iterable<org.netvogue.server.neo4japi.domain.Photo> dbPhotos = userService.GetPhotos(galleryid);
+			Iterable<org.netvogue.server.neo4japi.domain.Photo> dbPhotos;
+			if(photoname.isEmpty()) {
+				dbPhotos = userService.GetPhotos(galleryid);
+			} else {
+				dbPhotos = userService.searchPhotoByName(galleryid, photoname);
+			}
 			if(null == dbPhotos) {
 				return photos;
 			}
@@ -110,6 +119,38 @@ public class GalleryController {
 		if(ResultStatus.SUCCESS == userService.SaveGallery(newGallery, error)) {  
 			response.setStatus(true);
 			response.setIdcreated(newGallery.getGalleryid());
+		}
+		else
+			response.setError(error);
+		
+		return response;
+	}
+	
+	@RequestMapping(value="editgalleryname", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse EditGalleryName(@RequestParam JsonRequest request) {
+		System.out.println("Edit Gallery Name");
+		String error = "";
+		
+		JsonResponse response = new JsonResponse();
+		
+		if(ResultStatus.SUCCESS == userService.editGalleryName(request.getId(), request.getValue(), error))   
+			response.setStatus(true);
+		else
+			response.setError(error);
+		
+		return response;
+	}
+	
+	@RequestMapping(value="deletegallery", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse DeleteGallery(@RequestBody String galleryname) {
+		System.out.println("Delete Gallery");
+		String error = "";
+		User loggedinUser = userDetailsService.getUserFromSession();
+		
+		JsonResponse response = new JsonResponse();
+		
+		if(ResultStatus.SUCCESS == userService.deleteGallery(galleryname, error)) {  
+			response.setStatus(true);
 		}
 		else
 			response.setError(error);
@@ -162,5 +203,51 @@ public class GalleryController {
 		}*/
 		return response;
 	}
+	
+	@RequestMapping(value="editphotoname", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse EditPhotoName(@RequestParam JsonRequest request) {
+		System.out.println("Edit Photo Name");
+		String error = "";
+		
+		JsonResponse response = new JsonResponse();
+		
+		if(ResultStatus.SUCCESS == userService.editPhotoName(request.getId(), request.getValue(), error))   
+			response.setStatus(true);
+		else
+			response.setError(error);
+		
+		return response;
+	}
+	
+	@RequestMapping(value="editphotoseasonname", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse EditPhotoSeasonName(@RequestParam JsonRequest request) {
+		System.out.println("Edit Photo Name");
+		String error = "";
+		
+		JsonResponse response = new JsonResponse();
+		
+		if(ResultStatus.SUCCESS == userService.editPhotoSeasonName(request.getId(), request.getValue(), error))   
+			response.setStatus(true);
+		else
+			response.setError(error);
+		
+		return response;
+	}
 
+	@RequestMapping(value="deletephoto", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse DeletePhoto(@RequestParam String photoid) {
+		System.out.println("Delete Photo");
+		String error = "";
+		User loggedinUser = userDetailsService.getUserFromSession();
+		
+		JsonResponse response = new JsonResponse();
+		
+		if(ResultStatus.SUCCESS == userService.deletePhoto(photoid, error)) {  
+			response.setStatus(true);
+		}
+		else
+			response.setError(error);
+		
+		return response;
+	}
 }

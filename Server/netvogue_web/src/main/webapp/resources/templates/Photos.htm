@@ -19,8 +19,8 @@
 			<div class="leftpane_subheading">FILTERS</div>
 			<div class="divi2"></div>
 			<div class="leftpane_filter_name">
-				<span class="leftpane_filter_name">Photo name</span> <input
-					type="text" placeholder="Photo name" class="span3" />
+				<span class="leftpane_filter_name">Photo name</span> <input ng-model="searchphotoname"
+					type="text" placeholder="Photo name" class="span3" ng-change="getphotos()"/>
 			</div>
 		</div>
 		<!-- left pane -->
@@ -63,12 +63,12 @@
 								</div>
 								<div class="contentglry">
 								<ul class="maskls" ng-show="isMyProfile">
-                                        <li><a ng-href="#" title="Delete"><i class="icon-trash icon-white"></i></a></li>
+                                        <li><a ng-click="deletephoto(photo.uniqueid)" title="Delete"><i class="icon-trash icon-white"></i></a></li>
                                         <li><a ng-href="#/editgallery" title="Edit"><i class="icon-edit icon-white"></i>
                                         </a></li>
                                     </ul>
 									<h1>
-										<a ng-href="#/viewphotos?id={{photo.uniqueid}}" class="mask_edit">View</a>
+										<a ng-href="#/viewphotos?id={{photo.uniqueid}}&&galleryid={{galleryid}}" class="mask_edit">View</a>
 									</h1>
 								</div>
 								<div class="divi2"></div>

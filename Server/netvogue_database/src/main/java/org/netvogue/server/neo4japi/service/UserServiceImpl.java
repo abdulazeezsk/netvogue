@@ -1,5 +1,7 @@
 package org.netvogue.server.neo4japi.service;
 
+import java.util.Set;
+
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.Gallery;
@@ -66,10 +68,86 @@ public class UserServiceImpl implements UserService{
 		return galleryRepo.getGallery(galleryId);
 	}
 	
+	public Iterable<Gallery> searchGalleryByName(User user, String name) {
+		return searchGalleryByName(user.getUsername(), name);
+	}
+	
+	public Iterable<Gallery> searchGalleryByName(String username, String name) {
+		String query = "(?i).*" + name + ".*";
+		return userRepo.searchGalleryByName(username, query);
+	}
+	
+	public ResultStatus editGalleryName(String galleryId, String name, String error) {
+		try {
+			galleryRepo.editGalleryName(galleryId, name);
+			return ResultStatus.SUCCESS;
+		} catch(Exception e) {
+			System.out.println("There was an error while editing gallery" + galleryId + " - " + e.toString());
+			error = e.toString();
+			return ResultStatus.FAILURE;
+		}
+	}
+	
+	public ResultStatus deleteGallery(String galleryId, String error)  {
+		Gallery gallery = GetGallery(galleryId);
+		try {
+			Set<Photo> photos = gallery.getPhotosAdded();
+			galleryRepo.delete(GetGallery(galleryId));
+			return ResultStatus.SUCCESS;
+		} catch(Exception e) {
+			System.out.println("There was an error while deleting gallery" + gallery.getGalleryname() + " - " + e.toString());
+			error = e.toString();
+			return ResultStatus.FAILURE;
+		}
+	}
+	
 	public Iterable<Photo> GetPhotos(String galleryId) {
 		if(!galleryId.isEmpty()) {
 			return galleryRepo.getPhotos(galleryId);
 		}
 		return null;
+	}
+	
+	public Iterable<Photo> searchPhotoByName(Gallery gallery, String name) {
+		return searchPhotoByName(gallery.getGalleryid(), name);
+	}
+	
+	public Iterable<Photo> searchPhotoByName(String galleryid, String name) {
+		String query = "(?i).*" + name + ".*";
+		return galleryRepo.searchPhotosByName(galleryid, query);
+	}
+	
+	public ResultStatus editPhotoName(String photoId, String name, String error) {
+		try {
+			galleryRepo.editPhotoName(photoId, name);
+			return ResultStatus.SUCCESS;
+		} catch(Exception e) {
+			System.out.println("There was an error while editing photo name" + photoId + " - " + e.toString());
+			error = e.toString();
+			return ResultStatus.FAILURE;
+		}
+	}
+	
+	public ResultStatus editPhotoSeasonName(String photoId, String name, String error) {
+		try {
+			galleryRepo.editPhotoSeasonName(photoId, name);
+			return ResultStatus.SUCCESS;
+		} catch(Exception e) {
+			System.out.println("There was an error while editing photo name" + photoId + " - " + e.toString());
+			error = e.toString();
+			return ResultStatus.FAILURE;
+		}
+	}
+	
+	
+	public ResultStatus deletePhoto(String photoId, String error)  {
+		try {
+			galleryRepo.deletePhoto(photoId);
+			return ResultStatus.SUCCESS;
+		} catch(Exception e) {
+			System.out.println("There was an error while deleting photo" + photoId + " - " + e.toString());
+			error = e.toString();
+			return ResultStatus.FAILURE;
+		}
 	}
 }

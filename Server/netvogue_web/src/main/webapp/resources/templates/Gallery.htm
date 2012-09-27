@@ -20,7 +20,7 @@
 			<div class="divi2"></div>
 			<div class="leftpane_filter_name">
 				<span class="leftpane_filter_name">GALLERY NAME</span> <input
-					type="text" placeholder="Gallery name" class="span3" />
+					type="text" ng-model="searchgalleryname" placeholder="Gallery name" class="span3" ng-change="getgalleries()"/>
 			</div>
 		</div>
 		<!-- left pane -->
@@ -64,7 +64,7 @@
 								</div>
 								<div class="contentglry">
 								<ul class="maskls" ng-show="isMyProfile">
-                                        <li><a href="#" title="Delete"><i class="icon-trash icon-white"></i></a></li>
+                                        <li><a ng-click="deletegallery(gallery.galleryid)" title="Delete"><i class="icon-trash icon-white"></i></a></li>
                                         <li><a data-toggle="modal" href="#EditGallery" title="Edit"><i class="icon-edit icon-white"></i>
                                         </a></li>
                                     </ul>
@@ -115,12 +115,12 @@
 	</div>
 	<div class="modal-body">
 		<div>
-			<input type="text" class="span4" placeholder="Gallery name" />
+			<input type="text" class="span4" ng-model="galleryname" placeholder="Gallery name" />
 		</div>
 		</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" data-dismiss="modal" href="#/addgallery">
+			class="btn btn-primary" data-dismiss="modal" ng-click="updategallery()">
 			Update gallery</a>
 	</div>
 </div>

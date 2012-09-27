@@ -14,11 +14,11 @@ public class Photo {
 	@GraphId
 	Long nodeId;
 	
-	@Indexed(indexName="galleryid", unique = true)
+	@Indexed(indexName="photouniqueid", unique = true)
 	String photouniqueid;
 	
-	@Indexed(indexName="name", indexType=IndexType.FULLTEXT)
-	String name;
+	@Indexed(indexName="photoname", indexType=IndexType.FULLTEXT)
+	String photoname;
 	
 	@Indexed(indexName="seasonname", indexType=IndexType.FULLTEXT)
 	String seasonname;
@@ -33,8 +33,8 @@ public class Photo {
 	
 	public Photo(String photouniqueid) {
 		this.photouniqueid = photouniqueid;
-		this.name = "UNTITLED";
-		this.name = "UNTITLED SEASON";
+		this.photoname = "UNTITLED";
+		this.seasonname = "UNTITLED SEASON";
 		createdDate = System.currentTimeMillis();
 	}
 	public Long getNodeId() {
@@ -54,11 +54,11 @@ public class Photo {
 	}
 
 	public String getName() {
-		return name;
+		return photoname;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.photoname = name;
 	}
 
 	public String getSeasonname() {

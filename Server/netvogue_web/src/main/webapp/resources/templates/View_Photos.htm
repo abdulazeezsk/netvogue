@@ -23,12 +23,12 @@
 						<li ng-repeat="photo in viewPhotos">
 							<div class="leftpanefeed">
 								<div class="feedimage">
-									<a href="#/{{photo.uniqueid}}"> <img alt=""
+									<a ng-click="setphotoid(photo.uniqueid)"> <img alt=""
 										ng-src="{{photo.left_url}}" class="pull-left"></a>
 								</div>
 								<div class="leftpanefeed_text">
 									<h3>
-										<a href="#/{{photo.uniqueid}}" title="">{{photo.label}}</a>
+										<a ng-click="setphotoid(photo.uniqueid)" title="">{{photo.label}}</a>
 									</h3>
 								</div>
 							</div>
@@ -50,7 +50,7 @@
 					<!-- Carousel items -->
 					<div class="carousel-inner">
 						<div class="item" ng-repeat="viewPhoto in viewPhotos"
-							ng-class="{active: $first}">
+							ng-class="{active: viewPhoto.uniqueid == photoid}">
 							<img ng-src="{{viewPhoto.piclink}}" alt="">
 							<div class="carousel-caption">
 								<h4>{{viewPhoto.label}}</h4>

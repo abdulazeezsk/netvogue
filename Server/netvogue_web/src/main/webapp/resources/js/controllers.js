@@ -172,6 +172,7 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, s
 	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
 	                    ];*/
 	
+	$scope.searchgalleryname = ""; 
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
 	    $scope.galleries		= srvgallery.getgalleries($routeParams);
@@ -179,12 +180,15 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, s
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    srvgallery.galleries($routeParams).success(function(data) {
-    	srvgallery.setgallerylocally(data, $routeParams);
-    	$scope.updatedata();
-    }).error(function(data) {
-    	
-    });
+    $scope.getgalleries = function() {
+    	srvgallery.galleries($routeParams, $scope.searchgalleryname).success(function(data) {
+        	srvgallery.setgallerylocally(data, $routeParams);
+        	$scope.updatedata();
+        }).error(function(data) {
+        	
+        });
+    };
+    $scope.getgalleries();
     $scope.updatedata();
     
     $scope.creategallery = function() {
@@ -195,6 +199,23 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, s
         }).error(function(data) {
         	
         });
+    };
+    
+    $scope.updategallery = function() {
+    	mygallery.updatedgallery($scope.galleryname).success(function(data) {
+    		
+    	}).error(function(data) {
+    		
+    	});
+    };
+    
+    $scope.deletegallery = function(galleryid) {
+    	mygallery.deletegallery(galleryid).success(function(data) {
+    		mygallery.deletegallerylocally($scope.galleries[index].galleryid);
+    		$scope.galleries		= srvgallery.getgalleries($routeParams);
+    	}).error(function(data) {
+    		
+    	});
     };
 
 }
@@ -209,6 +230,7 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, srvgallery, m
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.galleryid = $routeParams.id;
 	}
+	$scope.searchphotoname = "";
 	/*$scope.photogallery = [ 
 	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
 	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
@@ -229,13 +251,26 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, srvgallery, m
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    srvgallery.photos($routeParams, $scope.galleryid, false).success(function(data) {
-    	srvgallery.setphotoslocally(data, $routeParams);
-    	$scope.updatedata();
-    }).error(function(data) {
-    	
-    });
+    $scope.getphotos = function() {
+    	srvgallery.photos($routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
+        	srvgallery.setphotoslocally(data, $routeParams);
+        	$scope.updatedata();
+        }).error(function(data) {
+        	
+        });
+    };
+    
+    $scope.getphotos();
     $scope.updatedata();
+    
+    $scope.deletephoto = function(uniqueid) {
+    	mygallery.deletephoto(uniqueid).success(function(data) {
+    		mygallery.deletephotolocally(uniqueid);
+    		$scope.photogallery		= srvgallery.getphotos($routeParams);
+    	}).error(function(data) {
+    		alert("error");
+    	});
+    };
 }
 
 function MyCtrlViewPhotos($scope, $routeParams, currentvisitedprofile, srvgallery) {
@@ -296,6 +331,10 @@ function MyCtrlViewPhotos($scope, $routeParams, currentvisitedprofile, srvgaller
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.photoid = $routeParams.id;
 	}
+	$scope.galleryid = "";
+	if (!angular.isUndefined($routeParams.galleryid)) {
+		$scope.galleryid = $routeParams.galleryid;
+	}
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
@@ -304,6 +343,9 @@ function MyCtrlViewPhotos($scope, $routeParams, currentvisitedprofile, srvgaller
     
     $scope.updatedata();
 
+    $scope.setphotoid = function(photoid) {
+    	$scope.photoid = photoid;
+    };
 }
 
 function MyCtrlPrintcampaign($scope, $routeParams, currentvisitedprofile,

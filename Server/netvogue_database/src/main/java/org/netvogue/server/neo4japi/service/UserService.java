@@ -14,7 +14,17 @@ public interface UserService {
 	public ResultStatus SaveGallery(Gallery newGallery, String error);
 	public Gallery GetGallery(String GalleryId);
 	public Iterable<Gallery> GetGalleries(User user);
+	public Iterable<Gallery> searchGalleryByName(User user, String name);
+	public Iterable<Gallery> searchGalleryByName(String username, String name);
+	public ResultStatus editGalleryName(String galleryId, String name, String error);
+	public ResultStatus deleteGallery(String galleryId, String error);
+	
 	public Iterable<Photo> GetPhotos(String galleryId);
+	public Iterable<Photo> searchPhotoByName(Gallery gallery, String name);
+	public Iterable<Photo> searchPhotoByName(String galleryid, String name);
+	public ResultStatus editPhotoName(String photoId, String name, String error);
+	public ResultStatus editPhotoSeasonName(String photoId, String name, String error);
+	public ResultStatus deletePhoto(String photoId, String error);
 	
 	//Photos inside Gallery
 	//public ResultStatus AddNewPhotos(Gallery gallery, String error); //Gallery where photos were added
