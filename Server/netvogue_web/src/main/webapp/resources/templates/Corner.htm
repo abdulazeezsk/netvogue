@@ -48,7 +48,7 @@
             <div class="divi2">
             </div>
             <ul class="thumbnails">
-                <li class="span3" ng-repeat="network in networkfeed | limitTo:4">
+                <li class="span3 fade_spot" ng-repeat="network in networkfeed | limitTo:4">
                     <div>
                         <a href="#/{{network.networklistitemID}}/profile">
                             <img alt="" ng-src="{{network.profilepiclink}}" class="pull-left"></a> <a href="#/{{network.networklistitemID}}/profile"
@@ -61,7 +61,7 @@
                     TRENDING</h4>
                 <ul class="nav nav-tab nav-stacked">
                     <li ng-repeat="trend in trending">
-                        <div class="trendfeedlast">
+                        <div class="trendfeed fade_spot">
                             <div class="img">
                                 <a href="#/{{trend.trendlistitemID}}">
                                     <img alt="" ng-src="{{trend.trendpiclink}}" class="pull-left"></a></div>
@@ -81,7 +81,7 @@
                     References</h4>
                 <ul class="nav nav-tab nav-stacked">
                     <li ng-repeat="reco in recommendations">
-                        <div class="trendfeedlast">
+                        <div class="trendfeedlast  spotlight">
                             <div class="img">
                                 <a href="#">
                                     <img alt="" ng-src="{{reco.recommendationpiclink}}" class="pull-left"></a></div>
