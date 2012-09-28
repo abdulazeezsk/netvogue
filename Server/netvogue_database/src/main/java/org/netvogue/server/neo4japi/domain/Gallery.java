@@ -1,5 +1,6 @@
 package org.netvogue.server.neo4japi.domain;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -27,7 +28,7 @@ public class Gallery {
 	
 	String profilePicLink;
 	
-	long createdDate;
+	Date createdDate = new Date();
 	
 	@RelatedTo(type="GALLERY", direction=Direction.INCOMING)
 	User	createdBy;
@@ -43,7 +44,6 @@ public class Gallery {
 		galleryname = name;
 		createdBy	= createdByTemp;
 		galleryid = UUID.randomUUID().toString();
-		createdDate = System.currentTimeMillis();
 		profilePicLink = "http://placehold.it/220x150";
 	}
 
@@ -87,11 +87,11 @@ public class Gallery {
 		this.profilePicLink = profilePicLink;
 	}
 
-	public long getCreatedDate() {
-		return createdDate;
+	public Date getCreatedDate(Date createdDate) {
+		return this.createdDate;
 	}
-
-	public void setCreatedDate(long createdDate) {
+	
+	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
 

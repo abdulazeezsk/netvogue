@@ -66,8 +66,8 @@ public class User {
 	
 	int 	yearofEst;
 	
-	long	registeredDate;
-	long	accessGrantedDate;
+	Date	registeredDate = new Date();
+	Date	accessGrantedDate = new Date();
 	
 	boolean firstTimeLogin;
 	boolean accountEnabled; //This would depend upon business requirements
@@ -94,8 +94,6 @@ public class User {
 		
 		this.email = email;
 		this.password = encode(password);
-		
-		this.registeredDate = System.currentTimeMillis();;
 	}
 	
 	public Long getNodeId() {
@@ -265,19 +263,19 @@ public class User {
 		this.roles = roles;
 	}
 	
-	public long getRegisteredDate() {
+	public Date getRegisteredDate() {
 		return registeredDate;
 	}
 
-	public void setRegisteredDate(long registeredDate) {
+	public void setRegisteredDate(Date registeredDate) {
 		this.registeredDate = registeredDate;
 	}
 
-	public long getAccessGrantedDate() {
+	public Date getAccessGrantedDate() {
 		return accessGrantedDate;
 	}
 
-	public void setAccessGrantedDate(long accessGrantedDate) {
+	public void setAccessGrantedDate(Date accessGrantedDate) {
 		this.accessGrantedDate = accessGrantedDate;
 	}
 

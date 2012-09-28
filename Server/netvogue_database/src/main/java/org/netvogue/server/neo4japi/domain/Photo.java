@@ -1,11 +1,10 @@
 package org.netvogue.server.neo4japi.domain;
 
-import org.neo4j.graphdb.Direction;
-import org.netvogue.server.aws.core.Size;
+import java.util.Date;
+
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedTo;
 import org.springframework.data.neo4j.support.index.IndexType;
 
 @NodeEntity
@@ -25,7 +24,7 @@ public class Photo {
 	
 	String originalImageURL;
 	
-	long createdDate;
+	Date createdDate = new Date();
 
 	public Photo() {
 		
@@ -35,7 +34,6 @@ public class Photo {
 		this.photouniqueid = photouniqueid;
 		this.photoname = "UNTITLED";
 		this.seasonname = "UNTITLED SEASON";
-		createdDate = System.currentTimeMillis();
 	}
 	public Long getNodeId() {
 		return nodeId;
@@ -53,12 +51,12 @@ public class Photo {
 		this.photouniqueid = photouniqueid;
 	}
 
-	public String getName() {
+	public String getPhotoname() {
 		return photoname;
 	}
 
-	public void setName(String name) {
-		this.photoname = name;
+	public void setPhotoname(String photoname) {
+		this.photoname = photoname;
 	}
 
 	public String getSeasonname() {
@@ -77,11 +75,11 @@ public class Photo {
 		this.originalImageURL = profilePicLink;
 	}
 
-	public long getCreatedDate() {
+	public Date getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(long createdDate) {
+	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
 	

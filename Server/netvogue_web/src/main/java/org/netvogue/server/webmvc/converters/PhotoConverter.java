@@ -16,7 +16,7 @@ public class PhotoConverter implements Converter<Photo, PhotoWeb> {
 	public PhotoWeb convert(Photo source) {
 		// TODO Auto-generated method stub
 		PhotoWeb newPhoto = new PhotoWeb();
-		newPhoto.setLabel(source.getName());
+		newPhoto.setLabel(source.getPhotoname());
 		newPhoto.setSeasonname(source.getSeasonname());
 		newPhoto.setUniqueid(source.getPhotouniqueid());
 		

@@ -3,6 +3,7 @@ package org.netvogue.server.webmvc.controllers;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -53,7 +54,7 @@ public class GalleryController {
 		User loggedinUser = userDetailsService.getUserFromSession();
 		if(profileid.isEmpty()) {
 			galleries.setName(loggedinUser.getName());
-			Set<Gallery> galleriesTemp = new HashSet<Gallery>();
+			Set<Gallery> galleriesTemp = new LinkedHashSet<Gallery>();
 			Iterable<org.netvogue.server.neo4japi.domain.Gallery> dbGalleries;
 			if(galleryname.isEmpty()) {
 				dbGalleries = userService.GetGalleries(loggedinUser);
@@ -66,10 +67,12 @@ public class GalleryController {
 			Iterator<org.netvogue.server.neo4japi.domain.Gallery> first = dbGalleries.iterator();
 			while ( first.hasNext() ){
 				org.netvogue.server.neo4japi.domain.Gallery dbGallery = first.next() ;
+				System.out.println("Gallery name: " + dbGallery.getGalleryname());
 				galleriesTemp.add(conversionService.convert(dbGallery, Gallery.class));
 			}
 			galleries.setGalleries(galleriesTemp);
 		}
+		
 		return galleries;
 	}
 	
@@ -88,7 +91,7 @@ public class GalleryController {
 		if(profileid.isEmpty()) {
 			photos.setName(loggedinUser.getName());
 			photos.setGalleryname(userService.GetGallery(galleryid).getGalleryname());
-			Set<PhotoWeb> photosTemp = new HashSet<PhotoWeb>();
+			Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
 			Iterable<org.netvogue.server.neo4japi.domain.Photo> dbPhotos;
 			if(photoname.isEmpty()) {
 				dbPhotos = userService.GetPhotos(galleryid);
