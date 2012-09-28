@@ -11,9 +11,10 @@ public interface GalleryRepository extends GraphRepository<Gallery>{
 	Gallery getGallery(String id);
 	
 	@Query("START p = node:galleryid(galleryid={0}) SET p.galleryname = {1}")
-	void editGalleryName(String photoId, String name);
+	void editGalleryName(String galleryid, String name);
 	
-	@Query("START g = node:galleryid(galleryid={0}) MATCH g-[r]-p DELETE n, r, p")
+	@Query("START n=node:galleryid(galleryid={0}) MATCH n-[rels*0..]->p FOREACH(rel IN rels: DELETE rel) DELETE p " +
+			"WITH n MATCH n<-[r]-() DELETE n, r")
 	void deleteGallery(String galleryId);
 	
 	@Query( "START n=node:galleryid(galleryid={0}) MATCH n-[:PHOTO]->p RETURN p ORDER BY p.createdDate DESC")

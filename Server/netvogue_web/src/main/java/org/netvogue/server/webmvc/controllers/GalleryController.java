@@ -131,8 +131,13 @@ public class GalleryController {
 	public @ResponseBody JsonResponse EditGalleryName(@RequestBody JsonRequest request) {
 		System.out.println("Edit Gallery Name");
 		String error = "";
-		
 		JsonResponse response = new JsonResponse();
+		
+		if(null == request.getId() || request.getId().isEmpty()) {
+			response.setError("galleryid is empty");
+		} else if(null == request.getValue() || request.getValue().isEmpty()) {
+			response.setError("newgalleryname is empty");
+		}
 		
 		if(ResultStatus.SUCCESS == userService.editGalleryName(request.getId(), request.getValue(), error))   
 			response.setStatus(true);
@@ -143,14 +148,15 @@ public class GalleryController {
 	}
 	
 	@RequestMapping(value="deletegallery", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse DeleteGallery(@RequestBody String galleryname) {
-		System.out.println("Delete Gallery");
+	public @ResponseBody JsonResponse DeleteGallery(@RequestBody String galleryid) {
+		System.out.println("Delete Gallery:"+ galleryid);
 		String error = "";
-		User loggedinUser = userDetailsService.getUserFromSession();
-		
 		JsonResponse response = new JsonResponse();
 		
-		if(ResultStatus.SUCCESS == userService.deleteGallery(galleryname, error)) {  
+		if(null == galleryid || galleryid.isEmpty()) {
+			response.setError("Galleryid is empty");
+		}
+		if(ResultStatus.SUCCESS == userService.deleteGallery(galleryid, error)) {  
 			response.setStatus(true);
 		}
 		else

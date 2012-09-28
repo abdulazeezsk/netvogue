@@ -6,4 +6,10 @@ public class Utils {
 		queryParam = "\"" + queryParam + "\"";
 		return queryParam;
 	}
+	
+	public static String SerializeQueryParamForSearch(String queryParam) {
+		queryParam = queryParam.replaceAll(" ", "*");
+		queryParam = "(?i).*" + queryParam + ".*";
+		return queryParam;
+	}
 }

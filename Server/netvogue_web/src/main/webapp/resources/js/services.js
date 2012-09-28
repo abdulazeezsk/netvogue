@@ -514,6 +514,18 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
                 };
                 return $http(config);
 	    	},
+	    	savegalleryname: function(galleryid, newname) {
+	    		var datatosend = {
+	    				"id" 	: galleryid,
+	    				"value"	: newname,
+	    		};
+	    		var config = {
+	    				method: "POST",
+	    				data: datatosend,
+	                    url: "editgalleryname"
+	                };
+	            return $http(config);
+	    	},
 	    	deletegallery: function(galleryid) {
 	    		var config = {
 	    			method: "POST",

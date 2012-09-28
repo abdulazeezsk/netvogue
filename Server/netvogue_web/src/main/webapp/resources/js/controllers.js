@@ -211,7 +211,7 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, s
     
     $scope.deletegallery = function(galleryid) {
     	mygallery.deletegallery(galleryid).success(function(data) {
-    		mygallery.deletegallerylocally($scope.galleries[index].galleryid);
+    		mygallery.deletegallerylocally(galleryid);
     		$scope.galleries		= srvgallery.getgalleries($routeParams);
     	}).error(function(data) {
     		

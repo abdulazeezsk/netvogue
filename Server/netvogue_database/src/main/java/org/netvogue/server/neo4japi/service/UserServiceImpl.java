@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Gallery;
 import org.netvogue.server.neo4japi.domain.Photo;
 import org.netvogue.server.neo4japi.domain.User;
@@ -73,8 +74,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public Iterable<Gallery> searchGalleryByName(String username, String name) {
-		String query = "(?i).*" + name + ".*";
-		return userRepo.searchGalleryByName(username, query);
+		return userRepo.searchGalleryByName(username, Utils.SerializeQueryParamForSearch(name));
 	}
 	
 	public ResultStatus editGalleryName(String galleryId, String name, String error) {
@@ -89,13 +89,12 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public ResultStatus deleteGallery(String galleryId, String error)  {
-		Gallery gallery = GetGallery(galleryId);
 		try {
-			Set<Photo> photos = gallery.getPhotosAdded();
-			galleryRepo.delete(GetGallery(galleryId));
+			galleryRepo.deleteGallery(galleryId);
+			System.out.println("deleted gallery:" + galleryId);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
-			System.out.println("There was an error while deleting gallery" + gallery.getGalleryname() + " - " + e.toString());
+			System.out.println("There was an error while deleting gallery:" + galleryId + " - " + e.toString());
 			error = e.toString();
 			return ResultStatus.FAILURE;
 		}
@@ -113,8 +112,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public Iterable<Photo> searchPhotoByName(String galleryid, String name) {
-		String query = "(?i).*" + name + ".*";
-		return galleryRepo.searchPhotosByName(galleryid, query);
+		return galleryRepo.searchPhotosByName(galleryid, Utils.SerializeQueryParamForSearch(name));
 	}
 	
 	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, String error) {
