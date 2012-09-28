@@ -21,7 +21,7 @@
 			<div class="leftpane_filter_name">
 				<span class="leftpane_filter_name">TITLE</span> <input type="text"
 					class="span3" /> <span class="leftpane_filter_name">DESCRIPTION</span>
-				<input type="text" class="span3" />
+				<input type="text" class="span3" ng-model="searchphotoname" ng-change="getphotos()"/>
 			</div>
 
 		</div>
@@ -33,47 +33,43 @@
                         <a href="#/newsletter">Editorials</a>
                         <span class="divider">/</span>
                         <span><a
-						href="#/editorial"> Untitled</a></span>
+						href="#/editorial?id={{galleryid}}">{{galleryname}}</a></span>
                 </span> 
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info"> Find Editorials using the
 					filters </span> <span class="right" ng-show="isMyProfile"> <a
-					 href="#/addnewsletter" class="rightpane_add_btn">Add Editorials</a>
+					 href="#/addnewsletter?id={{galleryid}}" class="rightpane_add_btn">Add Editorials</a>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 			</div>
 
 			<div>
 				<ul class="thumbnails">
-					<li ng-repeat="newsletter in newsletters">
+					<li ng-repeat="photo in galleries">
 						<div class="view view-first">
-							<a href="#/{{newsletter.campaignlistitemid}}"> <img
-								src="{{newsletter.campaigncoverpic}}" alt=""></a>
+							<a ng-href="#/{{photo.uniqueid}}"> <img
+									ng-src="{{photo.thumbnail_url}}" alt=""></a>
 							<div class="mask"></div>
 							<div class="content">
 								<div class="mask">
 									<ul ng-show="isMyProfile">
-										<li><a href="#" title="Delete"><i
+										<li><a ng-click="deletephoto(photo.uniqueid)" title="Delete"><i
 												class="icon-trash icon-white"></i></a></li>
 										<li><a  href="#/editnewsletters"  title="Edit"><i
 												class="icon-edit icon-white"></i></a></li>
 									</ul>
 									<p>
-										<u>{{newsletter.newslettername}}</u> <br /> Lorem Ipsum is
-										simply dummy text of the printing and typesetting industry.
-										Lorem Ipsum has been the industry's standard dummy text ever
-										since the 1500s, when an unknown printer took a galley of type
-										i
+										<u>{{photo.label}}</u> <br />{{photo.label}}
 									</p>
 									<h1>
-										<a href="#/newsletter/:newsid" class="mask_edit">view</a>
+										<a ng-href="#/newsletter?id={{photo.uniqueid}}&&galleryid={{galleryid}}" class="mask_edit">view</a>
 									</h1>
 								</div>
 							</div>
 							<div class="divi2"></div>
 						</div>
 						<div class="title">
-							<h5>{{newsletter.campaignname}}</h5>
+							<h5>{{photo.label}}</h5>
 						</div>
 					</li>
 				</ul>

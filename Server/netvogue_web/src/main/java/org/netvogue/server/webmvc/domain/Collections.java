@@ -1,16 +1,20 @@
 package org.netvogue.server.webmvc.domain;
 
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import java.util.Set;
 
 public class Collections {
-    private Object fileData;
-
-	public Object getFileData() {
-		return fileData;
+	String name;
+	Set<Collection> collections;
+	public String getName() {
+		return name;
 	}
-
-	public void setFileData(Object fileData) {
-		this.fileData = fileData;
+	public void setName(String name) {
+		this.name = name;
 	}
-
+	public Set<Collection> getCollections() {
+		return collections;
+	}
+	public void setCollections(Set<Collection> collections) {
+		this.collections = collections;
+	}
 }

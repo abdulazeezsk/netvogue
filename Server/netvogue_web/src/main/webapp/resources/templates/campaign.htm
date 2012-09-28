@@ -20,7 +20,8 @@
 			<div class="divi2"></div>
 			<div class="leftpane_filter_name">
 				<span class="leftpane_filter_name">Campaign Name</span> <input
-					type="text" class="span3" placeholder="Campaign name" />
+					type="text" class="span3" ng-model="searchphotoname" placeholder="Campaign name" 
+										ng-change="getphotos()"/>
 			</div>
 		</div>
 		<!-- left pane -->
@@ -29,12 +30,12 @@
 			<div>
 				<span class="left heading_btn"> <a href="#/printcampaign">print
 						campaign</a> <span class="divider">/</span> <span> <a
-						href="#/campaign"> Untitled</a></span>
+						ng-href="#/campaign?id={{galleryid}}">{{galleryname}}</a></span>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info"> Find Print Campaigns
 					using the filters </span> <span class="right" ng-show="isMyProfile">
-					<a data-toggle="modal" href="#/addprintcampaign"
+					<a data-toggle="modal" href="#/addprintcampaign?id={{galleryid}}"
 					class="rightpane_add_btn">Add Print Campaigns</a>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
@@ -43,35 +44,31 @@
 
 			<div>
 				<ul class="thumbnails">
-					<li ng-repeat="printcampign in printcampaigns">
+					<li ng-repeat="photo in galleries">
 						<div class="view view-first">
-							<a href="#/{{printcampign.campaignlistitemid}}"> <img
-								src="{{printcampign.campaigncoverpic}}" alt=""></a>
+							<a ng-href="#/{{photo.uniqueid}}"> <img
+									ng-src="{{photo.thumbnail_url}}" alt=""></a>
 							<div class="mask"></div>
 							<div class="content">
 								<div class="mask">
 									<ul ng-show="isMyProfile">
-										<li><a href="#" title="Delete"><i
+										<li><a ng-click="deletephoto(photo.uniqueid)" title="Delete"><i
 												class="icon-trash icon-white"></i></a></li>
 										<li><a data-toggle="modal" href="#/editprintcampaigns"
 											title="Edit"><i class="icon-edit icon-white"></i> </a></li>
 									</ul>
 									<p>
-										<u>{{printcampign.campaignname}}</u> <br /> Lorem Ipsum is
-										simply dummy text of the printing and typesetting industry.
-										Lorem Ipsum has been the industry's standard dummy text ever
-										since the 1500s, when an unknown printer took a galley of type
-										i
+										<u>{{photo.label}}</u> <br />{{photo.label}}
 									</p>
 									<h1>
-										<a href="#/printcampaign/:campaignid" class="mask_edit">view</a>
+										<a ng-href="#/printcampaign?id={{photo.uniqueid}}&&galleryid={{galleryid}}" class="mask_edit">view</a>
 									</h1>
 								</div>
 							</div>
 							<div class="divi2"></div>
 						</div>
 						<div class="title">
-							<h3>{{printcampign.campaignname}}</h3>
+							<h3>{{photo.label}}</h3>
 						</div>
 					</li>
 				</ul>

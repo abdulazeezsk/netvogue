@@ -2,6 +2,7 @@ package org.netvogue.server.webmvc.domain;
 
 import java.util.Set;
 
+//Holding class for Galleries, print campaigns, editorials and collections
 public class Galleries {
 	String name;
 	Set<Gallery> galleries;

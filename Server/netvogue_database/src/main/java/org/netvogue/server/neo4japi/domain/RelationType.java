@@ -4,5 +4,5 @@ public enum RelationType {
 	NETWORK,
 	BOUTIQUE,
 	BRAND,
-	HAS_COLLECTION
+	HAS_COLLECTION,
 }

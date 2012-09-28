@@ -21,14 +21,14 @@
                 <div>
                 <h4 class="subHeading_advertisement">Editorials</h4>
                 <ul class="nav nav-tab nav-stacked">
-                    <li ng-repeat="editorial in Editorials">
+                    <li ng-repeat="photo in viewPhotos">
                         <div class="leftpanefeed">
                             <div class="feedimage">
-                                <a href="#/{{editorial.newsletterlistitemid}}">
-                                    <img alt="" ng-src="{{editorial.newsletterpic}}" class="pull-left"></a></div>
+                                <a href="<a ng-click="setphotoid(photo.uniqueid)"> <img alt=""
+										ng-src="{{photo.left_url}}" class="pull-left"></a></div>
                             <div class="leftpanefeed_text">
                                 <h3>
-                                    <a href="#/{{editorial.newsletterlistitemid}}" title="">{{editorial.newslettername}}</a></h3>
+                                    <a ng-click="setphotoid(photo.uniqueid)" title="">{{photo.label}}</a>
                             </div>
                         </div>
                     </li>
@@ -39,23 +39,23 @@
         <!-- right pane -->
         <div class="span9">
                <span class="left heading_btn">
-                        <a href="#/newsletter">Editorials</a>
+                        <a ng-href="#/newsletter">Editorials</a>
                         <span class="divider">/</span>
                         <span><a
-						href="#/editorial"> Untitled</a></span>
+						ng-href="#/editorial?id={{galleryid}}">{{galleryname}}</a></span>
                 </span>
             <div class="divi2 right_pane_underline">
             </div>
             <div id="myCarousel" class="carousel slide">
                 <!-- Carousel items -->
                 <div class="carousel-inner">
-                    <div class="item" ng-repeat="newsletter in viewnewsletters" ng-class="{active: $first}">
-                        <img src="{{newsletter.newsletterpic}}" alt="">
+                    <div class="item" ng-repeat="viewPhoto in viewPhotos"
+							ng-class="{active: viewPhoto.uniqueid == photoid}">
+						<img ng-src="{{viewPhoto.piclink}}" alt="">
                         <div class="carousel-caption">
                             <h4>
-                                {{newsletter.newsletterbrand}}{{newsletter.newsletterseason}}</h4>
-                            <p>
-                                {{newsletter.newsletterdescription}}</p>
+                                {{viewPhoto.label}}</h4>
+							<p>{{viewPhoto.seasonname}}</p>
                         </div>
                     </div>
                 </div>

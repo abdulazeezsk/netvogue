@@ -25,7 +25,8 @@
             </div>
            <div class="leftpane_filter_name">
             <span class="leftpane_filter_name">Campaign Name</span> 
-            <input type="text" class="span3" placeholder="Campaign name"/>
+            <input type="text" ng-model="searchgalleryname" class="span3" 
+            				placeholder="Campaign name" ng-change="getgalleries()"/>
            </div>
         </div>
         <!-- left pane -->
@@ -41,11 +42,10 @@
                 </span>
                 <div class="divi2 right_pane_underline">
                 </div>
-                <span class="left right_pane_info">
-                        Find Print Campaigns using the filters
-                </span>
-                <span  class="right" ng-show="isMyProfile">
-                <a data-toggle="modal" href="#CreatePrintcampaign" class="rightpane_add_btn">create print campaign </a></span>
+                <span class="left right_pane_info"> Find print campaigns using the
+					filters </span> <span class="right"> <a data-toggle="modal"
+					href="#CreatePrintcampaign" class="rightpane_add_btn">create gallery</a>
+				</span>
                 <div class="divi2 right_pane_underline">
                 </div>
              </div>
@@ -53,27 +53,25 @@
                 
                 <div>
                 <ul class="thumbnails">
-                    <li ng-repeat="printcampign in printcampaigns">
+                    <li ng-repeat="gallery in galleries">
                         <div class="view view-first">
-                            <a href="#/{{printcampign.campaignlistitemid}}">
-                                <img src="{{printcampign.campaigncoverpic}}" alt=""></a>
+                            <a ng-href="#/campaign?id={{gallery.galleryid}}">
+                                <img ng-src="{{gallery.gallerypic}}" alt=""></a>
                             <div class="mask">
                             </div>
                             <div class="content">
                                 <div class="mask">
                                     <ul ng-show="isMyProfile">
-                                        <li><a href="#" title="Delete"><i class="icon-trash icon-white"></i></a></li>
+                                        <li><a ng-click="deletegallery(gallery.galleryid)" title="Delete"><i class="icon-trash icon-white"></i></a></li>
                                         <li><a data-toggle="modal" href="#EditPrintcampaign" title="Edit"><i class="icon-edit icon-white"></i>
                                         </a></li>
                                     </ul>
                                     <p>
-                                        <u>{{printcampign.campaignname}}</u>
-                                        <br />
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                        unknown printer took a galley of type i</p>
+                                        <u>{{gallery.galleryname}}</u>
+                                        <br />{{gallery.gallerydesc}}
+                                    </p>
                                     <h1>
-                                        <a href="#/campaign" class="mask_edit">view</a></h1>
+                                        <a ng-href="#/campaign?id={{gallery.galleryid}}" class="mask_edit">view</a></h1>
                                 </div>
                             </div>
                             <div class="divi2">
@@ -81,7 +79,7 @@
                         </div>
                         <div class="title">
                             <h3>
-                                {{printcampign.campaignname}}</h3>
+                                {{gallery.galleryname}}</h3>
                         </div> 
                     </li>
                 </ul>
@@ -100,18 +98,17 @@
 	</div>
 	<div class="modal-body">
 		<div>
-			<input type="text" class="span4" placeholder="Print campaign name" />
-			 <textarea style="width: 500px;" rows="9" placeholder="Enter description"></textarea>
+			<input type="text" class="span4" ng-model="galleryname" placeholder="Print campaign name" />
+			<textarea style="width: 500px;" rows="9" ng-model="gallerydesc" placeholder="Enter description"></textarea>
 		</div>
 		</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" data-dismiss="modal" href="#/addprintcampaign">
+			class="btn btn-primary" data-dismiss="modal" ng-click="creategallery()">
 			Create print campaign</a>
 	</div>
 </div>
 <!-- modal -->
-
 
 <!-- modal -->
 <div class="modal  hide" id="EditPrintcampaign">

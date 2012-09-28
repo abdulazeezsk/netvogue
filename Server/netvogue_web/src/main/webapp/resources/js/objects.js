@@ -233,6 +233,11 @@ netvogue.newsletter = function() {
 };
 netvogue.newsletter.prototype = new netvogue.campaign();
 
+netvogue.campaignjsonrequest = function(name, desc, id) {
+	this.id 	= id;
+	this.name	= name;
+	this.desc	= desc;
+};
 /*************************************************************************/
 /************************End of*******************************************/
 /*********************Campaign Objects************************************/
@@ -253,6 +258,13 @@ netvogue.collection = function(collectionlistitemid, collectionbrandname, collec
     this.collectionproductline	= collectionproductline;
     this.collectionimages		= collectionimages;
     this.collectionprivacy		= collectionprivacy;
+};
+
+netvogue.collectionjsonrequest = function(name, desc, id, category) {
+	this.id 		= id;
+	this.name		= name;
+	this.desc		= desc;
+	this.category 	= category;
 };
 
 /*************************************************************************/

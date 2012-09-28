@@ -2,30 +2,134 @@
 
 /* Add and Edit Controllers */
 
-function MyCtrlAddCollections($scope, $routeParams, currentvisitedprofile) {
+function MyCtrlAddGallery($scope, $routeParams, $location, srvgallery, mygallery, currentvisitedprofile) {
+	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
+	if(!$scope.isMyProfile) {
+		$location.url($routeParams.profileid + "/gallery");
+	}
+	
+    $scope.$parent.title	= "Add Gallery";
+    var ajaxrequestcall	 = "gallery";
+	$scope.newfiles = [];
+	$scope.galleryid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.galleryid = $routeParams.id;
+	}
+	
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
+	    $scope.existingfiles	= srvgallery.getphotos($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, "").success(function(data) {
+    	srvgallery.setphotoslocally(data, $routeParams);
+    	$scope.updatedata();
+    }).error(function(data) {
+    	
+    });
+	$scope.filesadded	= function(element) {
+		$scope.$apply(function($scope) {
+			// Turn the FileList object into an Array
+			$scope.$broadcast('filesadded', element.files);
+		});
+	};
+	
+	$scope.updatephoto = function(label, seasonname, photoid) {
+		mygallery.savephotoinfo(ajaxrequestcall, label, seasonname, photoid).success(function(data) {
+			if(data.status == true) {
+				alert("Updated successfully" + data.status);
+			} else {
+				alert("error" + data.status + data.error);
+			}
+		}).error(function(data) {
+			
+		});
+		alert(label + seasonname + photoid);
+	};
+	
+	$scope.deletephoto = function(photoid) {
+		mygallery.deletephoto(ajaxrequestcall, photoid).success(function(data) {
+			mygallery.deletephotoslocally(photoid);
+			$scope.existingfiles	= srvgallery.getphotos($routeParams);
+		}).error(function(data) {
+			alert("error: " + data.error);
+		});
+	};
+}
+
+
+function MyCtrlAddPrintCampaign($scope, $routeParams, $location, srvgallery, mygallery, currentvisitedprofile) {
+
+	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
+	if(!$scope.isMyProfile) {
+		$location.url($routeParams.profileid + "/printcampaign");
+	}
+	
+	var ajaxrequestcall	 = "printcampaign";
+    $scope.$parent.title	= "Add Print Campaign";
+	$scope.newfiles = [];
+	$scope.galleryid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.galleryid = $routeParams.id;
+	}
+	
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
+	    $scope.existingfiles	= srvgallery.getphotos($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, "").success(function(data) {
+    	srvgallery.setphotoslocally(data, $routeParams);
+    	$scope.updatedata();
+    }).error(function(data) {
+    	
+    });
+    
+	$scope.filesadded	= function(element) {
+		$scope.$apply(function($scope) {
+			// Turn the FileList object into an Array
+			$scope.$broadcast('filesadded', element.files);
+		});
+	};
+	
+	$scope.updatephoto = function(label, seasonname, photoid) {
+		mygallery.savephotoinfo(ajaxrequestcall, label, seasonname, photoid).success(function(data) {
+			if(data.status == true) {
+				alert("Updated successfully" + data.status);
+			} else {
+				alert("error" + data.status + data.error);
+			}
+		}).error(function(data) {
+			
+		});
+		alert(label + seasonname + photoid);
+	};
+	
+	$scope.deletephoto = function(photoid) {
+		mygallery.deletephoto(ajaxrequestcall, photoid).success(function(data) {
+			mygallery.deletephotoslocally(photoid);
+			$scope.existingfiles	= srvgallery.getphotos($routeParams);
+		}).error(function(data) {
+			alert("error: " + data.error);
+		});
+	};
+}
+
+function MyCtrlAddVideoCampaign($scope, $routeParams, currentvisitedprofile) {
 
     $scope.backButton = currentvisitedprofile.getBackHistory();
     $scope.addDetails = true;
-    $scope.newcollection = {};
-    $scope.AddCollection = function (collection) {
-        $scope.newcollection = angular.copy(collection);
+    $scope.newvideocampaign = {};
+    $scope.AddVideocampaign = function (video) {
+        $scope.newvideocampaign = angular.copy(video);
         $scope.addDetails = false;
     }
-
-    $scope.categories = [
-	                   {
-	                       "categorytype": "APPAREL"
-	                   },
-                       {
-                           "categorytype": "BAGS"
-                       },
-                       {
-                           "categorytype": "SHOES"
-                       },
-                       {
-                           "categorytype": "ACCESSORIES"
-                       }
-                       ];
 
     $scope.privacyset = [
 	                   {
@@ -38,27 +142,134 @@ function MyCtrlAddCollections($scope, $routeParams, currentvisitedprofile) {
                            "privacytype": "NETWORK"
                        }
                        ];
-    $scope.newfiles = [];
-	$scope.existingfiles = [
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "img/donna_karan_adriana_lima_1.jpg"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300")
-	                        ];
+}
+
+
+function MyCtrlAddNewsletter($scope, $routeParams, $location, svrgallery, mygallery, currentvisitedprofile) {
+
+	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
+	if(!$scope.isMyProfile) {
+		$location.url($routeParams.profileid + "/newsletter");
+	}
+	
+	var ajaxrequestcall	 = "editorial";
+    $scope.$parent.title	= "Add Editorials";
+	$scope.newfiles = [];
+	$scope.galleryid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.galleryid = $routeParams.id;
+	}
+	
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
+	    $scope.existingfiles	= srvgallery.getphotos($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, "").success(function(data) {
+    	srvgallery.setphotoslocally(data, $routeParams);
+    	$scope.updatedata();
+    }).error(function(data) {
+    	
+    });
+    
 	$scope.filesadded	= function(element) {
 		$scope.$apply(function($scope) {
 			// Turn the FileList object into an Array
 			$scope.$broadcast('filesadded', element.files);
 		});
 	};
+	
+	$scope.updatephoto = function(label, seasonname, photoid) {
+		mygallery.savephotoinfo(ajaxrequestcall, label, seasonname, photoid).success(function(data) {
+			if(data.status == true) {
+				alert("Updated successfully" + data.status);
+			} else {
+				alert("error" + data.status + data.error);
+			}
+		}).error(function(data) {
+			
+		});
+		alert(label + seasonname + photoid);
+	};
+	
+	$scope.deletephoto = function(photoid) {
+		mygallery.deletephoto(ajaxrequestcall, photoid).success(function(data) {
+			mygallery.deletephotoslocally(photoid);
+			$scope.existingfiles	= srvgallery.getphotos($routeParams);
+		}).error(function(data) {
+			alert("error: " + data.error);
+		});
+	};
+}
+
+function MyCtrlAddCollections($scope, $routeParams, currentvisitedprofile, $location) {
+
+	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
+	if(!$scope.isMyProfile) {
+		$location.url($routeParams.profileid + "/collections");
+	}
+	
+	var ajaxrequestcall	 = "collection";
+    $scope.$parent.title	= "Add Collection";
+	$scope.newfiles = [];
+	$scope.galleryid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.galleryid = $routeParams.id;
+	}
+	
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
+	    $scope.existingfiles	= srvgallery.getphotos($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, "").success(function(data) {
+    	srvgallery.setphotoslocally(data, $routeParams);
+    	$scope.updatedata();
+    }).error(function(data) {
+    	
+    });
+    
+	$scope.filesadded	= function(element) {
+		$scope.$apply(function($scope) {
+			// Turn the FileList object into an Array
+			$scope.$broadcast('filesadded', element.files);
+		});
+	};
+	
+	$scope.updatephoto = function(label, seasonname, photoid) {
+		mygallery.savephotoinfo(ajaxrequestcall, label, seasonname, photoid).success(function(data) {
+			if(data.status == true) {
+				alert("Updated successfully" + data.status);
+			} else {
+				alert("error" + data.status + data.error);
+			}
+		}).error(function(data) {
+			
+		});
+		alert(label + seasonname + photoid);
+	};
+	
+	$scope.deletephoto = function(photoid) {
+		mygallery.deletephoto(ajaxrequestcall, photoid).success(function(data) {
+			mygallery.deletephotoslocally(photoid);
+			$scope.existingfiles	= srvgallery.getphotos($routeParams);
+		}).error(function(data) {
+			alert("error: " + data.error);
+		});
+	};
 }
 
 function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile) {
 
+	if($scope.parent.iambrand == false) {
+		$location.url("linesheets");
+	}
     $scope.backButton = currentvisitedprofile.getBackHistory();
     $scope.addDetails = true;
     $scope.AddLinesheet = function () {
@@ -109,129 +320,12 @@ function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile) {
                        ];
 }
 
-function MyCtrlAddNewsletter($scope, $routeParams, currentvisitedprofile) {
-
-    $scope.backButton = currentvisitedprofile.getBackHistory();
-    $scope.addDetails = true;
-    $scope.newnewsletter = {};
-    $scope.AddNewsletter = function (newsletter) {
-        $scope.newNewsletter = angular.copy(newsletter);
-        $scope.addDetails = false;
-    }
-
-    $scope.privacyset = [
-	                   {
-	                       "privacytype": "PUBLIC"
-	                   },
-                       {
-                           "privacytype": "PRIVATE"
-                       },
-                       {
-                           "privacytype": "NETWORK"
-                       }
-                       ];
-    
-    $scope.newfiles = [];
-	$scope.existingfiles = [
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "img/donna_karan_adriana_lima_1.jpg"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300")
-	                        ];
-	$scope.filesadded	= function(element) {
-		$scope.$apply(function($scope) {
-			// Turn the FileList object into an Array
-			$scope.$broadcast('filesadded', element.files);
-		});
-	};
-}
-
-function MyCtrlAddPrintCampaign($scope, $routeParams, currentvisitedprofile) {
-
-    $scope.backButton = currentvisitedprofile.getBackHistory();
-    $scope.addDetails = true;
-    $scope.newprintcampaign = {};
-    $scope.AddPrintcampaign = function (printcampaign) {
-        $scope.newPrintcampaign = angular.copy(printcampaign);
-        $scope.addDetails = false;
-    }
-
-    $scope.categories = [
-	                   {
-	                       "categorytype": "APPAREL"
-	                   },
-                       {
-                           "categorytype": "BAGS"
-                       },
-                       {
-                           "categorytype": "SHOES"
-                       },
-                       {
-                           "categorytype": "ACCESSORIES"
-                       }
-                       ];
-
-    $scope.privacyset = [
-	                   {
-	                       "privacytype": "PUBLIC"
-	                   },
-                       {
-                           "privacytype": "PRIVATE"
-                       },
-                       {
-                           "privacytype": "NETWORK"
-                       }
-
-                       ];
-    
-    $scope.newfiles = [];
-	$scope.existingfiles = [
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "img/donna_karan_adriana_lima_1.jpg"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x300")
-	                        ];
-	$scope.filesadded	= function(element) {
-		$scope.$apply(function($scope) {
-			// Turn the FileList object into an Array
-			$scope.$broadcast('filesadded', element.files);
-		});
-	};
-}
-
-function MyCtrlAddVideoCampaign($scope, $routeParams, currentvisitedprofile) {
-
-    $scope.backButton = currentvisitedprofile.getBackHistory();
-    $scope.addDetails = true;
-    $scope.newvideocampaign = {};
-    $scope.AddVideocampaign = function (video) {
-        $scope.newvideocampaign = angular.copy(video);
-        $scope.addDetails = false;
-    }
-
-    $scope.privacyset = [
-	                   {
-	                       "privacytype": "PUBLIC"
-	                   },
-                       {
-                           "privacytype": "PRIVATE"
-                       },
-                       {
-                           "privacytype": "NETWORK"
-                       }
-                       ];
-}
-
 function MyCtrlEditCollections($scope, $routeParams, currentvisitedprofile) {
 
+	if($scope.parent.iambrand == false) {
+		$location.url("collections");
+	}
+	
     $scope.backButton = currentvisitedprofile.getBackHistory();
     $scope.addDetails = true;
     $scope.newcollection = {};
@@ -304,6 +398,9 @@ function MyCtrlEditCollections($scope, $routeParams, currentvisitedprofile) {
 
 function MyCtrlEditLinesheets($scope, $routeParams, currentvisitedprofile) {
 
+	if($scope.parent.iambrand == false) {
+		$location.url("linesheets");
+	}
     $scope.backButton = currentvisitedprofile.getBackHistory();
     $scope.addDetails = true;
     $scope.linesheets = [
@@ -464,6 +561,9 @@ function MyCtrlEditVideoCampaigns($scope, $routeParams, currentvisitedprofile) {
 
 function MyCtrlEditStyles($scope, $routeParams, currentvisitedprofile) {
 
+	if($scope.parent.iambrand == false) {
+		$location.url("linesheets");
+	}
     $scope.backButton = currentvisitedprofile.getBackHistory();
     $scope.addDetails = true;
     $scope.categories = [
@@ -531,6 +631,9 @@ function MyCtrlEditStyles($scope, $routeParams, currentvisitedprofile) {
 
 function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
 
+	if($scope.parent.iambrand == false) {
+		$location.url("linesheets");
+	}
     $scope.backButton = currentvisitedprofile.getBackHistory();
     $scope.addDetails = true;
     $scope.styles = [
@@ -579,64 +682,4 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
 	                   }
                        ];
 
-}
-
-function MyCtrlAddGallery($scope, $routeParams, srvgallery, mygallery) {
-	$scope.newfiles = [];
-	$scope.galleryid = "";
-	if (!angular.isUndefined($routeParams.id)) {
-		$scope.galleryid = $routeParams.id;
-	}
-	
-	/*$scope.existingfiles = [
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "img/donna_karan_adriana_lima_1.jpg"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150"),
-	                        	new netvogue.photo("Thumbnail Azeez", "Season Name", "http://placehold.it/210x150")
-	                        ];*/
-	$scope.updatedata = function() {
-	    $scope.entityname  		= srvgallery.getname($routeParams);
-	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
-	    $scope.existingfiles	= srvgallery.getphotos($routeParams);
-    };
-    
-    //Get all the profile data from the Server through AJAX everytime user comes here. 
-    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    srvgallery.photos($routeParams, $scope.galleryid, "").success(function(data) {
-    	srvgallery.setphotoslocally(data, $routeParams);
-    	$scope.updatedata();
-    }).error(function(data) {
-    	
-    });
-    $scope.updatedata();
-	$scope.filesadded	= function(element) {
-		$scope.$apply(function($scope) {
-			// Turn the FileList object into an Array
-			$scope.$broadcast('filesadded', element.files);
-		});
-	};
-	
-	$scope.updatephoto = function(label, seasonname, photoid) {
-		mygallery.savephotoinfo(label, seasonname, photoid).success(function(data) {
-			if(data.status == true) {
-				alert("Updated successfully");
-			}
-		}).error(function(data) {
-			
-		});
-		alert(label + seasonname + photoid);
-	};
-	
-	$scope.deletephoto = function(photoid) {
-		mygallery.deletephoto(photoid).success(function(data) {
-			mygallery.deletephotoslocally(photoid);
-			$scope.existingfiles	= srvgallery.getphotos($routeParams);
-		}).error(function(data) {
-			alert("error: " + data.error);
-		});
-	};
 }

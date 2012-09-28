@@ -506,15 +506,15 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	    	setgalleryname: function(name) {
 	    		this.galleryname = name;
 	    	},
-	    	creategallery: function(name) {
+	    	creategallery: function(ajaxrequestcall, jsonrequest) {
 	    		var config = {
     				method: "POST",
-    				data: name,
-                    url: "creategallery"
+    				data: jsonrequest,
+                    url: ajaxrequestcall + "/create"
                 };
                 return $http(config);
 	    	},
-	    	savegalleryname: function(galleryid, newname) {
+	    	updategallery: function(ajaxrequestcall, galleryid, newname) {
 	    		var datatosend = {
 	    				"id" 	: galleryid,
 	    				"value"	: newname,
@@ -522,15 +522,15 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	    		var config = {
 	    				method: "POST",
 	    				data: datatosend,
-	                    url: "editgalleryname"
+	                    url: ajaxrequestcall + "/edit"
 	                };
 	            return $http(config);
 	    	},
-	    	deletegallery: function(galleryid) {
+	    	deletegallery: function(ajaxrequestcall, galleryid) {
 	    		var config = {
 	    			method: "POST",
 	    			data: galleryid,
-	                url: "deletegallery"
+	                url: ajaxrequestcall + "/delete"
 	            };
 	    		return $http(config);
 	    	},
@@ -551,7 +551,7 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	    		galleryname = photostemp.galleryname;
 	    		angular.copy(photostemp.photos, photos);
 	    	},
-	    	savephotoinfo: function(label, seasonname, photoid) {
+	    	savephotoinfo: function(ajaxrequestcall, label, seasonname, photoid) {
 	    		var datatosend = {
 	    				"photoname" : label,
 	    				"seasonname": seasonname,
@@ -560,7 +560,7 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	    		var config = {
 	    				method: "POST",
 	    				data: datatosend,
-	                    url: "editphotoinfo"
+	                    url: ajaxrequestcall + "/editphotoinfo"
 	                };
 	            return $http(config);
 	    	},
@@ -568,7 +568,7 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	    		var config = {
 	    			method: "POST",
 	    			data: photoid,
-	                url: "deletephoto"
+	                url: ajaxrequestcall + "/deletephoto"
 	            };
 	    		return $http(config);
 	    	},
@@ -609,22 +609,22 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	        	  return mygallery.getgalleries();
 	          }
 	      },
-    	  galleries: function (routeparams, galleryname) {
+    	  galleries: function (ajaxrequestcall, routeparams, jsonrequest) {
 	          var profileid = "";
 	          if (!angular.isUndefined(routeparams.profileid)) {
 	        	  profileid = routeparams.profileid;
 	          }
 	          var datatosend = {
-		  				"galleryname" : galleryname
+		  				"galleryname" : jsonrequest
 		  	};
 	          var config = {
 	              method: "GET",
 	              params: datatosend,
-	              url: "getgalleries/" + profileid
+	              url: ajaxrequestcall + "/" + profileid
 	          };
 	          return $http(config);
 	      },
-	      photos: function (routeparams, galleryid, photoname) {
+	      photos: function (ajaxrequestcall, routeparams, galleryid, photoname) {
 	          var profileid = "";
 	          if (!angular.isUndefined(routeparams.profileid)) {
 	        	  profileid = routeparams.profileid;
@@ -636,7 +636,7 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	          var config = {
 	              method: "GET",
 	              params: datatosend,
-	              url: "getphotos/" + profileid
+	              url: ajaxrequestcall + "/getphotos/" + profileid
 	          };
 	          return $http(config);
 	      },

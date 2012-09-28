@@ -32,7 +32,7 @@ public class Boutique extends User{
 	//Stores -- Add new relationship/class to stores
 	
 	//Relation to collection relation relation type to brand collection
-	Map<String, Collections> myCollections;
+	//Map<String, Collections> myCollections;
 	
 	Collection<Notification> myNotifications;
 

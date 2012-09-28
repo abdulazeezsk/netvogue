@@ -20,7 +20,13 @@
             	<bean class="org.netvogue.server.webmvc.converters.UserConverterFactory" />
             	<bean class="org.netvogue.server.webmvc.converters.ProductLineConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.GalleryConverter" />
+            	<bean class="org.netvogue.server.webmvc.converters.PrintCampaignConverter" />
+            	<bean class="org.netvogue.server.webmvc.converters.EditorialConverter" />
+            	<bean class="org.netvogue.server.webmvc.converters.CollectionConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.PhotoConverter" />
+            	<bean class="org.netvogue.server.webmvc.converters.PrintCampaignPhotoConverter" />
+            	<bean class="org.netvogue.server.webmvc.converters.EditorialPhotoConverter" />
+            	<bean class="org.netvogue.server.webmvc.converters.CollectionPhotoConverter" />
         	</list>
     	</property>
 	</bean>

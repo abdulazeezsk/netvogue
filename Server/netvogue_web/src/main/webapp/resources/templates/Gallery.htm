@@ -54,7 +54,7 @@
 					<ul class="thumbnails">
 						<li ng-repeat="gallery in galleries">
 							<div class="galleryview galleryview-firstglry">
-								<a ng-href="#/{{gallery.galleryid}}"> <img
+								<a ng-href="#/photos?id={{gallery.galleryid}}"> <img
 									ng-src="{{gallery.gallerypic}}" alt=""></a>
 								<div class="maskglry mask-1"></div>
 								<div class="maskglry mask-2">
@@ -104,8 +104,6 @@
 	</div>
 </div>
 <!-- modal -->
-
-
 
 <!-- modal -->
 <div class="modal  hide" id="EditGallery">

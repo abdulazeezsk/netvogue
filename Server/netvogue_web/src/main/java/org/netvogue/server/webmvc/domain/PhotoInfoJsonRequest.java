@@ -1,6 +1,6 @@
 package org.netvogue.server.webmvc.domain;
 
-public class PhotoInfo {
+public class PhotoInfoJsonRequest {
 	String photoid;
 	String photoname;
 	String seasonname;

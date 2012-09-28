@@ -8,7 +8,8 @@ import org.springframework.data.neo4j.annotation.*;
 import org.springframework.data.neo4j.support.index.*;
 
 //Generic imports
-import java.util.*;
+import java.util.Date;
+import java.util.Collection;
 
 @NodeEntity
 public class BrandLineSheet {

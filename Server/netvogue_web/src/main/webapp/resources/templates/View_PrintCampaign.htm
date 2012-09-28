@@ -21,16 +21,15 @@
 				<div>
 					<h4 class="leftpane_subheading">Print Campaign</h4>
 					<ul class="nav nav-tab nav-stacked">
-						<li ng-repeat="printcampaign in printcampaigns">
+						<li ng-repeat="photo in viewPhotos">
 							<div class="leftpanefeed">
 								<div class="feedimage">
-									<a href="#/{{printcampaign.printcampaignlistitemid}}"> <img
-										alt="" ng-src="{{printcampaign.printcampaignpic}}"
-										class="pull-left"></a>
+									<a ng-click="setphotoid(photo.uniqueid)"> <img alt=""
+										ng-src="{{photo.left_url}}" class="pull-left"></a>
 								</div>
 								<div class="leftpanefeed_text">
 									<h3>
-										<a href="#/{{printcampaign.printcampaignlistitemid}}" title="">{{printcampaign.printcampaignname}}</a>
+										<a ng-click="setphotoid(photo.uniqueid)" title="">{{photo.label}}</a>
 									</h3>
 								</div>
 							</div>
@@ -42,10 +41,10 @@
 		<!-- left pane -->
 		<!-- right pane -->
 		<div class="span9">
-			<span class="left heading_btn"> <a href="#/printcampaign">print
+			<span class="left heading_btn"> <a ng-href="#/printcampaign">print
 					campaign</a> <span class="divider">/</span> <span>
-					<a href="#/campaign">
-					Untitled</a></span>
+					<a ng-href="#/campaign?id={{galleryid}}">{{galleryname}}
+					</a></span>
 			</span>
 			<div class="divi2 right_pane_underline"></div>
 			  <!-- <span class="left right_pane_info">
@@ -59,14 +58,13 @@
 			<div id="myCarousel" class="carousel slide">
 				<!-- Carousel items -->
 				<div class="carousel-inner">
-					<div class="item"
-						ng-repeat="viewPrintcampaign in viewPrintcampaigns"
-						ng-class="{active: $first}">
-						<img src="{{viewPrintcampaign.printcampaignpic}}" alt="">
+					<div class="item" ng-repeat="viewPhoto in viewPhotos"
+							ng-class="{active: viewPhoto.uniqueid == photoid}">
+						<img ng-src="{{viewPhoto.piclink}}" alt="">
 						<div class="carousel-caption">
 							<h4>
-								{{viewPrintcampaign.printcampaignname}}{{viewPrintcampaign.printcampaignseason}}</h4>
-							<p>{{viewPrintcampaign.printcampaigndescription}}</p>
+								{{viewPhoto.label}}</h4>
+							<p>{{viewPhoto.seasonname}}</p>
 						</div>
 					</div>
 				</div>

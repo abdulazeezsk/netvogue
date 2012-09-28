@@ -14,14 +14,14 @@ public interface BoutiqueRepository extends GraphRepository<Boutique>{
 	Iterable<Boutique> findBynameSearch(String query, USER_TYPE userType);
 	
 	@Query("START me=node:search({username}) /" +
-		    "MATCH me-[r:NETWORK]-network-[:HAS_COLLECTION]-collections /" +
+		    "MATCH me-[r:NETWORK]-network-[:COLLECTION]-collections /" +
 			"WHERE r.status == 'CONFIRMED' /" +
 		    "RETURN collections /" +
 			"SKIP {pagenumber*pagesize} LIMIT{pagesize}")
-	Iterable<Collections> getAllCollections(@Param("username") String username);
+	Iterable<Collection> getAllCollections(@Param("username") String username);
 	
 	@Query("START me=node:search({username}) /" +
-		    "MATCH me-[r:NETWORK]-network-[:HAS_COLLECTION]-collections /" +
+		    "MATCH me-[r:NETWORK]-network-[:COLLECTION]-collections /" +
 			"WHERE r.status == 'CONFIRMED' /" +
 		    "RETURN collections /" +
 			"SKIP {pagenumber*pagesize} LIMIT{pagesize}")

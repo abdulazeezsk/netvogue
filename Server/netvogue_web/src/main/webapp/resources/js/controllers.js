@@ -157,22 +157,12 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, s
 	$scope.galleryname = "";
 	$scope.$parent.title = 'Gallery';
 	
-	//$scope.entityname = currentvisitedprofile.getEntityName();
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 
 	$scope.backButton = currentvisitedprofile.getBackHistory();
-	/*$scope.galleries = [
-	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
-	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
-	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
-	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
-	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
-	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
-	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
-	                    new netvogue.gallery("galleryId", "Studded Winston", "http://placehold.it/220x150", "Spring 2012", "25/04/2012"),
-	                    ];*/
 	
 	$scope.searchgalleryname = ""; 
+	var ajaxrequestcall	 = "gallery";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
 	    $scope.galleries		= srvgallery.getgalleries($routeParams);
@@ -181,7 +171,7 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, s
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getgalleries = function() {
-    	srvgallery.galleries($routeParams, $scope.searchgalleryname).success(function(data) {
+    	srvgallery.galleries("getgalleries", $routeParams, $scope.searchgalleryname).success(function(data) {
         	srvgallery.setgallerylocally(data, $routeParams);
         	$scope.updatedata();
         }).error(function(data) {
@@ -192,7 +182,7 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, s
     $scope.updatedata();
     
     $scope.creategallery = function() {
-    	mygallery.creategallery($scope.galleryname).success(function(data) {
+    	mygallery.creategallery(ajaxrequestcall, $scope.galleryname).success(function(data) {
     		if(data.status == true) {
     			$location.url("addgallery?id=" + data.idcreated);
     		}
@@ -202,7 +192,7 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, s
     };
     
     $scope.updategallery = function() {
-    	mygallery.updatedgallery($scope.galleryname).success(function(data) {
+    	mygallery.updatedgallery(ajaxrequestcall, $scope.galleryname).success(function(data) {
     		
     	}).error(function(data) {
     		
@@ -210,14 +200,13 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, s
     };
     
     $scope.deletegallery = function(galleryid) {
-    	mygallery.deletegallery(galleryid).success(function(data) {
+    	mygallery.deletegallery(ajaxrequestcall, galleryid).success(function(data) {
     		mygallery.deletegallerylocally(galleryid);
     		$scope.galleries		= srvgallery.getgalleries($routeParams);
     	}).error(function(data) {
     		
     	});
     };
-
 }
 
 function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, srvgallery, mygallery) {
@@ -230,19 +219,8 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, srvgallery, m
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.galleryid = $routeParams.id;
 	}
+	var ajaxrequestcall	 = "gallery";
 	$scope.searchphotoname = "";
-	/*$scope.photogallery = [ 
-	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
-	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
-	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
-	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
-	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
-	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
-	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
-	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
-	                   new netvogue.photo("Studded Winston", "Spring 2012", "http://placehold.it/220x150", "photogalleryId"),
-	                   	];*/
-
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
@@ -252,7 +230,7 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, srvgallery, m
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getphotos = function() {
-    	srvgallery.photos($routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
+    	srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
         	srvgallery.setphotoslocally(data, $routeParams);
         	$scope.updatedata();
         }).error(function(data) {
@@ -264,7 +242,7 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, srvgallery, m
     $scope.updatedata();
     
     $scope.deletephoto = function(uniqueid) {
-    	mygallery.deletephoto(uniqueid).success(function(data) {
+    	mygallery.deletephoto(ajaxrequestcall, uniqueid).success(function(data) {
 			mygallery.deletephotoslocally(uniqueid);
 			$scope.photogallery	= srvgallery.getphotos($routeParams);
 		}).error(function(data) {
@@ -278,55 +256,7 @@ function MyCtrlViewPhotos($scope, $routeParams, currentvisitedprofile, srvgaller
 	$scope.$parent.title = 'ViewPhotos';
 
 	$scope.backButton = currentvisitedprofile.getBackHistory();
-	/*$scope.viewPhotos = [
-			{
-				"photolistitemid" : "printcampaignId",
-				"photoname" : "Calvin Klien",
-				"photodescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
-									+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
-				"photopic" : "img/donna_karan_adriana_lima_1.jpg"
-
-			},
-			{
-				"photolistitemid" : "printcampaignId",
-				"photoname" : "Calvin Klien",
-				"photodescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
-									+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
-				"photopic" : "img/donna_karan_adriana_lima_2.jpg"
-			
-			},
-			{
-					"photolistitemid" : "printcampaignId",
-					"photoname" : "Calvin Klien",
-					"photodescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
-										+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
-					"photopic" : "img/donna_karan_adriana_lima_3.jpg"
-
-			}
-
-	];
-
-	$scope.photos = [
-	{
-		"photolistitemid" : "Id",
-		"photoname" : "Studded Winston",
-		"photopic" : "http://placehold.it/130x100"
-
-	},
-	{
-		"photolistitemid" : "Id",
-		"photoname" : "Studded Winston",
-		"photopic" : "http://placehold.it/130x100"
-
-	},
-	{
-		"photolistitemid" : "Id",
-		"photoname" : "Studded Winston",
-		"photopic" : "http://placehold.it/130x100"
-
-	}
-	];*/
-	
+		
 	$scope.photoid = "";
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.photoid = $routeParams.id;
@@ -348,29 +278,129 @@ function MyCtrlViewPhotos($scope, $routeParams, currentvisitedprofile, srvgaller
     };
 }
 
-function MyCtrlPrintcampaign($scope, $routeParams, currentvisitedprofile,
-		srvprofile) {
+function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprofile, srvgallery, mygallery) {
 
-	$scope.$parent.title = 'Printcampaigns';
-
-	$scope.entityname = currentvisitedprofile.getEntityName();
+	$scope.galleryname = "new";
+	$scope.gallerydesc = "description";	
+	$scope.$parent.title = 'Print Campaigns';
+	
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
-
 	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.printcampaigns = srvprofile.getprintcampaigns($routeParams);
-
+	
+	$scope.searchgalleryname = ""; 
+	var ajaxrequestcall	 = "printcampaign";
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleries		= srvgallery.getgalleries($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    $scope.getgalleries = function() {
+    	srvgallery.galleries("getprintcampaigns", $routeParams, $scope.searchgalleryname).success(function(data) {
+        	srvgallery.setgallerylocally(data, $routeParams);
+        	$scope.updatedata();
+        }).error(function(data) {
+        	
+        });
+    };
+    $scope.getgalleries();
+    
+    $scope.creategallery = function() {
+    	var jsonrequest = new netvogue.campaignjsonrequest($scope.galleryname, $scope.gallerydesc, "");
+    	mygallery.creategallery(ajaxrequestcall, jsonrequest).success(function(data) {
+    		if(data.status == true) {
+    			$location.url("addprintcampaign?id=" + data.idcreated);
+    		}
+        }).error(function(data) {
+        	
+        });
+    };
+    
+    $scope.updategallery = function() {
+    	var jsonrequest = new netvogue.campaignjsonrequest($scope.galleryname, $scope.gallerydesc);
+    	mygallery.updatedgallery(ajaxrequestcall, jsonrequest).success(function(data) {
+    		
+    	}).error(function(data) {
+    		
+    	});
+    };
+    
+    $scope.deletegallery = function(galleryid) {
+    	mygallery.deletegallery(ajaxrequestcall, galleryid).success(function(data) {
+    		mygallery.deletegallerylocally(galleryid);
+    		$scope.galleries		= srvgallery.getgalleries($routeParams);
+    	}).error(function(data) {
+    		
+    	});
+    };
 }
-function MyCtrlCampaign($scope, $routeParams, currentvisitedprofile,
-		srvprofile) {
 
-	$scope.$parent.title = 'Printcampaign';
+function MyCtrlCampaign($scope, $routeParams, currentvisitedprofile, srvgallery, mygallery) {
 
-	$scope.entityname = currentvisitedprofile.getEntityName();
+	$scope.$parent.title = 'Print Campaign';
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 
 	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.printcampaigns = srvprofile.getprintcampaigns($routeParams);
+	$scope.galleryid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.galleryid = $routeParams.id;
+	}
+	var ajaxrequestcall	 = "printcampaign";
+	$scope.searchphotoname = "";
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
+	    $scope.photogallery		= srvgallery.getphotos($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    $scope.getphotos = function() {
+    	srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
+        	srvgallery.setphotoslocally(data, $routeParams);
+        	$scope.updatedata();
+        }).error(function(data) {
+        	
+        });
+    };
+    
+    $scope.getphotos();
+    $scope.deletephoto = function(uniqueid) {
+    	mygallery.deletephoto(ajaxrequestcall, uniqueid).success(function(data) {
+			mygallery.deletephotoslocally(uniqueid);
+			$scope.photogallery	= srvgallery.getphotos($routeParams);
+		}).error(function(data) {
+			alert("error");
+		});
+    };
+}
 
+function MyCtrlviewPrintcampaign($scope, $routeParams, currentvisitedprofile) {
+
+	$scope.$parent.title = 'ViewPhotos';
+
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+		
+	$scope.photoid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.photoid = $routeParams.id;
+	}
+	$scope.galleryid = "";
+	if (!angular.isUndefined($routeParams.galleryid)) {
+		$scope.galleryid = $routeParams.galleryid;
+	}
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
+	    $scope.viewPhotos		= srvgallery.getphotos($routeParams);
+    };
+    
+    $scope.updatedata();
+
+    $scope.setphotoid = function(photoid) {
+    	$scope.photoid = photoid;
+    };
 }
 
 function MyCtrlVideocampaign($scope, $routeParams, currentvisitedprofile,
@@ -387,32 +417,260 @@ function MyCtrlVideocampaign($scope, $routeParams, currentvisitedprofile,
 
 }
 
-function MyCtrlNewsletter($scope, $routeParams, currentvisitedprofile,
-		srvprofile) {
+function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile, srvgallery, mygallery) {
+
+	$scope.galleryname = "new";
+	$scope.gallerydesc = "description";	
+	$scope.$parent.title = 'News letters';
+	
+	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+	
+	$scope.searchgalleryname = ""; 
+	var ajaxrequestcall	 = "editorial";
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleries		= srvgallery.getgalleries($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    $scope.getgalleries = function() {
+    	srvgallery.galleries("geteditorials", $routeParams, $scope.searchgalleryname).success(function(data) {
+        	srvgallery.setgallerylocally(data, $routeParams);
+        	$scope.updatedata();
+        }).error(function(data) {
+        	
+        });
+    };
+    $scope.getgalleries();
+    
+    $scope.creategallery = function() {
+    	var jsonrequest = new netvogue.campaignjsonrequest($scope.galleryname, $scope.gallerydesc, "");
+    	mygallery.creategallery(ajaxrequestcall, jsonrequest).success(function(data) {
+    		if(data.status == true) {
+    			$location.url("addnewsletter?id=" + data.idcreated);
+    		}
+        }).error(function(data) {
+        	
+        });
+    };
+    
+    $scope.updategallery = function() {
+    	var jsonrequest = new netvogue.campaignjsonrequest($scope.galleryname, $scope.gallerydesc);
+    	mygallery.updatedgallery(ajaxrequestcall, jsonrequest).success(function(data) {
+    		
+    	}).error(function(data) {
+    		
+    	});
+    };
+    
+    $scope.deletegallery = function(galleryid) {
+    	mygallery.deletegallery(ajaxrequestcall, galleryid).success(function(data) {
+    		mygallery.deletegallerylocally(galleryid);
+    		$scope.galleries		= srvgallery.getgalleries($routeParams);
+    	}).error(function(data) {
+    		
+    	});
+    };
+}
+
+function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile, srvgallery, mygallery) {
 
 	$scope.$parent.title = 'Newsletter';
-
-	$scope.entityname = currentvisitedprofile.getEntityName();
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 
-	$scope.links = currentvisitedprofile.getleftpanellinks();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.newsletters = srvprofile.getnewsletters($routeParams);
+	$scope.galleryid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.galleryid = $routeParams.id;
+	}
+	var ajaxrequestcall	 = "printcampaign";
+	$scope.searchphotoname = "";
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
+	    $scope.photogallery		= srvgallery.getphotos($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    $scope.getphotos = function() {
+    	srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
+        	srvgallery.setphotoslocally(data, $routeParams);
+        	$scope.updatedata();
+        }).error(function(data) {
+        	
+        });
+    };
+    
+    $scope.getphotos();
+    $scope.deletephoto = function(uniqueid) {
+    	mygallery.deletephoto(ajaxrequestcall, uniqueid).success(function(data) {
+			mygallery.deletephotoslocally(uniqueid);
+			$scope.photogallery	= srvgallery.getphotos($routeParams);
+		}).error(function(data) {
+			alert("error");
+		});
+    };
 
 }
 
-function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile,
-		srvprofile) {
 
-	$scope.$parent.title = 'Newsletter';
+function MyCtrlViewNewsLetters($scope, $routeParams, currentvisitedprofile) {
 
-	$scope.entityname = currentvisitedprofile.getEntityName();
+	$scope.$parent.title = 'ViewNewsLetter';
+
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+	
+	$scope.photoid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.photoid = $routeParams.id;
+	}
+	$scope.galleryid = "";
+	if (!angular.isUndefined($routeParams.galleryid)) {
+		$scope.galleryid = $routeParams.galleryid;
+	}
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
+	    $scope.viewPhotos		= srvgallery.getphotos($routeParams);
+    };
+    
+    $scope.updatedata();
+
+    $scope.setphotoid = function(photoid) {
+    	$scope.photoid = photoid;
+    };
+
+}
+
+function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofile, srvgallery, mygallery) {
+
+	$scope.galleryname = "new";
+	$scope.gallerydesc = "description";	
+	$scope.$parent.title = 'Collections';
+	
+	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+	
+	$scope.searchgalleryname = ""; 
+	var ajaxrequestcall	 = "collection";
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleries		= srvgallery.getgalleries($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    $scope.getgalleries = function() {
+    	srvgallery.galleries("getcollectionss", $routeParams, $scope.searchgalleryname).success(function(data) {
+        	srvgallery.setgallerylocally(data, $routeParams);
+        	$scope.updatedata();
+        }).error(function(data) {
+        	
+        });
+    };
+    $scope.getgalleries();
+    
+    $scope.creategallery = function() {
+    	var jsonrequest = new netvogue.collectionjsonrequest($scope.galleryname, $scope.gallerydesc, "");
+    	mygallery.creategallery(ajaxrequestcall, jsonrequest).success(function(data) {
+    		if(data.status == true) {
+    			$location.url("addcollections?id=" + data.idcreated);
+    		}
+        }).error(function(data) {
+        	
+        });
+    };
+    
+    $scope.updategallery = function() {
+    	var jsonrequest = new netvogue.collectionjsonrequest($scope.galleryname, $scope.gallerydesc);
+    	mygallery.updatedgallery(ajaxrequestcall, jsonrequest).success(function(data) {
+    		
+    	}).error(function(data) {
+    		
+    	});
+    };
+    
+    $scope.deletegallery = function(galleryid) {
+    	mygallery.deletegallery(ajaxrequestcall, galleryid).success(function(data) {
+    		mygallery.deletegallerylocally(galleryid);
+    		$scope.galleries		= srvgallery.getgalleries($routeParams);
+    	}).error(function(data) {
+    		
+    	});
+    };
+
+	$scope.searchFilter = new netvogue.searchFilter();
+}
+
+function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, srvgallery, mygallery) {
+
+	$scope.$parent.title = "Collections";
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 
-	$scope.links = currentvisitedprofile.getleftpanellinks();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.newsletters = srvprofile.getnewsletters($routeParams);
+	$scope.galleryid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.galleryid = $routeParams.id;
+	}
+	var ajaxrequestcall	 = "printcampaign";
+	$scope.searchphotoname = "";
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
+	    $scope.photogallery		= srvgallery.getphotos($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    $scope.getphotos = function() {
+    	srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
+        	srvgallery.setphotoslocally(data, $routeParams);
+        	$scope.updatedata();
+        }).error(function(data) {
+        	
+        });
+    };
+    
+    $scope.getphotos();
+    $scope.deletephoto = function(uniqueid) {
+    	mygallery.deletephoto(ajaxrequestcall, uniqueid).success(function(data) {
+			mygallery.deletephotoslocally(uniqueid);
+			$scope.photogallery	= srvgallery.getphotos($routeParams);
+		}).error(function(data) {
+			alert("error");
+		});
+    };
 
+	$scope.searchFilter = new netvogue.searchFilter();
+}
+
+function MyCtrlViewcollection($scope, $routeParams, currentvisitedprofile) {
+
+	$scope.$parent.title = 'ViewCollection';
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+	
+	$scope.photoid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.photoid = $routeParams.id;
+	}
+	$scope.galleryid = "";
+	if (!angular.isUndefined($routeParams.galleryid)) {
+		$scope.galleryid = $routeParams.galleryid;
+	}
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
+	    $scope.viewPhotos		= srvgallery.getphotos($routeParams);
+    };
+    
+    $scope.updatedata();
+
+    $scope.setphotoid = function(photoid) {
+    	$scope.photoid = photoid;
+    };
 }
 
 function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofile) {
@@ -683,33 +941,7 @@ function MyCtrlAdvancedSearch($scope, search) {
 	});
 	$scope.searchFilter = new netvogue.searchFilter();
 }
-function MyCtrlCollections($scope, $routeParams, currentvisitedprofile,
-		srvprofile) {
 
-	$scope.$parent.title = "Collections";
-	$scope.entityname = currentvisitedprofile.getEntityName();
-	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
-
-	$scope.links = currentvisitedprofile.getleftpanellinks();
-	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.collections = srvprofile.getcollections($routeParams);
-
-	$scope.searchFilter = new netvogue.searchFilter();
-}
-
-function MyCtrlCollection($scope, $routeParams, currentvisitedprofile,
-		srvprofile) {
-
-	$scope.$parent.title = "Collection";
-	$scope.entityname = currentvisitedprofile.getEntityName();
-	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
-
-	$scope.links = currentvisitedprofile.getleftpanellinks();
-	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.collections = srvprofile.getcollections($routeParams);
-
-	$scope.searchFilter = new netvogue.searchFilter();
-}
 function MyCtrlLinesheets($scope, $routeParams, currentvisitedprofile,
 		srvprofile) {
 
@@ -848,67 +1080,6 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile) {
 		"linesheetcoverpic" : "http://placehold.it/90x119"
 
 	} ];
-
-}
-
-function MyCtrlviewPrintcampaign($scope, $routeParams, currentvisitedprofile) {
-
-	$scope.$parent.title = 'ViewPrintcampaign';
-
-	$scope.entityname = currentvisitedprofile.getEntityName();
-
-	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.viewPrintcampaigns = [
-			{
-				"printcampaignlistitemid" : "printcampaignId",
-				"printcampaignname" : "Calvin Klien",
-				"printcampaignseason" : "Spring 2012",
-				"printcampaigndescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
-						+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
-				"printcampaignpic" : "img/donna_karan_adriana_lima_1.jpg"
-
-			},
-			{
-				"printcampaignlistitemid" : "printcampaignId",
-				"printcampaignname" : "Calvin Klien",
-				"printcampaignseason" : "Spring 2012",
-				"printcampaigndescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
-						+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
-				"printcampaignpic" : "img/donna_karan_adriana_lima_2.jpg"
-
-			},
-			{
-				"printcampaignlistitemid" : "printcampaignId",
-				"printcampaignname" : "Calvin Klien",
-				"printcampaignseason" : "Spring 2012",
-				"printcampaigndescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
-						+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
-				"printcampaignpic" : "img/donna_karan_adriana_lima_3.jpg"
-
-			}
-
-	];
-
-	$scope.printcampaigns = [
-	{
-		"printcampaignlistitemid" : "Id",
-		"printcampaignname" : "Studded Winston",
-		"printcampaignpic" : "http://placehold.it/90x119"
-
-	},
-	{
-		"printcampaignlistitemid" : "Id",
-		"printcampaignname" : "Studded Winston",
-		"printcampaignpic" : "http://placehold.it/90x119"
-
-	},
-	{
-		"printcampaignlistitemid" : "Id",
-		"printcampaignname" : "Studded Winston",
-		"printcampaignpic" : "http://placehold.it/90x119"
-
-	}
-	];
 
 }
 function MyCtrlVideos($scope, $routeParams, currentvisitedprofile) {
@@ -1055,112 +1226,7 @@ function MyCtrlStyle($scope, currentvisitedprofile) {
 	];
 }
 
-function MyCtrlViewcollection($scope, $routeParams, currentvisitedprofile) {
 
-	$scope.$parent.title = 'ViewCollection';
-
-	$scope.entityname = currentvisitedprofile.getEntityName();
-
-	$scope.backButton = currentvisitedprofile.getBackHistory();
-
-	$scope.collectionseason = {
-		"seasonname" : "Spring 2012",
-		"collectionlikes" : "10 people like this"
-	};
-	$scope.viewcollections = [
-			{
-				"collectionlistitemid" : "collectionId",
-				"collectionbrand" : "Calvin Klien",
-				"collectionseason" : "Spring 2012",
-				"collectiondescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
-						+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
-				"collectionpic" : "img/donna_karan_adriana_lima_1.jpg"
-
-			},
-			{
-				"collectionlistitemid" : "collectionId",
-				"collectionbrand" : "Calvin Klien",
-				"collectionseason" : "Spring 2012",
-				"collectiondescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
-						+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
-				"collectionpic" : "img/donna_karan_adriana_lima_2.jpg"
-
-			},
-			{
-				"collectionlistitemid" : "collectionId",
-				"collectionbrand" : "Calvin Klien",
-				"collectionseason" : "Spring 2012",
-				"collectiondescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
-						+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
-				"collectionpic" : "img/donna_karan_adriana_lima_3.jpg"
-
-			}
-
-	];
-
-}
-
-function MyCtrlViewNewsLetters($scope, $routeParams, currentvisitedprofile) {
-
-	$scope.$parent.title = 'ViewNewsLetter';
-
-	$scope.entityname = currentvisitedprofile.getEntityName();
-
-	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.viewnewsletters = [
-			{
-				"newsletterlistitemid" : "newsletterId",
-				"newsletterbrand" : "Calvin Klien",
-				"newsletterseason" : "Spring 2012",
-				"newsletterdescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
-						+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
-				"newsletterpic" : "img/donna_karan_adriana_lima_1.jpg"
-
-			},
-			{
-				"newsletterlistitemid" : "newsletterId",
-				"newsletterbrand" : "Calvin Klien",
-				"newsletterseason" : "Spring 2012",
-				"newsletterdescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
-						+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
-				"newsletterpic" : "img/donna_karan_adriana_lima_2.jpg"
-
-			},
-			{
-				"newsletterlistitemid" : "newsletterId",
-				"newsletterbrand" : "Calvin Klien",
-				"newsletterseason" : "Spring 2012",
-				"newsletterdescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
-						+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
-				"newsletterpic" : "img/donna_karan_adriana_lima_3.jpg"
-
-			}
-
-	];
-	
-	$scope.Editorials = [
-	                     	{
-	                     		"newsletterlistitemid" : "Id",
-	                     		"newslettername" : "Studded Winston",
-	                     		"newsletterpic" : "http://placehold.it/90x119"
-
-	                     	},
-	                     	{
-	                     		"newsletterlistitemid" : "Id",
-	                     		"newslettername" : "Studded Winston",
-	                     		"newsletterpic" : "http://placehold.it/90x119"
-
-	                     	},
-	                     	{
-	                     		"newsletterlistitemid" : "Id",
-	                     		"newslettername" : "Studded Winston",
-	                     		"newsletterpic" : "http://placehold.it/90x119"
-
-	                     	}
-	                     	];
-
-
-}
 
 function MyCtrlHelp($scope, $routeParams, currentvisitedprofile, srvprofile) {
 
@@ -1203,19 +1269,6 @@ function MyCtrlNotifications($scope, $routeParams, currentvisitedprofile,
 	// $scope.mynotification = srvprofile.getnotification();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	$scope.mynetwork = srvprofile.getnetwork($routeParams);
-
-}
-
-function MyCtrlPrintcampaign($scope, $routeParams, currentvisitedprofile,
-		srvprofile) {
-
-	$scope.$parent.title = 'Printcampaign';
-
-	$scope.entityname = currentvisitedprofile.getEntityName();
-	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
-
-	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.printcampaigns = srvprofile.getprintcampaigns($routeParams);
 
 }
 
@@ -1396,7 +1449,7 @@ function MyCtrlStylesPreview($scope, currentvisitedprofile) {
 	$scope.SetmainImage=function(index)
 	{
 		$scope.styletdetails.stylecover = $scope.stylethumbnails[index].stylethumbnail;//"http://placehold.it/290x400"
-	}
+	};
 
 	$scope.styles = [
 	 {

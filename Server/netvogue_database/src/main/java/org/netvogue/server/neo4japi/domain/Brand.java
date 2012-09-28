@@ -24,9 +24,6 @@ public class Brand extends User{
 	@RelatedTo(type="BRAND", direction=Direction.INCOMING)
 	BrandRefNode brandRefNode;
 	
-	@RelatedTo(type="HAS_COLLECTION")
-	Set<Collections> collections;
-	
 	public Brand() {
 		super();
 	}

@@ -1,7 +1,6 @@
 package org.netvogue.server.webmvc.controllers;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -13,12 +12,13 @@ import org.netvogue.server.aws.core.UploadManager;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.Photo;
 import org.netvogue.server.neo4japi.domain.User;
+import org.netvogue.server.neo4japi.service.GalleryService;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.domain.Galleries;
 import org.netvogue.server.webmvc.domain.Gallery;
 import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
-import org.netvogue.server.webmvc.domain.PhotoInfo;
+import org.netvogue.server.webmvc.domain.PhotoInfoJsonRequest;
 import org.netvogue.server.webmvc.domain.PhotoWeb;
 import org.netvogue.server.webmvc.domain.Photos;
 import org.netvogue.server.webmvc.domain.UploadedFile;
@@ -40,7 +40,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class GalleryController {
 
 	@Autowired NetvogueUserDetailsService userDetailsService;
-	@Autowired UserService userService;
+	@Autowired UserService 			userService;
+	@Autowired GalleryService 		galleryService;
 	@Autowired ConversionService	conversionService;
 
 	@Autowired
@@ -76,7 +77,7 @@ public class GalleryController {
 		return galleries;
 	}
 	
-	@RequestMapping(value="getphotos", method=RequestMethod.GET)
+	@RequestMapping(value="gallery/getphotos", method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname
@@ -90,13 +91,17 @@ public class GalleryController {
 		
 		if(profileid.isEmpty()) {
 			photos.setName(loggedinUser.getName());
-			photos.setGalleryname(userService.GetGallery(galleryid).getGalleryname());
+			org.netvogue.server.neo4japi.domain.Gallery gTemp = galleryService.GetGallery(galleryid);
+			if(null == gTemp) {
+				return photos;
+			}
+			photos.setGalleryname(gTemp.getGalleryname());
 			Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
 			Iterable<org.netvogue.server.neo4japi.domain.Photo> dbPhotos;
 			if(photoname.isEmpty()) {
-				dbPhotos = userService.GetPhotos(galleryid);
+				dbPhotos = galleryService.GetPhotos(galleryid);
 			} else {
-				dbPhotos = userService.searchPhotoByName(galleryid, photoname);
+				dbPhotos = galleryService.searchPhotoByName(galleryid, photoname);
 			}
 			if(null == dbPhotos) {
 				return photos;
@@ -111,7 +116,7 @@ public class GalleryController {
 		return photos;
 	}
 	
-	@RequestMapping(value="creategallery", method=RequestMethod.POST)
+	@RequestMapping(value="gallery/create", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse CreateGallery(@RequestBody String galleryname) {
 		System.out.println("Create Gallery");
 		String error = "";
@@ -120,7 +125,7 @@ public class GalleryController {
 		
 		JsonResponse response = new JsonResponse();
 		
-		if(ResultStatus.SUCCESS == userService.SaveGallery(newGallery, error)) {  
+		if(ResultStatus.SUCCESS == galleryService.SaveGallery(newGallery, error)) {  
 			response.setStatus(true);
 			response.setIdcreated(newGallery.getGalleryid());
 		}
@@ -130,8 +135,8 @@ public class GalleryController {
 		return response;
 	}
 	
-	@RequestMapping(value="editgalleryname", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse EditGalleryName(@RequestBody JsonRequest request) {
+	@RequestMapping(value="gallery/edit", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse EditGallery(@RequestBody JsonRequest request) {
 		System.out.println("Edit Gallery Name");
 		String error = "";
 		JsonResponse response = new JsonResponse();
@@ -142,7 +147,7 @@ public class GalleryController {
 			response.setError("newgalleryname is empty");
 		}
 		
-		if(ResultStatus.SUCCESS == userService.editGalleryName(request.getId(), request.getValue(), error))   
+		if(ResultStatus.SUCCESS == galleryService.editGalleryName(request.getId(), request.getValue(), error))   
 			response.setStatus(true);
 		else
 			response.setError(error);
@@ -150,7 +155,7 @@ public class GalleryController {
 		return response;
 	}
 	
-	@RequestMapping(value="deletegallery", method=RequestMethod.POST)
+	@RequestMapping(value="gallery/delete", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeleteGallery(@RequestBody String galleryid) {
 		System.out.println("Delete Gallery:"+ galleryid);
 		String error = "";
@@ -159,7 +164,7 @@ public class GalleryController {
 		if(null == galleryid || galleryid.isEmpty()) {
 			response.setError("Galleryid is empty");
 		}
-		if(ResultStatus.SUCCESS == userService.deleteGallery(galleryid, error)) {  
+		if(ResultStatus.SUCCESS == galleryService.deleteGallery(galleryid, error)) {  
 			response.setStatus(true);
 		}
 		else
@@ -168,18 +173,17 @@ public class GalleryController {
 		return response;
 	}
 	
-	@RequestMapping(value="AddPhotos", method=RequestMethod.POST)
+	@RequestMapping(value="gallery/addphotos", method=RequestMethod.POST)
 	public @ResponseBody UploadedFileResponse AddPhotostoGallery(Model model, 
 			@RequestParam("files[]") List<MultipartFile> fileuploads, @RequestParam("galleryid") String galleryId) {
 		System.out.println("Add photos: Gallery Id:" + galleryId + "No:of Photos:" + fileuploads.size());
 		UploadedFileResponse response = new UploadedFileResponse();
-		final User user = userDetailsService.getUserFromSession();
 		
 		if(galleryId.isEmpty()) {
 			response.setError("Gallery Id is empty");
 			return response;
 		}
-		org.netvogue.server.neo4japi.domain.Gallery gallery = userService.GetGallery(galleryId);
+		org.netvogue.server.neo4japi.domain.Gallery gallery = galleryService.GetGallery(galleryId);
 		if(null == gallery) {
 			response.setError("No Gallery is present with this id");
 			return response;
@@ -199,7 +203,7 @@ public class GalleryController {
 			JSONFileData.add(fileUploaded);
 		}
 		String error ="";
-		if(ResultStatus.SUCCESS == userService.SaveGallery(gallery, error)) {  
+		if(ResultStatus.SUCCESS == galleryService.SaveGallery(gallery, error)) {  
 			response.setStatus(true);
 			response.setFilesuploaded(JSONFileData);
 		}
@@ -214,15 +218,15 @@ public class GalleryController {
 		return response;
 	}
 	
-	@RequestMapping(value="editphotoinfo", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse EditPhotoInfo(@RequestBody PhotoInfo photoInfo) {
+	@RequestMapping(value="gallery/editphotoinfo", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse EditPhotoInfo(@RequestBody PhotoInfoJsonRequest photoInfo) {
 		System.out.println("Edit Photo Info:" + photoInfo.toString());
 		String error = "";
 		JsonResponse response = new JsonResponse();
 		String photoId = photoInfo.getPhotoid();
 		if(null == photoId || photoId.isEmpty())
 			response.setError("photoid is empty");
-		if(ResultStatus.SUCCESS == userService.editPhotoInfo(photoInfo.getPhotoid(), photoInfo.getPhotoname(), 
+		if(ResultStatus.SUCCESS == galleryService.editPhotoInfo(photoInfo.getPhotoid(), photoInfo.getPhotoname(), 
 													photoInfo.getSeasonname(), error))
 			response.setStatus(true);
 		else
@@ -231,14 +235,14 @@ public class GalleryController {
 		return response;
 	}
 	
-	@RequestMapping(value="editphotoname", method=RequestMethod.POST)
+	@RequestMapping(value="gallery/editphotoname", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPhotoName(@RequestBody JsonRequest request) {
 		System.out.println("Edit Photo Name");
 		String error = "";
 		
 		JsonResponse response = new JsonResponse();
 		
-		if(ResultStatus.SUCCESS == userService.editPhotoName(request.getId(), request.getValue(), error))   
+		if(ResultStatus.SUCCESS == galleryService.editPhotoName(request.getId(), request.getValue(), error))   
 			response.setStatus(true);
 		else
 			response.setError(error);
@@ -246,7 +250,7 @@ public class GalleryController {
 		return response;
 	}
 	
-	@RequestMapping(value="editphotoseasonname", method=RequestMethod.POST)
+	@RequestMapping(value="gallery/editphotoseasonname", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPhotoSeasonName(@RequestParam("photoname") String photoname,
 														  @RequestParam("seasonname") String seasonname, 
 														  @RequestParam("photoid") String photoid) {
@@ -255,7 +259,7 @@ public class GalleryController {
 		
 		JsonResponse response = new JsonResponse();
 		
-		if(ResultStatus.SUCCESS == userService.editPhotoInfo(photoid, photoname, seasonname, error))   
+		if(ResultStatus.SUCCESS == galleryService.editPhotoInfo(photoid, photoname, seasonname, error))   
 			response.setStatus(true);
 		else
 			response.setError(error);
@@ -263,14 +267,14 @@ public class GalleryController {
 		return response;
 	}
 
-	@RequestMapping(value="deletephoto", method=RequestMethod.POST)
+	@RequestMapping(value="gallery/deletephoto", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeletePhoto(@RequestBody String photoid) {
 		System.out.println("Delete Photo:" + photoid);
 		String error = "";
 		
 		JsonResponse response = new JsonResponse();
 		if(!photoid.isEmpty()) {
-			if(ResultStatus.SUCCESS == userService.deletePhoto(photoid, error)) {  
+			if(ResultStatus.SUCCESS == galleryService.deletePhoto(photoid, error)) {  
 				response.setStatus(true);
 			}
 			else

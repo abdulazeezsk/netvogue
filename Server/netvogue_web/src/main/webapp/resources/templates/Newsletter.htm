@@ -21,7 +21,7 @@
 			<div class="leftpane_filter_name">
 				<span class="leftpane_filter_name">TITLE</span> <input type="text"
 					class="span3" /> <span class="leftpane_filter_name">DESCRIPTION</span>
-				<input type="text" class="span3" />
+				<input type="text" ng-model="searchgalleryname" class="span3" ng-change="getgalleries()"/>
 			</div>
 
 		</div>
@@ -42,35 +42,32 @@
 
 			<div>
 				<ul class="thumbnails">
-					<li ng-repeat="newsletter in newsletters">
+					<li ng-repeat="gallery in galleries">
 						<div class="view view-first">
-							<a href="#/{{newsletter.campaignlistitemid}}"> <img
-								src="{{newsletter.campaigncoverpic}}" alt=""></a>
+							<a ng-href="#/newsletter?id={{gallery.galleryid}}">
+                                <img ng-src="{{gallery.gallerypic}}" alt=""></a>
 							<div class="mask"></div>
 							<div class="content">
 								<div class="mask">
 									<ul ng-show="isMyProfile">
-										<li><a href="#" title="Delete"><i
+										<li><a ng-click="deletegallery(gallery.galleryid)" title="Delete"><i
 												class="icon-trash icon-white"></i></a></li>
 										<li><a data-toggle="modal" href="#EditEditorial"  title="Edit"><i
 												class="icon-edit icon-white"></i></a></li>
 									</ul>
 									<p>
-										<u>{{newsletter.newslettername}}</u> <br /> Lorem Ipsum is
-										simply dummy text of the printing and typesetting industry.
-										Lorem Ipsum has been the industry's standard dummy text ever
-										since the 1500s, when an unknown printer took a galley of type
-										i
+										<u>{{gallery.galleryname}}</u>
+                                        <br />{{gallery.gallerydesc}}
 									</p>
 									<h1>
-										<a href="#/editorial" class="mask_edit">view</a>
+										<a href="#/editorial?id={{gallery.galleryid}}" class="mask_edit">view</a>
 									</h1>
 								</div>
 							</div>
 							<div class="divi2"></div>
 						</div>
 						<div class="title">
-							<h5>{{newsletter.campaignname}}</h5>
+							<h5>{{gallery.galleryname}}</h5>
 						</div>
 					</li>
 				</ul>

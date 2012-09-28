@@ -1,9 +1,13 @@
 package org.netvogue.server.neo4japi.service;
 
 import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Boutique;
+import org.netvogue.server.neo4japi.domain.Collection;
+import org.netvogue.server.neo4japi.domain.Editorial;
 import org.netvogue.server.neo4japi.domain.Gallery;
 import org.netvogue.server.neo4japi.domain.Photo;
+import org.netvogue.server.neo4japi.domain.PrintCampaign;
 import org.netvogue.server.neo4japi.domain.User;
 
 public interface UserService {
@@ -11,22 +15,23 @@ public interface UserService {
 	ResultStatus ValidateEmailAndId(String email, Long id);
 
 	//Gallery related
-	public ResultStatus SaveGallery(Gallery newGallery, String error);
-	public Gallery GetGallery(String GalleryId);
 	public Iterable<Gallery> GetGalleries(User user);
 	public Iterable<Gallery> searchGalleryByName(User user, String name);
 	public Iterable<Gallery> searchGalleryByName(String username, String name);
-	public ResultStatus editGalleryName(String galleryId, String name, String error);
-	public ResultStatus deleteGallery(String galleryId, String error);
 	
-	public Iterable<Photo> GetPhotos(String galleryId);
-	public Iterable<Photo> searchPhotoByName(Gallery gallery, String name);
-	public Iterable<Photo> searchPhotoByName(String galleryid, String name);
-	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, String error);
-	public ResultStatus editPhotoName(String photoId, String name, String error);
-	public ResultStatus editPhotoSeasonName(String photoId, String name, String error);
-	public ResultStatus deletePhoto(String photoId, String error);
+	//Queries related to Printcampaigns
+	public Iterable<PrintCampaign> getPrintCampaigns(User user);
+	public Iterable<PrintCampaign> searchPrintCampaignByName(User user, String name);
+	public Iterable<PrintCampaign> searchPrintCampaignByName(String username, String name);
 	
-	//Photos inside Gallery
-	//public ResultStatus AddNewPhotos(Gallery gallery, String error); //Gallery where photos were added
+	//Queries related to Editorials
+	public Iterable<Editorial> getEditorials(User user);
+	public Iterable<Editorial> searchEditorialByName(User user, String name);
+	public Iterable<Editorial> searchEditorialByName(String username, String name);
+	
+	//Queries related to collections
+	public Iterable<Collection> getCollections(User user);
+	public Iterable<Collection> searchCollectionByName(User user, String name);
+	public Iterable<Collection> searchCollectionByName(String username, String name);
+
 }
