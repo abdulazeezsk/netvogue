@@ -20,8 +20,8 @@
 			<div class="divi2"></div>
 			<div class="leftpane_filter_name">
 				<span class="leftpane_filter_name">TITLE</span> <input type="text"
-					class="span3" /> <span class="leftpane_filter_name">DESCRIPTION</span>
-				<input type="text" ng-model="searchgalleryname" class="span3" ng-change="getgalleries()"/>
+					class="span3" ng-model="searchgalleryname" ng-change="getgalleries()"/> <span class="leftpane_filter_name">DESCRIPTION</span>
+				<input type="text" class="span3" ng-model="searchgallerydesc" ng-change="getgalleries()"/>
 			</div>
 
 		</div>
@@ -52,8 +52,8 @@
 									<ul ng-show="isMyProfile">
 										<li><a ng-click="deletegallery(gallery.galleryid)" title="Delete"><i
 												class="icon-trash icon-white"></i></a></li>
-										<li><a data-toggle="modal" href="#EditEditorial"  title="Edit"><i
-												class="icon-edit icon-white"></i></a></li>
+										<li><a ng-click="editgallery(gallery.galleryid, gallery.galleryname, gallery.gallerydesc)"  
+												title="Edit"><i class="icon-edit icon-white"></i></a></li>
 									</ul>
 									<p>
 										<u>{{gallery.galleryname}}</u>
@@ -87,13 +87,13 @@
 	</div>
 	<div class="modal-body">
 		<div>
-			<input type="text" class="span4" placeholder="Editorial name" />
-			<textarea style="width: 500px;" rows="9" placeholder="Enter description"></textarea>
+			<input type="text" class="span4" ng-model="galleryname" placeholder="Editorial name" />
+			<textarea style="width: 500px;" rows="9" ng-model="gallerydesc" placeholder="Enter description"></textarea>
 		</div>
 		</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" data-dismiss="modal" href="#/addnewsletter">
+			class="btn btn-primary" data-dismiss="modal" ng-click="creategallery()">
 			Create editorial</a>
 	</div>
 </div>
@@ -101,20 +101,20 @@
 
 
 <!-- modal -->
-<div class="modal  hide" id="EditEditorial">
+<div ui-modal class="modal  hide" ng-model="showEditGallery"id="EditEditorial">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal"></button>
 		<h4 class="subHeading_no_underline">Edit Editorial</h4>
 	</div>
 	<div class="modal-body">
 		<div>
-			<input type="text" class="span4" placeholder="Editorial name" />
-			<textarea style="width: 500px;" rows="9" placeholder="Enter description"></textarea>
+			<input type="text" class="span4" ng-model="editgalleryname" placeholder="Editorial name" />
+			<textarea style="width: 500px;" rows="9" ng-model="editgallerydesc" placeholder="Enter description"></textarea>
 		</div>
 		</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" data-dismiss="modal" href="#">
+			class="btn btn-primary" ng-click="updategallery()">
 			Update editorial</a>
 	</div>
 </div>

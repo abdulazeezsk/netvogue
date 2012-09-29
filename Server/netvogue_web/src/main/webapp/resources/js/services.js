@@ -514,17 +514,22 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
                 };
                 return $http(config);
 	    	},
-	    	updategallery: function(ajaxrequestcall, galleryid, newname) {
-	    		var datatosend = {
-	    				"id" 	: galleryid,
-	    				"value"	: newname,
-	    		};
+	    	updategallery: function(ajaxrequestcall, datatosend) {
 	    		var config = {
 	    				method: "POST",
 	    				data: datatosend,
 	                    url: ajaxrequestcall + "/edit"
 	                };
 	            return $http(config);
+	    	},
+	    	updategallerylocally: function(galleryid, newname) {
+	    		var index=0;
+	    		for(index=0; index <  galleries.length; index++) {
+	    			if(galleries[index].galleryid == galleryid) {
+	    				galleries[index].galleryname = newname;
+	    				break;
+	    			}
+	    		}
 	    	},
 	    	deletegallery: function(ajaxrequestcall, galleryid) {
 	    		var config = {
@@ -564,7 +569,7 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	                };
 	            return $http(config);
 	    	},
-	    	deletephoto: function(photoid) {
+	    	deletephoto: function(ajaxrequestcall, photoid) {
 	    		var config = {
 	    			method: "POST",
 	    			data: photoid,

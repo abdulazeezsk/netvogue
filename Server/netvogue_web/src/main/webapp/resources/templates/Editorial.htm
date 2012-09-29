@@ -20,8 +20,8 @@
 			<div class="divi2"></div>
 			<div class="leftpane_filter_name">
 				<span class="leftpane_filter_name">TITLE</span> <input type="text"
-					class="span3" /> <span class="leftpane_filter_name">DESCRIPTION</span>
-				<input type="text" class="span3" ng-model="searchphotoname" ng-change="getphotos()"/>
+					class="span3" ng-model="searchphotoname" ng-change="getphotos()"/> <span class="leftpane_filter_name">DESCRIPTION</span>
+				<input type="text" class="span3" />
 			</div>
 
 		</div>
@@ -45,7 +45,7 @@
 
 			<div>
 				<ul class="thumbnails">
-					<li ng-repeat="photo in galleries">
+					<li ng-repeat="photo in photogallery">
 						<div class="view view-first">
 							<a ng-href="#/{{photo.uniqueid}}"> <img
 									ng-src="{{photo.thumbnail_url}}" alt=""></a>

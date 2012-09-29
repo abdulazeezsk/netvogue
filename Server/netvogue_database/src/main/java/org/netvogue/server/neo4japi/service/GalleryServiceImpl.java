@@ -34,6 +34,7 @@ public class GalleryServiceImpl implements GalleryService {
 	
 	public ResultStatus editGalleryName(String galleryId, String name, String error) {
 		try {
+			System.out.println("Editing gallery with id" + galleryId + " - name: " + name);
 			galleryRepo.editGalleryName(galleryId, name);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {

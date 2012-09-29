@@ -145,7 +145,7 @@ function MyCtrlAddVideoCampaign($scope, $routeParams, currentvisitedprofile) {
 }
 
 
-function MyCtrlAddNewsletter($scope, $routeParams, $location, svrgallery, mygallery, currentvisitedprofile) {
+function MyCtrlAddNewsletter($scope, $routeParams, $location, srvgallery, mygallery, currentvisitedprofile) {
 
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
 	if(!$scope.isMyProfile) {

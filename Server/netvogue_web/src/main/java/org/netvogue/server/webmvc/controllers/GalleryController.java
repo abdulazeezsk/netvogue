@@ -145,13 +145,12 @@ public class GalleryController {
 			response.setError("galleryid is empty");
 		} else if(null == request.getValue() || request.getValue().isEmpty()) {
 			response.setError("newgalleryname is empty");
+		} else {
+			if(ResultStatus.SUCCESS == galleryService.editGalleryName(request.getId(), request.getValue(), error))   
+				response.setStatus(true);
+			else
+				response.setError(error);
 		}
-		
-		if(ResultStatus.SUCCESS == galleryService.editGalleryName(request.getId(), request.getValue(), error))   
-			response.setStatus(true);
-		else
-			response.setError(error);
-		
 		return response;
 	}
 	
@@ -163,6 +162,7 @@ public class GalleryController {
 		
 		if(null == galleryid || galleryid.isEmpty()) {
 			response.setError("Galleryid is empty");
+			return response;
 		}
 		if(ResultStatus.SUCCESS == galleryService.deleteGallery(galleryid, error)) {  
 			response.setStatus(true);
@@ -224,8 +224,10 @@ public class GalleryController {
 		String error = "";
 		JsonResponse response = new JsonResponse();
 		String photoId = photoInfo.getPhotoid();
-		if(null == photoId || photoId.isEmpty())
+		if(null == photoId || photoId.isEmpty()) {
 			response.setError("photoid is empty");
+			return response;
+		}
 		if(ResultStatus.SUCCESS == galleryService.editPhotoInfo(photoInfo.getPhotoid(), photoInfo.getPhotoname(), 
 													photoInfo.getSeasonname(), error))
 			response.setStatus(true);

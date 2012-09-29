@@ -63,7 +63,8 @@
                                 <div class="mask">
                                     <ul ng-show="isMyProfile">
                                         <li><a ng-click="deletegallery(gallery.galleryid)" title="Delete"><i class="icon-trash icon-white"></i></a></li>
-                                        <li><a data-toggle="modal" href="#EditPrintcampaign" title="Edit"><i class="icon-edit icon-white"></i>
+                                        <li><a ng-click="editgallery(gallery.galleryid, gallery.galleryname, gallery.gallerydesc)" 
+                                        		title="Edit"><i class="icon-edit icon-white"></i>
                                         </a></li>
                                     </ul>
                                     <p>
@@ -111,20 +112,20 @@
 <!-- modal -->
 
 <!-- modal -->
-<div class="modal  hide" id="EditPrintcampaign">
+<div ui-modal class="modal  hide" ng-model="showEditGallery" id="EditPrintcampaign">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal"></button>
 		<h4 class="subHeading_no_underline">Edit Print Campaign</h4>
 	</div>
 	<div class="modal-body">
 		<div>
-			<input type="text" class="span4" placeholder="Print campaign name" />
-			 <textarea style="width: 500px;" rows="9" placeholder="Enter description"></textarea>
+			<input type="text" class="span4" ng-model="editgalleryname" placeholder="Print campaign name" />
+			 <textarea style="width: 500px;" rows="9" ng-model="editgallerydesc" placeholder="Enter description"></textarea>
 		</div>
 		</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" data-dismiss="modal" href="#">
+			class="btn btn-primary" ng-click="updategallery()">
 			Update print campaign</a>
 	</div>
 </div>

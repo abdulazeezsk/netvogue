@@ -29,13 +29,13 @@
 		<div class="span9">
 			<div>
 				<span class="left heading_btn"> <a href="#/printcampaign">print
-						campaign</a> <span class="divider">/</span> <span> <a
-						ng-href="#/campaign?id={{galleryid}}">{{galleryname}}</a></span>
+						campaign</a> <span class="divider">/</span> 
+						<span> <a ng-href="#/campaign?id={{galleryid}}">{{galleryname}}</a></span>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info"> Find Print Campaigns
 					using the filters </span> <span class="right" ng-show="isMyProfile">
-					<a data-toggle="modal" href="#/addprintcampaign?id={{galleryid}}"
+					<a ng-href="#/addprintcampaign?id={{galleryid}}"
 					class="rightpane_add_btn">Add Print Campaigns</a>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
@@ -44,7 +44,7 @@
 
 			<div>
 				<ul class="thumbnails">
-					<li ng-repeat="photo in galleries">
+					<li ng-repeat="photo in photogallery">
 						<div class="view view-first">
 							<a ng-href="#/{{photo.uniqueid}}"> <img
 									ng-src="{{photo.thumbnail_url}}" alt=""></a>

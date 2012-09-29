@@ -90,7 +90,11 @@ public class PrintCampaignController {
 		
 		if(profileid.isEmpty()) {
 			photos.setName(loggedinUser.getName());
-			photos.setGalleryname(printcampaignService.getPrintCampaign(galleryid).getPrintcampaignname());
+			org.netvogue.server.neo4japi.domain.PrintCampaign printcampaign = printcampaignService.getPrintCampaign(galleryid);
+			if(null == printcampaign) {
+				return photos;
+			}
+			photos.setGalleryname(printcampaign.getPrintcampaignname());
 			Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
 			Iterable<PrintCampaignPhoto> dbPhotos;
 			if(photoname.isEmpty()) {

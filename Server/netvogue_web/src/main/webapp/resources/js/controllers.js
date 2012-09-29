@@ -161,7 +161,14 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, s
 
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	
-	$scope.searchgalleryname = ""; 
+	//Related to search
+	$scope.searchgalleryname = "";
+	
+	//Related to edit gallery
+	$scope.editgalleryname   = "";
+	$scope.editgalleryid	 = "";
+	$scope.showEditGallery	 = false;
+	
 	var ajaxrequestcall	 = "gallery";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
@@ -191,12 +198,24 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, s
         });
     };
     
+    $scope.editgallery = function(id, galleryname) {
+    	$scope.editgalleryname   = galleryname;
+    	$scope.editgalleryid	 = id;
+    	$scope.showEditGallery	 = true;
+    };
+    
     $scope.updategallery = function() {
-    	mygallery.updatedgallery(ajaxrequestcall, $scope.galleryname).success(function(data) {
-    		
+    	var datatosend = {
+				"id" 	: $scope.editgalleryid,
+				"value"	: $scope.editgalleryname,
+		};
+    	mygallery.updategallery(ajaxrequestcall, datatosend).success(function(data) {
+    		mygallery.updategallerylocally($scope.editgalleryid, $scope.editgalleryname);
+    		$scope.galleries		= srvgallery.getgalleries($routeParams);
     	}).error(function(data) {
-    		
+ 
     	});
+    	$scope.showEditGallery	 = false;
     };
     
     $scope.deletegallery = function(galleryid) {
@@ -288,6 +307,13 @@ function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprof
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	
 	$scope.searchgalleryname = ""; 
+	
+	//Related to edit gallery
+	$scope.editgalleryname   = "";
+	$scope.editgallerydesc   = "";
+	$scope.editgalleryid	 = "";
+	$scope.showEditGallery	 = false;
+	
 	var ajaxrequestcall	 = "printcampaign";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
@@ -317,13 +343,22 @@ function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprof
         });
     };
     
+    $scope.editgallery = function(id, galleryname, gallerydesc) {
+    	$scope.editgalleryname   = galleryname;
+    	$scope.editgallerydesc   = gallerydesc;
+    	$scope.editgalleryid	 = id;
+    	$scope.showEditGallery	 = true;
+    };
+    
     $scope.updategallery = function() {
-    	var jsonrequest = new netvogue.campaignjsonrequest($scope.galleryname, $scope.gallerydesc);
-    	mygallery.updatedgallery(ajaxrequestcall, jsonrequest).success(function(data) {
-    		
+    	var jsonrequest = new netvogue.campaignjsonrequest($scope.editgalleryname, $scope.editgallerydesc, $scope.editgalleryid);
+    	mygallery.updategallery(ajaxrequestcall, jsonrequest).success(function(data) {
+    		mygallery.updategallerylocally($scope.editgalleryid, $scope.editgalleryname);
+    		$scope.galleries		= srvgallery.getgalleries($routeParams);
     	}).error(function(data) {
-    		
+ 
     	});
+    	$scope.showEditGallery	 = false;
     };
     
     $scope.deletegallery = function(galleryid) {
@@ -426,7 +461,16 @@ function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	
+	//Related to search
 	$scope.searchgalleryname = ""; 
+	$scope.searchgallerydesc = "";
+	
+	//Related to edit gallery
+	$scope.editgalleryname   = "";
+	$scope.editgallerydesc   = "";
+	$scope.editgalleryid	 = "";
+	$scope.showEditGallery	 = false;
+	
 	var ajaxrequestcall	 = "editorial";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
@@ -456,13 +500,22 @@ function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile
         });
     };
     
+    $scope.editgallery = function(id, galleryname, gallerydesc) {
+    	$scope.editgalleryname   = galleryname;
+    	$scope.editgallerydesc   = gallerydesc;
+    	$scope.editgalleryid	 = id;
+    	$scope.showEditGallery	 = true;
+    };
+    
     $scope.updategallery = function() {
-    	var jsonrequest = new netvogue.campaignjsonrequest($scope.galleryname, $scope.gallerydesc);
-    	mygallery.updatedgallery(ajaxrequestcall, jsonrequest).success(function(data) {
-    		
+    	var jsonrequest = new netvogue.campaignjsonrequest($scope.editgalleryname, $scope.editgallerydesc, $scope.editgalleryid);
+    	mygallery.updategallery(ajaxrequestcall, jsonrequest).success(function(data) {
+    		mygallery.updategallerylocally($scope.editgalleryid, $scope.editgalleryname);
+    		$scope.galleries		= srvgallery.getgalleries($routeParams);
     	}).error(function(data) {
-    		
+ 
     	});
+    	$scope.showEditGallery	 = false;
     };
     
     $scope.deletegallery = function(galleryid) {
@@ -485,7 +538,7 @@ function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile, srvgallery
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.galleryid = $routeParams.id;
 	}
-	var ajaxrequestcall	 = "printcampaign";
+	var ajaxrequestcall	 = "editorial";
 	$scope.searchphotoname = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
