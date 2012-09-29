@@ -41,12 +41,12 @@ angular.module('netVogue', ['netVogue.filters', 'netVogue.services', 'netVogue.d
 	  $routeProvider.when('/:profileid/network', 		{templateUrl: 'templates/Network.htm', 								controller: MyCtrlNetwork});
 	  $routeProvider.when('/newsletter', 				{templateUrl: 'templates/Newsletter.htm', 							controller: MyCtrlNewsletter });
 	  $routeProvider.when('/editorial', 				{templateUrl: 'templates/Editorial.htm', 							controller: MyCtrlEditorial });
-	  $routeProvider.when('/newsletter/:newsid', 		{templateUrl: 'templates/View_Newsletter.htm', 						controller: MyCtrlViewNewsLetters });
+	  $routeProvider.when('/viewnewsletter', 		{templateUrl: 'templates/View_Newsletter.htm', 						controller: MyCtrlViewNewsLetters });
 	  $routeProvider.when('/:profileid/newsletter', 	{templateUrl: 'templates/Newsletter.htm', 							controller: MyCtrlNewsletter });
 	  $routeProvider.when('/:profileid/newsletter/:newsid', 		{templateUrl: 'templates/View_Newsletter.htm', 			controller: MyCtrlViewNewsLetters });
 	  $routeProvider.when('/printcampaign', 			{templateUrl: 'templates/PrintCampaign.htm', 						controller: MyCtrlPrintcampaign });
 	  $routeProvider.when('/campaign',				{ templateUrl: 'templates/campaign.htm',         		 				controller: MyCtrlCampaign });
-	  $routeProvider.when('/printcampaign/:printid', 	{templateUrl: 'templates/View_PrintCampaign.htm', 					controller: MyCtrlviewPrintcampaign });
+	  $routeProvider.when('/viewprintcampaign', 	{templateUrl: 'templates/View_PrintCampaign.htm', 					controller: MyCtrlviewPrintcampaign });
 	  $routeProvider.when('/:profileid/printcampaign', 	{templateUrl: 'templates/PrintCampaign.htm', 						controller: MyCtrlPrintcampaign });
 	  $routeProvider.when('/:profileid/printcampaign/:printid', 	{templateUrl: 'templates/View_PrintCampaign.htm', 		controller: MyCtrlviewPrintcampaign });
 	  $routeProvider.when('/profilesettings', 			{templateUrl: 'templates/Profile_Settings.htm', 					controller: MyCtrlProfileSettings});

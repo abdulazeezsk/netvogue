@@ -411,7 +411,7 @@ function MyCtrlCampaign($scope, $routeParams, currentvisitedprofile, srvgallery,
     };
 }
 
-function MyCtrlviewPrintcampaign($scope, $routeParams, currentvisitedprofile) {
+function MyCtrlviewPrintcampaign($scope, $routeParams, currentvisitedprofile, srvgallery) {
 
 	$scope.$parent.title = 'ViewPhotos';
 
@@ -570,7 +570,7 @@ function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile, srvgallery
 }
 
 
-function MyCtrlViewNewsLetters($scope, $routeParams, currentvisitedprofile) {
+function MyCtrlViewNewsLetters($scope, $routeParams, currentvisitedprofile, srvgallery) {
 
 	$scope.$parent.title = 'ViewNewsLetter';
 
