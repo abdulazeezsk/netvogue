@@ -1,5 +1,6 @@
 package org.netvogue.server.aws.core;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -14,9 +15,9 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.codec.binary.Base64;
-import org.imgscalr.Scalr;
-import org.imgscalr.Scalr.Method;
-import org.imgscalr.Scalr.Mode;
+import org.netvogue.server.aws.core.Scalr;
+import org.netvogue.server.aws.core.Scalr.Method;
+import org.netvogue.server.aws.core.Scalr.Mode;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.auth.AWSCredentials;
@@ -162,6 +163,7 @@ public class FileManager extends TransferManager {
 		try {
 			BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(input));
 			BufferedImage ResizedImage 	= Scalr.resize(originalImage, Method.QUALITY, Mode.AUTOMATIC, size.getWidth(), size.getHeight());
+			ResizedImage 	= Scalr.pad(ResizedImage, size.getWidth(), size.getHeight(), Color.WHITE);
 			String fileExtension = metaData.getUserMetadata().get("fileName");
 			fileExtension = fileExtension.substring(fileExtension.indexOf(".")+1);
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
