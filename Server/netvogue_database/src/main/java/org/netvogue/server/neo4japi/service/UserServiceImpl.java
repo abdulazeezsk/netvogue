@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public Iterable<Collection> searchCollections(String username, String seasonname, String category, String brandname){
-		if(category.isEmpty() && 
+		//if(category.isEmpty() && 
 		return userRepo.searchCollectionByName(username, Utils.SerializeQueryParamForSearch(seasonname));
 	}
 }
