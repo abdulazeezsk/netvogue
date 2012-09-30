@@ -12,7 +12,7 @@ public enum Size {
 	S9 (4,4),
 	S10 (4,4),
 	GThumb(220, 150),
-	GAdd(210, 150),
+	GAdd(220, 150),
 	GLeft(130, 100),
 	GMain(400, 400),
 	PCThumb(231, 306),
