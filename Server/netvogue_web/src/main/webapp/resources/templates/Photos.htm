@@ -56,21 +56,8 @@
 					<ul class="thumbnails">
 						<li ng-repeat="photo in photogallery">
 							<div class="galleryview galleryview-firstglry">
-								<a ng-href="#/{{photo.uniqueid}}"> <img
+								<a ng-href="#/viewphotos?id={{photo.uniqueid}}&&galleryid={{galleryid}}"> <img
 									ng-src="{{photo.thumbnail_url}}" alt=""></a>
-								<div class="maskglry mask-1"></div>
-								<div class="maskglry mask-2">
-								</div>
-								<div class="contentglry">
-								<ul class="maskls" ng-show="isMyProfile">
-                                        <li><a ng-click="deletephoto(photo.uniqueid)" title="Delete"><i class="icon-trash icon-white"></i></a></li>
-                                        <li><a ng-href="#/editgallery" title="Edit"><i class="icon-edit icon-white"></i>
-                                        </a></li>
-                                    </ul>
-									<h1>
-										<a ng-href="#/viewphotos?id={{photo.uniqueid}}&&galleryid={{galleryid}}" class="mask_edit">View</a>
-									</h1>
-								</div>
 								<div class="divi2"></div>
 							</div>
 							<div class="title">
