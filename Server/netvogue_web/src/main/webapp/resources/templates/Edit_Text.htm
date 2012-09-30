@@ -2,12 +2,12 @@
 </input>
 <h5 ng-hide="isEditMode" class="titleName" ng-dblclick="switchToEdit()" ng-bind-html-unsafe="data.label">
 </h5>
-<textarea class="spanedt_txt1" rows="4"   ng-show="isEditMode" ng-dblclick="switchToPreview()" ng-model="data.seasonname">
+<textarea class="spanedt_txt1" rows="4"   ng-show="isEditMode" ng-model="data.seasonname">
 </textarea>
 <h6 ng-hide="isEditMode"  class="desc"  ng-dblclick="switchToEdit()" ng-bind-html-unsafe="data.seasonname">
 </h6>
- <a href="#" class="btn" ng-show="isEditMode" ng-click="switchToPreview('cancel')">Cancel</a> 
- <a href="#" ng-hide="!isEditMode" class="btn  btn-primary" ng-click="switchToPreview('save')">
+ <a class="btn" ng-show="isEditMode" ng-click="switchToPreview('cancel')">Cancel</a> 
+ <a ng-show="isEditMode" class="btn  btn-primary" ng-click="switchToPreview('save')">
             Save</a>
 
 

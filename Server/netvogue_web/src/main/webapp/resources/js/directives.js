@@ -59,14 +59,22 @@ angular.module('netVogue.directives', []).
 	        },
 	        templateUrl: 'templates/Edit_Text.htm',
 	        link: function(scope, elm, attrs) {
+	        	var label = "";
+	        	var seasonname = "";
 	            scope.isEditMode = false;
 
 	            scope.switchToPreview = function (save) {
 	                scope.isEditMode = false;
-	                if(save == "save")
+	                if(save == "save") {
 	                	scope.updateData({label:scope.data.label, seasonname:scope.data.seasonname, photoid: scope.data.uniqueid});
+	                } else {
+	                	scope.data.label = label;
+	                	scope.data.seasonname = seasonname;
+		            }
 	            };
 	            scope.switchToEdit = function () {
+	            	label = scope.data.label;
+	            	seasonname = scope.data.seasonname;
 	                scope.isEditMode = true;
 	            };
 	        }
