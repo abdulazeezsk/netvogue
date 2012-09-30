@@ -16,7 +16,7 @@ public class PrintCampaignConverter implements Converter<org.netvogue.server.neo
 		PrintCampaign newCampaign = new PrintCampaign();
 		newCampaign.setGalleryid(source.getPrintcampaignid());
 		newCampaign.setGalleryname(source.getPrintcampaignname());
-		String thumblink = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.GALLERY, Size.GThumb);
+		String thumblink = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.PRINT_CAMPAIGN, Size.PCThumb);
 		newCampaign.setGallerypic(thumblink);
 		newCampaign.setGallerydesc(source.getDescription());
 		return newCampaign;

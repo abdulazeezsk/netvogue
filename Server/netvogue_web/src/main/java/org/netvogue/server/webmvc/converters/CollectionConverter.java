@@ -16,7 +16,7 @@ public class CollectionConverter implements Converter<org.netvogue.server.neo4ja
 		Collection newCollection = new Collection();
 		newCollection.setGalleryid(source.getCollectionid());
 		newCollection.setGalleryname(source.getCollectionname());
-		String thumblink = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.GALLERY, Size.GThumb);
+		String thumblink = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.COLLECTION, Size.CThumb);
 		newCollection.setGallerypic(thumblink);
 		newCollection.setGallerypic(source.getProfilePicLink());
 		newCollection.setGallerydesc(source.getDescription());
