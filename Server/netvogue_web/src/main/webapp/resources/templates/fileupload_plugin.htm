@@ -2,11 +2,7 @@
 	<li ng-repeat="eachfile in newfiles" class="span3">
 		<div class="thumbnail">
 			<img ng-src={{eachfile.thumbnail_url}} alt="" ng-style="{'max-height': maxheight, 'min-height': minheight}">
-			<div style="min-height:84px; max-height:84px;">
-			<!-- <h5>{{eachfile.label}}</h5>
-				<h6>
-					<p>{{eachfile.seasonname}}</p>
-				</h6> -->
+			<div style="min-height:100px; max-height:100px;">
 				<span ng-show="progressVisible" style="position:relative;top:30px;" >
             		<div class="percent">{{progress}}%</div>
             		<div class="progress-bar">
@@ -17,14 +13,12 @@
 		</div>
 	</li>
 	<li ng-repeat="eachfile in existingfiles" class="span3">
-		<div class="thumbnail">
+	<span class="right" title="Delete" ng-click="deletedata({photoid:eachfile.uniqueid})" style="background: url(../img/red-cross.png);width:25px;height:25px;position: realtive;display: block;right: -2px;top: 0px;cursor: pointer;z-index: 100;"></span>
+		<div class="thumbnail" style="min-height:300px; max-height:300px;">
 			<img ng-src={{eachfile.thumbnail_url}} alt="" ng-style="{'max-height': maxheight, 'min-height': minheight}">
-			<div style="min-height:75px; max-height:75px;">
-				<div edit-text data="eachfile" 
+			<div style="margin: 10px 0 0 10;">
+				<div ng-class="{spotlightx:!isEditMode}" edit-text data="eachfile" 
 					 edit-mode="isEditMode" update-data="updatedataToParent(label, seasonname, photoid)"></div>
-				<p style="text-align:right;">
-			     <a ng-hide="isEditMode" ng-click="deletedata({photoid:eachfile.uniqueid})" style="text-decoration:none;">Remove</a>
-				</p>
 			</div>
 		</div>
 	</li>
