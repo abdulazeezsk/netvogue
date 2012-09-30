@@ -12,8 +12,8 @@
 			</div>
 		</div>
 	</li>
-	<li ng-repeat="eachfile in existingfiles" class="span3">
-	<span class="right" title="Delete" ng-click="deletedata({photoid:eachfile.uniqueid})" style="background: url(../img/red-cross.png);width:25px;height:25px;position: realtive;display: block;right: -2px;top: 0px;cursor: pointer;z-index: 100;"></span>
+	<li ng-repeat="eachfile in existingfiles" class="span3" style="position:relative;">
+	<span class="right" title="Delete" ng-click="deletedata({photoid:eachfile.uniqueid})" style="background: url(../img/red-cross.png);width:25px;height:25px;position:absolute;display: block;right: -2px;top: 0px;cursor: pointer;z-index: 100;"></span>
 		<div class="thumbnail" style="min-height:300px; max-height:300px;">
 			<img ng-src={{eachfile.thumbnail_url}} alt="" ng-style="{'max-height': maxheight, 'min-height': minheight}">
 			<div style="margin: 10px 0 0 10;">

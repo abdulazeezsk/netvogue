@@ -61,9 +61,10 @@ angular.module('netVogue.directives', []).
 	        link: function(scope, elm, attrs) {
 	            scope.isEditMode = false;
 
-	            scope.switchToPreview = function () {
+	            scope.switchToPreview = function (save) {
 	                scope.isEditMode = false;
-	                scope.updateData({label:scope.data.label, seasonname:scope.data.seasonname, photoid: scope.data.uniqueid});
+	                if(save == "save")
+	                	scope.updateData({label:scope.data.label, seasonname:scope.data.seasonname, photoid: scope.data.uniqueid});
 	            };
 	            scope.switchToEdit = function () {
 	                scope.isEditMode = true;

@@ -1,4 +1,4 @@
-<input type="text" class="spanedt_txt"  ng-show="isEditMode" ng-dblclick="switchToPreview()" ng-model="data.label">
+<input type="text" class="spanedt_txt"  ng-show="isEditMode" ng-model="data.label">
 </input>
 <h5 ng-hide="isEditMode" class="titleName" ng-dblclick="switchToEdit()" ng-bind-html-unsafe="data.label">
 </h5>
@@ -6,7 +6,8 @@
 </textarea>
 <h6 ng-hide="isEditMode"  class="desc"  ng-dblclick="switchToEdit()" ng-bind-html-unsafe="data.seasonname">
 </h6>
- <a href="#" class="btn" ng-show="isEditMode" data-dismiss="modal">Cancel</a> <a href="#" ng-hide="!isEditMode" class="btn  btn-primary">
+ <a href="#" class="btn" ng-show="isEditMode" ng-click="switchToPreview('cancel')">Cancel</a> 
+ <a href="#" ng-hide="!isEditMode" class="btn  btn-primary" ng-click="switchToPreview('save')">
             Save</a>
 
 
