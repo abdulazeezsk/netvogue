@@ -194,7 +194,7 @@ public class PrintCampaignController {
 		
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
-			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.GALLERY);
+			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.PRINT_CAMPAIGN);
 			String imagePath = (String)uploadMap.get(UploadManager.QUERY_STRING);
 			PrintCampaignPhoto newPhoto = new PrintCampaignPhoto((String)uploadMap.get(UploadManager.FILE_ID));
 			printcampaign.addPhotos(newPhoto);

@@ -190,7 +190,7 @@ public class EditorialController {
 		
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
-			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.GALLERY);
+			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.EDITORIAL);
 			String imagePath = (String)uploadMap.get(UploadManager.QUERY_STRING);
 			EditorialPhoto newPhoto = new EditorialPhoto((String)uploadMap.get(UploadManager.FILE_ID));
 			editorial.addPhotos(newPhoto);
