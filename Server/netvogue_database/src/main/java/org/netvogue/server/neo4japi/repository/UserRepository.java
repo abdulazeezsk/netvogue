@@ -53,8 +53,8 @@ public interface UserRepository extends GraphRepository<User> {
 	@Query( "START n=node:username(username={0}) MATCH n-[:COLLECTION]->c RETURN c ORDER BY c.createdDate DESC")
 	Iterable<Collection> getCollections(String username);
 	
-	@Query( "START n=node:username(username={0}) MATCH n-[:COLLECTION]->c WHERE c.collectionname =~ {1} " +
+	@Query( "START n=node:username(username={0}) MATCH n-[:COLLECTION]->c WHERE c.collectionseasonname =~ {1} " +
 			"RETURN c ORDER BY c.createdDate DESC")
-	Iterable<Collection> searchCollectionByName(String username, String collectionname);
+	Iterable<Collection> searchCollectionByName(String username, String collectionseasonname);
 	
 }

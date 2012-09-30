@@ -33,5 +33,6 @@ public interface UserService {
 	public Iterable<Collection> getCollections(User user);
 	public Iterable<Collection> searchCollectionByName(User user, String name);
 	public Iterable<Collection> searchCollectionByName(String username, String name);
+	public Iterable<Collection> searchCollections(String username, String seasonname, String category, String brandname);
 
 }

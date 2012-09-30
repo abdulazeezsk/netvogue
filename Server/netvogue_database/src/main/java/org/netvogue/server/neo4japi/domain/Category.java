@@ -1,5 +1,6 @@
 package org.netvogue.server.neo4japi.domain;
 
+import org.netvogue.server.neo4japi.common.CategoryType;
 import org.netvogue.server.neo4japi.common.ProductLines;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
@@ -11,6 +12,9 @@ public class Category {
 	@GraphId
 	Long nodeId;
 	
+	@Indexed(indexName="productline", indexType=IndexType.FULLTEXT)
+	CategoryType categorytype;
+	
 	@Indexed(indexName="productline", indexType=IndexType.FULLTEXT, unique=true)
 	ProductLines productline;
 	
@@ -20,9 +24,16 @@ public class Category {
 		
 	}
 	public Category(ProductLines line) {
-		productline = line;
+		productline 	= line;
+		categorytype 	= line.getCategoryType();
 	}
 
+	public CategoryType getCategorytype() {
+		return categorytype;
+	}
+	public void setCategorytype(CategoryType categorytype) {
+		this.categorytype = categorytype;
+	}
 	public ProductLines getProductLine() {
 		return productline;
 	}

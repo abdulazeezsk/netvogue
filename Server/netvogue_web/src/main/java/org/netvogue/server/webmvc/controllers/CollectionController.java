@@ -9,13 +9,18 @@ import java.util.Set;
 
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.UploadManager;
+import org.netvogue.server.neo4japi.common.ProductLines;
 import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.neo4japi.domain.Category;
 import org.netvogue.server.neo4japi.domain.CollectionPhoto;
 import org.netvogue.server.neo4japi.domain.User;
+import org.netvogue.server.neo4japi.service.BoutiqueService;
 import org.netvogue.server.neo4japi.service.CollectionService;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.domain.CampaignJSONRequest;
 import org.netvogue.server.webmvc.domain.Collection;
+import org.netvogue.server.webmvc.domain.CollectionJSONRequest;
 import org.netvogue.server.webmvc.domain.Collections;
 import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
@@ -40,6 +45,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class CollectionController {
 	@Autowired NetvogueUserDetailsService 	userDetailsService;
+	@Autowired BoutiqueService  boutiqueService;
 	@Autowired UserService 					userService;
 	@Autowired CollectionService			collectionService;
 	@Autowired ConversionService			conversionService;
@@ -49,7 +55,9 @@ public class CollectionController {
 
 	@RequestMapping(value="getcollections", method=RequestMethod.GET)
 	public @ResponseBody Collections GetCollections(@ModelAttribute("profileid") String profileid, 
-												@RequestParam("galleryname") String galleryname) {
+												@RequestParam("galleryname") String galleryname,
+												@RequestParam("category") String categoryname,
+												@RequestParam("brandname") String brandname) {
 		System.out.println("Get Collections: " + galleryname);
 		Collections collections = new Collections();
 		User loggedinUser = userDetailsService.getUserFromSession();
@@ -60,7 +68,7 @@ public class CollectionController {
 			if(galleryname.isEmpty()) {
 				dbCollections = userService.getCollections(loggedinUser);
 			} else {
-				dbCollections = userService.searchCollectionByName(loggedinUser, galleryname);
+				dbCollections = userService.searchCollections(loggedinUser.getUsername(), galleryname, categoryname, brandname);
 			}
 			if(null == dbCollections) {
 				return collections;
@@ -68,7 +76,7 @@ public class CollectionController {
 			Iterator<org.netvogue.server.neo4japi.domain.Collection> first = dbCollections.iterator();
 			while ( first.hasNext() ){
 				org.netvogue.server.neo4japi.domain.Collection dbCollection = first.next() ;
-				System.out.println("Get Editorial" + dbCollection.getCollectionname());
+				System.out.println("Get Collection" + dbCollection.getCollectionname());
 				collectionTemp.add(conversionService.convert(dbCollection, Collection.class));
 			}
 			collections.setCollections(collectionTemp);
@@ -112,14 +120,21 @@ public class CollectionController {
 	}
 	
 	@RequestMapping(value="collection/create", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse CreateCollection(@RequestBody CampaignJSONRequest request) {
+	public @ResponseBody JsonResponse CreateCollection(@RequestBody CollectionJSONRequest request) {
 		System.out.println("Create Editorial");
 		String error = "";
-		User loggedinUser = userDetailsService.getUserFromSession();
-		org.netvogue.server.neo4japi.domain.Collection newCollection = 
-				new org.netvogue.server.neo4japi.domain.Collection(request.getName(), request.getDesc(), loggedinUser);
-		
 		JsonResponse response = new JsonResponse();
+		
+		User loggedinUser = userDetailsService.getUserFromSession();
+		if(loggedinUser.getUserType() != USER_TYPE.BRAND) {
+			response.setError("Only brands can create collections");
+			return response;
+		}
+		org.netvogue.server.neo4japi.domain.Collection newCollection = 
+				new org.netvogue.server.neo4japi.domain.Collection(request.getSeasonname(), request.getDesc(), loggedinUser);
+		ProductLines productLine = ProductLines.getValueOf(request.getCategory());
+		Category cat = boutiqueService.getOrCreateCategory(productLine);
+		newCollection.setProductcategory(cat);
 		
 		if(ResultStatus.SUCCESS == collectionService.SaveCollection(newCollection, error)) {  
 			response.setStatus(true);
@@ -132,26 +147,46 @@ public class CollectionController {
 	}
 	
 	@RequestMapping(value="collection/edit", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse EditCollection(@RequestBody CampaignJSONRequest request) {
+	public @ResponseBody JsonResponse EditCollection(@RequestBody CollectionJSONRequest request) {
 		System.out.println("Edit Editorial");
 		String error = "";
 		JsonResponse response = new JsonResponse();
 		
 		if(null == request.getId() || request.getId().isEmpty()) {
 			response.setError("editorial Id is empty");
-		} else if(null == request.getName() || request.getDesc().isEmpty()) {
+		} else if(null == request.getSeasonname() || request.getDesc().isEmpty()) {
 			response.setError("new name or description is empty");
 		}
 		
-		if(ResultStatus.SUCCESS == collectionService.editCollection(request.getId(), 
-							request.getName(), request.getDesc(), error))   
-			response.setStatus(true);
-		else
-			response.setError(error);
+		org.netvogue.server.neo4japi.domain.Collection collection = collectionService.getCollection(request.getId());
+		if(null == collection) {
+			response.setError("There is no collection with this Id");
+		}
+		if(collection.getProductcategory().getProductLine().getDesc() == request.getCategory()) {
+			if(ResultStatus.SUCCESS == collectionService.editCollection(request.getId(), 
+								request.getSeasonname(), request.getDesc(), error))   
+				response.setStatus(true);
+			else
+				response.setError(error);
+		} else { //If we can write a cypher query for the below operation, then we can replace
+			//this else part
+			collection.setCollectionseasonname(request.getSeasonname());
+			collection.setDescription(request.getDesc());
+			ProductLines productLine = ProductLines.getValueOf(request.getCategory());
+			Category cat = boutiqueService.getOrCreateCategory(productLine);
+			collection.setProductcategory(cat);
+			if(ResultStatus.SUCCESS == collectionService.SaveCollection(collection, error)) {  
+				response.setStatus(true);
+				response.setIdcreated(collection.getCollectionid());
+			}
+			else
+				response.setError(error);
+		}
 		
 		return response;
 	}
 	
+	//Think about the categories as well
 	@RequestMapping(value="collection/delete", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeleteCollection(@RequestBody String galleryid) {
 		System.out.println("Delete Print Campaign:"+ galleryid);

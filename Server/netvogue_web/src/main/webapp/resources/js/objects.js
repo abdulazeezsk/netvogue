@@ -124,10 +124,11 @@ netvogue.contactinfo	= function(email, mobile, landline1, landline2, address, ci
     this.yearest	= yearest;
 };
 
-netvogue.productline 	= function(productlinename) {
+netvogue.productline 	= function(productlinename, category) {
 	this.productlinename	= productlinename;
    	this.selected			= false;
    	this.id					= productlinename;
+   	this.category			= category;
 };
 
 netvogue.brandscarried	= function(brandlistitem, brandusername, brandprofilepic) {
@@ -148,24 +149,24 @@ netvogue.profile 		= function(name, profileid, aboutus, contactinfo) {
 
 //Default Productlines
 netvogue.defaultproductlines = [
-                                new netvogue.productline("Womens RTW"),
-								new netvogue.productline("Womens Shoe"),
-							   	new netvogue.productline("Denim"),
-							   	new netvogue.productline("Outerwear"),
-							   	new netvogue.productline("Activewear"),
-							   	new netvogue.productline("Mens RTW"),
-							   	new netvogue.productline("Mens Shoe"),
-							   	new netvogue.productline("Mens Bags"),
-							   	new netvogue.productline("Handbags"),
-							   	new netvogue.productline("Lingerie"),
-							   	new netvogue.productline("Jewelry"),
-							   	new netvogue.productline("Swimwear"),
-							   	new netvogue.productline("Kids"),
-							   	new netvogue.productline("Watches"),
-							   	new netvogue.productline("Hats"),
-							   	new netvogue.productline("Luggage"),
-							   	new netvogue.productline("Gifts"),
-							   	new netvogue.productline("Candles")
+                                new netvogue.productline("Womens RTW", 	"APPAREL"),
+								new netvogue.productline("Denim", 		"APPAREL"),
+							   	new netvogue.productline("Outerwear", 	"APPAREL"),
+							   	new netvogue.productline("Activewear", 	"APPAREL"),
+							   	new netvogue.productline("Mens RTW", 	"APPAREL"),
+							   	new netvogue.productline("Lingerie", 	"APPAREL"),
+							   	new netvogue.productline("Swimwear", 	"APPAREL"),
+							   	new netvogue.productline("Kids", 		"APPAREL"),
+							   	new netvogue.productline("Mens Shoe", 	"SHOES"),
+							   	new netvogue.productline("Womens Shoe", "SHOES"),
+							   	new netvogue.productline("Mens Bags", 	"HANDBAGS"),
+							   	new netvogue.productline("Handbags", 	"HANDBAGS"),
+							   	new netvogue.productline("Watches", 	"WATCHES"),
+							   	new netvogue.productline("Jewelry", 	"OTHERS"),
+							   	new netvogue.productline("Hats", 		"OTHERS"),
+							   	new netvogue.productline("Luggage", 	"OTHERS"),
+							   	new netvogue.productline("Gifts", 		"OTHERS"),
+							   	new netvogue.productline("Candles", 	"OTHERS")
                                 ];
 /*************************************************************************/
 /************************End of*******************************************/
@@ -260,7 +261,7 @@ netvogue.collection = function(collectionlistitemid, collectionbrandname, collec
     this.collectionprivacy		= collectionprivacy;
 };
 
-netvogue.collectionjsonrequest = function(name, desc, id, category) {
+netvogue.collectionjsonrequest = function(name, desc, category, id) {
 	this.id 		= id;
 	this.name		= name;
 	this.desc		= desc;

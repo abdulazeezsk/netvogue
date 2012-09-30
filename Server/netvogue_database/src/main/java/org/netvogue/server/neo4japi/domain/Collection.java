@@ -31,9 +31,10 @@ public class Collection {
 	
 	String profilePicLink;
 	
-	String timezone;
-	
 	Date createdDate = new Date();
+	
+	@RelatedTo(type="Collection_Category", direction=Direction.INCOMING)
+	@Fetch Category productcategory;
 	
 	@RelatedTo(type="COLLECTION", direction=Direction.INCOMING)
 	User	createdBy;
@@ -100,20 +101,20 @@ public class Collection {
 		this.profilePicLink = profilePicLink;
 	}
 
-	public String getTimezone() {
-		return timezone;
-	}
-
-	public void setTimezone(String timezone) {
-		this.timezone = timezone;
-	}
-
 	public Date getCreatedDate() {
 		return createdDate;
 	}
 
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
+	}
+
+	public Category getProductcategory() {
+		return productcategory;
+	}
+
+	public void setProductcategory(Category productcategory) {
+		this.productcategory = productcategory;
 	}
 
 	public User getCreatedBy() {

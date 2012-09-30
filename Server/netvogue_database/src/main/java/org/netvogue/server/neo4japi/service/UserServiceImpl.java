@@ -100,7 +100,12 @@ public class UserServiceImpl implements UserService{
 		return searchCollectionByName(user.getUsername(), name);
 	}
 	
-	public Iterable<Collection> searchCollectionByName(String username, String name) {
-		return userRepo.searchCollectionByName(username, Utils.SerializeQueryParamForSearch(name));
+	public Iterable<Collection> searchCollectionByName(String username, String seasonname) {
+		return userRepo.searchCollectionByName(username, Utils.SerializeQueryParamForSearch(seasonname));
+	}
+	
+	public Iterable<Collection> searchCollections(String username, String seasonname, String category, String brandname){
+		if(category.isEmpty() && 
+		return userRepo.searchCollectionByName(username, Utils.SerializeQueryParamForSearch(seasonname));
 	}
 }

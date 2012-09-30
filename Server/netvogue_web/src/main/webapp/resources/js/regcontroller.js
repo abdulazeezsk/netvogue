@@ -84,10 +84,11 @@ netvogue.hashtable = function(obj)
     };
 };
 
-netvogue.productline 	= function(productlinename, selected) {
+netvogue.productline 	= function(productlinename, category) {
 	this.productlinename	= productlinename;
-   	this.selected			= selected;
+   	this.selected			= "no";
    	this.id					= productlinename;
+   	this.category			= category;
 };
 
 netvogue.brandsavailable= function(username, name) {
@@ -128,24 +129,24 @@ function MyCtrlRegistration($scope, $http, $timeout, $location) {
 	                 'Hyderabad', 'Bangalore', 'New Delhi', 'Mumbai', 'Madras', 'Kolkatta'
 	                ];
 	$scope.productscarried = [
-		                 	   	new netvogue.productline("Womens RTW", 	"no"),
-		                	   	new netvogue.productline("Womens Shoe", "no"),
-		                	   	new netvogue.productline("Denim",		 "no"),
-		                	   	new netvogue.productline("Outerwear", 	 "no"),
-		                	   	new netvogue.productline("Activewear", 	 "no"),
-		                	   	new netvogue.productline("Mens RTW", 	 "no"),
-		                	   	new netvogue.productline("Mens Shoe", 	 "no"),
-		                	   	new netvogue.productline("Mens Bags", 	 "no"),
-		                	   	new netvogue.productline("Handbags", 	 "no"),
-		                	   	new netvogue.productline("Lingerie", 	 "no"),
-		                	   	new netvogue.productline("Jewelry", 	 "no"),
-		                	   	new netvogue.productline("Swimwear", 	 "no"),
-		                	   	new netvogue.productline("Kids", 		 "no"),
-		                	   	new netvogue.productline("Watches", 	 "no"),
-		                	   	new netvogue.productline("Hats", 		 "no"),
-		                	   	new netvogue.productline("Luggage", 	 "no"),
-		                	   	new netvogue.productline("Gifts", 		 "no"),
-		                	   	new netvogue.productline("Candles", 	 "no")
+                              	new netvogue.productline("Womens RTW", 	"APPAREL"),
+								new netvogue.productline("Denim", 		"APPAREL"),
+							   	new netvogue.productline("Outerwear", 	"APPAREL"),
+							   	new netvogue.productline("Activewear", 	"APPAREL"),
+							   	new netvogue.productline("Mens RTW", 	"APPAREL"),
+							   	new netvogue.productline("Lingerie", 	"APPAREL"),
+							   	new netvogue.productline("Swimwear", 	"APPAREL"),
+							   	new netvogue.productline("Kids", 		"APPAREL"),
+							   	new netvogue.productline("Mens Shoe", 	"SHOES"),
+							   	new netvogue.productline("Womens Shoe", "SHOES"),
+							   	new netvogue.productline("Mens Bags", 	"HANDBAGS"),
+							   	new netvogue.productline("Handbags", 	"HANDBAGS"),
+							   	new netvogue.productline("Watches", 	"WATCHES"),
+							   	new netvogue.productline("Jewelry", 	"OTHERS"),
+							   	new netvogue.productline("Hats", 		"OTHERS"),
+							   	new netvogue.productline("Luggage", 	"OTHERS"),
+							   	new netvogue.productline("Gifts", 		"OTHERS"),
+							   	new netvogue.productline("Candles", 	"OTHERS")
 		                 	 ];
 	$scope.addBrandsCarried = function(brandscarried) {
 		if("" == brandscarried) {

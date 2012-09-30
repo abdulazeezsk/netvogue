@@ -142,65 +142,7 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 				                    new netvogue.network("Donna Karan", "http://placehold.it/100x72", "profileid1"),
 	        	                 ]);
 
-      var printcampaigns = new netvogue.hashtable();
-      printcampaigns.setItem("profileid1",
-	                            [
-	                             new netvogue.campaign("PrintcampaignId1", "Matches", "Matches Spring 2weq2", "../images/paste2.jpg"),
-	 	                        new netvogue.campaign("PrintcampaignId2", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-	 	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-	 	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-	 	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-	 	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-	 	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-	 	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306")
-	                            ]);
-
-      var videocampaigns = new netvogue.hashtable();
-      videocampaigns.setItem("profileid1",
-								  [
-					               new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-					               new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-					               new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-					               new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-					               new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-					               new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-					               new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-					               new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-					               new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145")
-					              ]);
-
-      var newsletters = new netvogue.hashtable();
-      newsletters.setItem("profileid1",
-								  [
-					            	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-					            	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-					            	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-					            	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-					            	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-					            	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-					            	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-					            	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-					            	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-					            	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-					            	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306")
-					            ]);
-      var collections = new netvogue.hashtable();
-      collections.setItem("profileid1",
-								  [
-					               new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/231x306"),
-					               new netvogue.collection("collectionId", "Donna karan", "Spring 2012", "http://placehold.it/231x306"),
-					               new netvogue.collection("collectionId", "Catherine jones", "Spring 2012", "http://placehold.it/231x306"),
-					               new netvogue.collection("collectionId", "Rebecca Jonson", "Spring 2012", "http://placehold.it/231x306"),
-					               new netvogue.collection("collectionId", "Givenchy", "Spring 2012", "http://placehold.it/231x306"),
-					               new netvogue.collection("collectionId", "Valentino", "Spring 2012", "http://placehold.it/231x306"),
-					               new netvogue.collection("collectionId", "DKNY", "Spring 2012", "http://placehold.it/231x306"),
-					               new netvogue.collection("collectionId", "Rebecca Minkoff", "Spring 2012", "http://placehold.it/231x306"),
-					               new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/231x306"),
-					               new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/231x306"),
-					               new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/231x306"),
-					               new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/231x306")
-					              ]);
-      var linesheets = new netvogue.hashtable();
+            var linesheets = new netvogue.hashtable();
       linesheets.setItem("profileid1",
 								  [
 								  new netvogue.linesheet("linesheetId", "Calvin Klien", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
@@ -312,89 +254,6 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
                   }
                   })*/
                   ;
-              }
-              return result;
-          },
-          getprintcampaigns: function (routeparams) {
-              var result;
-              if (angular.isUndefined(routeparams.profileid)) {
-                  result = myprintcampaigns.getprintcampaigns();
-                  for (var campaign in result) {
-                      result[campaign].printcampaignlistitemid = "printcampaign/" + result[campaign].printcampaignlistitemid;
-                  }
-              } else {
-                  result = printcampaigns.getItem(routeparams.profileid);
-                  /*angular.forEach(campaigns, function(campaign) {
-                  if(angular.equals(campaign['profileid'], routeparams.profileid)) {
-                  result = campaign['printcampaign'];
-                  }
-                  });*/
-                  for (var printcampaigns in result) {
-                      result[printcampaigns].printcampaignlistitemid = routeparams.profileid + "/printcampaign/" + result[printcampaigns].printcampaignlistitemid;
-                  }
-              }
-              return result;
-          },
-          getvideocampaigns: function (routeparams) {
-              var result;
-              if (angular.isUndefined(routeparams.profileid)) {
-                  result = myvideocampaigns.getvideocampaigns();
-                  for (var campaign in result) {
-                      result[campaign].videocampaignlistitemid = "videocampaign/" + result[campaign].videocampaignlistitemid;
-                  }
-              } else {
-                  result = videocampaigns.getItem(routeparams.profileid);
-                  /*angular.forEach(campaigns, function(campaign) {
-                  if(angular.equals(campaign['profileid'], routeparams.profileid)) {
-                  result = campaign['videocampaign'];
-                  }
-                  });*/
-                  for (var campaign in result) {
-                      result[campaign].videocampaignlistitemid = routeparams.profileid + "/videocampaign/" + result[campaign].videocampaignlistitemid;
-                  }
-              }
-              return result;
-          },
-          getnewsletters: function (routeparams) {
-              var result;
-              if (angular.isUndefined(routeparams.profileid)) {
-                  result = mynewsletters.getnewsletters();
-                  for (var campaign in result) {
-                      result[campaign].newsletterlistitemid = "newsletter/" + result[campaign].newsletterlistitemid;
-                  }
-              } else {
-                  result = newsletters.getItem(routeparams.profileid);
-                  /*angular.forEach(campaigns, function(campaign) {
-                  if(angular.equals(campaign['profileid'], routeparams.profileid)) {
-                  result = campaign['newsletter'];
-                  for(var campaign in result) {
-                  result[campaign].newsletterlistitemid = routeparams.profileid + "/newsletter/" + result[campaign].newsletterlistitemid;
-                  }
-                  }
-                  });*/
-                  for (var campaign in result) {
-                      result[campaign].videocampaignlistitemid = routeparams.profileid + "/videocampaign/" + result[campaign].videocampaignlistitemid;
-                  }
-              }
-              return result;
-          },
-          getcollections: function (routeparams) {
-              var result;
-              if (angular.isUndefined(routeparams.profileid)) {
-                  result = mycollections.getcollections();
-                  for (var collection in result) {
-                      result[collection].collectionlistitemid = "collections/" + result[collection].collectionlistitemid;
-                  }
-              } else {
-                  result = collections.getItem(routeparams.profileid);
-                  /*angular.forEach(collections, function(collection) {
-                  if(angular.equals(collection['profileid'], routeparams.profileid)) {
-                  result = collection['collections'];
-                  }
-                  });*/
-                  for (var col in result) {
-                      result[col].collectionlistitemid = routeparams.profileid + "/collections/" + result[col].collectionlistitemid;
-                  }
               }
               return result;
           },
@@ -666,8 +525,196 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	      }
       };
   }).
-  service('trending', function () {
-      var trending = [
+  service('mycollection', function ($http) {
+		var name;
+		var galleryname;
+		var collections = [];
+		var photos    = [];
+		return {
+			getcollections: function() {
+	    		return collections;
+	    	},
+	    	setcollections: function(temp) {
+	    		name = temp.name;
+	    		angular.copy(temp.collections, collections);
+	    	},
+	    	getname: function() {
+	    		if(angular.isUndefined(name))
+	        		return "";
+	    		return name;
+	    	},
+	    	setname: function(name) {
+	    		this.name = name;
+	    	},
+	    	getgalleryname: function() {
+	    		if(angular.isUndefined(galleryname))
+	        		return "";
+	    		return galleryname;
+	    	},
+	    	setgalleryname: function(name) {
+	    		this.galleryname = name;
+	    	},
+	    	createcollection: function(jsonrequest) {
+	    		var config = {
+  				method: "POST",
+  				data: jsonrequest,
+                url: "collection/create"
+              };
+              return $http(config);
+	    	},
+	    	updatecollection: function(datatosend) {
+	    		var config = {
+	    				method: "POST",
+	    				data: datatosend,
+	                    url: "collection/edit"
+	                };
+	            return $http(config);
+	    	},
+	    	updatecollectionlocally: function(id, data) {
+	    		var index=0;
+	    		for(index=0; index <  collections.length; index++) {
+	    			if(collections[index].galleryid == galleryid) {
+	    				collections[index].galleryname = newname;
+	    				break;
+	    			}
+	    		}
+	    	},
+	    	deletecollection: function(ajaxrequestcall, galleryid) {
+	    		var config = {
+	    			method: "POST",
+	    			data: galleryid,
+	                url: ajaxrequestcall + "/delete"
+	            };
+	    		return $http(config);
+	    	},
+	    	deletecollectionlocally: function(galleryid) {
+	    		var index=0;
+	    		for(index=0; index <  galleries.length; index++) {
+	    			if(galleries[index].galleryid == galleryid) {
+	    				break;
+	    			}
+	    		}
+	    		galleries.splice(index, 1);
+	    	},
+	    	getphotos: function() {
+	    		return photos;
+	    	},
+	    	setphotos: function(photostemp) {
+	    		name = photostemp.name;
+	    		galleryname = photostemp.galleryname;
+	    		angular.copy(photostemp.photos, photos);
+	    	},
+	    	savephotoinfo: function(ajaxrequestcall, label, seasonname, photoid) {
+	    		var datatosend = {
+	    				"photoname" : label,
+	    				"seasonname": seasonname,
+	    				"photoid"	: photoid
+	    		};
+	    		var config = {
+	    				method: "POST",
+	    				data: datatosend,
+	                    url: ajaxrequestcall + "/editphotoinfo"
+	                };
+	            return $http(config);
+	    	},
+	    	deletephoto: function(ajaxrequestcall, photoid) {
+	    		var config = {
+	    			method: "POST",
+	    			data: photoid,
+	                url: ajaxrequestcall + "/deletephoto"
+	            };
+	    		return $http(config);
+	    	},
+	    	deletephotoslocally: function(photoid) {
+	    		var i=0;
+	    		for(i=0; i <  photos.length; i++) {
+	    			if(photos[i].uniqueid == photoid) {
+	    				break;
+	    			}
+	    		}
+	    		photos.splice(i, 1);
+	    	}
+		};
+}).
+service('srvcollection', function ($http, mycollection) {
+    var collections= new netvogue.hashtable();
+    return {
+  	  getname: function(routeparams) {
+      	  var result;
+            if (angular.isUndefined(routeparams.profileid)) {
+                return mycollection.getname();
+            } else {
+                /*angular.forEach(profiles, function (profile) {
+                    if (angular.equals(profile['profileid'], routeparams.profileid)) {
+                        result = profile['aboutus'];
+                    }
+                });*/
+            }
+            return result;
+  	  },
+  	  getgalleryname: function (routeparams) {
+	          if (angular.isUndefined(routeparams.profileid)) {
+	        	  return mycollection.getgalleryname();
+	          }
+	    	},
+  	  getcollections: function (routeparams) {
+	          if (angular.isUndefined(routeparams.profileid)) {
+	        	  return mycollection.getcollections();
+	          }
+	      },
+  	  collections: function(routeparams, jsonrequest) {
+	          var profileid = "";
+	          if (!angular.isUndefined(routeparams.profileid)) {
+	        	  profileid = routeparams.profileid;
+	          }
+	          var datatosend = {
+		  				"galleryname" : jsonrequest
+		  	};
+	          var config = {
+	              method: "GET",
+	              params: datatosend,
+	              url:   "getcollections/" + profileid
+	          };
+	          return $http(config);
+	      },
+	      photos: function (routeparams, galleryid, photoname) {
+	          var profileid = "";
+	          if (!angular.isUndefined(routeparams.profileid)) {
+	        	  profileid = routeparams.profileid;
+	          }
+	          var datatosend = {
+	  				"photoname" : photoname,
+	  				"galleryid" : galleryid
+	  		};
+	          var config = {
+	              method: "GET",
+	              params: datatosend,
+	              url: "collection/getphotos/" + profileid
+	          };
+	          return $http(config);
+	      },
+	      setcollectionlocally: function(data, routeparams) {
+	    	  if (angular.isUndefined(routeparams.profileid)) {
+	        	  mycollection.setcollections(data);
+	          } else {
+	        	  //galleries.push(angular.copy(galleriesdata));
+	          }
+	      },
+	      setphotoslocally: function(galleriesdata, routeparams) {
+	    	  if (angular.isUndefined(routeparams.profileid)) {
+	    		  mycollection.setphotos(galleriesdata);
+	          } else {
+	        	  //galleries.push(angular.copy(galleriesdata));
+	          }
+	      },
+	      getphotos: function (routeparams) {
+	          if (angular.isUndefined(routeparams.profileid)) {
+	        	  return mycollection.getphotos();
+	          }
+	      }
+    };
+}).service('trending', function () {
+     var trending = [
                   {
                       "trendlistitem": "Trend1",
                       "trendpiclink": "images/images.jpg",

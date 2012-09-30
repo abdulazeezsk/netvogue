@@ -31,7 +31,7 @@
                   <span class="left right_pane_info">
                         <a href="#/collections">Collections</a>
                         <span class="divider">/</span>
-                        <span><a href="#/collection">Untitled</a></span>
+                        <span><a href="#/collection?id={{galleryid}}">{{galleryname}}</a></span>
                 </span>
               
               <span class="right fileinput-button"> <span
@@ -43,8 +43,10 @@
                 <div class="divi2 right_pane_underline">
                 </div>
             </div>
-            <div fileupload-plugin ng-model="existingfiles" new-files="newfiles" min-height="300" max-height="300">
-            </div>
+            <div fileupload-plugin ng-model="existingfiles" new-files="newfiles" 
+            			min-height="300" max-height="300" gallery-id="galleryid" 
+            			update-data="updatephoto(label, seasonname, photoid)"
+            			delete-data="deletephoto(photoid)">
         </div>
         <!-- right pane -->
     </div>

@@ -598,37 +598,49 @@ function MyCtrlViewNewsLetters($scope, $routeParams, currentvisitedprofile, srvg
 
 }
 
-function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofile, srvgallery, mygallery) {
+function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofile, srvcollection, mycollection) {
 
-	$scope.galleryname = "new";
-	$scope.gallerydesc = "description";	
 	$scope.$parent.title = 'Collections';
 	
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
+
+	//Related to new collection
+	$scope.collectionname 		= "new";
+	$scope.collectiondesc 		= "description";
+	$scope.collectioncategory	= "";
+	$scope.defaultcategories	= netvogue.defaultproductlines;
 	
-	$scope.searchgalleryname = ""; 
+	//Related to edit collection
+	$scope.editcollectionname   = "";
+	$scope.editcollectiondesc   = "";
+	$scope.editcollectioncat	= "";
+	var editcollectionid	 	= "";
+	$scope.showEditCollection	= false;
+	
+	$scope.searchcollectionname = ""; 
 	var ajaxrequestcall	 = "collection";
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvgallery.getname($routeParams);
-	    $scope.galleries		= srvgallery.getgalleries($routeParams);
+	    $scope.entityname  		= srvcollection.getname($routeParams);
+	    $scope.collections		= srvcollection.getcollections($routeParams);
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    $scope.getgalleries = function() {
-    	srvgallery.galleries("getcollectionss", $routeParams, $scope.searchgalleryname).success(function(data) {
-        	srvgallery.setgallerylocally(data, $routeParams);
+    $scope.getcollections = function() {
+    	srvcollection.collections("getcollections", $routeParams, $scope.searchcollectionname).success(function(data) {
+    		srvcollection.setcollectionlocally(data, $routeParams);
         	$scope.updatedata();
         }).error(function(data) {
         	
         });
     };
-    $scope.getgalleries();
+    $scope.getcollections();
     
-    $scope.creategallery = function() {
-    	var jsonrequest = new netvogue.collectionjsonrequest($scope.galleryname, $scope.gallerydesc, "");
-    	mygallery.creategallery(ajaxrequestcall, jsonrequest).success(function(data) {
+    $scope.createcollection = function() {
+    	var jsonrequest = new netvogue.collectionjsonrequest($scope.collectionname, $scope.collectiondesc,
+    																			$scope.collectioncategory);
+    	mycollection.createcollection(jsonrequest).success(function(data) {
     		if(data.status == true) {
     			$location.url("addcollections?id=" + data.idcreated);
     		}
@@ -637,19 +649,30 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
         });
     };
     
-    $scope.updategallery = function() {
-    	var jsonrequest = new netvogue.collectionjsonrequest($scope.galleryname, $scope.gallerydesc);
-    	mygallery.updatedgallery(ajaxrequestcall, jsonrequest).success(function(data) {
-    		
-    	}).error(function(data) {
-    		
-    	});
+    $scope.editcollection = function(id, name, desc, category) {
+    	$scope.editcollectionname   = name;
+    	$scope.editcollectiondesc   = desc;
+    	editcollectionid	 		= id;
+    	$scope.editcollectioncat	= category;
+    	$scope.showEditCollection	= true;
     };
     
-    $scope.deletegallery = function(galleryid) {
-    	mygallery.deletegallery(ajaxrequestcall, galleryid).success(function(data) {
-    		mygallery.deletegallerylocally(galleryid);
-    		$scope.galleries		= srvgallery.getgalleries($routeParams);
+    $scope.updatecollection = function() {
+    	var jsonrequest = new netvogue.collectionjsonrequest($scope.editcollectionname, 
+    			$scope.editcollectiondesc, $scope.editcollectioncat, editcollectionid);
+    	mycollection.updatecollection(jsonrequest).success(function(data) {
+    		mycollection.updatecollectionlocally($scope.editgalleryid, $scope.editgalleryname);//Azeez
+    		$scope.collections		= srvcollection.getcollections($routeParams);
+    	}).error(function(data) {
+ 
+    	});
+    	$scope.showEditCollection	 = false;
+    };
+    
+    $scope.deletecollection = function(id) {
+    	mycollection.deletecollection(id).success(function(data) {
+    		mycollection.deletecollectionlocally(id);
+    		$scope.collections		= srvcollection.getcollections($routeParams);
     	}).error(function(data) {
     		
     	});

@@ -205,14 +205,13 @@ function MyCtrlAddNewsletter($scope, $routeParams, $location, srvgallery, mygall
 	};
 }
 
-function MyCtrlAddCollections($scope, $routeParams, currentvisitedprofile, $location) {
+function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedprofile, srvcollection, mycollection) {
 
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
 	if(!$scope.isMyProfile) {
 		$location.url($routeParams.profileid + "/collections");
 	}
 	
-	var ajaxrequestcall	 = "collection";
     $scope.$parent.title	= "Add Collection";
 	$scope.newfiles = [];
 	$scope.galleryid = "";
@@ -221,15 +220,15 @@ function MyCtrlAddCollections($scope, $routeParams, currentvisitedprofile, $loca
 	}
 	
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvgallery.getname($routeParams);
-	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
-	    $scope.existingfiles	= srvgallery.getphotos($routeParams);
+	    $scope.entityname  		= srvcollection.getname($routeParams);
+	    $scope.galleryname  	= srvcollection.getgalleryname($routeParams);
+	    $scope.existingfiles	= srvcollection.getphotos($routeParams);
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, "").success(function(data) {
-    	srvgallery.setphotoslocally(data, $routeParams);
+    srvcollection.photos($routeParams, $scope.galleryid, "").success(function(data) {
+    	srvcollection.setphotoslocally(data, $routeParams);
     	$scope.updatedata();
     }).error(function(data) {
     	
@@ -243,7 +242,7 @@ function MyCtrlAddCollections($scope, $routeParams, currentvisitedprofile, $loca
 	};
 	
 	$scope.updatephoto = function(label, seasonname, photoid) {
-		mygallery.savephotoinfo(ajaxrequestcall, label, seasonname, photoid).success(function(data) {
+		mycollection.savephotoinfo(label, seasonname, photoid).success(function(data) {
 			if(data.status == true) {
 				alert("Updated successfully" + data.status);
 			} else {
@@ -256,9 +255,9 @@ function MyCtrlAddCollections($scope, $routeParams, currentvisitedprofile, $loca
 	};
 	
 	$scope.deletephoto = function(photoid) {
-		mygallery.deletephoto(ajaxrequestcall, photoid).success(function(data) {
+		mycollection.deletephoto(ajaxrequestcall, photoid).success(function(data) {
 			mygallery.deletephotoslocally(photoid);
-			$scope.existingfiles	= srvgallery.getphotos($routeParams);
+			$scope.existingfiles	= srvcollection.getphotos($routeParams);
 		}).error(function(data) {
 			alert("error: " + data.error);
 		});
