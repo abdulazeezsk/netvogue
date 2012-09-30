@@ -108,7 +108,9 @@ public class Gallery {
 	}
 	
 	public void addPhotos(Photo newPhoto) {
-		System.out.println("No:of photos of gallery " + galleryname + " in gallery" + photosAdded.size());
+		if(0 == photosAdded.size()) {
+			setProfilePicLink(newPhoto.getPhotouniqueid());
+		}
 		photosAdded.add(newPhoto);
 		System.out.println("Photo with id" + newPhoto.getPhotouniqueid() + " added successfully");
 		System.out.println("No:of photos in gallery" + photosAdded.size());

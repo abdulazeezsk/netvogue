@@ -109,6 +109,9 @@ public class Editorial {
 	}
 	
 	public void addPhotos(EditorialPhoto newPhoto) {
+		if(0 == photosAdded.size()) {
+			setProfilePicLink(newPhoto.getEditorialphotouniqueid());
+		}
 		photosAdded.add(newPhoto);
 	}
 	

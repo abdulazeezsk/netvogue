@@ -130,6 +130,9 @@ public class Collection {
 	}
 	
 	public void addPhotos(CollectionPhoto newPhoto) {
+		if(0 == photosAdded.size()) {
+			setProfilePicLink(newPhoto.getCollectionphotouniqueid());
+		}
 		photosAdded.add(newPhoto);
 	}
 	

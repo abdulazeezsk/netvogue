@@ -109,6 +109,9 @@ public class PrintCampaign {
 	}
 	
 	public void addPhotos(PrintCampaignPhoto newPhoto) {
+		if(0 == photosAdded.size()) {
+			setProfilePicLink(newPhoto.getPrintcampaignphotouniqueid());
+		}
 		photosAdded.add(newPhoto);
 	}
 	
