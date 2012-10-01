@@ -18,7 +18,6 @@ import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
 import org.netvogue.server.neo4japi.service.CollectionService;
 import org.netvogue.server.neo4japi.service.UserService;
-import org.netvogue.server.webmvc.domain.CampaignJSONRequest;
 import org.netvogue.server.webmvc.domain.Collection;
 import org.netvogue.server.webmvc.domain.CollectionJSONRequest;
 import org.netvogue.server.webmvc.domain.Collections;
@@ -120,7 +119,7 @@ public class CollectionController {
 	
 	@RequestMapping(value="collection/create", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse CreateCollection(@RequestBody CollectionJSONRequest request) {
-		System.out.println("Create Editorial");
+		System.out.println("Create Collection");
 		String error = "";
 		JsonResponse response = new JsonResponse();
 		
@@ -149,7 +148,7 @@ public class CollectionController {
 	
 	@RequestMapping(value="collection/edit", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditCollection(@RequestBody CollectionJSONRequest request) {
-		System.out.println("Edit Editorial");
+		System.out.println("Edit Collection");
 		String error = "";
 		JsonResponse response = new JsonResponse();
 		
