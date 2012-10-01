@@ -29,6 +29,7 @@ import com.amazonaws.services.s3.model.ProgressEvent;
 import com.amazonaws.services.s3.model.ProgressListener;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
+import com.amazonaws.services.s3.transfer.model.UploadResult;
 
 public class FileManager extends TransferManager {
 	
@@ -143,12 +144,25 @@ public class FileManager extends TransferManager {
 			boolean firstImage = true;
 			for ( Size size : sizes ) {
 				Upload temp = upload(bucketName,imageKey+ "-" + size.toString(), buffer, metadata, size);
-				if(firstImage) {
+				/*if(firstImage) {
 					temp.waitForCompletion();
 					firstImage = false;
-				}
+				}*/
+				temp.waitForUploadResult();
 				System.out.println("input" + buffer + " : "+ temp.getDescription());
 			}
+		} catch (AmazonServiceException e) {
+			System.out.println("Amazon service exception:" +  
+					" - " + e.toString());
+			e.printStackTrace();
+		} catch (AmazonClientException e) {
+			System.out.println("Amazon client exception:" +  
+					" - " + e.toString());
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			System.out.println("Illegal argument exception" +  
+					" - " + e.toString());
+			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println("There was an error in Upload manager while uploading different sizes" +  
 													" - " + e.toString());
