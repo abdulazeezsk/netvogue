@@ -4,8 +4,10 @@ import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Editorial;
 import org.netvogue.server.neo4japi.domain.Gallery;
+import org.netvogue.server.neo4japi.domain.Linesheet;
 import org.netvogue.server.neo4japi.domain.PrintCampaign;
 import org.netvogue.server.neo4japi.domain.Collection;
+import org.netvogue.server.neo4japi.domain.Stylesheet;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,5 +109,35 @@ public class UserServiceImpl implements UserService{
 	public Iterable<Collection> searchCollections(String username, String seasonname, String category, String brandname){
 		//if(category.isEmpty() && 
 		return userRepo.searchCollectionByName(username, Utils.SerializeQueryParamForSearch(seasonname));
+	}
+	
+	public Iterable<Stylesheet> getStylesheets(User user) {
+		if(null != user) {
+			return userRepo.getStylesheets(user.getUsername());
+		}
+		return null;
+	}
+	
+	public Iterable<Stylesheet> searchStylesheetByName(User user, String name) {
+		return searchStylesheetByName(user.getUsername(), name);
+	}
+	
+	public Iterable<Stylesheet> searchStylesheetByName(String username, String name) {
+		return userRepo.searchStylesheetByName(username, name);
+	}
+	
+	public Iterable<Linesheet> getLinesheets(User user) {
+		if(null != user) {
+			return userRepo.getLinesheets(user.getUsername());
+		}
+		return null;
+	}
+	
+	public Iterable<Linesheet> searchLinesheetByName(User user, String name) {
+		return searchLinesheetByName(user.getUsername(), name);
+	}
+	
+	public Iterable<Linesheet> searchLinesheetByName(String username, String name) {
+		return userRepo.searchLinesheetByName(username, name);
 	}
 }

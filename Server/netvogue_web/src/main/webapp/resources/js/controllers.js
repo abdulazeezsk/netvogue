@@ -772,6 +772,358 @@ function MyCtrlViewcollection($scope, $routeParams, currentvisitedprofile, srvco
     };
 }
 
+function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofile, srvstylesheet, mystylesheet) {
+	
+	$scope.$parent.title = 'Style sheets';
+	
+	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+
+	//Related to new stylesheet
+	$scope.stylesheetname = "new";
+	$scope.stylesheetcat  = "description";
+	$scope.defaultcategories	= netvogue.defaultproductlines;
+	
+	//Related to search
+	$scope.searchstylesheetname = ""; 
+	$scope.searchstylesheetcat  = "";
+	
+	//Related to edit stylesheet
+	$scope.editstylesheetname   = "";
+	$scope.editstylesheetcat    = "";
+	$scope.editstylesheetid	 	= "";
+	$scope.showEditStylesheet	 = false;	
+	
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvstylesheet.getname($routeParams);
+	    $scope.stylesheets		= srvstylesheet.getstylesheets($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    $scope.getstylesheets = function() {
+    	var searchstylesheets = {
+    			"stylesheetname" :$scope.searchstylesheetname,
+    			"category"		 :$scope.searchstylesheetcat,
+    	};
+    	srvstylesheet.stylesheets($routeParams, searchstylesheets).success(function(data) {
+    		srvstylesheet.setstylesheetlocally(data, $routeParams);
+        	$scope.updatedata();
+        }).error(function(data) {
+        	
+        });
+    };
+    $scope.getstylesheets();
+    
+    $scope.createstylesheet = function() {
+    	var jsonrequest = new netvogue.stylesheetjsonrequest($scope.stylesheetname, $scope.stylesheetcat);
+    	mystylesheet.createstylesheet(jsonrequest).success(function(data) {
+    		if(data.status == true) {
+    			$location.url("addstyle?id=" + data.idcreated);
+    		}
+        }).error(function(data) {
+        	
+        });
+    };
+    
+    $scope.editstylesheet = function(id, name, category) {
+    	$scope.editstylesheetname   = name;
+    	$scope.editstylesheetcat    = category;
+    	$scope.editstylesheetid	 	= id;
+    	$scope.showEditStylesheet	= true;
+    };
+    
+    $scope.updatestylesheet = function() {
+    	var jsonrequest = new netvogue.stylesheetjsonrequest($scope.editstylesheetname, $scope.editstylesheetcat, $scope.editstylesheetid);
+    	mystylesheet.updatestylesheet(jsonrequest).success(function(data) {
+    		mystylesheet.updatestylesheetlocally(jsonrequest);
+    		$scope.stylesheets		= srvstylesheets.getstylesheets($routeParams);
+    	}).error(function(data) {
+ 
+    	});
+    	$scope.showEditStylesheet	 = false;
+    };
+    
+    $scope.deletestylesheet = function(id) {
+    	mystylesheet.deletestylesheet(id).success(function(data) {
+    		mystylesheet.deletestylesheetlocally(id);
+    		$scope.stylesheets		= srvstylesheets.getstylesheets($routeParams);
+    	}).error(function(data) {
+    		
+    	});
+    };
+
+	$scope.searchFilter = new netvogue.searchFilter();
+}
+
+function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile) {
+
+	$scope.$parent.title = 'Styles';
+
+	$scope.entityname = currentvisitedprofile.getEntityName();
+	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
+
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+	$scope.searchFilter = new netvogue.searchFilter();
+	
+	$scope.stylesseason = {
+		"seasonname" : "Spring 2012"
+	};
+	$scope.styles = [ {
+		"stylelistitemid" : "styleId",
+		"stylename" : "Studded Winston",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/220x320"
+
+	}, {
+		"stylelistitemid" : "styleId",
+		"stylename" : "Smith trench",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/220x320"
+
+	}, {
+		"stylelistitemid" : "styleId",
+		"stylename" : "Smith trench",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/220x320"
+
+	}, {
+		"stylelistitemid" : "styleId",
+		"stylename" : "Smith trench",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/220x320"
+
+	}, {
+		"stylelistitemid" : "styleId",
+		"stylename" : "Smith trench",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/220x320"
+
+	}, {
+		"stylelistitemid" : "styleId",
+		"stylename" : "Smith trench",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/220x320"
+
+	} ];
+
+}
+
+function MyCtrlLinesheets($scope, $routeParams, currentvisitedprofile, srvlinesheet, mylinesheet) {
+
+	$scope.$parent.title = 'Linesheets';
+	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+	
+	$scope.searchFilter = new netvogue.searchFilter();
+	
+	$scope.immediate = "true";
+	$scope.editimmediate = "false";
+
+	//Related to new stylesheet
+	$scope.linesheetname = "new";
+	$scope.linesheetcat  = "";
+	$scope.deliverydate  = "";
+	$scope.defaultcategories	= netvogue.defaultproductlines;
+	
+	//Related to search
+	$scope.searchlinesheetname = ""; 
+	$scope.searchlinesheetcat  = "";
+	
+	//Related to edit stylesheet
+	$scope.editlinesheetname   = "";
+	$scope.editlinesheetcat    = "";
+	$scope.editdeliverydate    = "";
+	$scope.editlinesheetid	 	= "";
+	$scope.showEditLinesheet	 = false;	
+	
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvlinesheet.getname($routeParams);
+	    $scope.linesheets		= srvlinesheet.getlinesheets($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    $scope.getlinesheets = function() {
+    	var searchlinesheets = {
+    			"linesheetname" :$scope.searchlinesheetname,
+    			"category"		 :$scope.searchlinesheetcat,
+    	};
+    	srvlinesheet.linesheets($routeParams, searchlinesheets).success(function(data) {
+    		srvlinesheet.setlinesheetlocally(data, $routeParams);
+        	$scope.updatedata();
+        }).error(function(data) {
+        	
+        });
+    };
+    $scope.getlinesheets();
+    
+    $scope.createlinesheet = function() {
+    	if("true" == $scope.immediate)
+    		$scope.deliverydate = 0;
+    	var jsonrequest = new netvogue.linesheetjsonrequest($scope.linesheetname, $scope.linesheetcat, $scope.deliverydate);
+    	mylinesheet.createlinesheet(jsonrequest).success(function(data) {
+    		if(data.status == true) {
+    			//$location.url("addstyle?id=" + data.idcreated);
+    		}
+        }).error(function(data) {
+        	
+        });
+    };
+    
+    $scope.editlinesheet = function(id, name, category, deliverydate) {
+    	$scope.editlinesheetname   	= name;
+    	$scope.editlinesheetcat    	= category;
+    	$scope.editlinesheetid	 	= id;
+    	$scope.editdeliverydate    	= deliverydate;
+    	if(0 == $scope.editdeliverydate)
+    		$scope.editimmediate = "true";
+    	$scope.showEditLinesheet	= true;
+    };
+    
+    $scope.updatelinesheet = function() {
+    	var jsonrequest = new netvogue.linesheetjsonrequest($scope.editlinesheetname, 
+    			$scope.editlinesheetcat, editdeliverydate, $scope.editlinesheetid);
+    	mylinesheet.updatelinesheet(jsonrequest).success(function(data) {
+    		mylinesheet.updatelinesheetlocally(jsonrequest);
+    		$scope.linesheets		= srvlinesheet.getlinesheets($routeParams);
+    	}).error(function(data) {
+ 
+    	});
+    	$scope.showEditLinesheet	 = false;
+    };
+    
+    $scope.deletelinesheet = function(id) {
+    	mylinesheet.deletelinesheet(id).success(function(data) {
+    		mylinesheet.deletelinesheetlocally(id);
+    		$scope.linesheets		= srvlinesheet.getlinesheets($routeParams);
+    	}).error(function(data) {
+    		
+    	});
+    };
+}
+
+function MyCtrlStylesPreview($scope, currentvisitedprofile) {
+
+	$scope.$parent.title = 'Style';
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+	$scope.stylethumbnails = [ {
+		"stylethumbnailsid" : "videoid",
+		"stylethumbnail" : "img/donna_karan_adriana_lima_1.jpg"
+
+	}, {
+		"stylethumbnailsid" : "videoid",
+		"stylethumbnail" : "img/donna_karan_adriana_lima_2.jpg"
+
+	}, {
+		"stylethumbnailsid" : "videoid",
+		"stylethumbnail" : "img/donna_karan_adriana_lima_3.jpg"
+
+	}
+
+	];
+
+	$scope.styletdetails = {
+		"styleid" : "styleid",
+		"stylename" : "becky red jacket",
+		"styledescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
+				+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
+		"stylefabricarion" : "Cotton",
+		"stylenumber" : "RBK2345",
+		"stylederliverydate" : "24/08/2012",
+		"stylesize" : "S M L XL",
+		"styleprice" : "12000",
+		"stylecover" : $scope.stylethumbnails[0].stylethumbnail//"http://placehold.it/290x400"
+	};
+	
+	$scope.SetmainImage=function(index)
+	{
+		$scope.styletdetails.stylecover = $scope.stylethumbnails[index].stylethumbnail;//"http://placehold.it/290x400"
+	};
+
+	$scope.styles = [
+	 {
+		"stylelistitemid" : "styleId",
+		"stylename" : "Studded Winston",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/90x119"
+
+	},
+	{
+		"stylelistitemid" : "styleId",
+		"stylename" : "Smith trench",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/90x119"
+
+	},
+	{
+		"stylelistitemid" : "styleId",
+		"stylename" : "Smith trench",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/90x119"
+
+	},
+	{
+		"stylelistitemid" : "styleId",
+		"stylename" : "Smith trench",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/90x119"
+
+	},
+	{
+		"stylelistitemid" : "styleId",
+		"stylename" : "Smith trench",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/90x119"
+
+	},
+	{
+		"stylelistitemid" : "styleId",
+		"stylename" : "Smith trench",
+		"stylebrandname" : "Calvin Klien",
+		"styleseason" : "Spring 2012",
+		"styledeliverydate" : "25/04/2012",
+		"styleprice" : "5000",
+		"stylecoverpic" : "http://placehold.it/90x119"
+
+	} 
+	
+	];
+}
+
 function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofile) {
 	
 	$scope.$parent.title 	= "Profile Settings";
@@ -1039,26 +1391,6 @@ function MyCtrlAdvancedSearch($scope, search) {
 		$jq("#slider").bxSlider();
 	});
 	$scope.searchFilter = new netvogue.searchFilter();
-}
-
-function MyCtrlLinesheets($scope, $routeParams, currentvisitedprofile,
-		srvprofile) {
-
-	$scope.$parent.title = 'Linesheets';
-	$scope.entityname = currentvisitedprofile.getEntityName();
-	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
-
-	$scope.links = currentvisitedprofile.getleftpanellinks();
-	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.linesheets = srvprofile.getlinesheets($routeParams);
-	$scope.$on('$viewContentLoaded', function() {
-
-	});
-
-	$scope.searchFilter = new netvogue.searchFilter();
-	
-	$scope.immediate = "true";
-
 }
 
 function MyCtrlStyles($scope, $routeParams, currentvisitedprofile) {
@@ -1368,249 +1700,5 @@ function MyCtrlNotifications($scope, $routeParams, currentvisitedprofile,
 	// $scope.mynotification = srvprofile.getnotification();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	$scope.mynetwork = srvprofile.getnetwork($routeParams);
-
-}
-
-function MyCtrlStylesheets($scope, $routeParams, currentvisitedprofile) {
-
-	$scope.$parent.title = 'Style sheets';
-
-	$scope.entityname = currentvisitedprofile.getEntityName();
-	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
-
-	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.searchFilter = new netvogue.searchFilter();
-	$scope.stylesseason = {
-		"seasonname" : "Spring 2012"
-	};
-	$scope.styles = [ {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Studded Winston",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	}, {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	}, {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	}, {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	}, {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	}, {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	} ];
-
-}
-
-function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile) {
-
-	$scope.$parent.title = 'Styles';
-
-	$scope.entityname = currentvisitedprofile.getEntityName();
-	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
-
-	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.searchFilter = new netvogue.searchFilter();
-	$scope.stylesseason = {
-		"seasonname" : "Spring 2012"
-	};
-	$scope.styles = [ {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Studded Winston",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	}, {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	}, {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	}, {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	}, {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	}, {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	} ];
-
-}
-
-
-function MyCtrlStylesPreview($scope, currentvisitedprofile) {
-
-	$scope.$parent.title = 'Style';
-	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.stylethumbnails = [ {
-		"stylethumbnailsid" : "videoid",
-		"stylethumbnail" : "img/donna_karan_adriana_lima_1.jpg"
-
-	}, {
-		"stylethumbnailsid" : "videoid",
-		"stylethumbnail" : "img/donna_karan_adriana_lima_2.jpg"
-
-	}, {
-		"stylethumbnailsid" : "videoid",
-		"stylethumbnail" : "img/donna_karan_adriana_lima_3.jpg"
-
-	}
-
-	];
-
-	$scope.styletdetails = {
-		"styleid" : "styleid",
-		"stylename" : "becky red jacket",
-		"styledescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
-				+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
-		"stylefabricarion" : "Cotton",
-		"stylenumber" : "RBK2345",
-		"stylederliverydate" : "24/08/2012",
-		"stylesize" : "S M L XL",
-		"styleprice" : "12000",
-		"stylecover" : $scope.stylethumbnails[0].stylethumbnail//"http://placehold.it/290x400"
-	};
 	
-	$scope.SetmainImage=function(index)
-	{
-		$scope.styletdetails.stylecover = $scope.stylethumbnails[index].stylethumbnail;//"http://placehold.it/290x400"
-	};
-
-	$scope.styles = [
-	 {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Studded Winston",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/90x119"
-
-	},
-	{
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/90x119"
-
-	},
-	{
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/90x119"
-
-	},
-	{
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/90x119"
-
-	},
-	{
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/90x119"
-
-	},
-	{
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/90x119"
-
-	} 
-	
-	];
 }

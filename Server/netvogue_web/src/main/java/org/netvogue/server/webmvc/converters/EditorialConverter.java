@@ -16,8 +16,12 @@ public class EditorialConverter implements Converter<org.netvogue.server.neo4jap
 		Editorial newEditorial = new Editorial();
 		newEditorial.setGalleryid(source.getEditorialid());
 		newEditorial.setGalleryname(source.getEditorialname());
-		String thumblink = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.EDITORIAL, Size.EThumb);
-		newEditorial.setGallerypic(thumblink);
+		if(0 == source.getPhotosAdded().size()) {
+			newEditorial.setGallerypic(source.getProfilePicLink());
+		} else {
+			String thumblink = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.EDITORIAL, Size.EThumb);
+			newEditorial.setGallerypic(thumblink);
+		}
 		newEditorial.setGallerydesc(source.getDescription());
 		return newEditorial;
 	}

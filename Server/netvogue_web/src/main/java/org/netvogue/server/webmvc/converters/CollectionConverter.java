@@ -16,8 +16,12 @@ public class CollectionConverter implements Converter<org.netvogue.server.neo4ja
 		Collection newCollection = new Collection();
 		newCollection.setGalleryid(source.getCollectionid());
 		newCollection.setGalleryname(source.getCollectionseasonname());
-		String thumblink = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.COLLECTION, Size.CThumb);
-		newCollection.setGallerypic(thumblink);
+		if(0 == source.getPhotosAdded().size()) {
+			newCollection.setGallerypic(source.getProfilePicLink());
+		} else {
+			String thumblink = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.COLLECTION, Size.CThumb);
+			newCollection.setGallerypic(thumblink);
+		}
 		newCollection.setGallerydesc(source.getDescription());
 		newCollection.setBrandname(source.getCreatedBy().getName());
 		newCollection.setCategory(source.getProductcategory().getProductLine().getDesc());

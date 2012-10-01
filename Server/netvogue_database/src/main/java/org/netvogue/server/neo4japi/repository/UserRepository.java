@@ -56,5 +56,21 @@ public interface UserRepository extends GraphRepository<User> {
 	@Query( "START n=node:username(username={0}) MATCH n-[:COLLECTION]->c WHERE c.collectionseasonname =~ {1} " +
 			"RETURN c ORDER BY c.createdDate DESC")
 	Iterable<Collection> searchCollectionByName(String username, String collectionseasonname);
+
+	//queries related to stylesheets
+	@Query( "START n=node:username(username={0}) MATCH n-[:STYLESHEET]->c RETURN c ORDER BY c.createdDate DESC")
+	Iterable<Stylesheet> getStylesheets(String username);
 	
+	@Query( "START n=node:username(username={0}) MATCH n-[:STYLESHEET]->c WHERE c.stylesheetname =~ {1} " +
+			"RETURN c ORDER BY c.createdDate DESC")
+	Iterable<Stylesheet> searchStylesheetByName(String username, String stylesheetname);
+	
+	//queries related to linesheets
+	@Query( "START n=node:username(username={0}) MATCH n-[:LINESHEET]->c RETURN c ORDER BY c.createdDate DESC")
+	Iterable<Linesheet> getLinesheets(String username);
+	
+	@Query( "START n=node:username(username={0}) MATCH n-[:LINESHEET]->c WHERE c.linesheetname =~ {1} " +
+			"RETURN c ORDER BY c.createdDate DESC")
+	Iterable<Linesheet> searchLinesheetByName(String username, String linesheetname);
+
 }

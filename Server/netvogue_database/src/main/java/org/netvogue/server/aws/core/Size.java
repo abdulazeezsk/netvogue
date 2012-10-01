@@ -26,7 +26,15 @@ public enum Size {
 	CAdd(210, 300),
 	CThumb(231, 306),
 	CLeft(130, 100),
-	CMain(550, 550);
+	CMain(550, 550),
+	SAdd(130, 151),
+	SThumb(220, 320),
+	SLeft(130, 100),
+	SMain(550, 550),
+	LAdd(130, 151),
+	LThumb(220, 320),
+	LLeft(130, 100),
+	LMain(550, 550);
 	
 	private final int width;   // in pixels
     private final int height; // in pixels

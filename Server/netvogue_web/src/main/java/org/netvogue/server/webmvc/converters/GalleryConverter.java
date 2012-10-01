@@ -17,8 +17,12 @@ public class GalleryConverter implements Converter<org.netvogue.server.neo4japi.
 	    Gallery gallery = new Gallery();
 	    gallery.setGalleryid(dbGallery.getGalleryid());
 	    gallery.setGalleryname(dbGallery.getGalleryname());
-	    String thumblink = uploadManager.getQueryString(dbGallery.getProfilePicLink(), ImageType.GALLERY, Size.GThumb);
-	    gallery.setGallerypic(thumblink);
+	    if(0 == dbGallery.getPhotosAdded().size()) {
+			gallery.setGallerypic(dbGallery.getProfilePicLink());
+		} else {
+			String thumblink = uploadManager.getQueryString(dbGallery.getProfilePicLink(), ImageType.GALLERY, Size.GThumb);
+			gallery.setGallerypic(thumblink);
+		}
 	    gallery.setGallerydesc(dbGallery.getDescription());
 		return gallery;
 	}

@@ -249,18 +249,6 @@ netvogue.campaignjsonrequest = function(name, desc, id) {
 /*******************Collection Objects************************************/
 /*************************************************************************/
 
-netvogue.collection = function(collectionlistitemid, collectionbrandname, collectionseason, collectioncoverpic,
-		collectioncategory, collectionproductline, collectionimages, collectionprivacy) {
-	this.collectionlistitemid 	= collectionlistitemid;
-    this.collectionbrandname 	= collectionbrandname; //Designer --remove this
-    this.collectionseason 		= collectionseason; 
-    this.collectioncoverpic		= collectioncoverpic;
-    this.collectioncategory		= collectioncategory;
-    this.collectionproductline	= collectionproductline;
-    this.collectionimages		= collectionimages;
-    this.collectionprivacy		= collectionprivacy;
-};
-
 netvogue.collectionjsonrequest = function(seasonname, desc, category, id) {
 	this.id 		= id;
 	this.seasonname	= seasonname;
@@ -271,6 +259,22 @@ netvogue.collectionjsonrequest = function(seasonname, desc, category, id) {
 /*************************************************************************/
 /************************End of*******************************************/
 /*******************Collection Objects************************************/
+/*************************************************************************/
+
+/*************************************************************************/
+/***********************Start of******************************************/
+/*******************Stylesheet Objects************************************/
+/*************************************************************************/
+
+netvogue.stylesheetjsonrequest = function(name, category, id) {
+	this.id 		= id;
+	this.name		= name;
+	this.category 	= category;
+};
+
+/*************************************************************************/
+/************************End of*******************************************/
+/*******************Stylesheet Objects************************************/
 /*************************************************************************/
 
 /*************************************************************************/
@@ -302,6 +306,13 @@ netvogue.style	= function(styleno, stylename, description, price, size, colors, 
 	this.fabrication	= fabrication;
 	this.coverpic		= coverpic; //Main image
 	this.views			= views;
+};
+
+netvogue.linesheetjsonrequest = function(name, category, deliverydate, id) {
+	this.id 			= id;
+	this.name			= name;
+	this.category 		= category;
+	this.deliverydate 	= deliverydate;
 };
 
 /*************************************************************************/

@@ -25,5 +25,5 @@ public interface BoutiqueRepository extends GraphRepository<Boutique>{
 			"WHERE r.status == 'CONFIRMED' /" +
 		    "RETURN collections /" +
 			"SKIP {pagenumber*pagesize} LIMIT{pagesize}")
-	Iterable<BrandLineSheet> getAllLinesheets(@Param("username") String username);
+	Iterable<Linesheet> getAllLinesheets(@Param("username") String username);
 }

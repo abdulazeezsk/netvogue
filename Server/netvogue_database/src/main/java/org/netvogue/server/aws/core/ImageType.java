@@ -7,11 +7,7 @@ public enum ImageType {
 	PRINT_CAMPAIGN				("printcampaign"	,new Size[]{Size.PCThumb,Size.PCAdd,Size.PCLeft,Size.PCMain}),
 	EDITORIAL					("editorial"		,new Size[]{Size.EThumb,Size.EAdd,Size.ELeft,Size.EMain}),
 	COLLECTION					("collection"		,new Size[]{Size.CThumb,Size.CAdd,Size.CLeft,Size.CMain}),
-	LINESHEETS_COVER_IMAGE		("linesheets"		,new Size[]{Size.S1}),
-	STYLES						("styles"			,new Size[]{Size.S1}),
-	STORES_PIC					("storesPic"		,new Size[]{Size.S1}),
-	CAMPAIGN_COVER_IMAGE		("campaignCover"	,new Size[]{Size.S1}),
-	CAMPAIGN					("campaign"			,new Size[]{Size.S1});
+	STYLE						("style"			,new Size[]{Size.SThumb,Size.SAdd,Size.SLeft,Size.SMain});
 	
 	private final Size[] sizes; // all required sizes
 	private final String key; // in meters

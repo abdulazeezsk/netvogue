@@ -47,6 +47,8 @@
 	<bean id="PrintCampaignService" class="org.netvogue.server.neo4japi.service.PrintCampaignServiceImpl" />
 	<bean id="EditorialService" 	class="org.netvogue.server.neo4japi.service.EditorialServiceImpl" />
 	<bean id="CollectionService" 	class="org.netvogue.server.neo4japi.service.CollectionServiceImpl" />
+	<bean id="StylesheetService" 	class="org.netvogue.server.neo4japi.service.StylesheetServiceImpl" />
+	<bean id="LinesheetService" 	class="org.netvogue.server.neo4japi.service.LinesheetServiceImpl" />
 	
 	<bean id="fileManager" class="org.netvogue.server.aws.core.FileManager" factory-method="getSharedInstance"/>
 	<bean id="uploadManager" class="org.netvogue.server.aws.core.UploadManager" />

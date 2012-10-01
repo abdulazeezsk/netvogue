@@ -23,6 +23,8 @@
             	<bean class="org.netvogue.server.webmvc.converters.PrintCampaignConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.EditorialConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.CollectionConverter" />
+            	<bean class="org.netvogue.server.webmvc.converters.StylesheetConverter" />
+            	<bean class="org.netvogue.server.webmvc.converters.LinesheetConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.PhotoConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.PrintCampaignPhotoConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.EditorialPhotoConverter" />

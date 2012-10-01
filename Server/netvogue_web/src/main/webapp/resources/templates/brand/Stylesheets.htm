@@ -22,7 +22,7 @@
 			<div class="divi2"></div>
 			<div>
 				<span class="leftpane_filter_name">Style sheet</span> 
-				<input type="text" placeholder="Stylesheet name" class="span3" />
+				<input type="text" placeholder="Stylesheet name" ng-model="searchstylesheetname" class="span3" />
 			</div>
 			<div>
 				<span class="leftpane_filter_name">CATEGORY</span>
@@ -49,27 +49,25 @@
 			</div>
 			<div>
 				<ul class="thumbnails">
-					<li ng-repeat="style in styles">
+					<li ng-repeat="stylesheet in stylesheets">
 						<div class="view view-first">
-							<a href="#/{{style.stylelistitemid}}"> <img
-								src="{{style.stylecoverpic}}" alt=""></a>
+							<a ng-href="#/stylesheet?id={{stylesheet.galleryid}}"> <img
+								ng-src="{{stylesheet.gallerypic}}" alt=""></a>
 							<div class="mask"></div>
 							<div class="content">
 								<div class="mask">
 									<ul>
-										<li><a href="#" title="Delete"><i
+										<li><a ng-click="deletestylesheet(stylesheet.galleryid)" title="Delete"><i
 												class="icon-trash icon-white"></i></a></li>
-										<li><a title="Edit" data-toggle="modal" href="#Editstylesheet" ><i
-												class="icon-edit icon-white"></i></a></li>
+										<li><a title="Edit" 
+										ng-click="editstylesheet(stylesheet.galleryid, stylesheet.galleryname, stylesheet.category)" >
+										<i class="icon-edit icon-white"></i></a></li>
 									</ul>
 									<p>
-										<u>{{style.stylename}}</u> <br /> Lorem Ipsum is simply dummy
-										text of the printing and typesetting industry. Lorem Ipsum has
-										been the industry's standard dummy text ever since the 1500s,
-										when an unknown printer took a galley of type i
+										<u>{{stylesheet.galleryname}}</u> <br /> {{stylesheet.gallerydesc}}
 									</p>
 									<h1>
-										<a href="#/stylesheet" class="mask_edit">view</a>
+										<a ng-href="#/stylesheet?id={{stylesheet.galleryid}}" class="mask_edit">view</a>
 									</h1>
 								</div>
 							</div>
@@ -98,77 +96,19 @@
 	</div>
 	<div class="modal-body">
 		<div>
-			<input type="text" class="span4" placeholder="Style sheet name" />
+			<input type="text" class="span4" ng-model="stylesheetname" placeholder="Style sheet name" />
 		</div>
 		<div class="divi2"></div>
 		<div>
-			<select id="e1" class="populate span4">
-				<optgroup label="Alaskan/Hawaiian Time Zone">
-					<option value="AK">Alaska</option>
-					<option value="HI">Hawaii</option>
-				</optgroup>
-				<optgroup label="Pacific Time Zone">
-					<option value="CA">California</option>
-					<option value="NV">Nevada</option>
-					<option value="OR">Oregon</option>
-					<option value="WA">Washington</option>
-				</optgroup>
-				<optgroup label="Mountain Time Zone">
-					<option value="AZ">Arizona</option>
-					<option value="CO">Colorado</option>
-					<option value="ID">Idaho</option>
-					<option value="MT">Montana</option>
-					<option value="NE">Nebraska</option>
-					<option value="NM">New Mexico</option>
-					<option value="ND">North Dakota</option>
-					<option value="UT">Utah</option>
-					<option value="WY">Wyoming</option>
-				</optgroup>
-				<optgroup label="Central Time Zone">
-					<option value="AL">Alabama</option>
-					<option value="AR">Arkansas</option>
-					<option value="IL">Illinois</option>
-					<option value="IA">Iowa</option>
-					<option value="KS">Kansas</option>
-					<option value="KY">Kentucky</option>
-					<option value="LA">Louisiana</option>
-					<option value="MN">Minnesota</option>
-					<option value="MS">Mississippi</option>
-					<option value="MO">Missouri</option>
-					<option value="OK">Oklahoma</option>
-					<option value="SD">South Dakota</option>
-					<option value="TX">Texas</option>
-					<option value="TN">Tennessee</option>
-					<option value="WI">Wisconsin</option>
-				</optgroup>
-				<optgroup label="Eastern Time Zone">
-					<option value="CT">Connecticut</option>
-					<option value="DE">Delaware</option>
-					<option value="FL">Florida</option>
-					<option value="GA">Georgia</option>
-					<option value="IN">Indiana</option>
-					<option value="ME">Maine</option>
-					<option value="MD">Maryland</option>
-					<option value="MA">Massachusetts</option>
-					<option value="MI">Michigan</option>
-					<option value="NH">New Hampshire</option>
-					<option value="NJ">New Jersey</option>
-					<option value="NY">New York</option>
-					<option value="NC">North Carolina</option>
-					<option value="OH">Ohio</option>
-					<option value="PA">Pennsylvania</option>
-					<option value="RI">Rhode Island</option>
-					<option value="SC">South Carolina</option>
-					<option value="VT">Vermont</option>
-					<option value="VA">Virginia</option>
-					<option value="WV">West Virginia</option>
-				</optgroup>
+			<select id="e1" class="populate span4" ng-model="stylesheetcat" 
+					ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
+					<option value="">-- Choose Category --</option>
 			</select>
 		</div>
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" data-dismiss="modal" href="#/addstyle">
+			class="btn btn-primary" data-dismiss="modal" ng-click="createstylesheet()">
 			Create style sheet</a>
 	</div>
 </div>
@@ -176,84 +116,26 @@
 
 
 <!-- modal -->
-<div class="modal  hide" id="Editstylesheet">
+<div ui-modal class="modal  hide" ng-model="showEditStylesheet" id="Editstylesheet">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal"></button>
 		<h4 class="subHeading_no_underline">Edit Style sheet</h4>
 	</div>
 	<div class="modal-body">
 		<div>
-			<input type="text" class="span4" placeholder="Style sheet name" />
+			<input type="text" class="span4" ng-model="editstylesheetname" placeholder="Style sheet name" />
 		</div>
 		<div class="divi2"></div>
 		<div>
-			<select id="e1" class="populate span4">
-				<optgroup label="Alaskan/Hawaiian Time Zone">
-					<option value="AK">Alaska</option>
-					<option value="HI">Hawaii</option>
-				</optgroup>
-				<optgroup label="Pacific Time Zone">
-					<option value="CA">California</option>
-					<option value="NV">Nevada</option>
-					<option value="OR">Oregon</option>
-					<option value="WA">Washington</option>
-				</optgroup>
-				<optgroup label="Mountain Time Zone">
-					<option value="AZ">Arizona</option>
-					<option value="CO">Colorado</option>
-					<option value="ID">Idaho</option>
-					<option value="MT">Montana</option>
-					<option value="NE">Nebraska</option>
-					<option value="NM">New Mexico</option>
-					<option value="ND">North Dakota</option>
-					<option value="UT">Utah</option>
-					<option value="WY">Wyoming</option>
-				</optgroup>
-				<optgroup label="Central Time Zone">
-					<option value="AL">Alabama</option>
-					<option value="AR">Arkansas</option>
-					<option value="IL">Illinois</option>
-					<option value="IA">Iowa</option>
-					<option value="KS">Kansas</option>
-					<option value="KY">Kentucky</option>
-					<option value="LA">Louisiana</option>
-					<option value="MN">Minnesota</option>
-					<option value="MS">Mississippi</option>
-					<option value="MO">Missouri</option>
-					<option value="OK">Oklahoma</option>
-					<option value="SD">South Dakota</option>
-					<option value="TX">Texas</option>
-					<option value="TN">Tennessee</option>
-					<option value="WI">Wisconsin</option>
-				</optgroup>
-				<optgroup label="Eastern Time Zone">
-					<option value="CT">Connecticut</option>
-					<option value="DE">Delaware</option>
-					<option value="FL">Florida</option>
-					<option value="GA">Georgia</option>
-					<option value="IN">Indiana</option>
-					<option value="ME">Maine</option>
-					<option value="MD">Maryland</option>
-					<option value="MA">Massachusetts</option>
-					<option value="MI">Michigan</option>
-					<option value="NH">New Hampshire</option>
-					<option value="NJ">New Jersey</option>
-					<option value="NY">New York</option>
-					<option value="NC">North Carolina</option>
-					<option value="OH">Ohio</option>
-					<option value="PA">Pennsylvania</option>
-					<option value="RI">Rhode Island</option>
-					<option value="SC">South Carolina</option>
-					<option value="VT">Vermont</option>
-					<option value="VA">Virginia</option>
-					<option value="WV">West Virginia</option>
-				</optgroup>
+			<select id="e1" class="populate span4" ng-model="editstylesheetcat" ng-disabled=true
+					ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
+					<option value="">-- Choose Category --</option>
 			</select>
 		</div>
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" data-dismiss="modal" href="#">
+			class="btn btn-primary" ng-click="updatestylesheet()">
 			Update style sheet</a>
 	</div>
 </div>

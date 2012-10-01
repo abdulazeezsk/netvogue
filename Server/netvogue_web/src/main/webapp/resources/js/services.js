@@ -124,8 +124,7 @@ angular.module('netVogue.services', []).
 	        	return $http(config);
 	        }
 	    };
-	}).
-service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, myvideocampaigns, mynewsletters, mycollections, mylinesheets) {
+}).service('srvprofile', function ($http, myprofile, mynetwork) {
       var profiles = [];
       var galleries= new netvogue.hashtable();
       
@@ -259,7 +258,7 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
           },
           getlinesheets: function (routeparams) {
               var result;
-              if (angular.isUndefined(routeparams.profileid)) {
+              /*if (angular.isUndefined(routeparams.profileid)) {
                   result = mylinesheets.getlinesheets();
                   for (var col in result) {
                       result[col].linesheetlistitemid = "linesheets/" + result[col].linesheetlistitemid;
@@ -270,16 +269,15 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
                   if(angular.equals(linesheet['profileid'], routeparams.profileid)) {
                   result = linesheet['linesheets'];
                   }
-                  });*/
+                  });
                   for (var col in result) {
                       result[col].linesheetlistitemid = routeparams.profileid + "/linesheets/" + result[col].linesheetlistitemid;
                   }
-              }
+              }*/
               return result;
           }
       };
-  }).
-  service('currentvisitedprofile', function ($location) {
+}).service('currentvisitedprofile', function ($location) {
       var home = true;
       var historyURL = "";
       var currentURL = "";
@@ -335,8 +333,7 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
               return leftpanellinks;
           }
       };
-  }).
-  service('mygallery', function ($http) {
+}).service('mygallery', function ($http) {
 		var name;
 		var galleryname;
 		var galleries = [];
@@ -446,8 +443,7 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	    		photos.splice(i, 1);
 	    	}
 		};
-  }).
-  service('srvgallery', function ($http, mygallery) {
+ }).service('srvgallery', function ($http, mygallery) {
       var galleries= new netvogue.hashtable();
       return {
     	  getname: function(routeparams) {
@@ -524,8 +520,7 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	          }
 	      }
       };
-  }).
-  service('mycollection', function ($http) {
+}).service('mycollection', function ($http) {
 		var name;
 		var galleryname;
 		var collections = [];
@@ -573,8 +568,8 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	    	updatecollectionlocally: function(id, data) {
 	    		var index=0;
 	    		for(index=0; index <  collections.length; index++) {
-	    			if(collections[index].galleryid == galleryid) {
-	    				collections[index].galleryname = newname;
+	    			if(collections[index].galleryid == id) {
+	    				collections[index] = data;
 	    				break;
 	    			}
 	    		}
@@ -635,8 +630,7 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	    		photos.splice(i, 1);
 	    	}
 		};
-}).
-service('srvcollection', function ($http, mycollection) {
+}).service('srvcollection', function ($http, mycollection) {
     var collections= new netvogue.hashtable();
     return {
   	  getname: function(routeparams) {
@@ -710,6 +704,377 @@ service('srvcollection', function ($http, mycollection) {
 	          }
 	      }
     };
+}).service('mystylesheet', function ($http) {
+	var name;
+	var stylesheetname;
+	var stylesheets = [];
+	var styles    = [];
+	return {
+		getstylesheets: function() {
+    		return stylesheets;
+    	},
+    	setstylesheets: function(temp) {
+    		name = temp.name;
+    		angular.copy(temp.stylesheets, stylesheets);
+    	},
+    	getname: function() {
+    		if(angular.isUndefined(name))
+        		return "";
+    		return name;
+    	},
+    	setname: function(name) {
+    		this.name = name;
+    	},
+    	getstylesheetname: function() {
+    		if(angular.isUndefined(stylesheetname))
+        		return "";
+    		return stylesheetname;
+    	},
+    	setstylesheetname: function(name) {
+    		this.stylesheetname = name;
+    	},
+    	createstylesheet: function(jsonrequest) {
+    		var config = {
+				method: "POST",
+				data: jsonrequest,
+            url: "stylesheet/create"
+          };
+          return $http(config);
+    	},
+    	updatestylesheet: function(datatosend) {
+    		var config = {
+    				method: "POST",
+    				data: datatosend,
+                    url: "stylesheet/edit"
+                };
+            return $http(config);
+    	},
+    	updatestylesheetlocally: function(data) {
+    		var index=0;
+    		for(index=0; index <  stylesheets.length; index++) {
+    			if(stylesheets[index].galleryid == data.id) {
+    				stylesheets[index].galleryname = data.name;
+    				stylesheets[index].category	= data.category;
+    				break;
+    			}
+    		}
+    	},
+    	deletestylesheet: function(galleryid) {
+    		var config = {
+    			method: "POST",
+    			data: galleryid,
+                url: "collection/delete"
+            };
+    		return $http(config);
+    	},
+    	deletestylesheetlocally: function(galleryid) {
+    		var index=0;
+    		for(index=0; index <  stylesheets.length; index++) {
+    			if(stylesheets[index].galleryid == galleryid) {
+    				break;
+    			}
+    		}
+    		stylesheets.splice(index, 1);
+    	},
+    	getstyles: function() {
+    		return styles;
+    	},
+    	setstyles: function(temp) {
+    		name = temp.name;
+    		stylesheetname = temp.stylesheetname;
+    		angular.copy(temp.styles, styles);
+    	},
+    	savestyle: function(label, seasonname, photoid) {
+    		var datatosend = {
+    				"photoname" : label,
+    				"seasonname": seasonname,
+    				"photoid"	: photoid
+    		};
+    		var config = {
+    				method: "POST",
+    				data: datatosend,
+                    url: "stylesheet/editphotoinfo"
+                };
+            return $http(config);
+    	},
+    	deletestyle: function(photoid) {
+    		var config = {
+    			method: "POST",
+    			data: photoid,
+                url: "stylesheet/deletephoto"
+            };
+    		return $http(config);
+    	},
+    	deletestyleslocally: function(id) {
+    		var i=0;
+    		for(i=0; i <  styles.length; i++) {
+    			if(styles[i].uniqueid == id) {
+    				break;
+    			}
+    		}
+    		styles.splice(i, 1);
+    	}
+	};
+}).service('srvstylesheet', function ($http, mystylesheet) {
+	var stylesheets = new netvogue.hashtable();
+	return {
+	  getname: function(routeparams) {
+  	  var result;
+        if (angular.isUndefined(routeparams.profileid)) {
+            return mystylesheet.getname();
+        } else {
+            /*angular.forEach(profiles, function (profile) {
+                if (angular.equals(profile['profileid'], routeparams.profileid)) {
+                    result = profile['aboutus'];
+                }
+            });*/
+        }
+        return result;
+	  },
+	  getstylesheetname: function (routeparams) {
+          if (angular.isUndefined(routeparams.profileid)) {
+        	  return mystylesheet.getstylesheetname();
+          }
+    	},
+	  getstylesheets: function (routeparams) {
+          if (angular.isUndefined(routeparams.profileid)) {
+        	  return mystylesheet.getstylesheets();
+          }
+      },
+	  stylesheets: function(routeparams, jsonrequest) {
+          var profileid = "";
+          if (!angular.isUndefined(routeparams.profileid)) {
+        	  profileid = routeparams.profileid;
+          }
+          var config = {
+              method: "GET",
+              params: jsonrequest,
+              url:   "getstylesheets/" + profileid
+          };
+          return $http(config);
+      },
+      styles: function (routeparams, id, name) {
+          var profileid = "";
+          if (!angular.isUndefined(routeparams.profileid)) {
+        	  profileid = routeparams.profileid;
+          }
+          var datatosend = {
+  				"stylename" : name,
+  				"stylesheetid" : id
+  		};
+          var config = {
+              method: "GET",
+              params: datatosend,
+              url: "stylesheet/getstyles/" + profileid
+          };
+          return $http(config);
+      },
+      setstylesheetlocally: function(data, routeparams) {
+    	  if (angular.isUndefined(routeparams.profileid)) {
+    		  mystylesheet.setstylesheets(data);
+          } else {
+        	  //galleries.push(angular.copy(galleriesdata));
+          }
+      },
+      setstylelocally: function(data, routeparams) {
+    	  if (angular.isUndefined(routeparams.profileid)) {
+    		  mystylesheet.setstyles(data);
+          } else {
+        	  //galleries.push(angular.copy(galleriesdata));
+          }
+      },
+      getstyles: function (routeparams) {
+          if (angular.isUndefined(routeparams.profileid)) {
+        	  return mystylesheet.getstyles();
+          }
+      }
+	};
+}).service('mylinesheet', function ($http) {
+	var name;
+	var linesheetname;
+	var linesheets = [];
+	var styles    = [];
+	return {
+		getlinesheets: function() {
+    		return linesheets;
+    	},
+    	setlinesheets: function(temp) {
+    		name = temp.name;
+    		angular.copy(temp.linesheets, linesheets);
+    	},
+    	getname: function() {
+    		if(angular.isUndefined(name))
+        		return "";
+    		return name;
+    	},
+    	setname: function(name) {
+    		this.name = name;
+    	},
+    	getlinesheetname: function() {
+    		if(angular.isUndefined(linesheetname))
+        		return "";
+    		return linesheetname;
+    	},
+    	setlinesheetname: function(name) {
+    		this.linesheetname = name;
+    	},
+    	createlinesheet: function(jsonrequest) {
+    		var config = {
+				method: "POST",
+				data: jsonrequest,
+            url: "linesheet/create"
+          };
+          return $http(config);
+    	},
+    	updatelinesheet: function(datatosend) {
+    		var config = {
+    				method: "POST",
+    				data: datatosend,
+                    url: "linesheet/edit"
+                };
+            return $http(config);
+    	},
+    	updatelinesheetlocally: function(data) {
+    		var index=0;
+    		for(index=0; index <  linesheets.length; index++) {
+    			if(linesheets[index].galleryid == data.id) {
+    				linesheets[index].galleryname = data.name;
+    				linesheets[index].category	= data.category;
+    				linesheets[index].deliverydate = data.deliverydate;
+    				break;
+    			}
+    		}
+    	},
+    	deletelinesheet: function(galleryid) {
+    		var config = {
+    			method: "POST",
+    			data: galleryid,
+                url: "linesheet/delete"
+            };
+    		return $http(config);
+    	},
+    	deletelinesheetlocally: function(galleryid) {
+    		var index=0;
+    		for(index=0; index <  linesheets.length; index++) {
+    			if(linesheets[index].galleryid == galleryid) {
+    				break;
+    			}
+    		}
+    		linesheets.splice(index, 1);
+    	},
+    	getstyles: function() {
+    		return styles;
+    	},
+    	setstyles: function(temp) {
+    		name = temp.name;
+    		linesheetname = temp.linesheetname;
+    		angular.copy(temp.styles, styles);
+    	},
+    	savestyle: function(label, seasonname, photoid) {
+    		var datatosend = {
+    				"photoname" : label,
+    				"seasonname": seasonname,
+    				"photoid"	: photoid
+    		};
+    		var config = {
+    				method: "POST",
+    				data: datatosend,
+                    url: "stylesheet/editphotoinfo"
+                };
+            return $http(config);
+    	},
+    	deletestyle: function(photoid) {
+    		var config = {
+    			method: "POST",
+    			data: photoid,
+                url: "stylesheet/deletephoto"
+            };
+    		return $http(config);
+    	},
+    	deletestyleslocally: function(id) {
+    		var i=0;
+    		for(i=0; i <  styles.length; i++) {
+    			if(styles[i].uniqueid == id) {
+    				break;
+    			}
+    		}
+    		styles.splice(i, 1);
+    	}
+	};
+}).service('srvlinesheet', function ($http, mylinesheet) {
+	var linesheets = new netvogue.hashtable();
+	return {
+	  getname: function(routeparams) {
+  	  var result;
+        if (angular.isUndefined(routeparams.profileid)) {
+            return mylinesheet.getname();
+        } else {
+            /*angular.forEach(profiles, function (profile) {
+                if (angular.equals(profile['profileid'], routeparams.profileid)) {
+                    result = profile['aboutus'];
+                }
+            });*/
+        }
+        return result;
+	  },
+	  getlinesheetname: function (routeparams) {
+          if (angular.isUndefined(routeparams.profileid)) {
+        	  return mylinesheet.getlinesheetname();
+          }
+    	},
+	  getlinesheets: function (routeparams) {
+          if (angular.isUndefined(routeparams.profileid)) {
+        	  return mylinesheet.getlinesheets();
+          }
+      },
+	  linesheets: function(routeparams, jsonrequest) {
+          var profileid = "";
+          if (!angular.isUndefined(routeparams.profileid)) {
+        	  profileid = routeparams.profileid;
+          }
+          var config = {
+              method: "GET",
+              params: jsonrequest,
+              url:   "getlinesheets/" + profileid
+          };
+          return $http(config);
+      },
+      styles: function (routeparams, id, name) {
+          var profileid = "";
+          if (!angular.isUndefined(routeparams.profileid)) {
+        	  profileid = routeparams.profileid;
+          }
+          var datatosend = {
+  				"stylename" : name,
+  				"stylesheetid" : id
+  		};
+          var config = {
+              method: "GET",
+              params: datatosend,
+              url: "linesheet/getstyles/" + profileid
+          };
+          return $http(config);
+      },
+      setlinesheetlocally: function(data, routeparams) {
+    	  if (angular.isUndefined(routeparams.profileid)) {
+    		  mylinesheet.setlinesheets(data);
+          } else {
+        	  //galleries.push(angular.copy(galleriesdata));
+          }
+      },
+      setstylelocally: function(data, routeparams) {
+    	  if (angular.isUndefined(routeparams.profileid)) {
+    		  mylinesheet.setstyles(data);
+          } else {
+        	  //galleries.push(angular.copy(galleriesdata));
+          }
+      },
+      getstyles: function (routeparams) {
+          if (angular.isUndefined(routeparams.profileid)) {
+        	  return mylinesheet.getstyles();
+          }
+      }
+	};
 }).service('trending', function () {
      var trending = [
                   {
@@ -737,8 +1102,7 @@ service('srvcollection', function ($http, mycollection) {
           }
       };
 
-  }).
-  service('mynetwork', function () {
+}).service('mynetwork', function () {
       var mynetwork = [
 	                   new netvogue.network("Calvin klein", "images/ck-beauty.jpg", "profileid1"),
 	                   new netvogue.network("Rebecca  Minkoff", "http://placehold.it/100x72", "profileid1"),
@@ -765,109 +1129,7 @@ service('srvcollection', function ($http, mycollection) {
               }
           }
       };
-  }).
-  service('myprintcampaigns', function () {
-      var printcampaigns = [
-	                        new netvogue.campaign("PrintcampaignId1", "Matches", "Matches Sprixzcng 2012", "http://www.withnina.com/images/paste4.jpg"),
-	                        new netvogue.campaign("PrintcampaignId2", "Matches", "Matches Spring 2012", "http://www.withnina.com/images/paste2.jpg"),
-	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://www.withnina.com/images/paste.jpg"),
-	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://www.withnina.com/images/paste5.jpg"),
-	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://www.withnina.com/images/paste6.jpg"),
-	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://www.schramm-badenhop.de/files/velvet_2012.jpg"),
-	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://www.harpersbazaar.com.au/assets/images/articles/migrated/fashion/fashionflash/HB_AMANDAANTMWINNERCOVER_001.jpg"),
-                            new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://www.harpersbazaar.com.au/assets/images/migrated/HB_130810_ProenzaSchouler_001.jpg"),
-                            new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://i653.photobucket.com/albums/uu257/paisleyrosevintage/RED/DianevonFurstenbergMikhailiaBellSleeveCoat400.jpg"),
-                            new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://www.azcentral.com/style/pics/020408nyfashion.jpg"),
-                            new netvogue.campaign("PrintcampaignId1", "Matches", "Matches Sprixzcng 2012", "http://media.tumblr.com/tumblr_ls1ppm1xBI1qfkreb.png"),
-	                        new netvogue.campaign("PrintcampaignId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306")
-	                       ];
-      return {
-          getprintcampaigns: function () {
-              return printcampaigns;
-          }
-      };
-  }).
-  service('myvideocampaigns', function () {
-      var videocampaigns = [
-	                        new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-	                        new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-	                        new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-	                        new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-	                        new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-	                        new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-	                        new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-	                        new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145"),
-	                        new netvogue.campaign("VideocampaignId1", "Matches", "Matches Spring 2012", "http://placehold.it/231x145")
-	                       ];
-      return {
-          getvideocampaigns: function () {
-              return videocampaigns;
-          }
-      };
-  }).
-  service('mynewsletters', function () {
-      var newsletters = [
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "images/paste2.jpg"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306"),
-	                     	new netvogue.campaign("NewsletterId", "Matches", "Matches Spring 2012", "http://placehold.it/231x306")
-	                     ];
-      return {
-          getnewsletters: function () {
-              return newsletters;
-          }
-      };
-  }).
-  service('mycollections', function () { //This is collections of his network collections in case of Boutique/In case of brand, it is his own collections
-      var collections = [
-	                     new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "images/paste2.jpg"),
-	                     new netvogue.collection("collectionId", "Donna karan", "Spring 2012", "http://placehold.it/231x306"),
-	                     new netvogue.collection("collectionId", "Catherine jones", "Spring 2012", "http://placehold.it/231x306"),
-	                     new netvogue.collection("collectionId", "Rebecca Jonson", "Spring 2012", "http://placehold.it/231x306"),
-	                     new netvogue.collection("collectionId", "Givenchy", "Spring 2012", "http://placehold.it/231x306"),
-	                     new netvogue.collection("collectionId", "Valentino", "Spring 2012", "http://placehold.it/231x306"),
-	                     new netvogue.collection("collectionId", "DKNY", "Spring 2012", "http://placehold.it/231x306"),
-	                     new netvogue.collection("collectionId", "Rebecca Minkoff", "Spring 2012", "http://placehold.it/231x306"),
-	                     new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/231x306"),
-	                     new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/231x306"),
-	                     new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/231x306"),
-	                     new netvogue.collection("collectionId", "Calvin Klien", "Spring 2012", "http://placehold.it/231x306")
-	                    ];
-
-      return {
-          getcollections: function () {
-              return collections;
-          }
-      };
-  }).
-  service('mylinesheets', function () { //This is collections of his network linesheets in case of Boutique/In case of brand, it is his own linesheets
-      var linesheets = [
-	                    new netvogue.linesheet("linesheetId", "Calvin Klien", "Spring 2012", "25/04/2012", "images/paste2.jpg"),
-	                    new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-	                    new netvogue.linesheet("linesheetId", "Catherine jones", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-	                    new netvogue.linesheet("linesheetId", "Rebecca Jonson", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-	                    new netvogue.linesheet("linesheetId", "Givenchy", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-	                    new netvogue.linesheet("linesheetId", "Valentino", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-	                    new netvogue.linesheet("linesheetId", "DKNY", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-	                    new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-	                    new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-	                    new netvogue.linesheet("linesheetId", "Rebecca Minkoff", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-	                    new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x306")
-	                   ];
-      return {
-          getlinesheets: function () {
-              return linesheets;
-          }
-      };
-  }).
-  service('search', function () {
+}).service('search', function () {
       var advancedsearch = [
 	                        new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
 	                        		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +

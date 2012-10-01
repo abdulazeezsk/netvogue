@@ -5,7 +5,7 @@ import org.netvogue.server.neo4japi.domain.*;
 //Spring specific
 import org.springframework.data.neo4j.repository.*;
 
-public interface LineSheetRepository extends GraphRepository<BrandLineSheet>{
+public interface LinesheetRepository extends GraphRepository<Linesheet>{
 
 	
 }
