@@ -20,6 +20,8 @@ import org.netvogue.server.aws.core.Scalr.Method;
 import org.netvogue.server.aws.core.Scalr.Mode;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -138,8 +140,13 @@ public class FileManager extends TransferManager {
 		
 		
 		try {
+			boolean firstImage = true;
 			for ( Size size : sizes ) {
 				Upload temp = upload(bucketName,imageKey+ "-" + size.toString(), buffer, metadata, size);
+				if(firstImage) {
+					temp.waitForCompletion();
+					firstImage = false;
+				}
 				System.out.println("input" + buffer + " : "+ temp.getDescription());
 			}
 		} catch (Exception e) {
@@ -170,11 +177,23 @@ public class FileManager extends TransferManager {
 			ImageIO.write(ResizedImage,fileExtension,output);
 			System.out.println("Size of buffer is " + output.size());
 			return upload(bucketName, key, output.toByteArray(), metaData);
+		} catch (AmazonServiceException e) {
+			System.out.println("Amazon service exception:" +  
+					" - " + e.toString());
+			e.printStackTrace();
+		} catch (AmazonClientException e) {
+			System.out.println("Amazon client exception:" +  
+					" - " + e.toString());
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			System.out.println("Illegal argument exception" +  
+					" - " + e.toString());
+			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println("There was an error in Upload manager main API" +  
 					" - " + e.toString());
 			e.printStackTrace();
-		}
+		}  
 		
 		return null;
 	}
@@ -189,15 +208,16 @@ public class FileManager extends TransferManager {
 		metadata.setContentLength(bytes.length);
 		Upload upload = upload(bucketName, key, input, metadata);
 		System.out.println("is Upload done:" + upload.isDone());
+		System.out.println("size of this transfer:" + bytes.length);
 		System.out.println("state of this transfer:" + upload.getState());
 		System.out.println("progress of this transfer:" + upload.getProgress());
 		ProgressListener listener = new ProgressListener() {
 			
 			@Override
 			public void progressChanged(ProgressEvent progressEvent) {
-				if(progressEvent.COMPLETED_EVENT_CODE == progressEvent.getEventCode()) {
+				if(ProgressEvent.COMPLETED_EVENT_CODE == progressEvent.getEventCode()) {
 					System.out.println("Transfer is successfull" + progressEvent.getBytesTransfered());
-				} else if(progressEvent.FAILED_EVENT_CODE == progressEvent.getEventCode()) {
+				} else if(ProgressEvent.FAILED_EVENT_CODE == progressEvent.getEventCode()) {
 					System.out.println("Transfer is failed" + progressEvent.getBytesTransfered());
 				}
 			}
