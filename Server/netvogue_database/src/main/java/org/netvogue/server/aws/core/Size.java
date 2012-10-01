@@ -14,19 +14,19 @@ public enum Size {
 	GAdd(220, 150),
 	GThumb(220, 150),
 	GLeft(130, 100),
-	GMain(400, 400),
+	GMain(450, 677),
 	PCAdd(220, 300),
 	PCThumb(220, 306),
 	PCLeft(130, 100),
-	PCMain(400, 400),
+	PCMain(450, 677),
 	EAdd(210, 300),
 	EThumb(220, 306),
 	ELeft(130, 100),
-	EMain(400, 400),
+	EMain(450, 677),
 	CAdd(210, 300),
 	CThumb(231, 306),
 	CLeft(130, 100),
-	CMain(400, 400);
+	CMain(550, 550);
 	
 	private final int width;   // in pixels
     private final int height; // in pixels

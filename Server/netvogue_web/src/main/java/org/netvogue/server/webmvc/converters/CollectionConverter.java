@@ -21,6 +21,8 @@ public class CollectionConverter implements Converter<org.netvogue.server.neo4ja
 		newCollection.setGallerydesc(source.getDescription());
 		newCollection.setBrandname(source.getCreatedBy().getName());
 		newCollection.setCategory(source.getProductcategory().getProductLine().getDesc());
+		String leftlink = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.COLLECTION, Size.CLeft);
+		newCollection.setLeftpic(leftlink);
 		return newCollection;
 	}
 

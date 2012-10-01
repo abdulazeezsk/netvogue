@@ -22,14 +22,14 @@
 					<li ng-repeat="collection in collections">
 						<div class="leftpanefeed">
 							<div class="feedimage">
-								<a ng-click="setphotoid(collection.uniqueid)"> <img alt=""
+								<a ng-click="setgalleryid(collection.galleryid)"> <img alt=""
 									ng-src="#{{collection.left_url}}" class="pull-left"></a>
 							</div>
 							<div class="leftpanefeed_text">
 								<h3>
-									<a ng-click="setphotoid(collection.uniqueid)">{{collection.brandname}}</a>
+									<a ng-click="setgalleryid(collection.galleryid)">{{collection.brandname}}</a>
 								</h3>
-								<p>{{collection.label}}</p>
+								<p>{{collection.galleryname}}</p>
 							</div>
 						</div>
 					</li>
@@ -42,7 +42,7 @@
 			<div>
 					<span class="left heading_btn"> <a href="#/collections">
 						collection</a> <span class="divider">/</span> <span> <a
-						ng-href="#/collection?id={{galleryid}}"">{{galleryname}}</a></span>
+						ng-href="#/collection?id={{galleryid}}">{{galleryname}}</a></span>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info">
@@ -69,7 +69,7 @@
 										<u>{{collection.label}}</u> <br />{{collection.seasonname}}
 									</p>
 									<h1>
-										<a href="#/viewcollection?id={{photo.uniqueid}}&&galleryid={{galleryid}}" class="mask_edit">view</a>
+										<a href="#/viewcollection?id={{collection.uniqueid}}&&galleryid={{galleryid}}" class="mask_edit">view</a>
 									</h1>
 								</div>
 							</div>

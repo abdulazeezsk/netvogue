@@ -7,7 +7,7 @@
 				<span class="left heading_btn">
 						<a href="#/collections">Collections</a>
 						<span class="divider">/</span>
-						<span><a href="#/collection">Untitled</a></span>	
+						<span><a href="#/collection?id={{galleryid}}">{{galleryname}}</a></span>	
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info">
@@ -20,9 +20,9 @@
 				<div id="myCarousel" class="carousel slide">
 					<!-- Carousel items -->
 					<div class="carousel-inner">
-						<div class="item" ng-repeat="collection in viewcollections"
+						<div class="item" ng-repeat="collection in viewPhotos"
 							ng-class="{active: $first}">
-							<img src="{{collection.collectionpic}}" alt="" />
+							<img src="{{collection.piclink}}" alt="" />
 						</div>
 					</div>
 					<!-- Carousel nav -->
