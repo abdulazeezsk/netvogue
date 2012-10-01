@@ -261,9 +261,9 @@ netvogue.collection = function(collectionlistitemid, collectionbrandname, collec
     this.collectionprivacy		= collectionprivacy;
 };
 
-netvogue.collectionjsonrequest = function(name, desc, category, id) {
+netvogue.collectionjsonrequest = function(seasonname, desc, category, id) {
 	this.id 		= id;
-	this.name		= name;
+	this.seasonname	= seasonname;
 	this.desc		= desc;
 	this.category 	= category;
 };

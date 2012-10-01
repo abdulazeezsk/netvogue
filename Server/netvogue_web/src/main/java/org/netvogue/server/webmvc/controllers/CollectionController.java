@@ -98,7 +98,7 @@ public class CollectionController {
 		
 		if(profileid.isEmpty()) {
 			photos.setName(loggedinUser.getName());
-			photos.setGalleryname(collectionService.getCollection(galleryid).getCollectionname());
+			photos.setGalleryname(collectionService.getCollection(galleryid).getCollectionseasonname());
 			Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
 			Iterable<CollectionPhoto> dbPhotos;
 			if(photoname.isEmpty()) {
@@ -132,10 +132,12 @@ public class CollectionController {
 		}
 		org.netvogue.server.neo4japi.domain.Collection newCollection = 
 				new org.netvogue.server.neo4japi.domain.Collection(request.getSeasonname(), request.getDesc(), loggedinUser);
-		ProductLines productLine = ProductLines.getValueOf(request.getCategory());
-		Category cat = boutiqueService.getOrCreateCategory(productLine);
-		newCollection.setProductcategory(cat);
 		
+		if(null != request.getCategory()) {
+			ProductLines productLine = ProductLines.getValueOf(request.getCategory());
+			Category cat = boutiqueService.getOrCreateCategory(productLine);
+			newCollection.setProductcategory(cat);
+		}
 		if(ResultStatus.SUCCESS == collectionService.SaveCollection(newCollection, error)) {  
 			response.setStatus(true);
 			response.setIdcreated(newCollection.getCollectionid());
@@ -189,7 +191,7 @@ public class CollectionController {
 	//Think about the categories as well
 	@RequestMapping(value="collection/delete", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeleteCollection(@RequestBody String galleryid) {
-		System.out.println("Delete Print Campaign:"+ galleryid);
+		System.out.println("Delete Collection:"+ galleryid);
 		String error = "";
 		JsonResponse response = new JsonResponse();
 		

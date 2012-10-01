@@ -21,7 +21,7 @@ angular.module('netVogue', ['netVogue.filters', 'netVogue.services', 'netVogue.d
 	  $routeProvider.when('/advancesearch', 			{templateUrl: 'templates/AdvSearch.htm', 							controller: MyCtrlAdvancedSearch });
 	  $routeProvider.when('/collections', 				{templateUrl: 'templates/brand/Collections.htm', 					controller: MyCtrlCollections });
 	  $routeProvider.when('/collection', 				{templateUrl: 'templates/brand/Collection.htm', 					controller: MyCtrlCollection });
-	  $routeProvider.when('/collections/:collectionid', {templateUrl: 'templates/brand/View_Collection.htm', 				controller: MyCtrlViewcollection });
+	  $routeProvider.when('/viewcollection', 			{templateUrl: 'templates/brand/View_Collection.htm', 				controller: MyCtrlViewcollection });
 	  $routeProvider.when('/:profileid/collections', 	{templateUrl: 'templates/brand/Collections.htm', 					controller: MyCtrlCollections });
 	  $routeProvider.when('/:profileid/collections/:collectionid', {templateUrl: 'templates/brand/View_Collection.htm', 	controller: MyCtrlViewcollection });
 	  $routeProvider.when('/corner',					{templateUrl: 'templates/Corner.htm', 								controller: MyCtrlCorner});

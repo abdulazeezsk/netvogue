@@ -579,22 +579,22 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	    			}
 	    		}
 	    	},
-	    	deletecollection: function(ajaxrequestcall, galleryid) {
+	    	deletecollection: function(galleryid) {
 	    		var config = {
 	    			method: "POST",
 	    			data: galleryid,
-	                url: ajaxrequestcall + "/delete"
+	                url: "collection/delete"
 	            };
 	    		return $http(config);
 	    	},
 	    	deletecollectionlocally: function(galleryid) {
 	    		var index=0;
-	    		for(index=0; index <  galleries.length; index++) {
-	    			if(galleries[index].galleryid == galleryid) {
+	    		for(index=0; index <  collections.length; index++) {
+	    			if(collections[index].galleryid == galleryid) {
 	    				break;
 	    			}
 	    		}
-	    		galleries.splice(index, 1);
+	    		collections.splice(index, 1);
 	    	},
 	    	getphotos: function() {
 	    		return photos;
@@ -604,7 +604,7 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	    		galleryname = photostemp.galleryname;
 	    		angular.copy(photostemp.photos, photos);
 	    	},
-	    	savephotoinfo: function(ajaxrequestcall, label, seasonname, photoid) {
+	    	savephotoinfo: function(label, seasonname, photoid) {
 	    		var datatosend = {
 	    				"photoname" : label,
 	    				"seasonname": seasonname,
@@ -613,15 +613,15 @@ service('srvprofile', function ($http, myprofile, mynetwork, myprintcampaigns, m
 	    		var config = {
 	    				method: "POST",
 	    				data: datatosend,
-	                    url: ajaxrequestcall + "/editphotoinfo"
+	                    url: "collection/editphotoinfo"
 	                };
 	            return $http(config);
 	    	},
-	    	deletephoto: function(ajaxrequestcall, photoid) {
+	    	deletephoto: function(photoid) {
 	    		var config = {
 	    			method: "POST",
 	    			data: photoid,
-	                url: ajaxrequestcall + "/deletephoto"
+	                url: "collection/deletephoto"
 	            };
 	    		return $http(config);
 	    	},
@@ -667,12 +667,9 @@ service('srvcollection', function ($http, mycollection) {
 	          if (!angular.isUndefined(routeparams.profileid)) {
 	        	  profileid = routeparams.profileid;
 	          }
-	          var datatosend = {
-		  				"galleryname" : jsonrequest
-		  	};
 	          var config = {
 	              method: "GET",
-	              params: datatosend,
+	              params: jsonrequest,
 	              url:   "getcollections/" + profileid
 	          };
 	          return $http(config);

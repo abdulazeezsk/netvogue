@@ -618,8 +618,9 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
 	var editcollectionid	 	= "";
 	$scope.showEditCollection	= false;
 	
-	$scope.searchcollectionname = ""; 
-	var ajaxrequestcall	 = "collection";
+	$scope.searchcollectionname = "";
+	$scope.searchcollectioncat  = "";
+	$scope.searchbrandname		= "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvcollection.getname($routeParams);
 	    $scope.collections		= srvcollection.getcollections($routeParams);
@@ -628,7 +629,12 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getcollections = function() {
-    	srvcollection.collections("getcollections", $routeParams, $scope.searchcollectionname).success(function(data) {
+    	var searchcollections = {
+    			"galleryname" 	:$scope.searchcollectionname,
+    			"category"		:$scope.searchcollectioncat,
+    			"brandname"		:$scope.searchbrandname,
+    	};
+    	srvcollection.collections($routeParams, searchcollections).success(function(data) {
     		srvcollection.setcollectionlocally(data, $routeParams);
         	$scope.updatedata();
         }).error(function(data) {
@@ -683,7 +689,7 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
 
 function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, srvgallery, mygallery) {
 
-	$scope.$parent.title = "Collections";
+	$scope.$parent.title = "Collection";
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 
 	$scope.backButton = currentvisitedprofile.getBackHistory();
@@ -691,8 +697,6 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, srvgaller
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.galleryid = $routeParams.id;
 	}
-	var ajaxrequestcall	 = "printcampaign";
-	$scope.searchphotoname = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
@@ -702,7 +706,7 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, srvgaller
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getphotos = function() {
-    	srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
+    	srvgallery.photos($routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
         	srvgallery.setphotoslocally(data, $routeParams);
         	$scope.updatedata();
         }).error(function(data) {
@@ -712,15 +716,17 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, srvgaller
     
     $scope.getphotos();
     $scope.deletephoto = function(uniqueid) {
-    	mygallery.deletephoto(ajaxrequestcall, uniqueid).success(function(data) {
+    	mygallery.deletephoto(uniqueid).success(function(data) {
 			mygallery.deletephotoslocally(uniqueid);
 			$scope.photogallery	= srvgallery.getphotos($routeParams);
 		}).error(function(data) {
 			alert("error");
 		});
     };
-
-	$scope.searchFilter = new netvogue.searchFilter();
+    
+    $scope.setphotoid = function(photoid) {
+    	$scope.photoid = photoid;
+    };
 }
 
 function MyCtrlViewcollection($scope, $routeParams, currentvisitedprofile) {

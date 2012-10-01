@@ -61,8 +61,8 @@
 						<li
 							ng-repeat="brand in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize">
 							<div class="viewls view-firstls">
-								<a href="#/{{brand.brandlistitemid}}"> <img
-									src="{{brand.brandprofilepic}}" alt=""></a>
+								<a ng-href="#/{{brand.brandlistitemid}}"> <img
+									ng-src="{{brand.brandprofilepic}}" alt=""></a>
 								<div class="maskls mask-1"></div>
 								<div class="maskls mask-2">
 									<p>

@@ -20,7 +20,7 @@ public enum Size {
 	PCLeft(130, 100),
 	PCMain(400, 400),
 	EAdd(210, 300),
-	EThumb(231, 306),
+	EThumb(220, 306),
 	ELeft(130, 100),
 	EMain(400, 400),
 	CAdd(210, 300),
