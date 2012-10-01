@@ -117,8 +117,7 @@ angular.module('netVogue.directives', []).
 		        	scope.$apply(function(scope) {
 		        		if(data.result.status == true) {
 		        			for(var i=0; i < data.result.filesuploaded.length; i++){
-		        				scope.existingfiles.push(
-		        						new netvogue.photo("Thumbnail Azeez", "Season Name", data.result.filesuploaded[i].url, data.result.filesuploaded[i].uniqueid));
+		        				scope.existingfiles.push(data.result.filesuploaded[i]);
 		        			};
 		        			scope.newfiles = [];
 		        		} else {

@@ -22,7 +22,6 @@ import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.PhotoInfoJsonRequest;
 import org.netvogue.server.webmvc.domain.PhotoWeb;
 import org.netvogue.server.webmvc.domain.Photos;
-import org.netvogue.server.webmvc.domain.UploadedFile;
 import org.netvogue.server.webmvc.domain.UploadedFileResponse;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -186,7 +185,7 @@ public class EditorialController {
 			return response;
 		}
 		
-		List<UploadedFile> JSONFileData= new ArrayList<UploadedFile>();
+		List<PhotoWeb> JSONFileData= new ArrayList<PhotoWeb>();
 		
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
@@ -195,9 +194,7 @@ public class EditorialController {
 			EditorialPhoto newPhoto = new EditorialPhoto((String)uploadMap.get(UploadManager.FILE_ID));
 			editorial.addPhotos(newPhoto);
 			
-			UploadedFile fileUploaded = new UploadedFile(fileupload.getOriginalFilename(),
-				Long.valueOf(fileupload.getSize()).intValue(), imagePath, (String)uploadMap.get(UploadManager.FILE_ID));
-			JSONFileData.add(fileUploaded);
+			JSONFileData.add(conversionService.convert(newPhoto, PhotoWeb.class));
 		}
 		String error ="";
 		if(ResultStatus.SUCCESS == editorialService.SaveEditorial(editorial, error)) {  

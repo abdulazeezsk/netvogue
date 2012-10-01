@@ -5,7 +5,7 @@ import java.util.List;
 public class UploadedFileResponse {
 	private boolean status = false;
     private String  error = null;
-    private List<UploadedFile>  filesuploaded;
+    private List<PhotoWeb>  filesuploaded;
 	
     public boolean isStatus() {
 		return status;
@@ -19,10 +19,10 @@ public class UploadedFileResponse {
 	public void setError(String error) {
 		this.error = error;
 	}
-	public List<UploadedFile> getFilesuploaded() {
+	public List<PhotoWeb> getFilesuploaded() {
 		return filesuploaded;
 	}
-	public void setFilesuploaded(List<UploadedFile> filesuploaded) {
+	public void setFilesuploaded(List<PhotoWeb> filesuploaded) {
 		this.filesuploaded = filesuploaded;
 	}
     

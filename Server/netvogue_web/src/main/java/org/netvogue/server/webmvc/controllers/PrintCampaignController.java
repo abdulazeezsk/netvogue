@@ -22,7 +22,6 @@ import org.netvogue.server.webmvc.domain.PhotoWeb;
 import org.netvogue.server.webmvc.domain.Photos;
 import org.netvogue.server.webmvc.domain.PrintCampaign;
 import org.netvogue.server.webmvc.domain.PrintCampaigns;
-import org.netvogue.server.webmvc.domain.UploadedFile;
 import org.netvogue.server.webmvc.domain.UploadedFileResponse;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -190,7 +189,7 @@ public class PrintCampaignController {
 			return response;
 		}
 		
-		List<UploadedFile> JSONFileData= new ArrayList<UploadedFile>();
+		List<PhotoWeb> JSONFileData= new ArrayList<PhotoWeb>();
 		
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
@@ -199,9 +198,7 @@ public class PrintCampaignController {
 			PrintCampaignPhoto newPhoto = new PrintCampaignPhoto((String)uploadMap.get(UploadManager.FILE_ID));
 			printcampaign.addPhotos(newPhoto);
 			
-			UploadedFile fileUploaded = new UploadedFile(fileupload.getOriginalFilename(),
-				Long.valueOf(fileupload.getSize()).intValue(), imagePath, (String)uploadMap.get(UploadManager.FILE_ID));
-			JSONFileData.add(fileUploaded);
+			JSONFileData.add(conversionService.convert(newPhoto, PhotoWeb.class));
 		}
 		String error ="";
 		if(ResultStatus.SUCCESS == printcampaignService.SavePrintCampaign(printcampaign, error)) {  
