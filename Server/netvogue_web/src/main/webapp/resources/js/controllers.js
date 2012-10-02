@@ -837,7 +837,7 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
     	var jsonrequest = new netvogue.stylesheetjsonrequest($scope.editstylesheetname, $scope.editstylesheetcat, $scope.editstylesheetid);
     	mystylesheet.updatestylesheet(jsonrequest).success(function(data) {
     		mystylesheet.updatestylesheetlocally(jsonrequest);
-    		$scope.stylesheets		= srvstylesheets.getstylesheets($routeParams);
+    		$scope.stylesheets		= srvstylesheet.getstylesheets($routeParams);
     	}).error(function(data) {
  
     	});
@@ -847,7 +847,7 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
     $scope.deletestylesheet = function(id) {
     	mystylesheet.deletestylesheet(id).success(function(data) {
     		mystylesheet.deletestylesheetlocally(id);
-    		$scope.stylesheets		= srvstylesheets.getstylesheets($routeParams);
+    		$scope.stylesheets		= srvstylesheet.getstylesheets($routeParams);
     	}).error(function(data) {
     		
     	});

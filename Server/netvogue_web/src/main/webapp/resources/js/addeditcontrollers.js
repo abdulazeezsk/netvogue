@@ -60,7 +60,6 @@ function MyCtrlAddGallery($scope, $routeParams, $location, srvgallery, mygallery
 	};
 }
 
-
 function MyCtrlAddPrintCampaign($scope, $routeParams, $location, srvgallery, mygallery, currentvisitedprofile) {
 
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
@@ -290,6 +289,8 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
 		$scope.category = $routeParams.cat;
 	}
 	
+	$scope.existingfiles = [];
+	$scope.newfiles = [];
     $scope.styles = [
 	                   {
 	                       "stylelistitemid": "styleId",

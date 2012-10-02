@@ -73,63 +73,7 @@
 				<div>
 					<!-- data pane -->
 					<div>
-						<ul class="thumbnails">
-							<li class="span2">
-								<div class="thumbnail">
-									<img src="img/donna_karan_adriana_lima_1.jpg" alt=""
-										style="min-height: 151px; max-height: 151px;">
-									<div class="caption">
-										<p>
-											<span class="fileinput-button addimg">
-											<a style="font-weight:bold;text-decoration:none;">Remove</a>
-											</span>
-										</p>
-									</div>
-								</div>
-							</li>
-							<li class="span2">
-								<div class="thumbnail">
-									<img src="http://placehold.it/130X151" alt="">
-									<div class="caption">
-										<p>
-											<span
-												class="fileinput-button addimg"><a style="font-weight:bold;text-decoration:none;">Add Style</a><input
-												id="fileupload" type="file" name="files[]" multiple
-												onchange="angular.element(this).scope().filesadded(this)">
-											</span> 
-										</p>
-									</div>
-								</div>
-							</li>
-							<li class="span2">
-								<div class="thumbnail">
-									<img src="http://placehold.it/130X151" alt="">
-									<div class="caption">
-										<p>
-											<span
-												class="fileinput-button addimg"><a style="font-weight:bold;text-decoration:none;">Add Style</a><input
-												id="fileupload" type="file" name="files[]" multiple
-												onchange="angular.element(this).scope().filesadded(this)">
-											</span> 
-										</p>
-									</div>
-								</div>
-							</li>
-							<li class="span2">
-								<div class="thumbnail">
-									<img src="http://placehold.it/130X151" alt="">
-									<div class="caption">
-										<p>
-											<span
-												class="fileinput-button addimg"><a style="font-weight:bold;text-decoration:none;">Add Style</a><input
-												id="fileupload" type="file" name="files[]" multiple
-												onchange="angular.element(this).scope().filesadded(this)">
-											</span> 
-										</p>
-									</div>
-								</div>
-							</li>
-						</ul>
+						<div styleupload-plugin ng-model="existingfiles" new-files="newfiles"></div>
 					</div>
 					<!-- data pane -->
 					<form novalidate class="form-horizontal css-form" name="form">

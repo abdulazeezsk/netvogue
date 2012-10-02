@@ -20,7 +20,7 @@ public class CollectionPhotoConverter implements Converter<CollectionPhoto, Phot
 		newPhoto.setUniqueid(source.getCollectionphotouniqueid());
 		
 		String thumblink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION, Size.CThumb);
-		String mainlink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION, Size.CMain);
+		String mainlink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION);
 		String leftlink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION, Size.CLeft);
 		newPhoto.setThumbnail_url(thumblink);
 		newPhoto.setPiclink(mainlink);

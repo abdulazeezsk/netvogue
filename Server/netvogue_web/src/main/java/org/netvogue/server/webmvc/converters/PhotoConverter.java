@@ -21,7 +21,7 @@ public class PhotoConverter implements Converter<Photo, PhotoWeb> {
 		newPhoto.setUniqueid(source.getPhotouniqueid());
 		
 		String thumblink = uploadManager.getQueryString(source.getPhotouniqueid(), ImageType.GALLERY, Size.GThumb);
-		String mainlink = uploadManager.getQueryString(source.getPhotouniqueid(), ImageType.GALLERY, Size.GMain);
+		String mainlink = uploadManager.getQueryString(source.getPhotouniqueid(), ImageType.GALLERY);
 		String leftlink = uploadManager.getQueryString(source.getPhotouniqueid(), ImageType.GALLERY, Size.GLeft);
 		newPhoto.setThumbnail_url(thumblink);
 		newPhoto.setPiclink(mainlink);

@@ -176,24 +176,44 @@ angular.module('netVogue.directives', []).
 		    	        {maxWidth: 600}
 		    	    );
 		    	if (!loadingImage) {
-		    		loadingImage.src = "http://placehold.it/210x150";
+		    		loadingImage.src = "http://placehold.it/130X151";
 		    	}
-		    	scope.newfiles.push(new netvogue.photo(files[i].name, "UNTITLED", loadingImage.src));
+		    	scope.existingfiles.splice(0, 1);
+		    	scope.newfiles.push(loadingImage.src);
+		    	if(3 == i)
+		    		break;
 		    }
+			checkremainingfiles();
 		};
+		
+		var checkremainingfiles = function() {
+			//Only four files can be added
+			var remainingimages = 4 - (scope.existingfiles.length + scope.newfiles.length);
+			if(remainingimages < 0)
+				remainingimages = 0;
+			for (var i = 0; i < remainingimages; i++) {
+				scope.newfiles.push("http://placehold.it/130X151");
+			}
+			
+		};
+		checkremainingfiles();
+		
 		scope.isEditMode = false;
-		scope.$on('filesadded', function(e, files) {
-			addfiles(files);
-		});
-		var galleryid = {
-				"galleryid" : scope.galleryid
+		scope.filesadded	= function(element) {
+			scope.$apply(function(scope) {
+				// Turn the FileList object into an Array
+				addfiles(element.files);
+			});
 		};
+		/*var galleryid = {
+				"galleryid" : scope.galleryid
+		};*/
 		angular.element(element).ready(function() {
 			jQuery('#styleupload').fileupload({
 		        dataType: 'json',
 		        singleFileUploads: false,
 		        limitMultiFileUploads: 4,
-		        formData: galleryid,
+		        //formData: galleryid,
 		        progressall: function (e, data) {
 		        	var progtemp = parseInt(data.loaded / data.total * 100, 10);
 		        	scope.$apply(function(scope) {
@@ -220,22 +240,22 @@ angular.module('netVogue.directives', []).
 		    });
     	});
 		scope.updatedataToParent = function(label, seasonname, photoid) {
-			scope.updatedata({label:label, seasonname:seasonname, photoid:photoid});
+			//scope.updatedata({label:label, seasonname:seasonname, photoid:photoid});
 		};
 		scope.progressVisible = true;
 		scope.progress = 0;
 	};
 	return {
-		templateUrl	: 'templates/brand/styleupload_plugin.htm',
+		templateUrl	: 'templates/brand/Styleupload_Plugin.htm',
 		replace		: false,
 		transclude	: true,
 		restrict	: 'A',
 		scope		: {
-			newstyles		: '=newStyles',
-			existingstyles	: '=ngModel',
-			styleid			: '=styleId',
+			newfiles		: '=newFiles',
+			existingfiles	: '=ngModel'
+			/*styleid			: '=styleId',
 			updatedata		: '&updateData',
-			deletedata		: '&deleteData'
+			deletedata		: '&deleteData'*/
 		},
 		link		: linkFn
 	};	
