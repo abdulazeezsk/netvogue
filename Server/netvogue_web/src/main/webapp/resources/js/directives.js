@@ -82,8 +82,7 @@ angular.module('netVogue.directives', []).
 }).directive('fileuploadPlugin', function() {
 	var linkFn;
 	linkFn = function(scope, element, attrs) {
-		scope.isEditMode = false;
-		scope.$on('filesadded', function(e, files) {
+		var addfiles = function(files) {
 			scope.newfiles = [];
 			for (var i = 0; i < files.length; i++) {
 		    	var loadingImage = window.loadImage(
@@ -98,6 +97,10 @@ angular.module('netVogue.directives', []).
 		    	}
 		    	scope.newfiles.push(new netvogue.photo(files[i].name, "UNTITLED", loadingImage.src));
 		    }
+		};
+		scope.isEditMode = false;
+		scope.$on('filesadded', function(e, files) {
+			addfiles(files);
 		});
 		var galleryid = {
 				"galleryid" : scope.galleryid
@@ -111,6 +114,16 @@ angular.module('netVogue.directives', []).
 		        	var progtemp = parseInt(data.loaded / data.total * 100, 10);
 		        	scope.$apply(function(scope) {
 		        		scope.progress = progtemp;
+		        	});
+		        },
+		        drop: function(e, data) {
+		        	scope.$apply(function(scope) {
+		        		addfiles(data.files);
+		        	});
+		        },
+		        paste: function(e, data) {
+		        	scope.$apply(function(scope) {
+		        		addfiles(data.files);
 		        	});
 		        },
 		        done: function (e, data) {
@@ -144,6 +157,83 @@ angular.module('netVogue.directives', []).
 			maxheight		: '=maxHeight',
 			minheight		: '=minHeight',
 			galleryid		: '=galleryId',
+			updatedata		: '&updateData',
+			deletedata		: '&deleteData'
+		},
+		link		: linkFn
+	};	
+}).directive('styleuploadPlugin', function() {
+	var linkFn;
+	linkFn = function(scope, element, attrs) {
+		var addfiles = function(files) {
+			scope.newfiles = [];
+			for (var i = 0; i < files.length; i++) {
+		    	var loadingImage = window.loadImage(
+		    			files[i],
+		    	        function (img) {
+		    	            
+		    	        },
+		    	        {maxWidth: 600}
+		    	    );
+		    	if (!loadingImage) {
+		    		loadingImage.src = "http://placehold.it/210x150";
+		    	}
+		    	scope.newfiles.push(new netvogue.photo(files[i].name, "UNTITLED", loadingImage.src));
+		    }
+		};
+		scope.isEditMode = false;
+		scope.$on('filesadded', function(e, files) {
+			addfiles(files);
+		});
+		var galleryid = {
+				"galleryid" : scope.galleryid
+		};
+		angular.element(element).ready(function() {
+			jQuery('#styleupload').fileupload({
+		        dataType: 'json',
+		        singleFileUploads: false,
+		        limitMultiFileUploads: 4,
+		        formData: galleryid,
+		        progressall: function (e, data) {
+		        	var progtemp = parseInt(data.loaded / data.total * 100, 10);
+		        	scope.$apply(function(scope) {
+		        		scope.progress = progtemp;
+		        	});
+		        },
+		        drop: function(e, data) {
+		        	scope.$apply(function(scope) {
+		        		addfiles(data.files);
+		        	});
+		        },
+		        done: function (e, data) {
+		        	scope.$apply(function(scope) {
+		        		if(data.result.status == true) {
+		        			for(var i=0; i < data.result.filesuploaded.length; i++){
+		        				scope.existingfiles.push(data.result.filesuploaded[i]);
+		        			};
+		        			scope.newfiles = [];
+		        		} else {
+		        			alert("error");
+		        		}
+		        	});
+		        }
+		    });
+    	});
+		scope.updatedataToParent = function(label, seasonname, photoid) {
+			scope.updatedata({label:label, seasonname:seasonname, photoid:photoid});
+		};
+		scope.progressVisible = true;
+		scope.progress = 0;
+	};
+	return {
+		templateUrl	: 'templates/brand/styleupload_plugin.htm',
+		replace		: false,
+		transclude	: true,
+		restrict	: 'A',
+		scope		: {
+			newstyles		: '=newStyles',
+			existingstyles	: '=ngModel',
+			styleid			: '=styleId',
 			updatedata		: '&updateData',
 			deletedata		: '&deleteData'
 		},
