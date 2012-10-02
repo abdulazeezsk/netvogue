@@ -50,11 +50,10 @@
 
 			<div>
 				<ul class="thumbnails">
-					<li ng-repeat="style in styles">
+					<li ng-repeat="style in styles" style="position: relative;">
 						<div class="view view-first">
 							<a href="#/{{style.stylelistitemid}}"> <img
 								src="{{style.stylecoverpic}}" alt=""></a>
-							<div class="mask"></div>
 							<div class="content">
 								<div class="mask">
 									<ul ng-show="isMyProfile">
@@ -63,12 +62,6 @@
 										<li><a href="#/editstyles" title="Edit"><i
 												class="icon-edit icon-white"></i></a></li>
 									</ul>
-									<p>
-										<u>{{style.stylename}}</u> <br /> Lorem Ipsum is simply dummy
-										text of the printing and typesetting industry. Lorem Ipsum has
-										been the industry's standard dummy text ever since the 1500s,
-										when an unknown printer took a galley of type i
-									</p>
 									<h1>
 										<a href="#/stylepreview" class="mask_edit">view</a>
 									</h1>
@@ -76,7 +69,7 @@
 							</div>
 							<div class="divi2"></div>
 						</div>
-						<div class="title">
+						<div class="campaigntitle">
 							<h3>{{style.stylename}}</h3>
 							<h3>{{style.stylebrandname}}</h3>
 							<h3>{{style.styleprice}}</h3>

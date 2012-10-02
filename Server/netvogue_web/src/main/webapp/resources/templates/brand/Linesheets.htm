@@ -79,12 +79,10 @@
 
 			<div>
 				<ul class="thumbnails">
-					<li ng-repeat="linesheet in linesheets">
+					<li ng-repeat="linesheet in linesheets" style="position: relative;">
 						<div class="view view-first">
 							<a ng-href="#/stylesheet?id={{stylesheet.galleryid}}"> <img
 								ng-src="{{linesheet.gallerypic}}" alt=""></a>
-							<div class="mask"></div>
-
 							<div class="content">
 								<div class="mask">
 									<ul ng-show="isMyProfile && iambrand">
@@ -93,12 +91,6 @@
 										<li><a ng-click="editlinesheet(linesheet.galleryid, linesheet.galleryname, linesheet.category, linesheet.deliverydate)" 
 										title="Edit"><i class="icon-edit icon-white"></i></a></li>
 									</ul>
-									<p>
-										<u>{{linesheet.galleryname}}</u> <br />
-										{{linesheet.gallerydesc}} 
-									</p>
-
-
 									<h1>
 										<a ng-href="#/stylesheet?id={{stylesheet.galleryid}}" class="mask_edit">view</a>
 									</h1>
@@ -106,7 +98,7 @@
 							</div>
 							<div class="divi2"></div>
 						</div>
-						<div class="title">
+						<div class="campaigntitle">
 							<!--<h3>
                                 {{linesheet.linesheetseason}}</h3>-->
 							<h4>DELIVERY DATE: {{linesheet.deliverydate}}</h4>
