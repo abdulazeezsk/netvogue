@@ -819,7 +819,7 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
     	var jsonrequest = new netvogue.stylesheetjsonrequest($scope.stylesheetname, $scope.stylesheetcat);
     	mystylesheet.createstylesheet(jsonrequest).success(function(data) {
     		if(data.status == true) {
-    			$location.url("addstyle?id=" + data.idcreated);
+    			$location.url("addstyle?id=" + data.idcreated + "&&cat=" + netvogue.getparentcategory($scope.stylesheetcat));
     		}
         }).error(function(data) {
         	

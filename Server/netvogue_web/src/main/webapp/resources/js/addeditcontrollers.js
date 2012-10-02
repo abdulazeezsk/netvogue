@@ -129,7 +129,7 @@ function MyCtrlAddVideoCampaign($scope, $routeParams, currentvisitedprofile) {
     $scope.AddVideocampaign = function (video) {
         $scope.newvideocampaign = angular.copy(video);
         $scope.addDetails = false;
-    }
+    };
 
     $scope.privacyset = [
 	                   {
@@ -143,7 +143,6 @@ function MyCtrlAddVideoCampaign($scope, $routeParams, currentvisitedprofile) {
                        }
                        ];
 }
-
 
 function MyCtrlAddNewsletter($scope, $routeParams, $location, srvgallery, mygallery, currentvisitedprofile) {
 
@@ -212,6 +211,10 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 		$location.url($routeParams.profileid + "/collections");
 	}
 	
+	if($scope.$parent.iambrand == false) {
+		$location.url("collections");
+	}
+	
     $scope.$parent.title	= "Add Collection";
 	$scope.newfiles = [];
 	$scope.galleryid = "";
@@ -264,6 +267,76 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 	};
 }
 
+function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
+
+	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
+	if(!$scope.isMyProfile) {
+		$location.url($routeParams.profileid + "/collections");
+	}
+	
+	if($scope.$parent.iambrand == false) {
+		$location.url("stylesheets");
+	}
+	
+	$scope.$parent.title	= "Add Collection";
+    $scope.backButton = currentvisitedprofile.getBackHistory();
+    
+    $scope.stylesheetid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.stylesheetid = $routeParams.id;
+	}
+	$scope.category = "";
+	if (!angular.isUndefined($routeParams.cat)) {
+		$scope.category = $routeParams.cat;
+	}
+	
+    $scope.styles = [
+	                   {
+	                       "stylelistitemid": "styleId",
+	                       "stylename": "Studded Winston",
+	                       "stylebrandname": "Calvin Klien",
+	                       "styleseason": "Spring 2012",
+	                       "styledeliverydate": "25/04/2012",
+	                       "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+	                       "styleprice": "5000",
+	                       "stylecoverpic": "http://placehold.it/90x119"
+
+	                   },
+                       {
+                           "stylelistitemid": "styleId",
+                           "stylename": "Studded Winston",
+                           "stylebrandname": "Calvin Klien",
+                           "styleseason": "Spring 2012",
+                           "styledeliverydate": "25/04/2012",
+                           "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+                           "styleprice": "5000",
+                           "stylecoverpic": "http://placehold.it/90x119"
+
+                       },
+                       {
+                           "stylelistitemid": "styleId",
+                           "stylename": "Smith trench",
+                           "stylebrandname": "Calvin Klien",
+                           "styleseason": "Spring 2012",
+                           "styledeliverydate": "25/04/2012",
+                           "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+                           "styleprice": "5000",
+                           "stylecoverpic": "http://placehold.it/90x119"
+
+                       }
+                       ];
+    $scope.linesheets = [
+	                   {
+	                       "linesheetlistitemid": "linesheetId",
+	                       "linesheetbrandname": "Calvin Klien",
+	                       "linesheetseason": "Spring 2012",
+	                       "linesheetdeliverydate": "25/04/2012",
+	                       "linesheetcoverpic": "http://placehold.it/100x130"
+
+	                   }
+                       ];
+
+}
 function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile) {
 
 	if($scope.parent.iambrand == false) {
@@ -626,59 +699,4 @@ function MyCtrlEditStyles($scope, $routeParams, currentvisitedprofile) {
 
                        }
                        ];
-}
-
-function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
-
-	if($scope.parent.iambrand == false) {
-		$location.url("linesheets");
-	}
-    $scope.backButton = currentvisitedprofile.getBackHistory();
-    $scope.addDetails = true;
-    $scope.styles = [
-	                   {
-	                       "stylelistitemid": "styleId",
-	                       "stylename": "Studded Winston",
-	                       "stylebrandname": "Calvin Klien",
-	                       "styleseason": "Spring 2012",
-	                       "styledeliverydate": "25/04/2012",
-	                       "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-	                       "styleprice": "5000",
-	                       "stylecoverpic": "http://placehold.it/90x119"
-
-	                   },
-                       {
-                           "stylelistitemid": "styleId",
-                           "stylename": "Studded Winston",
-                           "stylebrandname": "Calvin Klien",
-                           "styleseason": "Spring 2012",
-                           "styledeliverydate": "25/04/2012",
-                           "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-                           "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/90x119"
-
-                       },
-                       {
-                           "stylelistitemid": "styleId",
-                           "stylename": "Smith trench",
-                           "stylebrandname": "Calvin Klien",
-                           "styleseason": "Spring 2012",
-                           "styledeliverydate": "25/04/2012",
-                           "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-                           "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/90x119"
-
-                       }
-                       ];
-    $scope.linesheets = [
-	                   {
-	                       "linesheetlistitemid": "linesheetId",
-	                       "linesheetbrandname": "Calvin Klien",
-	                       "linesheetseason": "Spring 2012",
-	                       "linesheetdeliverydate": "25/04/2012",
-	                       "linesheetcoverpic": "http://placehold.it/100x130"
-
-	                   }
-                       ];
-
 }

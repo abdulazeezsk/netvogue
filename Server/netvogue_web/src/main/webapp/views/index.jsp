@@ -10,6 +10,7 @@
     <link href="css/style_common.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="css/jquery.tree.css" />
+    <link href="css/angular-ui.css" rel="stylesheet" />
     <style type="text/css">
         body
         {
@@ -35,6 +36,7 @@
     <script src="lib/bootstrap/bootstrap.min.js" 	type="text/javascript"></script>
     <script src="lib/jquery/jquery.progressbar.js" 	type="text/javascript"></script>
     <script src="lib/angular/angular.js" 			type="text/javascript"></script>
+    <script src="lib/angular/angular-ui.js" 		type="text/javascript"></script>
     <script src="lib/bootstrap/bootstrap-navlist.js" type="text/javascript"></script>
     <div style="display: none;">
     	<div id="firsttimelogin">${firsttimelogin}</div>
@@ -48,6 +50,7 @@
     <script src="js/addeditcontrollers.js" 			type="text/javascript"></script>
     <script src="js/filters.js" 					type="text/javascript"></script>
     <script src="js/directives.js" 					type="text/javascript"></script>
+    <script src="js/constants.js" 					type="text/javascript"></script>
     <script src="js/main.js" 						type="text/javascript"></script>
     <script src="js/utils.js" 						type="text/javascript"></script>
     

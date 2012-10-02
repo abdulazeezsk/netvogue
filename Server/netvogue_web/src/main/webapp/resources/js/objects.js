@@ -168,6 +168,14 @@ netvogue.defaultproductlines = [
 							   	new netvogue.productline("Gifts", 		"OTHERS"),
 							   	new netvogue.productline("Candles", 	"OTHERS")
                                 ];
+
+netvogue.getparentcategory = function(productlinename) {
+	for(var i=0;i < netvogue.defaultproductlines.length; i++) {
+		if(netvogue.defaultproductlines[i].productlinename == productlinename) {
+			return netvogue.defaultproductlines[i].category;
+		}
+	}
+};
 /*************************************************************************/
 /************************End of*******************************************/
 /*********************Profile Objects*************************************/

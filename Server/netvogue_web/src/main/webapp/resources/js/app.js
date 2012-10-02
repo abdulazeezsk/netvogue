@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('netVogue', ['netVogue.filters', 'netVogue.services', 'netVogue.directives']).
+angular.module('netVogue', ['netVogue.constants', 'netVogue.filters', 'netVogue.services', 'netVogue.directives', 'ui']).
 	config(['$locationProvider', function($locationProvider) {
 		//$locationProvider.html5Mode(true).hashPrefix('app/index.html/');
 	}]).
@@ -74,8 +74,7 @@ angular.module('netVogue', ['netVogue.filters', 'netVogue.services', 'netVogue.d
 
 	 
 	  $routeProvider.otherwise({redirectTo: homepage});
-  }]).
-  run( function($rootScope, currentvisitedprofile) {
+  }]).run( function($rootScope, currentvisitedprofile) {
 
 	    // register listener to watch route changes
 	    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
@@ -85,4 +84,4 @@ angular.module('netVogue', ['netVogue.filters', 'netVogue.services', 'netVogue.d
 	    	}
 	    	currentvisitedprofile.profilevisitChange(next.params, home);
 	    });
-	 })
+});
