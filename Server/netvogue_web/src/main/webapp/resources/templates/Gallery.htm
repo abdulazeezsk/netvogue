@@ -38,32 +38,13 @@
 				<div class="divi2 right_pane_underline"></div>
 			</div>
 			<div>
-				<!-- <ul class="thumbnails">
-					<li ng-repeat="gallery in galleries">
-						<div class="galleryview">
-							<a href="#/photos"> <img src="{{gallery.gallerypic}}" alt=""></a>
-							<div class="divi2"></div>
-						</div>
-						<div class="gallerytitle">
-							<h5>{{gallery.galleryname}}</h5>
-						</div>
-					</li>
-				</ul> -->
-				
-				
 					<ul class="thumbnails">
-						<li ng-repeat="gallery in galleries">
-							<div class="galleryview galleryview-firstglry">
+						<li ng-repeat="gallery in galleries" style="position: relative;">
+							<div class="galleryview view-firstg">
 								<a ng-href="#/photos?id={{gallery.galleryid}}"> <img
 									ng-src="{{gallery.gallerypic}}" alt=""></a>
-								<div class="maskglry mask-1"></div>
-								<div class="maskglry mask-2">
-									<p>
-										<u>{{gallery.galleryname}}</u>
-									</p>
-								</div>
-								<div class="contentglry">
-								<ul class="maskls" ng-show="isMyProfile">
+								<div class="content">
+							     	<ul class="mask" ng-show="isMyProfile">
                                         <li><a ng-click="deletegallery(gallery.galleryid)" title="Delete"><i class="icon-trash icon-white"></i></a></li>
                                         <li><a ng-click="editgallery(gallery.galleryid, gallery.galleryname)" title="Edit">
                                         <i class="icon-edit icon-white"></i>
@@ -72,10 +53,10 @@
 									<h1>
 										<a ng-href="#/photos?id={{gallery.galleryid}}" class="mask_edit">View</a>
 									</h1>
-								</div>
+								</div> 
 								<div class="divi2"></div>
 							</div>
-							<div class="title">
+							<div class="gallerytitle">
 								<h3>{{gallery.galleryname}}</h3>
 							</div>
 						</li>

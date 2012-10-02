@@ -42,11 +42,10 @@
 
 			<div>
 				<ul class="thumbnails">
-					<li ng-repeat="gallery in galleries">
+					<li ng-repeat="gallery in galleries" style="position: relative;">
 						<div class="view view-first">
 							<a ng-href="#/newsletter?id={{gallery.galleryid}}">
                                 <img ng-src="{{gallery.gallerypic}}" alt=""></a>
-							<div class="mask"></div>
 							<div class="content">
 								<div class="mask">
 									<ul ng-show="isMyProfile">
@@ -55,10 +54,6 @@
 										<li><a ng-click="editgallery(gallery.galleryid, gallery.galleryname, gallery.gallerydesc)"  
 												title="Edit"><i class="icon-edit icon-white"></i></a></li>
 									</ul>
-									<p>
-										<u>{{gallery.galleryname}}</u>
-                                        <br />{{gallery.gallerydesc}}
-									</p>
 									<h1>
 										<a href="#/editorial?id={{gallery.galleryid}}" class="mask_edit">view</a>
 									</h1>
@@ -66,8 +61,8 @@
 							</div>
 							<div class="divi2"></div>
 						</div>
-						<div class="title">
-							<h5>{{gallery.galleryname}}</h5>
+						<div class="campaigntitle">
+							<h3>{{gallery.galleryname}}</h3>
 						</div>
 					</li>
 				</ul>

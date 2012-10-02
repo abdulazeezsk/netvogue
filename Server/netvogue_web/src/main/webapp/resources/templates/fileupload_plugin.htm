@@ -1,25 +1,38 @@
 <ul class="thumbnails">
 	<li ng-repeat="eachfile in newfiles" class="span3">
 		<div class="thumbnail">
-			<img ng-src={{eachfile.thumbnail_url}} alt="" ng-style="{'max-height': maxheight, 'min-height': minheight}">
-			<div style="min-height:100px; max-height:100px;">
-				<span ng-show="progressVisible" style="position:relative;top:30px;" >
-            		<div class="percent">{{progress}}%</div>
-            		<div class="progress-bar">
-                		<div class="uploaded" ng-style="{'width': progress+'%'}"></div>
-            		</div>
-        		</span>
+			<img ng-src={{eachfile.thumbnail_url}} alt=""
+				ng-style="{'max-height': maxheight, 'min-height': minheight}">
+			<div style="min-height: 100px; max-height: 100px;">
+				<span ng-show="progressVisible"
+					style="position: relative; top: 30px;">
+					<div class="percent">{{progress}}%</div>
+					<div class="progress-bar">
+						<div class="uploaded" ng-style="{'width': progress+'%'}"></div>
+					</div>
+				</span>
 			</div>
 		</div>
 	</li>
-	<li ng-repeat="eachfile in existingfiles" class="span3" style="position:relative;">
-	<span class="right" title="Delete" ng-click="deletedata({photoid:eachfile.uniqueid})" style="background: url(../img/red-cross.png);width:25px;height:25px;position:absolute;display: block;right: -2px;top: 0px;cursor: pointer;z-index: 100;"></span>
-		<div class="thumbnail" style="min-height:300px; max-height:300px;">
-			<img ng-src={{eachfile.thumbnail_url}} alt="" ng-style="{'max-height': maxheight, 'min-height': minheight}">
+	<li ng-repeat="eachfile in existingfiles" class="span3"
+		style="position: relative;"><span class="right" title="Delete"
+		ng-click="deletedata({photoid:eachfile.uniqueid})"
+		style="background: url(../img/red-cross.png); width: 25px; height: 25px; position: absolute; display: block; right: -2px; top: 0px; cursor: pointer; z-index: 100;"></span>
+		<div class="thumbnail" style="min-height: 300px; max-height: 300px;">
+			<img ng-src={{eachfile.thumbnail_url}} alt=""
+				ng-style="{'max-height': maxheight, 'min-height': minheight}">
 			<div style="margin: 10px 0 0 10;">
-				<div ng-class="{spotlightx:!isEditMode}" edit-text data="eachfile" 
-					 edit-mode="isEditMode" update-data="updatedataToParent(label, seasonname, photoid)"></div>
+				<div ng-class="{spotlightx:!isEditMode}" edit-text data="eachfile"
+					edit-mode="isEditMode"
+					update-data="updatedataToParent(label, seasonname, photoid)">
+				</div>
+				<p ng-show="!isEditMode" style ="font:normal 9px Verdana;position: absolute; display: block;bottom: 0px; cursor: pointer; z-index: 100;">
+					Uploaded on
+					<a href="" style="text-decoration:none;">Sep 27, 2012</a> 
+					|
+				 <a href="" style="text-decoration:none;">Set as cover</a>
+				</p>
 			</div>
 		</div>
-	</li>
+		</li>
 </ul>
