@@ -154,13 +154,16 @@ public class CollectionController {
 		
 		if(null == request.getId() || request.getId().isEmpty()) {
 			response.setError("editorial Id is empty");
+			return response;
 		} else if(null == request.getSeasonname() || request.getDesc().isEmpty()) {
 			response.setError("new name or description is empty");
+			return response;
 		}
 		
 		org.netvogue.server.neo4japi.domain.Collection collection = collectionService.getCollection(request.getId());
 		if(null == collection) {
 			response.setError("There is no collection with this Id");
+			return response;
 		}
 		if(collection.getProductcategory().getProductLine().getDesc() == request.getCategory()) {
 			if(ResultStatus.SUCCESS == collectionService.editCollection(request.getId(), 
@@ -195,6 +198,7 @@ public class CollectionController {
 		
 		if(null == galleryid || galleryid.isEmpty()) {
 			response.setError("Galleryid is empty");
+			return response;
 		}
 		if(ResultStatus.SUCCESS == collectionService.deleteCollection(galleryid, error)) {  
 			response.setStatus(true);

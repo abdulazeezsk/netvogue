@@ -763,7 +763,7 @@ angular.module('netVogue.services', []).
     		var config = {
     			method: "POST",
     			data: galleryid,
-                url: "collection/delete"
+                url: "stylesheet/delete"
             };
     		return $http(config);
     	},

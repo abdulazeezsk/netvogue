@@ -18,6 +18,7 @@ import org.netvogue.server.webmvc.domain.Linesheet;
 import org.netvogue.server.webmvc.domain.LinesheetJSONRequest;
 import org.netvogue.server.webmvc.domain.Linesheets;
 import org.netvogue.server.webmvc.domain.Photos;
+import org.netvogue.server.webmvc.domain.StylesheetJsonRequest;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -128,6 +129,47 @@ public class LinesheetController {
 		if(ResultStatus.SUCCESS == linesheetService.SaveLinesheet(newLinesheet, error)) {  
 			response.setStatus(true);
 			response.setIdcreated(newLinesheet.getLinesheetid());
+		}
+		else
+			response.setError(error);
+		
+		return response;
+	}
+	
+	@RequestMapping(value="linesheet/edit", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse EditLinesheet(@RequestBody LinesheetJSONRequest request) {
+		System.out.println("Edit Linesheet");
+		String error = "";
+		JsonResponse response = new JsonResponse();
+		
+		if(null == request.getId() || request.getId().isEmpty()) {
+			response.setError("linesheet Id is empty");
+			return response;
+		} else if(null == request.getName()) {
+			response.setError("new name is empty");
+			return response;
+		}
+		
+		if(ResultStatus.SUCCESS == linesheetService.editLinesheet(request.getId(), request.getName(), request.getDeliverydate(), error))   
+			response.setStatus(true);
+		else
+				response.setError(error);	
+		return response;
+	}
+	
+	//Think about the categories as well
+	@RequestMapping(value="linesheet/delete", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse DeleteLinesheet(@RequestBody String linesheetId) {
+		System.out.println("Delete Linesheet:"+ linesheetId);
+		String error = "";
+		JsonResponse response = new JsonResponse();
+		
+		if(null == linesheetId || linesheetId.isEmpty()) {
+			response.setError("linesheetId is empty");
+			return response;
+		}
+		if(ResultStatus.SUCCESS == linesheetService.deleteLinesheet(linesheetId, error)) {  
+			response.setStatus(true);
 		}
 		else
 			response.setError(error);

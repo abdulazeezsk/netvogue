@@ -138,8 +138,10 @@ public class EditorialController {
 		
 		if(null == request.getId() || request.getId().isEmpty()) {
 			response.setError("editorial Id is empty");
+			return response;
 		} else if(null == request.getName() || request.getDesc().isEmpty()) {
 			response.setError("new name or description is empty");
+			return response;
 		}
 		
 		if(ResultStatus.SUCCESS == editorialService.editEditorial(request.getId(), 
@@ -159,6 +161,7 @@ public class EditorialController {
 		
 		if(null == galleryid || galleryid.isEmpty()) {
 			response.setError("Galleryid is empty");
+			return response;
 		}
 		if(ResultStatus.SUCCESS == editorialService.deleteEditorial(galleryid, error)) {  
 			response.setStatus(true);

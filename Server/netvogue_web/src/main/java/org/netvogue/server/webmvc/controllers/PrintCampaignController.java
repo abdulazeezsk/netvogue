@@ -142,8 +142,10 @@ public class PrintCampaignController {
 		
 		if(null == request.getId() || request.getId().isEmpty()) {
 			response.setError("printcampaign Id is empty");
+			return response;
 		} else if(null == request.getName() || request.getDesc().isEmpty()) {
 			response.setError("newgalleryname is empty");
+			return response;
 		}
 		
 		if(ResultStatus.SUCCESS == printcampaignService.editPrintCampaign(request.getId(), 
@@ -163,6 +165,7 @@ public class PrintCampaignController {
 		
 		if(null == galleryid || galleryid.isEmpty()) {
 			response.setError("Galleryid is empty");
+			return response;
 		}
 		if(ResultStatus.SUCCESS == printcampaignService.deletePrintCampaign(galleryid, error)) {  
 			response.setStatus(true);

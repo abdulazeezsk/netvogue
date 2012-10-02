@@ -149,57 +149,41 @@ public class StyleSheetController {
 		return response;
 	}
 	
-	/*@RequestMapping(value="stylesheet/edit", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse EditCollection(@RequestBody CollectionJSONRequest request) {
+	@RequestMapping(value="stylesheet/edit", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse EditStylesheet(@RequestBody StylesheetJsonRequest request) {
 		System.out.println("Edit Stylesheet");
 		String error = "";
 		JsonResponse response = new JsonResponse();
 		
 		if(null == request.getId() || request.getId().isEmpty()) {
-			response.setError("editorial Id is empty");
-		} else if(null == request.getSeasonname() || request.getDesc().isEmpty()) {
-			response.setError("new name or description is empty");
+			response.setError("stylesheet Id is empty");
+			return response;
+		} else if(null == request.getName()) {
+			response.setError("new name is empty");
+			return response;
 		}
 		
-		org.netvogue.server.neo4japi.domain.Collection collection = collectionService.getCollection(request.getId());
-		if(null == collection) {
-			response.setError("There is no collection with this Id");
-		}
-		if(collection.getProductcategory().getProductLine().getDesc() == request.getCategory()) {
-			if(ResultStatus.SUCCESS == collectionService.editCollection(request.getId(), 
-								request.getSeasonname(), request.getDesc(), error))   
-				response.setStatus(true);
-			else
-				response.setError(error);
-		} else { //If we can write a cypher query for the below operation, then we can replace
-			//this else part
-			collection.setCollectionseasonname(request.getSeasonname());
-			collection.setDescription(request.getDesc());
-			ProductLines productLine = ProductLines.getValueOf(request.getCategory());
-			Category cat = boutiqueService.getOrCreateCategory(productLine);
-			collection.setProductcategory(cat);
-			if(ResultStatus.SUCCESS == collectionService.SaveCollection(collection, error)) {  
-				response.setStatus(true);
-				response.setIdcreated(collection.getCollectionid());
-			}
-			else
-				response.setError(error);
-		}
-		
+		if(ResultStatus.SUCCESS == stylesheetService.editStylesheet(request.getId(), request.getName(), error))   
+			response.setStatus(true);
+		else
+				response.setError(error);	
 		return response;
 	}
 	
 	//Think about the categories as well
 	@RequestMapping(value="stylesheet/delete", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse DeleteCollection(@RequestBody String galleryid) {
-		System.out.println("Delete Collection:"+ galleryid);
+	public @ResponseBody JsonResponse DeleteStylesheet(@RequestBody String stylesheetId) {
+		System.out.println("Delete Stylesheet:"+ stylesheetId);
 		String error = "";
 		JsonResponse response = new JsonResponse();
 		
-		if(null == galleryid || galleryid.isEmpty()) {
-			response.setError("Galleryid is empty");
+		if(null == stylesheetId || stylesheetId.isEmpty()) {
+			response.setError("Stylesheetid is empty");
+			return response;
 		}
-		if(ResultStatus.SUCCESS == collectionService.deleteCollection(galleryid, error)) {  
+		
+		//Make sure that styles inside this stylesheet are not part of any linesheets
+		if(ResultStatus.SUCCESS == stylesheetService.deleteStylesheet(stylesheetId, error)) {  
 			response.setStatus(true);
 		}
 		else
@@ -208,7 +192,7 @@ public class StyleSheetController {
 		return response;
 	}
 	
-	@RequestMapping(value="stylesheet/addphotos", method=RequestMethod.POST)
+	/*@RequestMapping(value="stylesheet/addphotos", method=RequestMethod.POST)
 	public @ResponseBody UploadedFileResponse AddPhotostoGallery(Model model, 
 			@RequestParam("files[]") List<MultipartFile> fileuploads, @RequestParam("galleryid") String galleryId) {
 		System.out.println("Add photos: Gallery Id:" + galleryId + "No:of Photos:" + fileuploads.size());
