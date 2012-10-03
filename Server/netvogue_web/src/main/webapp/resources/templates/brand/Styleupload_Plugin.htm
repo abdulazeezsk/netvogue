@@ -1,10 +1,11 @@
 <ul class="thumbnails" ui-sortable ng-model="existingfiles">
 	<li class="span2" ng-repeat="style in existingfiles| limitTo:4">
 		<div class="thumbnail">
-			<img ng-src={{style.thumnail_url}} alt="">
+			<img ng-src={{style.thumbnail_url}} alt="">
 			<div class="caption">
 				<p>
-					<span class="fileinput-button addimg"><a style="font-weight:bold;text-decoration:none;">Remove</a>
+					<span class="fileinput-button ">
+					<a style="font-weight:bold;text-decoration:none;" ng-click="deletephoto($index)">Remove</a>
 					</span> 
 				</p>
 			</div>

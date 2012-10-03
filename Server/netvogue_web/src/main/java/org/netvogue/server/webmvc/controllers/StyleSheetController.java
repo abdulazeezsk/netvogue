@@ -252,9 +252,10 @@ public class StyleSheetController {
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
 			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.STYLE);
-			String imagePath = (String)uploadMap.get(UploadManager.QUERY_STRING);
 			PhotoWeb newPhoto = new PhotoWeb();
-			newPhoto.setThumbnail_url(imagePath);
+			String thumburl = uploadManager.getQueryString((String)uploadMap.get(UploadManager.FILE_ID), ImageType.STYLE, Size.SThumb);
+			System.out.println("Image path is/Thumnail url is" + thumburl);
+			newPhoto.setThumbnail_url(thumburl);
 			String lefturl = uploadManager.getQueryString((String)uploadMap.get(UploadManager.FILE_ID), ImageType.STYLE, Size.SLeft);
 			newPhoto.setLeft_url(lefturl);
 			newPhoto.setUniqueid((String)uploadMap.get(UploadManager.FILE_ID));

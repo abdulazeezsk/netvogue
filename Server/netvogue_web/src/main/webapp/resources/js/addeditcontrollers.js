@@ -11,6 +11,7 @@ function MyCtrlAddGallery($scope, $routeParams, $location, srvgallery, mygallery
     $scope.$parent.title	= "Add Gallery";
     var ajaxrequestcall	 = "gallery";
 	$scope.newfiles = [];
+	$scope.filesadded = false;
 	$scope.galleryid = "";
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.galleryid = $routeParams.id;
@@ -33,6 +34,7 @@ function MyCtrlAddGallery($scope, $routeParams, $location, srvgallery, mygallery
 	$scope.filesadded	= function(element) {
 		$scope.$apply(function($scope) {
 			// Turn the FileList object into an Array
+			$scope.filesadded = true;
 			$scope.$broadcast('filesadded', element.files);
 		});
 	};
@@ -70,6 +72,7 @@ function MyCtrlAddPrintCampaign($scope, $routeParams, $location, srvgallery, myg
 	var ajaxrequestcall	 = "printcampaign";
     $scope.$parent.title	= "Add Print Campaign";
 	$scope.newfiles = [];
+	$scope.filesadded = false;
 	$scope.galleryid = "";
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.galleryid = $routeParams.id;
@@ -93,6 +96,7 @@ function MyCtrlAddPrintCampaign($scope, $routeParams, $location, srvgallery, myg
 	$scope.filesadded	= function(element) {
 		$scope.$apply(function($scope) {
 			// Turn the FileList object into an Array
+			$scope.filesadded = true;
 			$scope.$broadcast('filesadded', element.files);
 		});
 	};
@@ -153,6 +157,7 @@ function MyCtrlAddNewsletter($scope, $routeParams, $location, srvgallery, mygall
 	var ajaxrequestcall	 = "editorial";
     $scope.$parent.title	= "Add Editorials";
 	$scope.newfiles = [];
+	$scope.filesadded = false;
 	$scope.galleryid = "";
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.galleryid = $routeParams.id;
@@ -175,6 +180,7 @@ function MyCtrlAddNewsletter($scope, $routeParams, $location, srvgallery, mygall
     
 	$scope.filesadded	= function(element) {
 		$scope.$apply(function($scope) {
+			$scope.filesadded = true;
 			// Turn the FileList object into an Array
 			$scope.$broadcast('filesadded', element.files);
 		});
@@ -216,6 +222,7 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 	
     $scope.$parent.title	= "Add Collection";
 	$scope.newfiles = [];
+	$scope.filesadded = false;
 	$scope.galleryid = "";
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.galleryid = $routeParams.id;
@@ -238,6 +245,7 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
     
 	$scope.filesadded	= function(element) {
 		$scope.$apply(function($scope) {
+			$scope.filesadded = true;
 			// Turn the FileList object into an Array
 			$scope.$broadcast('filesadded', element.files);
 		});
@@ -295,6 +303,7 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile, srvstyleshe
 	$scope.showStylePane = true;
 	$scope.newstyle = new netvogue.stylejsonrequest($scope.stylesheetid);
 	$scope.stylesizes = netvogue.defaultstylesizes;
+	$scope.filesadded = false;
 	$scope.existingfiles = [];
 	
 	$scope.updatedata = function() {

@@ -129,10 +129,13 @@ angular.module('netVogue.directives', []).
 		        done: function (e, data) {
 		        	scope.$apply(function(scope) {
 		        		if(data.result.status == true) {
-		        			for(var i=0; i < data.result.filesuploaded.length; i++){
-		        				scope.existingfiles.push(data.result.filesuploaded[i]);
-		        			};
-		        			scope.newfiles = [];
+		        			if(true == scope.filesadded) {
+			        			for(var i=0; i < data.result.filesuploaded.length; i++){
+			        				scope.existingfiles.push(data.result.filesuploaded[i]);
+			        			};
+			        			scope.newfiles = [];
+			        			scope.filesadded = false;
+		        			}
 		        		} else {
 		        			alert("error");
 		        		}
@@ -158,7 +161,8 @@ angular.module('netVogue.directives', []).
 			minheight		: '=minHeight',
 			galleryid		: '=galleryId',
 			updatedata		: '&updateData',
-			deletedata		: '&deleteData'
+			deletedata		: '&deleteData',
+			filesadded		: '=filesAdded'
 		},
 		link		: linkFn
 	};	
@@ -169,6 +173,9 @@ angular.module('netVogue.directives', []).
 		var addfiles = function(files) {
 			scope.newfiles = [];
 			for (var i = 0; i < files.length; i++) {
+				if(3 == (i +  scope.existingfiles.length))
+		    		break;
+				scope.senttoserver = true;
 		    	var loadingImage = window.loadImage(
 		    			files[i],
 		    	        function (img) {
@@ -179,10 +186,7 @@ angular.module('netVogue.directives', []).
 		    	if (!loadingImage) {
 		    		loadingImage.src = "http://placehold.it/130X151";
 		    	}
-		    	scope.existingfiles.splice(0, 1);
 		    	scope.newfiles.push(loadingImage.src);
-		    	if(3 == i)
-		    		break;
 		    }
 			checkremainingfiles();
 		};
@@ -212,7 +216,7 @@ angular.module('netVogue.directives', []).
 			jQuery('#styleupload').fileupload({
 		        dataType: 'json',
 		        singleFileUploads: false,
-		        limitMultiFileUploads: 4,
+		        limitMultiFileUploads: 4 - scope.existingfiles.length,
 		        formData: stylesheetid,
 		        progressall: function (e, data) {
 		        	var progtemp = parseInt(data.loaded / data.total * 100, 10);
@@ -228,13 +232,16 @@ angular.module('netVogue.directives', []).
 		        done: function (e, data) {
 		        	scope.$apply(function(scope) {
 		        		if(data.result.status == true) {
-		        			for(var i=0; i < data.result.filesuploaded.length; i++){
-		        				alert(data.result.filesuploaded[i]);
-		        				scope.existingfiles.push(data.result.filesuploaded[i]);
-		        				alert(scope.existingfiles.length);
-		        			};
-		        			scope.newfiles = [];
-		        			checkremainingfiles();
+		        			if(true == scope.senttoserver) {
+			        			for(var i=0; i < data.result.filesuploaded.length; i++){
+			        				alert(data.result.filesuploaded[i].thumbnail_url);
+			        				scope.existingfiles.push(data.result.filesuploaded[i]);
+			        				alert(scope.existingfiles.length);
+			        			};
+			        			scope.senttoserver = false;
+			        			scope.newfiles = [];
+			        			checkremainingfiles();
+		        			}
 		        		} else {
 		        			alert("error");
 		        		}
@@ -242,11 +249,19 @@ angular.module('netVogue.directives', []).
 		        }
 		    });
     	});
+		scope.deletephoto = function(index) {
+			scope.existingfiles.splice(index, 1);
+			checkremainingfiles();
+		};
 		scope.updatedataToParent = function(label, seasonname, photoid) {
 			//scope.updatedata({label:label, seasonname:seasonname, photoid:photoid});
 		};
 		scope.progressVisible = true;
 		scope.progress = 0;
+		
+		scope.$watch('existingfiles', function() {
+			checkremainingfiles();
+		});
 	};
 	return {
 		templateUrl	: 'templates/brand/Styleupload_Plugin.htm',
@@ -256,6 +271,7 @@ angular.module('netVogue.directives', []).
 		scope		: {
 			existingfiles	: '=ngModel',
 			stylesheetid	: '=stylesheetId',
+			senttoserver	: '=filesAdded'
 		},
 		link		: linkFn
 	};	
