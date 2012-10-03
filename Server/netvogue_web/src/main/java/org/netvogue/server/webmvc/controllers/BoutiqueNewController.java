@@ -2,12 +2,9 @@ package org.netvogue.server.webmvc.controllers;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,27 +14,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.Boutique;
 import org.netvogue.server.neo4japi.domain.Brand;
-import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
 import org.netvogue.server.neo4japi.service.BrandService;
 
 import org.netvogue.server.webmvc.domain.BoutiqueNew;
 import org.netvogue.server.webmvc.domain.UsersAvailable;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
-@SessionAttributes("boutiqueNew")
 public class BoutiqueNewController {
 	
 	@Autowired NetvogueUserDetailsService 	userDetailsService;

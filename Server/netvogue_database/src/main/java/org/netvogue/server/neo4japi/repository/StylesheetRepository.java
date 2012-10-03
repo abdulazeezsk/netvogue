@@ -1,5 +1,6 @@
 package org.netvogue.server.neo4japi.repository;
 
+import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.neo4japi.domain.Stylesheet;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
@@ -17,26 +18,16 @@ public interface StylesheetRepository extends GraphRepository<Stylesheet> {
 			"WITH n MATCH n<-[r]-() DELETE n, r")
 	void deleteStylesheet(String stylesheetid);
 	
-	/*@Query( "START n=node:printcampaignid(printcampaignid={0}) " +
-			"MATCH n-[:PRINTCAMPAIGNPHOTO]->p RETURN p ORDER BY p.createdDate DESC")
-	Iterable<PrintCampaignPhoto> getPhotos(String printcampaignid);
+	@Query( "START n=node:stylesheetid(stylesheetid={0}) " +
+			"MATCH n-[:SS_STYLE]->p RETURN p ORDER BY p.createdDate DESC")
+	Iterable<Style> getStyles(String stylesheetid);
 	
-	@Query( "START n=node:printcampaignid(printcampaignid={0}) " +
+	/*@Query( "START n=node:stylesheetid(printcampaignid={0}) " +
 			"MATCH n-[:PRINTCAMPAIGNPHOTO]->p WHERE p.printcampaignphotoname! =~ {1} " +
 			"RETURN p ORDER BY p.createdDate DESC")
-	Iterable<PrintCampaignPhoto> searchPhotosByName(String printcampaignid, String photoname);
+	Iterable<Style> searchStyles(String stylesheetid, String query);*/
 	
-	@Query("START p = node:printcampaignphotouniqueid(printcampaignphotouniqueid={0}) MATCH p-[r]-() DELETE p, r")
-	void deletePhoto(String printcampaignphotouniqueid);
+	@Query("START p = node:styleid(styleid={0}) MATCH p-[r]-() DELETE p, r")
+	void deleteStyle(String styleid);
 	
-	@Query("START p = node:printcampaignphotouniqueid(printcampaignphotouniqueid={0}) " +
-			"SET p.printcampaignphotoname = {1}, p.description = {2}")
-	void editPhotoInfo(String printcampaignphotouniqueid, String printcampaignphotoName, String description);
-	
-	@Query("START p = node:printcampaignphotouniqueid(printcampaignphotouniqueid={0}) SET p.printcampaignphotoname = {1}")
-	void editPhotoName(String printcampaignphotouniqueid, String printcampaignphotoname);
-	
-	@Query("START p = node:printcampaignphotouniqueid(printcampaignphotouniqueid={0}) SET p.description = {1}")
-	void editPhotoDescription(String printcampaignphotouniqueid, String description);*/
-
 }

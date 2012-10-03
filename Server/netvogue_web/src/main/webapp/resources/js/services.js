@@ -784,24 +784,40 @@ angular.module('netVogue.services', []).
     		stylesheetname = temp.stylesheetname;
     		angular.copy(temp.styles, styles);
     	},
-    	savestyle: function(label, seasonname, photoid) {
-    		var datatosend = {
-    				"photoname" : label,
-    				"seasonname": seasonname,
-    				"photoid"	: photoid
-    		};
+    	createstyle: function(style) {
     		var config = {
-    				method: "POST",
-    				data: datatosend,
-                    url: "stylesheet/editphotoinfo"
+        			method: "POST",
+        			data: style,
+                    url: "stylesheet/createstyle"
                 };
-            return $http(config);
+        		return $http(config);
+    	},
+    	updatestyle: function(style) {
+    		var config = {
+        			method: "POST",
+        			data: style,
+                    url: "stylesheet/editstyle"
+                };
+        		return $http(config);
+    	},
+    	updatestyleslocally: function(style) {
+    		var index=0;
+    		for(index=0; index <  styles.length; index++) {
+    			if(styles[index].galleryid == style.styleid) {
+    				styles[index] = style;
+    				break;
+    			}
+    		}
+    		if(index == styles.length) {
+    			styles.push(style);
+    		}
+    			
     	},
     	deletestyle: function(photoid) {
     		var config = {
     			method: "POST",
     			data: photoid,
-                url: "stylesheet/deletephoto"
+                url: "stylesheet/deletestyle"
             };
     		return $http(config);
     	},
@@ -876,7 +892,7 @@ angular.module('netVogue.services', []).
         	  //galleries.push(angular.copy(galleriesdata));
           }
       },
-      setstylelocally: function(data, routeparams) {
+      setstyleslocally: function(data, routeparams) {
     	  if (angular.isUndefined(routeparams.profileid)) {
     		  mystylesheet.setstyles(data);
           } else {

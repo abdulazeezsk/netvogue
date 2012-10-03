@@ -54,8 +54,8 @@
 				<ul class="thumbnails">
 					<li ng-repeat="collection in photogallery">
 						<div class="view view-first">
-							<a ng-href="#/{{collection.uniqueid}}"> <img
-								ng-src="{{collection.thumbnail_url}}" alt=""></a>
+							<a ng-href="#/viewcollection?id={{collection.uniqueid}}&&galleryid={{galleryid}}"> 
+							<img ng-src="{{collection.thumbnail_url}}" alt=""></a>
 							<div class="mask"></div>
 							<div class="content">
 								<div class="mask">

@@ -12,7 +12,6 @@ import org.springframework.security.core.GrantedAuthority;
 //Generic
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 //Base class for boutique and Brand

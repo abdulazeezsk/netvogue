@@ -9,6 +9,15 @@ public class PhotoWeb {
     String thumbnail_url;
     String left_url;
     
+    public PhotoWeb() {
+    	
+    }
+    public PhotoWeb(String uniqueid, String mainlink, String thumblink, String leftlink) {
+    	this.uniqueid 		= uniqueid;
+    	this.piclink		= mainlink;
+    	this.thumbnail_url	= thumblink;
+    	this.left_url		= leftlink;
+    }
 	public String getUniqueid() {
 		return uniqueid;
 	}

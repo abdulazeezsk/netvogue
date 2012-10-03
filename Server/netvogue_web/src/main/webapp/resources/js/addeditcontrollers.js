@@ -266,18 +266,18 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 	};
 }
 
-function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
+function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile, srvstylesheet, mystylesheet) {
 
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
 	if(!$scope.isMyProfile) {
-		$location.url($routeParams.profileid + "/collections");
+		$location.url($routeParams.profileid + "/stylesheets");
 	}
 	
 	if($scope.$parent.iambrand == false) {
 		$location.url("stylesheets");
 	}
 	
-	$scope.$parent.title	= "Add Collection";
+	$scope.$parent.title	= "Add Style";
     $scope.backButton = currentvisitedprofile.getBackHistory();
     
     $scope.stylesheetid = "";
@@ -288,55 +288,106 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile) {
 	if (!angular.isUndefined($routeParams.cat)) {
 		$scope.category = $routeParams.cat;
 	}
+	if (!angular.isUndefined($routeParams.styleid)) {
+		$scope.editstyleid = $routeParams.styleid;
+	}
 	
+	$scope.showStylePane = true;
+	$scope.newstyle = new netvogue.stylejsonrequest($scope.stylesheetid);
+	$scope.stylesizes = netvogue.defaultstylesizes;
 	$scope.existingfiles = [];
-	$scope.newfiles = [];
-    $scope.styles = [
-	                   {
-	                       "stylelistitemid": "styleId",
-	                       "stylename": "Studded Winston",
-	                       "stylebrandname": "Calvin Klien",
-	                       "styleseason": "Spring 2012",
-	                       "styledeliverydate": "25/04/2012",
-	                       "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-	                       "styleprice": "5000",
-	                       "stylecoverpic": "http://placehold.it/90x119"
-
-	                   },
-                       {
-                           "stylelistitemid": "styleId",
-                           "stylename": "Studded Winston",
-                           "stylebrandname": "Calvin Klien",
-                           "styleseason": "Spring 2012",
-                           "styledeliverydate": "25/04/2012",
-                           "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-                           "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/90x119"
-
-                       },
-                       {
-                           "stylelistitemid": "styleId",
-                           "stylename": "Smith trench",
-                           "stylebrandname": "Calvin Klien",
-                           "styleseason": "Spring 2012",
-                           "styledeliverydate": "25/04/2012",
-                           "styledescription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-                           "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/90x119"
-
-                       }
-                       ];
-    $scope.linesheets = [
-	                   {
-	                       "linesheetlistitemid": "linesheetId",
-	                       "linesheetbrandname": "Calvin Klien",
-	                       "linesheetseason": "Spring 2012",
-	                       "linesheetdeliverydate": "25/04/2012",
-	                       "linesheetcoverpic": "http://placehold.it/100x130"
-
-	                   }
-                       ];
-
+	
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvstylesheet.getname($routeParams);
+	    $scope.stylesheetname  	= srvstylesheet.getstylesheetname($routeParams);
+	    $scope.styles			= srvstylesheet.getstyles($routeParams);
+	    if(!angular.isUndefined($routeParams.styleid)) {
+	    	for(var i=0; i < $scope.styles.length; i++) {
+	    		if($scope.editstyleid == $scope.styles[i].styleid) {
+	    			$scope.editstyle($scope.styles[i]);
+	    			break;
+	    		}
+	    	}
+	    }
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    srvstylesheet.styles($routeParams, $scope.stylesheetid, "").success(function(data) {
+    	srvstylesheet.setstyleslocally(data, $routeParams);
+    	$scope.updatedata();
+    }).error(function(data) {
+    	
+    });
+    
+	$scope.createstyle	= function() {
+		//Add sizes
+		for(var i=0;i < $scope.stylesizes.length;i++) {
+			if($scope.stylesizes[i].available == true) {
+				$scope.newstyle.availableSizes.push($scope.stylesizes[i].size);
+			}
+		}
+		
+		//Add Images
+		for(var i=0;i < $scope.existingfiles.length;i++) {
+			$scope.newstyle.availableImages.push($scope.existingfiles[i].uniqueid);
+		}
+		
+		//Add colors
+		//Add this logic here
+		
+		mystylesheet.createstyle($scope.newstyle).success(function(data) {
+			//Add this to styles locally...
+			if(data.status == true) {
+				mystylesheet.updatestyleslocally(data.style);
+				$scope.styles	= srvstylesheet.getstyles($routeParams);
+				alert("Created style successfully" + data.status);
+			} else {
+				alert("error" + data.status + data.error);
+			}
+			$scope.exitstylepane();
+		}).error(function(data) {
+			
+		});
+	};
+	
+	$scope.exitstylepane = function() {
+		$scope.newstyle.empty();
+		$scope.existingfiles = [];
+	};
+	
+	$scope.editstyle   = function(style) {
+		//Convert this to $scope.newstyle and open edit window for this...
+		$scope.newstyle.copy(style);
+		$scope.existingfiles = style.availableImages;
+	};
+	
+	$scope.updatestyle = function() {
+		for(var i=0;i < $scope.existingfiles.length;i++) {
+			$scope.newstyle.availableImages.push($scope.existingfiles[i].uniqueid);
+		}
+		mystylesheet.updatestyle($scope.newstyle).success(function(data) {
+			if(data.status == true) {
+				mystylesheet.updatestyleslocally(data.style);
+				$scope.styles	= srvstylesheet.getstyles($routeParams);
+				alert("Updated successfully" + data.status);
+			} else {
+				alert("error" + data.status + data.error);
+			}
+			$scope.exitstylepane();
+		}).error(function(data) {
+			
+		});
+	};
+	
+	$scope.deletestyle = function(styleid) {
+		mystylesheet.deletestyle(styleid).success(function(data) {
+			mystylesheet.deletestyleslocally(styleid);
+			$scope.styles	= srvstylesheet.getstyles($routeParams);
+		}).error(function(data) {
+			alert("error: " + data.error);
+		});
+	};    
 }
 function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile) {
 

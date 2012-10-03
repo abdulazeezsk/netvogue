@@ -3,30 +3,30 @@ package org.netvogue.server.neo4japi.common;
 import org.netvogue.server.neo4japi.common.ProductLineSizes;
 
 public enum ProductLines {
-	WOMENS_RTW(	"Womens RTW",	CategoryType.APPAREL, ProductLineSizes.Handbag),
-	MENS_RTW(	"Mens RTW", 	CategoryType.APPAREL, ProductLineSizes.Handbag),
-	DENIM(		"Denim", 		CategoryType.APPAREL, ProductLineSizes.Handbag),
-	OUTER_WEAR(	"Outerwear", 	CategoryType.APPAREL, ProductLineSizes.Handbag),
-	ACTIVE_WEAR("Activewear", 	CategoryType.APPAREL, ProductLineSizes.Handbag),//Yoga
-	LINGERIE(	"Lingerie", 	CategoryType.APPAREL, ProductLineSizes.Handbag),
-	SWIMWEAR(	"Swimwear", 	CategoryType.APPAREL, ProductLineSizes.Handbag),
-	KIDS(		"Kids", 		CategoryType.APPAREL, ProductLineSizes.Handbag),
-	WOMENS_SHOE("Womens Shoe", 	CategoryType.SHOES,	  ProductLineSizes.Handbag),
-	MENS_SHOE(	"Mens Shoe", 	CategoryType.SHOES,   ProductLineSizes.Handbag),
-	MENS_BAGS(	"Mens Bags", 	CategoryType.HANDBAGS,ProductLineSizes.Handbag),
-	HANDBAGS(	"Handbags", 	CategoryType.HANDBAGS,ProductLineSizes.Handbag),
-	WATCHES(	"Watches", 		CategoryType.WATCHES, ProductLineSizes.Handbag),
-	JEWELLERY(	"Jewelry", 		CategoryType.OTHERS,  ProductLineSizes.Handbag),
-	HATS(		"Hats", 		CategoryType.OTHERS,  ProductLineSizes.Handbag),
-	LUGGAGE(	"Luggage", 		CategoryType.OTHERS,  ProductLineSizes.Handbag),
-	GIFTS(		"Gifts", 		CategoryType.OTHERS,  ProductLineSizes.Handbag),
-	CANDLES(	"Candles", 		CategoryType.OTHERS,  ProductLineSizes.Handbag);
+	WOMENS_RTW(	"Womens RTW",	CategoryType.APPAREL, new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	MENS_RTW(	"Mens RTW", 	CategoryType.APPAREL, new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	DENIM(		"Denim", 		CategoryType.APPAREL, new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	OUTER_WEAR(	"Outerwear", 	CategoryType.APPAREL, new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	ACTIVE_WEAR("Activewear", 	CategoryType.APPAREL, new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	LINGERIE(	"Lingerie", 	CategoryType.APPAREL, new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	SWIMWEAR(	"Swimwear", 	CategoryType.APPAREL, new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	KIDS(		"Kids", 		CategoryType.APPAREL, new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	WOMENS_SHOE("Womens Shoe", 	CategoryType.SHOES,	  new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	MENS_SHOE(	"Mens Shoe", 	CategoryType.SHOES,   new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	MENS_BAGS(	"Mens Bags", 	CategoryType.HANDBAGS,new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	HANDBAGS(	"Handbags", 	CategoryType.HANDBAGS,new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	WATCHES(	"Watches", 		CategoryType.WATCHES, new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	JEWELLERY(	"Jewelry", 		CategoryType.OTHERS,  new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	HATS(		"Hats", 		CategoryType.OTHERS,  new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	LUGGAGE(	"Luggage", 		CategoryType.OTHERS,  new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	GIFTS(		"Gifts", 		CategoryType.OTHERS,  new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	CANDLES(	"Candles", 		CategoryType.OTHERS,  new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE});
 
 	private  String desc;
 	private  CategoryType category;
-	private  ProductLineSizes sizes;
+	private  ProductLineSizes[] sizes;
 	
-	ProductLines(String desc, CategoryType category, ProductLineSizes productSizes) {
+	ProductLines(String desc, CategoryType category, ProductLineSizes[] productSizes) {
 		this.desc 		= desc;
 		this.category	= category;
 		this.sizes 		= productSizes;
@@ -40,7 +40,7 @@ public enum ProductLines {
 		return category;
 	}
 	
-	public ProductLineSizes getProductLineSizes() {
+	public ProductLineSizes[] getProductLineSizes() {
 		return sizes;
 	}
 	

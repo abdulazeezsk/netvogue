@@ -8,6 +8,7 @@ public enum CategoryType {
    	OTHERS("OTHERS");
    	
    	String desc;
+   	StyleSize size;
 	CategoryType(String desc) {
 		this.desc 	= desc;
 	}

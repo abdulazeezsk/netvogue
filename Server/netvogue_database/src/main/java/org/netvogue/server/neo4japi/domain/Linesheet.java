@@ -36,7 +36,7 @@ public class Linesheet {
 	User	createdBy;
 	
 	@RelatedTo(type="LS_STYLE", direction=Direction.OUTGOING)
-	@Fetch Set<CollectionPhoto>	styles =  new HashSet<CollectionPhoto>();
+	@Fetch Set<Style>	styles =  new HashSet<Style>();
 	
 	public Linesheet() {
 		
@@ -82,7 +82,7 @@ public class Linesheet {
 		this.deliveryDate = deliveryDate;
 	}
 
-	public void setStyles(Set<CollectionPhoto> styles) {
+	public void setStyles(Set<Style> styles) {
 		this.styles = styles;
 	}
 
@@ -118,15 +118,15 @@ public class Linesheet {
 		this.createdBy = createdBy;
 	}
 
-	public Set<CollectionPhoto> getStyles() {
+	public Set<Style> getStyles() {
 		return styles;
 	}
 	
-	public void addStyles(CollectionPhoto newPhoto) {
+	public void addStyles(Style newStyle) {
 		if(0 == styles.size()) {
-			setProfilePicLink(newPhoto.getCollectionphotouniqueid());
+			setProfilePicLink(newStyle.getStyleid());
 		}
-		styles.add(newPhoto);
+		styles.add(newStyle);
 	}
 	
 	@Override

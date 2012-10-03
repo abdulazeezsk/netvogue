@@ -1,7 +1,7 @@
 <ul class="thumbnails" ui-sortable ng-model="existingfiles">
 	<li class="span2" ng-repeat="style in existingfiles| limitTo:4">
 		<div class="thumbnail">
-			<img ng-src={{style}} alt="">
+			<img ng-src={{style.thumnail_url}} alt="">
 			<div class="caption">
 				<p>
 					<span class="fileinput-button addimg"><a style="font-weight:bold;text-decoration:none;">Remove</a>
@@ -13,14 +13,14 @@
 	<li class="span2" ng-repeat="style in newfiles| limitTo:4">
 		<div class="thumbnail">
 			<img ng-src={{style}} alt="">
-			<div class="caption">
-				<p>
-					<span class="fileinput-button addimg"><a style="font-weight:bold;text-decoration:none;">Add Style</a>
-						<input id="styleupload" type="file" name="files[]" multiple
-						onchange="angular.element(this).scope().filesadded(this)">
-					</span> 
-				</p>
-			</div>
 		</div>
 	</li>
+	<div class="caption">
+		<p>
+			<span class="fileinput-button addimg"><a style="font-weight:bold;text-decoration:none;">Add Style</a>
+				<input id="styleupload" type="file" name="files[]" multiple data-url="stylesheet/addstyleimages"
+				onchange="angular.element(this).scope().filesadded(this)">
+			</span> 
+		</p>
+	</div>
 </ul>

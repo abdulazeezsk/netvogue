@@ -856,75 +856,54 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
 	$scope.searchFilter = new netvogue.searchFilter();
 }
 
-function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile) {
+function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, srvstylesheet, mystylesheet) {
 
 	$scope.$parent.title = 'Styles';
 
-	$scope.entityname = currentvisitedprofile.getEntityName();
-	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
-
+	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
+	if(!$scope.isMyProfile) {
+		$location.url($routeParams.profileid + "/stylesheets");
+	}
+	
+	if($scope.$parent.iambrand == false) {
+		$location.url("stylesheets");
+	}
+	
+    $scope.stylesheetid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.stylesheetid = $routeParams.id;
+	}
+	$scope.category = "";
+	if (!angular.isUndefined($routeParams.cat)) {
+		$scope.category = netvogue.getparentcategory($routeParams.cat);
+	}
+	
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	$scope.searchFilter = new netvogue.searchFilter();
 	
-	$scope.stylesseason = {
-		"seasonname" : "Spring 2012"
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvstylesheet.getname($routeParams);
+	    $scope.stylesheetname  	= srvstylesheet.getstylesheetname($routeParams);
+	    $scope.styles			= srvstylesheet.getstyles($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    srvstylesheet.styles($routeParams, $scope.stylesheetid, "").success(function(data) {
+    	srvstylesheet.setstyleslocally(data, $routeParams);
+    	$scope.updatedata();
+    }).error(function(data) {
+    	
+    });
+    
+	$scope.deletestyle = function(styleid) {
+		mystylesheet.deletestyle(styleid).success(function(data) {
+			mystylesheet.deletestyleslocally(styleid);
+			$scope.styles	= srvstylesheet.getstyles($routeParams);
+		}).error(function(data) {
+			alert("error: " + data.error);
+		});
 	};
-	$scope.styles = [ {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Studded Winston",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	}, {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	}, {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	}, {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	}, {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	}, {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/220x320"
-
-	} ];
-
 }
 
 function MyCtrlLinesheets($scope, $routeParams, currentvisitedprofile, srvlinesheet, mylinesheet) {

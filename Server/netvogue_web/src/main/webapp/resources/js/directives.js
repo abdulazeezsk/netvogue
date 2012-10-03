@@ -165,6 +165,7 @@ angular.module('netVogue.directives', []).
 }).directive('styleuploadPlugin', function() {
 	var linkFn;
 	linkFn = function(scope, element, attrs) {
+		scope.newfiles = [];
 		var addfiles = function(files) {
 			scope.newfiles = [];
 			for (var i = 0; i < files.length; i++) {
@@ -194,7 +195,6 @@ angular.module('netVogue.directives', []).
 			for (var i = 0; i < remainingimages; i++) {
 				scope.newfiles.push("http://placehold.it/130X151");
 			}
-			
 		};
 		checkremainingfiles();
 		
@@ -205,15 +205,15 @@ angular.module('netVogue.directives', []).
 				addfiles(element.files);
 			});
 		};
-		/*var galleryid = {
-				"galleryid" : scope.galleryid
-		};*/
+		var stylesheetid = {
+				"stylesheetid" : scope.stylesheetid
+		};
 		angular.element(element).ready(function() {
 			jQuery('#styleupload').fileupload({
 		        dataType: 'json',
 		        singleFileUploads: false,
 		        limitMultiFileUploads: 4,
-		        //formData: galleryid,
+		        formData: stylesheetid,
 		        progressall: function (e, data) {
 		        	var progtemp = parseInt(data.loaded / data.total * 100, 10);
 		        	scope.$apply(function(scope) {
@@ -229,9 +229,12 @@ angular.module('netVogue.directives', []).
 		        	scope.$apply(function(scope) {
 		        		if(data.result.status == true) {
 		        			for(var i=0; i < data.result.filesuploaded.length; i++){
+		        				alert(data.result.filesuploaded[i]);
 		        				scope.existingfiles.push(data.result.filesuploaded[i]);
+		        				alert(scope.existingfiles.length);
 		        			};
 		        			scope.newfiles = [];
+		        			checkremainingfiles();
 		        		} else {
 		        			alert("error");
 		        		}
@@ -251,11 +254,8 @@ angular.module('netVogue.directives', []).
 		transclude	: true,
 		restrict	: 'A',
 		scope		: {
-			newfiles		: '=newFiles',
-			existingfiles	: '=ngModel'
-			/*styleid			: '=styleId',
-			updatedata		: '&updateData',
-			deletedata		: '&deleteData'*/
+			existingfiles	: '=ngModel',
+			stylesheetid	: '=stylesheetId',
 		},
 		link		: linkFn
 	};	

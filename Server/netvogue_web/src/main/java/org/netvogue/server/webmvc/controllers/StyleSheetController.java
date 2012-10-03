@@ -8,24 +8,25 @@ import java.util.Map;
 import java.util.Set;
 
 import org.netvogue.server.aws.core.ImageType;
+import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
+import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ProductLines;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.Category;
-import org.netvogue.server.neo4japi.domain.CollectionPhoto;
+import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
-import org.netvogue.server.neo4japi.service.CollectionService;
 import org.netvogue.server.neo4japi.service.StylesheetService;
 import org.netvogue.server.neo4japi.service.UserService;
-import org.netvogue.server.webmvc.domain.CollectionJSONRequest;
-import org.netvogue.server.webmvc.domain.Collections;
-import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
-import org.netvogue.server.webmvc.domain.PhotoInfoJsonRequest;
 import org.netvogue.server.webmvc.domain.PhotoWeb;
 import org.netvogue.server.webmvc.domain.Photos;
+import org.netvogue.server.webmvc.domain.StyleJSONResponse;
+import org.netvogue.server.webmvc.domain.StyleRequest;
+import org.netvogue.server.webmvc.domain.StyleResponse;
+import org.netvogue.server.webmvc.domain.Styles;
 import org.netvogue.server.webmvc.domain.Stylesheet;
 import org.netvogue.server.webmvc.domain.StylesheetJsonRequest;
 import org.netvogue.server.webmvc.domain.Stylesheets;
@@ -44,6 +45,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
+//This must be implemented as queue, as maximum number of images are only four - Azeez
+//@SessionAttributes("AddedPhotos") Implement this, for now, am sending all id's to client and getting them back again
 public class StyleSheetController {
 
 	@Autowired NetvogueUserDetailsService 	userDetailsService;
@@ -57,8 +60,8 @@ public class StyleSheetController {
 
 	@RequestMapping(value="getstylesheets", method=RequestMethod.GET)
 	public @ResponseBody Stylesheets GetStylesheets(@ModelAttribute("profileid") String profileid, 
-												@RequestParam("stylesheetname") String stylesheetname,
-												@RequestParam("category") String categoryname) {
+												@RequestParam(value="stylesheetname", required=false) String stylesheetname,
+												@RequestParam(value="category", required=false) String categoryname) {
 		System.out.println("Get Stylesheets: " + stylesheetname);
 		Stylesheets stylesheets = new Stylesheets();
 		User loggedinUser = userDetailsService.getUserFromSession();
@@ -86,39 +89,45 @@ public class StyleSheetController {
 		return stylesheets;
 	}
 	
-	@RequestMapping(value="stylesheet/getphotos", method=RequestMethod.GET)
-	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
-										  @RequestParam("galleryid") String galleryid,
-										  @RequestParam("photoname") String photoname
+	@RequestMapping(value="stylesheet/getstyles", method=RequestMethod.GET)
+	public @ResponseBody Styles GetStyles(@ModelAttribute("profileid") String profileid, 
+										  @RequestParam("stylesheetid") String stylesheetid,
+										  @RequestParam(value="searchquery", required=false) String searchquery
 											 ) {
-		System.out.println("Get collection Photos: " + photoname);
-		Photos photos = new Photos();
-		/*User loggedinUser = userDetailsService.getUserFromSession();
-		if(galleryid.isEmpty()) {
-			return photos;
+		System.out.println("Get Styles: " + searchquery);
+		Styles styles = new Styles();
+		User loggedinUser = userDetailsService.getUserFromSession();
+		if(stylesheetid.isEmpty()) {
+			return styles;
 		}
 		
 		if(profileid.isEmpty()) {
-			photos.setName(loggedinUser.getName());
-			photos.setGalleryname(collectionService.getCollection(galleryid).getCollectionseasonname());
-			Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
-			Iterable<CollectionPhoto> dbPhotos;
-			if(photoname.isEmpty()) {
-				dbPhotos = collectionService.getPhotos(galleryid);
+			styles.setName(loggedinUser.getName());
+			//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
+			org.netvogue.server.neo4japi.domain.Stylesheet s = stylesheetService.getStylesheet(stylesheetid);
+			if(null == s)
+				return styles;
+			styles.setStylesheetname(s.getStylesheetname());
+			Set<StyleResponse> stylesTemp = new LinkedHashSet<StyleResponse>();
+			Iterable<Style> dbStyles;
+			if(null == searchquery || searchquery.isEmpty()) {
+				dbStyles = stylesheetService.getStyles(stylesheetid);
 			} else {
-				dbPhotos = collectionService.searchPhotoByName(galleryid, photoname);
+				//Change this after implementing query
+				//dbStyles = collectionService.searchPhotoByName(stylesheetid, photoname);
+				dbStyles = stylesheetService.getStyles(stylesheetid);
 			}
-			if(null == dbPhotos) {
-				return photos;
+			if(null == dbStyles) {
+				return styles;
 			}
-			Iterator<CollectionPhoto> first = dbPhotos.iterator();
+			Iterator<Style> first = dbStyles.iterator();
 			while ( first.hasNext() ){
-				CollectionPhoto dbPhoto = first.next() ;
-				photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
+				Style dbStyle = first.next() ;
+				stylesTemp.add(conversionService.convert(dbStyle, StyleResponse.class));
 			}
-			photos.setPhotos(photosTemp);
-		}*/
-		return photos;
+			styles.setStyles(stylesTemp);
+		}
+		return styles;
 	}
 	
 	@RequestMapping(value="stylesheet/create", method=RequestMethod.POST)
@@ -192,19 +201,49 @@ public class StyleSheetController {
 		return response;
 	}
 	
-	/*@RequestMapping(value="stylesheet/addphotos", method=RequestMethod.POST)
-	public @ResponseBody UploadedFileResponse AddPhotostoGallery(Model model, 
-			@RequestParam("files[]") List<MultipartFile> fileuploads, @RequestParam("galleryid") String galleryId) {
-		System.out.println("Add photos: Gallery Id:" + galleryId + "No:of Photos:" + fileuploads.size());
+	@RequestMapping(value ="stylesheet/createstyle",method=RequestMethod.POST)
+	public @ResponseBody StyleJSONResponse CreateStyle(@RequestBody StyleRequest newStyle) throws Exception {
+		
+			System.out.println("Create new Style" + newStyle.getStylename());
+			String error = "";
+			StyleJSONResponse response = new StyleJSONResponse();
+			
+			User loggedinUser = userDetailsService.getUserFromSession();
+			if(loggedinUser.getUserType() != USER_TYPE.BRAND) {
+				response.setError("Only brands can create styles");
+				return response;
+			}
+			org.netvogue.server.neo4japi.domain.Stylesheet stylesheet = stylesheetService.getStylesheet(newStyle.getStylesheetid());
+			if(null == stylesheet) {
+				response.setError("No stylesheet present with this id");
+				return response;
+			}
+			
+			Style createdStyle = conversionService.convert(newStyle, Style.class);
+			stylesheet.addStyles(createdStyle);
+			if(ResultStatus.SUCCESS == stylesheetService.SaveStylesheet(stylesheet, error)) {  
+				response.setStatus(true);
+				response.setStyle(conversionService.convert(createdStyle, StyleResponse.class));
+			}
+			else
+				response.setError(error);
+			
+			return response;
+	}
+	
+	@RequestMapping(value="stylesheet/addstyleimages", method=RequestMethod.POST)
+	public @ResponseBody UploadedFileResponse AddImagestoStyle(Model model, 
+			@RequestParam("files[]") List<MultipartFile> fileuploads, @RequestParam("stylesheetid") String stylesheetId) {
+		System.out.println("Add photos: Stylesheet Id:" + stylesheetId + "No:of Photos:" + fileuploads.size());
 		UploadedFileResponse response = new UploadedFileResponse();
 		
-		if(galleryId.isEmpty()) {
-			response.setError("Gallery Id is empty");
+		if(stylesheetId.isEmpty()) {
+			response.setError("Stylesheet Id is empty");
 			return response;
 		}
-		org.netvogue.server.neo4japi.domain.Collection collection = collectionService.getCollection(galleryId);
-		if(null == collection) {
-			response.setError("No collection is present with this id");
+		org.netvogue.server.neo4japi.domain.Stylesheet stylesheet = stylesheetService.getStylesheet(stylesheetId);
+		if(null == stylesheet) {
+			response.setError("No stylesheet present with this id");
 			return response;
 		}
 		
@@ -212,80 +251,80 @@ public class StyleSheetController {
 		
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
-			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.COLLECTION);
+			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.STYLE);
 			String imagePath = (String)uploadMap.get(UploadManager.QUERY_STRING);
-			CollectionPhoto newPhoto = new CollectionPhoto((String)uploadMap.get(UploadManager.FILE_ID));
-			collection.addPhotos(newPhoto);
+			PhotoWeb newPhoto = new PhotoWeb();
+			newPhoto.setThumbnail_url(imagePath);
+			String lefturl = uploadManager.getQueryString((String)uploadMap.get(UploadManager.FILE_ID), ImageType.STYLE, Size.SLeft);
+			newPhoto.setLeft_url(lefturl);
+			newPhoto.setUniqueid((String)uploadMap.get(UploadManager.FILE_ID));
+			JSONFileData.add(newPhoto);
+			if(JSONFileData.size() == Constants.MAX_IMAGES_IN_STYLE) {
+				break;
+			}
+		}
+		response.setFilesuploaded(JSONFileData);
+		response.setStatus(true);
+		return response;
+	}
+	
+	//Check if there is better of response -- Azeez
+	@RequestMapping(value ="stylesheet/editstyle",method=RequestMethod.POST)
+	public @ResponseBody StyleJSONResponse EditStyle(@RequestBody StyleRequest newStyle) throws Exception {
+		
+			System.out.println("Edit Style" + newStyle.getStylename());
+			String error = "";
+			StyleJSONResponse response = new StyleJSONResponse();
 			
-			JSONFileData.add(conversionService.convert(newPhoto, PhotoWeb.class));
-		}
-		String error ="";
-		if(ResultStatus.SUCCESS == collectionService.SaveCollection(collection, error)) {  
-			response.setStatus(true);
-			response.setFilesuploaded(JSONFileData);
-		}
-		else
-			response.setError(error);
-		return response;
+			User loggedinUser = userDetailsService.getUserFromSession();
+			if(loggedinUser.getUserType() != USER_TYPE.BRAND) {
+				response.setError("Only brands can create and edit styles");
+				return response;
+			}
+			org.netvogue.server.neo4japi.domain.Stylesheet stylesheet = stylesheetService.getStylesheet(newStyle.getStylesheetid());
+			if(null == stylesheet) {
+				response.setError("No stylesheet present with this id");
+				return response;
+			}
+			
+			//Other way of doing this is using Cypher query. Use map to send all the properties of node
+			Style styleToEdit = conversionService.convert(newStyle, Style.class);
+			Set<Style> allStyles = stylesheet.getStyles();
+			String styleId = newStyle.getStyleid();
+			boolean foundStyle = false;
+			for(Style style: allStyles) {
+				if(style.getStyleid() == styleId) {
+					style.Copy(styleToEdit);
+					foundStyle = true;
+					break;
+				}
+			}
+			if(!foundStyle) {
+				response.setError("No style present with this id");
+				return response;
+			}
+				
+			if(ResultStatus.SUCCESS == stylesheetService.SaveStylesheet(stylesheet, error)) {  
+				response.setStatus(true);
+				response.setStyle(conversionService.convert(styleToEdit, StyleResponse.class));
+			}
+			else
+				response.setError(error);
+			
+			return response;
 	}
 	
-	@RequestMapping(value="stylesheet/editphotoinfo", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse EditPhotoInfo(@RequestBody PhotoInfoJsonRequest photoInfo) {
-		System.out.println("Edit Photo Info:" + photoInfo.toString());
-		String error = "";
-		JsonResponse response = new JsonResponse();
-		String photoId = photoInfo.getPhotoid();
-		if(null == photoId || photoId.isEmpty())
-			response.setError("photoid is empty");
-		if(ResultStatus.SUCCESS == collectionService.editPhotoInfo(photoInfo.getPhotoid(), photoInfo.getPhotoname(), 
-													photoInfo.getSeasonname(), error))
-			response.setStatus(true);
-		else
-			response.setError(error);
-		
-		return response;
-	}
 	
-	@RequestMapping(value="stylesheet/editphotoname", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse EditPhotoName(@RequestBody JsonRequest request) {
-		System.out.println("Edit Photo Name");
-		String error = "";
-		
-		JsonResponse response = new JsonResponse();
-		
-		if(ResultStatus.SUCCESS == collectionService.editPhotoName(request.getId(), request.getValue(), error))   
-			response.setStatus(true);
-		else
-			response.setError(error);
-		
-		return response;
-	}
-	
-	@RequestMapping(value="stylesheet/editphotoseasonname", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse EditPhotoSeasonName(@RequestParam("photoname") String photoname,
-														  @RequestParam("seasonname") String seasonname, 
-														  @RequestParam("photoid") String photoid) {
-		System.out.println("Edit Photo Name");
-		String error = "";
-		
-		JsonResponse response = new JsonResponse();
-		
-		if(ResultStatus.SUCCESS == collectionService.editPhotoInfo(photoid, photoname, seasonname, error))   
-			response.setStatus(true);
-		else
-			response.setError(error);
-		
-		return response;
-	}
-
-	@RequestMapping(value="stylesheet/deletephoto", method=RequestMethod.POST)
+	//Change these things once the whole application is completed
+	//All these queries must be changed, as anyone can delete these things if they just have userid Azeez
+	@RequestMapping(value="stylesheet/deletestyle", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeletePhoto(@RequestBody String photoid) {
 		System.out.println("Delete Photo:" + photoid);
 		String error = "";
 		
 		JsonResponse response = new JsonResponse();
 		if(!photoid.isEmpty()) {
-			if(ResultStatus.SUCCESS == collectionService.deletePhoto(photoid, error)) {  
+			if(ResultStatus.SUCCESS == stylesheetService.deleteStyle(photoid, error)) {  
 				response.setStatus(true);
 			}
 			else
@@ -295,5 +334,5 @@ public class StyleSheetController {
 		}
 		
 		return response;
-	}*/
+	}
 }

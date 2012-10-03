@@ -173,6 +173,8 @@ netvogue.getparentcategory = function(productlinename) {
 	for(var i=0;i < netvogue.defaultproductlines.length; i++) {
 		if(netvogue.defaultproductlines[i].productlinename == productlinename) {
 			return netvogue.defaultproductlines[i].category;
+		} else if(netvogue.defaultproductlines[i].category == productlinename) {
+			return netvogue.defaultproductlines[i].category;
 		}
 	}
 };
@@ -280,6 +282,53 @@ netvogue.stylesheetjsonrequest = function(name, category, id) {
 	this.category 	= category;
 };
 
+netvogue.stylejsonrequest = function(stylesheetid) {
+	this.stylesheetid	= stylesheetid;
+	this.styleid;
+	this.stylename 		= "isha"; 
+	this.styleno		= "1234";
+	this.description	= "First Style";
+	this.fabrication	= "Cotton";
+	this.price			= 10000;
+	this.availableSizes = [];
+	this.availableColors= [];
+	this.availableImages= [];
+	
+	this.empty = function() {
+		this.stylename = ""; 
+		this.styleno	= ""; 
+		this.description= "";
+		this.fabrication= "";
+		this.price		= "";
+		this.availableSizes = [];
+		this.availableColors= [];
+		this.availableImages= [];
+    };
+    
+    this.copy = function(existingstyle) {
+		this.stylesheetid	= stylesheetid;
+		this.styleid		= existingstyle.styleid;
+		this.stylename 		= existingstyle.stylename;
+		this.styleno		= existingstyle.styleno;
+		this.description	= existingstyle.description;
+		this.fabrication	= existingstyle.fabrication;
+		this.price			= existingstyle.price;
+		this.availableSizes = existingstyle.availableSizes;
+		this.availableColors= [];
+		this.availableImages= []; //This part is done from existing files
+    };
+};
+
+netvogue.stylesize = function(size) {
+	this.size = size;
+	this.available = false;
+};
+
+netvogue.defaultstylesizes = [
+                              new netvogue.stylesize("SMALL"),
+                              new netvogue.stylesize("MEDIUM"),
+                              new netvogue.stylesize("LARGE")
+                              ];
 /*************************************************************************/
 /************************End of*******************************************/
 /*******************Stylesheet Objects************************************/

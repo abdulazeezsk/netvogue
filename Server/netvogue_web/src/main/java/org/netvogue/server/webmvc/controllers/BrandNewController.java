@@ -2,19 +2,11 @@ package org.netvogue.server.webmvc.controllers;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
-
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +21,6 @@ import org.netvogue.server.neo4japi.domain.Brand;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
 import org.netvogue.server.neo4japi.service.BrandService;
 import org.netvogue.server.webmvc.domain.BoutiqueNew;
-import org.netvogue.server.webmvc.domain.BrandNew;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.UsersAvailable;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;

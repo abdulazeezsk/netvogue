@@ -1,6 +1,7 @@
 package org.netvogue.server.neo4japi.service;
 
 import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.neo4japi.domain.Stylesheet;
 import org.netvogue.server.neo4japi.repository.StylesheetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,27 @@ public class StylesheetServiceImpl implements StylesheetService {
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while deleting stylesheetId:" + stylesheetId + " - " + e.toString());
+			error = e.toString();
+			return ResultStatus.FAILURE;
+		}
+	}
+	
+	public Iterable<Style> getStyles(String stylesheetId) {
+		if(!stylesheetId.isEmpty()) {
+			return stylesheetRepo.getStyles(stylesheetId);
+		}
+		return null;
+	}
+	public ResultStatus deleteStyle(String styleId, String error)  {
+		if(null == styleId || styleId.isEmpty()){
+			error = "styleId is empty";
+			return ResultStatus.FAILURE;
+		}
+		try {
+			stylesheetRepo.deleteStyle(styleId);
+			return ResultStatus.SUCCESS;
+		} catch(Exception e) {
+			System.out.println("There was an error while deleting Style" + styleId + " - " + e.toString());
 			error = e.toString();
 			return ResultStatus.FAILURE;
 		}

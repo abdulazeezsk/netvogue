@@ -5,6 +5,6 @@ import org.netvogue.server.neo4japi.domain.*;
 //Spring specific
 import org.springframework.data.neo4j.repository.*;
 
-public interface StylesRepository extends GraphRepository<BrandStyles> {
+public interface StyleRepository extends GraphRepository<Style> {
 
 }

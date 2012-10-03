@@ -35,7 +35,7 @@ public class Stylesheet {
 	User	createdBy;
 	
 	@RelatedTo(type="SS_STYLE", direction=Direction.OUTGOING)
-	@Fetch Set<CollectionPhoto>	styles =  new HashSet<CollectionPhoto>();
+	@Fetch Set<Style>	styles =  new HashSet<Style>();
 	
 	public Stylesheet() {
 		
@@ -72,7 +72,7 @@ public class Stylesheet {
 		this.stylesheetname = stylesheetname;
 	}
 
-	public void setStyles(Set<CollectionPhoto> styles) {
+	public void setStyles(Set<Style> styles) {
 		this.styles = styles;
 	}
 
@@ -108,15 +108,22 @@ public class Stylesheet {
 		this.createdBy = createdBy;
 	}
 
-	public Set<CollectionPhoto> getStyles() {
+	public Set<Style> getStyles() {
 		return styles;
 	}
 	
-	public void addStyles(CollectionPhoto newPhoto) {
-		if(0 == styles.size()) {
-			setProfilePicLink(newPhoto.getCollectionphotouniqueid());
+	public Style getStyle(String styleid) {
+		for(Style style: styles) {
+			if(style.getStyleid() == styleid)
+				return style;
 		}
-		styles.add(newPhoto);
+		return null;
+	}
+	public void addStyles(Style newStyle) {
+		if(0 == styles.size()) {
+			setProfilePicLink(newStyle.getProfilePicLink());
+		}
+		styles.add(newStyle);
 	}
 	
 	@Override
