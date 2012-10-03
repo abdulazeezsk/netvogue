@@ -19,9 +19,11 @@ public class EditorialPhotoConverter implements Converter<EditorialPhoto, PhotoW
 		newPhoto.setSeasonname(source.getDescription());
 		newPhoto.setUniqueid(source.getEditorialphotouniqueid());
 		
+		String addlink	 = uploadManager.getQueryString(source.getEditorialphotouniqueid(), ImageType.EDITORIAL, Size.EAdd);
 		String thumblink = uploadManager.getQueryString(source.getEditorialphotouniqueid(), ImageType.EDITORIAL, Size.EThumb);
 		String mainlink = uploadManager.getQueryString(source.getEditorialphotouniqueid(), ImageType.EDITORIAL);
 		String leftlink = uploadManager.getQueryString(source.getEditorialphotouniqueid(), ImageType.EDITORIAL, Size.ELeft);
+		newPhoto.setAdd_url(addlink);
 		newPhoto.setThumbnail_url(thumblink);
 		newPhoto.setPiclink(mainlink);
 		newPhoto.setLeft_url(leftlink);

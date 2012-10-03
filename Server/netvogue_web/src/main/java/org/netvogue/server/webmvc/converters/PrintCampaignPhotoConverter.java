@@ -19,9 +19,11 @@ public class PrintCampaignPhotoConverter implements Converter<PrintCampaignPhoto
 		newPhoto.setSeasonname(source.getDescription());
 		newPhoto.setUniqueid(source.getPrintcampaignphotouniqueid());
 		
+		String addlink   = uploadManager.getQueryString(source.getPrintcampaignphotouniqueid(), ImageType.PRINT_CAMPAIGN, Size.PCAdd);
 		String thumblink = uploadManager.getQueryString(source.getPrintcampaignphotouniqueid(), ImageType.PRINT_CAMPAIGN, Size.PCThumb);
 		String mainlink = uploadManager.getQueryString(source.getPrintcampaignphotouniqueid(), ImageType.PRINT_CAMPAIGN);
 		String leftlink = uploadManager.getQueryString(source.getPrintcampaignphotouniqueid(), ImageType.PRINT_CAMPAIGN, Size.PCLeft);
+		newPhoto.setAdd_url(addlink);
 		newPhoto.setThumbnail_url(thumblink);
 		newPhoto.setPiclink(mainlink);
 		newPhoto.setLeft_url(leftlink);

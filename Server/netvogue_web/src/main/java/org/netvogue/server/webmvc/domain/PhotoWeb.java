@@ -5,6 +5,7 @@ public class PhotoWeb {
 	String label;
 	String seasonname;
 	String piclink;
+	String add_url;
     String thumbnail_url;
     String left_url;
     
@@ -43,5 +44,11 @@ public class PhotoWeb {
 	}
 	public void setLeft_url(String left_url) {
 		this.left_url = left_url;
+	}
+	public String getAdd_url() {
+		return add_url;
+	}
+	public void setAdd_url(String add_url) {
+		this.add_url = add_url;
 	}
 }

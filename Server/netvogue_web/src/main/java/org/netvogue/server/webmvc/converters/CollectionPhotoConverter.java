@@ -19,9 +19,11 @@ public class CollectionPhotoConverter implements Converter<CollectionPhoto, Phot
 		newPhoto.setSeasonname(source.getDescription());
 		newPhoto.setUniqueid(source.getCollectionphotouniqueid());
 		
+		String addlink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION, Size.CAdd);
 		String thumblink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION, Size.CThumb);
 		String mainlink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION);
 		String leftlink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION, Size.CLeft);
+		newPhoto.setAdd_url(addlink);
 		newPhoto.setThumbnail_url(thumblink);
 		newPhoto.setPiclink(mainlink);
 		newPhoto.setLeft_url(leftlink);
