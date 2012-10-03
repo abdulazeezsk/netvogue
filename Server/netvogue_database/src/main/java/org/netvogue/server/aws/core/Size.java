@@ -15,7 +15,7 @@ public enum Size {
 	GThumb(220, 150),
 	GLeft(130, 100),
 	GMain(450, 677),
-	PCAdd(220, 300),
+	PCAdd(220, 150),
 	PCThumb(220, 306),
 	PCLeft(130, 100),
 	PCMain(450, 677),
