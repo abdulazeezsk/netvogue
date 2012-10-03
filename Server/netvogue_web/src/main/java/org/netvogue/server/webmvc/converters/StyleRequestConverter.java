@@ -16,9 +16,11 @@ public class StyleRequestConverter implements Converter<StyleRequest, Style> {
 		newStyle.setAvailableImages(source.getAvailableImages());
 		Set<String>	availableSizes	= source.getAvailableSizes();
 		Set<ProductLineSizes>	sizes = new HashSet<ProductLineSizes>();
-		for(String size: availableSizes) {
-			ProductLineSizes productLineSize = ProductLineSizes.valueOf(size);
-			sizes.add(productLineSize);
+		if(null != availableSizes) {
+			for(String size: availableSizes) {
+				ProductLineSizes productLineSize = ProductLineSizes.valueOf(size);
+				sizes.add(productLineSize);
+			}
 		}
 		newStyle.setAvailableSizes(sizes);
 		newStyle.setDescription(source.getDescription());

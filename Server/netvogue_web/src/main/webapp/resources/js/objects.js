@@ -306,7 +306,6 @@ netvogue.stylejsonrequest = function(stylesheetid) {
     };
     
     this.copy = function(existingstyle) {
-		this.stylesheetid	= stylesheetid;
 		this.styleid		= existingstyle.styleid;
 		this.stylename 		= existingstyle.stylename;
 		this.styleno		= existingstyle.styleno;

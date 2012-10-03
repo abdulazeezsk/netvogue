@@ -133,8 +133,10 @@ public class Style {
 	}
 
 	public void setAvailableImages(Set<String> availableImages) {
-		for(String image: availableImages) {
-			addImages(image);
+		if(null != availableImages) {
+			for(String image: availableImages) {
+				addImages(image);
+			}
 		}
 	}
 

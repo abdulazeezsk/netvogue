@@ -170,12 +170,14 @@ angular.module('netVogue.directives', []).
 	var linkFn;
 	linkFn = function(scope, element, attrs) {
 		scope.newfiles = [];
+		var filesinprocess = 0;
 		var addfiles = function(files) {
 			scope.newfiles = [];
-			for (var i = 0; i < files.length; i++) {
-				if(3 == (i +  scope.existingfiles.length))
-		    		break;
+			var i;
+			for (i = 0; i < files.length; i++) {
 				scope.senttoserver = true;
+				if(4 == (i +  scope.existingfiles.length + filesinprocess))
+		    		break;
 		    	var loadingImage = window.loadImage(
 		    			files[i],
 		    	        function (img) {
@@ -188,12 +190,13 @@ angular.module('netVogue.directives', []).
 		    	}
 		    	scope.newfiles.push(loadingImage.src);
 		    }
+			filesinprocess = i;
 			checkremainingfiles();
 		};
 		
 		var checkremainingfiles = function() {
 			//Only four files can be added
-			var remainingimages = 4 - (scope.existingfiles.length + scope.newfiles.length);
+			var remainingimages = 4 - (scope.existingfiles.length + filesinprocess);
 			if(remainingimages < 0)
 				remainingimages = 0;
 			for (var i = 0; i < remainingimages; i++) {
@@ -234,13 +237,12 @@ angular.module('netVogue.directives', []).
 		        		if(data.result.status == true) {
 		        			if(true == scope.senttoserver) {
 			        			for(var i=0; i < data.result.filesuploaded.length; i++){
-			        				alert(data.result.filesuploaded[i].thumbnail_url);
 			        				scope.existingfiles.push(data.result.filesuploaded[i]);
-			        				alert(scope.existingfiles.length);
 			        			};
 			        			scope.senttoserver = false;
 			        			scope.newfiles = [];
 			        			checkremainingfiles();
+			        			filesinprocess = 0;
 		        			}
 		        		} else {
 		        			alert("error");
@@ -251,6 +253,7 @@ angular.module('netVogue.directives', []).
     	});
 		scope.deletephoto = function(index) {
 			scope.existingfiles.splice(index, 1);
+			scope.newfiles = [];
 			checkremainingfiles();
 		};
 		scope.updatedataToParent = function(label, seasonname, photoid) {
@@ -260,6 +263,7 @@ angular.module('netVogue.directives', []).
 		scope.progress = 0;
 		
 		scope.$watch('existingfiles', function() {
+			scope.newfiles = [];
 			checkremainingfiles();
 		});
 	};

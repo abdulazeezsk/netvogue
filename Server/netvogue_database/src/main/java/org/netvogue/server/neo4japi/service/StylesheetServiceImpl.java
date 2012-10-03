@@ -26,6 +26,19 @@ public class StylesheetServiceImpl implements StylesheetService {
 		}
 	}
 	
+	public ResultStatus SaveStyle(Style newStyle, String error) {
+		try {
+			//New Categories node will be created an relationship will also be added for this.
+			//Saving it through Template instead of boutiquerepo so that categories node can also be saved
+			neo4jTemplate.save(newStyle);
+			System.out.println("Saved Style Successfully");
+			return ResultStatus.SUCCESS;
+		} catch(Exception e) {
+			System.out.println("There was an error for" + newStyle.getStylename());
+			error = e.toString();
+			return ResultStatus.FAILURE;
+		}
+	}
 	public Stylesheet getStylesheet(String stylesheetId) {
 		//galleryRepo.findByPropertyValue(arg0, galleryId);
 		return stylesheetRepo.getStylesheet(stylesheetId);

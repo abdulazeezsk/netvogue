@@ -784,26 +784,23 @@ angular.module('netVogue.services', []).
     		stylesheetname = temp.stylesheetname;
     		angular.copy(temp.styles, styles);
     	},
-    	createstyle: function(style) {
+    	updatestyle: function(style, edit) { //Same for create style
+    		var request = "";
+    		if(edit)
+    			request = "editstyle";
+    		else
+    			request = "createstyle";
     		var config = {
         			method: "POST",
         			data: style,
-                    url: "stylesheet/createstyle"
-                };
-        		return $http(config);
-    	},
-    	updatestyle: function(style) {
-    		var config = {
-        			method: "POST",
-        			data: style,
-                    url: "stylesheet/editstyle"
+                    url: "stylesheet/" + request
                 };
         		return $http(config);
     	},
     	updatestyleslocally: function(style) {
     		var index=0;
     		for(index=0; index <  styles.length; index++) {
-    			if(styles[index].galleryid == style.styleid) {
+    			if(styles[index].styleid == style.styleid) {
     				styles[index] = style;
     				break;
     			}
@@ -824,7 +821,7 @@ angular.module('netVogue.services', []).
     	deletestyleslocally: function(id) {
     		var i=0;
     		for(i=0; i <  styles.length; i++) {
-    			if(styles[i].uniqueid == id) {
+    			if(styles[i].styleid == id) {
     				break;
     			}
     		}

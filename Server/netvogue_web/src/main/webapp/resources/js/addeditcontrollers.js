@@ -305,6 +305,7 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile, srvstyleshe
 	$scope.stylesizes = netvogue.defaultstylesizes;
 	$scope.filesadded = false;
 	$scope.existingfiles = [];
+	$scope.edit = false;
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvstylesheet.getname($routeParams);
@@ -328,8 +329,21 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile, srvstyleshe
     }).error(function(data) {
     	
     });
-    
-	$scope.createstyle	= function() {
+	
+	$scope.exitstylepane = function() {
+		$scope.newstyle.empty();
+		$scope.existingfiles = [];
+		$scope.edit = false;
+	};
+	
+	$scope.editstyle   = function(style) {
+		//Convert this to $scope.newstyle and open edit window for this...
+		$scope.newstyle.copy(style);
+		$scope.existingfiles = style.availableImages;
+		$scope.edit = true;
+	};
+	
+	$scope.updatestyle = function() {
 		//Add sizes
 		for(var i=0;i < $scope.stylesizes.length;i++) {
 			if($scope.stylesizes[i].available == true) {
@@ -345,37 +359,7 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile, srvstyleshe
 		//Add colors
 		//Add this logic here
 		
-		mystylesheet.createstyle($scope.newstyle).success(function(data) {
-			//Add this to styles locally...
-			if(data.status == true) {
-				mystylesheet.updatestyleslocally(data.style);
-				$scope.styles	= srvstylesheet.getstyles($routeParams);
-				alert("Created style successfully" + data.status);
-			} else {
-				alert("error" + data.status + data.error);
-			}
-			$scope.exitstylepane();
-		}).error(function(data) {
-			
-		});
-	};
-	
-	$scope.exitstylepane = function() {
-		$scope.newstyle.empty();
-		$scope.existingfiles = [];
-	};
-	
-	$scope.editstyle   = function(style) {
-		//Convert this to $scope.newstyle and open edit window for this...
-		$scope.newstyle.copy(style);
-		$scope.existingfiles = style.availableImages;
-	};
-	
-	$scope.updatestyle = function() {
-		for(var i=0;i < $scope.existingfiles.length;i++) {
-			$scope.newstyle.availableImages.push($scope.existingfiles[i].uniqueid);
-		}
-		mystylesheet.updatestyle($scope.newstyle).success(function(data) {
+		mystylesheet.updatestyle($scope.newstyle, $scope.edit).success(function(data) {
 			if(data.status == true) {
 				mystylesheet.updatestyleslocally(data.style);
 				$scope.styles	= srvstylesheet.getstyles($routeParams);

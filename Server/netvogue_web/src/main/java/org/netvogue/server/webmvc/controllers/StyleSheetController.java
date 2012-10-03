@@ -273,7 +273,7 @@ public class StyleSheetController {
 	@RequestMapping(value ="stylesheet/editstyle",method=RequestMethod.POST)
 	public @ResponseBody StyleJSONResponse EditStyle(@RequestBody StyleRequest newStyle) throws Exception {
 		
-			System.out.println("Edit Style" + newStyle.getStylename());
+			System.out.println("Edit Style" + newStyle.getStylename() + newStyle.getStyleid());
 			String error = "";
 			StyleJSONResponse response = new StyleJSONResponse();
 			
@@ -291,12 +291,20 @@ public class StyleSheetController {
 			//Other way of doing this is using Cypher query. Use map to send all the properties of node
 			Style styleToEdit = conversionService.convert(newStyle, Style.class);
 			Set<Style> allStyles = stylesheet.getStyles();
+			System.out.println("number of styles:" + allStyles.size());
 			String styleId = newStyle.getStyleid();
 			boolean foundStyle = false;
 			for(Style style: allStyles) {
-				if(style.getStyleid() == styleId) {
+				System.out.println("available styles:" + style.getStyleid());
+				if(style.getStyleid().equals(styleId)) {
 					style.Copy(styleToEdit);
 					foundStyle = true;
+					if(ResultStatus.SUCCESS == stylesheetService.SaveStyle(style, error)) {  
+						response.setStatus(true);
+						response.setStyle(conversionService.convert(style, StyleResponse.class));
+					}
+					else
+						response.setError(error);
 					break;
 				}
 			}
@@ -305,13 +313,6 @@ public class StyleSheetController {
 				return response;
 			}
 				
-			if(ResultStatus.SUCCESS == stylesheetService.SaveStylesheet(stylesheet, error)) {  
-				response.setStatus(true);
-				response.setStyle(conversionService.convert(styleToEdit, StyleResponse.class));
-			}
-			else
-				response.setError(error);
-			
 			return response;
 	}
 	
