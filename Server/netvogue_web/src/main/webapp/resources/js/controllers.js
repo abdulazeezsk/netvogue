@@ -256,7 +256,7 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, srvgallery, m
         	
         });
     };
-    
+    var ajaxrequestcall	 = "gallery";
     $scope.getphotos();
     $scope.updatedata();
     
@@ -289,6 +289,13 @@ function MyCtrlViewPhotos($scope, $routeParams, currentvisitedprofile, srvgaller
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.viewPhotos		= srvgallery.getphotos($routeParams);
     };
+    
+    srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
+    	srvgallery.setphotoslocally(data, $routeParams);
+    	$scope.updatedata();
+    }).error(function(data) {
+    	
+    });
     
     $scope.updatedata();
 
@@ -425,6 +432,7 @@ function MyCtrlviewPrintcampaign($scope, $routeParams, currentvisitedprofile, sr
 	if (!angular.isUndefined($routeParams.galleryid)) {
 		$scope.galleryid = $routeParams.galleryid;
 	}
+	var ajaxrequestcall	 = "printcampaign";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
@@ -432,7 +440,14 @@ function MyCtrlviewPrintcampaign($scope, $routeParams, currentvisitedprofile, sr
     };
     
     $scope.updatedata();
-
+    
+    srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
+    	srvgallery.setphotoslocally(data, $routeParams);
+    	$scope.updatedata();
+    }).error(function(data) {
+    	
+    });
+    
     $scope.setphotoid = function(photoid) {
     	$scope.photoid = photoid;
     };
@@ -584,12 +599,23 @@ function MyCtrlViewNewsLetters($scope, $routeParams, currentvisitedprofile, srvg
 	if (!angular.isUndefined($routeParams.galleryid)) {
 		$scope.galleryid = $routeParams.galleryid;
 	}
+	var ajaxrequestcall	 = "editorial";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.viewPhotos		= srvgallery.getphotos($routeParams);
     };
     
+    $scope.getphotos = function() {
+    	srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
+        	srvgallery.setphotoslocally(data, $routeParams);
+        	$scope.updatedata();
+        }).error(function(data) {
+        	
+        });
+    };
+    
+    $scope.getphotos();
     $scope.updatedata();
 
     $scope.setphotoid = function(photoid) {
@@ -765,6 +791,16 @@ function MyCtrlViewcollection($scope, $routeParams, currentvisitedprofile, srvco
 	    $scope.viewPhotos		= srvcollection.getphotos($routeParams);
     };
     
+    $scope.getphotos = function() {
+    	srvcollection.photos($routeParams, $scope.galleryid, "").success(function(data) {
+    		srvcollection.setphotoslocally(data, $routeParams);
+        	$scope.updatedata();
+        }).error(function(data) {
+        	
+        });
+    };
+    
+    $scope.getphotos();
     $scope.updatedata();
 
     $scope.setphotoid = function(photoid) {
@@ -906,6 +942,54 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, srvstyles
 	};
 }
 
+function MyCtrlStylesPreview($scope, $routeParams, currentvisitedprofile, srvstylesheet, mystylesheet) {
+
+	$scope.$parent.title = 'Style';
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+	
+    $scope.stylesheetid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.stylesheetid = $routeParams.id;
+	}
+	$scope.category = "";
+	if (!angular.isUndefined($routeParams.cat)) {
+		$scope.category = $routeParams.cat;
+	}
+	if (!angular.isUndefined($routeParams.styleid)) {
+		$scope.styleid = $routeParams.styleid;
+	}
+	
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvstylesheet.getname($routeParams);
+	    $scope.stylesheetname  	= srvstylesheet.getstylesheetname($routeParams);
+	    $scope.styles			= srvstylesheet.getstyles($routeParams);
+    	for(var i=0; i < $scope.styles.length; i++) {
+    		if($scope.styleid == $scope.styles[i].styleid) {
+    			$scope.mainstyle = $scope.styles[i];
+    			break;
+    		}
+    	}
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    srvstylesheet.styles($routeParams, $scope.stylesheetid, "").success(function(data) {
+    	srvstylesheet.setstyleslocally(data, $routeParams);
+    	$scope.updatedata();
+    }).error(function(data) {
+    	
+    });
+    
+    $scope.setmainstyle = function(style) {
+    	$scope.mainstyle = style;
+    };
+    
+	$scope.SetmainImage=function(index)
+	{
+		$scope.styletdetails.stylecover = $scope.stylethumbnails[index].stylethumbnail;//"http://placehold.it/290x400"
+	};
+}
+
 function MyCtrlLinesheets($scope, $routeParams, currentvisitedprofile, srvlinesheet, mylinesheet) {
 
 	$scope.$parent.title = 'Linesheets';
@@ -998,109 +1082,6 @@ function MyCtrlLinesheets($scope, $routeParams, currentvisitedprofile, srvlinesh
     		
     	});
     };
-}
-
-function MyCtrlStylesPreview($scope, currentvisitedprofile) {
-
-	$scope.$parent.title = 'Style';
-	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.stylethumbnails = [ {
-		"stylethumbnailsid" : "videoid",
-		"stylethumbnail" : "img/donna_karan_adriana_lima_1.jpg"
-
-	}, {
-		"stylethumbnailsid" : "videoid",
-		"stylethumbnail" : "img/donna_karan_adriana_lima_2.jpg"
-
-	}, {
-		"stylethumbnailsid" : "videoid",
-		"stylethumbnail" : "img/donna_karan_adriana_lima_3.jpg"
-
-	}
-
-	];
-
-	$scope.styletdetails = {
-		"styleid" : "styleid",
-		"stylename" : "becky red jacket",
-		"styledescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi"
-				+ "porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit",
-		"stylefabricarion" : "Cotton",
-		"stylenumber" : "RBK2345",
-		"stylederliverydate" : "24/08/2012",
-		"stylesize" : "S M L XL",
-		"styleprice" : "12000",
-		"stylecover" : $scope.stylethumbnails[0].stylethumbnail//"http://placehold.it/290x400"
-	};
-	
-	$scope.SetmainImage=function(index)
-	{
-		$scope.styletdetails.stylecover = $scope.stylethumbnails[index].stylethumbnail;//"http://placehold.it/290x400"
-	};
-
-	$scope.styles = [
-	 {
-		"stylelistitemid" : "styleId",
-		"stylename" : "Studded Winston",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/90x119"
-
-	},
-	{
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/90x119"
-
-	},
-	{
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/90x119"
-
-	},
-	{
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/90x119"
-
-	},
-	{
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/90x119"
-
-	},
-	{
-		"stylelistitemid" : "styleId",
-		"stylename" : "Smith trench",
-		"stylebrandname" : "Calvin Klien",
-		"styleseason" : "Spring 2012",
-		"styledeliverydate" : "25/04/2012",
-		"styleprice" : "5000",
-		"stylecoverpic" : "http://placehold.it/90x119"
-
-	} 
-	
-	];
 }
 
 function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofile) {

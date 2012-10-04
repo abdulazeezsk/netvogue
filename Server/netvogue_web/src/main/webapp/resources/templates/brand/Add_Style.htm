@@ -25,12 +25,13 @@
 					<li ng-repeat="style in styles">
 						<div class="leftpanefeed">
 							<div class="feedimage">
-								<a href="#/{{style.styleid}}"> <img alt=""
-									ng-src="{{style.profileleftpic}}" class="pull-left"></a>
+								<a ng-href="#/stylepreview?id={{style.styleid}}&&cat={{category}}&&stylesheetid={{style.styleid}}"> 
+								<img alt="" ng-src="{{style.profileleftpic}}" class="pull-left"></a>
 							</div>
 							<div class="leftpanefeed_text">
 								<h3>
-									<a href="#/{{style.styleid}}" title="">{{style.stylename}}</a>
+									<a nghref="#/stylepreview?id={{style.styleid}}&&cat={{category}}&&stylesheetid={{style.styleid}}"
+									 title="">{{style.stylename}}</a>
 								</h3>
 								<p>{{style.stylename}}</p>
 								<p>

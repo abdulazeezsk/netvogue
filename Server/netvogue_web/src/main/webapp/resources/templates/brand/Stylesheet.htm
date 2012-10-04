@@ -54,7 +54,7 @@
 				<ul class="thumbnails">
 					<li ng-repeat="style in styles" style="position: relative;">
 						<div class="view view-first">
-							<a ng-href="#/stylepreview?id={{style.styleid}}&&stylesheetid={{stylesheetid}}"> <img
+							<a ng-href="#/stylepreview?id={{style.styleid}}&&cat={{category}}&&stylesheetid={{stylesheetid}}"> <img
 								ng-src="{{style.profilethumbpic}}" alt=""></a>
 							<div class="content">
 								<div class="mask">
@@ -65,7 +65,7 @@
 										title="Edit"><i class="icon-edit icon-white"></i></a></li>
 									</ul>
 									<h1>
-										<a ng-href="#/stylepreview?id={{style.styleid}}&&stylesheetid={{stylesheetid}}" class="mask_edit">view</a>
+										<a ng-href="#/stylepreview?id={{stylesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" class="mask_edit">view</a>
 									</h1>
 								</div>
 							</div>
