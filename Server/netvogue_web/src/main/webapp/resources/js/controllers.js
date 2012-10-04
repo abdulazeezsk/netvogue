@@ -1435,10 +1435,6 @@ function MyCtrlAdvancedSearch($scope, search) {
 	$scope.pageSize = 12;
 
 	$scope.advancedsearch = search.getsearchresults();
-
-	$scope.$on('$viewContentLoaded', function() {
-		$jq("#slider").bxSlider();
-	});
 	$scope.searchFilter = new netvogue.searchFilter();
 }
 

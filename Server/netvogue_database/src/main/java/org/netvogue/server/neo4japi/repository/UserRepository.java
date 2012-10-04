@@ -3,6 +3,7 @@ package org.netvogue.server.neo4japi.repository;
 import java.util.List;
 import java.util.Map;
 
+import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.*;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
@@ -16,6 +17,9 @@ public interface UserRepository extends GraphRepository<User> {
 	User findByemailAndId(String email, Long id);
 	//User findByemailOrUsername(String email, String username);
 	
+	@Query( "START n=node:search({0}) RETURN n")
+	Iterable<User> doBasicSearch(String query);
+	
 	@Query( "start category=node:category({cat}) /" +
 			"with collect(category) as categories /" +
 			"start user=node:index({search}) /" +
@@ -23,6 +27,15 @@ public interface UserRepository extends GraphRepository<User> {
 			"return user " +
 			"skip {pagenumber*pagesize} limit{pagesize}")
 	Iterable<User> doAdvancedSearch(@Param("SelCategories") List<String> Categories, @Param("searchindex") Map<String, String> searchIndex,
+									@Param("pagenumber") long pagenumber, @Param("pagesize") long pagesize);
+	
+	@Query( "start category=node:category({cat}) /" +
+			"with collect(category) as categories /" +
+			"start user=node:index({search}) /" +
+			"where p<>user AND ALL( c in categories WHERE user-[:HAS_CAT]->c)  /" +
+			"return user " +
+			"skip {pagenumber*pagesize} limit{pagesize}")
+	Iterable<User> doBasicSearch(@Param("SelCategories") List<String> Categories, @Param("searchindex") Map<String, String> searchIndex,
 									@Param("pagenumber") long pagenumber, @Param("pagesize") long pagesize);
 	
 	//Queries related to gallery

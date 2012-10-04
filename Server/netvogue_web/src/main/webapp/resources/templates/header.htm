@@ -36,8 +36,8 @@
             </div>
             <form class="navbar-search dropdown" style="position:relative;left:-14px;" ng-class="{open: focused && searchText.length > 0}"
              action=""  method="POST">
-            <input type="text" ng-model="searchText" style="width:310px;" class="search-query data-toggle" placeholder="Search"
-                focused="focused">
+            <input type="text" ng-model="searchText" style="width:310px;" class="search-query data-toggle" 
+            			placeholder="Search" focused="focused" ng-change="getsearchResults(searchText)">
             <ul id="Ul1" class="notification-menu span5 notify-info">
                 <li ng-repeat="item in searchResults | filter:searchText"><a class="auto" ng-href="#/advancesearch">
                     <div class="clearfix">
@@ -48,7 +48,7 @@
                                 <div class="author">
                                     <strong>{{item.name}}</strong></div>
                                 <div class="preview fsm fwn fcg">
-                                    <span>India - Hyderabad</span></div>
+                                    <span>{{item.country}} - {{item.city}}</span></div>
                                 <div class="time">
                                     <abbr class="timestamp">
                                         Estd August-2000</abbr></div>

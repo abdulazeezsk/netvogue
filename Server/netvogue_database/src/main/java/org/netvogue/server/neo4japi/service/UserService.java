@@ -13,6 +13,9 @@ public interface UserService {
 	ResultStatus SaveUser(User user, String error);
 	ResultStatus ValidateEmailAndId(String email, Long id);
 
+	//Search related
+	public Iterable<User> doBasicSearch(String query);
+	
 	//Gallery related
 	public Iterable<Gallery> GetGalleries(User user);
 	public Iterable<Gallery> searchGalleryByName(User user, String name);

@@ -42,6 +42,12 @@ public class UserServiceImpl implements UserService{
 		return ResultStatus.USER_EXISTS;
 	}
 	
+	//Search related
+	public Iterable<User> doBasicSearch(String query) {
+		query = "username:*" + query + "* OR " + "name:*" + query + "*";
+		return userRepo.doBasicSearch(query);
+	}
+	
 	//Queries related to galleries
 	public Iterable<Gallery> GetGalleries(User user) {
 		if(null != user) {
