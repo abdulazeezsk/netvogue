@@ -9,16 +9,22 @@ import org.netvogue.server.neo4japi.common.ProductLines;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.Category;
+import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
 import org.netvogue.server.neo4japi.service.LinesheetService;
+import org.netvogue.server.neo4japi.service.StylesheetService;
 import org.netvogue.server.neo4japi.service.UserService;
+import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.Linesheet;
 import org.netvogue.server.webmvc.domain.LinesheetJSONRequest;
 import org.netvogue.server.webmvc.domain.Linesheets;
 import org.netvogue.server.webmvc.domain.Photos;
-import org.netvogue.server.webmvc.domain.StylesheetJsonRequest;
+import org.netvogue.server.webmvc.domain.StyleJSONResponse;
+import org.netvogue.server.webmvc.domain.StyleRequest;
+import org.netvogue.server.webmvc.domain.StyleResponse;
+import org.netvogue.server.webmvc.domain.Styles;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -36,6 +42,7 @@ public class LinesheetController {
 	@Autowired BoutiqueService  			boutiqueService;
 	@Autowired UserService 					userService;
 	@Autowired LinesheetService				linesheetService;
+	@Autowired StylesheetService			stylesheetService;
 	@Autowired ConversionService			conversionService;
 
 	@Autowired
@@ -72,39 +79,45 @@ public class LinesheetController {
 		return linesheets;
 	}
 	
-	@RequestMapping(value="linesheet/getphotos", method=RequestMethod.GET)
-	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
-										  @RequestParam("galleryid") String galleryid,
-										  @RequestParam("photoname") String photoname
+	@RequestMapping(value="linesheet/getstyles", method=RequestMethod.GET)
+	public @ResponseBody Styles GetStyles(@ModelAttribute("profileid") String profileid, 
+										  @RequestParam("linesheetid") String stylesheetid,
+										  @RequestParam(value="searchquery", required=false) String searchquery
 											 ) {
-		System.out.println("Get collection Photos: " + photoname);
-		Photos photos = new Photos();
-		/*User loggedinUser = userDetailsService.getUserFromSession();
-		if(galleryid.isEmpty()) {
-			return photos;
+		System.out.println("Get Styles: " + searchquery);
+		Styles styles = new Styles();
+		User loggedinUser = userDetailsService.getUserFromSession();
+		if(stylesheetid.isEmpty()) {
+			return styles;
 		}
 		
 		if(profileid.isEmpty()) {
-			photos.setName(loggedinUser.getName());
-			photos.setGalleryname(collectionService.getCollection(galleryid).getCollectionseasonname());
-			Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
-			Iterable<CollectionPhoto> dbPhotos;
-			if(photoname.isEmpty()) {
-				dbPhotos = collectionService.getPhotos(galleryid);
+			styles.setName(loggedinUser.getName());
+			//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
+			org.netvogue.server.neo4japi.domain.Linesheet s = linesheetService.getLinesheet(stylesheetid);
+			if(null == s)
+				return styles;
+			styles.setStylesheetname(s.getLinesheetname());
+			Set<StyleResponse> stylesTemp = new LinkedHashSet<StyleResponse>();
+			Iterable<Style> dbStyles;
+			if(null == searchquery || searchquery.isEmpty()) {
+				dbStyles = linesheetService.getStyles(stylesheetid);
 			} else {
-				dbPhotos = collectionService.searchPhotoByName(galleryid, photoname);
+				//Change this after implementing query
+				//dbStyles = collectionService.searchPhotoByName(stylesheetid, photoname);
+				dbStyles = linesheetService.getStyles(stylesheetid);
 			}
-			if(null == dbPhotos) {
-				return photos;
+			if(null == dbStyles) {
+				return styles;
 			}
-			Iterator<CollectionPhoto> first = dbPhotos.iterator();
+			Iterator<Style> first = dbStyles.iterator();
 			while ( first.hasNext() ){
-				CollectionPhoto dbPhoto = first.next() ;
-				photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
+				Style dbStyle = first.next() ;
+				stylesTemp.add(conversionService.convert(dbStyle, StyleResponse.class));
 			}
-			photos.setPhotos(photosTemp);
-		}*/
-		return photos;
+			styles.setStyles(stylesTemp);
+		}
+		return styles;
 	}
 	
 	@RequestMapping(value="linesheet/create", method=RequestMethod.POST)
@@ -173,6 +186,61 @@ public class LinesheetController {
 		}
 		else
 			response.setError(error);
+		
+		return response;
+	}
+	
+	@RequestMapping(value ="linesheet/addstyle",method=RequestMethod.POST)
+	public @ResponseBody StyleJSONResponse AddStyle(@RequestBody JsonRequest request) throws Exception {
+		
+			System.out.println("Add new Style" + request.getValue());
+			String error = "";
+			StyleJSONResponse response = new StyleJSONResponse();
+			
+			User loggedinUser = userDetailsService.getUserFromSession();
+			if(loggedinUser.getUserType() != USER_TYPE.BRAND) {
+				response.setError("Only brands can create styles");
+				return response;
+			}
+			org.netvogue.server.neo4japi.domain.Linesheet linesheet = linesheetService.getLinesheet(request.getId());
+			if(null == linesheet) {
+				response.setError("No linesheet present with this id");
+				return response;
+			}
+			
+			Style styleToAdd = stylesheetService.getStyle(request.getValue(), request.getId());
+			if(null == styleToAdd) {
+				response.setError("No style available with this style id");
+				System.out.println("No style available with this style id");
+				return response;
+			}
+			linesheet.addStyles(styleToAdd);
+			if(ResultStatus.SUCCESS == linesheetService.SaveLinesheet(linesheet, error)) {  
+				response.setStatus(true);
+			}
+			else
+				response.setError(error);
+			
+			return response;
+	}
+	
+	//Change these things once the whole application is completed
+	//All these queries must be changed, as anyone can delete these things if they just have userid Azeez
+	@RequestMapping(value="linesheet/deletestyle", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse DeleteStyle(@RequestBody String styleid) {
+		System.out.println("Delete Style:" + styleid);
+		String error = "";
+		
+		JsonResponse response = new JsonResponse();
+		if(!styleid.isEmpty()) {
+			if(ResultStatus.SUCCESS == linesheetService.deleteStyle(styleid, error)) {  
+				response.setStatus(true);
+			}
+			else
+				response.setError(error);
+		} else {
+			response.setError("styleid is empty");
+		}
 		
 		return response;
 	}

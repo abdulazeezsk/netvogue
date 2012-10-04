@@ -130,6 +130,45 @@ public class StyleSheetController {
 		return styles;
 	}
 	
+	@RequestMapping(value="stylesheet/getstylesbycat", method=RequestMethod.GET)
+	public @ResponseBody Styles GetStylesByCategory(@ModelAttribute("profileid") String profileid, 
+										  @RequestParam("category") String category,
+										  @RequestParam(value="searchquery", required=false) String searchquery
+											 ) {
+		System.out.println("Get Styles: " + category);
+		Styles styles = new Styles();
+		User loggedinUser = userDetailsService.getUserFromSession();
+		if(category.isEmpty()) {
+			return styles;
+		}
+		
+		if(profileid.isEmpty()) {
+			styles.setName(loggedinUser.getName());
+			//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
+			Set<StyleResponse> stylesTemp = new LinkedHashSet<StyleResponse>();
+			Iterable<Style> dbStyles;
+			ProductLines productline = ProductLines.getValueOf(category);
+			if(null == searchquery || searchquery.isEmpty()) {
+				dbStyles = stylesheetService.getStylesbyCategory(productline.toString());
+			} else {
+				//Change this after implementing query
+				//dbStyles = collectionService.searchPhotoByName(stylesheetid, photoname);
+				dbStyles = stylesheetService.getStylesbyCategory(category);
+			}
+			if(null == dbStyles) {
+				return styles;
+			}
+			Iterator<Style> first = dbStyles.iterator();
+			while ( first.hasNext() ){
+				Style dbStyle = first.next() ;
+				stylesTemp.add(conversionService.convert(dbStyle, StyleResponse.class));
+			}
+			System.out.println("No:of Styles: " + stylesTemp.size());
+			styles.setStyles(stylesTemp);
+		}
+		return styles;
+	}
+	
 	@RequestMapping(value="stylesheet/create", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse CreateStylesheet(@RequestBody StylesheetJsonRequest request) {
 		System.out.println("Create Stylesheet");

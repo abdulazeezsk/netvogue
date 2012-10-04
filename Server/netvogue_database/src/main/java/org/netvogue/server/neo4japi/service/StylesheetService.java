@@ -12,6 +12,8 @@ public interface StylesheetService {
 	public ResultStatus editStylesheet(String id, String name, String error);
 	public ResultStatus deleteStylesheet(String id, String error);
 	
+	public Style getStyle(String styleid, String error);
+	public Iterable<Style> getStylesbyCategory(String category);
 	public Iterable<Style> getStyles(String StylesheetId);
 	/*public Iterable<PrintCampaignPhoto> searchPhotoByName(PrintCampaign printCampaign, String name);
 	public Iterable<PrintCampaignPhoto> searchPhotoByName(String printcampaignId, String name);*/

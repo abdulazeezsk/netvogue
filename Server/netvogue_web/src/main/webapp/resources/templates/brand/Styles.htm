@@ -35,12 +35,12 @@
 					<li ng-repeat="linesheet in linesheets">
 						<div class="leftpanefeed">
 							<div class="feedimage">
-								<a href="#/{{linesheet.linesheetlistitemid}}"> <img alt=""
-									ng-src="{{linesheet.linesheetcoverpic}}" class="pull-left"></a>
+								<a ng-click="setlinesheet(linesheet.galleryid)"> <img alt=""
+									ng-src="{{linesheet.leftpic}}" class="pull-left"></a>
 							</div>
 							<div class="leftpanefeed_text">
 								<h3>
-									<a href="#/{{linesheet.linesheetlistitemid}}" title="">{{linesheet.linesheetname}}</a>
+									<a ng-click="setlinesheet(linesheet.galleryid)" title="">{{linesheet.galleryname}}</a>
 								</h3>
 								<p>{{style.stylename}}</p>
 							</div>
@@ -55,12 +55,13 @@
 			<div>
 				<div>
 					<span class="left heading_btn"> <a href="#/linesheets">Line
-							sheets</a> <span class="divider">/</span> <span><a href="#/linesheets/:lineid">Untitled</a></span>
+							sheets</a> <span class="divider">/</span> <span>
+							<a ng-href="#/styles?id={{linesheetid}}&&cat={{category}}">{{linesheetname}}</a></span>
 					</span> <span class="right"> <a ng-href="#{{backButton}}"
 						class="rightpane_back_btn">Back</a></span>
 					<div class="divi2 right_pane_underline"></div>
 					<span class="left right_pane_info"> Find styles using the
-						filters </span> <span class="right"> <a href="#/addlinesheets"
+						filters </span> <span class="right"> <a href="#/addlinesheets?id={{linesheetid}}&&cat={{category}}"
 						class="rightpane_add_btn">Edit</a>
 					</span>
 					<div class="divi2 right_pane_underline"></div>
@@ -70,12 +71,12 @@
 					<ul class="thumbnails">
 						<li ng-repeat="style in styles" style="position: relative;">
 							<div class="view view-first">
-								<a href="#/{{style.stylelistitemid}}"> <img
-									src="{{style.stylecoverpic}}" alt=""></a>
+								<a ng-href="#/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}"> <img
+									ng-src="{{style.profilethumbpic}}" alt=""></a>
 								<div class="content">
 									<div class="mask">
 										<h1>
-											<a href="#/style" class="mask_edit">view</a>
+											<a ng-href="#/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" class="mask_edit">View</a>
 										</h1>
 									</div>
 								</div>
@@ -84,7 +85,7 @@
 							<div class="campaigntitle">
 								<h3>{{style.stylename}}</h3>
 								<h3>{{style.stylebrandname}}</h3>
-								<h3>{{style.styleprice}}</h3>
+								<h3>{{style.price}}</h3>
 							</div>
 						</li>
 					</ul>

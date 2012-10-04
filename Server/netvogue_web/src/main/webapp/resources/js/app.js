@@ -34,7 +34,7 @@ angular.module('netVogue', ['netVogue.constants', 'netVogue.filters', 'netVogue.
 	  $routeProvider.when('/editvideocampaigns', 		{templateUrl: 'templates/Edit_VideoCampaigns.htm', 					controller: MyCtrlEditVideoCampaigns});
 	  $routeProvider.when('/initiate', 					{templateUrl: 'templates/initiate.htm', 							controller: MyCtrlInitiate });
 	  $routeProvider.when('/linesheets', 				{templateUrl: 'templates/brand/Linesheets.htm', 					controller: MyCtrlLinesheets });
-	  $routeProvider.when('/linesheets/:lineid', 		{templateUrl: 'templates/brand/Styles.htm', 						controller: MyCtrlStyles });
+	  $routeProvider.when('/styles', 					{templateUrl: 'templates/brand/Styles.htm', 						controller: MyCtrlStyles });
 	  $routeProvider.when('/:profileid/linesheets', 	{templateUrl: 'templates/brand/Linesheets.htm', 					controller: MyCtrlLinesheets });
 	  $routeProvider.when('/:profileid/linesheets/:lineid', 		{templateUrl: 'templates/brand/Styles.htm', 			controller: MyCtrlStyles });
 	  $routeProvider.when('/network', 					{templateUrl: 'templates/Network.htm', 								controller: MyCtrlNetwork});

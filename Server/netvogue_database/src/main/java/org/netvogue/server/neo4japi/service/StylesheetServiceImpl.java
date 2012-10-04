@@ -67,12 +67,26 @@ public class StylesheetServiceImpl implements StylesheetService {
 		}
 	}
 	
+	public Style getStyle(String styleId, String error) {
+		if(!styleId.isEmpty()) {
+			return stylesheetRepo.getStyle(styleId);
+		} else {
+			error = "empty styleid";
+		}
+		return null;
+	}
 	public Iterable<Style> getStyles(String stylesheetId) {
 		if(!stylesheetId.isEmpty()) {
 			return stylesheetRepo.getStyles(stylesheetId);
 		}
 		return null;
 	}
+	public Iterable<Style> getStylesbyCategory(String category) {
+		if(!category.isEmpty()) {
+			return stylesheetRepo.getStylesByCategory(category);
+		}
+		return null;
+ 	}
 	public ResultStatus deleteStyle(String styleId, String error)  {
 		if(null == styleId || styleId.isEmpty()){
 			error = "styleId is empty";

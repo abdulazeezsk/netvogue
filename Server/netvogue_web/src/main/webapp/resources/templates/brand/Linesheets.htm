@@ -81,7 +81,7 @@
 				<ul class="thumbnails">
 					<li ng-repeat="linesheet in linesheets" style="position: relative;">
 						<div class="view view-first">
-							<a ng-href="#/stylesheet?id={{stylesheet.galleryid}}"> <img
+							<a ng-href="#/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}"> <img
 								ng-src="{{linesheet.gallerypic}}" alt=""></a>
 							<div class="content">
 								<div class="mask">
@@ -92,7 +92,7 @@
 										title="Edit"><i class="icon-edit icon-white"></i></a></li>
 									</ul>
 									<h1>
-										<a ng-href="#/stylesheet?id={{stylesheet.galleryid}}" class="mask_edit">view</a>
+										<a ng-href="#/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}" class="mask_edit">view</a>
 									</h1>
 								</div>
 							</div>

@@ -25,11 +25,11 @@
 			<div>
 				<h4 class="leftpane_subheading">Styles</h4>
 				<ul class="nav nav-tab nav-stacked">
-					<li ng-repeat="style in styles">
+					<li ng-repeat="style in allstyles">
 						<div class="leftpanefeed">
 							<div class="feedimage">
 								<a href="#/{{style.stylelistitemid}}"> <img alt=""
-									ng-src="{{style.stylecoverpic}}" class="pull-left"></a>
+									ng-src="{{style.profileleftpic}}" class="pull-left"></a>
 							</div>
 							<div class="leftpanefeed_text">
 								<h3>
@@ -37,7 +37,7 @@
 								</h3>
 								<p>{{style.stylename}}</p>
 								<p>
-									<a>ADD</a>
+									<a ng-click="addstyle(style)">ADD</a>
 								</p>
 							</div>
 						</div>
@@ -53,8 +53,7 @@
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info"> <a href="#/linesheets">Line
 						Sheets</a> <span class="divider">/</span> <span>
-						<a href="#/linesheets/:lineid">Untitled Line
-						sheet</a></span>
+						<a ng-href="#/styles?id={{linesheetid}}&&cat={{category}}">{{linesheetname}}</a></span>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 			</div>
@@ -62,120 +61,21 @@
 				<!-- data pane -->
 				<div>
 					<ul class="thumbnails">
-						<li>
+						<li ng-repeat="style in styles">
 							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
+								<img ng-src="{{style.profilethumbpic}}" alt="">
 								<div class="caption">
-									<h5>Thumbnail label</h5>
+									<h5>{{style.stylename}}</h5>
 									<h6>
-										<p>Season Name</p>
+										<p>{{style.description}}</p>
 									</h6>
 									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
-								<div class="caption">
-									<h5>Thumbnail label</h5>
-									<h6>
-										<p>Season Name</p>
-									</h6>
-									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
-								<div class="caption">
-									<h5>Thumbnail label</h5>
-									<h6>
-										<p>Season Name</p>
-									</h6>
-									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
-								<div class="caption">
-									<h5>Thumbnail label</h5>
-									<h6>
-										<p>Season Name</p>
-									</h6>
-									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
-								<div class="caption">
-									<h5>Thumbnail label</h5>
-									<h6>
-										<p>Season Name</p>
-									</h6>
-									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
-								<div class="caption">
-									<h5>Thumbnail label</h5>
-									<h6>
-										<p>Season Name</p>
-									</h6>
-									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
-								<div class="caption">
-									<h5>Thumbnail label</h5>
-									<h6>
-										<p>Season Name</p>
-									</h6>
-									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="thumbnail">
-								<img src="http://placehold.it/210x300" alt="">
-								<div class="caption">
-									<h5>Thumbnail label</h5>
-									<h6>
-										<p>Season Name</p>
-									</h6>
-									<p>
-										<a href="#" class="btn btn-primary">Remove</a>
+										<a ng-click="deletestyle(style)" class="btn btn-primary">Remove</a>
 									</p>
 								</div>
 							</div>
 						</li>
 					</ul>
-
 				</div>
 				<!-- data pane -->
 			</div>

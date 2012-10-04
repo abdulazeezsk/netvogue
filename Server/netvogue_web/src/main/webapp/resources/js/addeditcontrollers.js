@@ -382,59 +382,88 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile, srvstyleshe
 		});
 	};    
 }
-function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile) {
+function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile, srvlinesheet, mylinesheet, srvstylesheet) {
 
-	if($scope.parent.iambrand == false) {
+	if($scope.$parent.iambrand == false) {
 		$location.url("linesheets");
 	}
-    $scope.backButton = currentvisitedprofile.getBackHistory();
-    $scope.addDetails = true;
-    $scope.AddLinesheet = function () {
-        $scope.addDetails = false;
-    }
-
-    $scope.linesheets = [
-	                   {
-	                       "linesheetlistitemid": "linesheetId",
-	                       "linesheetbrandname": "Calvin Klien",
-	                       "linesheetseason": "Spring 2012",
-	                       "linesheetdeliverydate": "25/04/2012",
-	                       "linesheetcoverpic": "http://placehold.it/231x306"
-
-	                   }
-                       ];
-    $scope.styles = [
-	                   {
-	                       "stylelistitemid": "styleId",
-	                       "stylename": "Studded Winston",
-	                       "stylebrandname": "Calvin Klien",
-	                       "styleseason": "Spring 2012",
-	                       "styledeliverydate": "25/04/2012",
-	                       "styleprice": "5000",
-	                       "stylecoverpic": "http://placehold.it/90x119"
-
-	                   },
-                       {
-                           "stylelistitemid": "styleId",
-                           "stylename": "Studded Winston",
-                           "stylebrandname": "Calvin Klien",
-                           "styleseason": "Spring 2012",
-                           "styledeliverydate": "25/04/2012",
-                           "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/90x119"
-
-                       },
-                       {
-                           "stylelistitemid": "styleId",
-                           "stylename": "Smith trench",
-                           "stylebrandname": "Calvin Klien",
-                           "styleseason": "Spring 2012",
-                           "styledeliverydate": "25/04/2012",
-                           "styleprice": "5000",
-                           "stylecoverpic": "http://placehold.it/90x119"
-
-                       }
-                       ];
+    
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+    $scope.$parent.title	= "Add Linesheets";
+    
+    $scope.linesheetid = "";
+	if (!angular.isUndefined($routeParams.id)) {
+		$scope.linesheetid = $routeParams.id;
+	}
+	$scope.category = "";
+	if (!angular.isUndefined($routeParams.cat)) {
+		$scope.category = $routeParams.cat;
+	}
+	
+	$scope.allstyles = [];
+	$scope.styles    = [];
+	$scope.updatedata = function() {
+	    $scope.entityname  		= srvlinesheet.getname($routeParams);
+	    $scope.linesheetname  	= srvlinesheet.getlinesheetname($routeParams);
+	    $scope.styles			= srvlinesheet.getstyles($routeParams);
+    };
+    
+    //Get all the profile data from the Server through AJAX everytime user comes here. 
+    //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
+    srvstylesheet.stylesbycategory($routeParams, $scope.category, "").success(function(data) {
+    	$scope.allstyles = data.styles;
+    	updateallstyles();
+    }).error(function(data) {
+    	
+    });
+	
+    srvlinesheet.styles($routeParams, $scope.linesheetid, "").success(function(data) {
+    	srvlinesheet.setstyleslocally(data, $routeParams);
+    	$scope.updatedata();
+    	updateallstyles();
+    }).error(function(data) {
+    	
+    });
+	
+    var updateallstyles = function() {
+    	for(var i=0; i < $scope.styles.length; i++) {
+    		for(var j=0; j < $scope.allstyles.length; j++) {
+    			if($scope.styles[i].styleid == $scope.allstyles[j].styleid) {
+    				$scope.allstyles.splice(j, 1);
+    				break;
+    			}
+    		}
+    	}
+    };
+	$scope.addstyle = function(newstyle) {
+		//Add sizes
+		var jsonrequest = {
+				"id"	: $scope.linesheetid,
+				"value"	: newstyle.styleid
+		};
+		mylinesheet.addstyle(jsonrequest).success(function(data) {
+			if(data.status == true) {
+				mylinesheet.addstylelocally(newstyle);
+				$scope.styles	= srvlinesheet.getstyles($routeParams);
+				updateallstyles();
+				alert("added successfully" + data.status);
+			} else {
+				alert("error" + data.status + data.error);
+			}
+		}).error(function(data) {
+			
+		});
+	};
+	
+	$scope.deletestyle = function(style) {
+		mylinesheet.deletestyle(style.styleid).success(function(data) {
+			mylinesheet.deletestyleslocally(style.styleid);
+			$scope.styles	= srvlinesheet.getstyles($routeParams);
+			$scope.allstyles.push(style);
+		}).error(function(data) {
+			alert("error: " + data.error);
+		});
+	};
 }
 
 function MyCtrlEditCollections($scope, $routeParams, currentvisitedprofile) {

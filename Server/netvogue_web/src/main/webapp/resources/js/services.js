@@ -882,6 +882,22 @@ angular.module('netVogue.services', []).
           };
           return $http(config);
       },
+      stylesbycategory: function (routeparams, category, name) {
+          var profileid = "";
+          if (!angular.isUndefined(routeparams.profileid)) {
+        	  profileid = routeparams.profileid;
+          }
+          var datatosend = {
+  				"stylename" : name,
+  				"category" : category
+  		};
+          var config = {
+              method: "GET",
+              params: datatosend,
+              url: "stylesheet/getstylesbycat/" + profileid
+          };
+          return $http(config);
+      },
       setstylesheetlocally: function(data, routeparams) {
     	  if (angular.isUndefined(routeparams.profileid)) {
     		  mystylesheet.setstylesheets(data);
@@ -980,34 +996,32 @@ angular.module('netVogue.services', []).
     	},
     	setstyles: function(temp) {
     		name = temp.name;
-    		linesheetname = temp.linesheetname;
+    		linesheetname = temp.stylesheetname;//We are using same styles for both stylesheet and linesheet
     		angular.copy(temp.styles, styles);
     	},
-    	savestyle: function(label, seasonname, photoid) {
-    		var datatosend = {
-    				"photoname" : label,
-    				"seasonname": seasonname,
-    				"photoid"	: photoid
-    		};
+    	addstyle: function(styleid) { //Same for create style
     		var config = {
-    				method: "POST",
-    				data: datatosend,
-                    url: "stylesheet/editphotoinfo"
+        			method: "POST",
+        			data: styleid,
+                    url: "linesheet/addstyle"
                 };
-            return $http(config);
+        		return $http(config);
+    	},
+    	addstylelocally: function(style) {
+    			styles.push(style);
     	},
     	deletestyle: function(photoid) {
     		var config = {
     			method: "POST",
     			data: photoid,
-                url: "stylesheet/deletephoto"
+                url: "linesheet/deletestyle"
             };
     		return $http(config);
     	},
     	deletestyleslocally: function(id) {
     		var i=0;
     		for(i=0; i <  styles.length; i++) {
-    			if(styles[i].uniqueid == id) {
+    			if(styles[i].styleid == id) {
     				break;
     			}
     		}
@@ -1058,8 +1072,8 @@ angular.module('netVogue.services', []).
         	  profileid = routeparams.profileid;
           }
           var datatosend = {
-  				"stylename" : name,
-  				"stylesheetid" : id
+  				"linename" : name,
+  				"linesheetid" : id
   		};
           var config = {
               method: "GET",
@@ -1075,7 +1089,7 @@ angular.module('netVogue.services', []).
         	  //galleries.push(angular.copy(galleriesdata));
           }
       },
-      setstylelocally: function(data, routeparams) {
+      setstyleslocally: function(data, routeparams) {
     	  if (angular.isUndefined(routeparams.profileid)) {
     		  mylinesheet.setstyles(data);
           } else {

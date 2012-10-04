@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.Linesheet;
+import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.neo4japi.repository.LinesheetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.neo4j.support.Neo4jTemplate;
@@ -50,6 +51,27 @@ public class LinesheetServiceImpl implements LinesheetService {
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while deleting linesheet:" + linesheetId + " - " + e.toString());
+			error = e.toString();
+			return ResultStatus.FAILURE;
+		}
+	}
+	
+	public Iterable<Style> getStyles(String linesheetId) {
+		if(!linesheetId.isEmpty()) {
+			return linesheetRepo.getStyles(linesheetId);
+		}
+		return null;
+	}
+	public ResultStatus deleteStyle(String styleId, String error)  {
+		if(null == styleId || styleId.isEmpty()){
+			error = "styleId is empty";
+			return ResultStatus.FAILURE;
+		}
+		try {
+			linesheetRepo.deleteStyle(styleId);
+			return ResultStatus.SUCCESS;
+		} catch(Exception e) {
+			System.out.println("There was an error while deleting Style" + styleId + " - " + e.toString());
 			error = e.toString();
 			return ResultStatus.FAILURE;
 		}

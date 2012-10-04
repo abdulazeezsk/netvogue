@@ -24,12 +24,12 @@
 					<li ng-repeat="style in styles">
 						<div class="leftpanefeed">
 							<div class="feedimage">
-								<a href="#/{{style.stylelistitemid}}"> <img alt=""
-									ng-src="{{style.stylecoverpic}}" class="pull-left"></a>
+								<a ng-click="setmainstyle(style)"> <img alt=""
+									ng-src="{{style.profileleftpic}}" class="pull-left"></a>
 							</div>
 							<div class="leftpanefeed_text">
 								<h3>
-									<a href="#/{{style.stylelistitemid}}" title="">{{style.stylename}}</a>
+									<a ng-click="setmainstyle(style)" title="">{{style.stylename}}</a>
 								</h3>
 								<p>{{style.stylename}}</p>
 							</div>
@@ -43,7 +43,8 @@
 		<div class="span9">
 			<div>
 				<span class="left heading_btn"> <a href="#/linesheets">Line
-						sheets</a> <span class="divider">/</span> <span><a href="#/linesheets/:lineid">Untitled</a></span>
+						sheets</a> <span class="divider">/</span> <span>
+						<a ng-href="#/styles?id={{linesheetid}}&&cat={{category}}">{{linesheetname}}</a></span>
 				</span> <span class="right"> <a ng-href="#{{backButton}}"
 					class="rightpane_back_btn">Back</a></span>
 				<div class="divi2 right_pane_underline"></div>
@@ -55,15 +56,15 @@
 			<div class="span4" style="height: 400px">
 				<ul class="thumbnails">
 					<li class="spanstyle" style="display: inline;"><img
-						src="{{styletdetails.stylecover}}" alt=""></li>
+						src="{{mainstyle.profilethumbpic}}" alt=""></li>
 				</ul>
 
 			</div>
 
 			<div class="spanpreview_details" style="height: 400px;">
 				<div>
-					<p class="subHeading">{{styletdetails.stylename}}</p>
-					<p>{{styletdetails.styledescription}}</p>
+					<p class="subHeading">{{mainstyle.stylename}}</p>
+					<p>{{mainstyle.description}}</p>
 				</div>
 				<div class="underline"></div>
 				<div class="style_description">
@@ -71,7 +72,7 @@
 							<div class="style_dimentions">
 								<div class="styl_number">
 									<p>Style No:</p>
-									<h4>{{styletdetails.stylenumber}}</h4>
+									<h4>{{mainstyle.styleno}}</h4>
 								</div>
 								<div class="styl_number">
 									<p>Sizes</p>
@@ -91,7 +92,7 @@
 							<div class="style_type_cost">
 								<div class="style_cloth">
 									<p>Fabrication:</p>
-									<h4>{{styletdetails.stylefabricarion}}</h4>
+									<h4>{{mainstyle.fabricarion}}</h4>
 								</div>
 								<div class="delevry_date">
 									<p>Delivery Date:</p>
@@ -99,17 +100,17 @@
 								</div>
 								<div class="price">
 									<p>Price</p>
-									<h4>{{styletdetails.styleprice}}</h4>
+									<h4>{{mainstyle.price}}</h4>
 								</div>
 							</div>
 						</div>
 			</div>
 			<div class="span4" style="height: 300px;">
 				<ul class="thumbnails">
-					<li class="spanviews" ng-repeat="styletemp in stylethumbnails"
-						ng-click="SetmainImage($index)">
-						<div class="thumbnail_noborder">
-							<img src="{{styletemp.stylethumbnail}}" alt="">
+					<li class="spanviews" ng-repeat="image in mainstyle.availableImages"
+						ng-click="mainstyle.profilethumbpic = image.thumbnail_url">
+						<div ng-hide="mainstyle.profilethumbpic == image.thumbnail_url" class="thumbnail_noborder">
+							<img src="{{image.thumbnail_url}}" alt="">
 						</div>
 					</li>
 				</ul>
