@@ -1,0 +1,15 @@
+<div id="container" class="clearfix">
+	<div class="box  col2" ng-repeat="photo in photogallery">
+		<a ng-href="#/viewphotos?id={{photo.uniqueid}}&&galleryid={{galleryid}}"
+			title="{{photo.label}}"><img alt="Stanley" class="fade_spot" /></a>
+		<h3>
+			<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;">{{galleryname}}</span>
+		</h3>
+		<h3>
+			<span style="color:#20ACB8;font-weight:normal;font-size:17px;">{{photo.seasonname}}</span>
+		</h3>
+		<p>date</p>
+		<p>Chanel's Creative Director of Makeup Peter Philips talks us
+			through shine and silver, the new season's look</p>
+	</div>
+</div>

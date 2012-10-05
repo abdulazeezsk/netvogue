@@ -39,9 +39,7 @@
     <script src="lib/jquery/jquery.placeholder.js"  type="text/javascript"></script>
     <script src="lib/bootstrap/bootstrap.min.js" 	type="text/javascript"></script>
     <script src="lib/jquery/jquery.progressbar.js" 	type="text/javascript"></script>
-   
-   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-   <script src="lib/jquery/jquery.masonry.min.js" 	type="text/javascript"></script>
+   <script src="lib/jquery/jquery.masonry.js" 	type="text/javascript"></script>
    <script src="lib/jquery/jquery.infinitescroll.min.js" 	type="text/javascript"></script>
     <script src="lib/angular/angular.js" 			type="text/javascript"></script>
     <script src="lib/angular/angular-ui.js" 		type="text/javascript"></script>
