@@ -29,6 +29,7 @@
             	<bean class="org.netvogue.server.webmvc.converters.PrintCampaignPhotoConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.EditorialPhotoConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.CollectionPhotoConverter" />
+            	<bean class="org.netvogue.server.webmvc.converters.SearchConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.StyleRequestConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.StyleResponseConverter" />
         	</list>

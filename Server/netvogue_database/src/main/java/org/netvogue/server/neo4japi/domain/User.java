@@ -29,7 +29,7 @@ public class User {
 	
 	String password;
 	
-	@Indexed(indexName="username", indexType=IndexType.FULLTEXT, unique=true)
+	@Indexed(indexName="search", indexType=IndexType.FULLTEXT, unique=true)
 	String username;
 	
 	@Indexed(indexName="search", indexType=IndexType.FULLTEXT)

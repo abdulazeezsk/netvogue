@@ -34,32 +34,32 @@
                                 <a class="seeMore" href="#/notification" accesskey="5"><span>Show All Notifications</span></a></div>
                         </ul>
             </div>
-            <form class="navbar-search dropdown" style="position:relative;left:-14px;" ng-class="{open: focused && searchText.length > 0}"
-             action=""  method="POST">
-            <input type="text" ng-model="searchText" style="width:310px;" class="search-query data-toggle" placeholder="Search"
-                focused="focused">
-            <ul id="Ul1" class="notification-menu span5 notify-info">
-                <li ng-repeat="item in searchResults | filter:searchText"><a class="auto" ng-href="#/advancesearch">
-                    <div class="clearfix">
-                        <div class="MercuryThreadImage _8o _8s lfloat">
-                            <img class="_s0 _rw img" src="http://placehold.it/50x50" alt=""></div>
-                        <div class="_8m ">
-                            <div class="content fsm fwn fcg">
-                                <div class="author">
-                                    <strong>{{item.name}}</strong></div>
-                                <div class="preview fsm fwn fcg">
-                                    <span>India - Hyderabad</span></div>
-                                <div class="time">
-                                    <abbr class="timestamp">
-                                        Estd August-2000</abbr></div>
-                            </div>
-                        </div>
-                    </div>
-                </a></li>
-                <div class="jewelFooter">
-                    <a class="seeMore" href="#/advancesearch" accesskey="5"><span>Show More Results</span></a></div>
-            </ul>
-            </form>
+            <div class="navbar-search dropdown" style="position:relative;left:-14px;" ng-class="{open: focused && searchText.length > 0}">
+	            <input type="text" ng-model="searchText" style="width:310px;" class="search-query data-toggle" 
+	            			placeholder="Search" focused="focused" ng-change="getsearchResults(searchText)">
+	            <ul id="Ul1" class="notification-menu span5 notify-info">
+	                <li ng-repeat="item in searchResults | filter:searchText">
+	                <a class="auto" ng-href="#/{{item.username}}/profile">
+	                    <div class="clearfix">
+	                        <div class="MercuryThreadImage _8o _8s lfloat">
+	                            <img class="_s0 _rw img" src="http://placehold.it/50x50" alt=""></div>
+	                        <div class="_8m ">
+	                            <div class="content fsm fwn fcg">
+	                                <div class="author">
+	                                    <strong>{{item.name}}</strong></div>
+	                                <div class="preview fsm fwn fcg">
+	                                    <span>{{item.country}} - {{item.city}}</span></div>
+	                                <div class="time">
+	                                    <abbr class="timestamp">
+	                                        Estd August-2000</abbr></div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </a></li>
+	                <div class="jewelFooter">
+	                    <a class="seeMore" href="#/advancesearch" accesskey="5"><span>Show More Results</span></a></div>
+	            </ul>
+            </div>
             <ul class="nav">
             </ul>
             <ul class="nav pull-right">

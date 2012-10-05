@@ -1,4 +1,4 @@
-function CtrlMain($scope, currentvisitedprofile, $route, $routeParams) {
+function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search) {
 	$scope.title = "Profile";
 	netvogue.initialize();
 	$scope.iambrand = netvogue.isbrand;
@@ -26,9 +26,13 @@ function CtrlMain($scope, currentvisitedprofile, $route, $routeParams) {
 	//Related to search box in header
 	$scope.focused   = false;
 	$scope.searchText = "";
-	$scope.searchResults = [
-	                        new netvogue.basicSearch("Azeez", "Hyderabad"),
-	                        new netvogue.basicSearch("Azeez1", "Hyderabad"),
-	                        new netvogue.basicSearch("Azeez2", "Hyderabad")
-	                        ];
+	$scope.searchResults = [];
+	
+	$scope.getsearchResults = function(query) {
+		search.getbasicsearchresults(query).success(function(data) {
+			$scope.searchResults = data;
+	    }).error(function(data) {
+	    	
+	    });
+	};
 }

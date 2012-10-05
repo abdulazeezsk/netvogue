@@ -1074,7 +1074,7 @@ angular.module('netVogue.services', []).
           var datatosend = {
   				"linename" : name,
   				"linesheetid" : id
-  		};
+  		  };
           var config = {
               method: "GET",
               params: datatosend,
@@ -1156,7 +1156,7 @@ angular.module('netVogue.services', []).
               }
           }
       };
-}).service('search', function () {
+}).service('search', function ($http) {
       var advancedsearch = [
 	                        new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
 	                        		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
@@ -1192,6 +1192,17 @@ angular.module('netVogue.services', []).
       return {
           getsearchresults: function () {
               return advancedsearch;
+          },
+          getbasicsearchresults: function(query) {
+        	  var datatosend = {
+        			  "query": query
+        	  };
+        	  var config = {
+                  method: "GET",
+                  params: datatosend,
+                  url: "basicsearch"
+              };
+        	  return $http(config);
           }
       };
   });
