@@ -41,50 +41,50 @@ public interface UserRepository extends GraphRepository<User> {
 									@Param("pagenumber") long pagenumber, @Param("pagesize") long pagesize);
 	
 	//Queries related to gallery
-	@Query( "START n=node:username(username={0}) MATCH n-[:GALLERY]->g RETURN g ORDER BY g.createdDate DESC")
+	@Query( "START n=node:search(username={0}) MATCH n-[:GALLERY]->g RETURN g ORDER BY g.createdDate DESC")
 	Iterable<Gallery> getGalleries(String username);
 	
-	@Query( "START n=node:username(username={0}) MATCH n-[:GALLERY]->g WHERE g.galleryname =~ {1} " +
+	@Query( "START n=node:search(username={0}) MATCH n-[:GALLERY]->g WHERE g.galleryname =~ {1} " +
 			"RETURN g ORDER BY g.createdDate DESC")
 	Iterable<Gallery> searchGalleryByName(String username, String galleryname);
 	
 	//Queries related to Print campaigns
-	@Query( "START n=node:username(username={0}) MATCH n-[:PRINTCAMPAIGN]->pc RETURN pc ORDER BY pc.createdDate DESC")
+	@Query( "START n=node:search(username={0}) MATCH n-[:PRINTCAMPAIGN]->pc RETURN pc ORDER BY pc.createdDate DESC")
 	Iterable<PrintCampaign> getPrintCampaigns(String username);
 	
-	@Query( "START n=node:username(username={0}) MATCH n-[:PRINTCAMPAIGN]->pc WHERE pc.printcampaignname =~ {1} " +
+	@Query( "START n=node:search(username={0}) MATCH n-[:PRINTCAMPAIGN]->pc WHERE pc.printcampaignname =~ {1} " +
 			"RETURN pc ORDER BY pc.createdDate DESC")
 	Iterable<PrintCampaign> searchPrintCampaignByName(String username, String printcampaignname);
 	
 	//Queries related to editorials
-	@Query( "START n=node:username(username={0}) MATCH n-[:EDITORIAL]->e RETURN e ORDER BY e.createdDate DESC")
+	@Query( "START n=node:search(username={0}) MATCH n-[:EDITORIAL]->e RETURN e ORDER BY e.createdDate DESC")
 	Iterable<Editorial> getEditorials(String username);
 	
-	@Query( "START n=node:username(username={0}) MATCH n-[:EDITORIAL]->e WHERE e.editorialname =~ {1} " +
+	@Query( "START n=node:search(username={0}) MATCH n-[:EDITORIAL]->e WHERE e.editorialname =~ {1} " +
 			"RETURN e ORDER BY e.createdDate DESC")
 	Iterable<Editorial> searchEditorialByName(String username, String editorialname);
 	
 	//queries related to collections
-	@Query( "START n=node:username(username={0}) MATCH n-[:COLLECTION]->c RETURN c ORDER BY c.createdDate DESC")
+	@Query( "START n=node:search(username={0}) MATCH n-[:COLLECTION]->c RETURN c ORDER BY c.createdDate DESC")
 	Iterable<Collection> getCollections(String username);
 	
-	@Query( "START n=node:username(username={0}) MATCH n-[:COLLECTION]->c WHERE c.collectionseasonname =~ {1} " +
+	@Query( "START n=node:search(username={0}) MATCH n-[:COLLECTION]->c WHERE c.collectionseasonname =~ {1} " +
 			"RETURN c ORDER BY c.createdDate DESC")
 	Iterable<Collection> searchCollectionByName(String username, String collectionseasonname);
 
 	//queries related to stylesheets
-	@Query( "START n=node:username(username={0}) MATCH n-[:STYLESHEET]->c RETURN c ORDER BY c.createdDate DESC")
+	@Query( "START n=node:search(username={0}) MATCH n-[:STYLESHEET]->c RETURN c ORDER BY c.createdDate DESC")
 	Iterable<Stylesheet> getStylesheets(String username);
 	
-	@Query( "START n=node:username(username={0}) MATCH n-[:STYLESHEET]->c WHERE c.stylesheetname =~ {1} " +
+	@Query( "START n=node:search(username={0}) MATCH n-[:STYLESHEET]->c WHERE c.stylesheetname =~ {1} " +
 			"RETURN c ORDER BY c.createdDate DESC")
 	Iterable<Stylesheet> searchStylesheetByName(String username, String stylesheetname);
 	
 	//queries related to linesheets
-	@Query( "START n=node:username(username={0}) MATCH n-[:LINESHEET]->c RETURN c ORDER BY c.createdDate DESC")
+	@Query( "START n=node:search(username={0}) MATCH n-[:LINESHEET]->c RETURN c ORDER BY c.createdDate DESC")
 	Iterable<Linesheet> getLinesheets(String username);
 	
-	@Query( "START n=node:username(username={0}) MATCH n-[:LINESHEET]->c WHERE c.linesheetname =~ {1} " +
+	@Query( "START n=node:search(username={0}) MATCH n-[:LINESHEET]->c WHERE c.linesheetname =~ {1} " +
 			"RETURN c ORDER BY c.createdDate DESC")
 	Iterable<Linesheet> searchLinesheetByName(String username, String linesheetname);
 
