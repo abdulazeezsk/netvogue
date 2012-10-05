@@ -4659,7 +4659,7 @@ font-size:14px;
 	width: 100%;
 	border-bottom: solid 1px #999999;
 	padding: 5px 0 5px 0;
-	min-height: 25px;
+	min-height: 82px;
 	position: relative;
 	float: left;
 	clear: both;
@@ -4670,7 +4670,9 @@ font-size:14px;
 	margin: 0 10px 0 0;
 	width: 90px;
 	min-height: 72px;
+	max-height: 72px;
 	overflow-x: hidden;
+	overflow-y: hidden;
 }
 
 .leftpanefeed_text {
@@ -4785,13 +4787,13 @@ font-size:14px;
 .campaigntitle
 {
 	width: 220px;
-	margin: 10px auto 0;
+	margin: 10px 0 0 0;
 	text-align: center;
-	padding: 0 0 10px 0;
+	padding: 0 0 7px 0;
 	border-bottom: solid 1px #666666;
 	position: absolute;
 	display: block;
-	top: 310px;
+	top: 312px;
 }
 
 .campaigntitle h3 {
@@ -4799,7 +4801,7 @@ font-size:14px;
 	text-transform: uppercase;
 	position: absolute;
 	display: block;
-	top: -10px;
+	top: -12px;
 	left:10px;
 	right:10px;
 }
@@ -5661,14 +5663,13 @@ background: url(../img/red-cross.png);
 
 .gallerytitle {
 	width: 220px;
-	margin: 10px auto 0;
+	margin: 10px 0 0 0;
 	text-align: center;
 	padding: 0 0 10px 0;
 	border-bottom: solid 1px #666666;
 	position: absolute;
 	display: block;
 	top: 154px;
-	cursor: pointer;
 }
 
 
@@ -5681,7 +5682,30 @@ background: url(../img/red-cross.png);
 	cursor: pointer;
 	left:10px;
 	right:10px;
+
 }
+
+/* .campaigntitle
+{
+	width: 220px;
+	margin: 10px 0 0 0;
+	text-align: center;
+	padding: 0 0 7px 0;
+	border-bottom: solid 1px #666666;
+	position: absolute;
+	display: block;
+	top: 312px;
+}
+
+.campaigntitle h3 {
+	font: normal 13px Verdana;
+	text-transform: uppercase;
+	position: absolute;
+	display: block;
+	top: -12px;
+	left:10px;
+	right:10px;
+} */
 
 
 
@@ -6611,3 +6635,5 @@ ul.n-wizard-brand-list {
 }
 
 /* -----------------------------------------------xxxxx   Begin---------------------------------------------------*/
+
+
