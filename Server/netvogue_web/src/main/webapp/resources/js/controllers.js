@@ -1433,9 +1433,23 @@ function MyCtrlAdvancedSearch($scope, search) {
 	$scope.pagenumber = 0;
 	$scope.pagenumbers = [ 1, 2, 3, 4 ];
 	$scope.pageSize = 12;
-
-	$scope.advancedsearch = search.getsearchresults();
+	
+	//Search related
+	$scope.isbrandsearch = "true";
+	$scope.name			 = "";
+	$scope.location		 = "";
+	$scope.categories	 = [];
+	
 	$scope.searchFilter = new netvogue.searchFilter();
+	$scope.getsearchResults = function() {
+		search.getadvancedsearchresults($scope.name, $scope.location, $scope.categories, $scope.isbrandsearch).
+		success(function(data) {
+			$scope.advancedsearch = data;
+	    }).
+	    error(function(data) {
+	    	
+	    });
+	};
 }
 
 function MyCtrlVideos($scope, $routeParams, currentvisitedprofile) {

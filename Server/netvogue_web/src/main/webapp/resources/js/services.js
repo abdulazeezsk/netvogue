@@ -1193,6 +1193,20 @@ angular.module('netVogue.services', []).
           getsearchresults: function () {
               return advancedsearch;
           },
+          getadvancedsearchresults: function(name, location, categories, usertype) {
+        	  var datatosend = {
+        			"name": name, 
+        			"location": location,
+					"categories": categories, 
+					"usertype":	usertype
+        	  };
+        	  var config = {
+                  method: "GET",
+                  params: datatosend,
+                  url: "advancedsearch"
+              };
+        	  return $http(config);
+          },
           getbasicsearchresults: function(query) {
         	  var datatosend = {
         			  "query": query

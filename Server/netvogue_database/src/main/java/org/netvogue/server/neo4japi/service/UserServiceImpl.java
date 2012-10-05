@@ -1,6 +1,9 @@
 package org.netvogue.server.neo4japi.service;
 
+import java.util.List;
+
 import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Editorial;
 import org.netvogue.server.neo4japi.domain.Gallery;
@@ -46,6 +49,12 @@ public class UserServiceImpl implements UserService{
 	public Iterable<User> doBasicSearch(String query) {
 		query = "username:*" + query + "* OR " + "name:*" + query + "*";
 		return userRepo.doBasicSearch(query);
+	}
+	
+	public Iterable<User> doAdvancedSearch(USER_TYPE userType, String name, String location, List<String> categories) {
+		String query = "username:*" + name + "* OR " + "name:*" + name + "* OR "
+				 + "city:*" + location  + "* OR " + "country:*" + location + "*";
+		return userRepo.doAdvancedSearch(categories, query, 0, 10);
 	}
 	
 	//Queries related to galleries
