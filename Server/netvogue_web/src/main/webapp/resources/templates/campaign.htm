@@ -20,17 +20,17 @@
 			<div class="divi2"></div>
 			<div class="leftpane_filter_name">
 				<span class="leftpane_filter_name">Campaign Name</span> <input
-					type="text" class="span3" ng-model="searchphotoname" placeholder="Campaign name" 
-										ng-change="getphotos()"/>
+					type="text" class="span3" ng-model="searchphotoname"
+					placeholder="Campaign name" ng-change="getphotos()" />
 			</div>
 		</div>
 		<!-- left pane -->
 		<!-- right pane -->
 		<div class="span9">
 			<div>
-				<span class="left heading_btn header_width"> <a href="#/printcampaign">print
-						campaign</a> <span class="divider">/</span> 
-						<span> <a ng-href="#/campaign?id={{galleryid}}">{{galleryname}}</a></span>
+				<span class="left heading_btn header_width"> <a
+					href="#/printcampaign">print campaign</a> <span class="divider">/</span>
+					<span> <a ng-href="#/campaign?id={{galleryid}}">{{galleryname}}</a></span>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info"> Find Print Campaigns
@@ -41,24 +41,309 @@
 				<div class="divi2 right_pane_underline"></div>
 			</div>
 
+			<div id="container" class="clearfix">
+				<div class="box  col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013039951/"
+						title="Stanley by Dave DeSandro, on Flickr"><img
+						src="images/paste.jpg"  alt="Stanley" class="fade_spot" /></a>
+					<h3>
+						<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;"> Fashion Week</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
 
-			<div>
-				<ul class="thumbnails">
-					<li ng-repeat="photo in photogallery" style="position: relative;">
-						<div class="view view-first">
-							<a  ng-href="#/viewprintcampaign?id={{photo.uniqueid}}&&galleryid={{galleryid}}"> <img
-									ng-src="{{photo.thumbnail_url}}" alt="" class="fade_spot"></a>
-							<div class="divi2"></div>
-						</div>
-						<div class="campaigntitle">
-							<h3>{{photo.label}}</h3>
-						</div>
-					</li>
-				</ul>
+				</div>
+				<div class="box  col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013039885/"
+						title="Officer by Dave DeSandro, on Flickr"><img
+						src="images/paste2.jpg" alt="Officer" class="fade_spot" /></a>
+					<h3>
+						<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;">Fall/Winter 2012</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
+
+				</div>
+				<div class="box  col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013039583/"
+						title="Tony by Dave DeSandro, on Flickr"><img
+						src="images/paste4.jpg" alt="Tony" class="fade_spot"  /></a>
+					<h3>
+					<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;"> Fashion Week</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
+
+				</div>
+				<div class="box photo col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013646070/"
+						title="Kendra by Dave DeSandro, on Flickr"><img
+						src="images/paste5.jpg" alt="Kendra" class="fade_spot"  /></a>
+					<h3>
+					<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;">Minkoff</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
+
+				</div>
+				<div class="box photo col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013039541/"
+						title="Giraffe by Dave DeSandro, on Flickr"><img
+						src="images/paste6.jpg" alt="Giraffe" class="fade_spot"  /></a>
+					<h3>
+					<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;"> Fashion Week</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
+
+				</div>
+				<div class="box photo col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013039741/"
+						title="Gavin by Dave DeSandro, on Flickr"><img
+						src="img/donna_karan_adriana_lima_1.jpg" alt="Gavin" class="fade_spot"  /></a>
+					<h3>
+						<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;">Lakme Fashion Week</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
+
+				</div>
+				<div class="box photo col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013039697/"
+						title="Anita by Dave DeSandro, on Flickr"><img
+						src="img/donna_karan_adriana_lima_2.jpg" class="fade_spot" alt="Anita" /></a>
+					<h3>
+					<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;"> Fashion Week</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
+
+				</div>
+				<div class="box photo col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013646314/"
+						title="Take My Portrait by Dave DeSandro, on Flickr"><img
+						src="img/donna_karan_adriana_lima_3.jpg" alt="Take My Portrait" /></a>
+
+					<h3>
+						<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;"> Fashion Week</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
+
+				</div>
+			
+			
+				<div class="box  col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013039951/"
+						title="Stanley by Dave DeSandro, on Flickr"><img
+						src="images/paste.jpg"  alt="Stanley" class="fade_spot" /></a>
+					<h3>
+						<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;"> Fashion Week</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
+
+				</div>
+				<div class="box  col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013039885/"
+						title="Officer by Dave DeSandro, on Flickr"><img
+						src="images/paste2.jpg" alt="Officer" class="fade_spot" /></a>
+					<h3>
+						<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;">Fall/Winter 2012</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
+
+				</div>
+				<div class="box  col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013039583/"
+						title="Tony by Dave DeSandro, on Flickr"><img
+						src="images/paste4.jpg" alt="Tony" class="fade_spot"  /></a>
+					<h3>
+					<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;"> Fashion Week</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
+
+				</div>
+				<div class="box photo col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013646070/"
+						title="Kendra by Dave DeSandro, on Flickr"><img
+						src="images/paste5.jpg" alt="Kendra" class="fade_spot"  /></a>
+					<h3>
+					<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;">Minkoff</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
+
+				</div>
+				<div class="box photo col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013039541/"
+						title="Giraffe by Dave DeSandro, on Flickr"><img
+						src="images/paste6.jpg" alt="Giraffe" class="fade_spot"  /></a>
+					<h3>
+					<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;"> Fashion Week</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
+
+				</div>
+				<div class="box photo col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013039741/"
+						title="Gavin by Dave DeSandro, on Flickr"><img
+						src="img/donna_karan_adriana_lima_1.jpg" alt="Gavin" class="fade_spot"  /></a>
+					<h3>
+						<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;">Lakme Fashion Week</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
+
+				</div>
+				<div class="box photo col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013039697/"
+						title="Anita by Dave DeSandro, on Flickr"><img
+						src="img/donna_karan_adriana_lima_2.jpg" class="fade_spot" alt="Anita" /></a>
+					<h3>
+					<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;"> Fashion Week</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
+
+				</div>
+				<div class="box photo col2">
+					<a href="http://www.flickr.com/photos/nemoorange/5013646314/"
+						title="Take My Portrait by Dave DeSandro, on Flickr"><img
+						src="img/donna_karan_adriana_lima_3.jpg" alt="Take My Portrait" /></a>
+
+					<h3>
+						<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;"> Fashion Week</span>
+					</h3>
+					<h3>
+						<span style="color:#20ACB8;font-weight:normal;font-size:17px;"> Chanel Womenswear SS13</span>
+					</h3>
+					<p>date</p>
+					<p>Chanel's Creative Director of Makeup Peter Philips talks us
+						through shine and silver, the new season's look</p>
+
+				</div>
 			</div>
+			<!-- #container -->
+			
+<nav id="page-nav">
+  <a href="../pages/2.html"></a>
+</nav>
+
 		</div>
 		<!-- right pane -->
 	</div>
 </div>
 <!--body-->
+<!-- <script>
+$(function(){
+    
+    jQuery('#container').masonry({
+      itemSelector: '.box'
+    });
+
+  });
+</script> -->
+
+
+<script>
+	$(function() {
+
+		var $container = jQuery('#container');
+
+		$container.imagesLoaded(function() {
+			$container.masonry({
+				itemSelector : '.box'
+			});
+		});
+
+		
+		 $container.infinitescroll({
+		      navSelector  : '#page-nav',    // selector for the paged navigation 
+		      nextSelector : '#page-nav a',  // selector for the NEXT link (to page 2)
+		      itemSelector : '.box',     // selector for all items you'll retrieve
+		      loading: {
+		          finishedMsg: 'No more pages to load.',
+		          img: 'http://i.imgur.com/6RMhx.gif'
+		        }
+		      },
+		      // trigger Masonry as a callback
+		      function( newElements ) {
+		        // hide new items while they are loading
+		        var $newElems = $( newElements ).css({ opacity: 0 });
+		        // ensure that images load before adding to masonry layout
+		        $newElems.imagesLoaded(function(){
+		          // show elems now they're ready
+		          $newElems.animate({ opacity: 1 });
+		          $container.masonry( 'appended', $newElems, true ); 
+		        });
+		      }
+		    );
+	});
+</script>
+
+
 
