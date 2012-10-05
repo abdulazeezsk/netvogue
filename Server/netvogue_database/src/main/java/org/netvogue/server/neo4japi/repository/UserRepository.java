@@ -22,20 +22,22 @@ public interface UserRepository extends GraphRepository<User> {
 	
 	@Query( "start category=node:category({cat}) /" +
 			"with collect(category) as categories /" +
-			"start user=node:index({search}) /" +
+			"start user=node:search({search}) /" +
 			"where p<>user AND ALL( c in categories WHERE user-[:HAS_CAT]->c)  /" +
 			"return user " +
 			"skip {pagenumber*pagesize} limit{pagesize}")
-	Iterable<User> doAdvancedSearch(@Param("SelCategories") List<String> Categories, @Param("searchindex") Map<String, String> searchIndex,
+	Iterable<User> doAdvancedSearch(@Param("cat") List<String> Categories, 
+									@Param("search") Map<String, String> searchIndex,
 									@Param("pagenumber") long pagenumber, @Param("pagesize") long pagesize);
 	
 	@Query( "start category=node:category({cat}) /" +
 			"with collect(category) as categories /" +
-			"start user=node:index({search}) /" +
+			"start user=node:search({search}) /" +
 			"where p<>user AND ALL( c in categories WHERE user-[:HAS_CAT]->c)  /" +
 			"return user " +
 			"skip {pagenumber*pagesize} limit{pagesize}")
-	Iterable<User> doBasicSearch(@Param("SelCategories") List<String> Categories, @Param("searchindex") Map<String, String> searchIndex,
+	Iterable<User> doAdvancedSearch(@Param("cat") List<String> Categories, 
+									@Param("search") String searchIndex,
 									@Param("pagenumber") long pagenumber, @Param("pagesize") long pagesize);
 	
 	//Queries related to gallery

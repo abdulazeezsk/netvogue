@@ -20,25 +20,27 @@
 			<div class="divi2"></div>
 			<div>
 				<div>
-					<input type="radio" name="Date" checked value="true" checked>
-					Brands
-						<input type="radio" name="Date" value="false"> Boutiques
+					<input type="radio" name="Date" value="true" ng-model="isbrandsearch"> Brands
+					<input type="radio" name="Date" value="false" ng-model="isbrandsearch"> Boutiques
 				</div>
 			</div>
 			<div class="divi2"></div>
-			<div>
-				<span class="leftpane_filter_name">BRAND</span> <input type="text"
-					class="span3"  placeholder="Brand name" /> <span class="leftpane_filter_name" >Stockists
-					</span> <input type="text" class="span3" placeholder="Stockists" /> <span
-					class="leftpane_filter_name">LOCATION</span> <input type="text"
-					class="span3" placeholder="Location" />
+			<div ui-if="isbrandsearch == 'true'">
+				<span class="leftpane_filter_name">BRAND</span> 
+					<input type="text" class="span3"  placeholder="Brand name" ng-model="name" ng-change="getsearchResults()"/> 
+				<span class="leftpane_filter_name" >Stockists</span> 
+					<input type="text" class="span3" placeholder="Stockists" /> 
+				<span class="leftpane_filter_name">LOCATION</span> 
+					<input type="text" class="span3" placeholder="Location" ng-model="location" ng-change="getsearchResults()"/>
 			</div>
-			<div ng-show="false">
-				<span class="leftpane_filter_name">Boutique</span> <input type="text"
-					class="span3"  placeholder="Boutique name" /> <span class="leftpane_filter_name">
-					Brands CARRIED</span> <input type="text" class="span3" placeholder="Brands carried" /> <span
-					class="leftpane_filter_name">LOCATION</span> <input type="text"
-					class="span3" placeholder="Location" />
+			<div ui-if="isbrandsearch == 'false'">
+				<span class="leftpane_filter_name">Boutique</span> 
+					<input type="text" class="span3"  placeholder="Boutique name" ng-model="name" ng-change="getsearchResults()"/> 
+				<span class="leftpane_filter_name">
+					Brands CARRIED</span> 
+					<input type="text" class="span3" placeholder="Brands carried" /> 
+				<span class="leftpane_filter_name">LOCATION</span> 
+					<input type="text" class="span3" placeholder="Location" ng-model="location" ng-change="getsearchResults()"/>
 			</div>
 			<div>
 				<span class="leftpane_filter_name">CATEGORY</span>
@@ -59,19 +61,19 @@
 				<div>
 					<ul class="thumbnails">
 						<li
-							ng-repeat="brand in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize">
+							ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize">
 							<div class="viewls view-firstls">
-								<a href="#/{{brand.brandlistitemid}}"> <img
-									src="{{brand.brandprofilepic}}" alt=""></a>
+								<a ng-href="#/{{user.username}}/profile"> <img
+									ng-src="{{user.thumbpicpic}}" alt=""></a>
 								<div class="maskls mask-1"></div>
 								<div class="maskls mask-2">
 									<p>
-										<u>{{brand.brandname}}</u> <br /> {{brand.brandlocation}}
+										<u>{{user.name}}</u> <br /> {{user.location}}
 									</p>
 								</div>
 								<div class="contentls">
 									<h1>
-										<a href="#/{{brand.brandlistitemid}}" class="mask_edit">View</a>
+										<a ng-href="#/{{user.username}}/profile" class="mask_edit">View</a>
 									</h1>
 								</div>
 								<div class="divi2"></div>
@@ -79,7 +81,7 @@
 							<div class="title">
 								<!--<h3>
                                 {{linesheet.linesheetseason}}</h3>-->
-								<h3>{{brand.brandname}}</h3>
+								<h3>{{user.name}}</h3>
 							</div>
 						</li>
 					</ul>

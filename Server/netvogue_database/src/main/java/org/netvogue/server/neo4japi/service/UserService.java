@@ -1,6 +1,9 @@
 package org.netvogue.server.neo4japi.service;
 
+import java.util.List;
+
 import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.Collection;
 import org.netvogue.server.neo4japi.domain.Editorial;
 import org.netvogue.server.neo4japi.domain.Gallery;
@@ -15,6 +18,7 @@ public interface UserService {
 
 	//Search related
 	public Iterable<User> doBasicSearch(String query);
+	public Iterable<User> doAdvancedSearch(USER_TYPE userType, String name, String location, List<String> categories);
 	
 	//Gallery related
 	public Iterable<Gallery> GetGalleries(User user);
