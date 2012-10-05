@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="css/jquery.fileupload-ui.css" />
     <link href="css/style_overlay.css" rel="stylesheet" type="text/css" />
     <link href="css/style_common.css" rel="stylesheet" type="text/css" />
+   
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+ 
+    
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="css/jquery.tree.css" />
     <link href="css/angular-ui.css" rel="stylesheet" />
@@ -35,6 +39,10 @@
     <script src="lib/jquery/jquery.placeholder.js"  type="text/javascript"></script>
     <script src="lib/bootstrap/bootstrap.min.js" 	type="text/javascript"></script>
     <script src="lib/jquery/jquery.progressbar.js" 	type="text/javascript"></script>
+   
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+   <script src="lib/jquery/jquery.masonry.min.js" 	type="text/javascript"></script>
+   <script src="lib/jquery/jquery.infinitescroll.min.js" 	type="text/javascript"></script>
     <script src="lib/angular/angular.js" 			type="text/javascript"></script>
     <script src="lib/angular/angular-ui.js" 		type="text/javascript"></script>
     <script src="lib/bootstrap/bootstrap-navlist.js" type="text/javascript"></script>
@@ -53,6 +61,7 @@
     <script src="js/constants.js" 					type="text/javascript"></script>
     <script src="js/main.js" 						type="text/javascript"></script>
     <script src="js/utils.js" 						type="text/javascript"></script>
+  
     
     <script src="lib/fileupload/vendor/jquery.ui.widget.js"></script>
 	<script src="lib/fileupload/jquery.iframe-transport.js"></script>
