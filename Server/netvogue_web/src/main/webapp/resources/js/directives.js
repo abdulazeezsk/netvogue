@@ -60,10 +60,11 @@ angular.module('netVogue.directives', []).
 	    			angular.forEach(angular.element(element).find('img'), function(imgElement) {
 	    				angular.element(imgElement).attr('src', newValue[i++].thumbnail_url);
 	    			});
-	    			var $container = element;
-					$container.imagesLoaded(function() {
-						$container.masonry({
-							itemSelector : '.box'
+	    			element.imagesLoaded(function() {
+						scope.$apply( function() {
+							element.masonry({
+								itemSelector : '.box'
+							});
 						});
 					});
 	    		//});
@@ -211,10 +212,29 @@ angular.module('netVogue.directives', []).
 			angular.forEach(angular.element(element).find('img'), function(imgElement) {
 				angular.element(imgElement).attr('src', newValue[i++].thumbnail_url);
 			});
-			var $container = element;
-			$container.imagesLoaded(function() {
-				$container.masonry({
-					itemSelector : '.box'
+			element.imagesLoaded(function() {
+				scope.$apply( function() {
+					element.masonry({
+						itemSelector : '.box'
+					});
+				});
+			});
+		});
+		
+		scope.$watch('existingfiles', function(newValue, oldValue) {
+    		if(angular.isUndefined(newValue)) {
+				return;
+			}
+    		
+    		var i=0;
+			angular.forEach(angular.element(element).find('img'), function(imgElement) {
+				angular.element(imgElement).attr('src', newValue[i++].thumbnail_url);
+			});
+			element.imagesLoaded(function() {
+				scope.$apply( function() {
+					element.masonry({
+						itemSelector : '.box'
+					});
 				});
 			});
 		});
