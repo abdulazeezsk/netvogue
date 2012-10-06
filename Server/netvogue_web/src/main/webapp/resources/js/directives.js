@@ -201,6 +201,23 @@ angular.module('netVogue.directives', []).
 		};
 		scope.progressVisible = true;
 		scope.progress = 0;
+		
+		scope.$watch('$parent.existingfiles', function(newValue, oldValue) {
+    		if(angular.isUndefined(newValue)) {
+				return;
+			}
+    		
+    		var i=0;
+			angular.forEach(angular.element(element).find('img'), function(imgElement) {
+				angular.element(imgElement).attr('src', newValue[i++].thumbnail_url);
+			});
+			var $container = element;
+			$container.imagesLoaded(function() {
+				$container.masonry({
+					itemSelector : '.box'
+				});
+			});
+		});
 	};
 	return {
 		templateUrl	: 'templates/fileupload_plugin.htm',
