@@ -1,9 +1,9 @@
-<input type="text" class="spanedt_txt" ng-show="isEditMode"	ng-model="data.label">
+<input type="text" class="spanedt_txt" ng-show="isEditMode"	ng-model="data.label" placeholder="Click here to add title">
 </input>
 
 <span ui-if="emptylabel" ng-hide="isEditMode" ng-click="switchToEdit()"
 	style="color: #20ACB8; font-weight: normal; font-size: 14px; cursor: pointer; text-transform: uppercase;">
-	Click here to add label</span>
+	Click here to add title</span>
 
 <span ui-if="!emptylabel" ng-hide="isEditMode" ng-click="switchToEdit()"
 	ng-bind-html-unsafe="data.label"
@@ -24,12 +24,12 @@
 	</ul>
 </span>
 
-<textarea class="spanedt_txt1" rows="5" ng-show="isEditMode"
+<textarea class="spanedt_txt1" rows="5" ng-show="isEditMode" placeholder="Click here to add description"
 	ng-model="data.seasonname">
 </textarea>
 
 <p ui-if="emptyseasonname" ng-hide="isEditMode" class="desc" ng-click="switchToEdit()">
-	Click here to edit season name</p>
+	Click here to add description</p>
 
 <p ui-if="!emptyseasonname" ng-hide="isEditMode" class="desc" ng-click="switchToEdit()"
 	ng-bind-html-unsafe="data.seasonname"></p>
