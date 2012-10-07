@@ -6683,7 +6683,6 @@ ul.n-wizard-brand-list {
 	padding: 5px 0 5px 0;
 	min-height: 150px;
 	position: relative;
-	float: left;
 	clear: both;
 }
 
@@ -6697,7 +6696,7 @@ ul.n-wizard-brand-list {
 	overflow-x: hidden;
 	overflow-y: hidden;
 }
-}
+
 
 
 
