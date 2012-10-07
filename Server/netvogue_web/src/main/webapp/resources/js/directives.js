@@ -203,7 +203,7 @@ angular.module('netVogue.directives', []).
 		scope.progressVisible = true;
 		scope.progress = 0;
 		
-		scope.$watch('$parent.existingfiles', function(newValue, oldValue) {
+		/*scope.$watch('existingfiles', function(newValue, oldValue) {
     		if(angular.isUndefined(newValue)) {
 				return;
 			}
@@ -219,25 +219,7 @@ angular.module('netVogue.directives', []).
 					});
 				});
 			});
-		});
-		
-		scope.$watch('existingfiles', function(newValue, oldValue) {
-    		if(angular.isUndefined(newValue)) {
-				return;
-			}
-    		
-    		var i=0;
-			angular.forEach(angular.element(element).find('img'), function(imgElement) {
-				angular.element(imgElement).attr('src', newValue[i++].thumbnail_url);
-			});
-			element.imagesLoaded(function() {
-				scope.$apply( function() {
-					element.masonry({
-						itemSelector : '.box'
-					});
-				});
-			});
-		});
+		}, true);*/
 	};
 	return {
 		templateUrl	: 'templates/fileupload_plugin.htm',
