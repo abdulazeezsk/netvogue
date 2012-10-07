@@ -191,11 +191,6 @@ angular.module('netVogue.directives', []).
 		        		addfiles(data.files);
 		        	});
 		        },
-		        paste: function(e, data) {
-		        	scope.$apply(function(scope) {
-		        		addfiles(data.files);
-		        	});
-		        },
 		        done: function (e, data) {
 		        	scope.$apply(function(scope) {
 		        		if(data.result.status == true) {
