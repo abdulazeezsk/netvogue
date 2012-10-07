@@ -255,7 +255,30 @@ angular.module('netVogue.directives', []).
 			filesadded		: '=filesAdded'
 		},
 		link		: linkFn
-	};	
+	};
+}).directive('profileuploadPlugin', function() {
+	var linkFn;
+	linkFn = function(scope, element, attrs, ngModel) {
+		angular.element(element).ready(function() {
+			jQuery('#profileupload').fileupload({
+		        dataType: 'json',
+		        limitMultiFileUploads: 1,
+		        done: function (e, data) {
+		        	scope.$apply(function(scope) {
+		        		if(data.result.status == true) {
+		        			scope.profilepic = data.result.filesuploaded[0].thumbnail_url;
+		        		} else {
+		        			alert("error");
+		        		}
+		        	});
+		        }
+		    });
+    	});
+	};
+	return {
+		restrict	: 'A',
+		link		: linkFn
+	};		
 }).directive('styleuploadPlugin', function() {
 	var linkFn;
 	linkFn = function(scope, element, attrs) {

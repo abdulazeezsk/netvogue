@@ -8,55 +8,7 @@
 angular.module('netVogue.services', []).
 	value('version', '0.1').
 	service('myprofile', function ($http) {
-	    /*var aboutus = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-        "ipsum vel enim. Aliquam erat volutpat. Etiam a dui at neque semper ornare. Mauris" +
-        "lacus tortor, sagittis eu, dictum sit amet, facilisis eu, mauris. Praesent molestie" +
-        "ante non nibh. Suspendisse placerat eros vel velit. Vestibulum ante ipsum primis" +
-        "in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam ultricies eros" +
-        "eget quam Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-        "ipsum vel enim. Aliquam erat volutpat. Etiam a dui at neque semper ornare. Mauris" +
-        "lacus tortor, sagittis eu, dictum sit amet, facilisis eu, mauris. Praesent molestie" +
-        "ante non nibh. Suspendisse placerat eros vel velit. Vestibulum ante ipsum primis" +
-        "in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam ultricies eros" +
-        "eget quam";
-
-
-	    var contactinfo = new netvogue.contactinfo(
-		        "Boutiquename@gmail.com", "9949879098", "040-23371149", "040-23371149",
-		        "Lorem ipsum dolor sit amet\, consectetuer adipiscing elit. Vivamus dui.",
-		        "Hyderabad", "500009", "Andhra Pradesh", "India", "netvogue.org", "2012"
-		    ); // email, mobile, landline1, landline2, address, city, zip, state, country, website, yearest
-
-
-	    var productline = [ //	productlinename, productlinepic, selected
-	                	   	new netvogue.productline("Womens RTW", "http://placehold.it/100x72", "yes"),
-	                	   	new netvogue.productline("Womens Shoe", "http://placehold.it/100x72", "no"),
-	                	   	new netvogue.productline("Denim", "http://placehold.it/100x72", "no"),
-	                	   	new netvogue.productline("Outerwear", "http://placehold.it/100x72", "yes"),
-	                	   	new netvogue.productline("Activewear", "http://placehold.it/100x72", "yes"),
-	                	   	new netvogue.productline("Mens RTW", "http://placehold.it/100x72", "no"),
-	                	   	new netvogue.productline("Mens Shoe", "http://placehold.it/100x72", "no"),
-	                	   	new netvogue.productline("Mens Bags", "http://placehold.it/100x72", "no"),
-	                	   	new netvogue.productline("Handbags", "http://placehold.it/100x72", "no"),
-	                	   	new netvogue.productline("Lingerie", "http://placehold.it/100x72", "yes"),
-	                	   	new netvogue.productline("Jewelry", "http://placehold.it/100x72", "no"),
-	                	   	new netvogue.productline("Swimwear", "http://placehold.it/100x72", "no"),
-	                	   	new netvogue.productline("Kids", "http://placehold.it/100x72", "yes"),
-	                	   	new netvogue.productline("Watches", "http://placehold.it/100x72", "no"),
-	                	   	new netvogue.productline("Hats", "http://placehold.it/100x72", "no"),
-	                	   	new netvogue.productline("Luggage", "http://placehold.it/100x72", "no"),
-	                	   	new netvogue.productline("Gifts", "http://placehold.it/100x72", "no"),
-	                	   	new netvogue.productline("Candles", "http://placehold.it/100x72", "no")
-						  ];
-	    var brandscarried = [ //brandlistitem , brandprofilepic
-		                     new netvogue.brandscarried("Calvin klein", "images/ck-beauty.jpg"),
-		                     new netvogue.brandscarried("Rebecca  Minkoff Drake", "http://placehold.it/132x89"),
-		                     new netvogue.brandscarried("Donna Karan", "http://placehold.it/132x89"),
-		                     new netvogue.brandscarried("Ritu Beri", "http://placehold.it/132x89"),
-		                     new netvogue.brandscarried("Jason Myers", "http://placehold.it/132x89"),
-		                     new netvogue.brandscarried("Maria will", "http://placehold.it/132x89")
-	                        ];*/
-		var profileinfo = new netvogue.profile();
+	    var profileinfo = new netvogue.profile();
 
 	    return {
 	    	getprofileinfo: function() {
@@ -82,6 +34,14 @@ angular.module('netVogue.services', []).
 	        	profileinfo.aboutus = aboutme;
 
 	        },
+	        getprofilepic: function() {
+	    		if(angular.isUndefined(profileinfo.profilepic))
+	        		return "";
+	    		return profileinfo.profilepic;
+	    	},
+	    	setprofilepic: function(profilepic) {
+	    		profileinfo.profilepic = profilepic;
+	    	},
 	        getemail: function() {
 	        	if(angular.isUndefined(profileinfo.contactinfo))
 	        		return "";
@@ -141,21 +101,6 @@ angular.module('netVogue.services', []).
 				                    new netvogue.network("Donna Karan", "http://placehold.it/100x72", "profileid1"),
 	        	                 ]);
 
-            var linesheets = new netvogue.hashtable();
-      linesheets.setItem("profileid1",
-								  [
-								  new netvogue.linesheet("linesheetId", "Calvin Klien", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-					              new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-					              new netvogue.linesheet("linesheetId", "Catherine jones", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-					              new netvogue.linesheet("linesheetId", "Rebecca Jonson", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-					              new netvogue.linesheet("linesheetId", "Givenchy", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-					              new netvogue.linesheet("linesheetId", "Valentino", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-					              new netvogue.linesheet("linesheetId", "DKNY", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-					              new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-					              new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-					              new netvogue.linesheet("linesheetId", "Rebecca Minkoff", "Spring 2012", "25/04/2012", "http://placehold.it/231x306"),
-					              new netvogue.linesheet("linesheetId", "Donna karan", "Spring 2012", "25/04/2012", "http://placehold.it/231x306")
-								  ]);
       return {
           profileinfo: function (routeparams) {
               var profileid = "";
@@ -197,6 +142,19 @@ angular.module('netVogue.services', []).
                   angular.forEach(profiles, function (profile) {
                       if (angular.equals(profile['profileid'], routeparams.profileid)) {
                           result = profile['aboutus'];
+                      }
+                  });
+              }
+              return result;
+          },
+          getprofilepic: function(routeparams) {
+        	  var result;
+              if (angular.isUndefined(routeparams.profileid)) {
+                  return myprofile.getprofilepic();
+              } else {
+                  angular.forEach(profiles, function (profile) {
+                      if (angular.equals(profile['profileid'], routeparams.profileid)) {
+                          result = profile['profilepic'];
                       }
                   });
               }
@@ -335,6 +293,7 @@ angular.module('netVogue.services', []).
       };
 }).service('mygallery', function ($http) {
 		var name;
+		var profilepic;
 		var galleryname;
 		var galleries = [];
 		var photos    = [];
@@ -344,6 +303,7 @@ angular.module('netVogue.services', []).
 	    	},
 	    	setgalleries: function(galleriestemp) {
 	    		name = galleriestemp.name;
+	    		profilepic = galleriestemp.profilepic
 	    		angular.copy(galleriestemp.galleries, galleries);
 	    	},
 	    	getname: function() {
@@ -353,6 +313,11 @@ angular.module('netVogue.services', []).
 	    	},
 	    	setname: function(name) {
 	    		this.name = name;
+	    	},
+	    	getprofilepic: function() {
+	    		if(angular.isUndefined(profilepic))
+	        		return "";
+	    		return profilepic;
 	    	},
 	    	getgalleryname: function() {
 	    		if(angular.isUndefined(galleryname))
@@ -459,6 +424,19 @@ angular.module('netVogue.services', []).
               }
               return result;
     	  },
+    	  getprofilepic: function(routeparams) {
+    		  var result;
+              if (angular.isUndefined(routeparams.profileid)) {
+                  return mygallery.getprofilepic();
+              } else {
+                  /*angular.forEach(profiles, function (profile) {
+                      if (angular.equals(profile['profileid'], routeparams.profileid)) {
+                          result = profile['aboutus'];
+                      }
+                  });*/
+              }
+              return result;
+    	  },
     	  getgalleryname: function (routeparams) {
 	          if (angular.isUndefined(routeparams.profileid)) {
 	        	  return mygallery.getgalleryname();
@@ -522,6 +500,7 @@ angular.module('netVogue.services', []).
       };
 }).service('mycollection', function ($http) {
 		var name;
+		var profilepic;
 		var galleryname;
 		var collections = [];
 		var photos    = [];
@@ -531,6 +510,7 @@ angular.module('netVogue.services', []).
 	    	},
 	    	setcollections: function(temp) {
 	    		name = temp.name;
+	    		profilepic = temp.profilepic;
 	    		angular.copy(temp.collections, collections);
 	    	},
 	    	getname: function() {
@@ -540,6 +520,11 @@ angular.module('netVogue.services', []).
 	    	},
 	    	setname: function(name) {
 	    		this.name = name;
+	    	},
+	    	getprofilepic: function() {
+	    		if(angular.isUndefined(profilepic))
+	        		return "";
+	    		return profilepic;
 	    	},
 	    	getgalleryname: function() {
 	    		if(angular.isUndefined(galleryname))
@@ -646,6 +631,19 @@ angular.module('netVogue.services', []).
             }
             return result;
   	  },
+  	  getprofilepic: function(routeparams) {
+		  var result;
+        if (angular.isUndefined(routeparams.profileid)) {
+            return mycollection.getprofilepic();
+        } else {
+            /*angular.forEach(profiles, function (profile) {
+                if (angular.equals(profile['profileid'], routeparams.profileid)) {
+                    result = profile['aboutus'];
+                }
+            });*/
+        }
+        return result;
+	  },
   	  getgalleryname: function (routeparams) {
 	          if (angular.isUndefined(routeparams.profileid)) {
 	        	  return mycollection.getgalleryname();
@@ -706,6 +704,7 @@ angular.module('netVogue.services', []).
     };
 }).service('mystylesheet', function ($http) {
 	var name;
+	var profilepic;
 	var stylesheetname;
 	var stylesheets = [];
 	var styles    = [];
@@ -715,6 +714,7 @@ angular.module('netVogue.services', []).
     	},
     	setstylesheets: function(temp) {
     		name = temp.name;
+    		profilepic = temp.profilepic;
     		angular.copy(temp.stylesheets, stylesheets);
     	},
     	getname: function() {
@@ -724,6 +724,11 @@ angular.module('netVogue.services', []).
     	},
     	setname: function(name) {
     		this.name = name;
+    	},
+    	getprofilepic: function() {
+    		if(angular.isUndefined(profilepic))
+        		return "";
+    		return profilepic;
     	},
     	getstylesheetname: function() {
     		if(angular.isUndefined(stylesheetname))
@@ -844,6 +849,19 @@ angular.module('netVogue.services', []).
         }
         return result;
 	  },
+	  getprofilepic: function(routeparams) {
+		  var result;
+          if (angular.isUndefined(routeparams.profileid)) {
+              return mystylesheet.getprofilepic();
+          } else {
+              /*angular.forEach(profiles, function (profile) {
+                  if (angular.equals(profile['profileid'], routeparams.profileid)) {
+                      result = profile['aboutus'];
+                  }
+              });*/
+          }
+          return result;
+	  },
 	  getstylesheetname: function (routeparams) {
           if (angular.isUndefined(routeparams.profileid)) {
         	  return mystylesheet.getstylesheetname();
@@ -920,6 +938,7 @@ angular.module('netVogue.services', []).
 	};
 }).service('mylinesheet', function ($http) {
 	var name;
+	var profilepic;
 	var linesheetname;
 	var linesheets = [];
 	var styles    = [];
@@ -929,6 +948,7 @@ angular.module('netVogue.services', []).
     	},
     	setlinesheets: function(temp) {
     		name = temp.name;
+    		profilepic = temp.profilepic;
     		angular.copy(temp.linesheets, linesheets);
     	},
     	getname: function() {
@@ -938,6 +958,11 @@ angular.module('netVogue.services', []).
     	},
     	setname: function(name) {
     		this.name = name;
+    	},
+    	getprofilepic: function() {
+    		if(angular.isUndefined(profilepic))
+        		return "";
+    		return profilepic;
     	},
     	getlinesheetname: function() {
     		if(angular.isUndefined(linesheetname))
@@ -1032,17 +1057,30 @@ angular.module('netVogue.services', []).
 	var linesheets = new netvogue.hashtable();
 	return {
 	  getname: function(routeparams) {
-  	  var result;
-        if (angular.isUndefined(routeparams.profileid)) {
-            return mylinesheet.getname();
-        } else {
+		  var result;
+		  if (angular.isUndefined(routeparams.profileid)) {
+			  return mylinesheet.getname();
+		  } else {
             /*angular.forEach(profiles, function (profile) {
                 if (angular.equals(profile['profileid'], routeparams.profileid)) {
                     result = profile['aboutus'];
                 }
             });*/
-        }
-        return result;
+		  }
+		  return result;
+	  },
+	  getprofilepic: function(routeparams) {
+		  var result;
+          if (angular.isUndefined(routeparams.profileid)) {
+              return mylinesheet.getprofilepic();
+          } else {
+              /*angular.forEach(profiles, function (profile) {
+                  if (angular.equals(profile['profileid'], routeparams.profileid)) {
+                      result = profile['aboutus'];
+                  }
+              });*/
+          }
+          return result;
 	  },
 	  getlinesheetname: function (routeparams) {
           if (angular.isUndefined(routeparams.profileid)) {

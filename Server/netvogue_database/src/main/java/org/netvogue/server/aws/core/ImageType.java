@@ -2,7 +2,7 @@ package org.netvogue.server.aws.core;
 
 public enum ImageType {
 	
-	PROFILE_PIC					("profiles"			,new Size[]{Size.S1,Size.S2,Size.S3,Size.S4}),
+	PROFILE_PIC					("profiles"			,new Size[]{Size.PThumb,Size.PTop}),
 	GALLERY						("gallery"			,new Size[]{Size.GThumb,Size.GAdd,Size.GLeft,Size.GMain}),
 	PRINT_CAMPAIGN				("printcampaign"	,new Size[]{Size.PCThumb,Size.PCAdd,Size.PCLeft,Size.PCMain}),
 	EDITORIAL					("editorial"		,new Size[]{Size.EThumb,Size.EAdd,Size.ELeft,Size.EMain}),

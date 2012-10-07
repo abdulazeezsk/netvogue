@@ -20,6 +20,7 @@ import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
 import org.netvogue.server.neo4japi.service.StylesheetService;
 import org.netvogue.server.neo4japi.service.UserService;
+import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.PhotoWeb;
 import org.netvogue.server.webmvc.domain.Photos;
@@ -67,6 +68,7 @@ public class StyleSheetController {
 		User loggedinUser = userDetailsService.getUserFromSession();
 		if(profileid.isEmpty()) {
 			stylesheets.setName(loggedinUser.getName());
+			stylesheets.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
 			Set<Stylesheet> stylesheetTemp = new LinkedHashSet<Stylesheet>();
 			Iterable<org.netvogue.server.neo4japi.domain.Stylesheet> dbStylesheets;
 			if(stylesheetname.isEmpty()) {
@@ -103,6 +105,7 @@ public class StyleSheetController {
 		
 		if(profileid.isEmpty()) {
 			styles.setName(loggedinUser.getName());
+			styles.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
 			//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
 			org.netvogue.server.neo4japi.domain.Stylesheet s = stylesheetService.getStylesheet(stylesheetid);
 			if(null == s)
@@ -144,6 +147,7 @@ public class StyleSheetController {
 		
 		if(profileid.isEmpty()) {
 			styles.setName(loggedinUser.getName());
+			styles.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
 			//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
 			Set<StyleResponse> stylesTemp = new LinkedHashSet<StyleResponse>();
 			Iterable<Style> dbStyles;

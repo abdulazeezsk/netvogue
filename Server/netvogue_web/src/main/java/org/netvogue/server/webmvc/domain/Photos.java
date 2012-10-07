@@ -6,6 +6,7 @@ import org.netvogue.server.webmvc.domain.PhotoWeb;
 
 public class Photos {
 	String name;
+	ImageURLsResponse profilepic;
 	String galleryname;
 	Set<PhotoWeb> photos;
 	public String getName() {
@@ -25,5 +26,11 @@ public class Photos {
 	}
 	public void setGalleryname(String galleryname) {
 		this.galleryname = galleryname;
+	}
+	public ImageURLsResponse getProfilepic() {
+		return profilepic;
+	}
+	public void setProfilepic(ImageURLsResponse profilepic) {
+		this.profilepic = profilepic;
 	}
 }

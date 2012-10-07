@@ -15,6 +15,7 @@ import org.netvogue.server.neo4japi.service.BoutiqueService;
 import org.netvogue.server.neo4japi.service.LinesheetService;
 import org.netvogue.server.neo4japi.service.StylesheetService;
 import org.netvogue.server.neo4japi.service.UserService;
+import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.Linesheet;
@@ -57,6 +58,7 @@ public class LinesheetController {
 		User loggedinUser = userDetailsService.getUserFromSession();
 		if(profileid.isEmpty()) {
 			linesheets.setName(loggedinUser.getName());
+			linesheets.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
 			Set<Linesheet> linesheetTemp = new LinkedHashSet<Linesheet>();
 			Iterable<org.netvogue.server.neo4japi.domain.Linesheet> dbLinesheets;
 			if(linesheetname.isEmpty()) {
@@ -93,6 +95,7 @@ public class LinesheetController {
 		
 		if(profileid.isEmpty()) {
 			styles.setName(loggedinUser.getName());
+			styles.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
 			//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
 			org.netvogue.server.neo4japi.domain.Linesheet s = linesheetService.getLinesheet(stylesheetid);
 			if(null == s)

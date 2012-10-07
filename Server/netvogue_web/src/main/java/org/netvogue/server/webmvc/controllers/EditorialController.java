@@ -17,6 +17,7 @@ import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.domain.CampaignJSONRequest;
 import org.netvogue.server.webmvc.domain.Editorial;
 import org.netvogue.server.webmvc.domain.Editorials;
+import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.PhotoInfoJsonRequest;
@@ -54,6 +55,7 @@ public class EditorialController {
 		User loggedinUser = userDetailsService.getUserFromSession();
 		if(profileid.isEmpty()) {
 			campaigns.setName(loggedinUser.getName());
+			campaigns.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
 			Set<Editorial> campaignTemp = new LinkedHashSet<Editorial>();
 			Iterable<org.netvogue.server.neo4japi.domain.Editorial> dbCampaigns;
 			if(galleryname.isEmpty()) {
@@ -89,6 +91,7 @@ public class EditorialController {
 		
 		if(profileid.isEmpty()) {
 			photos.setName(loggedinUser.getName());
+			photos.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
 			photos.setGalleryname(editorialService.getEditorial(galleryid).getEditorialname());
 			Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
 			Iterable<EditorialPhoto> dbPhotos;

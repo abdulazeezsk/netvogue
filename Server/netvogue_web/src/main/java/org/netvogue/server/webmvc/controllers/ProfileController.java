@@ -1,20 +1,21 @@
 package org.netvogue.server.webmvc.controllers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.validation.Valid;
-
-import org.netvogue.server.webmvc.domain.BoutiqueNew;
 import org.netvogue.server.webmvc.domain.BrandsCarried;
 import org.netvogue.server.webmvc.domain.JsonResponse;
+import org.netvogue.server.webmvc.domain.PhotoWeb;
 import org.netvogue.server.webmvc.domain.ProductLine;
 import org.netvogue.server.webmvc.domain.ProfileInfo;
 import org.netvogue.server.webmvc.domain.ContactInfo;
+import org.netvogue.server.webmvc.domain.UploadedFileResponse;
+import org.netvogue.server.aws.core.ImageType;
+import org.netvogue.server.aws.core.Size;
+import org.netvogue.server.aws.core.UploadManager;
 import org.netvogue.server.neo4japi.common.ProductLines;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.*;
@@ -23,12 +24,14 @@ import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 //This controllers handles both profile and profile settings page
 @Controller
@@ -37,6 +40,7 @@ public class ProfileController {
 	@Autowired NetvogueUserDetailsService userDetailsService;
 	@Autowired UserService 		userService;
 	@Autowired BoutiqueService  boutiqueService;
+	@Autowired UploadManager 	uploadManager;
 
 	@RequestMapping(value = {"/profile/", "/profile/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody ProfileInfo getProfileInfo(@ModelAttribute("profileid") String profileid) {
@@ -46,6 +50,12 @@ public class ProfileController {
 		if(profileid.isEmpty()) {
 			profile.setName(loggedinUser.getName());
 			profile.setAboutus(loggedinUser.getAboutUs());
+			//Set profile pic
+			if(null != loggedinUser.getProfilePicLink()) {
+				String thumburl = uploadManager.getQueryString(loggedinUser.getProfilePicLink(), ImageType.PROFILE_PIC, Size.PThumb);
+				System.out.println("Image path is/Thumnail url is" + thumburl);
+				profile.setProfilepic(thumburl);
+			}
 			
 			//Get ContactInfo
 			ContactInfo contactInfo = new ContactInfo();
@@ -107,6 +117,45 @@ public class ProfileController {
 			status.setError(e.toString());
 		}
 		return status;
+	}
+	
+	@RequestMapping(value = "/profile/profilepic", method=RequestMethod.POST)
+	public @ResponseBody UploadedFileResponse setProfilePic(Model model, 
+			@RequestParam("files[]") MultipartFile fileupload) {
+		System.out.println("Set Profile Pic: ");
+		UploadedFileResponse response = new UploadedFileResponse();
+		
+		
+		User user = userDetailsService.getUserFromSession();
+		if(null == user) {
+			response.setError("User is not logged in");
+			return response;
+		}
+		
+		List<PhotoWeb> JSONFileData= new ArrayList<PhotoWeb>();
+		
+		System.out.println("Came here" + fileupload.getOriginalFilename());
+		Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.PROFILE_PIC);
+		user.setProfilePicLink((String)uploadMap.get(UploadManager.FILE_ID));
+		String error = new String();
+		if(ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
+			response.setStatus(true);
+		
+			PhotoWeb newPhoto = new PhotoWeb();
+			String thumburl = uploadManager.getQueryString((String)uploadMap.get(UploadManager.FILE_ID), ImageType.PROFILE_PIC, Size.PThumb);
+			System.out.println("Image path is/Thumnail url is" + thumburl);
+			newPhoto.setThumbnail_url(thumburl);
+			String lefturl = uploadManager.getQueryString((String)uploadMap.get(UploadManager.FILE_ID), ImageType.PROFILE_PIC, Size.PTop);
+			newPhoto.setLeft_url(lefturl);
+			newPhoto.setUniqueid((String)uploadMap.get(UploadManager.FILE_ID));
+			JSONFileData.add(newPhoto);
+			
+			response.setFilesuploaded(JSONFileData);
+		} else {
+			response.setError(error);
+		}
+	
+		return response;
 	}
 	
 	@RequestMapping(value = "/profile/contactinfo", method=RequestMethod.POST)

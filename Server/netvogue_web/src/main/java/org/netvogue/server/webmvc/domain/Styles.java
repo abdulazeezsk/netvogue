@@ -4,6 +4,7 @@ import java.util.Set;
 
 public class Styles {
 	String name;
+	ImageURLsResponse profilepic;
 	String stylesheetname;
 	Set<StyleResponse> styles;
 	public String getName() {
@@ -23,5 +24,11 @@ public class Styles {
 	}
 	public void setStyles(Set<StyleResponse> styles) {
 		this.styles = styles;
+	}
+	public ImageURLsResponse getProfilepic() {
+		return profilepic;
+	}
+	public void setProfilepic(ImageURLsResponse profilepic) {
+		this.profilepic = profilepic;
 	}
 }

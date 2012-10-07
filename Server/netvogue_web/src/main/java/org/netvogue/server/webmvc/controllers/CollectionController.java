@@ -21,6 +21,7 @@ import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.domain.Collection;
 import org.netvogue.server.webmvc.domain.CollectionJSONRequest;
 import org.netvogue.server.webmvc.domain.Collections;
+import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.PhotoInfoJsonRequest;
@@ -61,6 +62,7 @@ public class CollectionController {
 		User loggedinUser = userDetailsService.getUserFromSession();
 		if(profileid.isEmpty()) {
 			collections.setName(loggedinUser.getName());
+			collections.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
 			Set<Collection> collectionTemp = new LinkedHashSet<Collection>();
 			Iterable<org.netvogue.server.neo4japi.domain.Collection> dbCollections;
 			if(galleryname.isEmpty()) {
@@ -96,6 +98,7 @@ public class CollectionController {
 		
 		if(profileid.isEmpty()) {
 			photos.setName(loggedinUser.getName());
+			photos.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
 			photos.setGalleryname(collectionService.getCollection(galleryid).getCollectionseasonname());
 			Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
 			Iterable<CollectionPhoto> dbPhotos;

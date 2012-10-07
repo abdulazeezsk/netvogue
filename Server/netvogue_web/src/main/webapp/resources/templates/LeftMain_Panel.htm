@@ -3,16 +3,16 @@
         <li class="span2">
             <div class="viewprofile view-firstprofile">
                 <a href="#">
-                    <img src="http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg" alt="" /></a>
+                    <img ng-src={{profilepic}} alt="" /></a>
                 <div class="contentprofile">
                     <div class="maskprofile">
                     </div>
                     <h1 ng-show="isMyProfile">
                        <span class="fileinput-button"> <span
 							class="rightpane_add_btn"><i class="icon-edit icon-white"></i>change
-								Image</span> <input id="fileupload" type="file" name="profile" multiple
-							data-url="AddPhotos"
-							onchange="angular.element(this).scope().filesadded(this)">
+								Image</span> 
+							<input id="profileupload" type="file" name="files[]" 
+							data-url="profile/profilepic" profileupload-plugin >
 						</span>
                     </h1>
                 </div>

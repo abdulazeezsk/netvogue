@@ -27,12 +27,14 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
     $scope.currentPage = 'Profile';
     $scope.$parent.title	= "Profile";
     $scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
+    $scope.profilepic		= "http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg";
 	
     //This will initialize all the variables inside controller.
     //Also, if there is any existing data, this data will be shown to user until we get response from server
     $scope.updatedata = function() {
 	    $scope.entityname  		= srvprofile.getname($routeParams);
 	    $scope.aboutus 			= srvprofile.getaboutus($routeParams);
+	    $scope.profilepic		= srvprofile.getprofilepic($routeParams);
 	    $scope.brandscarried 	= srvprofile.getbrandscarried($routeParams);
 	    $scope.productline 		= srvprofile.getproductline($routeParams);
 	    $scope.contactinfo 		= srvprofile.getcontactinfo($routeParams);
@@ -65,6 +67,8 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 	};
 	$scope.currentPage = 'Network';
 	$scope.$parent.title = "Network";
+	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
+	$scope.profilepic		= "http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg";
 
 	$scope.entityname = currentvisitedprofile.getEntityName();
 	$scope.links = currentvisitedprofile.getleftpanellinks();
@@ -87,6 +91,8 @@ function MyCtrlCorner($scope, $routeParams, srvprofile, currentvisitedprofile,
 	};
 	$scope.currentPage = 'Corner';
 	$scope.$parent.title = "Corner";
+	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
+	$scope.profilepic		= "http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg";
 
 	$scope.entityname = currentvisitedprofile.getEntityName();
 
@@ -172,6 +178,7 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, s
 	var ajaxrequestcall	 = "gallery";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleries		= srvgallery.getgalleries($routeParams);
     };
     
@@ -242,6 +249,7 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, srvgallery, m
 	$scope.searchphotoname = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.photogallery		= srvgallery.getphotos($routeParams);
     };
@@ -285,6 +293,7 @@ function MyCtrlViewPhotos($scope, $routeParams, currentvisitedprofile, srvgaller
 	}
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.viewPhotos		= srvgallery.getphotos($routeParams);
     };
@@ -323,6 +332,7 @@ function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprof
 	var ajaxrequestcall	 = "printcampaign";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleries		= srvgallery.getgalleries($routeParams);
     };
     
@@ -391,6 +401,7 @@ function MyCtrlCampaign($scope, $routeParams, currentvisitedprofile, srvgallery,
 	$scope.searchphotoname = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.photogallery		= srvgallery.getphotos($routeParams);
     };
@@ -434,6 +445,7 @@ function MyCtrlviewPrintcampaign($scope, $routeParams, currentvisitedprofile, sr
 	var ajaxrequestcall	 = "printcampaign";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.viewPhotos		= srvgallery.getphotos($routeParams);
     };
@@ -488,6 +500,7 @@ function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile
 	var ajaxrequestcall	 = "editorial";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleries		= srvgallery.getgalleries($routeParams);
     };
     
@@ -556,6 +569,7 @@ function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile, srvgallery
 	$scope.searchphotoname = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.photogallery		= srvgallery.getphotos($routeParams);
     };
@@ -601,6 +615,7 @@ function MyCtrlViewNewsLetters($scope, $routeParams, currentvisitedprofile, srvg
 	var ajaxrequestcall	 = "editorial";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.viewPhotos		= srvgallery.getphotos($routeParams);
     };
@@ -648,6 +663,7 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
 	$scope.searchbrandname		= "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvcollection.getname($routeParams);
+	    $scope.profilepic		= srvcollection.getprofilepic($routeParams);
 	    $scope.collections		= srvcollection.getcollections($routeParams);
     };
     
@@ -724,6 +740,7 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, srvcollec
 	}
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvcollection.getname($routeParams);
+	    $scope.profilepic		= srvcollection.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvcollection.getgalleryname($routeParams);
 	    $scope.collections		= srvcollection.getcollections($routeParams);
 	    $scope.photogallery		= srvcollection.getphotos($routeParams);
@@ -786,6 +803,7 @@ function MyCtrlViewcollection($scope, $routeParams, currentvisitedprofile, srvco
 	$scope.collectionlikes = 0;
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvcollection.getname($routeParams);
+	    $scope.profilepic		= srvcollection.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvcollection.getgalleryname($routeParams);
 	    $scope.viewPhotos		= srvcollection.getphotos($routeParams);
     };
@@ -831,6 +849,7 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvstylesheet.getname($routeParams);
+	    $scope.profilepic		= srvstylesheet.getprofilepic($routeParams);
 	    $scope.stylesheets		= srvstylesheet.getstylesheets($routeParams);
     };
     
@@ -918,6 +937,7 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, srvstyles
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvstylesheet.getname($routeParams);
+	    $scope.profilepic		= srvstylesheet.getprofilepic($routeParams);
 	    $scope.stylesheetname  	= srvstylesheet.getstylesheetname($routeParams);
 	    $scope.styles			= srvstylesheet.getstyles($routeParams);
     };
@@ -1019,6 +1039,7 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvlinesheet.getname($routeParams);
+	    $scope.profilepic		= srvlinesheet.getprofilepic($routeParams);
 	    $scope.linesheets		= srvlinesheet.getlinesheets($routeParams);
     };
     
@@ -1106,6 +1127,7 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, srvlinesheet,
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvlinesheet.getname($routeParams);
+	    $scope.profilepic		= srvlinesheet.getprofilepic($routeParams);
 	    $scope.linesheetname  	= srvlinesheet.getlinesheetname($routeParams);
 	    $scope.linesheets		= srvlinesheet.getlinesheets($routeParams);
 	    $scope.styles			= srvlinesheet.getstyles($routeParams);
@@ -1148,6 +1170,7 @@ function MyCtrlStyle($scope, $routeParams, currentvisitedprofile, srvlinesheet, 
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvlinesheet.getname($routeParams);
+	    $scope.profilepic		= srvlinesheet.getprofilepic($routeParams);
 	    $scope.linesheetname  	= srvlinesheet.getlinesheetname($routeParams);
 	    $scope.styles			= srvlinesheet.getstyles($routeParams);
     	for(var i=0; i < $scope.styles.length; i++) {
@@ -1183,6 +1206,7 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
 	var brandsReceived		= new netvogue.hashtable();
 	$scope.updatedata = function() {
     	$scope.aboutus 			= myprofile.getaboutus();
+    	$scope.profilepic		= myprofile.getprofilepic();
     	var productlinestemp 	= myprofile.getproductline();
 	    for(var product in productlinestemp) {
 	    	for(var defaultproduct in $scope.productline) {
@@ -1354,6 +1378,7 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myprofile, srvprofil
     	//Use entityname as name of the variable for boutique/brand name. As we have same name variable in Main controller scope as well.
     	//Main controllers name will get displayed until we get data from server
     	$scope.entityname  		= myprofile.getname();
+    	$scope.profilepic		= myprofile.getprofilepic();
     	$scope.email 			= myprofile.getemail();
 	};
     

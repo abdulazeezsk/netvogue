@@ -5,6 +5,7 @@ import java.util.Set;
 public class Editorials {
 
 	String name;
+	ImageURLsResponse profilepic;
 	Set<Editorial> editorials;
 	public String getName() {
 		return name;
@@ -18,5 +19,10 @@ public class Editorials {
 	public void setGalleries(Set<Editorial> editorials) {
 		this.editorials = editorials;
 	}
-	
+	public ImageURLsResponse getProfilepic() {
+		return profilepic;
+	}
+	public void setProfilepic(ImageURLsResponse profilepic) {
+		this.profilepic = profilepic;
+	}
 }

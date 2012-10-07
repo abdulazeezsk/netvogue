@@ -4,6 +4,7 @@ import java.util.Set;
 
 public class Collections {
 	String name;
+	ImageURLsResponse profilepic;
 	Set<Collection> collections;
 	public String getName() {
 		return name;
@@ -16,5 +17,11 @@ public class Collections {
 	}
 	public void setCollections(Set<Collection> collections) {
 		this.collections = collections;
+	}
+	public ImageURLsResponse getProfilepic() {
+		return profilepic;
+	}
+	public void setProfilepic(ImageURLsResponse profilepic) {
+		this.profilepic = profilepic;
 	}
 }

@@ -16,6 +16,7 @@ import org.netvogue.server.neo4japi.service.GalleryService;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.domain.Galleries;
 import org.netvogue.server.webmvc.domain.Gallery;
+import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.PhotoInfoJsonRequest;
@@ -54,6 +55,7 @@ public class GalleryController {
 		User loggedinUser = userDetailsService.getUserFromSession();
 		if(profileid.isEmpty()) {
 			galleries.setName(loggedinUser.getName());
+			galleries.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
 			Set<Gallery> galleriesTemp = new LinkedHashSet<Gallery>();
 			Iterable<org.netvogue.server.neo4japi.domain.Gallery> dbGalleries;
 			if(galleryname.isEmpty()) {
@@ -90,6 +92,7 @@ public class GalleryController {
 		
 		if(profileid.isEmpty()) {
 			photos.setName(loggedinUser.getName());
+			photos.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
 			org.netvogue.server.neo4japi.domain.Gallery gTemp = galleryService.GetGallery(galleryid);
 			if(null == gTemp) {
 				return photos;

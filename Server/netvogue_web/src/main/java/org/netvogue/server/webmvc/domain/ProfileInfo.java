@@ -3,9 +3,10 @@ package org.netvogue.server.webmvc.domain;
 import java.util.Set;
 
 public class ProfileInfo {
-	String name		 = new String();
-	String profileid = new String();
-	String aboutus = new String();
+	String name		 	= new String();
+	String profileid 	= new String();
+	String aboutus 		= new String();
+	String profilepic	= new String();
 	ContactInfo contactinfo ;
 	Set<ProductLine> productlines; 	//netvogue.productline 
 	Set<BrandsCarried> brandscarried;	//netvogue.brandscarried
@@ -27,6 +28,14 @@ public class ProfileInfo {
 
 	public void setProfileid(String profileid) {
 		this.profileid = profileid;
+	}
+
+	public String getProfilepic() {
+		return profilepic;
+	}
+
+	public void setProfilepic(String profilepic) {
+		this.profilepic = profilepic;
 	}
 
 	public String getAboutus() {
