@@ -5323,23 +5323,50 @@ float: right;
 	width: 199px;
 	font: normal 11px Verdana;
 	border-top: solid 1px #999999;
-	margin: 20px 0 0 0;
+	margin: 0 0 0 0;
 }
 
 input.spanedt_txt,textarea.spanedt_txt,.uneditable-input.spanedt_txt{
 	width: 199px;
+	position:relative;
+	position-bottom: 30px;
 }
 
 .spanedt_txt1
 {
-	width: 199px;
+	width: 400px;
 	font: normal 11px Verdana;
+	position:relative;
+	top: 3px;
 }
 
 input.spanedt_txt1,textarea.spanedt_txt1,.uneditable-input.spanedt_txt1{
-	width: 199px;
+	width: 400px;
+	position:relative;
+	top:3px;
+	right:0px;
 }
 
+
+.spanaddstyle_txt
+{
+	width: 210px;
+	font: normal 11px Verdana;
+}
+
+input.spanaddstyle_txt,textarea.spanaddstyle_txt,.uneditable-input.spanaddstyle_txt{
+	width: 210px;
+}
+
+.spanaddstyle_txt1
+{
+	width: 270px;
+	font: normal 11px Verdana;
+}
+
+input.spanaddstyle_txt1,textarea.spanaddstyle_txt1,.uneditable-input.spanaddstyle_txt{1
+	width: 270px;
+}
 
 
 .titleName
@@ -5360,6 +5387,7 @@ input.spanedt_txt1,textarea.spanedt_txt1,.uneditable-input.spanedt_txt1{
 	height: 10px;
 	margin: 10px 0 0 0;
 	width: 100%;
+	cursor:pointer;
 }
 .remove {
 width: 25px;
@@ -6634,6 +6662,42 @@ ul.n-wizard-brand-list {
 	font: normal 9px Verdana;
 }
 
-/* -----------------------------------------------xxxxx   Begin---------------------------------------------------*/
+/* ----------------------------------------------- organise---------------------------------------------------*/
+
+.organise{
+	width: 100%;
+	border-bottom: solid 1px #999999;
+	padding: 5px 0 5px 0;
+	min-height: 150px;
+	position: relative;
+	float: left;
+	clear: both;
+}
 
 
+.organise .image {
+	float: left;
+	margin: 0 10px 0 0;
+	width: 220px;
+	min-height: 150px;
+	max-height: 150px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+}
+
+
+
+#title {
+   background-color:red;	
+   opacity: 1;
+   transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+   }
+ 
+#title :hover
+ {
+ background-color:#F5F5F5;
+     /* opacity: 0.5;*/
+ }

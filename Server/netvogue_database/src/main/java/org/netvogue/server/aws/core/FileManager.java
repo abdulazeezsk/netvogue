@@ -183,8 +183,8 @@ public class FileManager extends TransferManager {
 
 		try {
 			BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(input));
-			BufferedImage ResizedImage 	= Scalr.resize(originalImage, Method.ULTRA_QUALITY, Mode.AUTOMATIC, size.getWidth(), size.getHeight());
-			ResizedImage 	= Scalr.pad(ResizedImage, size.getWidth(), size.getHeight(), Color.WHITE);
+			BufferedImage ResizedImage 	= Scalr.resize(originalImage, Method.ULTRA_QUALITY, Mode.FIT_TO_WIDTH, size.getWidth(), size.getHeight());
+			//ResizedImage 	= Scalr.pad(ResizedImage, size.getWidth(), size.getHeight(), Color.WHITE);
 			String fileExtension = metaData.getUserMetadata().get("fileName");
 			fileExtension = fileExtension.substring(fileExtension.indexOf(".")+1);
 			ByteArrayOutputStream output = new ByteArrayOutputStream();

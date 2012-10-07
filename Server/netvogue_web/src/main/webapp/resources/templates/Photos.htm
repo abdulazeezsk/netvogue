@@ -38,13 +38,30 @@
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 			</div>
-
-			<div>
+			<div masonry photo-gallery="photogallery" gallery-name="galleryname">
+			</div> 
+			
+<!-- <div id="container" class="clearfix">
+	<div class="box  col2" ng-repeat="photo in photogallery">
+		<a ng-href="#/viewphotos?id={{photo.uniqueid}}&&galleryid={{galleryid}}"
+			title="{{photo.label}}"><img ng-src="{{photo.piclink}}" class="fade_spot" /></a>
+		<h3>
+			<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;">{{galleryname}}</span>
+		</h3>
+		<h3>
+			<span style="color:#20ACB8;font-weight:normal;font-size:17px;">{{photo.label}}</span>
+		</h3>
+		<p>date</p>
+		<p>{{photo.seasonname}}</p>
+	</div>
+</div> -->
+			
+		<!-- 	<div>
 					<ul class="thumbnails">
-						<li ng-repeat="photo in photogallery" style="position: relative;">
+						<li ng-repeat="photo in photogallery" style="position: relative;margin-top:20px;">
 							<div class="galleryview galleryview-firstglry">
 								<a ng-href="#/viewphotos?id={{photo.uniqueid}}&&galleryid={{galleryid}}"> <img
-									ng-src="{{photo.thumbnail_url}}" alt=""></a>
+									ng-src="{{photo.piclink}}" class="fade_spot" alt=""></a>
 								<div class="divi2"></div>
 							</div>
 							<div class="gallerytitle">
@@ -52,7 +69,7 @@
 							</div>
 						</li>
 					</ul>
-			</div>
+			</div> -->
 
 		</div>
 		<!-- right pane -->

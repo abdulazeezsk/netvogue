@@ -1,4 +1,4 @@
-<ul class="thumbnails" ui-sortable ng-model="existingfiles" id="container" class="clearfix">
+<ul  class="nav nav-tab nav-stacked" ui-sortable ng-model="existingfiles" id="container" class="clearfix">
 	<li ng-repeat="eachfile in newfiles" class="span3">
 		<div class="thumbnail">
 			<img ng-src={{eachfile.thumbnail_url}} alt=""
@@ -14,7 +14,62 @@
 			</div>
 		</div>
 	</li>
-	<li ng-repeat="eachfile in existingfiles" class="span3"
+	<li ng-repeat="eachfile in existingfiles" style="postion:absloute;">
+	      <div class="organise">
+			 <span class="image"><img alt="" >
+			</span>
+			<span style="width:400px;margin-left:10px;"  >
+				<div edit-text data="eachfile"
+					edit-mode="isEditMode"
+					update-data="updatedataToParent(label, seasonname, photoid)">
+				</div>
+			</span>
+			
+		</li>
+	
+	</ul>
+<!-- <div id="container" class="clearfix">
+	<div class="box  col2" ng-repeat="eachfile in existingfiles">
+		<img class="fade_spot" />
+		<div  edit-text data="eachfile"
+					edit-mode="isEditMode"
+					update-data="updatedataToParent(label, seasonname, photoid)">
+	   </div>
+	</div>
+</div> 
+
+ <div style="margin: 10px 0 0 10;">
+				<div ng-class="{spotlightx:!isEditMode}" edit-text data="eachfile"
+					edit-mode="isEditMode"
+					update-data="updatedataToParent(label, seasonname, photoid)">
+				</div>
+			</div>
+
+-->
+
+
+<!-- <ul class="nav nav-tab nav-stacked">
+                <li ng-repeat="network in mynetwork">
+                    <div class="network">
+                        <span class="brand_image"><a href="#/{{network.networklistitemID}}/profile">
+                            <img alt="" src="{{network.profilepiclink}}" class="pull-left"></a> </span><span
+                                class="network_text">
+                                <h3>
+                                    <span><a href="#/{{network.networklistitemID}}/profile">{{network.networklistitem}}</a></span></h3>
+                            </span><span class="btn-group pull-right">
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    Action <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Block</a></li>
+                                    <li><a href="#">Delete</a></li>
+                                </ul>
+                            </span>
+                    </div>
+                </li>
+            </ul> -->
+
+<!-- <li ng-repeat="eachfile in existingfiles" class="span3"
 		style="position: relative;"><span class="right" title="Delete"
 		ng-click="deletedata({photoid:eachfile.uniqueid})"
 		style="background: url(../img/red-cross.png); width: 25px; height: 25px; position: absolute; display: block; right: -2px; top: 0px; cursor: pointer; z-index: 100;"></span>
@@ -33,5 +88,4 @@
 				</p>
 			</div>
 		</div>
-		</li>
-</ul>
+		</li> -->

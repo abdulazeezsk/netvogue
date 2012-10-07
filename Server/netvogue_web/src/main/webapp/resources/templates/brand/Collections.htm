@@ -49,11 +49,10 @@
 				<a data-toggle="modal"	href="#CreateCollection" class="rightpane_add_btn">create collection</a></span>
 				<div class="divi2 right_pane_underline"></div>
 				<ul class="thumbnails">
-					<li ng-repeat="collection in collections">
+					<li ng-repeat="collection in collections" style="position: relative;">
 						<div class="view view-first">
 							<a ng-href="#/collection?id={{collection.galleryid}}"> <img
 								ng-src="{{collection.gallerypic}}" alt=""></a>
-							<div class="mask"></div>
 							<div class="content">
 								<div class="mask">
 									<ul>
@@ -62,10 +61,6 @@
 										<li><a ng-click="editgallery(collection.galleryid, collection.galleryname, collection.gallerydesc, collection.category)" 
 										title="Edit"><i class="icon-edit icon-white"></i></a></li>
 									</ul>
-									<p>
-										<u>{{collection.galleryname}}</u> <br /> 
-										{{collection.gallerydesc}}
-									</p>
 									<h1>
 										<a ng-href="#/collection?id={{collection.galleryid}}" class="mask_edit">view</a>
 									</h1>
@@ -73,7 +68,7 @@
 							</div>
 							<div class="divi2"></div>
 						</div>
-						<div class="title">
+						<div class="campaigntitle">
 							<!--  <h3>
                                     {{collection.collectionseason}}</h3>-->
 							<h3>{{collection.brandname}}</h3>

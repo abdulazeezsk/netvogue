@@ -50,13 +50,13 @@
 
 			<div>
 				<ul class="thumbnails">
-					<li ng-repeat="gallery in galleries" style="position: relative;">
-						<div class="view view-first">
+					<li ng-repeat="gallery in galleries" style="position: relative;margin-top:20px;">
+						<div class="galleryview view-firstg">
 							<a ng-href="#/campaign?id={{gallery.galleryid}}"> <img
 								ng-src="{{gallery.gallerypic}}" alt=""></a>
 							<div class="content">
-								<div class="mask">
-									<ul ng-show="isMyProfile">
+							
+									<ul class="mask" ng-show="isMyProfile">
 										<li><a ng-click="deletegallery(gallery.galleryid)"
 											title="Delete"><i class="icon-trash icon-white"></i></a></li>
 										<li><a
@@ -67,10 +67,10 @@
 										<a ng-href="#/campaign?id={{gallery.galleryid}}"
 											class="mask_edit">view</a>
 									</h1>
-								</div>
+								
 							</div>
 						</div>
-						<div class="campaigntitle">
+						<div class="gallerytitle">
 							 <h3>{{gallery.galleryname}}</h3>
 						</div>
 					</li>

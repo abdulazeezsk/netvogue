@@ -51,7 +51,10 @@
 				<span class="right" >
 				<a ng-href="#/addcollections?id={{galleryid}}" class="rightpane_add_btn">add collection</a></span>
 				<div class="divi2 right_pane_underline"></div>
-				<ul class="thumbnails">
+				
+					<div masonry photo-gallery="photogallery" gallery-name="galleryname">
+			</div>
+				<!-- <ul class="thumbnails">
 					<li ng-repeat="collection in photogallery">
 						<div class="view view-first">
 							<a ng-href="#/viewcollection?id={{collection.uniqueid}}&&galleryid={{galleryid}}"> 
@@ -76,12 +79,12 @@
 							<div class="divi2"></div>
 						</div>
 						<div class="title">
-							<!--  <h3>
-                                    {{collection.collectionseason}}</h3>-->
+							 <h3>
+                                    {{collection.collectionseason}}</h3>
 							<h3>{{collection.brandname}}</h3>
 						</div>
 					</li>
-				</ul>
+				</ul> -->
 			</div>
 		</div>
 		<!-- right pane -->
