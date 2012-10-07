@@ -258,7 +258,6 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, srvgallery, m
     };
     var ajaxrequestcall	 = "gallery";
     $scope.getphotos();
-    $scope.updatedata();
     
     $scope.deletephoto = function(uniqueid) {
     	mygallery.deletephoto(ajaxrequestcall, uniqueid).success(function(data) {
@@ -738,7 +737,7 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, srvcollec
 	};
 	srvcollection.collections($routeParams, searchcollections).success(function(data) {
 		srvcollection.setcollectionlocally(data, $routeParams);
-    	$scope.updatedata();
+		$scope.collections		= srvcollection.getcollections($routeParams);
     }).error(function(data) {
     	
     });

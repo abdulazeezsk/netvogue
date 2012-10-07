@@ -1,14 +1,44 @@
-<input type="text" class="spanedt_txt"  ng-show="isEditMode" ng-model="data.label">
+<input type="text" class="spanedt_txt" ng-show="isEditMode"
+	ng-model="data.label">
 </input>
-<h5 ng-hide="isEditMode" class="titleName" ng-dblclick="switchToEdit()" ng-bind-html-unsafe="data.label">
-</h5>
-<textarea class="spanedt_txt1" rows="4"   ng-show="isEditMode" ng-model="data.seasonname">
+
+
+<span ng-hide="isEditMode" ng-dblclick="switchToEdit()"
+	ng-bind-html-unsafe="data.label"
+	style="color: #20ACB8; font-weight: normal; font-size: 14px; cursor: pointer; text-transform: uppercase;"></span>
+
+<span ng-hide="isEditMode" class="btn-group pull-right">
+	<button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
+		Action <span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu">
+		<li><a ng-click="deletedata({photoid:eachfile.uniqueid})" >Delete</a></li>
+		<li class="divider"></li>
+		<li><a href="#">Set as cover</a></li>
+		<li class="divider"></li>
+		<li><a href="#">Public</a></li>
+		<li><a href="#">Private</a></li>
+		<li><a href="#">Network</a></li>
+	</ul>
+</span>
+
+<textarea class="spanedt_txt1" rows="5" ng-show="isEditMode"
+	ng-model="data.seasonname">
 </textarea>
-<h6 ng-hide="isEditMode"  class="desc"  ng-dblclick="switchToEdit()" ng-bind-html-unsafe="data.seasonname">
-</h6>
- <a class="btn" ng-show="isEditMode" ng-click="switchToPreview('cancel')">Cancel</a> 
- <a ng-show="isEditMode" class="btn  btn-primary" ng-click="switchToPreview('save')">
-            Save</a>
+
+<p ng-hide="isEditMode" class="desc" ng-dblclick="switchToEdit()"
+	ng-bind-html-unsafe="data.seasonname"></p>
+
+
+<a class="btn" ng-show="isEditMode" ng-click="switchToPreview('cancel')">Cancel</a>
+<a ng-show="isEditMode" class="btn  btn-primary"
+	ng-click="switchToPreview('save')"> Save</a>
+
+
+
+
+
+
 
 
 

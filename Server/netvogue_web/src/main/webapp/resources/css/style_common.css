@@ -1,6 +1,7 @@
 .view
 {
-    width: 220px;
+    max-width: 220px;
+    min-width: 220px;
     float: left;
     overflow: hidden;
     position: relative;
@@ -10,12 +11,12 @@
 }
 .view .mask, .view .content
 {
-    width: 208px;
+    width: 220px;
     height: 306px;
     position: absolute;
     overflow: hidden;
     top: 0;
-    left: 4px;
+    left: 0px;
 }
 .view img
 {

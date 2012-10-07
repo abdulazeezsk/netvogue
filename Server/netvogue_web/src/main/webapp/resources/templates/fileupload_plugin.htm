@@ -1,4 +1,28 @@
-<ul class="thumbnails" ui-sortable ng-model="existingfiles" id="container" class="clearfix">
+<ul  class="nav nav-tab nav-stacked" ui-sortable ng-model="existingfiles" id="container" class="clearfix">
+	<li ng-repeat="eachfile in newfiles" style="postion:absloute;">
+		<div class="organiseloading">
+			<img ng-src="img/ajax-loader.gif" style="margin-left:280px;" alt="" />
+		</div>
+	</li>
+	<li ng-repeat="eachfile in existingfiles" style="postion:absloute;">
+	      <div class="organise">
+			 <span class="image"><img alt="" >
+			</span>
+			<span style="width:400px;margin-left:10px;"  >
+				<div edit-text data="eachfile"
+					edit-mode="isEditMode"
+					update-data="updatedataToParent(label, seasonname, photoid)">
+				</div>
+			</span>
+			
+		</li>
+	
+	</ul>
+
+
+
+
+<!-- 
 	<li ng-repeat="eachfile in newfiles" class="span3">
 		<div class="thumbnail">
 			<img ng-src={{eachfile.thumbnail_url}} alt=""
@@ -14,7 +38,8 @@
 			</div>
 		</div>
 	</li>
-	<li ng-repeat="eachfile in existingfiles" class="span3"
+
+<li ng-repeat="eachfile in existingfiles" class="span3"
 		style="position: relative;"><span class="right" title="Delete"
 		ng-click="deletedata({photoid:eachfile.uniqueid})"
 		style="background: url(../img/red-cross.png); width: 25px; height: 25px; position: absolute; display: block; right: -2px; top: 0px; cursor: pointer; z-index: 100;"></span>
@@ -33,5 +58,4 @@
 				</p>
 			</div>
 		</div>
-		</li>
-</ul>
+		</li> -->
