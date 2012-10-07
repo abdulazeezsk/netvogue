@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public Iterable<User> doAdvancedSearch(USER_TYPE userType, String name, String location, Set<String> categories) {
-		String query = "username:*" + name + "*";
+		/*String query = "username:*" + name + "*";
 		String cat = "";
 		/*if(!name.isEmpty()) {
 			query = "username:*" + name + "* OR " + "name:*" + name + "*" ;
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService{
 		}
 		if(name.isEmpty() && location.isEmpty()) {
 			query = "username:*";
-		}*/
+		}
 		
 		if(categories.isEmpty()) {
 			cat = "productline:*";
@@ -83,7 +83,10 @@ public class UserServiceImpl implements UserService{
 		}
 		System.out.println(query);
 		System.out.println(cat);
-		return userRepo.doAdvancedSearch(cat, query);
+		return userRepo.doAdvancedSearch(cat, query);*/
+		
+		String query = "username:*" + name + "* OR " + "name:*" + name + "*";
+		return userRepo.doBasicSearch(query);
 	}
 	
 	//Queries related to galleries
