@@ -116,12 +116,13 @@ angular.module('netVogue.directives', []).
 	        link: function(scope, elm, attrs) {
 	        	var label = "";
 	        	var seasonname = "";
-	            scope.isEditMode = false;
+	            scope.isEditMode 	= false;
 
 	            scope.switchToPreview = function (save) {
 	                scope.isEditMode = false;
 	                if(save == "save") {
 	                	scope.updateData({label:scope.data.label, seasonname:scope.data.seasonname, photoid: scope.data.uniqueid});
+	                	updatetext();
 	                } else {
 	                	scope.data.label = label;
 	                	scope.data.seasonname = seasonname;
@@ -132,6 +133,19 @@ angular.module('netVogue.directives', []).
 	            	seasonname = scope.data.seasonname;
 	                scope.isEditMode = true;
 	            };
+	            var updatetext = function() {
+		            if(scope.data.label == "UNTITLED" || scope.data.label == "") {
+		            	scope.emptylabel = true;
+		            } else {
+		            	scope.emptylabel = false;
+		            }
+		            if(scope.data.seasonname == "UNTITLED SEASON" || scope.data.seasonname == "") {
+		            	scope.emptyseasonname = true;
+		            } else {
+		            	scope.emptyseasonname = false;
+		            }
+	            };
+	            updatetext();
 	        }
 	    };
 }).directive('fileuploadPlugin', function() {

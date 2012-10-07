@@ -1,7 +1,11 @@
 <input type="text" class="spanedt_txt" ng-show="isEditMode"	ng-model="data.label">
 </input>
 
-<span ng-hide="isEditMode" ng-dblclick="switchToEdit()"
+<span ui-if="emptylabel" ng-hide="isEditMode" ng-click="switchToEdit()"
+	style="color: #20ACB8; font-weight: normal; font-size: 14px; cursor: pointer; text-transform: uppercase;">
+	Click here to add label</span>
+
+<span ui-if="!emptylabel" ng-hide="isEditMode" ng-click="switchToEdit()"
 	ng-bind-html-unsafe="data.label"
 	style="color: #20ACB8; font-weight: normal; font-size: 14px; cursor: pointer; text-transform: uppercase;"></span>
 
@@ -24,7 +28,10 @@
 	ng-model="data.seasonname">
 </textarea>
 
-<p ng-hide="isEditMode" class="desc" ng-dblclick="switchToEdit()"
+<p ui-if="emptyseasonname" ng-hide="isEditMode" class="desc" ng-click="switchToEdit()">
+	Click here to edit season name</p>
+
+<p ui-if="!emptyseasonname" ng-hide="isEditMode" class="desc" ng-click="switchToEdit()"
 	ng-bind-html-unsafe="data.seasonname"></p>
 
 <a class="btn" ng-show="isEditMode" ng-click="switchToPreview('cancel')">Cancel</a>
