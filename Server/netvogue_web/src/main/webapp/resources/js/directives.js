@@ -209,7 +209,7 @@ angular.module('netVogue.directives', []).
 			scope.updatedata({label:label, seasonname:seasonname, photoid:photoid});
 		};
 		scope.deletedataToParent = function(photoid) {
-			deletedata({photoid:photoid});
+			scope.deletedata({photoid:photoid});
 		};
 		scope.progressVisible = true;
 		scope.progress = 0;
