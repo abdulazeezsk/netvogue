@@ -134,12 +134,12 @@ angular.module('netVogue.directives', []).
 	                scope.isEditMode = true;
 	            };
 	            var updatetext = function() {
-		            if(scope.data.label == "UNTITLED" || scope.data.label == "") {
+		            if(scope.data.label == "UNTITLED" || scope.data.label == "" || scope.data.label == null) {
 		            	scope.emptylabel = true;
 		            } else {
 		            	scope.emptylabel = false;
 		            }
-		            if(scope.data.seasonname == "UNTITLED SEASON" || scope.data.seasonname == "") {
+		            if(scope.data.seasonname == "UNTITLED SEASON" || scope.data.seasonname == "" || scope.data.seasonname == null) {
 		            	scope.emptyseasonname = true;
 		            } else {
 		            	scope.emptyseasonname = false;
