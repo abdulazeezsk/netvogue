@@ -31,7 +31,7 @@ public class CollectionPhoto {
 	
 	public CollectionPhoto(String photouniqueid) {
 		this.collectionphotouniqueid = photouniqueid;
-		this.collectionphotoname = "UNTITLED";
+		//this.collectionphotoname = "UNTITLED";
 	}
 	
 	public Long getNodeId() {

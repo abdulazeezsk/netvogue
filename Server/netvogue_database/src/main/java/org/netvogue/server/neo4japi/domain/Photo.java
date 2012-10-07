@@ -32,8 +32,8 @@ public class Photo {
 	
 	public Photo(String photouniqueid) {
 		this.photouniqueid = photouniqueid;
-		this.photoname = "UNTITLED";
-		this.seasonname = "UNTITLED SEASON";
+		//this.photoname = "UNTITLED";
+		//this.seasonname = "UNTITLED SEASON";
 	}
 	public Long getNodeId() {
 		return nodeId;

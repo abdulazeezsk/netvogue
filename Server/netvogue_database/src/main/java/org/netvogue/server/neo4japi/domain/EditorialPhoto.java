@@ -31,7 +31,7 @@ public class EditorialPhoto {
 	
 	public EditorialPhoto(String photouniqueid) {
 		this.editorialphotouniqueid = photouniqueid;
-		this.editorialphotoname 	= "UNTITLED";
+		//this.editorialphotoname 	= "UNTITLED";
 	}
 	
 	public Long getNodeId() {

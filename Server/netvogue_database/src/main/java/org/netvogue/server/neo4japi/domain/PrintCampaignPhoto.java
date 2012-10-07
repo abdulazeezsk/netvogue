@@ -31,7 +31,7 @@ public class PrintCampaignPhoto {
 	
 	public PrintCampaignPhoto(String photouniqueid) {
 		this.printcampaignphotouniqueid = photouniqueid;
-		this.printcampaignphotoname 	= "UNTITLED";
+		//this.printcampaignphotoname 	= "UNTITLED";
 	}
 	
 	public Long getNodeId() {
