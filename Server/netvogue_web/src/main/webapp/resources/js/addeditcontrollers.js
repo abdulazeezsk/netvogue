@@ -42,7 +42,7 @@ function MyCtrlAddGallery($scope, $routeParams, $location, srvgallery, mygallery
 	$scope.updatephoto = function(label, seasonname, photoid) {
 		mygallery.savephotoinfo(ajaxrequestcall, label, seasonname, photoid).success(function(data) {
 			if(data.status == true) {
-				alert("Updated successfully" + data.status);
+				//
 			} else {
 				alert("error" + data.status + data.error);
 			}
@@ -104,7 +104,7 @@ function MyCtrlAddPrintCampaign($scope, $routeParams, $location, srvgallery, myg
 	$scope.updatephoto = function(label, seasonname, photoid) {
 		mygallery.savephotoinfo(ajaxrequestcall, label, seasonname, photoid).success(function(data) {
 			if(data.status == true) {
-				alert("Updated successfully" + data.status);
+				//
 			} else {
 				alert("error" + data.status + data.error);
 			}
@@ -189,7 +189,7 @@ function MyCtrlAddNewsletter($scope, $routeParams, $location, srvgallery, mygall
 	$scope.updatephoto = function(label, seasonname, photoid) {
 		mygallery.savephotoinfo(ajaxrequestcall, label, seasonname, photoid).success(function(data) {
 			if(data.status == true) {
-				alert("Updated successfully" + data.status);
+				//
 			} else {
 				alert("error" + data.status + data.error);
 			}
@@ -254,7 +254,7 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 	$scope.updatephoto = function(label, seasonname, photoid) {
 		mycollection.savephotoinfo(label, seasonname, photoid).success(function(data) {
 			if(data.status == true) {
-				alert("Updated successfully" + data.status);
+				//
 			} else {
 				alert("error" + data.status + data.error);
 			}
@@ -363,7 +363,7 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile, srvstyleshe
 			if(data.status == true) {
 				mystylesheet.updatestyleslocally(data.style);
 				$scope.styles	= srvstylesheet.getstyles($routeParams);
-				alert("Updated successfully" + data.status);
+				//alert("Updated successfully" + data.status);
 			} else {
 				alert("error" + data.status + data.error);
 			}
@@ -446,7 +446,7 @@ function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile, srvlin
 				mylinesheet.addstylelocally(newstyle);
 				$scope.styles	= srvlinesheet.getstyles($routeParams);
 				updateallstyles();
-				alert("added successfully" + data.status);
+				//alert("added successfully" + data.status);
 			} else {
 				alert("error" + data.status + data.error);
 			}
