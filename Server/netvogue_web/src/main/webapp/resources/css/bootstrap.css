@@ -6664,6 +6664,19 @@ ul.n-wizard-brand-list {
 
 /* ----------------------------------------------- organise---------------------------------------------------*/
 
+.organiseloading{
+	width: 100%;
+	border-bottom: solid 1px #999999;
+	padding: 5px 0 5px 0;
+	height: 25px;
+	position: relative;
+	float: left;
+	clear: both;
+}
+
+
+
+
 .organise{
 	width: 100%;
 	border-bottom: solid 1px #999999;

@@ -1,17 +1,7 @@
 <ul  class="nav nav-tab nav-stacked" ui-sortable ng-model="existingfiles" id="container" class="clearfix">
-	<li ng-repeat="eachfile in newfiles" class="span3">
-		<div class="thumbnail">
-			<img ng-src={{eachfile.thumbnail_url}} alt=""
-				ng-style="{'max-height': maxheight, 'min-height': minheight}">
-			<div style="min-height: 100px; max-height: 100px;">
-				<span ng-show="progressVisible"
-					style="position: relative; top: 30px;">
-					<div class="percent">{{progress}}%</div>
-					<div class="progress-bar">
-						<div class="uploaded" ng-style="{'width': progress+'%'}"></div>
-					</div>
-				</span>
-			</div>
+	<li ng-repeat="eachfile in newfiles" style="postion:absloute;">
+		<div class="organiseloading">
+			<img ng-src="img/ajax-loader.gif" style="margin-left:280px;" alt="" />
 		</div>
 	</li>
 	<li ng-repeat="eachfile in existingfiles" style="postion:absloute;">
@@ -32,7 +22,24 @@
 
 
 
-<!-- <li ng-repeat="eachfile in existingfiles" class="span3"
+<!-- 
+	<li ng-repeat="eachfile in newfiles" class="span3">
+		<div class="thumbnail">
+			<img ng-src={{eachfile.thumbnail_url}} alt=""
+				ng-style="{'max-height': maxheight, 'min-height': minheight}">
+			<div style="min-height: 100px; max-height: 100px;">
+				<span ng-show="progressVisible"
+					style="position: relative; top: 30px;">
+					<div class="percent">{{progress}}%</div>
+					<div class="progress-bar">
+						<div class="uploaded" ng-style="{'width': progress+'%'}"></div>
+					</div>
+				</span>
+			</div>
+		</div>
+	</li>
+
+<li ng-repeat="eachfile in existingfiles" class="span3"
 		style="position: relative;"><span class="right" title="Delete"
 		ng-click="deletedata({photoid:eachfile.uniqueid})"
 		style="background: url(../img/red-cross.png); width: 25px; height: 25px; position: absolute; display: block; right: -2px; top: 0px; cursor: pointer; z-index: 100;"></span>
