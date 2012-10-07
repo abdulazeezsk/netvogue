@@ -147,26 +147,33 @@ netvogue.profile 		= function(name, profileid, aboutus, contactinfo) {
   	    	               
 };
 
+netvogue.parentcategory = new function() {
+	this.apparel = "APPAREL";
+	this.shoes	 = "SHOES";
+	this.handbags= "HANDBAGS";
+	this.watches = "WATCHES";
+	this.others  = "OTHERS";
+};
 //Default Productlines
 netvogue.defaultproductlines = [
-                                new netvogue.productline("Womens RTW", 	"APPAREL"),
-								new netvogue.productline("Denim", 		"APPAREL"),
-							   	new netvogue.productline("Outerwear", 	"APPAREL"),
-							   	new netvogue.productline("Activewear", 	"APPAREL"),
-							   	new netvogue.productline("Mens RTW", 	"APPAREL"),
-							   	new netvogue.productline("Lingerie", 	"APPAREL"),
-							   	new netvogue.productline("Swimwear", 	"APPAREL"),
-							   	new netvogue.productline("Kids", 		"APPAREL"),
-							   	new netvogue.productline("Mens Shoe", 	"SHOES"),
-							   	new netvogue.productline("Womens Shoe", "SHOES"),
-							   	new netvogue.productline("Mens Bags", 	"HANDBAGS"),
-							   	new netvogue.productline("Handbags", 	"HANDBAGS"),
-							   	new netvogue.productline("Watches", 	"WATCHES"),
-							   	new netvogue.productline("Jewelry", 	"OTHERS"),
-							   	new netvogue.productline("Hats", 		"OTHERS"),
-							   	new netvogue.productline("Luggage", 	"OTHERS"),
-							   	new netvogue.productline("Gifts", 		"OTHERS"),
-							   	new netvogue.productline("Candles", 	"OTHERS")
+                                new netvogue.productline("Womens RTW", 	netvogue.parentcategory.apparel),
+								new netvogue.productline("Denim", 		netvogue.parentcategory.apparel),
+							   	new netvogue.productline("Outerwear", 	netvogue.parentcategory.apparel),
+							   	new netvogue.productline("Activewear", 	netvogue.parentcategory.apparel),
+							   	new netvogue.productline("Mens RTW", 	netvogue.parentcategory.apparel),
+							   	new netvogue.productline("Lingerie", 	netvogue.parentcategory.apparel),
+							   	new netvogue.productline("Swimwear", 	netvogue.parentcategory.apparel),
+							   	new netvogue.productline("Kids", 		netvogue.parentcategory.apparel),
+							   	new netvogue.productline("Mens Shoe", 	netvogue.parentcategory.shoes),
+							   	new netvogue.productline("Womens Shoe", netvogue.parentcategory.shoes),
+							   	new netvogue.productline("Mens Bags", 	netvogue.parentcategory.handbags),
+							   	new netvogue.productline("Handbags", 	netvogue.parentcategory.handbags),
+							   	new netvogue.productline("Watches", 	netvogue.parentcategory.watches),
+							   	new netvogue.productline("Jewelry", 	netvogue.parentcategory.others),
+							   	new netvogue.productline("Hats", 		netvogue.parentcategory.others),
+							   	new netvogue.productline("Luggage", 	netvogue.parentcategory.others),
+							   	new netvogue.productline("Gifts", 		netvogue.parentcategory.others),
+							   	new netvogue.productline("Candles", 	netvogue.parentcategory.others)
                                 ];
 
 netvogue.getparentcategory = function(productlinename) {
@@ -400,14 +407,33 @@ netvogue.searchFilter 	= function() {
 		  this.checked = false;
 		  this.children = [];
 	}
+	this.getCheckedFilters = function() {
+		var result = "";
+		for(var i=0;i<this.filters.length;i++) {
+			for(var j=0;j<this.filters[i].children.length;j++) {
+				if(true == this.filters[i].children[j].checked) {
+					result += (this.filters[i].children[j].name) + ",";
+				}
+			}
+		}
+		return result;
+	};
 	this.filters = [
-	                new Filter('Apparel'),
-	                new Filter('Shoes'),
-	                new Filter('Handbags'),
-	                new Filter('Watches')
+	                new Filter(netvogue.parentcategory.apparel),
+	                new Filter(netvogue.parentcategory.shoes),
+	                new Filter(netvogue.parentcategory.handbags),
+	                new Filter(netvogue.parentcategory.watches)
 	                ];
 	
-	this.filters[0].children = [
+	
+	for(var i=0;i<this.filters.length;i++) {
+		for(var j=0;j<netvogue.defaultproductlines.length;j++) {
+			if(this.filters[i].name == netvogue.defaultproductlines[j].category) {
+				this.filters[i].children.push(new Filter(netvogue.defaultproductlines[j].productlinename));
+			}
+		}
+	}
+	/*this.filters[0].children = [
 							  new Filter('WOMEN\'S RTW'),
 							  new Filter('MEN\'S RTW'),
 							  new Filter('OUTERWEAR'),
@@ -431,7 +457,7 @@ netvogue.searchFilter 	= function() {
 	this.filters[3].children = [
 	                         new Filter('WOMEN\'S Watches'),
 	                         new Filter('MEN\'S Watches'),
-	                         ];
+	                         ];*/
 };
 
 /*************************************************************************/

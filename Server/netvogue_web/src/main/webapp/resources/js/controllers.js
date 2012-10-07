@@ -1436,13 +1436,15 @@ function MyCtrlAdvancedSearch($scope, search) {
 	
 	//Search related
 	$scope.isbrandsearch = "true";
-	$scope.name			 = "";
-	$scope.location		 = "";
-	$scope.categories	 = [];
+	$scope.search = {
+			name: "",
+			location:""
+	};
 	
 	$scope.searchFilter = new netvogue.searchFilter();
 	$scope.getsearchResults = function() {
-		search.getadvancedsearchresults($scope.name, $scope.location, $scope.categories, $scope.isbrandsearch).
+		var categories = $scope.searchFilter.getCheckedFilters();
+		search.getadvancedsearchresults($scope.search.name, $scope.search.location, categories, $scope.isbrandsearch).
 		success(function(data) {
 			$scope.advancedsearch = data;
 	    }).

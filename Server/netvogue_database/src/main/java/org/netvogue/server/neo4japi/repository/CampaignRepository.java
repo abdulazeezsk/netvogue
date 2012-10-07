@@ -7,5 +7,4 @@ import org.springframework.data.neo4j.repository.GraphRepository;
 
 public interface CampaignRepository extends GraphRepository<Campaign>{
 	
-	Iterable<Campaign> findByTitleOrDesc(Pageable p);
 }

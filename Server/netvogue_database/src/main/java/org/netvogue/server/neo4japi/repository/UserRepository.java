@@ -20,25 +20,20 @@ public interface UserRepository extends GraphRepository<User> {
 	@Query( "START n=node:search({0}) RETURN n")
 	Iterable<User> doBasicSearch(String query);
 	
-	@Query( "start category=node:category({cat}) /" +
-			"with collect(category) as categories /" +
-			"start user=node:search({search}) /" +
-			"where p<>user AND ALL( c in categories WHERE user-[:HAS_CAT]->c)  /" +
+	/*@Query( "start category=node:productline(productline={cat}) " +
+			"with collect(category) as categories " +
+			"start user=node:search({search}) " +
+			"where p<>user AND ALL( c in categories WHERE user-[:HAS_CAT]->c)  " +
 			"return user " +
 			"skip {pagenumber*pagesize} limit{pagesize}")
 	Iterable<User> doAdvancedSearch(@Param("cat") List<String> Categories, 
 									@Param("search") Map<String, String> searchIndex,
-									@Param("pagenumber") long pagenumber, @Param("pagesize") long pagesize);
+									@Param("pagenumber") long pagenumber, @Param("pagesize") long pagesize);*/
 	
-	@Query( "start category=node:category({cat}) /" +
-			"with collect(category) as categories /" +
-			"start user=node:search({search}) /" +
-			"where p<>user AND ALL( c in categories WHERE user-[:HAS_CAT]->c)  /" +
-			"return user " +
-			"skip {pagenumber*pagesize} limit{pagesize}")
-	Iterable<User> doAdvancedSearch(@Param("cat") List<String> Categories, 
-									@Param("search") String searchIndex,
-									@Param("pagenumber") long pagenumber, @Param("pagesize") long pagesize);
+	@Query( "START category=node:productline({0}) WITH collect(category) as categories " +
+			"START user=node:search({1}) " +
+			"WHERE ALL( c in categories WHERE user-[:has_category]->c) RETURN user")
+	Iterable<User> doAdvancedSearch(String Categories, String search);
 	
 	//Queries related to gallery
 	@Query( "START n=node:search(username={0}) MATCH n-[:GALLERY]->g RETURN g ORDER BY g.createdDate DESC")

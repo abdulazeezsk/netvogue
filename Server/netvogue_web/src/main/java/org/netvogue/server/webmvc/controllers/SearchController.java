@@ -1,11 +1,16 @@
 package org.netvogue.server.webmvc.controllers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.netvogue.server.neo4japi.common.ProductLines;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.neo4japi.domain.Category;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.domain.SearchResponse;
@@ -50,13 +55,13 @@ public class SearchController {
 	@RequestMapping(value="advancedsearch", method=RequestMethod.GET)
 	public @ResponseBody Set<SearchResponse> doAdvancedSearch(
 							@RequestParam("name") String name, @RequestParam("location") String location,
-							@RequestParam("categories") List<String> categories, 
+							@RequestParam("categories") String categories, 
 							@RequestParam("usertype")	String searchtype	) {
 		
-		System.out.println("Get users: name:" + name);
-		System.out.println("\n location:" + location);
-		System.out.println("\n categories:" + categories.toString());
-		System.out.println("\n user type:" + searchtype);
+		System.out.println("\nGet users: name:" + name);
+		System.out.println("location:" + location);
+		System.out.println("categories:" + categories.toString());
+		System.out.println("user type:" + searchtype);
 		Set<SearchResponse> response = new LinkedHashSet<SearchResponse>();
 		
 		USER_TYPE user_type;
@@ -66,7 +71,17 @@ public class SearchController {
 			user_type = USER_TYPE.BOUTIQUE;
 		}
 		
-		Iterable<User> users = userService.doAdvancedSearch(user_type, name, location, categories);
+		Set<String> productlines = new HashSet<String>();
+		List<String> categoriesafter =  Arrays.asList(categories.split(","));
+		for(String productline: categoriesafter) {
+			ProductLines productLine = ProductLines.getValueOf(productline);
+			if(null != productLine)
+				productlines.add(productLine.toString());
+			else
+				System.out.println("product line is null");
+		}
+		
+		Iterable<User> users = userService.doAdvancedSearch(user_type, name, location, productlines);
 		
 		if(null == users) {
 			System.out.println("No users found: ");

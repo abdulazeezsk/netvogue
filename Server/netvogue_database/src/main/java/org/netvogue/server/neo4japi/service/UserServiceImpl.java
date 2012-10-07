@@ -1,6 +1,7 @@
 package org.netvogue.server.neo4japi.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
@@ -51,10 +52,38 @@ public class UserServiceImpl implements UserService{
 		return userRepo.doBasicSearch(query);
 	}
 	
-	public Iterable<User> doAdvancedSearch(USER_TYPE userType, String name, String location, List<String> categories) {
-		String query = "username:*" + name + "* OR " + "name:*" + name + "* OR "
-				 + "city:*" + location  + "* OR " + "country:*" + location + "*";
-		return userRepo.doAdvancedSearch(categories, query, 0, 10);
+	public Iterable<User> doAdvancedSearch(USER_TYPE userType, String name, String location, Set<String> categories) {
+		String query = "username:*" + name + "*";
+		String cat = "";
+		/*if(!name.isEmpty()) {
+			query = "username:*" + name + "* OR " + "name:*" + name + "*" ;
+		}
+		if(!location.isEmpty()) {
+			if(!query.isEmpty()) {
+				query += (" AND ");
+			}
+			query += ("city:*" + location  + "* OR " + "country:*" + location + "*");
+		}
+		if(name.isEmpty() && location.isEmpty()) {
+			query = "username:*";
+		}*/
+		
+		if(categories.isEmpty()) {
+			cat = "productline:*";
+		} else {
+			cat = "productline:" ;
+			int index =1;
+			for(String category: categories) {
+				System.out.println("Category is:" + category);
+				cat += category ;
+				if(index++ < categories.size()) {
+					cat += " OR ";
+				}
+			}
+		}
+		System.out.println(query);
+		System.out.println(cat);
+		return userRepo.doAdvancedSearch(cat, query);
 	}
 	
 	//Queries related to galleries

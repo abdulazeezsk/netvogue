@@ -27,20 +27,20 @@
 			<div class="divi2"></div>
 			<div ui-if="isbrandsearch == 'true'">
 				<span class="leftpane_filter_name">BRAND</span> 
-					<input type="text" class="span3"  placeholder="Brand name" ng-model="name" ng-change="getsearchResults()"/> 
+					<input type="text" class="span3"  placeholder="Brand name" ng-model="search.name" ng-change="getsearchResults()"/> 
 				<span class="leftpane_filter_name" >Stockists</span> 
 					<input type="text" class="span3" placeholder="Stockists" /> 
 				<span class="leftpane_filter_name">LOCATION</span> 
-					<input type="text" class="span3" placeholder="Location" ng-model="location" ng-change="getsearchResults()"/>
+					<input type="text" class="span3" placeholder="Location" ng-model="search.location" ng-change="getsearchResults()"/>
 			</div>
 			<div ui-if="isbrandsearch == 'false'">
 				<span class="leftpane_filter_name">Boutique</span> 
-					<input type="text" class="span3"  placeholder="Boutique name" ng-model="name" ng-change="getsearchResults()"/> 
+					<input type="text" class="span3"  placeholder="Boutique name" ng-model="search.name" ng-change="getsearchResults()"/> 
 				<span class="leftpane_filter_name">
 					Brands CARRIED</span> 
 					<input type="text" class="span3" placeholder="Brands carried" /> 
 				<span class="leftpane_filter_name">LOCATION</span> 
-					<input type="text" class="span3" placeholder="Location" ng-model="location" ng-change="getsearchResults()"/>
+					<input type="text" class="span3" placeholder="Location" ng-model="search.location" ng-change="getsearchResults()"/>
 			</div>
 			<div>
 				<span class="leftpane_filter_name">CATEGORY</span>
@@ -60,8 +60,8 @@
 				<div class="divi2 right_pane_underline"></div>
 				<div>
 					<ul class="thumbnails">
-						<li
-							ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize">
+						<li ng-repeat="user in advancedsearch ">
+							<!--  ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize" -->
 							<div class="viewls view-firstls">
 								<a ng-href="#/{{user.username}}/profile"> <img
 									ng-src="{{user.thumbpicpic}}" alt=""></a>
