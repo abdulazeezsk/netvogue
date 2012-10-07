@@ -31,7 +31,7 @@ function MyCtrlAddGallery($scope, $routeParams, $location, srvgallery, mygallery
     }).error(function(data) {
     	
     });
-	$scope.filesadded	= function(element) {
+	$scope.addfiles	= function(element) {
 		$scope.$apply(function($scope) {
 			// Turn the FileList object into an Array
 			$scope.filesadded = true;
@@ -93,7 +93,7 @@ function MyCtrlAddPrintCampaign($scope, $routeParams, $location, srvgallery, myg
     	
     });
     
-	$scope.filesadded	= function(element) {
+    $scope.addfiles	= function(element) {
 		$scope.$apply(function($scope) {
 			// Turn the FileList object into an Array
 			$scope.filesadded = true;
@@ -178,7 +178,7 @@ function MyCtrlAddNewsletter($scope, $routeParams, $location, srvgallery, mygall
     	
     });
     
-	$scope.filesadded	= function(element) {
+    $scope.addfiles	= function(element) {
 		$scope.$apply(function($scope) {
 			$scope.filesadded = true;
 			// Turn the FileList object into an Array
@@ -243,7 +243,7 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
     	
     });
     
-	$scope.filesadded	= function(element) {
+    $scope.addfiles	= function(element) {
 		$scope.$apply(function($scope) {
 			$scope.filesadded = true;
 			// Turn the FileList object into an Array

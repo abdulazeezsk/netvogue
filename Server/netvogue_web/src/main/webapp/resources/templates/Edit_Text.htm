@@ -1,7 +1,5 @@
-<input type="text" class="spanedt_txt" ng-show="isEditMode"
-	ng-model="data.label">
+<input type="text" class="spanedt_txt" ng-show="isEditMode"	ng-model="data.label">
 </input>
-
 
 <span ng-hide="isEditMode" ng-dblclick="switchToEdit()"
 	ng-bind-html-unsafe="data.label"
@@ -28,7 +26,6 @@
 
 <p ng-hide="isEditMode" class="desc" ng-dblclick="switchToEdit()"
 	ng-bind-html-unsafe="data.seasonname"></p>
-
 
 <a class="btn" ng-show="isEditMode" ng-click="switchToPreview('cancel')">Cancel</a>
 <a ng-show="isEditMode" class="btn  btn-primary"

@@ -109,7 +109,8 @@ angular.module('netVogue.directives', []).
 	        scope: {
 	            data		: '=data',
 	            isEditMode	: '=editMode',
-	            updateData	: '&updateData'
+	            updateData	: '&updateData',
+	            deletedata	: '&deleteData',
 	        },
 	        templateUrl: 'templates/Edit_Text.htm',
 	        link: function(scope, elm, attrs) {
@@ -138,7 +139,8 @@ angular.module('netVogue.directives', []).
 	linkFn = function(scope, element, attrs) {
 		var addfiles = function(files) {
 			scope.newfiles = [];
-			for (var i = 0; i < files.length; i++) {
+			scope.newfiles.push("Uploading images");
+			/*for (var i = 0; i < files.length; i++) {
 		    	var loadingImage = window.loadImage(
 		    			files[i],
 		    	        function (img) {
@@ -150,7 +152,7 @@ angular.module('netVogue.directives', []).
 		    		loadingImage.src = "http://placehold.it/210x150";
 		    	}
 		    	scope.newfiles.push(new netvogue.photo(files[i].name, "UNTITLED", loadingImage.src));
-		    }
+		    }*/
 		};
 		scope.isEditMode = false;
 		scope.$on('filesadded', function(e, files) {
@@ -184,9 +186,15 @@ angular.module('netVogue.directives', []).
 		        	scope.$apply(function(scope) {
 		        		if(data.result.status == true) {
 		        			if(true == scope.filesadded) {
+		        				//Worst logic ever -- revisit it once again -- Azeez
+		        				var replyFromServer = [];
 			        			for(var i=0; i < data.result.filesuploaded.length; i++){
-			        				scope.existingfiles.push(data.result.filesuploaded[i]);
+			        				replyFromServer.push(data.result.filesuploaded[i]);
 			        			};
+			        			for(var i=0; i < scope.existingfiles.length; i++){
+			        				replyFromServer.push(scope.existingfiles[i]);
+			        			};
+			        			scope.existingfiles = angular.copy(replyFromServer);
 			        			scope.newfiles = [];
 			        			scope.filesadded = false;
 		        			}
@@ -199,6 +207,9 @@ angular.module('netVogue.directives', []).
     	});
 		scope.updatedataToParent = function(label, seasonname, photoid) {
 			scope.updatedata({label:label, seasonname:seasonname, photoid:photoid});
+		};
+		scope.deletedataToParent = function(photoid) {
+			deletedata({photoid:photoid});
 		};
 		scope.progressVisible = true;
 		scope.progress = 0;
