@@ -1465,6 +1465,13 @@ function MyCtrlAdvancedSearch($scope, search) {
 			location:""
 	};
 	
+	search.getallusers().success(function(data) {
+		$scope.entityname		= data.name;
+		$scope.profilepic		= data.profilepic;
+		$scope.advancedsearch	= data.users;
+	}).error(function(data) {
+		
+	});
 	$scope.searchFilter = new netvogue.searchFilter();
 	$scope.getsearchResults = function() {
 		var categories = $scope.searchFilter.getCheckedFilters();

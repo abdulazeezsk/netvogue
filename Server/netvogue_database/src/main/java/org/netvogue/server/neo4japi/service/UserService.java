@@ -20,6 +20,7 @@ public interface UserService {
 	//Search related
 	public Iterable<User> doBasicSearch(String query);
 	public Iterable<User> doAdvancedSearch(USER_TYPE userType, String name, String location, Set<String> categories);
+	public Iterable<User> getAllUsers();
 	
 	//Gallery related
 	public Iterable<Gallery> GetGalleries(User user);

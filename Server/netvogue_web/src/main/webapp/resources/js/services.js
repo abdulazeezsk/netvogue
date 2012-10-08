@@ -1231,6 +1231,13 @@ angular.module('netVogue.services', []).
           getsearchresults: function () {
               return advancedsearch;
           },
+          getallusers: function() {
+        	  var config = {
+        			  method: "GET",
+                      url: "getallusers"
+              };
+        	  return $http(config);  
+          },
           getadvancedsearchresults: function(name, location, categories, usertype) {
         	  var datatosend = {
         			"name": name, 

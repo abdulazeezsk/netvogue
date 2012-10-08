@@ -1,6 +1,5 @@
 package org.netvogue.server.neo4japi.service;
 
-import java.util.List;
 import java.util.Set;
 
 import org.netvogue.server.neo4japi.common.ResultStatus;
@@ -49,6 +48,11 @@ public class UserServiceImpl implements UserService{
 	//Search related
 	public Iterable<User> doBasicSearch(String query) {
 		query = "username:*" + query + "* OR " + "name:*" + query + "*";
+		return userRepo.doBasicSearch(query);
+	}
+	
+	public Iterable<User> getAllUsers() {
+		String query = "username:*";
 		return userRepo.doBasicSearch(query);
 	}
 	

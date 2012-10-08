@@ -1,6 +1,5 @@
 package org.netvogue.server.webmvc.controllers;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -10,10 +9,11 @@ import java.util.Set;
 
 import org.netvogue.server.neo4japi.common.ProductLines;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
-import org.netvogue.server.neo4japi.domain.Category;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.UserService;
+import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.SearchResponse;
+import org.netvogue.server.webmvc.domain.UsersResponse;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -30,6 +30,34 @@ public class SearchController {
 	@Autowired UserService 			userService;
 	@Autowired ConversionService	conversionService;
 
+	@RequestMapping(value="getallusers", method=RequestMethod.GET)
+	public @ResponseBody UsersResponse getAllUsers() {
+		System.out.println("Get all users: ");
+		
+		UsersResponse response = new UsersResponse();
+		User loggedinUser = userDetailsService.getUserFromSession();
+		response.setName(loggedinUser.getName());
+		response.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
+		
+		Set<SearchResponse> allusers = new LinkedHashSet<SearchResponse>();
+		
+			Iterable<User> users = userService.getAllUsers();
+			
+			if(null == users) {
+				System.out.println("No users found: ");
+				return response;
+			}
+			Iterator<User> first = users.iterator();
+			while ( first.hasNext() ){
+				User dbUser = first.next() ;
+				System.out.println("user name: " + dbUser.getUsername());
+				allusers.add(conversionService.convert(dbUser, SearchResponse.class));
+			}
+		response.setUsers(allusers);
+	
+		return response;
+	}
+	
 	@RequestMapping(value="basicsearch", method=RequestMethod.GET)
 	public @ResponseBody Set<SearchResponse> doBasicSearch(@RequestParam("query") String query) {
 		System.out.println("Get users: " + query);
