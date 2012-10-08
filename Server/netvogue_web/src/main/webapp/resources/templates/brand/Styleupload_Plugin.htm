@@ -1,4 +1,4 @@
-<ul class="thumbnails" ui-sortable ng-model="existingfiles">
+<!-- <ul class="thumbnails" ui-sortable ng-model="existingfiles">
 	<li class="span2" ng-repeat="style in existingfiles| limitTo:4">
 		<div class="thumbnail">
 			<img ng-src={{style.thumbnail_url}} alt="">
@@ -24,4 +24,76 @@
 			</span> 
 		</p>
 	</div>
-</ul>
+</ul> -->
+
+<!-- <ul class="nav nav-tab nav-stacked" ui-sortable ng-model="existingfiles"
+	id="container" class="clearfix">
+	<li ng-repeat="eachfile in newfiles" style="postion: absloute;">
+		<div class="organiseloading">
+			<img ng-src="img/ajax-loader.gif" style="margin-left: 280px;" alt="" />
+		</div>
+	</li>
+	<li ng-repeat="eachfile in existingfiles" style="postion: absloute;">
+		<div class="organise">
+			<span class="image"><img alt=""
+				ng-src={{eachfile.thumbnail_url}}> </span> <span
+				style="width: 400px; margin-left: 10px;">
+				<div edit-text data="eachfile" edit-mode="isEditMode"
+					update-data="updatedataToParent(label, seasonname, photoid)"
+					delete-data="deletedataToParent(photoid)"></div>
+			</span>
+	</li>
+</ul> -->
+
+
+
+
+
+
+<div class="span4">
+	<ul class="nav nav-tab nav-stacked" class="clearfix">
+		<li style="postion: absloute;"><span
+			class="btn btn-inverse fileinput-button span4"> <i
+				class="icon-plus icon-white"></i> <span>Add images...</span> <input
+				id="styleupload" type="file" name="files[]" multiple
+				data-url="stylesheet/addstyleimages"
+				onchange="angular.element(this).scope().filesadded(this)">
+		</span></li>
+	</ul>
+
+	<ul class="thumbnails" ui-sortable ng-model="existingfiles">
+
+		<li class="span2" ng-repeat="style in newfiles| limitTo:1">
+				<img ng-src="img/ajax-loader.gif" style="margin-left: 80px;" alt="" />
+		</li>
+
+
+		<li ng-repeat="style in existingfiles| limitTo:4"
+			style="postion: absloute;">
+			<div class="addstyles">
+				<span class="imagepotrait"><img
+					ng-src={{style.thumbnail_url}} alt=""></span> <span
+					style="margin-left: 100px;"> <span
+					class="btn-group pull-right">
+						<button class="btn btn-inverse dropdown-toggle"
+							data-toggle="dropdown">
+							Action <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a ng-click="deletephoto($index)">Delete</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Set as cover</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Public</a></li>
+							<li><a href="#">Private</a></li>
+							<li><a href="#">Network</a></li>
+						</ul>
+				</span>
+				</span>
+			</div>
+		</li>
+
+
+
+	</ul>
+</div>

@@ -25,18 +25,22 @@
 					<li ng-repeat="style in styles">
 						<div class="leftpanefeed">
 							<div class="feedimage">
-								<a ng-href="#/stylepreview?id={{style.styleid}}&&cat={{category}}&&stylesheetid={{style.styleid}}"> 
-								<img alt="" ng-src="{{style.profileleftpic}}" class="pull-left"></a>
+								<a
+									ng-href="#/stylepreview?id={{style.styleid}}&&cat={{category}}&&stylesheetid={{style.styleid}}">
+									<img alt="" ng-src="{{style.profileleftpic}}" class="pull-left">
+								</a>
 							</div>
 							<div class="leftpanefeed_text">
 								<h3>
-									<a nghref="#/stylepreview?id={{style.styleid}}&&cat={{category}}&&stylesheetid={{style.styleid}}"
-									 title="">{{style.stylename}}</a>
+									<a
+										nghref="#/stylepreview?id={{style.styleid}}&&cat={{category}}&&stylesheetid={{style.styleid}}"
+										title="">{{style.stylename}}</a>
 								</h3>
 								<p>{{style.stylename}}</p>
 								<p>
-									<span><a ng-click="editstyle(style)">Edit</a></span> <span class="divider">/</span> 
-									<span><a ng-click="deletestyle(style.styleid)">Delete</a></span>
+									<span><a ng-click="editstyle(style)">Edit</a></span> <span
+										class="divider">/</span> <span><a
+										ng-click="deletestyle(style.styleid)">Delete</a></span>
 								</p>
 							</div>
 						</div>
@@ -48,116 +52,123 @@
 		<!-- right pane -->
 		<div class="span9">
 			<div>
-				<span class="left rightpane_subHeading"> Add Styles</span> <span
-					class="right"> <a ng-href="#{{backButton}}"
-					class="rightpane_back_btn"> Back</a>
+				<span class="left rightpane_subHeading"> <a href="#/stylesheets">
+						Style sheet</a> <span class="divider">/</span> <span><a
+						ng-href="#/stylesheet?id={{stylesheetid}}&&cat={{category}}">
+							{{stylesheetname}}</a> </span> <span
+					class="right"> 
 				</span>
 				<div class="divi2 right_pane_underline"></div>
-
+<!-- 
 				<span class="left right_pane_info"> <a href="#/stylesheets">
 						Style sheet</a> <span class="divider">/</span> <span><a
-						ng-href="#/stylesheet?id={{stylesheetid}}&&cat={{category}}"> {{stylesheetname}}</a> </span>
+						ng-href="#/stylesheet?id={{stylesheetid}}&&cat={{category}}">
+							{{stylesheetname}}</a> </span>
 				</span>
-				<div class="divi2 right_pane_underline"></div>
+				<div class="divi2 right_pane_underline"></div> -->
 				<span class="left right_pane_info"> Lorem Ipsum is simply
 					dummy text of the printing and typesetting industryever since the
 					1500s, when an unknown printer took a galley of type and scrambled
 					it to make a type and more recently with desktop publishing
-					software like Aldus PageMaker including versions of Lorem Ipsum. </span> <span
-					class="right"> <a ng-click="showStylePane = true"
-					class="rightpane_add_btn">Add</a></span>
 				<div class="divi2 right_pane_underline"></div>
 			</div>
 
 
-			<div ng-show="showStylePane">
-				<!-- data pane -->
-				<div>
-					<!-- data pane -->
-					<div>
-						<div styleupload-plugin ng-model="existingfiles" 
-									stylesheet-id="stylesheetid" files-added="filesadded"></div>
-					</div>
-					<!-- data pane -->
-					<form novalidate class="form-horizontal css-form" name="form">
-						<div ng-switch on="category">
-							<div class="control-group" ng-switch-when="APPAREL">
-								<label class="control-label"> Style Name</label>
-								<div class="controls">
-									<input type="text" class="span4" ng-model="newstyle.stylename" placeholder=" Style Name"
-										id="Text2" />
-								</div>
-								<div class="divi2"></div>
-								<label class="control-label"> Style No</label>
-								<div class="controls">
-									<input type="text" class="span4" ng-model="newstyle.styleno" placeholder=" Style Number"
-										id="Text6" />
-								</div>
-								<div class="divi2"></div>
-								<label class="control-label"> Description</label>
-								<div class="controls">
-									<textarea class="span4" placeholder="Description" rows="5" ng-model="newstyle.description"
-										name="uDescription" ng-maxlength="200" required></textarea>
-								</div>
-								<div class="divi2"></div>
-								<label class="control-label"> Fabrication</label>
-								<div class="controls">
-									<input type="text" class="span4" ng-model="newstyle.fabrication" placeholder="Fabrication"
-										id="Text1" />
-								</div>
-								<div class="divi2"></div>
-								<label class="control-label"> Price</label>
-								<div class="controls">
-									<input type="text" class="span4" ng-model="newstyle.price" placeholder="Price" id="Text8" />
-								</div>
-								<div class="divi2"></div>
-								<label class="control-label"> Size</label>
-								<div class="controls" ng-repeat="size in stylesizes">
-									<input type="checkbox" ng-model="size.available" /> <span class="checkbx_text">{{size.size}}</span>
-								</div>
-								<div class="divi2"></div>
-								<label class="control-label" ng-model="newstyle.availableSizes" > Colors</label>
-								<div class="controls"></div>
-								<div class="divi2"></div>
-								<label class="control-label"> Privicy</label>
-								<div class="controls">
-									<select id="select2" class="span4">
-										<option>Public</option>
-										<option>Private</option>
-										<option>Network</option>
-									</select>
-								</div>
-								<div class="divi2"></div>
+			<div class="spanpreview_details1">
+				<form novalidate class="form-horizontal css-form" name="form">
+					<div ng-switch on="category">
+						<div class="control-group" ng-switch-when="APPAREL">
+							<label class="control-label"> Style Name</label>
+							<div class="controls">
+								<input type="text" class="spanaddstyle_txt"
+									ng-model="newstyle.stylename" placeholder=" Style Name"
+									id="Text2" />
 							</div>
-	
-							<div class="control-group" ng-switch-when="SHOES">
+							<div class="divi2"></div>
+							<label class="control-label"> Style No</label>
+							<div class="controls">
+								<input type="text" class="spanaddstyle_txt"
+									ng-model="newstyle.styleno" placeholder=" Style Number"
+									id="Text6" />
+							</div>
+							<div class="divi2"></div>
+							<label class="control-label"> Description</label>
+							<div class="controls">
+								<textarea class="spanaddstyle_txt" placeholder="Description"
+									rows="5" ng-model="newstyle.description" name="uDescription"
+									ng-maxlength="200" required></textarea>
+							</div>
+							<div class="divi2"></div>
+							<label class="control-label"> Fabrication</label>
+							<div class="controls">
+								<input type="text" class="spanaddstyle_txt"
+									ng-model="newstyle.fabrication" placeholder="Fabrication"
+									id="Text1" />
+							</div>
+							<div class="divi2"></div>
+							<label class="control-label"> Price</label>
+							<div class="controls">
+								<input type="text" class="spanaddstyle_txt"
+									ng-model="newstyle.price" placeholder="Price" id="Text8" />
+							</div>
+							<div class="divi2"></div>
+							<label class="control-label"> Size</label>
+							<div class="controls" ng-repeat="size in stylesizes">
+								<input type="checkbox" ng-model="size.available" /> <span
+									class="checkbx_text">{{size.size}}</span>
+							</div>
+							<div class="divi2"></div>
+							<label class="control-label" ng-model="newstyle.availableSizes">Swatches</label>
+							<div class="controls">
+								<button type="button" style="width: 225px;"
+									class="btn btn-inverse">Add swatches</button>
+							</div>
+							<!-- <div class="divi2"></div>
+							<label class="control-label" ng-model="newstyle.availableSizes">Images</label>
+							<div class="controls">
+								<div styleupload-plugin ng-model="existingfiles" 
+									stylesheet-id="stylesheetid" files-added="filesadded"></div>
+							</div> -->
+							<div class="divi2"></div>
+							<label class="control-label"> Privicy</label>
+							<div class="controls">
+								<select id="select2" class="spanaddstyle_txt">
+									<option>Public</option>
+									<option>Private</option>
+									<option>Network</option>
+								</select>
+							</div>
+							<div class="divi2"></div>
+						</div>
+						
+						<div class="control-group" ng-switch-when="SHOES">
 								<label class="control-label"> Style Name</label>
 								<div class="controls">
-									<input type="text" class="span4" ng-model="newstyle.stylename" placeholder=" Style Name"
+									<input type="text" class="spanaddstyle_txt" ng-model="newstyle.stylename" placeholder=" Style Name"
 										id="Text2" />
 								</div>
 								<div class="divi2"></div>
 								<label class="control-label"> Style No</label>
 								<div class="controls">
-									<input type="text" class="span4" ng-model="newstyle.styleno" placeholder=" Style Number"
+									<input type="text" class="spanaddstyle_txt" ng-model="newstyle.styleno" placeholder=" Style Number"
 										id="Text6" />
 								</div>
 								<div class="divi2"></div>
 								<label class="control-label"> Description</label>
 								<div class="controls">
-									<textarea class="span4" placeholder="Description" rows="5" ng-model="newstyle.description"
+									<textarea class="spanaddstyle_txt" placeholder="Description" rows="5" ng-model="newstyle.description"
 										name="uDescription" ng-maxlength="200" required></textarea>
 								</div>
 								<div class="divi2"></div>
 								<label class="control-label"> Fabrication</label>
 								<div class="controls">
-									<input type="text" class="span4" placeholder="Fabrication"
+									<input type="text" class="spanaddstyle_txt" placeholder="Fabrication"
 										ng-model="newstyle.fabrication" id="Text1" />
 								</div>
 								<div class="divi2"></div>
 								<label class="control-label"> Price</label>
 								<div class="controls">
-									<input type="text" class="span4" ng-model="newstyle.price" placeholder="Price" id="Text8" />
+									<input type="text" class="spanaddstyle_txt" ng-model="newstyle.price" placeholder="Price" id="Text8" />
 								</div>
 								<div class="divi2"></div>
 								<label class="control-label"> Size</label>
@@ -168,7 +179,7 @@
 								<div class="divi2"></div>
 								<label class="control-label"> Privicy</label>
 								<div class="controls">
-									<select id="select2" class="span4">
+									<select id="select2" class="spanaddstyle_txt">
 										<option>Public</option>
 										<option>Private</option>
 										<option>Network</option>
@@ -176,35 +187,35 @@
 								</div>
 								<div class="divi2"></div>
 							</div>
-	
+							
 							<div class="control-group" ng-switch-when="HANDBAGS">
 								<label class="control-label"> Style Name</label>
 								<div class="controls">
-									<input type="text" class="span4" ng-model="newstyle.stylename" placeholder=" Style Name"
+									<input type="text" class="spanaddstyle_txt" ng-model="newstyle.stylename" placeholder=" Style Name"
 										id="Text2" />
 								</div>
 								<div class="divi2"></div>
 								<label class="control-label"> Style No</label>
 								<div class="controls">
-									<input type="text" class="span4" ng-model="newstyle.styleno" placeholder=" Style Number"
+									<input type="text" class="spanaddstyle_txt" ng-model="newstyle.styleno" placeholder=" Style Number"
 										id="Text6" />
 								</div>
 								<div class="divi2"></div>
 								<label class="control-label"> Description</label>
 								<div class="controls">
-									<textarea class="span4" placeholder="Description" rows="5" ng-model="newstyle.description"
+									<textarea class="spanaddstyle_txt" placeholder="Description" rows="5" ng-model="newstyle.description"
 										name="uDescription" ng-maxlength="200" required></textarea>
 								</div>
 								<div class="divi2"></div>
 								<label class="control-label"> Fabrication</label>
 								<div class="controls">
-									<input type="text" class="span4" placeholder="Fabrication" ng-model="newstyle.fabrication"
+									<input type="text" class="spanaddstyle_txt" placeholder="Fabrication" ng-model="newstyle.fabrication"
 										id="Text1" />
 								</div>
 								<div class="divi2"></div>
 								<label class="control-label"> Price</label>
 								<div class="controls">
-									<input type="text" class="span4" ng-model="newstyle.price" placeholder="Price" id="Text8" />
+									<input type="text" class="spanaddstyle_txt" ng-model="newstyle.price" placeholder="Price" id="Text8" />
 								</div>
 								<div class="divi2"></div>
 								<label class="control-label"> Size</label>
@@ -217,7 +228,7 @@
 								<div class="divi2"></div>
 								<label class="control-label"> Privicy</label>
 								<div class="controls">
-									<select id="select2" class="span4">
+									<select id="select2" class="spanaddstyle_txt">
 										<option>Public</option>
 										<option>Private</option>
 										<option>Network</option>
@@ -225,29 +236,30 @@
 								</div>
 								<div class="divi2"></div>
 							</div>
-	
+							
+							
 							<div class="control-group" ng-switch-when="WATCHES">
 								<label class="control-label"> Style Name</label>
 								<div class="controls">
-									<input type="text" class="span4" ng-model="newstyle.stylename" placeholder=" Style Name"
+									<input type="text" class="spanaddstyle_txt" ng-model="newstyle.stylename" placeholder=" Style Name"
 										id="Text2" />
 								</div>
 								<div class="divi2"></div>
 								<label class="control-label"> Style No</label>
 								<div class="controls">
-									<input type="text" class="span4" ng-model="newstyle.styleno" placeholder=" Style Number"
+									<input type="text" class="spanaddstyle_txt" ng-model="newstyle.styleno" placeholder=" Style Number"
 										id="Text6" />
 								</div>
 								<div class="divi2"></div>
 								<label class="control-label"> Description</label>
 								<div class="controls">
-									<textarea class="span4" placeholder="Description" rows="5" ng-model="newstyle.description"
+									<textarea class="spanaddstyle_txt" placeholder="Description" rows="5" ng-model="newstyle.description"
 										name="uDescription" ng-maxlength="200" required></textarea>
 								</div>
 								<div class="divi2"></div>
 								<label class="control-label"> Price</label>
 								<div class="controls">
-									<input type="text" class="span4" ng-model="newstyle.fabrication" placeholder="Price" id="Text8" />
+									<input type="text" class="spanaddstyle_txt" ng-model="newstyle.fabrication" placeholder="Price" id="Text8" />
 								</div>
 								<div class="divi2"></div>
 								<label class="control-label"> Colors</label>
@@ -255,7 +267,7 @@
 								<div class="divi2"></div>
 								<label class="control-label"> Privicy</label>
 								<div class="controls">
-									<select id="select2" class="span4">
+									<select id="select2" class="spanaddstyle_txt">
 										<option>Public</option>
 										<option>Private</option>
 										<option>Network</option>
@@ -263,10 +275,14 @@
 								</div>
 								<div class="divi2"></div>
 							</div>
-						</div>
-					</form>
-				</div>
-				<div class="controls pull-right">
+					</div>
+				</form>
+
+			</div>
+			<div styleupload-plugin ng-model="existingfiles"
+				stylesheet-id="stylesheetid" files-added="filesadded"></div>
+				
+				<div class="controls pull-right" style="clear:both;">
 					<button type="button" class="btn" ng-click="exitstylepane()">
 						<i class=""></i><span>Exit</span>
 					</button>
@@ -276,10 +292,11 @@
 					</button>
 
 				</div>
-				<div class="divi2"></div>
-			</div>
 		</div>
-		<!-- right pane -->
+
 	</div>
+
+</div>
+<!-- right pane -->
 </div>
 <!--body-->

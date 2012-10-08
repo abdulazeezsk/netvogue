@@ -326,6 +326,7 @@ angular.module('netVogue.directives', []).
 				//addfiles(element.files);
 				scope.newfiles = [];
 				scope.newfiles.push("");
+				scope.senttoserver = true;
 			});
 		};
 		var stylesheetid = {
