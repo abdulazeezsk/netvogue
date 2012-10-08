@@ -284,8 +284,9 @@ angular.module('netVogue.directives', []).
 	linkFn = function(scope, element, attrs) {
 		scope.newfiles = [];
 		var filesinprocess = 0;
-		var addfiles = function(files) {
+		/*var addfiles = function(files) {
 			scope.newfiles = [];
+			scope.newfiles.push(loadingImage.src);
 			var i;
 			for (i = 0; i < files.length; i++) {
 				scope.senttoserver = true;
@@ -305,16 +306,16 @@ angular.module('netVogue.directives', []).
 		    }
 			filesinprocess = i;
 			checkremainingfiles();
-		};
+		};*/
 		
 		var checkremainingfiles = function() {
 			//Only four files can be added
 			var remainingimages = 4 - (scope.existingfiles.length + filesinprocess);
 			if(remainingimages < 0)
 				remainingimages = 0;
-			for (var i = 0; i < remainingimages; i++) {
+			/*for (var i = 0; i < remainingimages; i++) {
 				scope.newfiles.push("http://placehold.it/130X151");
-			}
+			}*/
 		};
 		checkremainingfiles();
 		
@@ -322,7 +323,9 @@ angular.module('netVogue.directives', []).
 		scope.filesadded	= function(element) {
 			scope.$apply(function(scope) {
 				// Turn the FileList object into an Array
-				addfiles(element.files);
+				//addfiles(element.files);
+				scope.newfiles = [];
+				scope.newfiles.push(loadingImage.src);
 			});
 		};
 		var stylesheetid = {
@@ -367,7 +370,7 @@ angular.module('netVogue.directives', []).
 		scope.deletephoto = function(index) {
 			scope.existingfiles.splice(index, 1);
 			scope.newfiles = [];
-			checkremainingfiles();
+			//checkremainingfiles();
 		};
 		scope.updatedataToParent = function(label, seasonname, photoid) {
 			//scope.updatedata({label:label, seasonname:seasonname, photoid:photoid});
