@@ -45,59 +45,69 @@ public class ProfileController {
 	@RequestMapping(value = {"/profile/", "/profile/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody ProfileInfo getProfileInfo(@ModelAttribute("profileid") String profileid) {
 		System.out.println("ProfileInfo: id is:" + profileid);
-		User loggedinUser = userDetailsService.getUserFromSession();
+		User user = userDetailsService.getUserFromSession();
 		ProfileInfo profile = new ProfileInfo();
-		if(profileid.isEmpty()) {
-			profile.setName(loggedinUser.getName());
-			profile.setAboutus(loggedinUser.getAboutUs());
-			//Set profile pic
-			if(null != loggedinUser.getProfilePicLink()) {
-				String thumburl = uploadManager.getQueryString(loggedinUser.getProfilePicLink(), ImageType.PROFILE_PIC, Size.PThumb);
-				System.out.println("Image path is/Thumnail url is" + thumburl);
-				profile.setProfilepic(thumburl);
+		
+		if(!profileid.isEmpty()) {
+			user = userService.getUserByUsername(profileid);
+			if(user == null) {
+				return profile;
 			}
-			
-			//Get ContactInfo
-			ContactInfo contactInfo = new ContactInfo();
-			contactInfo.setAddress(loggedinUser.getAddress());
-			contactInfo.setCity(loggedinUser.getCity());
-			contactInfo.setState(loggedinUser.getState());
-			contactInfo.setCountry(loggedinUser.getCountry());
-			contactInfo.setZip(String.valueOf(loggedinUser.getZipCode()));
-			contactInfo.setEmail(loggedinUser.getEmail());
-			contactInfo.setLandline1(String.valueOf(loggedinUser.getTelephoneNo1()));
-			contactInfo.setLandline2(String.valueOf(loggedinUser.getTelephoneNo2()));
-			contactInfo.setMobile(String.valueOf(loggedinUser.getMobileNo()));
-			contactInfo.setWebsite(loggedinUser.getWebsite());
-			contactInfo.setYearest(loggedinUser.getYearofEst());
-			//Add it to profile Info
-			profile.setContactinfo(contactInfo);
-			
-			//Get Productlines Info			
-			Set<Category> productsCarried = loggedinUser.getProductLinesCarried();
-			int size = productsCarried.size();
-			Set<ProductLine> productLine = new HashSet<ProductLine>();
-			for(Category product: productsCarried) {
-				System.out.println("Name:" +  product.getProductLine().getDesc() + "- size:" + size );
-				ProductLine productTemp = new ProductLine();
-				productTemp.setProductlinename(product.getProductLine().getDesc());
-				productTemp.setSelected(true);
-				productLine.add(productTemp);
-			}
-			profile.setProductlines(productLine);
-			
-			//Get Brands/Stockists carried info
-			Set<User> brandsCarried = loggedinUser.getUsersCarried();
-			Set<BrandsCarried> brands = new HashSet<BrandsCarried>();
-			for(User product: brandsCarried) {
-				System.out.println("Name:" +  product.getName() + "username:" + product.getUsername());
-				BrandsCarried brand = new BrandsCarried();
-				brand.setBrandname(product.getName());
-				brand.setBrandusername(product.getUsername());
-				brands.add(brand);
-			}
-			profile.setBrandscarried(brands);
 		}
+
+		profile.setProfileid(user.getUsername());
+		profile.setName(user.getName());
+		profile.setAboutus(user.getAboutUs());
+		//Set profile pic
+		if(null != user.getProfilePicLink()) {
+			String thumburl = uploadManager.getQueryString(user.getProfilePicLink(), ImageType.PROFILE_PIC, Size.PThumb);
+			System.out.println("Image path is/Thumnail url is" + thumburl);
+			profile.setProfilepic(thumburl);
+		}
+		
+		//Get ContactInfo
+		ContactInfo contactInfo = new ContactInfo();
+		contactInfo.setAddress(user.getAddress());
+		contactInfo.setCity(user.getCity());
+		contactInfo.setState(user.getState());
+		contactInfo.setCountry(user.getCountry());
+		contactInfo.setZip(String.valueOf(user.getZipCode()));
+		contactInfo.setEmail(user.getEmail());
+		contactInfo.setLandline1(String.valueOf(user.getTelephoneNo1()));
+		contactInfo.setLandline2(String.valueOf(user.getTelephoneNo2()));
+		contactInfo.setMobile(String.valueOf(user.getMobileNo()));
+		contactInfo.setWebsite(user.getWebsite());
+		contactInfo.setYearest(user.getYearofEst());
+		//Add it to profile Info
+		profile.setContactinfo(contactInfo);
+		
+		//Get Productlines Info			
+		Set<Category> productsCarried = user.getProductLinesCarried();
+		int size = productsCarried.size();
+		Set<ProductLine> productLine = new HashSet<ProductLine>();
+		for(Category product: productsCarried) {
+			System.out.println("Name:" +  product.getProductLine().getDesc() + "- size:" + size );
+			ProductLine productTemp = new ProductLine();
+			productTemp.setProductlinename(product.getProductLine().getDesc());
+			productTemp.setSelected(true);
+			productLine.add(productTemp);
+		}
+		profile.setProductlines(productLine);
+		
+		//Get Brands/Stockists carried info
+		Set<User> brandsCarried = user.getUsersCarried();
+		Set<BrandsCarried> brands = new HashSet<BrandsCarried>();
+		for(User product: brandsCarried) {
+			System.out.println("Name:" +  product.getName() + "username:" + product.getUsername());
+			BrandsCarried brand = new BrandsCarried();
+			brand.setBrandname(product.getName());
+			brand.setBrandusername(product.getUsername());
+			brands.add(brand);
+		}
+		profile.setBrandscarried(brands);
+		profile.setStatus(true);
+		
+		System.out.println("ProfileInfo Sent for id:" + profileid);
 		return profile;
 	}
 	
@@ -124,8 +134,7 @@ public class ProfileController {
 			@RequestParam("files[]") MultipartFile fileupload) {
 		System.out.println("Set Profile Pic: ");
 		UploadedFileResponse response = new UploadedFileResponse();
-		
-		
+			
 		User user = userDetailsService.getUserFromSession();
 		if(null == user) {
 			response.setError("User is not logged in");

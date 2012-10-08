@@ -1,17 +1,17 @@
 package org.netvogue.server.webmvc.domain;
 
 public class ContactInfo {
-	String email 		= new String();
-	String mobile 		= new String();
-	String landline1	= new String();
-	String landline2	= new String();
-	String address		= new String();
-	String city			= new String();
-	String zip			= new String();
-	String state		= new String();
-	String country		= new String();
-	String website		= new String();
-    Integer yearest;
+	String email 	=""	;	
+	String mobile 	=""	;
+	String landline1=""	;
+	String landline2=""	;
+	String address	=""	;
+	String city		=""	;
+	String zip		=""	;
+	String state	=""	;
+	String country	=""	;
+	String website	=""	;
+    Integer yearest		;
     
     public String getEmail() {
 		return email;

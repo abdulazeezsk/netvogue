@@ -34,6 +34,10 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 	
+	public User getUserByUsername(String username) {
+		return userRepo.findByusername(username);
+	}
+	
 	public ResultStatus ValidateEmailAndId(String email, Long id) {
 		if(email.isEmpty()) {
 			return ResultStatus.FAILURE;

@@ -233,7 +233,7 @@ public class CollectionController {
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
 			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.COLLECTION);
-			String imagePath = (String)uploadMap.get(UploadManager.QUERY_STRING);
+			//String imagePath = (String)uploadMap.get(UploadManager.QUERY_STRING);
 			CollectionPhoto newPhoto = new CollectionPhoto((String)uploadMap.get(UploadManager.FILE_ID));
 			collection.addPhotos(newPhoto);
 			

@@ -1,6 +1,5 @@
 package org.netvogue.server.neo4japi.service;
 
-import java.util.List;
 import java.util.Set;
 
 import org.netvogue.server.neo4japi.common.ResultStatus;
@@ -16,6 +15,7 @@ import org.netvogue.server.neo4japi.domain.User;
 public interface UserService {
 	ResultStatus SaveUser(User user, String error);
 	ResultStatus ValidateEmailAndId(String email, Long id);
+	public User getUserByUsername(String username);
 
 	//Search related
 	public Iterable<User> doBasicSearch(String query);

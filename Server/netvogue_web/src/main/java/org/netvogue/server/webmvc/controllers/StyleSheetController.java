@@ -23,7 +23,6 @@ import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.PhotoWeb;
-import org.netvogue.server.webmvc.domain.Photos;
 import org.netvogue.server.webmvc.domain.StyleJSONResponse;
 import org.netvogue.server.webmvc.domain.StyleRequest;
 import org.netvogue.server.webmvc.domain.StyleResponse;

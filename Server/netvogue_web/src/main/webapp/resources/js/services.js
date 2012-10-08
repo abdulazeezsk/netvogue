@@ -85,8 +85,7 @@ angular.module('netVogue.services', []).
 	        }
 	    };
 }).service('srvprofile', function ($http, myprofile, mynetwork) {
-      var profiles = [];
-      var galleries= new netvogue.hashtable();
+	var profileinfo = new netvogue.profile(); //This must be converted to hashtable if we want to store localdata
       
       /*********************************/
 	  var networks = new netvogue.hashtable();
@@ -113,91 +112,60 @@ angular.module('netVogue.services', []).
               };
               return $http(config);
           },
-          setProfileLocally: function(profiledata) {
+          setProfileLocally: function(profiledata, routeparams) {
         	  netvogue.yettocontact = false;
-              if ("" == profiledata.profileid) {
+        	  if (angular.isUndefined(routeparams.profileid)) {
             	  myprofile.setprofileinfo(profiledata);
               } else {
-            	  profiles.push(angular.copy(profiledata));
+            	  profileinfo = angular.copy(profiledata);
               }
           },
           getname: function(routeparams) {
-        	  var result;
               if (angular.isUndefined(routeparams.profileid)) {
                   return myprofile.getname();
               } else {
-                  angular.forEach(profiles, function (profile) {
+                  /*angular.forEach(profiles, function (profile) {
                       if (angular.equals(profile['profileid'], routeparams.profileid)) {
                           result = profile['aboutus'];
                       }
-                  });
+                  });*/
+            	  return profileinfo.name;
               }
-              return result;
 	    	},
           getaboutus: function (routeparams) {
-              var result;
               if (angular.isUndefined(routeparams.profileid)) {
                   return myprofile.getaboutus();
               } else {
-                  angular.forEach(profiles, function (profile) {
-                      if (angular.equals(profile['profileid'], routeparams.profileid)) {
-                          result = profile['aboutus'];
-                      }
-                  });
+                  return profileinfo.aboutus;
               }
-              return result;
           },
           getprofilepic: function(routeparams) {
-        	  var result;
               if (angular.isUndefined(routeparams.profileid)) {
                   return myprofile.getprofilepic();
               } else {
-                  angular.forEach(profiles, function (profile) {
-                      if (angular.equals(profile['profileid'], routeparams.profileid)) {
-                          result = profile['profilepic'];
-                      }
-                  });
+            	  return profileinfo.profilepic;
               }
-              return result;
           },
           getcontactinfo: function (routeparams) {
-              var result;
               if (angular.isUndefined(routeparams.profileid)) {
                   return myprofile.getcontactinfo();
               } else {
-                  angular.forEach(profiles, function (profile) {
-                      if (angular.equals(profile['profileid'], routeparams.profileid)) {
-                          result = profile['contactinfo'];
-                      }
-                  });
+                  return profileinfo.contactinfo;
               }
-              return result;
           },
           getproductline: function (routeparams) {
-              var result;
               if (angular.isUndefined(routeparams.profileid)) {
                   return myprofile.getproductline();
               } else {
-                  angular.forEach(profiles, function (profile) {
-                      if (angular.equals(profile['profileid'], routeparams.profileid)) {
-                          result = profile['productline'];
-                      }
-                  });
+                  return profileinfo.productlines;
               }
-              return result;
           },
           getbrandscarried: function (routeparams) {
-              var result;
               if (angular.isUndefined(routeparams.profileid)) {
                   return myprofile.getbrandscarried();
               } else {
-                  angular.forEach(profiles, function (profile) {
-                      if (angular.equals(profile['profileid'], routeparams.profileid)) {
-                          result = profile['brandscarried'];
-                      }
-                  });
+                  return profileinfo.brandscarried;
               }
-              return result;
           },
           getnetwork: function (routeparams) {
               var result;
@@ -205,33 +173,7 @@ angular.module('netVogue.services', []).
                   return mynetwork.getmynetwork();
               } else {
                   result = networks.getItem(routeparams.profileid);
-                  /*angular.forEach(networks, function(network) {
-                  if(angular.equals(network['profileid'], routeparams.profileid)) {
-                  result = network['network'];
-                  }
-                  })*/
-                  ;
               }
-              return result;
-          },
-          getlinesheets: function (routeparams) {
-              var result;
-              /*if (angular.isUndefined(routeparams.profileid)) {
-                  result = mylinesheets.getlinesheets();
-                  for (var col in result) {
-                      result[col].linesheetlistitemid = "linesheets/" + result[col].linesheetlistitemid;
-                  }
-              } else {
-                  result = linesheets.getItem(routeparams.profileid);
-                  /*angular.forEach(linesheets, function(linesheet) {
-                  if(angular.equals(linesheet['profileid'], routeparams.profileid)) {
-                  result = linesheet['linesheets'];
-                  }
-                  });
-                  for (var col in result) {
-                      result[col].linesheetlistitemid = routeparams.profileid + "/linesheets/" + result[col].linesheetlistitemid;
-                  }
-              }*/
               return result;
           }
       };

@@ -27,8 +27,10 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
     $scope.currentPage = 'Profile';
     $scope.$parent.title	= "Profile";
     $scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
-    $scope.profilepic		= "http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg";
-	
+    if (!angular.isUndefined($routeParams.profileid)) {
+		$scope.galleryid = $routeParams.profileid;
+	}
+    
     //This will initialize all the variables inside controller.
     //Also, if there is any existing data, this data will be shown to user until we get response from server
     $scope.updatedata = function() {
@@ -44,16 +46,21 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     srvprofile.profileinfo($routeParams).success(function(data) {
-    	srvprofile.setProfileLocally(data);
-    	$scope.updatedata();
+    	if(data.status == true) {
+    		srvprofile.setProfileLocally(data, $routeParams);
+    		$scope.updatedata();
+    	} else {
+    		allert("No user available with this name");
+    	}
     }).error(function(data) {
     	
     });
-    $scope.updatedata();
+    //$scope.updatedata();
     
     //Yet to get data about trending and myfriend details
     $scope.trending = trending.getTrending();
-    $scope.myfriend = mynetwork.ismyfriend($routeParams);
+    //$scope.myfriend = mynetwork.ismyfriend($routeParams);
+    $scope.myfriend = $scope.isMyProfile;
     $scope.links = currentvisitedprofile.getleftpanellinks();
 }
 

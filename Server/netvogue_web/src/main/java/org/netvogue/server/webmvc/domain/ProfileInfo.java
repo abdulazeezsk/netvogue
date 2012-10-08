@@ -3,13 +3,15 @@ package org.netvogue.server.webmvc.domain;
 import java.util.Set;
 
 public class ProfileInfo {
-	String name		 	= new String();
-	String profileid 	= new String();
-	String aboutus 		= new String();
-	String profilepic	= new String();
+	String name		 	= "";
+	String profileid 	= "";
+	String aboutus 		= "";
+	String profilepic	= "";
 	ContactInfo contactinfo ;
 	Set<ProductLine> productlines; 	//netvogue.productline 
 	Set<BrandsCarried> brandscarried;	//netvogue.brandscarried
+	
+	boolean status = false;
 	
 	public String getName() {
 		return name;
@@ -69,4 +71,13 @@ public class ProfileInfo {
 	public void setBrandscarried(Set<BrandsCarried> brandscarried) {
 		this.brandscarried = brandscarried;
 	}
+
+	public boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
 }
