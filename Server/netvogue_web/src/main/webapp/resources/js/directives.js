@@ -325,7 +325,7 @@ angular.module('netVogue.directives', []).
 				// Turn the FileList object into an Array
 				//addfiles(element.files);
 				scope.newfiles = [];
-				scope.newfiles.push(loadingImage.src);
+				scope.newfiles.push("");
 			});
 		};
 		var stylesheetid = {
