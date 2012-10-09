@@ -124,7 +124,7 @@ public class Linesheet {
 	
 	public void addStyles(Style newStyle) {
 		if(0 == styles.size()) {
-			setProfilePicLink(newStyle.getStyleid());
+			setProfilePicLink(newStyle.getProfilePicLink());
 		}
 		styles.add(newStyle);
 	}
