@@ -117,6 +117,8 @@ angular.module('netVogue.services', []).
                           result = profile['aboutus'];
                       }
                   });*/
+            	  if(angular.isUndefined(profileinfo.name))
+  	        		return "";
             	  return profileinfo.name;
               }
 	    	},
@@ -124,6 +126,8 @@ angular.module('netVogue.services', []).
               if (angular.isUndefined(routeparams.profileid)) {
                   return myprofile.getaboutus();
               } else {
+            	  if(angular.isUndefined(profileinfo.aboutus))
+  	        		return "";
                   return profileinfo.aboutus;
               }
           },
@@ -131,16 +135,22 @@ angular.module('netVogue.services', []).
               if (angular.isUndefined(routeparams.profileid)) {
                   return myprofile.getprofilepic();
               } else {
+            	  if(angular.isUndefined(profileinfo.profilepic))
+  	        		return "";
             	  return profileinfo.profilepic;
               }
           },
           getnetworkstatus: function(routeparams) {
+        	  if(angular.isUndefined(profileinfo.networkstatus))
+	        		return "";
               return profileinfo.networkstatus;
           },
           getcontactinfo: function (routeparams) {
               if (angular.isUndefined(routeparams.profileid)) {
                   return myprofile.getcontactinfo();
               } else {
+            	  if(angular.isUndefined(profileinfo.contactinfo))
+  	        		return {};
                   return profileinfo.contactinfo;
               }
           },
@@ -148,6 +158,8 @@ angular.module('netVogue.services', []).
               if (angular.isUndefined(routeparams.profileid)) {
                   return myprofile.getproductline();
               } else {
+            	  if(angular.isUndefined(profileinfo.productlines))
+  	        		return [];
                   return profileinfo.productlines;
               }
           },
@@ -155,17 +167,10 @@ angular.module('netVogue.services', []).
               if (angular.isUndefined(routeparams.profileid)) {
                   return myprofile.getbrandscarried();
               } else {
+            	  if(angular.isUndefined(profileinfo.brandscarried))
+  	        		return [];
                   return profileinfo.brandscarried;
               }
-          },
-          getnetwork: function (routeparams) {
-              var result;
-              if (angular.isUndefined(routeparams.profileid)) {
-                  return mynetwork.getmynetwork();
-              } else {
-                  result = networks.getItem(routeparams.profileid);
-              }
-              return result;
           }
       };
 }).service('currentvisitedprofile', function ($location) {
@@ -1116,12 +1121,12 @@ angular.module('netVogue.services', []).
     	setnotifications: function(temp) {
     		name = temp.name;
     		profilepic = temp.profilepic;
-    		numberofunreadnotifications = temp.unreadnotifications;
     		angular.copy(temp.notifications, notifications);
     	},
     	setunreadnotifications: function(temp) {
     		name = temp.name;
     		profilepic = temp.profilepic;
+    		numberofunreadnotifications = temp.unreadnotifications;
     		angular.copy(temp.notifications, unreadnotifications);
     	},
     	getname: function() {
@@ -1182,7 +1187,7 @@ angular.module('netVogue.services', []).
     	confirmnetworklocally: function(id) {
     		var index=0;
     		for(index=0; index <  notifications.length; index++) {
-    			if(notifications[index].notificationid == id) {
+    			if(notifications[index].profileid == id) {
     				notifications[index].networkstatus = "CONFIRMED";
     				break;
     			}
@@ -1205,13 +1210,13 @@ angular.module('netVogue.services', []).
 	var contactinfo;
 	return {
 		getnetworks: function() {
-    		return network;
+    		return networks;
     	},
     	setnetworks: function(temp) {
     		name = temp.name;
     		profilepic = temp.profilepic;
-    		angular.copy(temp.contactinfo, contactinfo);
-    		angular.copy(temp.networks, networks);
+    		contactinfo = angular.copy(temp.contactinfo);
+    		networks = angular.copy(temp.networks);
     	},
     	getname: function() {
     		if(angular.isUndefined(name))
@@ -1227,7 +1232,7 @@ angular.module('netVogue.services', []).
     		return profilepic;
     	},
     	getcontactinfo: function() {
-    		if(angular.isUndefined(profilepic))
+    		if(angular.isUndefined(contactinfo))
         		return {};
     		return contactinfo;
     	},
@@ -1263,6 +1268,14 @@ angular.module('netVogue.services', []).
     	          };
             return $http(config);
     	},
+    	unblocknetwork: function(profileid) {
+    		var config = {
+    				method: "POST",
+    				data: profileid,
+    	            url: "network/unblocknetwork"
+    	          };
+            return $http(config);
+    	},
     	confirmnetworklocally: function(profileid) {
     		var index=0;
     		for(index=0; index <  networks.length; index++) {
@@ -1288,7 +1301,7 @@ angular.module('netVogue.services', []).
     				break;
     			}
     		}
-    		galleries.splice(index, 1);
+    		networks.splice(index, 1);
     	}
       };
 }).service('srvnetwork', function ($http, mynetwork) {
@@ -1299,11 +1312,9 @@ angular.module('netVogue.services', []).
             if (angular.isUndefined(routeparams.profileid)) {
                 return mynetwork.getname();
             } else {
-                /*angular.forEach(profiles, function (profile) {
-                    if (angular.equals(profile['profileid'], routeparams.profileid)) {
-                        result = profile['aboutus'];
-                    }
-                });*/
+            	if(angular.isUndefined(network.name))
+            		return "";
+        		return network.name;
             }
             return result;
   	  },
@@ -1312,17 +1323,28 @@ angular.module('netVogue.services', []).
             if (angular.isUndefined(routeparams.profileid)) {
                 return mynetwork.getprofilepic();
             } else {
-                /*angular.forEach(profiles, function (profile) {
-                    if (angular.equals(profile['profileid'], routeparams.profileid)) {
-                        result = profile['aboutus'];
-                    }
-                });*/
+            	if(angular.isUndefined(network.profilepic))
+            		return "";
+        		return network.profilepic;
             }
             return result;
   	  },
+  	  getcontactinfo: function(routeparams) {
+		  var result;
+          if (angular.isUndefined(routeparams.profileid)) {
+              return mynetwork.getcontactinfo();
+          } else {
+        	  if(angular.isUndefined(network.contactinfo))
+          		return {};
+      		return network.contactinfo;
+          }
+          return result;
+	  },
   	  getnetworks: function (routeparams) {
 	          if (angular.isUndefined(routeparams.profileid)) {
 	        	  return mynetwork.getnetworks();
+	          } else {
+	        	  return network.networks;  
 	          }
   	  },
   	  networks: function (routeparams) {
@@ -1332,7 +1354,6 @@ angular.module('netVogue.services', []).
 	          }
 	          var config = {
 	              method: "GET",
-	              params: profileid,
 	              url: "network/getnetworks/" + profileid
 	          };
 	          return $http(config);
@@ -1341,7 +1362,7 @@ angular.module('netVogue.services', []).
 	  		if (angular.isUndefined(routeparams.profileid)) {
 	  			mynetwork.setnetworks(data);
 	        } else {
-	      	  //galleries.push(angular.copy(galleriesdata));
+	        	network = angular.copy(data);
 	        }
   	  }
     };

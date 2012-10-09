@@ -24,10 +24,11 @@
                                     Action <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                	<li ng-show="network.networkstatus == 'PENDING'">
-                                		<a ng-click="confirmnetwork(profileid)">Accept</a></li>
-                                    <li><a ng-click="deletenetwork(profileid)">Delete</a></li>
-                                    <li><a ng-click="blocknetwork(profileid)">Block</a></li>
+                                	<li ng-show="network.networkstatus == 'PENDING' || !network.networkstatus == 'BLOCK'">
+                                		<a ng-click="confirmnetwork(network.profileid)">Accept</a></li>
+                                    <li><a ng-hide="network.networkstatus == 'BLOCK'" ng-click="deletenetwork(network.profileid)">Delete</a></li>
+                                    <li><a ng-hide="network.networkstatus == 'BLOCK'" ng-click="blocknetwork(network.profileid)">Block</a></li>
+                                    <li><a ng-show="network.networkstatus == 'BLOCK'" ng-click="unblocknetwork(network.profileid)">UnBlock</a></li>
                                 </ul>
                             </span>
                     </div>

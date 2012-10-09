@@ -31,7 +31,7 @@ public interface UserRepository extends GraphRepository<User> {
 			"WHERE ALL( c in categories WHERE user-[:has_category]->c) RETURN user")
 	Iterable<User> doAdvancedSearch(String Categories, String search);
 	
-	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-() WHERE f.username={1} " +
+	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-f WHERE f.username={1} " +
 			"RETURN r.status")
 	NetworkStatus getNetworkStatus(String username1, String username2);
 	

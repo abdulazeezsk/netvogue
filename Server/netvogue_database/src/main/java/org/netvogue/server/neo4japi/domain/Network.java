@@ -32,9 +32,9 @@ public class Network {
 	Brand 	brand;*/
 	
 	@StartNode
-	User 	requestBy;
+	@Fetch User 	requestBy;
 	@EndNode
-	User 	requestTo;
+	@Fetch User 	requestTo;
 	
 	String breakupby; //In case if there is a breakup
 	

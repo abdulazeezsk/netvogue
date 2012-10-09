@@ -26,7 +26,7 @@ public class Notification {
 	
 	boolean				isRead = false;
 	
-	User				otherUser;
+	@Fetch User			otherUser;
 	
 	NetworkStatus		status;
 	
@@ -47,6 +47,14 @@ public class Notification {
 		this.notificationid = UUID.randomUUID().toString();
 	}
 	
+	public String getNotificationid() {
+		return notificationid;
+	}
+
+	public void setNotificationid(String notificationid) {
+		this.notificationid = notificationid;
+	}
+
 	public NotificationType getNotificationType() {
 		return notificationType;
 	}

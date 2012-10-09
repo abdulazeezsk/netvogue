@@ -17,4 +17,5 @@ public interface NetworkService {
 	ResultStatus DiscardNetwork(String usernameBy, String usernameTo, String error);
 	ResultStatus DeleteNetwork(String usernameBy, String usernameTo, String error);
 	ResultStatus BlockNetwork(String usernameBy, String usernameTo, String error);
+	ResultStatus UnblockNetwork(String usernameBy, String usernameTo, String error);
 }

@@ -17,6 +17,6 @@ public interface NotificationRepository extends GraphRepository<Notification> {
 	@Query("START n=node:notificationid(notificationid={0}) SET n.isRead=true")
 	void markNotificationRead(String notificationid);
 	
-	@Query( "START n=node:notificationid(notificationid={0}) SET r.status = 'DISCARD'")
+	@Query( "START n=node:notificationid(notificationid={0}) SET n.status = 'DISCARD', n.isRead=true")
 	void DiscardNetwork(String id); //You can confirm afterwards
 }

@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -37,11 +38,11 @@ public class NetworkController {
 	@Autowired ConversionService	conversionService;
 	@Autowired UploadManager 		uploadManager;
 	
-	@RequestMapping(value="network/getnetworks", method=RequestMethod.GET)
+	@RequestMapping(value={"network/getnetworks", "network/getnetworks/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Networks GetNetworks(@ModelAttribute("profileid") String profileid) {
 		System.out.println("Get Networks: id is:" + profileid);
 		User user = userDetailsService.getUserFromSession();
-		
+		String loggedinuser = user.getUsername();
 		Networks response = new Networks();
 		
 		if(!profileid.isEmpty()) {
@@ -65,9 +66,13 @@ public class NetworkController {
 		while ( first.hasNext() ){
 			org.netvogue.server.neo4japi.domain.Network dbNetwork = first.next() ;
 			if(
-				(dbNetwork.getStatus() == NetworkStatus.PENDING && username.equals(dbNetwork.getRequestBy().getUsername()))
-			 || (dbNetwork.getStatus() == NetworkStatus.BLOCK && !username.equals(dbNetwork.getBreakupby()))
+				(dbNetwork.getStatus() != NetworkStatus.CONFIRMED && !loggedinuser.equals(username))	
+			 ||	(dbNetwork.getStatus() == NetworkStatus.PENDING && loggedinuser.equals(dbNetwork.getRequestBy().getUsername()))
+			 || (dbNetwork.getStatus() == NetworkStatus.BLOCK && !loggedinuser.equals(dbNetwork.getBreakupby()))
 			  )	 {
+				System.out.println("Ignoring this" + dbNetwork.getStatus().toString());
+				System.out.println("Loggedinuser" + loggedinuser);
+				System.out.println("blocked by" + dbNetwork.getBreakupby());
 				continue;
 			}
 			Network newNetwork = conversionService.convert(dbNetwork, Network.class);
@@ -129,13 +134,13 @@ public class NetworkController {
 		else
 			response.setError(error);
 		
-		System.out.println("Created Network");
+		System.out.println("Created Network" + error);
 		return response;
 	}
 	
 	@RequestMapping(value="network/confirmnetwork", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse confirmNetwork(@RequestBody String profileid) {
-		System.out.println("Create Network: id is:" + profileid);
+		System.out.println("Confirm Network: id is:" + profileid);
 		String error = "";
 		JsonResponse response = new JsonResponse();
 		if(profileid.isEmpty()) {
@@ -152,13 +157,13 @@ public class NetworkController {
 		else
 			response.setError(error);
 		
-		System.out.println("Created Network");
+		System.out.println("Confirmed Network");
 		return response;
 	}
 	
 	@RequestMapping(value="network/deletenetwork", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse deleteNetwork(@RequestBody String profileid) {
-		System.out.println("Create Network: id is:" + profileid);
+		System.out.println("Delete Network: id is:" + profileid);
 		String error = "";
 		JsonResponse response = new JsonResponse();
 		if(profileid.isEmpty()) {
@@ -173,13 +178,13 @@ public class NetworkController {
 		else
 			response.setError(error);
 		
-		System.out.println("Created Network");
+		System.out.println("Network deleted");
 		return response;
 	}
 	
 	@RequestMapping(value="network/blocknetwork", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse blockNetwork(@RequestBody String profileid) {
-		System.out.println("Create Network: id is:" + profileid);
+		System.out.println("Block Network: id is:" + profileid);
 		String error = "";
 		JsonResponse response = new JsonResponse();
 		if(profileid.isEmpty()) {
@@ -194,7 +199,28 @@ public class NetworkController {
 		else
 			response.setError(error);
 		
-		System.out.println("Created Network");
+		System.out.println("Network blocked");
+		return response;
+	}
+	
+	@RequestMapping(value="network/unblocknetwork", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse unblockNetwork(@RequestBody String profileid) {
+		System.out.println("unblock Network: id is:" + profileid);
+		String error = "";
+		JsonResponse response = new JsonResponse();
+		if(profileid.isEmpty()) {
+			response.setError("Username is empty");
+			return response;
+		}
+		
+		User user = userDetailsService.getUserFromSession();
+		if(ResultStatus.SUCCESS == networkService.UnblockNetwork(user.getUsername(), profileid, error)) {  
+			response.setStatus(true);
+		}
+		else
+			response.setError(error);
+		
+		System.out.println("unblocked Network");
 		return response;
 	}
 }

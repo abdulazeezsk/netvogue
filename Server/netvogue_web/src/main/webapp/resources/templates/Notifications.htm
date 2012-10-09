@@ -28,7 +28,7 @@
                 <div class="divi2 right_pane_underline">
                 </div>
             <ul class="nav nav-tab nav-stacked">
-                <li ng-repeat="notification in mynotifications">
+                <li ng-repeat="notification in notifications">
                     <div class="network">
                         <span class="brand_image"><a ng-href="#/{{notification.profileid}}/profile">
                             <img alt="" ng-src="{{notification.thumbnail_url}}" class="pull-left"></a> </span><span
@@ -42,7 +42,7 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><a ng-click="confirmnetwork(notification.profileid)">Accept</a></li>
-                                    <li><a ng-click="discardnetwork(notification.profileid)">Discard</a></li>
+                                    <li><a ng-click="discardnetwork(notification.notificationid)">Discard</a></li>
                                 </ul>
                             </span>
                     </div>

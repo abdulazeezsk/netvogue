@@ -28,10 +28,14 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
     $scope.$parent.title	= "Profile";
     $scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
     if (!angular.isUndefined($routeParams.profileid)) {
-		$scope.galleryid = $routeParams.profileid;
+		$scope.profileid = $routeParams.profileid;
 	}
     
+    $scope.entityname  		= "";
+    $scope.profilepic		= "";
     $scope.links = currentvisitedprofile.getleftpanellinks();
+    
+    $scope.showCreateNetwork = false;
     //This will initialize all the variables inside controller.
     //Also, if there is any existing data, this data will be shown to user until we get response from server
     $scope.updatedata = function() {
@@ -42,6 +46,11 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
 	    $scope.productline 		= srvprofile.getproductline($routeParams);
 	    $scope.contactinfo 		= srvprofile.getcontactinfo($routeParams);
 	    $scope.getcontactinfo 	= addresstostring($scope.contactinfo);
+	    
+	    //PENDING CONFIRMED NONE
+	    if(!$scope.isMyProfile) {
+	    	$scope.networkstatus = srvprofile.getnetworkstatus();
+	    }
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
@@ -51,16 +60,28 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
     		srvprofile.setProfileLocally(data, $routeParams);
     		$scope.updatedata();
     	} else {
-    		allert("No user available with this name");
+    		alert("No user available with this name");
     	}
     }).error(function(data) {
     	
     });
     
-    //PENDING CONFIRMED NONE
-    if(!$scope.isMyProfile) {
-    	$scope.networkstatus = srvprofile.getnetworkstatus();
-    }
+    $scope.shownetwork = function() {
+    	$scope.showCreateNetwork = true;
+    };
+    
+    $scope.createnetwork = function() {
+    	mynetwork.createnetwork($scope.profileid).success(function(data) {
+        	if(data.status == true) {
+        		$scope.networkstatus = "PENDING";
+        	} else {
+        		alert(data.error);
+        	}
+        	$scope.showCreateNetwork = false;
+    	}).error(function(data) {
+    		
+    	});
+    };
         
     //Yet to get data about trending and myfriend details
     $scope.trending = trending.getTrending();
@@ -78,34 +99,35 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 	$scope.$parent.title = "Network";
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
 
-	$scope.entityname = currentvisitedprofile.getEntityName();
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.links = currentvisitedprofile.getleftpanellinks();
-
-	$scope.contactinfo = myprofile.getcontactinfo();
-	$scope.getcontactinfo = function() {
-		return addresstostring($scope.contactinfo);
-	};
 	
 	$scope.updatedata = function() {
 		$scope.entityname 		= srvnetwork.getname($routeParams);
 		$scope.profilepic 		= srvnetwork.getprofilepic($routeParams);
 		$scope.contactinfo		= srvnetwork.getcontactinfo($routeParams);
 		$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
+		$scope.getcontactinfo 	= addresstostring($scope.contactinfo);
 	};
 	
 	srvnetwork.networks($routeParams).success(function(data) {
 		srvnetwork.setnetworkslocally($routeParams, data);
-		$scope.updatenotifications();
+		$scope.updatedata();
 	}).error(function(data) {
 		
 	});
 	
 	$scope.confirmnetwork = function(profileid) {
 		mynetwork.confirmnetwork(profileid).success(function(data) {
-			mynetwork.confirmnetworklocally(profileid);
-			$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
+			if(data.status == true) {
+				mynetwork.confirmnetworklocally(profileid);
+				$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
+			} else {
+				alert(data.error);
+			}
 		}).error(function(data) {
-			
+			alert("error");
 		});
 	};
 	
@@ -121,6 +143,15 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 	$scope.blocknetwork = function(profileid) {
 		mynetwork.blocknetwork(profileid).success(function(data) {
 			mynetwork.blocknetworklocally(profileid);
+			$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
+		}).error(function(data) {
+			
+		});
+	};
+	
+	$scope.unblocknetwork = function(profileid) {
+		mynetwork.unblocknetwork(profileid).success(function(data) {
+			mynetwork.deletenetworklocally(profileid);
 			$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
 		}).error(function(data) {
 			
@@ -1611,12 +1642,13 @@ function MyCtrlNotifications($scope, $routeParams, currentvisitedprofile, mynoti
 	// $scope.currentPage = 'Notification';
 	$scope.$parent.title = "Notification";
 
-	$scope.entityname = currentvisitedprofile.getEntityName();
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 
 	// $scope.mynotification = srvprofile.getnotification();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
-	
+
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.updatenotifications = function() {
 		$scope.entityname 		= mynotifications.getname();
 		$scope.profilepic 		= mynotifications.getprofilepic();

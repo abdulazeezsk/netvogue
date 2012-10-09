@@ -28,6 +28,7 @@ public class NotificationConverter implements Converter<org.netvogue.server.neo4
 			String topurl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PTop);
 			response.setTop_url(topurl);
 		}
+		response.setNotificationid(source.getNotificationid());
 		return response;
 	}
 }

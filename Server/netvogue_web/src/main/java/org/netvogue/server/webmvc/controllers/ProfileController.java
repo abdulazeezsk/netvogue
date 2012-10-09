@@ -59,7 +59,7 @@ public class ProfileController {
 				return profile;
 			}
 			NetworkStatus status = userService.getNetworkStatus(loggedinuser.getUsername(), profileid);
-			if(null == status || status == NetworkStatus.BREAKUP) {
+			if(null == status || status == NetworkStatus.BREAKUP || status == NetworkStatus.NONE) {
 				profile.setNetworkstatus(NetworkStatus.NONE.toString());
 			} else if(status == NetworkStatus.PENDING) {
 				profile.setNetworkstatus(NetworkStatus.PENDING.toString());
