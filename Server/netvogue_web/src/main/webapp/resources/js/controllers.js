@@ -1134,7 +1134,7 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
     
     $scope.updatelinesheet = function() {
     	var jsonrequest = new netvogue.linesheetjsonrequest($scope.editlinesheetname, 
-    			$scope.editlinesheetcat, editdeliverydate, $scope.editlinesheetid);
+    			$scope.editlinesheetcat, $scope.editdeliverydate, $scope.editlinesheetid);
     	mylinesheet.updatelinesheet(jsonrequest).success(function(data) {
     		mylinesheet.updatelinesheetlocally(jsonrequest);
     		$scope.linesheets		= srvlinesheet.getlinesheets($routeParams);

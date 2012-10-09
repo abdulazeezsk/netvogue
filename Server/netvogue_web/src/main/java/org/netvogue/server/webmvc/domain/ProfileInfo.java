@@ -7,7 +7,7 @@ public class ProfileInfo {
 	String profileid 	= "";
 	String networkstatus= "";
 	String aboutus 		= "";
-	String profilepic	= "";
+	ImageURLsResponse profilepic;
 	ContactInfo contactinfo ;
 	Set<ProductLine> productlines; 	//netvogue.productline 
 	Set<BrandsCarried> brandscarried;	//netvogue.brandscarried
@@ -33,11 +33,11 @@ public class ProfileInfo {
 		this.profileid = profileid;
 	}
 
-	public String getProfilepic() {
+	public ImageURLsResponse getProfilepic() {
 		return profilepic;
 	}
 
-	public void setProfilepic(String profilepic) {
+	public void setProfilepic(ImageURLsResponse profilepic) {
 		this.profilepic = profilepic;
 	}
 

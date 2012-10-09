@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.netvogue.server.webmvc.domain.BrandsCarried;
+import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.PhotoWeb;
 import org.netvogue.server.webmvc.domain.ProductLine;
@@ -24,6 +25,7 @@ import org.netvogue.server.neo4japi.service.BoutiqueService;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,6 +43,7 @@ public class ProfileController {
 	@Autowired NetvogueUserDetailsService userDetailsService;
 	@Autowired UserService 		userService;
 	@Autowired BoutiqueService  boutiqueService;
+	@Autowired ConversionService conversionService;
 	@Autowired UploadManager 	uploadManager;
 
 	@RequestMapping(value = {"/profile/", "/profile/{profileid}"}, method=RequestMethod.GET)
@@ -70,9 +73,7 @@ public class ProfileController {
 		profile.setAboutus(user.getAboutUs());
 		//Set profile pic
 		if(null != user.getProfilePicLink()) {
-			String thumburl = uploadManager.getQueryString(user.getProfilePicLink(), ImageType.PROFILE_PIC, Size.PThumb);
-			System.out.println("Image path is/Thumbnail url is" + thumburl);
-			profile.setProfilepic(thumburl);
+			profile.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
 		}
 	
 		//Get ContactInfo
