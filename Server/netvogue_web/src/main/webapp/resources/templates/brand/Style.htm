@@ -42,9 +42,9 @@
 		<!-- right pane -->
 		<div class="span9">
 			<div>
-				<span class="left heading_btn"> <a href="#/linesheets">Line
-						sheets</a> <span class="divider">/</span> <span>
-						<a ng-href="#/styles?id={{linesheetid}}&&cat={{category}}">{{linesheetname}}</a></span>
+				<span class="left heading_btn header_width"> <a href="#/linesheets">Line
+						sheets</a> <span class="divider">/</span> <span> <a
+						ng-href="#/styles?id={{linesheetid}}&&cat={{category}}">{{linesheetname}}</a></span>
 				</span> <span class="right"> <a ng-href="#{{backButton}}"
 					class="rightpane_back_btn">Back</a></span>
 				<div class="divi2 right_pane_underline"></div>
@@ -53,12 +53,17 @@
 		</div>
 
 		<div>
-			<div class="span4" style="height: 400px">
+			<div class="span4">
 				<ul class="thumbnails">
 					<li class="spanstyle" style="display: inline;"><img
 						src="{{mainstyle.profilethumbpic}}" alt=""></li>
 				</ul>
-
+				<div class="moreviews">
+					<a ng-repeat="image in mainstyle.availableImages"
+						ng-click="mainstyle.profilethumbpic = image.thumbnail_url"><img
+						width="85" style="max-height: 113px; margin-bottom: 2px;"
+						src="{{image.thumbnail_url}}" alt=""></a>
+				</div>
 			</div>
 
 			<div class="spanpreview_details" style="height: 400px;">
@@ -68,52 +73,42 @@
 				</div>
 				<div class="underline"></div>
 				<div class="style_description">
-							
-							<div class="style_dimentions">
-								<div class="styl_number">
-									<p>Style No:</p>
-									<h4>{{mainstyle.styleno}}</h4>
-								</div>
-								<div class="styl_number">
-									<p>Sizes</p>
-									<h4>{{styletdetails.stylesize}}</h4>
-								</div>
-								<div class="clr"></div>
-								<div class="style_colors">
-									<p>Colors</p>
-									<div class="color_pallet">
-										<span></span><span style="background: #0066FF;"></span><span
-											style="background: #666666;"> </span><span
-											style="background: #009900;"></span><span
-											style="background: #CC9900;"> </span>
-									</div>
-								</div>
-							</div>
-							<div class="style_type_cost">
-								<div class="style_cloth">
-									<p>Fabrication:</p>
-									<h4>{{mainstyle.fabricarion}}</h4>
-								</div>
-								<div class="delevry_date">
-									<p>Delivery Date:</p>
-									<h4>{{styletdetails.stylederliverydate}}</h4>
-								</div>
-								<div class="price">
-									<p>Price</p>
-									<h4>{{mainstyle.price}}</h4>
-								</div>
+
+					<div class="style_dimentions">
+						<div class="styl_number">
+							<p>Style No:</p>
+							<h4>{{mainstyle.styleno}}</h4>
+						</div>
+						<div class="styl_number">
+							<p>Sizes</p>
+							<h4>{{styletdetails.stylesize}}</h4>
+						</div>
+						<div class="clr"></div>
+						<div class="style_colors">
+							<p>Colors</p>
+							<div class="color_pallet">
+								<span></span><span style="background: #0066FF;"></span><span
+									style="background: #666666;"> </span><span
+									style="background: #009900;"></span><span
+									style="background: #CC9900;"> </span>
 							</div>
 						</div>
-			</div>
-			<div class="span4" style="height: 300px;">
-				<ul class="thumbnails">
-					<li class="spanviews" ng-repeat="image in mainstyle.availableImages"
-						ng-click="mainstyle.profilethumbpic = image.thumbnail_url">
-						<div ng-hide="mainstyle.profilethumbpic == image.thumbnail_url" class="thumbnail_noborder">
-							<img src="{{image.thumbnail_url}}" alt="">
+					</div>
+					<div class="style_type_cost">
+						<div class="style_cloth">
+							<p>Fabrication:</p>
+							<h4>{{mainstyle.fabricarion}}</h4>
 						</div>
-					</li>
-				</ul>
+						<div class="delevry_date">
+							<p>Delivery Date:</p>
+							<h4>{{styletdetails.stylederliverydate}}</h4>
+						</div>
+						<div class="price">
+							<p>Price</p>
+							<h4>{{mainstyle.price}}</h4>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<!-- right pane -->

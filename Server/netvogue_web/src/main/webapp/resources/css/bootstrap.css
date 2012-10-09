@@ -4885,8 +4885,8 @@ font-size:14px;
 
 .spanstyle
 {
-	width:290px;
-	height:400px;
+	width:267px;
+	height:356px;
 }
 
 .style_description {
@@ -4982,34 +4982,14 @@ font-size:14px;
 	padding-left: 10px;
 }
 
-.moreviews {
-	min-height: 100px;
-	float: left;
-	list-style-type: none;
-}
 
-.spanviews
+
+.moreviews
 {
-width: 85px;
-height: 114px;
+width: 267px;
+height: 356px;
 }
-
-
-.moreviews ul {
-	margin: 0px;
-	padding: 0px;
-}
-
-.moreviews li {
-	float: right;
-	min-height: 130px;
-	padding: 10px 0px;
-	list-style-type: none;
-	list-style-position: inside;
-	text-align: center;
-	font: normal 10px Verdana;
-	text-transform: uppercase;
-}
+ 
 
 
 /* ------------------------------------------------------------ Style css End------------------------------------------*/
