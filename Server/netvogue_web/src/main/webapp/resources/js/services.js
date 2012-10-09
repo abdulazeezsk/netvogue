@@ -88,18 +88,6 @@ angular.module('netVogue.services', []).
 	var profileinfo = new netvogue.profile(); //This must be converted to hashtable if we want to store localdata
       
       /*********************************/
-	  var networks = new netvogue.hashtable();
-      networks.setItem("profileid1",
-			  					[
-			  					 	new netvogue.network("Calvin klein", "http://placehold.it/100x72", "profileid1"),
-				                    new netvogue.network("Rebecca  Minkoff", "http://placehold.it/100x72", "profileid1"),
-				                    new netvogue.network("Jason Myers", "http://placehold.it/100x72", "profileid1"),
-				                    new netvogue.network("Akris", "http://placehold.it/100x72", "profileid1"),
-				                    new netvogue.network("Catherine Malandrino", "http://placehold.it/100x72", "profileid1"),
-				                    new netvogue.network("Derek Lam", "http://placehold.it/100x72", "profileid1"),
-				                    new netvogue.network("Donna Karan", "http://placehold.it/100x72", "profileid1"),
-	        	                 ]);
-
       return {
           profileinfo: function (routeparams) {
               var profileid = "";
@@ -145,6 +133,9 @@ angular.module('netVogue.services', []).
               } else {
             	  return profileinfo.profilepic;
               }
+          },
+          getnetworkstatus: function(routeparams) {
+              return profileinfo.networkstatus;
           },
           getcontactinfo: function (routeparams) {
               if (angular.isUndefined(routeparams.profileid)) {
@@ -1109,70 +1100,253 @@ angular.module('netVogue.services', []).
           }
       };
 
-}).service('mynetwork', function () {
-      var mynetwork = [
-	                   new netvogue.network("Calvin klein", "images/ck-beauty.jpg", "profileid1"),
-	                   new netvogue.network("Rebecca  Minkoff", "http://placehold.it/100x72", "profileid1"),
-	                   new netvogue.network("Jason Myers", "http://placehold.it/100x72", "profileid1"),
-	                   new netvogue.network("Akris", "http://placehold.it/100x72", "profileid1"),
-	                   new netvogue.network("Catherine Malandrino", "http://placehold.it/100x72", "profileid1"),
-	                   new netvogue.network("Derek Lam", "http://placehold.it/100x72", "profileid1"),
-	                   new netvogue.network("Donna Karan", "http://placehold.it/100x72", "profileid1"),
-	                   ];
-      return {
-          getmynetwork: function () {
-              return mynetwork;
-          },
-          ismyfriend: function (routeParams) {
-              if (angular.isUndefined(routeParams.profileid)) {
-                  return true;
-              } else {
-                  for (var network in mynetwork) {
-                      if (mynetwork[network].networklistitemID == routeParams.profileid) {
-                          return true;
-                      }
-                  }
-                  return false;
-              }
-          }
+}).service('mynotifications', function ($http) {
+	var notifications = [];
+	var unreadnotifications = [];
+	var numberofunreadnotifications = 0;
+	var name;
+	var profilepic;
+	return {
+		getnotifications: function() {
+    		return notifications;
+    	},
+    	getunreadnotifications: function() {
+    		return unreadnotifications;
+    	},
+    	setnotifications: function(temp) {
+    		name = temp.name;
+    		profilepic = temp.profilepic;
+    		numberofunreadnotifications = temp.unreadnotifications;
+    		angular.copy(temp.notifications, notifications);
+    	},
+    	setunreadnotifications: function(temp) {
+    		name = temp.name;
+    		profilepic = temp.profilepic;
+    		angular.copy(temp.notifications, unreadnotifications);
+    	},
+    	getname: function() {
+    		if(angular.isUndefined(name))
+        		return "";
+    		return name;
+    	},
+    	setname: function(name) {
+    		this.name = name;
+    	},
+    	getprofilepic: function() {
+    		if(angular.isUndefined(profilepic))
+        		return "";
+    		return profilepic;
+    	},
+    	getnumberofunreadnotifications: function() {
+    		return numberofunreadnotifications;
+    	},
+    	notificationsunread: function() {
+    		var config = {
+  	              method: "GET",
+  	              url: "notifications/unread"
+  	          };
+  	          return $http(config);
+    	},
+    	notifications: function() {
+    		var config = {
+  	              method: "GET",
+  	              url: "notifications/get"
+  	          };
+  	          return $http(config);
+    	},
+    	discardnetwork: function(id) {
+    		var config = {
+    				method: "POST",
+    				data: id,
+    	            url: "notifications/discardnetwork"
+    	          };
+            return $http(config);
+    	},
+    	markread: function(id) {
+    		var config = {
+    				method: "POST",
+    				data: profileid,
+    	            url: "notifications/markread"
+    	          };
+            return $http(config);
+    	},
+    	markreadlocally: function(id) {
+    		var index=0;
+    		for(index=0; index <  notifications.length; index++) {
+    			if(notifications[index].notificationid == id) {
+    				notifications[index].isread = true;
+    				break;
+    			}
+    		}
+    	},
+    	confirmnetworklocally: function(id) {
+    		var index=0;
+    		for(index=0; index <  notifications.length; index++) {
+    			if(notifications[index].notificationid == id) {
+    				notifications[index].networkstatus = "CONFIRMED";
+    				break;
+    			}
+    		}
+    	},
+    	discardnetworklocally: function(id) {
+    		var index=0;
+    		for(index=0; index <  notifications.length; index++) {
+    			if(notifications[index].notificationid == id) {
+    				notifications[index].networkstatus = "DISCARD";
+    				break;
+    			}
+    		}
+    	}
       };
+}).service('mynetwork', function ($http) {
+	var networks = [];
+	var name;
+	var profilepic;
+	var contactinfo;
+	return {
+		getnetworks: function() {
+    		return network;
+    	},
+    	setnetworks: function(temp) {
+    		name = temp.name;
+    		profilepic = temp.profilepic;
+    		angular.copy(temp.contactinfo, contactinfo);
+    		angular.copy(temp.networks, networks);
+    	},
+    	getname: function() {
+    		if(angular.isUndefined(name))
+        		return "";
+    		return name;
+    	},
+    	setname: function(name) {
+    		this.name = name;
+    	},
+    	getprofilepic: function() {
+    		if(angular.isUndefined(profilepic))
+        		return "";
+    		return profilepic;
+    	},
+    	getcontactinfo: function() {
+    		if(angular.isUndefined(profilepic))
+        		return {};
+    		return contactinfo;
+    	},
+    	createnetwork: function(profileid) {
+    		var config = {
+    				method: "POST",
+    				data: profileid,
+    				url: "network/createnetwork"
+          };
+          return $http(config);
+    	},
+    	confirmnetwork: function(profileid) {
+    		var config = {
+    				method: "POST",
+    				data: profileid,
+    	            url: "network/confirmnetwork"
+    	          };
+            return $http(config);
+    	},
+    	deletenetwork: function(profileid) {
+    		var config = {
+    				method: "POST",
+    				data: profileid,
+    	            url: "network/deletenetwork"
+    	          };
+            return $http(config);
+    	},
+    	blocknetwork: function(profileid) {
+    		var config = {
+    				method: "POST",
+    				data: profileid,
+    	            url: "network/blocknetwork"
+    	          };
+            return $http(config);
+    	},
+    	confirmnetworklocally: function(profileid) {
+    		var index=0;
+    		for(index=0; index <  networks.length; index++) {
+    			if(networks[index].profileid == profileid) {
+    				networks[index].networkstatus = "CONFIRMED";
+    				break;
+    			}
+    		}
+    	},
+    	blocknetworklocally: function(profileid) {
+    		var index=0;
+    		for(index=0; index <  networks.length; index++) {
+    			if(networks[index].profileid == profileid) {
+    				networks[index].networkstatus = "BLOCKED";
+    				break;
+    			}
+    		}
+    	},
+    	deletenetworklocally: function(profileid) {
+    		var index=0;
+    		for(index=0; index <  networks.length; index++) {
+    			if(networks[index].profileid == profileid) {
+    				break;
+    			}
+    		}
+    		galleries.splice(index, 1);
+    	}
+      };
+}).service('srvnetwork', function ($http, mynetwork) {
+    var network = new netvogue.hashtable();
+    return {
+  	  getname: function(routeparams) {
+      	  var result;
+            if (angular.isUndefined(routeparams.profileid)) {
+                return mynetwork.getname();
+            } else {
+                /*angular.forEach(profiles, function (profile) {
+                    if (angular.equals(profile['profileid'], routeparams.profileid)) {
+                        result = profile['aboutus'];
+                    }
+                });*/
+            }
+            return result;
+  	  },
+  	  getprofilepic: function(routeparams) {
+  		  var result;
+            if (angular.isUndefined(routeparams.profileid)) {
+                return mynetwork.getprofilepic();
+            } else {
+                /*angular.forEach(profiles, function (profile) {
+                    if (angular.equals(profile['profileid'], routeparams.profileid)) {
+                        result = profile['aboutus'];
+                    }
+                });*/
+            }
+            return result;
+  	  },
+  	  getnetworks: function (routeparams) {
+	          if (angular.isUndefined(routeparams.profileid)) {
+	        	  return mynetwork.getnetworks();
+	          }
+  	  },
+  	  networks: function (routeparams) {
+	          var profileid = "";
+	          if (!angular.isUndefined(routeparams.profileid)) {
+	        	  profileid = routeparams.profileid;
+	          }
+	          var config = {
+	              method: "GET",
+	              params: profileid,
+	              url: "network/getnetworks/" + profileid
+	          };
+	          return $http(config);
+  	  },
+  	  setnetworkslocally: function(routeparams, data) {
+	  		if (angular.isUndefined(routeparams.profileid)) {
+	  			mynetwork.setnetworks(data);
+	        } else {
+	      	  //galleries.push(angular.copy(galleriesdata));
+	        }
+  	  }
+    };
 }).service('search', function ($http) {
-      var advancedsearch = [
-	                        new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
-	                        		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                                    "ipsum vel enim.", "http://placehold.it/231x145"),
-                            new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
-                            		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                                     "ipsum vel enim.", "http://placehold.it/231x145"),
-                            new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
-                            		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/231x145"),
-                            new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
-                            		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/231x145"),
-                            new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
-                            		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/231x145"),
-                            new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
-                            		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/231x145"),
-                            new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
-                            		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/231x145"),
-                            new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
-                            		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/231x145"),
-                            new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
-                            		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/231x145"),
-                            new netvogue.advancedsearch("brandId", "Calvin Klien", "Calvin Klien",
-                            		"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate" +
-                            		"ipsum vel enim.", "http://placehold.it/231x145"),
-	                     ];
       return {
-          getsearchresults: function () {
-              return advancedsearch;
-          },
           getallusers: function() {
         	  var config = {
         			  method: "GET",

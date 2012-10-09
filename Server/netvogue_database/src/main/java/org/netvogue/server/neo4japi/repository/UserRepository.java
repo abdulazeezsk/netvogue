@@ -1,13 +1,9 @@
 package org.netvogue.server.neo4japi.repository;
 
-import java.util.List;
-import java.util.Map;
-
-import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.domain.*;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
-import org.springframework.data.repository.query.Param;
 
 public interface UserRepository extends GraphRepository<User> {
 	User findByemail(String email);
@@ -34,6 +30,10 @@ public interface UserRepository extends GraphRepository<User> {
 			"START user=node:search({1}) " +
 			"WHERE ALL( c in categories WHERE user-[:has_category]->c) RETURN user")
 	Iterable<User> doAdvancedSearch(String Categories, String search);
+	
+	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-() WHERE f.username={1} " +
+			"RETURN r.status")
+	NetworkStatus getNetworkStatus(String username1, String username2);
 	
 	//Queries related to gallery
 	@Query( "START n=node:search(username={0}) MATCH n-[:GALLERY]->g RETURN g ORDER BY g.createdDate DESC")

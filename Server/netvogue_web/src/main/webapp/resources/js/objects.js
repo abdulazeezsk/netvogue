@@ -140,6 +140,7 @@ netvogue.brandscarried	= function(brandlistitem, brandusername, brandprofilepic)
 netvogue.profile 		= function(name, profileid, aboutus, contactinfo) {
 	this.name			= name;
 	this.profileid		= profileid;
+	this.networkstatus	= "";
 	this.aboutus		= aboutus;
 	this.contactinfo	= contactinfo; 		//netvogue.contactinfo
 	this.productlines	= []; 	//netvogue.productline 

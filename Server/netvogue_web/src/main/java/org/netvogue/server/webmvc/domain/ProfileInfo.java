@@ -5,6 +5,7 @@ import java.util.Set;
 public class ProfileInfo {
 	String name		 	= "";
 	String profileid 	= "";
+	String networkstatus= "";
 	String aboutus 		= "";
 	String profilepic	= "";
 	ContactInfo contactinfo ;
@@ -38,6 +39,14 @@ public class ProfileInfo {
 
 	public void setProfilepic(String profilepic) {
 		this.profilepic = profilepic;
+	}
+
+	public String getNetworkstatus() {
+		return networkstatus;
+	}
+
+	public void setNetworkstatus(String networkstatus) {
+		this.networkstatus = networkstatus;
 	}
 
 	public String getAboutus() {

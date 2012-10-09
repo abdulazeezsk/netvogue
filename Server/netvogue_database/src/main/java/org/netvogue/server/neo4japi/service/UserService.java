@@ -2,6 +2,7 @@ package org.netvogue.server.neo4japi.service;
 
 import java.util.Set;
 
+import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.Collection;
@@ -21,6 +22,9 @@ public interface UserService {
 	public Iterable<User> doBasicSearch(String query);
 	public Iterable<User> doAdvancedSearch(USER_TYPE userType, String name, String location, Set<String> categories);
 	public Iterable<User> getAllUsers();
+	
+	//network related
+	NetworkStatus getNetworkStatus(String username1, String username2);
 	
 	//Gallery related
 	public Iterable<Gallery> GetGalleries(User user);

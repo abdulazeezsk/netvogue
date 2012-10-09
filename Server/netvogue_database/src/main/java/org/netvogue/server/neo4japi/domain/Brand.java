@@ -1,28 +1,12 @@
 package org.netvogue.server.neo4japi.domain;
 
 //Spring specific
-import org.neo4j.graphdb.Direction;
-import org.springframework.data.neo4j.annotation.*;
-import org.springframework.data.neo4j.support.index.*;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
-
-//Generic
-import java.util.*;
 
 public class Brand extends User{
 	
-	@Indexed(indexName="brandname", indexType=IndexType.FULLTEXT)
-	String brandName;
-	
-	//Stockists -- This is nothing but boutiqueStores
-	Set<Boutique> stockists;
-	
-	int minPriceRange;
-	
-	int maxPriceRange;
-	
-	@RelatedTo(type="BRAND", direction=Direction.INCOMING)
-	BrandRefNode brandRefNode;
+	/*@RelatedTo(type="BRAND", direction=Direction.INCOMING)
+	BrandRefNode brandRefNode;*/
 	
 	public Brand() {
 		super();
@@ -34,17 +18,9 @@ public class Brand extends User{
 		setRoles(Roles.ROLE_BRAND);
 	}
 	
-	public String getBrandName() {
-		return brandName;
-	}
-	
-	public void setBrandName(String brandName) {
-		this.brandName = brandName;
-	}
-	
-	public void AddtoRefNode(BrandRefNode brandRefNode) {
+	/*public void AddtoRefNode(BrandRefNode brandRefNode) {
 		this.brandRefNode = brandRefNode;
-	}
+	}*/
 	
 	@Override
     public boolean equals(Object other) {

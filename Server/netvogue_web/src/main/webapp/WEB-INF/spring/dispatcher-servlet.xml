@@ -33,6 +33,8 @@
             	<bean class="org.netvogue.server.webmvc.converters.StyleRequestConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.StyleResponseConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.ImageURLsConverter" />
+            	<bean class="org.netvogue.server.webmvc.converters.NetworkConverter" />
+            	<bean class="org.netvogue.server.webmvc.converters.NotificationConverter" />
         	</list>
     	</property>
 	</bean>

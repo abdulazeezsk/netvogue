@@ -2,6 +2,7 @@ package org.netvogue.server.neo4japi.service;
 
 import java.util.Set;
 
+import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.common.Utils;
@@ -95,6 +96,11 @@ public class UserServiceImpl implements UserService{
 		
 		String query = "username:*" + name + "* OR " + "name:*" + name + "*";
 		return userRepo.doBasicSearch(query);
+	}
+	
+	//Network related
+	public NetworkStatus getNetworkStatus(String username1, String username2) {
+		return userRepo.getNetworkStatus(username1, username2);
 	}
 	
 	//Queries related to galleries

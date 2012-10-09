@@ -12,6 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 //Generic
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 //Base class for boutique and Brand
@@ -81,6 +82,17 @@ public class User {
 	
 	@RelatedTo(type="users_carried")
 	@Fetch Set<User> 	  usersCarried =  new HashSet<User>();
+	//Because of this there would be two relationships between brand and boutique
+	//BrandsCarried of boutique may or may not be part of their network
+	//If any particular brand is not there in our network, just add with basic information and move ahead. Tomorrow, if someone else
+	// add this new brand into our network. Then these boutiques must be automatically connected to them
+	//Azeez -- How do we connect it to existing brands in our network or to the new network.
+	
+	@RelatedTo(type="NOTIFICATION")
+	@Fetch Set<Notification> notifications = new LinkedHashSet<Notification>();
+	
+	@RelatedTo(type="NETWORK")
+	@Fetch private Iterable<User> friends; //revisit this once again
 	
 	public User() {
 		
@@ -355,6 +367,18 @@ public class User {
 		usersCarried.clear();
 	}
 
+	public void addNotification(Notification newNotification) {
+		notifications.add(newNotification);
+	}
+	
+	/*public boolean isMyFriend(String username) {
+		Iterator<User> first = friends.iterator();
+		while ( first.hasNext() ){
+			User dbUser = first.next() ;
+			if(dbUser.getUsername() == usern)
+		}
+	}*/
+	
 	@Override
     public boolean equals(Object other) {
 		if (this == other) 

@@ -1,18 +1,22 @@
-function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search) {
+function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search, mynotifications) {
 	$scope.title = "Profile";
 	netvogue.initialize();
 	$scope.iambrand = netvogue.isbrand;
 	$scope.entityname = netvogue.entityname; //Boutique or Brand name
-	$scope.notifications = {
-		"Totalnotifications" : "1",
-		"Notificationstext"	 : [
-								{
-										"text" 			: "notification1",
-										"unreadstatus" 	: "true"
-								}
-							   ]
+	
+	$scope.updatenotifications = function() {
+		$scope.entityname 			= mynotifications.getname();
+		$scope.profilepic 			= mynotifications.getprofilepic();
+		$scope.unreadnotifications 	= mynotifications.getnumberofunreadnotifications();
+		$scope.notifications 		= mynotifications.getunreadnotifications();
 	};
 	
+	mynotifications.notificationsunread().success(function(data) {
+		mynotifications.setunreadnotifications(data);
+		$scope.updatenotifications();
+	}).error(function(data) {
+		
+	});
 	// Not required anymore, as we have changed Find Boutiques and Brands to directory
 	/*$scope.brandsorboutiques = "Brands";
 	$scope.$watch('iambrand', function(newValue, oldValue) {

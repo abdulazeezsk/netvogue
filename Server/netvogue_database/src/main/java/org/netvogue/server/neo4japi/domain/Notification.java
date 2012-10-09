@@ -15,17 +15,86 @@ public class Notification {
 	@GraphId
 	Long nodeId;
 	
+	@Indexed(indexName="notificationid", unique = true)
+	String 				notificationid;
+	
 	NotificationType 	notificationType;
 		
 	String				desc;
 	
-	Date				notificationDate;
+	Date				notificationDate = new Date();
 	
-	//To --Brand/Boutique
-	//From -- Brand/Boutique
+	boolean				isRead = false;
 	
-	//Add relation to boutique and brand and collections
+	User				otherUser;
 	
+	NetworkStatus		status;
+	
+	//User				notificationsFor; Adding notifications in user entity
+	public Notification() {
+		
+	}
+	
+	public Notification(User otheruser) {
+		otherUser = otheruser;
+		this.status = NetworkStatus.PENDING;
+		this.notificationid = UUID.randomUUID().toString();
+	}
+	
+	public Notification(User otheruser, NetworkStatus status) {
+		otherUser = otheruser;
+		this.status = status;
+		this.notificationid = UUID.randomUUID().toString();
+	}
+	
+	public NotificationType getNotificationType() {
+		return notificationType;
+	}
+
+	public void setNotificationType(NotificationType notificationType) {
+		this.notificationType = notificationType;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	public Date getNotificationDate() {
+		return notificationDate;
+	}
+
+	public void setNotificationDate(Date notificationDate) {
+		this.notificationDate = notificationDate;
+	}
+
+	public boolean isRead() {
+		return isRead;
+	}
+
+	public void setRead(boolean isRead) {
+		this.isRead = isRead;
+	}
+
+	public User getOtherUser() {
+		return otherUser;
+	}
+
+	public void setOtherUser(User otherUser) {
+		this.otherUser = otherUser;
+	}
+
+	public NetworkStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(NetworkStatus networkStatus) {
+		this.status = networkStatus;
+	}
+
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;

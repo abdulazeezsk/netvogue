@@ -16,6 +16,7 @@ import org.netvogue.server.webmvc.domain.UploadedFileResponse;
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
+import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.common.ProductLines;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.*;
@@ -49,9 +50,18 @@ public class ProfileController {
 		ProfileInfo profile = new ProfileInfo();
 		
 		if(!profileid.isEmpty()) {
+			User loggedinuser = user;
 			user = userService.getUserByUsername(profileid);
 			if(user == null) {
 				return profile;
+			}
+			NetworkStatus status = userService.getNetworkStatus(loggedinuser.getUsername(), profileid);
+			if(null == status || status == NetworkStatus.BREAKUP) {
+				profile.setNetworkstatus(NetworkStatus.NONE.toString());
+			} else if(status == NetworkStatus.PENDING) {
+				profile.setNetworkstatus(NetworkStatus.PENDING.toString());
+			} else {
+				profile.setNetworkstatus(NetworkStatus.CONFIRMED.toString());
 			}
 		}
 
@@ -61,10 +71,10 @@ public class ProfileController {
 		//Set profile pic
 		if(null != user.getProfilePicLink()) {
 			String thumburl = uploadManager.getQueryString(user.getProfilePicLink(), ImageType.PROFILE_PIC, Size.PThumb);
-			System.out.println("Image path is/Thumnail url is" + thumburl);
+			System.out.println("Image path is/Thumbnail url is" + thumburl);
 			profile.setProfilepic(thumburl);
 		}
-		
+	
 		//Get ContactInfo
 		ContactInfo contactInfo = new ContactInfo();
 		contactInfo.setAddress(user.getAddress());

@@ -49,6 +49,8 @@
 	<bean id="CollectionService" 	class="org.netvogue.server.neo4japi.service.CollectionServiceImpl" />
 	<bean id="StylesheetService" 	class="org.netvogue.server.neo4japi.service.StylesheetServiceImpl" />
 	<bean id="LinesheetService" 	class="org.netvogue.server.neo4japi.service.LinesheetServiceImpl" />
+	<bean id="NetworkService" 		class="org.netvogue.server.neo4japi.service.NetworkServiceImpl" />
+	<bean id="NotificationService" 	class="org.netvogue.server.neo4japi.service.NotificationServiceImpl" />
 	
 	<bean id="fileManager" class="org.netvogue.server.aws.core.FileManager" factory-method="getSharedInstance"/>
 	<bean id="uploadManager" class="org.netvogue.server.aws.core.UploadManager" />

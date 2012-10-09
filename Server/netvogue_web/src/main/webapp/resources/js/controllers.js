@@ -31,6 +31,7 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
 		$scope.galleryid = $routeParams.profileid;
 	}
     
+    $scope.links = currentvisitedprofile.getleftpanellinks();
     //This will initialize all the variables inside controller.
     //Also, if there is any existing data, this data will be shown to user until we get response from server
     $scope.updatedata = function() {
@@ -55,17 +56,18 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
     }).error(function(data) {
     	
     });
-    //$scope.updatedata();
     
+    //PENDING CONFIRMED NONE
+    if(!$scope.isMyProfile) {
+    	$scope.networkstatus = srvprofile.getnetworkstatus();
+    }
+        
     //Yet to get data about trending and myfriend details
     $scope.trending = trending.getTrending();
-    //$scope.myfriend = mynetwork.ismyfriend($routeParams);
-    $scope.myfriend = $scope.isMyProfile;
-    $scope.links = currentvisitedprofile.getleftpanellinks();
 }
 
 function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
-		srvprofile, trending) {
+		srvnetwork, mynetwork, trending) {
 	$scope.navClass = function(page1) {
 		return {
 			// last: this.$last,
@@ -75,17 +77,58 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 	$scope.currentPage = 'Network';
 	$scope.$parent.title = "Network";
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
-	$scope.profilepic		= "http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg";
 
 	$scope.entityname = currentvisitedprofile.getEntityName();
 	$scope.links = currentvisitedprofile.getleftpanellinks();
 
-	$scope.mynetwork = srvprofile.getnetwork($routeParams);
-	$scope.trending = trending.getTrending();
 	$scope.contactinfo = myprofile.getcontactinfo();
 	$scope.getcontactinfo = function() {
 		return addresstostring($scope.contactinfo);
 	};
+	
+	$scope.updatedata = function() {
+		$scope.entityname 		= srvnetwork.getname($routeParams);
+		$scope.profilepic 		= srvnetwork.getprofilepic($routeParams);
+		$scope.contactinfo		= srvnetwork.getcontactinfo($routeParams);
+		$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
+	};
+	
+	srvnetwork.networks($routeParams).success(function(data) {
+		srvnetwork.setnetworkslocally($routeParams, data);
+		$scope.updatenotifications();
+	}).error(function(data) {
+		
+	});
+	
+	$scope.confirmnetwork = function(profileid) {
+		mynetwork.confirmnetwork(profileid).success(function(data) {
+			mynetwork.confirmnetworklocally(profileid);
+			$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
+		}).error(function(data) {
+			
+		});
+	};
+	
+	$scope.deletenetwork = function(profileid) {
+		mynetwork.deletenetwork(profileid).success(function(data) {
+			mynetwork.deletenetworklocally(profileid);
+			$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
+		}).error(function(data) {
+			
+		});
+	};
+	
+	$scope.blocknetwork = function(profileid) {
+		mynetwork.blocknetwork(profileid).success(function(data) {
+			mynetwork.blocknetworklocally(profileid);
+			$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
+		}).error(function(data) {
+			
+		});
+	};
+	
+	//trending data
+	$scope.trending = trending.getTrending();
 }
 
 function MyCtrlCorner($scope, $routeParams, srvprofile, currentvisitedprofile,
@@ -1563,8 +1606,7 @@ function MyCtrlOrganizestyle($scope, $routeParams, currentvisitedprofile,
 
 }
 
-function MyCtrlNotifications($scope, $routeParams, currentvisitedprofile,
-		srvprofile) {
+function MyCtrlNotifications($scope, $routeParams, currentvisitedprofile, mynotifications, mynetwork) {
 
 	// $scope.currentPage = 'Notification';
 	$scope.$parent.title = "Notification";
@@ -1574,6 +1616,35 @@ function MyCtrlNotifications($scope, $routeParams, currentvisitedprofile,
 
 	// $scope.mynotification = srvprofile.getnotification();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.mynetwork = srvprofile.getnetwork($routeParams);
 	
+	$scope.updatenotifications = function() {
+		$scope.entityname 		= mynotifications.getname();
+		$scope.profilepic 		= mynotifications.getprofilepic();
+		$scope.notifications 	= mynotifications.getnotifications();
+	};
+	
+	mynotifications.notifications().success(function(data) {
+		mynotifications.setnotifications(data);
+		$scope.updatenotifications();
+	}).error(function(data) {
+		
+	});
+	
+	$scope.confirmnetwork = function(profileid) {
+		mynetwork.confirmnetwork(profileid).success(function(data) {
+			mynotifications.confirmnetworklocally(profileid);
+			$scope.notifications 	= mynotifications.getnotifications();
+		}).error(function(data) {
+			
+		});
+	};
+	
+	$scope.discardnetwork = function(profileid) {
+		mynotifications.discardnetwork(profileid).success(function(data) {
+			mynotifications.discardnetworklocally(profileid);
+			$scope.notifications 	= mynotifications.getnotifications();
+		}).error(function(data) {
+			
+		});
+	};
 }
