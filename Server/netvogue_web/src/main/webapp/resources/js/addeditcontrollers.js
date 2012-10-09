@@ -19,6 +19,7 @@ function MyCtrlAddGallery($scope, $routeParams, $location, srvgallery, mygallery
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.existingfiles	= srvgallery.getphotos($routeParams);
     };
@@ -80,6 +81,7 @@ function MyCtrlAddPrintCampaign($scope, $routeParams, $location, srvgallery, myg
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.existingfiles	= srvgallery.getphotos($routeParams);
     };
@@ -165,6 +167,7 @@ function MyCtrlAddNewsletter($scope, $routeParams, $location, srvgallery, mygall
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.existingfiles	= srvgallery.getphotos($routeParams);
     };
@@ -230,6 +233,7 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvcollection.getname($routeParams);
+	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvcollection.getgalleryname($routeParams);
 	    $scope.existingfiles	= srvcollection.getphotos($routeParams);
     };
@@ -309,6 +313,7 @@ function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile, srvstyleshe
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvstylesheet.getname($routeParams);
+	    $scope.profilepic		= srvstylesheet.getprofilepic($routeParams);
 	    $scope.stylesheetname  	= srvstylesheet.getstylesheetname($routeParams);
 	    $scope.styles			= srvstylesheet.getstyles($routeParams);
 	    if(!angular.isUndefined($routeParams.styleid)) {
@@ -404,6 +409,7 @@ function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile, srvlin
 	$scope.styles    = [];
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvlinesheet.getname($routeParams);
+	    $scope.profilepic		= srvlinesheet.getprofilepic($routeParams);
 	    $scope.linesheetname  	= srvlinesheet.getlinesheetname($routeParams);
 	    $scope.styles			= srvlinesheet.getstyles($routeParams);
     };
