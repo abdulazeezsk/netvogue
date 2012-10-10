@@ -106,6 +106,11 @@ netvogue.hashtable = function(obj)
         this.length = 0;
     };
 };
+
+netvogue.jsonrequest = function(id, value) {
+	this.id 	= id;
+	this.value 	= value;
+};
 /**********************************************************************/
 /************************Start of**************************************/
 /******************Profile Objects*************************************/
