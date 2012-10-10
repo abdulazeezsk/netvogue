@@ -1366,6 +1366,148 @@ angular.module('netVogue.services', []).
 	        }
   	  }
     };
+}).service('mytimeline', function ($http) {
+	var updates = [];
+	var name;
+	var profilepic;
+	var contactinfo;
+	return {
+		getupdates: function() {
+    		return updates;
+    	},
+    	setupdates: function(temp) {
+    		name = temp.name;
+    		profilepic = temp.profilepic;
+    		contactinfo = angular.copy(temp.contactinfo);
+    		updates = angular.copy(temp.updates);
+    	},
+    	getname: function() {
+    		if(angular.isUndefined(name))
+        		return "";
+    		return name;
+    	},
+    	setname: function(name) {
+    		this.name = name;
+    	},
+    	getprofilepic: function() {
+    		if(angular.isUndefined(profilepic))
+        		return "";
+    		return profilepic;
+    	},
+    	getcontactinfo: function() {
+    		if(angular.isUndefined(contactinfo))
+        		return {};
+    		return contactinfo;
+    	},
+    	addupdate: function(update) {
+    		var config = {
+    				method: "POST",
+    				data: update,
+    				url: "statusupdate/add"
+          };
+          return $http(config);
+    	},
+    	editupdate: function(id, update) {
+    		var request = netvogue.jsonrequest(id, update);
+    		var config = {
+    				method: "POST",
+    				data: id,
+    				url: "statusupdate/edit"
+          };
+          return $http(config);
+    	},
+    	deleteupdate: function(id) {
+    		var config = {
+    				method: "POST",
+    				data: id,
+    				url: "statusupdate/delete"
+          };
+          return $http(config);
+    	},
+    	addupdatelocally: function() {
+    		//updates.push();
+    	},
+    	editupdatelocally: function(id, status) {
+    		var index=0;
+    		for(index=0; index <  updates.length; index++) {
+    			if(updates[index].statusid == id) {
+    				updatess[index].status = status;
+    				break;
+    			}
+    		}
+    	},
+    	deleteupdatelocally: function(id) {
+    		var index=0;
+    		for(index=0; index <  updates.length; index++) {
+    			if(updates[index].statusid == id) {
+    				break;
+    			}
+    		}
+    		updates.splice(index, 1);
+    	}
+      };
+}).service('srvtimeline', function ($http, mynetwork) {
+    var updates = new netvogue.hashtable();
+    return {
+  	  getname: function(routeparams) {
+      	  var result;
+            if (angular.isUndefined(routeparams.profileid)) {
+                return mytimeline.getname();
+            } else {
+            	if(angular.isUndefined(network.name))
+            		return "";
+        		return network.name;
+            }
+            return result;
+  	  },
+  	  getprofilepic: function(routeparams) {
+  		  var result;
+            if (angular.isUndefined(routeparams.profileid)) {
+                return mytimeline.getprofilepic();
+            } else {
+            	if(angular.isUndefined(network.profilepic))
+            		return "";
+        		return network.profilepic;
+            }
+            return result;
+  	  },
+  	  getcontactinfo: function(routeparams) {
+		  var result;
+          if (angular.isUndefined(routeparams.profileid)) {
+              return mytimeline.getcontactinfo();
+          } else {
+        	  if(angular.isUndefined(network.contactinfo))
+          		return {};
+      		return network.contactinfo;
+          }
+          return result;
+	  },
+  	  getupdates: function (routeparams) {
+	          if (angular.isUndefined(routeparams.profileid)) {
+	        	  return mytimeline.getupdates();
+	          } else {
+	        	  return updates.updates;  
+	          }
+  	  },
+  	  updates: function (routeparams) {
+	          var profileid = "";
+	          if (!angular.isUndefined(routeparams.profileid)) {
+	        	  profileid = routeparams.profileid;
+	          }
+	          var config = {
+	              method: "GET",
+	              url: "getstatusupdates/" + profileid
+	          };
+	          return $http(config);
+  	  },
+  	  setupdateslocally: function(routeparams, data) {
+	  		if (angular.isUndefined(routeparams.profileid)) {
+	  			mytimeline.setupdates(data);
+	        } else {
+	        	updates = angular.copy(data);
+	        }
+  	  }
+    };
 }).service('search', function ($http) {
       return {
           getallusers: function() {

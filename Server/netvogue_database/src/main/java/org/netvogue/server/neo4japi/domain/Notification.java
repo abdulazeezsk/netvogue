@@ -104,18 +104,18 @@ public class Notification {
 	}
 
 	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Notification notification = (Notification) o;
-        if (nodeId == null) return super.equals(o);
-        return nodeId.equals(notification.nodeId);
-
-    }
+    public boolean equals(Object other) {
+		if (this == other) 
+			return true;
+		if (nodeId == null) 
+			return false;
+		if (! (other instanceof User)) 
+			return false;
+		return nodeId.equals(((User) other).nodeId);    
+	}
 
     @Override
     public int hashCode() {
-        return nodeId != null ? nodeId.hashCode() : super.hashCode();
+    	return nodeId == null ? System.identityHashCode(this) : nodeId.hashCode();
     }
 }
