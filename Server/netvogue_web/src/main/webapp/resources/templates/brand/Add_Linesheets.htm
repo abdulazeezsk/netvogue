@@ -19,7 +19,7 @@
 			<div class="leftpane_subheading">FILTERS</div>
 			<div class="divi2"></div>
 			<div>
-				<span class="leftpane_filter_name">Style name</span> <input
+				<span class="leftpane_filter_name">Stylesheets</span> <input
 					type="text" class="span3" />
 			</div>
 			<div>
@@ -49,31 +49,73 @@
 		<!-- right pane -->
 		<div class="span9">
 			<div>
-				<span class="left rightpane_subHeading">Line sheet</span>
+				<span class="left rightpane_subHeading header_width"> <a
+					style="text-decoration: none;" href="#/linesheets">Line Sheets</a>
+					<span class="divider">/</span> <span> <a
+						style="text-decoration: none;"
+						ng-href="#/styles?id={{linesheetid}}&&cat={{category}}">Rebecca
+							Minkoff {{linesheetname}}</a></span></span>
 				<div class="divi2 right_pane_underline"></div>
-				<span class="left right_pane_info" style="width:75%"> <a href="#/linesheets">Line
-						Sheets</a> <span class="divider">/</span> <span>
-						<a ng-href="#/styles?id={{linesheetid}}&&cat={{category}}">{{linesheetname}}</a></span>
-				</span>
+				<span class="left right_pane_info" style="width: 75%"> Styles
+					in this linesheet </span>
 				<div class="divi2 right_pane_underline"></div>
 			</div>
 			<div>
 				<!-- data pane -->
 				<div>
-					<ul class="thumbnails">
+					<div class="alert alert-info">
+						<button type="button" class="close" data-dismiss="alert">
+							<small>x</small>
+						</button>
+						Add the styles from all available stylesheets for this category
+					</div>
+					<!-- <ul class="thumbnails">
 						<li ng-repeat="style in styles">
 							<div class="thumbnail">
 								<img ng-src="{{style.profilethumbpic}}" alt="">
-								<div class="caption">
-									<h5>{{style.stylename}}</h5>
-									<h6>
-										<p>{{style.description}}</p>
-									</h6>
-									<p>
-										<a ng-click="deletestyle(style)" class="btn btn-primary">Remove</a>
-									</p>
-								</div>
 							</div>
+							<div class="caption">
+								<h5>{{style.stylename}}</h5>
+								<h6>
+									<p>{{style.description}}</p>
+								</h6>
+								<p>
+									<a ng-click="deletestyle(style)" class="btn btn-primary">Remove</a>
+								</p>
+							</div>
+						</li> -->
+
+					<ul class="nav nav-tab nav-stacked" ui-sortable
+						ng-model="existingfiles" id="container" class="clearfix">
+						<li ng-repeat="style in styles" style="postion: absloute;">
+							<div class="organiselinesheet">
+								<span class="image"><img
+									ng-src="{{style.profilethumbpic}}" alt=""> </span> <span
+									style="width: 400px; margin-left: 10px;">
+									<div>
+										<span
+											style="font-weight: normal; font-size: 14px; cursor: pointer; text-transform: uppercase;">
+											{{style.stylename}} </span>
+										
+										<span ng-hide="isEditMode" class="btn-group pull-right">
+											<button class="btn btn-inverse dropdown-toggle"
+												data-toggle="dropdown">
+												Action <span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a ng-click="deletestyle(style)">Delete</a></li>
+												<li class="divider"></li>
+												<li><a href="#">Set as cover</a></li>
+												<li class="divider"></li>
+												<li><a href="#">Public</a></li>
+												<li><a href="#">Private</a></li>
+												<li><a href="#">Network</a></li>
+											</ul>
+										</span>
+										<br><br>
+										<p class="desc">{{style.description}}</p>
+									</div>
+								</span>
 						</li>
 					</ul>
 				</div>

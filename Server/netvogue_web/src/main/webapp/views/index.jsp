@@ -9,7 +9,7 @@
     <link href="css/style_overlay.css" rel="stylesheet" type="text/css" />
     <link href="css/style_common.css" rel="stylesheet" type="text/css" />
     <link href="css/select2.css" rel="stylesheet" />
-   
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
     <link href="css/style.css" rel="stylesheet" type="text/css" />
  
     

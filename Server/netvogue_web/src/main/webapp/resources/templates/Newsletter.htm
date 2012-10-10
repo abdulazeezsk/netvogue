@@ -37,12 +37,12 @@
 					filters </span> <span class="right" ng-show="isMyProfile"> <a
 					data-toggle="modal" href="#CreateEditorial" class="rightpane_add_btn">Create Editorial</a>
 				</span>
-				<div class="divi2 right_pane_underline"></div>
+				<div class="empty right_pane_underline"></div>
 			</div>
 
 			<div>
 				<ul class="thumbnails">
-					<li ng-repeat="gallery in galleries" style="position: relative;margin-top:20px;">
+					<li ng-repeat="gallery in galleries" style="position: relative;margin-top:15px;">
 						<div class="view view-first">
 							<a ng-href="#/newsletter?id={{gallery.galleryid}}">
                                 <img ng-src="{{gallery.gallerypic}}" alt=""></a>

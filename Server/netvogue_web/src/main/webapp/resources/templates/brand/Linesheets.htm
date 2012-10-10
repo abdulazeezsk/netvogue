@@ -20,8 +20,9 @@
 			<div class="divi2"></div>
 			<div>
 				<span class="leftpane_filter_name">BRAND</span> <input type="text"
-					class="span3" placeholder="Brand name" /> <span class="leftpane_filter_name">SEASON</span>
-				<input type="text" class="span3" placeholder="Season name" />
+					class="span3" placeholder="Brand name" /> <span
+					class="leftpane_filter_name">SEASON</span> <input type="text"
+					class="span3" placeholder="Season name" />
 			</div>
 			<div>
 				<!-- <div class="leftpane_subheading">DELIVERY DATE</div> -->
@@ -43,15 +44,12 @@
 					</div>
 				</div>
 				<div class="divi2"></div>
-				<div  ng-hide="deliverydate == 'true'" >
+				<div ng-hide="deliverydate == 'true'">
 					<span class="leftpane_filter_name">From</span> <input type="text"
 						class="span3" placeholder="Enter from date" ng-model="fromdate"
-						ui-date /> 
-						
-						<span
-						class="leftpane_filter_name">To</span> <input type="text"
-						class="span3" placeholder="Enter to date" ng-model="todate"
-						ui-date />
+						ui-date /> <span class="leftpane_filter_name">To</span> <input
+						type="text" class="span3" placeholder="Enter to date"
+						ng-model="todate" ui-date />
 				</div>
 				<div class="divi2"></div>
 				<span class="leftpane_filter_name">CATEGORY</span>
@@ -75,121 +73,118 @@
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 			</div>
-
-
 			<div>
 				<ul class="thumbnails">
-					<li ng-repeat="linesheet in linesheets" style="position: relative;">
-						<div class="view view-first">
-							<a ng-href="#/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}"> <img
-								ng-src="{{linesheet.gallerypic}}" alt=""></a>
-							<div class="content">
-								<div class="mask">
-									<ul ng-show="isMyProfile && iambrand">
-										<li><a ng-click="deletelinesheet(linesheet.galleryid)" title="Delete"><i
-												class="icon-trash icon-white"></i></a></li>
-										<li><a ng-click="editlinesheet(linesheet.galleryid, linesheet.galleryname, linesheet.category, linesheet.deliverydate)" 
-										title="Edit"><i class="icon-edit icon-white"></i></a></li>
-									</ul>
-									<h1>
-										<a ng-href="#/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}" class="mask_edit">view</a>
-									</h1>
-								</div>
+					<li ng-repeat="linesheet in linesheets">
+						<div align="center" style="position: relative;">
+							<a class="product-image"
+								ng-href="#/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}"
+								title="Dumont Coat"> <img ng-src="{{linesheet.gallerypic}}" class="fade_spot"
+								width="220" height="300" alt="Dumont Coat" title="Dumont Coat"></a>
+							<div class="linesheet-edit-delete">
+								<span class="edit-delete"><a ng-click="deletelinesheet(linesheet.galleryid)" title="Delete"><i
+												class="icon-trash icon-black"></i></a><a ng-click="editlinesheet(linesheet.galleryid, linesheet.galleryname, linesheet.category, linesheet.deliverydate)" 
+										title="Edit"><i class="icon-edit icon-black"></i></a></span>
 							</div>
-							<div class="divi2"></div>
-						</div>
-						<div class="campaigntitle">
-							<!--<h3>
-                                {{linesheet.linesheetseason}}</h3>-->
-							<h4>DELIVERY DATE: {{linesheet.deliverydate}}</h4>
-							<h3>{{linesheet.brandname}}</h3>
+							<div class="linesheet-designer">
+								<span class="designer">Rebecca Minkoff</span>
+							</div>
+							<div class="linesheet-season">
+								<span class="season">{{linesheet.galleryname}} </span>
+							</div>
+							<div class="linesheet-deliverydate">
+								<span class="deliverydate"> DELIVERY DATE:
+									{{linesheet.deliverydate}}</span>
+							</div>
 						</div>
 					</li>
 				</ul>
 			</div>
-
 		</div>
-		<!-- right pane -->
 	</div>
-</div>
-<!--body-->
-<!-- modal -->
-<div class="modal  hide" id="Createlinesheet">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"></button>
-		<h4 class="subHeading_no_underline">Create Line sheet</h4>
-	</div>
-	<div class="modal-body">
-		<div>
-			<input type="text" ng-model="linesheetname" class="span4" placeholder="Enter line sheet name" />
+	<!--body-->
+	<!-- modal -->
+	<div class="modal  hide" id="Createlinesheet">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"></button>
+			<h4 class="subHeading_no_underline">Create Line sheet</h4>
 		</div>
-		<div class="divi2"></div>
-		<div>
-			<select id="e1" class="populate span4" ng-model="linesheetcat" 
+		<div class="modal-body">
+			<div>
+				<input type="text" ng-model="linesheetname" class="span4"
+					placeholder="Enter linesheet season" />
+			</div>
+			<div class="divi2"></div>
+			<div>
+				<select id="e1" class="populate span4" ng-model="linesheetcat"
 					ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
 					<option value="">-- Choose Category --</option>
-			</select>
+				</select>
+			</div>
+			<div class="divi2"></div>
+			<div>
+				<ul class="nav nav-horizontal left">
+					<li><span class="left" ng-show="isMyProfile"> <input
+							type="radio" name="Date" checked value="true"
+							ng-model="immediate"> Immediates <input type="radio"
+							name="Date" value="false" ng-model="immediate"> Delivery
+							date
+					</span></li>
+				</ul>
+			</div>
+			<div class="divi2"></div>
+			<div>
+				<input type="text" class="span4" placeholder="Enter delivery date"
+					ng-model="deliverydate" ui-date ng-hide="immediate == 'true'" />
+			</div>
 		</div>
-		<div class="divi2"></div>
-		<div>
-			<ul class="nav nav-horizontal left">
-				<li><span class="left" ng-show="isMyProfile"> <input
-						type="radio" name="Date" checked value="true" ng-model="immediate">
-						Immediates <input type="radio" name="Date" value="false"
-						ng-model="immediate"> Delivery date
-				</span></li>
-			</ul>
-		</div>
-		<div class="divi2"></div>
-		<div>
-			<input type="text" class="span4" placeholder="Enter delivery date"
-				ng-model="deliverydate" ui-date ng-hide="immediate == 'true'" />
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a> <a
+				class="btn btn-primary" data-dismiss="modal"
+				ng-click="createlinesheet()"> Create linesheet</a>
 		</div>
 	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" data-dismiss="modal" ng-click="createlinesheet()">
-			Create linesheet</a>
-	</div>
-</div>
-<!-- modal -->
-<div ui-modal class="modal  hide" ng-model="showEditLinesheet" id="Editlinesheet">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"></button>
-		<h4 class="subHeading_no_underline">Edit Line sheet</h4>
-	</div>
-	<div class="modal-body">
-		<div>
-			<input type="text" ng-model="editlinesheetname" class="span4" placeholder="Enter line sheet name" />
+	<!-- modal -->
+	<div ui-modal class="modal  hide" ng-model="showEditLinesheet"
+		id="Editlinesheet">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"></button>
+			<h4 class="subHeading_no_underline">Edit Line sheet</h4>
 		</div>
-		<div class="divi2"></div>
-		<div>
-			<select id="e1" class="populate span4" ng-model="editlinesheetcat" ng-disabled=true
+		<div class="modal-body">
+			<div>
+				<input type="text" ng-model="editlinesheetname" class="span4"
+					placeholder="Enter linesheet season" />
+			</div>
+			<div class="divi2"></div>
+			<div>
+				<select id="e1" class="populate span4" ng-model="editlinesheetcat"
+					ng-disabled=true
 					ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
-			</select>
+				</select>
+			</div>
+			<div class="divi2"></div>
+			<div>
+				<ul class="nav nav-horizontal left">
+					<li><span class="left" ng-show="isMyProfile"> <input
+							type="radio" name="Date" checked value="true"
+							ng-model="editimmediate"> Immediates <input type="radio"
+							name="Date" value="false" ng-model="editimmediate">
+							Delivery date
+					</span></li>
+				</ul>
+			</div>
+			<div class="divi2"></div>
+			<div>
+				<input type="text" class="span4" placeholder="Enter delivery date"
+					ng-model="editdeliverydate" ui-date
+					ng-hide="editimmediate == 'true'" />
+			</div>
 		</div>
-		<div class="divi2"></div>
-		<div>
-			<ul class="nav nav-horizontal left">
-				<li><span class="left" ng-show="isMyProfile"> <input
-						type="radio" name="Date" checked value="true" ng-model="editimmediate">
-						Immediates <input type="radio" name="Date" value="false"
-						ng-model="editimmediate"> Delivery date
-				</span></li>
-			</ul>
-		</div>
-		<div class="divi2"></div>
-		<div>
-			<input type="text" class="span4" placeholder="Enter delivery date"
-				ng-model="editdeliverydate" ui-date ng-hide="editimmediate == 'true'" />
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a> <a
+				class="btn btn-primary" ng-click="updatelinesheet()"> Edit
+				linesheet</a>
 		</div>
 	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" ng-click="updatelinesheet()">
-			Edit linesheet</a>
-	</div>
-</div>
-<!-- modal -->
-
-
+	<!-- modal -->
