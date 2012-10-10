@@ -31,12 +31,9 @@
 				<span class="leftpane_filter_name" >Stockists</span> 
 					<!-- <input type="text" class="span3" placeholder="Stockists" /> -->
 					
-					<select data-placeholder="Select a Stockist" class="span3" ui-select2 ng-model="search.stockists" multiple>
-														
-						<option value="AL">Alabama</option>
-						<option value="WY">Wyoming</option>
-						<option value="A">AAAAAAA</option>
-						<option value="B">BBBBBB</option>
+					<select data-placeholder="Select a Stockist" ui-select2="{width:'element'}" ng-model="search.stockists" multiple>
+						<option value="{{st.username}}" ng-repeat="st in usersavailable">{{st.name}}</option>								
+						
 					</select>
 					 
 				<span class="leftpane_filter_name">LOCATION</span> 
@@ -47,7 +44,12 @@
 					<input type="text" class="span3"  placeholder="Boutique name" ng-model="search.name" ng-change="getsearchResults()"/> 
 				<span class="leftpane_filter_name">
 					Brands CARRIED</span> 
-					<input type="text" class="span3" placeholder="Brands carried" /> 
+					<!-- <input type="text" class="span3" placeholder="Brands carried" />  -->
+					
+					<select data-placeholder="Select a Brands carried" ui-select2="{width:'element'}" ng-model="search.stockists" multiple>
+						<option value="{{st.username}}" ng-repeat="st in usersavailable">{{st.name}}</option>
+					</select>
+					
 				<span class="leftpane_filter_name">LOCATION</span> 
 					<input type="text" class="span3" placeholder="Location" ng-model="search.location" ng-change="getsearchResults()"/>
 			</div>

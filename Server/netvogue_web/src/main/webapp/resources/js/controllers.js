@@ -1532,7 +1532,7 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myprofile, srvprofil
     };
 }
 
-function MyCtrlAdvancedSearch($scope, search) {
+function MyCtrlAdvancedSearch($scope, $http, search) {
 
 	$scope.$parent.title = 'AdvancedSearch';
 	$scope.pagenumber = 0;
@@ -1544,7 +1544,7 @@ function MyCtrlAdvancedSearch($scope, search) {
 	$scope.search = {
 			name: "",
 			location:"",
-			stockists: ""
+			stockists: []
 	};
 	
 	search.getallusers().success(function(data) {
@@ -1565,6 +1565,28 @@ function MyCtrlAdvancedSearch($scope, search) {
 	    	
 	    });
 	};
+	
+	$scope.brandsenteredchanged = function(brandsentered) {
+		var datatosend = {
+				"username" : brandsentered
+		};
+		var entity = "";
+		if($scope.isbrandsearch) {
+			entity="brand";
+		} else {
+			entity="boutique";
+		}
+		var config = {
+                method: "GET",
+                params: datatosend,
+                url: entity + "/usersavailable"
+            };
+        $http(config).success(function(data) {
+            $scope.usersavailable = data;
+        });
+	};
+	
+	$scope.brandsenteredchanged("");
 }
 
 function MyCtrlVideos($scope, $routeParams, currentvisitedprofile) {
