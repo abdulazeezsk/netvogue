@@ -29,7 +29,16 @@
 				<span class="leftpane_filter_name">BRAND</span> 
 					<input type="text" class="span3"  placeholder="Brand name" ng-model="search.name" ng-change="getsearchResults()"/> 
 				<span class="leftpane_filter_name" >Stockists</span> 
-					<input type="text" class="span3" placeholder="Stockists" /> 
+					<!-- <input type="text" class="span3" placeholder="Stockists" /> -->
+					
+					<select data-placeholder="Select a Stockist" class="span3" ui-select2 ng-model="search.stockists" multiple>
+														
+						<option value="AL">Alabama</option>
+						<option value="WY">Wyoming</option>
+						<option value="A">AAAAAAA</option>
+						<option value="B">BBBBBB</option>
+					</select>
+					 
 				<span class="leftpane_filter_name">LOCATION</span> 
 					<input type="text" class="span3" placeholder="Location" ng-model="search.location" ng-change="getsearchResults()"/>
 			</div>
@@ -102,4 +111,5 @@
 		<!-- right pane -->
 	</div>
 </div>
+	
 <!--body-->

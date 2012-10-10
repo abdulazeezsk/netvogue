@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/jquery.fileupload-ui.css" />
     <link href="css/style_overlay.css" rel="stylesheet" type="text/css" />
     <link href="css/style_common.css" rel="stylesheet" type="text/css" />
+    <link href="css/select2.css" rel="stylesheet" />
    
     <link href="css/style.css" rel="stylesheet" type="text/css" />
  
@@ -59,6 +60,7 @@
     <script src="js/constants.js" 					type="text/javascript"></script>
     <script src="js/main.js" 						type="text/javascript"></script>
     <script src="js/utils.js" 						type="text/javascript"></script>
+    <script src="js/select2.js" type="text/javascript"></script>
   
     
     <script src="lib/fileupload/vendor/jquery.ui.widget.js"></script>
