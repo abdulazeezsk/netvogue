@@ -1543,7 +1543,8 @@ function MyCtrlAdvancedSearch($scope, search) {
 	$scope.isbrandsearch = "true";
 	$scope.search = {
 			name: "",
-			location:""
+			location:"",
+			stockists: ""
 	};
 	
 	search.getallusers().success(function(data) {
