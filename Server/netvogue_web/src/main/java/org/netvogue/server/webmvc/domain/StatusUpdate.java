@@ -2,6 +2,7 @@ package org.netvogue.server.webmvc.domain;
 
 public class StatusUpdate {
 	String profileid;
+	String name;
 	String status;
 	String statusid;
 	String posteddate; 
@@ -11,6 +12,12 @@ public class StatusUpdate {
 	}
 	public void setProfileid(String profileid) {
 		this.profileid = profileid;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getStatus() {
 		return status;

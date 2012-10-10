@@ -2,13 +2,9 @@ package org.netvogue.server.neo4japi.service;
 
 //Project specific
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.neo4j.conversion.EndResult;
 import org.springframework.data.neo4j.support.Neo4jTemplate;
 
-import org.netvogue.server.neo4japi.domain.Boutique;
-import org.netvogue.server.neo4japi.domain.BoutiqueRefNode;
 import org.netvogue.server.neo4japi.domain.Brand;
-import org.netvogue.server.neo4japi.domain.BrandRefNode;
 import org.netvogue.server.neo4japi.repository.*;
 import org.netvogue.server.neo4japi.common.*;
 

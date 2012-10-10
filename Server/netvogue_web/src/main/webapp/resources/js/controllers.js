@@ -162,8 +162,7 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 	$scope.trending = trending.getTrending();
 }
 
-function MyCtrlCorner($scope, $routeParams, srvprofile, currentvisitedprofile,
-		mynetwork, trending) {
+function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisitedprofile, trending) {
 	$scope.navClass = function(page1) {
 		return {
 			// last: this.$last,
@@ -173,70 +172,77 @@ function MyCtrlCorner($scope, $routeParams, srvprofile, currentvisitedprofile,
 	$scope.currentPage = 'Corner';
 	$scope.$parent.title = "Corner";
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
-	$scope.profilepic		= "http://vivaldiboutique.com/wp-content/uploads/2010/05/intro-right.jpg";
 
-	$scope.entityname = currentvisitedprofile.getEntityName();
-
-	$scope.mynetwork = mynetwork.getmynetwork();
-	$scope.trending = trending.getTrending();
-	$scope.contactinfo = srvprofile.getcontactinfo($routeParams);
-	$scope.getcontactinfo = function() {
-		return addresstostring($scope.contactinfo);
+	$scope.entityname = "";
+	$scope.profilepic = "";
+	$scope.links = currentvisitedprofile.getleftpanellinks();
+	if (!angular.isUndefined($routeParams.profileid)) {
+		$scope.profileid = $routeParams.profileid;
+	}
+	
+	$scope.newupdate ="";
+	$scope.updatedata = function() {
+		$scope.entityname 		= srvtimeline.getname($routeParams);
+		$scope.profilepic 		= srvtimeline.getprofilepic($routeParams);
+		$scope.contactinfo		= srvtimeline.getcontactinfo($routeParams);
+		$scope.newsfeeds 		= srvtimeline.getupdates($routeParams);
+		$scope.getcontactinfo 	= addresstostring($scope.contactinfo);
+	};
+	
+	$scope.getupdates = function(routeParams) {
+		srvtimeline.updates(routeParams).success(function(data) {
+			srvtimeline.setupdateslocally(routeParams, data);
+			$scope.updatedata();
+		}).error(function(data) {
+			
+		});
+	};
+	$scope.getupdates($routeParams);
+	
+	$scope.getmyupdates = function() {
+		
+	};
+	
+	$scope.addupdate = function() {
+		mytimeline.addupdate($scope.newupdate).success(function(data) {
+			if(data.status == true) {
+				mytimeline.addupdatelocally($scope.newupdate);
+				$scope.newsfeeds 		= srvtimeline.getupdates($routeParams);
+			} else {
+				alert(data.error);
+			}
+		}).error(function(data) {
+			alert("error");
+		});
+	};
+	
+	$scope.editupdate = function(id, update) {
+		mytimeline.editupdate(id, update).success(function(data) {
+			if(data.status == true) {
+				mytimeline.editupdatelocally(id, update);
+				$scope.newsfeeds 		= srvtimeline.getupdates($routeParams);
+			} else {
+				alert(data.error);
+			}
+		}).error(function(data) {
+			alert("error");
+		});
+	};
+	
+	$scope.deleteupdate = function(id) {
+		mytimeline.deleteupdate(id).success(function(data) {
+			if(data.status == true) {
+				mytimeline.editupdatelocally(id);
+				$scope.newsfeeds 		= srvtimeline.getupdates($routeParams);
+			} else {
+				alert(data.error);
+			}
+		}).error(function(data) {
+			alert("error");
+		});
 	};
 
-	$scope.links = currentvisitedprofile.getleftpanellinks();
-	$scope.newsfeeds = [
-			{
-				"boutiquename" : "Boutique Name",
-				"boutiqueID" : "boutique",
-				"profilepiclink" : "http://placehold.it/50x50",
-				"post" : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus dui. Vivamus vulputate"
-						+ "ipsum vel enim. Aliquam erat volutpat. Etiam a dui at neque semper ornare. Mauris"
-						+ "lacus tortor, sagittis eu, dictum sit amet, facilisis eu, mauris. Praesent molestie"
-						+ "ante non nibh. Suspendisse placerat eros vel velit. Vestibulum ante ipsum primis"
-						+ "in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam ultricies eros"
-						+ "eget quam."
-			}, {
-				"boutiquename" : "Motorola XOOM with Wi-Fi",
-				"boutiqueID" : "boutique",
-				"profilepiclink" : "http://placehold.it/50x50",
-				"post" : "The Next, Next Generation tablet."
-			}, {
-				"boutiquename" : "MOTOROLA XOOM",
-				"boutiqueID" : "boutique",
-				"profilepiclink" : "http://placehold.it/50x50",
-				"post" : "The Next, Next Generation tablet."
-			} ];
-	$scope.networkfeed = [ {
-		"networklistitem" : "Calvin klein",
-		"profilepiclink" : "images/netwrk50x50.jpg",
-		"networklistitemID" : "CalvinKlienId"
-	}, {
-		"networklistitem" : "Rebecca  Minkoff",
-		"profilepiclink" : "http://placehold.it/50x50",
-		"networklistitemID" : "RebeccaMinkoffId"
-	}, {
-		"networklistitem" : "Jason Myers",
-		"profilepiclink" : "http://placehold.it/50x50",
-		"networklistitemID" : "JasonMyersId"
-	}, {
-		"networklistitem" : "Akris",
-		"profilepiclink" : "http://placehold.it/50x50",
-		"networklistitemID" : "AkrisId"
-	}, {
-		"networklistitem" : "Catherine Malandrino",
-		"profilepiclink" : "http://placehold.it/50x50",
-		"networklistitemID" : "CatherineMalandrinoId"
-	}, {
-		"networklistitem" : "Derek Lam",
-		"profilepiclink" : "http://placehold.it/50x50",
-		"networklistitemID" : "DerekLamId"
-	}, {
-		"networklistitem" : "Donna Karan",
-		"profilepiclink" : "http://placehold.it/50x50",
-		"networklistitemID" : "DonnaKaranId"
-	} ];
-
+	$scope.trending = trending.getTrending();
 }
 
 function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, srvgallery, mygallery) {
