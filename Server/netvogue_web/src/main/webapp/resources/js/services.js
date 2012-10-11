@@ -177,26 +177,23 @@ angular.module('netVogue.services', []).
       var home = true;
       var historyURL = "";
       var currentURL = "";
+      var myprofileID= "";
       var currentProfileID = "";
-      var currentProfile = {
-          "entityname": "Boutique Name"
-      };
       return {
           isMyProfile: function () {
-              return currentProfileID == "" ? true : false;
+              return currentProfileID == myprofileID ? true : false;
           },
           isHomePage: function () {
               return home;
           },
-          getEntityName: function () {
-              return currentProfile.entityname;
+          setmyprofileid: function(id) {
+        	  myprofileID = id;
           },
           profilevisitChange: function (routeParams, hometemp) {
               if (angular.isUndefined(routeParams.profileid)) {
                   currentProfileID = "";
               } else if (!angular.equals(routeParams.profileid, currentProfileID)) {
                   currentProfileID = routeParams.profileid;
-                  currentProfile.entityname = routeParams.profileid;
               }
               historyURL = currentURL;
               currentURL = $location.url();
@@ -1110,6 +1107,7 @@ angular.module('netVogue.services', []).
 	var unreadnotifications = [];
 	var numberofunreadnotifications = 0;
 	var name;
+	var profileid;
 	var profilepic;
 	return {
 		getnotifications: function() {
@@ -1121,11 +1119,13 @@ angular.module('netVogue.services', []).
     	setnotifications: function(temp) {
     		name = temp.name;
     		profilepic = temp.profilepic;
+    		profileid  = temp.profileid;	
     		angular.copy(temp.notifications, notifications);
     	},
     	setunreadnotifications: function(temp) {
     		name = temp.name;
     		profilepic = temp.profilepic;
+    		profileid  = temp.profileid;
     		numberofunreadnotifications = temp.unreadnotifications;
     		angular.copy(temp.notifications, unreadnotifications);
     	},
@@ -1133,6 +1133,11 @@ angular.module('netVogue.services', []).
     		if(angular.isUndefined(name))
         		return "";
     		return name;
+    	},
+    	getprofileid: function() {
+    		if(angular.isUndefined(profileid))
+        		return "";
+    		return profileid;
     	},
     	setname: function(name) {
     		this.name = name;
@@ -1424,8 +1429,13 @@ angular.module('netVogue.services', []).
           };
           return $http(config);
     	},
-    	addupdatelocally: function() {
-    		//updates.push();
+    	addupdatelocally: function(data) {
+    		var temp = [];
+    		temp.push(data);
+    		for(var i=0; i < updates.length; i++) {
+    			temp.push(updates[i]);
+    		}
+    		updates = angular.copy(temp);
     	},
     	editupdatelocally: function(id, status) {
     		var index=0;
@@ -1446,7 +1456,7 @@ angular.module('netVogue.services', []).
     		updates.splice(index, 1);
     	}
       };
-}).service('srvtimeline', function ($http, mynetwork) {
+}).service('srvtimeline', function ($http, mytimeline) {
     var updates = new netvogue.hashtable();
     return {
   	  getname: function(routeparams) {
@@ -1454,9 +1464,9 @@ angular.module('netVogue.services', []).
             if (angular.isUndefined(routeparams.profileid)) {
                 return mytimeline.getname();
             } else {
-            	if(angular.isUndefined(network.name))
+            	if(angular.isUndefined(updates.name))
             		return "";
-        		return network.name;
+        		return updates.name;
             }
             return result;
   	  },
@@ -1465,9 +1475,9 @@ angular.module('netVogue.services', []).
             if (angular.isUndefined(routeparams.profileid)) {
                 return mytimeline.getprofilepic();
             } else {
-            	if(angular.isUndefined(network.profilepic))
+            	if(angular.isUndefined(updates.profilepic))
             		return "";
-        		return network.profilepic;
+        		return updates.profilepic;
             }
             return result;
   	  },
@@ -1476,9 +1486,9 @@ angular.module('netVogue.services', []).
           if (angular.isUndefined(routeparams.profileid)) {
               return mytimeline.getcontactinfo();
           } else {
-        	  if(angular.isUndefined(network.contactinfo))
+        	  if(angular.isUndefined(updates.contactinfo))
           		return {};
-      		return network.contactinfo;
+      		return updates.contactinfo;
           }
           return result;
 	  },

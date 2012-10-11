@@ -5,10 +5,10 @@ import org.netvogue.server.neo4japi.domain.StatusUpdate;
 
 public interface StatusUpdateService {
 	Iterable<StatusUpdate> getMyStatusUpdates(String username);
-	Iterable<StatusUpdate> getAllStatusUpdates(String username);
+	Iterable<StatusUpdateData> getAllStatusUpdates(String username);
 	
-	ResultStatus newStatusUpdate(String username, String statusupdate, String error);
-	ResultStatus editStatusUpdate(String id, String message, String error);
-	ResultStatus deleteStatusUpdate(String id, String error);
+	StatusUpdate newStatusUpdate(String username, String statusupdate, StringBuffer error);
+	ResultStatus editStatusUpdate(String id, String message, StringBuffer error);
+	ResultStatus deleteStatusUpdate(String id, StringBuffer error);
 	
 }

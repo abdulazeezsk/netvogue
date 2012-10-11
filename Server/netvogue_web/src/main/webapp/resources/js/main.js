@@ -2,13 +2,15 @@ function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search, m
 	$scope.title = "Profile";
 	netvogue.initialize();
 	$scope.iambrand = netvogue.isbrand;
-	$scope.entityname = netvogue.entityname; //Boutique or Brand name
 	
 	$scope.updatenotifications = function() {
 		$scope.entityname 			= mynotifications.getname();
+		$scope.myprofileid			= mynotifications.getprofileid();
 		$scope.profilepic 			= mynotifications.getprofilepic();
 		$scope.unreadnotifications 	= mynotifications.getnumberofunreadnotifications();
 		$scope.notifications 		= mynotifications.getunreadnotifications();
+		
+		currentvisitedprofile.setmyprofileid($scope.myprofileid);
 	};
 	
 	mynotifications.notificationsunread().success(function(data) {

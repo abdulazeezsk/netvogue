@@ -180,36 +180,46 @@ function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisi
 		$scope.profileid = $routeParams.profileid;
 	}
 	
+	$scope.routeparams = {
+			
+	};
 	$scope.newupdate ="";
-	$scope.updatedata = function() {
-		$scope.entityname 		= srvtimeline.getname($routeParams);
-		$scope.profilepic 		= srvtimeline.getprofilepic($routeParams);
-		$scope.contactinfo		= srvtimeline.getcontactinfo($routeParams);
-		$scope.newsfeeds 		= srvtimeline.getupdates($routeParams);
+	$scope.updatedata = function(routeparams) {
+		$scope.entityname 		= srvtimeline.getname(routeparams);
+		$scope.profilepic 		= srvtimeline.getprofilepic(routeparams);
+		$scope.contactinfo		= srvtimeline.getcontactinfo(routeparams);
+		$scope.newsfeeds 		= srvtimeline.getupdates(routeparams);
 		$scope.getcontactinfo 	= addresstostring($scope.contactinfo);
 	};
 	
-	$scope.getupdates = function(routeParams) {
-		srvtimeline.updates(routeParams).success(function(data) {
-			srvtimeline.setupdateslocally(routeParams, data);
-			$scope.updatedata();
+	$scope.getupdates = function(routeparams) {
+		srvtimeline.updates(routeparams).success(function(data) {
+			srvtimeline.setupdateslocally(routeparams, data);
+			$scope.updatedata(routeparams);
 		}).error(function(data) {
-			
 		});
 	};
-	$scope.getupdates($routeParams);
 	
 	$scope.getmyupdates = function() {
-		
+		$scope.routeparams.profileid = $scope.$parent.myprofileid;
+		$scope.getupdates($scope.routeparams);
 	};
+	
+	$scope.getallupdates = function() {
+		$scope.routeparams.profileid = undefined;
+		$scope.getupdates($routeParams);
+	};
+	
+	$scope.getallupdates();
 	
 	$scope.addupdate = function() {
 		mytimeline.addupdate($scope.newupdate).success(function(data) {
-			if(data.status == true) {
-				mytimeline.addupdatelocally($scope.newupdate);
+			if(data != null) {
+				mytimeline.addupdatelocally(data);
 				$scope.newsfeeds 		= srvtimeline.getupdates($routeParams);
+				$scope.newupdate = "";
 			} else {
-				alert(data.error);
+				alert("There is some error");
 			}
 		}).error(function(data) {
 			alert("error");

@@ -1,6 +1,7 @@
 package org.netvogue.server.neo4japi.domain;
 
 //Netvogue specific imports
+import org.neo4j.graphdb.Direction;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
 
 //Spring Framework imports
@@ -379,6 +380,14 @@ public class User {
 		}
 	}*/
 	
+	public Set<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(Set<Notification> notifications) {
+		this.notifications = notifications;
+	}
+
 	@Override
     public boolean equals(Object other) {
 		if (this == other) 
@@ -390,7 +399,7 @@ public class User {
 		return nodeId.equals(((User) other).nodeId);    
 	}
 
-    @Override
+	@Override
     public int hashCode() {
     	return nodeId == null ? System.identityHashCode(this) : nodeId.hashCode();
     }

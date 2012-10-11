@@ -35,6 +35,7 @@ public class NotificationController {
 		Notifications response = new Notifications();
 		
 		response.setName(user.getName());
+		response.setProfileid(user.getUsername());
 		response.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
 		Set<Notification> notificationsTemp = new LinkedHashSet<Notification>();
 		

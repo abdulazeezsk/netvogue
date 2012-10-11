@@ -1,6 +1,7 @@
 package org.netvogue.server.neo4japi.domain;
 
 //Spring specific imports
+import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.*;
 
 //Generic
@@ -18,6 +19,12 @@ public class StatusUpdate {
 	String statusUpdate;
 	
 	Date postedDate = new Date();
+	
+	@RelatedTo(type="NEXT", direction = Direction.OUTGOING)
+	StatusUpdate status;
+	
+	@RelatedTo(type="STATUS", direction = Direction.INCOMING)
+	User addedBy;
 	
 	public StatusUpdate() {
 		
@@ -50,6 +57,22 @@ public class StatusUpdate {
 
 	public void setPostedDate(Date postedDate) {
 		this.postedDate = postedDate;
+	}
+
+	public StatusUpdate getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusUpdate status) {
+		this.status = status;
+	}
+
+	public User getAddedBy() {
+		return addedBy;
+	}
+
+	public void setAddedBy(User addedBy) {
+		this.addedBy = addedBy;
 	}
 
 	@Override

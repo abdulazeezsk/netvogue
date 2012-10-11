@@ -12,15 +12,6 @@ public class StatusUpdateConverter implements Converter<org.netvogue.server.neo4
 	public StatusUpdate convert(org.netvogue.server.neo4japi.domain.StatusUpdate source) {
 		StatusUpdate response = new StatusUpdate();
 		
-		/*response.setProfileid(source.getOtherUser().getUsername());
-		String profilepic = source.getOtherUser().getProfilePicLink();
-		if(null != profilepic) {
-			String thumburl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PThumb);
-			response.setThumbnail_url(thumburl);
-			
-			String topurl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PTop);
-			response.setTop_url(topurl);
-		}*/
 		response.setStatusid(source.getStatusid());
 		response.setStatus(source.getStatusUpdate());
 		Date postedDate = source.getPostedDate();

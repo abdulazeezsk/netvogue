@@ -35,6 +35,8 @@
             	<bean class="org.netvogue.server.webmvc.converters.ImageURLsConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.NetworkConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.NotificationConverter" />
+            	<bean class="org.netvogue.server.webmvc.converters.StatusUpdateConverter" />
+            	<bean class="org.netvogue.server.webmvc.converters.StatusUpdateDataConverter" />
         	</list>
     	</property>
 	</bean>

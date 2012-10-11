@@ -20,19 +20,19 @@
                     sort <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="#">My Timeline</a></li>
-                    <li><a href="#">Everyone</a></li>
+                    <li><a ng-click="getmyupdates()">My Timeline</a></li>
+                    <li><a ng-click="getallupdates()">Everyone</a></li>
                 </ul>
             </span>
             <ul class="nav nav-tab nav-stacked">
                 <li ng-repeat="news in newsfeeds">
                     <div class="newsfeed">
                         <div class="brand_image">
-                            <a href="#">
+                            <a ng-href="#/{{news.profileid}}/profile">
                                 <img alt="" ng-src="{{news.left_url}}" class="pull-left"></a></div>
                         <div class="newsfeed_text">
                             <h3>
-                                <a ng-href="#" title="">{{news.name}}</a></h3>
+                                <a ng-href="#/{{news.profileid}}/profile" title="">{{news.name}}</a></h3>
                             <p>
                                 {{news.status}}
                             </p>

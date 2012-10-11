@@ -4,9 +4,12 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.netvogue.server.aws.core.ImageType;
+import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.User;
+import org.netvogue.server.neo4japi.service.StatusUpdateData;
 import org.netvogue.server.neo4japi.service.StatusUpdateService;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.domain.ContactInfo;
@@ -34,7 +37,7 @@ public class StatusUpdateController {
 	@Autowired StatusUpdateService	statusUpdateService; 
 	@Autowired UploadManager 		uploadManager;
 		
-	@RequestMapping(value="getstatusupdates", method=RequestMethod.GET)
+	@RequestMapping(value={"getstatusupdates", "getstatusupdates/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody StatusUpdates getStatusUpdates(@ModelAttribute("profileid") String profileid) {
 		System.out.println("Get Statuspupdates: " + profileid);
 		StatusUpdates updates = new StatusUpdates();
@@ -70,57 +73,86 @@ public class StatusUpdateController {
 		
 		Set<StatusUpdate> updatesTemp = new LinkedHashSet<StatusUpdate>();
 		
-		Iterable<org.netvogue.server.neo4japi.domain.StatusUpdate> dbupdates;
-		if(profileid.isEmpty()) {
-			dbupdates = statusUpdateService.getAllStatusUpdates(user.getUsername());
-		} else {
-			dbupdates = statusUpdateService.getMyStatusUpdates(user.getUsername());
-		}
-		if(null == dbupdates) {
-			return updates;
-		}
 		
-		Iterator<org.netvogue.server.neo4japi.domain.StatusUpdate> first = dbupdates.iterator();
+		if(profileid.isEmpty()) {
+			Iterable<StatusUpdateData> dbupdates;
+			dbupdates = statusUpdateService.getAllStatusUpdates(user.getUsername());
+		
+			if(null == dbupdates) {
+				return updates;
+			}
+
+			Iterator<StatusUpdateData> first = dbupdates.iterator();
 			while ( first.hasNext() ){
-				org.netvogue.server.neo4japi.domain.StatusUpdate dbUpdate = first.next() ;
-				System.out.println("Status update is: " + dbUpdate.getStatusUpdate());
+				StatusUpdateData dbUpdate = first.next() ;
 				updatesTemp.add(conversionService.convert(dbUpdate, StatusUpdate.class));
 			}
+		} else {
+			Iterable<org.netvogue.server.neo4japi.domain.StatusUpdate> dbupdates;
+			dbupdates = statusUpdateService.getMyStatusUpdates(user.getUsername());
+		
+			if(null == dbupdates) {
+				return updates;
+			}
+		
+			Iterator<org.netvogue.server.neo4japi.domain.StatusUpdate> first = dbupdates.iterator();
+			while ( first.hasNext() ){
+				org.netvogue.server.neo4japi.domain.StatusUpdate dbUpdate = first.next() ;
+				StatusUpdate newTemp = conversionService.convert(dbUpdate, StatusUpdate.class);
+				newTemp.setName(user.getUsername());
+				newTemp.setProfileid(user.getUsername());
+				String profilepic = user.getProfilePicLink();
+				if(null != profilepic) {
+					String topurl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PTop);
+					newTemp.setLeft_url(topurl);
+				}
+				updatesTemp.add(newTemp);
+			}
+		}
 		
 		updates.setUpdates(updatesTemp);
-		System.out.println("Status updates returned: " + profileid);
+		System.out.println("Status updates returned: " + updatesTemp.size());
 		return updates;
 	}
 	
 	@RequestMapping(value="statusupdate/add", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse addStatusUpdate(@RequestBody String status) {
+	public @ResponseBody StatusUpdate addStatusUpdate(@RequestBody String status) {
 		System.out.println("Add Status update: " + status);
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		User user = userDetailsService.getUserFromSession();
 		JsonResponse response = new JsonResponse();
 		
-		if(ResultStatus.SUCCESS == statusUpdateService.newStatusUpdate(status, user.getUsername(), error))   
+		org.netvogue.server.neo4japi.domain.StatusUpdate newUpdate = statusUpdateService.newStatusUpdate(user.getUsername(), status, error);
+		if(null != newUpdate)   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
+		StatusUpdate update = conversionService.convert(newUpdate, StatusUpdate.class);
+		update.setName(user.getName());
+		update.setProfileid(user.getUsername());
+		String profilepic = user.getProfilePicLink();
+		if(null != profilepic) {
+			String topurl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PTop);
+			update.setLeft_url(topurl);
+		}
 		
-		System.out.println("added status update");
-		return response;
+		System.out.println("added status update" + error);
+		return update;
 	}
 	
 	@RequestMapping(value="statusupdate/edit", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse editStatusUpdate(@RequestBody JsonRequest request) {
 		System.out.println("edit Status update: " + request.getId());
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		
 		if(ResultStatus.SUCCESS == statusUpdateService.editStatusUpdate(request.getId(), request.getValue(), error))   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		
 		System.out.println("edited status update");
@@ -130,14 +162,14 @@ public class StatusUpdateController {
 	@RequestMapping(value="statusupdate/delete", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse deleteStatusUpdate(@RequestBody String id) {
 		System.out.println("delete Status update: " + id);
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		
 		if(ResultStatus.SUCCESS == statusUpdateService.deleteStatusUpdate(id, error))   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		
 		System.out.println("delete status update");
