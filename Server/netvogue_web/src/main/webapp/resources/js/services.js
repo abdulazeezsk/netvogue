@@ -181,7 +181,7 @@ angular.module('netVogue.services', []).
       var currentProfileID = "";
       return {
           isMyProfile: function () {
-              return currentProfileID == myprofileID || currentProfileID == ""? true : false;
+              return (currentProfileID == myprofileID || currentProfileID == "")? true : false;
           },
           isHomePage: function () {
               return home;

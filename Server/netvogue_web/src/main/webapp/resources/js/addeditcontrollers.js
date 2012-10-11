@@ -278,7 +278,7 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 	};
 }
 
-function MyCtrlAddStyle($scope, $routeParams, currentvisitedprofile, srvstylesheet, mystylesheet) {
+function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, srvstylesheet, mystylesheet) {
 
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
 	if(!$scope.isMyProfile) {
