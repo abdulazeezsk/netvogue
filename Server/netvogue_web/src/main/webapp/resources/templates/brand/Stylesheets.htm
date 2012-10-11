@@ -1,28 +1,27 @@
 <!--body-->
 <div class="container minimum_height">
-    <div class="row">
-        <!-- left-pane -->
-        <div class="span3">
-            <h4 class="leftpane_entity_heading">
-                Boutique</h4>
-            <div class="divi2">
-            </div>
-            <ul class="thumbnails">
-                <li class="span3">
-                    <div>
-                    <span> <a href="#profile"> <img alt=""
+	<div class="row">
+		<!-- left-pane -->
+		<div class="span3">
+			<h4 class="leftpane_entity_heading">Boutique</h4>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> <a href="#profile"> <img alt=""
 								ng-src={{profilepic.thumbnail_url}}
 								class="pull-left leftpane_profile_img"></a>
 						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
-                    </div>
-                </li>
-            </ul>
-            			<div class="leftpane_subheading">FILTERS</div>
+					</div>
+				</li>
+			</ul>
+			<div class="leftpane_subheading">FILTERS</div>
 			<div class="divi2"></div>
 			<div>
-				<span class="leftpane_filter_name">Style sheet</span> 
-				<input type="text" placeholder="Stylesheet name" ng-model="searchstylesheetname" class="span3" />
+				<span class="leftpane_filter_name">Style sheet</span> <input
+					type="text" placeholder="Stylesheet name"
+					ng-model="searchstylesheetname" class="span3" />
 			</div>
 			<div>
 				<span class="leftpane_filter_name">CATEGORY</span>
@@ -30,40 +29,45 @@
 			<div>
 				<div checkbox-tree ng-model="searchFilter"></div>
 			</div>
-        </div>
-        <!-- left-pane -->
-        
-        
-        <!-- right pane -->
+		</div>
+		<!-- left-pane -->
+
+
+		<!-- right pane -->
 		<div class="span9">
 			<div>
 				<span class="left rightpane_subHeading"> Style Sheets </span> <span
 					class="right"> <a ng-href="#{{backButton}}"
 					class="rightpane_back_btn">Back</a></span>
 				<div class="divi2 right_pane_underline"></div>
-				<span class="left right_pane_info"> Find style sheets using the
-					filters </span> <span class="right"> <a data-toggle="modal"
-					href="#Createstylesheet"class="rightpane_add_btn">create style sheet</a>
+				<span class="left right_pane_info"> Find style sheets using
+					the filters </span> <span class="right"> <a data-toggle="modal"
+					href="#Createstylesheet" class="rightpane_add_btn">create style
+						sheet</a>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 			</div>
 			<div>
-				<ul class="thumbnails">
-					<li ng-repeat="stylesheet in stylesheets" style="position: relative;">
+				<!-- <ul class="thumbnails">
+					<li ng-repeat="stylesheet in stylesheets"
+						style="position: relative;">
 						<div class="view view-first">
 							<a ng-href="#/stylesheet?id={{stylesheet.galleryid}}"> <img
 								ng-src="{{stylesheet.gallerypic}}" alt=""></a>
 							<div class="content">
 								<div class="mask">
 									<ul>
-										<li><a ng-click="deletestylesheet(stylesheet.galleryid)" title="Delete"><i
-												class="icon-trash icon-white"></i></a></li>
-										<li><a title="Edit" 
-										ng-click="editstylesheet(stylesheet.galleryid, stylesheet.galleryname, stylesheet.category)" >
-										<i class="icon-edit icon-white"></i></a></li>
+										<li><a ng-click="deletestylesheet(stylesheet.galleryid)"
+											title="Delete"><i class="icon-trash icon-white"></i></a></li>
+										<li><a title="Edit"
+											ng-click="editstylesheet(stylesheet.galleryid, stylesheet.galleryname, stylesheet.category)">
+												<i class="icon-edit icon-white"></i>
+										</a></li>
 									</ul>
 									<h1>
-										<a ng-href="#/stylesheet?id={{stylesheet.galleryid}}&&cat={{stylesheet.category}}" class="mask_edit">view</a>
+										<a
+											ng-href="#/stylesheet?id={{stylesheet.galleryid}}&&cat={{stylesheet.category}}"
+											class="mask_edit">view</a>
 									</h1>
 								</div>
 							</div>
@@ -75,13 +79,41 @@
 							<h3>{{style.styleprice}}</h3>
 						</div>
 					</li>
+				</ul> -->
+
+
+				<ul class="thumbnails">
+					<li ng-repeat="stylesheet in stylesheets">
+						<div align="center" style="position: relative;">
+							<a class="product-image"
+								ng-href="#/stylesheet?id={{stylesheet.galleryid}}" title="">
+								<img ng-src="{{stylesheet.gallerypic}}" class="fade_spot"
+								width="220" height="300" alt="Dumont Coat" title="Dumont Coat">
+							</a>
+							<div class="stylesheet-edit-delete">
+								<span class="edit-delete"><a
+									ng-click="deletestylesheet(stylesheet.galleryid)"
+									title="Delete"><i class="icon-trash icon-black"></i></a><a
+									ng-click="editstylesheet(stylesheet.galleryid, stylesheet.galleryname, stylesheet.category)"
+									title="Edit"><i class="icon-edit icon-black"></i></a></span>
+							</div>
+							<div class="stylesheet-designer">
+								<span class="designer">Rebecca Minkoff</span>
+							</div>
+							<div class="stylesheet-name">
+								<span class="season">Winter/fall stylesheets</span>
+							</div>
+						</div>
+					</li>
 				</ul>
+
+
 			</div>
 		</div>
 		<!-- right pane -->
-		
-		
-    </div>
+
+
+	</div>
 </div>
 <!--body-->
 <!-- modal -->
@@ -92,47 +124,51 @@
 	</div>
 	<div class="modal-body">
 		<div>
-			<input type="text" class="span4" ng-model="stylesheetname" placeholder="Style sheet name" />
+			<input type="text" class="span4" ng-model="stylesheetname"
+				placeholder="Enter stylesheet season" />
 		</div>
 		<div class="divi2"></div>
 		<div>
-			<select id="e1" class="populate span4" ng-model="stylesheetcat" 
-					ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
-					<option value="">-- Choose Category --</option>
+			<select id="e1" class="populate span4" ng-model="stylesheetcat"
+				ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
+				<option value="">-- Choose Category --</option>
 			</select>
 		</div>
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" data-dismiss="modal" ng-click="createstylesheet()">
-			Create style sheet</a>
+			class="btn btn-primary" data-dismiss="modal"
+			ng-click="createstylesheet()"> Create style sheet</a>
 	</div>
 </div>
 <!-- modal -->
 
 
 <!-- modal -->
-<div ui-modal class="modal  hide" ng-model="showEditStylesheet" id="Editstylesheet">
+<div ui-modal class="modal  hide" ng-model="showEditStylesheet"
+	id="Editstylesheet">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal"></button>
 		<h4 class="subHeading_no_underline">Edit Style sheet</h4>
 	</div>
 	<div class="modal-body">
 		<div>
-			<input type="text" class="span4" ng-model="editstylesheetname" placeholder="Style sheet name" />
+			<input type="text" class="span4" ng-model="editstylesheetname"
+				placeholder="Enter stylesheet season" />
 		</div>
 		<div class="divi2"></div>
 		<div>
-			<select id="e1" class="populate span4" ng-model="editstylesheetcat" ng-disabled=true
-					ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
-					<option value="">-- Choose Category --</option>
+			<select id="e1" class="populate span4" ng-model="editstylesheetcat"
+				ng-disabled=true
+				ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
+				<option value="">-- Choose Category --</option>
 			</select>
 		</div>
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" ng-click="updatestylesheet()">
-			Update style sheet</a>
+			class="btn btn-primary" ng-click="updatestylesheet()"> Update
+			style sheet</a>
 	</div>
 </div>
 <!-- modal -->

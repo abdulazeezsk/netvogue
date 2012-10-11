@@ -38,7 +38,7 @@
 				<div class="divi2 right_pane_underline"></div>
 			</div>
 			<div>
-					<ul class="thumbnails">
+				<!-- 	<ul class="thumbnails">
 						<li ng-repeat="gallery in galleries" style="position: relative;margin-top:20px;">
 							<div class="galleryview view-firstg">
 								<a ng-href="#/photos?id={{gallery.galleryid}}"> <img
@@ -57,6 +57,58 @@
 								<div class="divi2"></div>
 							</div>
 							<div class="gallerytitle">
+								<h3>{{gallery.galleryname}}</h3>
+							</div>
+						</li>
+					</ul> -->
+					
+					
+				<!-- <ul class="thumbnails">
+					<li ng-repeat="gallery in galleries" >
+						<div align="center" style="position: relative;">
+							<a class="product-image"
+								ng-href="#/photos?id={{gallery.galleryid}}" title="">
+								<img  ng-src="{{gallery.gallerypic}}" class="fade_spot"
+								width="220" height="230">
+							</a>
+							<div class="stylesheet-edit-delete">
+								<span class="edit-delete"><a
+									ng-click="deletegallery(gallery.galleryid)"
+									title="Delete"><i class="icon-trash icon-black"></i></a><a
+									ng-click="editgallery(gallery.galleryid, gallery.galleryname)"
+									title="Edit"><i class="icon-edit icon-black"></i></a></span>
+							</div>
+							<div class="gallery-name">
+								<span class="designer">{{gallery.galleryname}}</span>
+							</div>
+						</div>
+					</li>
+				</ul> -->
+				
+				
+				<ul class="thumbnails">
+						<li ng-repeat="gallery in galleries" style="position: relative;margin-top:20px;" >
+							<!--  ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize" -->
+							<div class="press view-press">
+								<a  ng-href="#/photos?id={{gallery.galleryid}}"  > <img
+									ng-src="{{gallery.gallerypic}}" alt=""></a>
+								<div class="content">
+							     	<div class="mask">
+                                    </div>
+                                    <ul class="prs">
+                                       <li><a ng-click="deletegallery(gallery.galleryid)"
+										title="Delete"><i class="icon-trash icon-white"></i></a></li>
+									<li><a
+										ng-click="editgallery(gallery.galleryid, gallery.galleryname, gallery.gallerydesc)"
+										title="Edit"><i class="icon-edit icon-white"></i> </a></li>
+							    	</ul>
+									<h1>
+									<a ng-href="#/photos?id={{gallery.galleryid}}"  class="mask_edit">View</a>
+									</h1>
+								</div> 
+								<div class="divi2"></div>
+							</div>
+							<div class="presstitle">
 								<h3>{{gallery.galleryname}}</h3>
 							</div>
 						</li>
