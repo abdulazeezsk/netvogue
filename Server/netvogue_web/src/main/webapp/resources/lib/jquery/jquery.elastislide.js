@@ -213,7 +213,7 @@
 			if( dir && status ) {
 				if( status === 1 )
 					( dir === 'right' ) ? this.$navNext.show() : this.$navPrev.show();
-				else
+				else 
 					( dir === 'right' ) ? this.$navNext.hide() : this.$navPrev.hide();
 			}
 			else if( this.current === this.itemsCount - 1 || this.fitCount >= this.itemsCount )

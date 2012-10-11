@@ -38,12 +38,12 @@
                             </li>
 							<li style="margin-right: 5px; width: 306.6666666666667px; ">
                             	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/7.jpg" style="border-width: 3px; ">
-                                	<img src="images/Fall-Lookbook-2012/fall/fl_2012_lookbook_7.jpg" alt="Flookbook7">
+                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/7.jpg" alt="Flookbook7">
                                 </a>
                             </li>
                             <li style="margin-right: 5px; width: 306.6666666666667px; ">
                             	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/8.jpg" style="border-width: 3px; ">
-                                	<img src="images/Fall-Lookbook-2012/fall/fl_2012_lookbook_8.jpg" alt="Flookbook8">
+                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/8.jpg" alt="Flookbook8">
                                 </a>
                             </li>
 							<li style="margin-right: 5px; width: 306.6666666666667px; ">
@@ -58,7 +58,7 @@
                             </li>
 							<li style="margin-right: 5px; width: 306.6666666666667px; ">
                             	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/11.jpg" style="border-width: 3px; ">
-                                	<img src="images/Fall-Lookbook-2012/fall/fl_2012_lookbook_11.jpg" alt="Flookbook11">
+                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/11.jpg" alt="Flookbook11">
                                 </a>
                             </li>
 							<li style="margin-right: 5px; width: 306.6666666666667px; ">
@@ -151,11 +151,15 @@
 														
 						</ul>
 					</div>
-					<div class="es-nav"><span class="es-nav-prev" style="display: none; ">Previous</span><span class="es-nav-next" style="">Next</span></div></div>
+					<div class="es-nav">
+						<span class="es-nav-prev" style="display: none; ">Previous</span>
+						<span class="es-nav-next" style="display: none; ">Next</span>
+					</div>
+			</div>
 	
 					<script type="text/javascript">
 
-			$j('#lookbookS').elastislide({
+			jQuery('#lookbookS').elastislide({
 				speed       : 750,						
 				imageW 		: 320,
 				margin		: 5,
@@ -165,11 +169,9 @@
 			});
 			
 			
-			$j(document).ready(function() {
-										
+			jQuery(document).ready(function() {
 				/* This is basic - uses default settings */
-	
-				$j("a#single_image").fancybox({
+				jQuery("a#single_image").fancybox({
 					overlayOpacity: 0,
 					padding: 0,
 					showCloseButton: true,
@@ -182,14 +184,30 @@
 			
 						
 		</script>
-					</div>
+		</div>
 		<!-- Main pane -->
 	</div>
 </div>
 <div id="fancybox-tmp" style="padding: 50px; "></div>
 <div id="fancybox-loading" style="display: none; "><div></div></div>
 <div id="fancybox-overlay" style="background-color: rgb(119, 119, 119); opacity: 0; cursor: pointer; height: 739px; display: none; "></div>
-<div id="fancybox-wrap" style="width: 1000px; height: auto; top: 30px; left: 120px; display: none; "><div id="fancybox-outer"><div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div><div id="fancybox-content" style="border-width: 0px; width: 1000px; height: 1500px; "></div><a id="fancybox-close" style="display: none; "></a><div id="fancybox-title" style="display: none; "></div><a href="javascript:;" id="fancybox-left" style="display: none; "><span class="fancy-ico" id="fancybox-left-ico"></span></a><a href="javascript:;" id="fancybox-right" style="display: none; "><span class="fancy-ico" id="fancybox-right-ico"></span></a></div></div>
+<div id="fancybox-wrap" style="width: 1000px; height: auto; top: 30px; left: 120px; display: none; ">
+	<div id="fancybox-outer">
+		<div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div>
+		<div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div>
+		<div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div>
+		<div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div>
+		<div id="fancybox-content" style="border-width: 0px; width: 1000px; height: 1500px; "></div>
+		<a id="fancybox-close" style="display: none; "></a>
+		<div id="fancybox-title" style="display: none; "></div>
+		<a href="javascript:;" id="fancybox-left" style="display: none; ">
+			<span class="fancy-ico" id="fancybox-left-ico"></span>
+		</a>
+		<a href="javascript:;" id="fancybox-right" style="display: none; ">
+			<span class="fancy-ico" id="fancybox-right-ico"></span>
+		</a>
+	</div>
+</div>
 
 
 <!--body-->

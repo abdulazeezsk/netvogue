@@ -35,7 +35,7 @@
 	left: 0;
 	width: 40px;
 	height: 480px;
-	background-image: url('../images/fancybox.png');
+	background-image: url('http://rebeccaminkoff.com/lookbooks/images/fancybox.png');
 }
 
 #fancybox-overlay {
@@ -99,7 +99,7 @@
 	right: -12px;
 	width: 30px;
 	height: 26px;
-	background: transparent url('../images/fancyboxxx.png') ;
+	background: transparent url('http://rebeccaminkoff.com/lookbooks/images/fancyboxxx.png') ;
 	cursor: pointer;
 	z-index: 1110;
 	display: none;
@@ -139,7 +139,7 @@
 	width: 35%;
 	cursor: pointer;
 	outline: none;
-	background: transparent url('../images/blank.gif');
+	background: transparent url('http://rebeccaminkoff.com/lookbooks/images/blank.gif');
 	z-index: 1102;
 	display: none;
 }
@@ -165,12 +165,12 @@
 }
 
 #fancybox-left-ico {
-	background-image: url('../images/fancybox.png');
+	background-image: url('http://rebeccaminkoff.com/lookbooks/images/fancybox.png');/*http://rebeccaminkoff.com/lookbooks/images/fancybox.png*/
 	background-position: -40px -30px;
 }
 
 #fancybox-right-ico {
-	background-image: url('../images/fancybox.png');
+	background-image: url('http://rebeccaminkoff.com/lookbooks/images/fancybox.png');
 	background-position: -40px -60px;
 }
 
@@ -226,7 +226,8 @@
 
 #fancybox-title-over {
 	padding: 10px;
-	background-image: url('../images/fancy_title_over.png');
+	background-image: url('http://rebeccaminkoff.com/lookbooks/images/fancy_title_over.png');
+	
 	display: block;
 }
 
@@ -250,7 +251,7 @@
 
 #fancybox-title-float-left {
 	padding: 0 0 0 15px;
-	background: url('../images/fancybox.png') -40px -90px no-repeat;
+	background: url('http://rebeccaminkoff.com/lookbooks/images/fancybox.png') -40px -90px no-repeat;
 }
 
 #fancybox-title-float-main {
@@ -258,12 +259,12 @@
 	line-height: 29px;
 	font-weight: bold;
 	padding: 0 0 3px 0;
-	background: url('../images/fancybox-x.png') 0px -40px;
+	background: url('http://rebeccaminkoff.com/lookbooks/images/fancybox-x.png') 0px -40px;
 }
 
 #fancybox-title-float-right {
 	padding: 0 0 0 15px;
-	background: url('../images/fancybox.png') -55px -90px no-repeat;
+	background: url('http://rebeccaminkoff.com/lookbooks/images/fancybox.png') -55px -90px no-repeat;
 }
 
 /* IE6 */
