@@ -20,38 +20,41 @@
 			<div class="divi2"></div>
 			<div>
 				<div>
-					<input type="radio" name="Date" value="true" ng-model="isbrandsearch"> Brands
-					<input type="radio" name="Date" value="false" ng-model="isbrandsearch"> Boutiques
+					<input type="radio" name="Date" value="true"
+						ng-model="isbrandsearch"> Brands <input type="radio"
+						name="Date" value="false" ng-model="isbrandsearch">
+					Boutiques
 				</div>
 			</div>
 			<div class="divi2"></div>
 			<div ui-if="isbrandsearch == 'true'">
-				<span class="leftpane_filter_name">BRAND</span> 
-					<input type="text" class="span3"  placeholder="Brand name" ng-model="search.name" ng-change="getsearchResults()"/> 
-				<span class="leftpane_filter_name" >Stockists</span> 
-					<!-- <input type="text" class="span3" placeholder="Stockists" /> -->
-					
-					<select data-placeholder="Select a Stockist" ui-select2="{width:'element'}" ng-model="search.stockists" multiple>
-						<option value="{{st.username}}" ng-repeat="st in usersavailable">{{st.name}}</option>								
-						
-					</select>
-					 
-				<span class="leftpane_filter_name">LOCATION</span> 
-					<input type="text" class="span3" placeholder="Location" ng-model="search.location" ng-change="getsearchResults()"/>
+				<span class="leftpane_filter_name">BRAND</span> <input type="text"
+					class="span3" placeholder="Brand name" ng-model="search.name"
+					ng-change="getsearchResults()" /> <span
+					class="leftpane_filter_name">Stockists</span>
+				<!-- <input type="text" class="span3" placeholder="Stockists" /> -->
+
+				<select data-placeholder="Select a Stockist"
+					ui-select2="{width:'element'}" ng-model="search.stockists" multiple>
+					<option value="{{st.username}}" ng-repeat="st in usersavailable">{{st.name}}</option>
+
+				</select> <span class="leftpane_filter_name">LOCATION</span> <input
+					type="text" class="span3" placeholder="Location"
+					ng-model="search.location" ng-change="getsearchResults()" />
 			</div>
 			<div ui-if="isbrandsearch == 'false'">
-				<span class="leftpane_filter_name">Boutique</span> 
-					<input type="text" class="span3"  placeholder="Boutique name" ng-model="search.name" ng-change="getsearchResults()"/> 
-				<span class="leftpane_filter_name">
-					Brands CARRIED</span> 
-					<!-- <input type="text" class="span3" placeholder="Brands carried" />  -->
-					
-					<select data-placeholder="Select a Brands carried" ui-select2="{width:'element'}" ng-model="search.stockists" multiple>
-						<option value="{{st.username}}" ng-repeat="st in usersavailable">{{st.name}}</option>
-					</select>
-					
-				<span class="leftpane_filter_name">LOCATION</span> 
-					<input type="text" class="span3" placeholder="Location" ng-model="search.location" ng-change="getsearchResults()"/>
+				<span class="leftpane_filter_name">Boutique</span> <input
+					type="text" class="span3" placeholder="Boutique name"
+					ng-model="search.name" ng-change="getsearchResults()" /> <span
+					class="leftpane_filter_name"> Brands CARRIED</span>
+				<!-- <input type="text" class="span3" placeholder="Brands carried" />  -->
+
+				<select data-placeholder="Select a Brands carried"
+					ui-select2="{width:'element'}" ng-model="search.stockists" multiple>
+					<option value="{{st.username}}" ng-repeat="st in usersavailable">{{st.name}}</option>
+				</select> <span class="leftpane_filter_name">LOCATION</span> <input
+					type="text" class="span3" placeholder="Location"
+					ng-model="search.location" ng-change="getsearchResults()" />
 			</div>
 			<div>
 				<span class="leftpane_filter_name">CATEGORY</span>
@@ -71,31 +74,60 @@
 				<div class="divi2 right_pane_underline"></div>
 				<div>
 					<ul class="thumbnails">
-						<li ng-repeat="user in advancedsearch" style="position: relative;margin-top:20px;" >
+						<li ng-repeat="user in advancedsearch"
+							style="position: relative; margin-top: 20px;">
 							<!--  ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize" -->
-							<div class="directory view-directory">
+							<div class="view view-second">
+								<img ng-src="{{user.thumbpic}}" />
+								<div class="mask">
+									<h2>{{user.name}}</h2>
+									<p>Bangalore,India</p>
+									<a ng-href="#/{{user.username}}/profile" class="info">View</a>
+								</div>
+							</div>
+							<div class="directorytitle">
+								<h3>{{user.name}}</h3>
+							</div> <!-- <div class="directory view-directory">
 								<a ng-href="#/{{user.username}}/profile"> <img
 									ng-src="{{user.thumbpic}}" alt=""></a>
 								<div class="content">
-							     	<div class="mask">
-                                    </div>
-                                    <ul class="atr">
-                                        <li><a class="searchlocation" style="text-decoration:none;" >Bangalore,</a></li>
-                                        <li><a class="searchlocation" style="text-decoration:none;" >India</a></li>
-                                    </ul>
+									<div class="mask"></div>
+									<ul class="atr">
+										<li><a class="searchlocation"
+											style="text-decoration: none;">Bangalore,</a></li>
+										<li><a class="searchlocation"
+											style="text-decoration: none;">India</a></li>
+									</ul>
 									<h1>
-									<a ng-href="#/{{user.username}}/profile" class="mask_edit">View</a>
+										<a ng-href="#/{{user.username}}/profile" class="mask_edit">View</a>
 									</h1>
-								</div> 
+								</div>
 								<div class="divi2"></div>
 							</div>
 							<div class="directorytitle">
 								<h3>{{user.name}}</h3>
-							</div>
+							</div> -->
 						</li>
 					</ul>
 				</div>
-			<!-- 	<div class="pagination"
+				<!--  <div class="view view-second">
+					<img src="img/donna_karan_adriana_lima_2.jpg" />
+					<div class="mask">
+						<h2>Matches</h2>
+						<p>Bangalore,India</p>
+						<a href="#" class="info">View</a>
+					</div>
+				</div> -->
+				<!-- <div class="view view-third">
+					<img src="img/donna_karan_adriana_lima_2.jpg" />
+					<div class="mask">
+						<h2>Matches</h2>
+						<p>Bangalore,India</p>
+						<a href="#" class="info">View</a>
+					</div>
+				</div>  -->
+
+				<!-- 	<div class="pagination"
 					style="margin-left: auto; margin-right: auto; width: 35%;">
 					<ul>
 						<li><a ng-disabled="pagenumber == 0"
@@ -113,5 +145,5 @@
 		<!-- right pane -->
 	</div>
 </div>
-	
+
 <!--body-->

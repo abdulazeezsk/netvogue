@@ -77,10 +77,13 @@
 				<ul class="thumbnails">
 					<li ng-repeat="linesheet in linesheets">
 						<div align="center" style="position: relative;">
+						   	<div class="view-linesheet">
+						   	<div class="mask"></div>
 							<a class="product-image"
 								ng-href="#/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}"
 								title="Dumont Coat"> <img ng-src="{{linesheet.gallerypic}}" class="fade_spot"
 								width="220" height="300" alt="Dumont Coat" title="Dumont Coat"></a>
+							</div>
 							<div class="linesheet-edit-delete">
 								<span class="edit-delete"><a ng-click="deletelinesheet(linesheet.galleryid)" title="Delete"><i
 												class="icon-trash icon-black"></i></a><a ng-click="editlinesheet(linesheet.galleryid, linesheet.galleryname, linesheet.category, linesheet.deliverydate)" 

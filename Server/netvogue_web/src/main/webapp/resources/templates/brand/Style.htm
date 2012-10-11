@@ -55,13 +55,13 @@
 		<div>
 			<div class="span4">
 				<ul class="thumbnails">
-					<li class="spanstyle" style="display: inline;"><img
+					<li class="spanstyle" style="display: inline;"><img width="257" height="365"
 						src="{{mainstyle.profilethumbpic}}" alt=""></li>
 				</ul>
 				<div class="moreviews">
 					<a ng-repeat="image in mainstyle.availableImages"
-						ng-click="mainstyle.profilethumbpic = image.thumbnail_url"><img
-						width="85" style="max-height: 113px; margin-bottom: 2px;"
+						ng-click="mainstyle.profilethumbpic = image.thumbnail_url"><img class="thumbnailz"
+						width="85" style="max-height: 113px;"
 						src="{{image.thumbnail_url}}" alt=""></a>
 				</div>
 			</div>
@@ -69,7 +69,7 @@
 			<div class="spanpreview_details" style="height: 400px;">
 				<div>
 					<p class="subHeading">{{mainstyle.stylename}}</p>
-					<p>{{mainstyle.description}}</p>
+					<p style="font: normal 10px Verdana;" >{{mainstyle.description}}</p>
 				</div>
 				<div class="underline"></div>
 				<div class="style_description">
