@@ -233,7 +233,7 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvcollection.getname($routeParams);
-	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
+	    $scope.profilepic		= srvcollection.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvcollection.getgalleryname($routeParams);
 	    $scope.existingfiles	= srvcollection.getphotos($routeParams);
     };
