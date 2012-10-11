@@ -14,6 +14,5 @@ target
 .DS_Store
 .class
 .gitignore
-script.bat
 org.eclipse.core.resources.prefs
 Server/netvogue_web/.settings/org.eclipse.core.resources.prefs
