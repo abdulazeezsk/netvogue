@@ -1,9 +1,9 @@
 <!--body-->
 <div class="container minimum_height">
 	<div class="row">
-	
-	
-	
+
+
+
 		<!-- left pane -->
 		<div class="span3">
 			<h4 class="leftpane_entity_heading">Boutique</h4>
@@ -28,12 +28,12 @@
 			</div>
 		</div>
 		<!-- left pane -->
-		
-		
+
+
 		<!-- right pane -->
 		<div class="span9">
-			
-			
+
+
 			<div>
 				<span class="left rightpane_subHeading"> Print Campaigns </span> <span
 					class="right"> <a ng-href="#{{backButton}}"
@@ -48,40 +48,69 @@
 				<div class="divi2 right_pane_underline"></div>
 			</div>
 
+
 			<div>
-				<ul class="thumbnails">
-					<li ng-repeat="gallery in galleries" style="position: relative;margin-top:20px;">
+				<!-- <ul class="thumbnails">
+					<li ng-repeat="gallery in galleries"
+						style="position: relative; margin-top: 20px;">
 						<div class="galleryview view-firstg">
 							<a ng-href="#/campaign?id={{gallery.galleryid}}"> <img
 								ng-src="{{gallery.gallerypic}}" alt=""></a>
 							<div class="content">
-							
-									<ul class="mask" ng-show="isMyProfile">
-										<li><a ng-click="deletegallery(gallery.galleryid)"
-											title="Delete"><i class="icon-trash icon-white"></i></a></li>
-										<li><a
-											ng-click="editgallery(gallery.galleryid, gallery.galleryname, gallery.gallerydesc)"
-											title="Edit"><i class="icon-edit icon-white"></i> </a></li>
-									</ul>
-									<h1>
-										<a ng-href="#/campaign?id={{gallery.galleryid}}"
-											class="mask_edit">view</a>
-									</h1>
-								
+								<ul class="mask" ng-show="isMyProfile">
+									<li><a ng-click="deletegallery(gallery.galleryid)"
+										title="Delete"><i class="icon-trash icon-white"></i></a></li>
+									<li><a
+										ng-click="editgallery(gallery.galleryid, gallery.galleryname, gallery.gallerydesc)"
+										title="Edit"><i class="icon-edit icon-white"></i> </a></li>
+								</ul>
+								<h1>
+									<a ng-href="#/campaign?id={{gallery.galleryid}}"
+										class="mask_edit">view</a>
+								</h1>
 							</div>
 						</div>
 						<div class="gallerytitle">
-							 <h3>{{gallery.galleryname}}</h3>
+							<h3>{{gallery.galleryname}}</h3>
 						</div>
 					</li>
-				</ul>
+				</ul> -->
+				
+				
+					<ul class="thumbnails">
+						<li ng-repeat="gallery in galleries" style="position: relative;margin-top:20px;" >
+							<!--  ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize" -->
+							<div class="directory view-directory">
+								<a ng-href="#/campaign?id={{gallery.galleryid}}" > <img
+									ng-src="{{gallery.gallerypic}}" alt=""></a>
+								<div class="content">
+							     	<div class="mask">
+                                    </div>
+                                    <ul class="atr">
+                                       <li><a ng-click="deletegallery(gallery.galleryid)"
+										title="Delete"><i class="icon-trash icon-white"></i></a></li>
+									<li><a
+										ng-click="editgallery(gallery.galleryid, gallery.galleryname, gallery.gallerydesc)"
+										title="Edit"><i class="icon-edit icon-white"></i> </a></li>
+							    	</ul>
+									<h1>
+									<a ng-href="#/campaign?id={{gallery.galleryid}}" class="mask_edit">View</a>
+									</h1>
+								</div> 
+								<div class="divi2"></div>
+							</div>
+							<div class="directorytitle">
+								<h3>{{gallery.galleryname}}</h3>
+							</div>
+						</li>
+					</ul>
 			</div>
-			
-			
+
+
 		</div>
 		<!-- right pane -->
-		
-		
+
+
 	</div>
 </div>
 <!--body-->

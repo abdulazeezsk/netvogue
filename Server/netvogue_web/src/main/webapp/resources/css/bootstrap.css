@@ -5621,168 +5621,6 @@ background: url(../img/red-cross.png);
 
 /*Gallery styles Begin ================================================================================= */
 
-.galleryview
-{
-    width: 220px;
-    float: left;
-    overflow: hidden;
-    position: relative;
-    text-align: center;
-    cursor: default;
-    height:150px;
-}
-
-.galleryview .mask, .galleryview .content
-{
-    width: 250px;
-    height: 150px;
-    position: absolute;
-    overflow: hidden;
-    top: 0;
-    left: -25px;
-}
-.galleryview img
-{
-    display: block;
-    position: relative;
-}
-
-.galleryview h1
-{
-    text-transform: uppercase;
-    color: #fff;
-    text-align: center;
-    position: relative;
-    font-size: 12px;
-    text-decoration:underline;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0);
-    margin: -60px -20px 0 0;
-}
-
-.galleryview a.info
-{
-    display: inline-block;
-    text-decoration: none;
-    padding: 7px 14px;
-    background: #000;
-    color: #fff;
-    text-transform: uppercase;
-    -webkit-box-shadow: 0 0 1px #000;
-    -moz-box-shadow: 0 0 1px #000;
-    box-shadow: 0 0 1px #000;
-}
-
-.gallerytitle {
-	width: 220px;
-	margin: 10px 0 0 0;
-	text-align: center;
-	padding: 0 0 10px 0;
-	border-bottom: solid 1px #666666;
-	position: absolute;
-	display: block;
-	top: 154px;
-}
-
-
-.gallerytitle h3 {
-	font: normal 13px Verdana;
-	text-transform: uppercase;
-	position: absolute;
-	display: block;
-	width:100%;
-	top: -10px;
-	cursor: pointer;
-	margin:auto;
-}
-
-.mask ul{
-  display: inline-block;
-  *display: inline;
-  margin-bottom: 0;
-  margin-left: 0;
-  float:right;
-}
-.mask li {
- display: inline;
- float:right;
-padding:0px 7px 0px 0px;
-}
-
-.view-firstg img
-{
-    -webkit-transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-    -ms-transition: all 0.2s linear;
-    transition: all 0.2s linear;
-}
-
-.view-firstg .mask
-{
-    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    opacity: 0;
-    background-color: Black;
-    -webkit-transition: all 0.4s ease-in-out;
-    -moz-transition: all 0.4s ease-in-out;
-    -o-transition: all 0.4s ease-in-out;
-    -ms-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
-}
-
-.view-firstg:hover h1
-{
-    margin-top: 45px;
-}
-.view-firstg:hover h1
-{
-    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    opacity: 1;
-    -webkit-transform: translateY(0px);
-    -moz-transform: translateY(0px);
-    -o-transform: translateY(0px);
-    -ms-transform: translateY(0px);
-    transform: translateY(0px);
-}
-
-.view-firstg a
-{
-   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    opacity: 1;
-    -webkit-transition: all 0.4s ease-in-out;
-    -moz-transition: all 0.4s ease-in-out;
-    -o-transition: all 0.4s ease-in-out;
-    -ms-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
-    color:White;
-}
-
-.view-firstg:hover .mask
-{
-    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    filter: alpha(opacity=50);
-    opacity: 0.5;
-}
-.view-firstg:hover a.info
-{
-    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    opacity: 1;
-    -webkit-transform: translateY(0px);
-    -moz-transform: translateY(0px);
-    -o-transform: translateY(0px);
-    -ms-transform: translateY(0px);
-    transform: translateY(0px);
-}
-
-.header_width
-{
-	width:500px;
-}
-
 
 /* Trending styles Begin ================================================================================= */
 
@@ -6659,6 +6497,201 @@ ul.n-wizard-brand-list {
  }
 
 
+/*press & gallery================================================================================= */
+
+
+ .prs ul{
+  display: inline-block;
+  *display: inline;
+  margin-bottom: 0;
+  margin-left: 0;
+  float:left;
+}
+
+.prs li {
+ display: inline;
+ float:left;
+padding:0px 7px 0px 0px;
+opacity:0;
+}
+
+.press
+{
+    width: 220px;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    cursor: default;
+    height:150px;
+}
+
+.press .mask, .press .content
+{
+    width: 220px;
+    height: 150px;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0px;
+}
+.press img
+{
+    display: block;
+    position: relative;
+}
+
+.press h1
+{
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    font-size: 12px;
+    text-decoration:underline;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0);
+    margin: -60px 0 0 0;
+}
+
+.press a.info
+{
+    display: inline-block;
+    text-decoration: none;
+    padding: 7px 14px;
+    background: #000;
+    color: #fff;
+    text-transform: uppercase;
+    -webkit-box-shadow: 0 0 1px #000;
+    -moz-box-shadow: 0 0 1px #000;
+    box-shadow: 0 0 1px #000;
+}
+
+.presstitle {
+	width: 220px;
+	margin: 10px 0 0 0;
+	text-align: center;
+	padding: 0 0 10px 0;
+	border-bottom: solid 1px #666666;
+	position: absolute;
+	display: block;
+	top: 154px;
+}
+
+
+.presstitle h3 {
+	font: normal 13px Verdana;
+	text-transform: uppercase;
+	position: absolute;
+	display: block;
+	top: -10px;
+	cursor: pointer;
+	width:100%;
+	margin:auto;
+
+}
+
+.view-press img
+{
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+
+.view-press .mask
+{
+    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+    background-color: Black;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+.view-press :hover h1
+{
+    margin-top: 45px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.view-press :hover h1
+{
+    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    -o-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    transform: translateY(0px);
+}
+
+.view-press  a
+{
+   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    color:White;
+}
+
+.view-press :hover .mask
+{
+    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+.view-press :hover a.info
+{
+    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    -o-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    transform: translateY(0px);
+}
+
+.view-press :hover ul
+{
+-ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
+ filter: alpha(opacity=100);
+opacity: 1;
+-webkit-transform: translateY(0px);
+-moz-transform: translateY(0px);
+-o-transform: translateY(0px);
+-ms-transform: translateY(0px);
+transform: translateY(0px);
+display: inline-block;
+*display: inline;
+margin-bottom: 0;
+margin-left: 0;
+float:left;
+}
+.view-press :hover  li {
+  display: inline;
+  padding:0px 7px 0px 0px;
+  opacity:1;
+}
+
+.actionicons
+{
+	font: normal 12px Verdana;
+	font-weight:bold;
+	cursor:default;
+}
+
+
  /* Advanced search ================================================================================= */
  .atr ul{
   display: inline-block;
@@ -6851,6 +6884,7 @@ float:left;
 }
 
 
+
  /* Line sheets,stylesheets & collections ================================================================================= */
 .linesheet-edit-delete
 {
@@ -6875,9 +6909,6 @@ float:left;
 	height:12px;
 	margin-bottom:3px;
 }
-
-
-
 
 .linesheet-deliverydate
 {
@@ -6925,6 +6956,32 @@ float:left;
 	margin-bottom:3px;
 }
 
+
+.collection-edit-delete
+{
+	width:100%;
+	height:12px;
+	margin-bottom:3px;
+}
+
+.collection-designer
+{
+	width:100%;
+	height:12px;
+	margin-bottom:3px;
+}
+
+.collection-season
+{
+	width:100%;
+	height:12px;
+	border-bottom:1px solid #000;
+	margin: 5px 0 3px 0;
+	padding-bottom: 10px;
+}
+
+
+
 .edit-delete
 {
 	font: normal 12px Verdana;
@@ -6968,7 +7025,7 @@ float:left;
 
 .designer
 {
-	font: normal 12px Verdana;
+	font: normal 12px helvetica,verdana, sans-serif;
 	text-transform: uppercase;
 	font-weight:bold;
 	position: absolute;

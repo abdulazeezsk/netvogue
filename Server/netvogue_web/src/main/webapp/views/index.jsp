@@ -11,7 +11,8 @@
     <link href="css/select2.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" type="text/css" />
     <link href="css/style.css" rel="stylesheet" type="text/css" />
- 
+ 	<link href="css/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" />
+    <link href="css/elastislide.css" rel="stylesheet" type="text/css" />
     
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="css/jquery.tree.css" />
@@ -42,6 +43,9 @@
     <script src="lib/jquery/jquery.progressbar.js" 	type="text/javascript"></script>
    <script src="lib/jquery/jquery.masonry.js" 	type="text/javascript"></script>
    <script src="lib/jquery/jquery.infinitescroll.min.js" 	type="text/javascript"></script>
+   <script src="lib/jquery/jquery.fancybox-1.3.4.pack.js" 	type="text/javascript"></script>
+   <script src="lib/jquery/jquery.elastislide.js" 	type="text/javascript"></script>
+   
     <script src="lib/angular/angular.js" 			type="text/javascript"></script>
     <script src="lib/angular/angular-ui.js" 		type="text/javascript"></script>
     <script src="lib/bootstrap/bootstrap-navlist.js" type="text/javascript"></script>

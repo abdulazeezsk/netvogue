@@ -48,7 +48,7 @@
 				<span class="right" >
 				<a data-toggle="modal"	href="#CreateCollection" class="rightpane_add_btn">create collection</a></span>
 				<div class="divi2 right_pane_underline"></div>
-				<ul class="thumbnails">
+				<!-- <ul class="thumbnails">
 					<li ng-repeat="collection in collections" style="position: relative;">
 						<div class="view view-first">
 							<a ng-href="#/collection?id={{collection.galleryid}}"> <img
@@ -69,12 +69,39 @@
 							<div class="divi2"></div>
 						</div>
 						<div class="campaigntitle">
-							<!--  <h3>
-                                    {{collection.collectionseason}}</h3>-->
+							 <h3>
+                                    {{collection.collectionseason}}</h3>
 							<h3>{{collection.brandname}}</h3>
 						</div>
 					</li>
+				</ul> -->
+				
+				<ul class="thumbnails">
+					<li ng-repeat="collection in collections">
+						<div align="center" style="position: relative;">
+							<a class="product-image"
+								ng-href="#/collection?id={{collection.galleryid}}" title="">
+								<img ng-src="{{collection.gallerypic}}"  class="fade_spot"
+								width="220" height="300" alt="Dumont Coat" title="Dumont Coat">
+							</a>
+							<div class="stylesheet-edit-delete">
+								<span class="edit-delete"><a
+									ng-click="deletecollection(collection.galleryid)" 
+									title="Delete"><i class="icon-trash icon-black"></i></a><a
+									ng-click="editgallery(collection.galleryid, collection.galleryname, collection.gallerydesc, collection.category)"
+									title="Edit"><i class="icon-edit icon-black"></i></a></span>
+							</div>
+							<div class="collection-designer">
+								<span class="designer">Rebecca Minkoff</span>
+							</div>
+							<div class="collection-season">
+								<span class="season">{{collection.collectionseason}}</span>
+							</div>
+						</div>
+					</li>
 				</ul>
+				
+				
 			</div>
 		</div>
 		<!-- right pane -->
