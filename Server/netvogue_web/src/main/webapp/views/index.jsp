@@ -49,6 +49,7 @@
     <script src="lib/angular/angular.js" 			type="text/javascript"></script>
     <script src="lib/angular/angular-ui.js" 		type="text/javascript"></script>
     <script src="lib/bootstrap/bootstrap-navlist.js" type="text/javascript"></script>
+    <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
     <div style="display: none;">
     	<div id="firsttimelogin">${firsttimelogin}</div>
     	<div id="isbrand">${isbrand}</div>

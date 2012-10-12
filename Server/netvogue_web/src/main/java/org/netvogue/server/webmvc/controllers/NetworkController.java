@@ -18,6 +18,7 @@ import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.Network;
 import org.netvogue.server.webmvc.domain.Networks;
+import org.netvogue.server.webmvc.pusher.PusherChannel;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -127,9 +128,16 @@ public class NetworkController {
 		
 		User user = userDetailsService.getUserFromSession();
 		Notification newNotification = null;
-		if(ResultStatus.SUCCESS == networkService.CreateNetwork(user, profileid, newNotification, error)) {  
+		if(ResultStatus.SUCCESS == networkService.CreateNetwork(user, profileid, newNotification, error)) {
+			//Add notification to pubsub node here //Azeez
+			PusherChannel pusher= new PusherChannel(profileid);
+			try{
+			pusher.pushEvent("notification", "You got new message");
+			} catch (Exception e) {
+				System.out.println("Error in pusher" + error);
+				return response;
+			}
 			response.setStatus(true);
-			//Add notification to pubsub node here //Azeez 
 		}
 		else
 			response.setError(error);
