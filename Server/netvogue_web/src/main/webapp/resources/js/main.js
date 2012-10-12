@@ -11,7 +11,7 @@ function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search, m
 		$scope.notifications 		= mynotifications.getunreadnotifications();
 		
 		currentvisitedprofile.setmyprofileid($scope.myprofileid);
-		//createpusherchannel($scope.myprofileid);
+		createpusherchannel($scope.myprofileid);
 		//createpubnubchannel($scope.myprofileid);
 	};
 	
@@ -45,7 +45,7 @@ function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search, m
 	};
 	var createpusherchannel = function(id) {
 		//Register pusher to receive notifications
-		var pusher = new Pusher('29419'); // Replace with your app key
+		var pusher = new Pusher('15b40a25fa57725931ad'); // Replace with your app key
 		var channel = pusher.subscribe(id);
 		channel.bind('notification', function(data) {
 		      alert(data);

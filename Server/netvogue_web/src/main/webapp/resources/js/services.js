@@ -218,7 +218,7 @@ angular.module('netVogue.services', []).
                   "stylesheets": "#/stylesheets",
                   "collections": "#/collections"
               };
-              if (currentProfileID != "") {
+              if (!(currentProfileID == myprofileID || currentProfileID == "")) {
                   for (var link in leftpanellinks) {
                       leftpanellinks[link] = "#/" + currentProfileID + "/" + link;
                   }
