@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
@@ -16,8 +17,10 @@ import org.netvogue.server.webmvc.domain.ContactInfo;
 import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
+import org.netvogue.server.webmvc.domain.Notification;
 import org.netvogue.server.webmvc.domain.StatusUpdate;
 import org.netvogue.server.webmvc.domain.StatusUpdates;
+import org.netvogue.server.webmvc.pusher.PusherChannel;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -118,24 +121,35 @@ public class StatusUpdateController {
 	@RequestMapping(value="statusupdate/add", method=RequestMethod.POST)
 	public @ResponseBody StatusUpdate addStatusUpdate(@RequestBody String status) {
 		System.out.println("Add Status update: " + status);
+		StatusUpdate update = null;
 		StringBuffer error = new StringBuffer();
 		
 		User user = userDetailsService.getUserFromSession();
 		JsonResponse response = new JsonResponse();
 		
 		org.netvogue.server.neo4japi.domain.StatusUpdate newUpdate = statusUpdateService.newStatusUpdate(user.getUsername(), status, error);
-		if(null != newUpdate)   
+		if(null != newUpdate) {
+			update = conversionService.convert(newUpdate, StatusUpdate.class);
+			update.setName(user.getName());
+			update.setProfileid(user.getUsername());
+			String profilepic = user.getProfilePicLink();
+			if(null != profilepic) {
+				String topurl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PTop);
+				update.setLeft_url(topurl);
+			}
+			
+			/*ObjectMapper mapper = new ObjectMapper();
+			PusherChannel pusher= new PusherChannel(profileid);
+			try{
+				String notificationToSent = mapper.writeValueAsString(update);
+				pusher.pushEvent("statusupdate", notificationToSent);
+			} catch (Exception e) {
+				System.out.println("Error in pusher" + error);
+				return update;
+			}*/
 			response.setStatus(true);
-		else
+		} else {
 			response.setError(error.toString());
-		
-		StatusUpdate update = conversionService.convert(newUpdate, StatusUpdate.class);
-		update.setName(user.getName());
-		update.setProfileid(user.getUsername());
-		String profilepic = user.getProfilePicLink();
-		if(null != profilepic) {
-			String topurl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PTop);
-			update.setLeft_url(topurl);
 		}
 		
 		System.out.println("added status update" + error);

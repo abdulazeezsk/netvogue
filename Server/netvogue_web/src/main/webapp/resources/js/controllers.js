@@ -190,6 +190,8 @@ function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisi
 		$scope.contactinfo		= srvtimeline.getcontactinfo(routeparams);
 		$scope.newsfeeds 		= srvtimeline.getupdates(routeparams);
 		$scope.getcontactinfo 	= addresstostring($scope.contactinfo);
+		
+		createpusherchannel();
 	};
 	
 	$scope.getupdates = function(routeparams) {
@@ -252,6 +254,21 @@ function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisi
 		});
 	};
 
+	//for new updates
+	var createpusherchannel = function() {
+		var id;
+		if (!angular.isUndefined($routeParams.profileid)) {
+			id = $routeParams.profileid;
+		} else {
+			id = $scope.$parent.myprofileid;
+		}
+		
+		//Register pusher to receive notifications
+		var channel = $scope.$parent.pusher.subscribe(id);
+		channel.bind('statusupdate', function(data) {
+		      $scope.newsfeeds.push(data);
+		 });
+	};
 	$scope.trending = trending.getTrending();
 }
 

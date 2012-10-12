@@ -45,8 +45,8 @@ function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search, m
 	};
 	var createpusherchannel = function(id) {
 		//Register pusher to receive notifications
-		var pusher = new Pusher('15b40a25fa57725931ad'); // Replace with your app key
-		var channel = pusher.subscribe(id);
+		$scope.pusher = new Pusher('15b40a25fa57725931ad'); // Replace with your app key
+		var channel = $scope.pusher.subscribe(id);
 		channel.bind('notification', function(data) {
 		      alert(data);
 		      $scope.unreadnotifications++ ;
