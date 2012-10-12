@@ -49,8 +49,8 @@ function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search, m
 		var channel = pusher.subscribe(id);
 		channel.bind('notification', function(data) {
 		      alert(data);
-		      //$scope.unreadnotifications++ ;
-		      //$scope.unreadnotifications.push(data);
+		      $scope.unreadnotifications++ ;
+		      $scope.notifications.push(data);
 		 });
 	};
 	
