@@ -19,62 +19,39 @@
 			<div class="leftpane_subheading">FILTERS</div>
 			<div class="divi2"></div>
 			<div class="leftpane_filter_name">
-				<span class="leftpane_filter_name">Photo name</span> <input ng-model="searchphotoname"
-					type="text" placeholder="Photo name" class="span3" ng-change="getphotos()"/>
+				<span class="leftpane_filter_name">Photo name</span> <input
+					ng-model="searchphotoname" type="text" placeholder="Photo name"
+					class="span3" ng-change="getphotos()" />
 			</div>
 		</div>
 		<!-- left pane -->
+		
 		<!-- right pane-->
 		<div class="span9">
 			<div>
-				<span class="left heading_btn header_width"> <a href="#/gallery">Gallery</a>
-					<span class="divider">/</span> <span><a ng-href="#/photos?id={{galleryid}}">{{galleryname}}</a>
-				</span></span>
-
-				<div class="divi2 right_pane_underline"></div>
-				<span class="left right_pane_info"> Find Photos using the
-					filters </span> <span class="right"> <a ng-href="#/addgallery?id={{galleryid}}"
-					class="rightpane_add_btn">Organise</a>
-				</span>
-				<div class="divi2 right_pane_underline"></div>
+			<!-- header pane -->
+				<div style="border-bottom: 1px solid black; position: relative; top: -2px;">
+					<span class="left ywbreadcrumb header_width"> <a class="nonactive"
+						href="#/gallery">gallery</a> <span class="ywdivider">/</span> <span>
+						photos <!-- ({{galleryname}}) --> </span></span>
+				</div>
+				<div style="border-bottom: 1px solid black;">
+					<span class="left right_pane_info"> Find Photos using the
+						filters </span> <span class="right"> <a
+						ng-href="#/addgallery?id={{galleryid}}" class="rightpane_add_btn">Organize</a>
+					</span>
+				</div>
+				<!-- header pane -->
+				
+				<!-- data masonry pane -->
+				<div masonry photo-gallery="photogallery" gallery-name="galleryname">
+				</div>
+				<!-- data masonry pane -->
 			</div>
-			<div masonry photo-gallery="photogallery" gallery-name="galleryname">
-			</div> 
 			
-<!-- <div id="container" class="clearfix">
-	<div class="box  col2" ng-repeat="photo in photogallery">
-		<a ng-href="#/viewphotos?id={{photo.uniqueid}}&&galleryid={{galleryid}}"
-			title="{{photo.label}}"><img ng-src="{{photo.piclink}}" class="fade_spot" /></a>
-		<h3>
-			<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;">{{galleryname}}</span>
-		</h3>
-		<h3>
-			<span style="color:#20ACB8;font-weight:normal;font-size:17px;">{{photo.label}}</span>
-		</h3>
-		<p>date</p>
-		<p>{{photo.seasonname}}</p>
-	</div>
-</div> -->
-			
-		<!-- 	<div>
-					<ul class="thumbnails">
-						<li ng-repeat="photo in photogallery" style="position: relative;margin-top:20px;">
-							<div class="galleryview galleryview-firstglry">
-								<a ng-href="#/viewphotos?id={{photo.uniqueid}}&&galleryid={{galleryid}}"> <img
-									ng-src="{{photo.piclink}}" class="fade_spot" alt=""></a>
-								<div class="divi2"></div>
-							</div>
-							<div class="gallerytitle">
-								<h3>{{photo.label}}</h3>
-							</div>
-						</li>
-					</ul>
-			</div> -->
-
 		</div>
 		<!-- right pane -->
 	</div>
-
-</div>
-
 <!--body-->
+
+	<!--body-->

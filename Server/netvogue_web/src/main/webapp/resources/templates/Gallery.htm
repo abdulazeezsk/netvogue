@@ -20,25 +20,42 @@
 			<div class="divi2"></div>
 			<div class="leftpane_filter_name">
 				<span class="leftpane_filter_name">GALLERY NAME</span> <input
-					type="text" ng-model="searchgalleryname" placeholder="Gallery name" class="span3" ng-change="getgalleries()"/>
+					type="text" ng-model="searchgalleryname" placeholder="Gallery name"
+					class="span3" ng-change="getgalleries()" />
 			</div>
 		</div>
 		<!-- left pane -->
 		<!-- right pane-->
 		<div class="span9">
-			<div>
-				<span class="left heading_btn">Gallery
-				</span> <span class="right"> <a ng-href="#{{backButton}}"
-					class="rightpane_back_btn">Back</a></span>
-				<div class="divi2 right_pane_underline"></div>
+		
+		
+			 <div style="border-bottom:1px solid black;position:relative;top:-2px;">
+				<span class="left rightpane_subHeading">Gallery </span> <span class="right">
+					<a ng-href="#{{backButton}}" class="rightpane_back_btn">Back</a>
+				</span>
+			</div>
+			<div style="border-bottom:1px solid black;">
 				<span class="left right_pane_info"> Find galleries using the
 					filters </span> <span class="right"> <a data-toggle="modal"
 					href="#CreateGallery" class="rightpane_add_btn">create gallery</a>
 				</span>
-				<div class="divi2 right_pane_underline"></div>
 			</div>
+			<!-- 
+			<div class="headerspanline">
+				<span class="left rightpane_subHeading"> Print Campaigns </span> <span
+					class="right"> <a ng-href="#{{backButton}}"
+					class="rightpane_back_btn"> Back</a>
+				</span>
+			</div>
+			<div style="border-bottom:1px solid black;">
+				<span class="left right_pane_info"> Find print campaigns
+					using the filters </span> <span class="right"> <a
+					data-toggle="modal" href="#CreatePrintcampaign"
+					class="rightpane_add_btn">create print campaign</a>
+				</span>
+			</div> -->
 			<div>
-				<!-- 	<ul class="thumbnails">
+				<!-- 	<ul class="thumbnails">position:relative;top:-2px;
 						<li ng-repeat="gallery in galleries" style="position: relative;margin-top:20px;">
 							<div class="galleryview view-firstg">
 								<a ng-href="#/photos?id={{gallery.galleryid}}"> <img
@@ -61,8 +78,8 @@
 							</div>
 						</li>
 					</ul> -->
-					
-					
+
+
 				<!-- <ul class="thumbnails">
 					<li ng-repeat="gallery in galleries" >
 						<div align="center" style="position: relative;">
@@ -84,35 +101,36 @@
 						</div>
 					</li>
 				</ul> -->
-				
-				
+
+
 				<ul class="thumbnails">
-						<li ng-repeat="gallery in galleries" style="position: relative;margin-top:20px;" >
-							<!--  ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize" -->
-							<div class="press view-press">
-								<a  ng-href="#/photos?id={{gallery.galleryid}}"  > <img
-									ng-src="{{gallery.gallerypic}}" alt=""></a>
-								<div class="content">
-							     	<div class="mask">
-                                    </div>
-                                    <ul class="prs">
-                                       <li><a ng-click="deletegallery(gallery.galleryid)"
+					<li ng-repeat="gallery in galleries"
+						style="position: relative; margin-top: 20px;">
+						<!--  ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize" -->
+						<div class="press view-press">
+							<a ng-href="#/photos?id={{gallery.galleryid}}"> <img
+								ng-src="{{gallery.gallerypic}}" alt=""></a>
+							<div class="content">
+								<div class="mask"></div>
+								<ul class="prs">
+									<li><a ng-click="deletegallery(gallery.galleryid)"
 										title="Delete"><i class="icon-trash icon-white"></i></a></li>
 									<li><a
 										ng-click="editgallery(gallery.galleryid, gallery.galleryname, gallery.gallerydesc)"
 										title="Edit"><i class="icon-edit icon-white"></i> </a></li>
-							    	</ul>
-									<h1>
-									<a ng-href="#/photos?id={{gallery.galleryid}}"  class="mask_edit">View</a>
-									</h1>
-								</div> 
-								<div class="divi2"></div>
+								</ul>
+								<h1>
+									<a ng-href="#/photos?id={{gallery.galleryid}}"
+										class="mask_edit">View</a>
+								</h1>
 							</div>
-							<div class="presstitle">
-								<h3>{{gallery.galleryname}}</h3>
-							</div>
-						</li>
-					</ul>
+							<div class="divi2"></div>
+						</div>
+						<div class="presstitle">
+							<h3>{{gallery.galleryname}}</h3>
+						</div>
+					</li>
+				</ul>
 			</div>
 		</div>
 		<!-- right pane -->
@@ -128,32 +146,35 @@
 	</div>
 	<div class="modal-body">
 		<div>
-			<input type="text" class="span4" ng-model="galleryname" placeholder="Gallery name" />
+			<input type="text" class="span4" ng-model="galleryname"
+				placeholder="Gallery name" />
 		</div>
-		</div>
+	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" data-dismiss="modal" ng-click="creategallery()">
-			Create gallery</a>
+			class="btn btn-primary" data-dismiss="modal"
+			ng-click="creategallery()"> Create gallery</a>
 	</div>
 </div>
 <!-- modal -->
 
 <!-- modal -->
-<div ui-modal class="modal  hide" ng-model="showEditGallery" id="EditGallery">
+<div ui-modal class="modal  hide" ng-model="showEditGallery"
+	id="EditGallery">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal"></button>
 		<h4 class="subHeading_no_underline">Edit Gallery</h4>
 	</div>
 	<div class="modal-body">
 		<div>
-			<input type="text" class="span4" ng-model="editgalleryname" placeholder="Gallery name" />
+			<input type="text" class="span4" ng-model="editgalleryname"
+				placeholder="Gallery name" />
 		</div>
-		</div>
+	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" ng-click="updategallery()">
-			Update gallery</a>
+			class="btn btn-primary" ng-click="updategallery()"> Update
+			gallery</a>
 	</div>
 </div>
 <!-- modal -->

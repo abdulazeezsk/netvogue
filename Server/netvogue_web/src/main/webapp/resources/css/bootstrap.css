@@ -4926,6 +4926,34 @@ width:600px;
 	font: normal 11px  Helvetica, Arial, sans-serif;
 }
 
+.ywbreadcrumb{
+	color: #000;
+	font: normal 12px  Helvetica, Arial, sans-serif;;
+	/* text-transform:capitalize; */
+	text-transform: uppercase;
+}
+
+.ywbreadcrumb .nonactive{
+	/* color: #08C; */
+	color: #20ACB8
+}
+
+.ywdivider {
+	padding: 0 5px;
+	color: #999999;
+}
+
+a.nonactive:hover
+{
+color: #000;
+text-decoration: none;
+}
+
+a.nodeco:hover
+{
+text-decoration: none;
+}
+
 .heading_btn{
 	color: black;
 	font: normal 14px  Helvetica, Arial, sans-serif;
@@ -4936,6 +4964,26 @@ width:600px;
 	text-decoration: none;
 }
 
+.Intcap
+{
+text-transform:capitalize;	
+}
+
+.headerspanline
+{
+width:100%;	
+border-bottom:1px solid black;
+position:relative;
+top:-2px;
+float:left;
+}
+
+.subheaderspanline
+{
+float:left;	
+width:100%;	
+border-bottom:1px solid black;	
+}
 /*  Addvertizement feed ============================================================= */
 
 
@@ -7368,10 +7416,6 @@ a.thumbnailz:hover {
 	text-transform:uppercase; 
 }
 
-.Intcap
-{
-text-transform:capitalize;	
-}
 
 
 

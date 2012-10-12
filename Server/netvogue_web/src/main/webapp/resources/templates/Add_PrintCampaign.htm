@@ -20,7 +20,7 @@
 		<!-- left pane -->
 		<!-- right pane -->
 		<div class="span9">
-			<div>
+			<!-- <div>
 				<span class="left rightpane_subHeading">Add Print Campaign </span>
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info" style="width:75%"> <a href="#/printcampaign">Print
@@ -32,13 +32,37 @@
                 			onchange="angular.element(this).scope().addfiles(this)" >
 				</span>
 				<div class="divi2 right_pane_underline"></div>
+			</div> -->
+			
+			<!-- header-->
+			<div>
+				<div
+					style="border-bottom: 1px solid black; position: relative; top: -2px;">
+					<span class="left rightpane_subHeading">organize </span> <span
+						class="right"> <a href="#/campaign?id={{galleryid}}"
+						class="rightpane_back_btn nodeco">Back</a>
+					</span>
+				</div>
+				<div style="border-bottom: 1px solid black;">
+					<span class="left right_pane_info">Find Print Campaigns
+					using the filters</span> 
+						<span class="right fileinput-button"> <span
+					class="rightpane_add_btn">Upload Print Campaigns</span> 
+					<input id="fileupload" type="file" name="files[]" multiple data-url="printcampaign/addphotos"
+                			onchange="angular.element(this).scope().addfiles(this)" >
+				</span>
+				</div>
 			</div>
+			<!-- header-->
+			
+			<!-- data masonry pane -->
 			<div fileupload-plugin ng-model="existingfiles" new-files="newfiles" 
             			min-height="150" max-height="150" gallery-id="galleryid" 
             			update-data="updatephoto(label, seasonname, photoid)"
             			delete-data="deletephoto(photoid)" files-added="filesadded">
-            </div>		
-		<!-- right pane -->
+            </div>	
+            <!-- data masonry pane -->
 	</div>
+	<!-- right pane -->
 </div>
 <!--body-->
