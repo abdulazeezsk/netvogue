@@ -382,7 +382,7 @@ angular.module('netVogue.services', []).
     	  },
     	  isbrand: function(routeparams) {
     	        if (angular.isUndefined(routeparams.profileid)) {
-    	            return mynetwork.isbrand();
+    	            return mygallery.isbrand();
     	        } else {
     	        	if(angular.isUndefined(galleries.isbrand))
     	        		return false;
