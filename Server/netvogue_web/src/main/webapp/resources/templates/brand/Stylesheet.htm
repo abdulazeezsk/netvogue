@@ -33,7 +33,7 @@
 
 		<!-- right pane -->
 		<div class="span9">
-			<div>
+			<!-- <div>
 				<span class="left heading_btn"> <a ng-href="#/stylesheets">Style sheets</a>
 					<span class="divider">/</span>
 					<span><a
@@ -46,10 +46,22 @@
 					class="rightpane_add_btn">Organise</a>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
-			</div>
+			</div> -->
 
-
-
+				<!-- header pane -->
+				<div style="border-bottom: 1px solid black; position: relative; top: -2px;">
+					<span class="left ywbreadcrumb header_width"> <a class="nonactive"
+						ng-href="#/stylesheets">Stylesheets</a> <span class="ywdivider">/</span> <span>
+						Rebecca minkoff {{stylesheetname}}</span></span>
+				</div>
+				<div style="border-bottom: 1px solid black;">
+					<span class="left right_pane_info"> Find styles using the
+					filters </span> <span class="right"> <a
+						ng-href="#/addstyle?id={{stylesheetid}}&&cat={{category}}" class="rightpane_add_btn">Organize</a>
+					</span>
+				</div>
+				<!-- header pane -->
+					<div class="divi2"></div>
 			<div>
 				<!-- <ul class="thumbnails">
 					<li ng-repeat="style in styles" style="position: relative;">
