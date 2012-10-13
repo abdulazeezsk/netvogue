@@ -103,6 +103,34 @@ angular.module('netVogue.directives', []).
 	        restrict: 'A',
 	        link: linkFn
 	    };	    
+ }).directive('elastislide', function() {
+	    var linkFn;
+	    linkFn = function(scope, element, attrs) {
+	    	scope.$watch('photogallery', function(newValue, oldValue) {
+	    		if(angular.isUndefined(newValue)) {
+    				return;
+    			}
+	    		angular.element(element).find('#lookbookS').elastislide({
+					speed       : 750,						
+					imageW 		: 320,
+					margin		: 5,
+					border		: 3,
+					minItems    : 3,
+				});
+	    		angular.element(element).find("a#single_image").fancybox({
+					overlayOpacity: 0,
+					padding: 0,
+					showCloseButton: true,
+					autoScale: false,
+					hideOnContentClick: true,
+					margin: 50
+				});
+	    	});
+	    };
+	    return {
+	        restrict: 'A',
+	        link: linkFn
+	    };	    
  }).directive('editText', function () {        
 	    return {
 	        restrict:'A',
