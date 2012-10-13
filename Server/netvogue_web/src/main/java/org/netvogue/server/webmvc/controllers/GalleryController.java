@@ -10,6 +10,7 @@ import java.util.Set;
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.UploadManager;
 import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.Photo;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.GalleryService;
@@ -63,6 +64,7 @@ public class GalleryController {
 		}
 		
 		galleries.setName(user.getName());
+		galleries.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
 		galleries.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
 		Set<Gallery> galleriesTemp = new LinkedHashSet<Gallery>();
 		Iterable<org.netvogue.server.neo4japi.domain.Gallery> dbGalleries;
@@ -108,6 +110,7 @@ public class GalleryController {
 		}
 		
 		photos.setName(user.getName());
+		photos.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
 		photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
 		org.netvogue.server.neo4japi.domain.Gallery gTemp = galleryService.GetGallery(galleryid);
 		if(null == gTemp) {

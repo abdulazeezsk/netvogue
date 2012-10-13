@@ -295,6 +295,7 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, s
 	var ajaxrequestcall	 = "gallery";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleries		= srvgallery.getgalleries($routeParams);
     };
@@ -366,6 +367,7 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, srvgallery, m
 	$scope.searchphotoname = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.photogallery		= srvgallery.getphotos($routeParams);
@@ -410,6 +412,7 @@ function MyCtrlViewPhotos($scope, $routeParams, currentvisitedprofile, srvgaller
 	}
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.viewPhotos		= srvgallery.getphotos($routeParams);
@@ -449,6 +452,7 @@ function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprof
 	var ajaxrequestcall	 = "printcampaign";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleries		= srvgallery.getgalleries($routeParams);
     };
@@ -518,6 +522,7 @@ function MyCtrlCampaign($scope, $routeParams, currentvisitedprofile, srvgallery,
 	$scope.searchphotoname = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.photogallery		= srvgallery.getphotos($routeParams);
@@ -562,6 +567,7 @@ function MyCtrlviewPrintcampaign($scope, $routeParams, currentvisitedprofile, sr
 	var ajaxrequestcall	 = "printcampaign";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.viewPhotos		= srvgallery.getphotos($routeParams);
@@ -617,6 +623,7 @@ function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile
 	var ajaxrequestcall	 = "editorial";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleries		= srvgallery.getgalleries($routeParams);
     };
@@ -686,6 +693,7 @@ function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile, srvgallery
 	$scope.searchphotoname = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.photogallery		= srvgallery.getphotos($routeParams);
@@ -732,6 +740,7 @@ function MyCtrlViewNewsLetters($scope, $routeParams, currentvisitedprofile, srvg
 	var ajaxrequestcall	 = "editorial";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.viewPhotos		= srvgallery.getphotos($routeParams);
