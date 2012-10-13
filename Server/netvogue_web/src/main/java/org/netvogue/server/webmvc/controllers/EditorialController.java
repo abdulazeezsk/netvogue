@@ -10,6 +10,7 @@ import java.util.Set;
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.UploadManager;
 import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.EditorialPhoto;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.EditorialService;
@@ -64,6 +65,7 @@ public class EditorialController {
 		}
 		
 		campaigns.setName(user.getName());
+		campaigns.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
 		campaigns.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
 		Set<Editorial> campaignTemp = new LinkedHashSet<Editorial>();
 		Iterable<org.netvogue.server.neo4japi.domain.Editorial> dbCampaigns;
@@ -108,6 +110,7 @@ public class EditorialController {
 		}
 		
 		photos.setName(user.getName());
+		photos.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
 		photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
 		photos.setGalleryname(editorialService.getEditorial(galleryid).getEditorialname());
 		Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();

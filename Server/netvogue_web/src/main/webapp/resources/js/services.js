@@ -242,6 +242,7 @@ angular.module('netVogue.services', []).
       };
 }).service('mygallery', function ($http) {
 		var name;
+		var isbrand;
 		var profilepic;
 		var galleryname;
 		var galleries = [];
@@ -252,6 +253,7 @@ angular.module('netVogue.services', []).
 	    	},
 	    	setgalleries: function(galleriestemp) {
 	    		name = galleriestemp.name;
+	    		isbrand = galleriestemp.isbrand;
 	    		profilepic = galleriestemp.profilepic;
 	    		angular.copy(galleriestemp.galleries, galleries);
 	    	},
@@ -262,6 +264,11 @@ angular.module('netVogue.services', []).
 	    	},
 	    	setname: function(name) {
 	    		this.name = name;
+	    	},
+	    	isbrand: function() {
+	    		if(angular.isUndefined(isbrand))
+	        		return false;
+	    		return isbrand;
 	    	},
 	    	getprofilepic: function() {
 	    		if(angular.isUndefined(profilepic))
@@ -372,6 +379,15 @@ angular.module('netVogue.services', []).
                   });*/
               }
               return result;
+    	  },
+    	  isbrand: function(routeparams) {
+    	        if (angular.isUndefined(routeparams.profileid)) {
+    	            return mynetwork.isbrand();
+    	        } else {
+    	        	if(angular.isUndefined(galleries.isbrand))
+    	        		return false;
+    	    		return updates.isbrand;
+    	        }
     	  },
     	  getprofilepic: function(routeparams) {
     		  var result;
