@@ -5149,6 +5149,11 @@ border-bottom:1px solid black;
 width: 267px;
 height: 356px;
 }
+.swatches
+{
+width: 110px;
+height: 356px;	
+}
  
 
 
@@ -7365,6 +7370,33 @@ a.thumbnailz:hover {
 	box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 }
 
+.colors {
+margin: 5px 0;
+}
+
+.tooltip {
+cursor: pointer;
+}
+
+/* @font-face
+{
+	font-family:ÔWebRupeeÕ;
+	src:url(ÔWebRupee.V2.0.eotÕ);
+	src:local(ÔWebRupeeÕ), url(ÔWebRupee.V2.0.ttfÕ)format(ÔtruetypeÕ),url(ÔWebRupee.V2.0.woffÕ)format(ÔwoffÕ),url(ÔWebRupee.V2.0.svgÕ)format(ÔsvgÕ);
+	font-weight:normal;
+	font-style:normal;
+}
+.WebRupee
+{
+font-family:WebRupee;
+} */
+
+/* html>body.WebRupee{margin-right:2px;}
+html>body.WebRupee{*margin-right:0;}
+#container{width:500px;margin:50pxauto;}
+
+user agent stylesheet
+ */
 .breadcrumbyw ul {
 	width:700px;
 }

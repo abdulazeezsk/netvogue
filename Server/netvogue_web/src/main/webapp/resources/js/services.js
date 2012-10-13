@@ -1517,7 +1517,7 @@ angular.module('netVogue.services', []).
   	  },
   	  isbrand: function(routeparams) {
         if (angular.isUndefined(routeparams.profileid)) {
-            return mynetwork.isbrand();
+            return mytimeline.isbrand();
         } else {
         	if(angular.isUndefined(updates.isbrand))
         		return false;

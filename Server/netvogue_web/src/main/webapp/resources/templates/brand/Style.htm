@@ -49,34 +49,35 @@
 					class="rightpane_back_btn">Back</a></span>
 				<div class="divi2 right_pane_underline"></div>
 			</div> -->
-			
+
 			<!--    header -->
-			<div style="border-bottom: 1px solid black; position: relative; top: -2px;margin-bottom:10px;">
+			<div
+				style="border-bottom: 1px solid black; position: relative; top: -2px; margin-bottom: 10px;">
 				<span class="left ywbreadcrumb header_width"> <a
 					class="nonactive"
-					ng-href="#/styles?id={{linesheetid}}&&cat={{category}}"> Rebecca
-						minkoff {{linesheetname}}</a>
-				</span>
-				<span class="right">
-					<a ng-href="#{{backButton}}" class="rightpane_back_btn">Back</a>
+					ng-href="#/styles?id={{linesheetid}}&&cat={{category}}">
+						Rebecca minkoff {{linesheetname}}</a>
+				</span> <span class="right"> <a ng-href="#{{backButton}}"
+					class="rightpane_back_btn">Back</a>
 				</span>
 			</div>
-			 <!--    header -->
+			<!--    header -->
 		</div>
-			
+
 
 		<!-- </div> -->
 		<!-- right pane data -->
 		<div>
 			<div class="span4">
 				<ul class="thumbnails">
-					<li class="spanstyle" style="display: inline;"><img width="257" height="365"
-						src="{{mainstyle.profilethumbpic}}" alt=""></li>
+					<li class="spanstyle" style="display: inline;"><img
+						width="257" height="365" src="{{mainstyle.profilethumbpic}}"
+						alt=""></li>
 				</ul>
 				<div class="moreviews">
 					<a ng-repeat="image in mainstyle.availableImages"
-						ng-click="mainstyle.profilethumbpic = image.thumbnail_url"><img class="thumbnailz"
-						width="85" style="max-height: 113px;"
+						ng-click="mainstyle.profilethumbpic = image.thumbnail_url"><img
+						class="thumbnailz" width="85" style="max-height: 113px;"
 						src="{{image.thumbnail_url}}" alt=""></a>
 				</div>
 			</div>
@@ -84,7 +85,7 @@
 			<div class="spanpreview_details" style="height: 400px;">
 				<div>
 					<p class="subHeading">{{mainstyle.stylename}}</p>
-					<p style="font: normal 10px Verdana;" >{{mainstyle.description}}</p>
+					<p style="font: normal 10px Verdana;">{{mainstyle.description}}</p>
 				</div>
 				<div class="underline"></div>
 				<div class="style_description">
@@ -99,14 +100,30 @@
 							<h4>{{styletdetails.stylesize}}</h4>
 						</div>
 						<div class="clr"></div>
-						<div class="style_colors">
+						<div>
 							<p>Colors</p>
-							<div class="color_pallet">
-								<span></span><span style="background: #0066FF;"></span><span
-									style="background: #666666;"> </span><span
-									style="background: #009900;"></span><span
-									style="background: #CC9900;"> </span>
+							<div class="swatches">
+								<a rel="tooltip" data-original-title="SALSA RED/ RED" ><img width="20" height="20" src="img/Red.jpeg" alt="" style="margin-bottom:3px;"></a>
+								<a rel="tooltip" data-original-title="SALSA BLACK/ BLACK" ><img width="20" height="20" src="img/Black.jpeg" alt="" style="margin-bottom:3px;"></a>
+								<a rel="tooltip" data-original-title="SALSA RED/ RED" ><img width="20" height="20" src="img/Red.jpeg" alt="" style="margin-bottom:3px;"></a>
+								<a rel="tooltip" data-original-title="SALSA BLACK/ BLACK" ><img width="20" height="20" src="img/Black.jpeg" alt="" style="margin-bottom:3px;"></a>
+								<a rel="tooltip" data-original-title="SALSA RED/ RED" ><img width="20" height="20" src="img/Red.jpeg" alt="" style="margin-bottom:3px;" ></a>
+								<a rel="tooltip" data-original-title="SALSA BLACK/ BLACK" ><img width="20" height="20" src="img/Black.jpeg" alt="" style="margin-bottom:3px;"></a>
+								<a rel="tooltip" data-original-title="SALSA RED/ RED" ><img width="20" height="20" src="img/Red.jpeg" alt="" style="margin-bottom:3px;"></a>
+								<a rel="tooltip" data-original-title="SALSA BLACK/ BLACK" ><img width="20" height="20" src="img/Black.jpeg" alt="" style="margin-bottom:3px;"></a>
+							
 							</div>
+
+							<!-- <div class="colors">
+								<a href="/products/372205402/?fts=SALSA RED/ BLACK"  rel="tooltip" data-original-title="SALSA RED/ RED"><img
+									src="img/Red.jpg"
+									class="tooltip"></a> 
+									<a
+									href="/products/372205402/?fts=CROWN JEWEL/BLACK" rel="tooltip" data-original-title="CROWN JEWEL/BLACK"><img
+									src="img/Black.jpg"
+									class="tooltip" ></a>
+							</div> -->
+
 						</div>
 					</div>
 					<div class="style_type_cost">
@@ -120,7 +137,7 @@
 						</div>
 						<div class="price">
 							<p>Price</p>
-							<h4>{{mainstyle.price}}</h4>
+							<h4><span class="WebRupee" style="font-size: 18px;">Rs.</span>{{mainstyle.price}}</h4>
 						</div>
 					</div>
 				</div>
@@ -129,4 +146,10 @@
 		<!-- right pane data -->
 	</div>
 </div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery("[rel=tooltip]").tooltip();
+	});
+</script>
 <!-- body -->

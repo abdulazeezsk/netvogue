@@ -45,7 +45,9 @@
    
     <script src="lib/angular/angular.js" 			type="text/javascript"></script>
     <script src="lib/angular/angular-ui.js" 		type="text/javascript"></script>
+    <script src="lib/angular/select2.js" 					type="text/javascript"></script>
     <script src="lib/bootstrap/bootstrap-navlist.js" type="text/javascript"></script>
+    <script src="lib/wr.js" 						 type="text/javascript"></script>
     <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
     <div style="display: none;">
     	<div id="firsttimelogin">${firsttimelogin}</div>
@@ -62,10 +64,9 @@
     <script src="js/constants.js" 					type="text/javascript"></script>
     <script src="js/main.js" 						type="text/javascript"></script>
     <script src="js/utils.js" 						type="text/javascript"></script>
-    <script src="js/select2.js" type="text/javascript"></script>
   
+  	
     
-    <script src="lib/fileupload/vendor/jquery.ui.widget.js"></script>
 	<script src="lib/fileupload/jquery.iframe-transport.js"></script>
 	<script src="lib/fileupload/jquery.fileupload.js"></script>
 	<script src="lib/fileupload/load-image.min.js"></script>
