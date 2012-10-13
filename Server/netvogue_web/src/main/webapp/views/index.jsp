@@ -3,20 +3,17 @@
 <head>
     <meta charset="utf-8">
     <title ng-Bind-Template="Netvogue : {{title}}"></title>
-    <link href="css/bootstrap.css" rel="stylesheet" />
-    <link href="css/StyleSheet.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/jquery.fileupload-ui.css" />
-    <link href="css/style_overlay.css" rel="stylesheet" type="text/css" />
-    <link href="css/style_common.css" rel="stylesheet" type="text/css" />
-    <link href="css/select2.css" rel="stylesheet" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="css/StyleSheet.css" rel="stylesheet" type="text/css" />
+    <link href="css/jquery.fileupload-ui.css" rel="stylesheet" type="text/css" />
+    <link href="css/select2.css" rel="stylesheet" type="text/css" />
     <link href="css/styles.css" rel="stylesheet" type="text/css" />
     <link href="css/style.css" rel="stylesheet" type="text/css" />
  	<link href="css/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" />
     <link href="css/elastislide.css" rel="stylesheet" type="text/css" />
-    
-    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="css/jquery.tree.css" />
-    <link href="css/angular-ui.css" rel="stylesheet" />
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="css/jquery.tree.css" rel="stylesheet" type="text/css"  />
+    <link href="css/angular-ui.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         body
         {
