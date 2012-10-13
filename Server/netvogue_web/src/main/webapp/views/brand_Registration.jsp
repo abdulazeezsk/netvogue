@@ -313,12 +313,41 @@
             </div>
         </div>
     </div>
-    <!-- footer -->
-    <div class="footer">
-        <div class="footer_in">
-            <span>© 2012 NET VOGUE</span></div>
-    </div>
-    <!-- footer -->
+   <!-- footer -->
+	<div class="footer">
+		<div class=" footer_in">
+			<ul class="footbar pull-left" style="padding-top:4px;" >
+				<li  id="YourWindow"><span>© 2012 YourWindow</span> <span></li>
+			</ul>
+
+			<ul class="footbar pull-right">
+				<li  id="itemPinterest1"><a
+					onmouseover="document.getElementById('pinterest1').src ='img/facebook-on.jpeg';"
+					onmouseout="document.getElementById('pinterest1').src ='img/facebook.jpeg';"
+					href="#" title="Go to Facebook page"> <img id="pinterest1"
+						src="img/facebook.jpeg" border="0" alt="Facebook" />
+				</a></li>
+				<li id="itemPinterest2"><a
+					onmouseover="document.getElementById('pinterest2').src ='img/twitter-on.jpeg';"
+					onmouseout="document.getElementById('pinterest2').src ='img/twitter.jpeg';"
+					href="#" title="Go to Twitter page"><img id="pinterest2"
+						src="img/twitter.jpeg" border="0" alt="Twitter"></a></li>
+
+				<li id="itemPinterest3"><a
+					onmouseover="document.getElementById('pinterest3').src ='img/Pinterest-logo-on.jpeg';"
+					onmouseout="document.getElementById('pinterest3').src ='img/Pinterest.jpeg';"
+					href="#" title="Go to Pinterest page"><img id="pinterest3"
+						src="img/Pinterest.jpeg" border="0" alt="Pinterest"></a></li>
+
+				<li id="itemPinterest4"><a
+					onmouseover="document.getElementById('pinterest').src ='img/blog-on.jpeg';"
+					onmouseout="document.getElementById('pinterest').src ='img/blog.jpeg';"
+					href="#" title="Go to Blog page"><img id="pinterest"
+						src="img/blog.jpeg" border="0" alt="Blog "></a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- footer -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript">
         var entity = "brand";

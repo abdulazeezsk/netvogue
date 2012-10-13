@@ -27,11 +27,14 @@
     <div ng-view>
     </div>
     <!-- footer -->
-    <div class="footer">
-        <div class="footer_in">
-            <span>© 2012 NET VOGUE</span></div>
-    </div>
-    <!-- footer -->
+	<div class="footer" style="max-height:10px;">
+		<div class="footer_in">
+			<ul class="footbar pull-left" >
+				<li  id="YourWindow" ><span>© 2012 YourWindow</span></li>
+			</ul>
+		</div>
+	</div>
+	<!-- footer -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="lib/jquery/jquery.js" type="text/javascript"></script>
     <script src="lib/jquery/jquery-ui.min.js" type="text/javascript"></script>
@@ -45,7 +48,7 @@
    
     <script src="lib/angular/angular.js" 			type="text/javascript"></script>
     <script src="lib/angular/angular-ui.js" 		type="text/javascript"></script>
-    <script src="lib/angular/select2.js" 					type="text/javascript"></script>
+    <script src="lib/angular/select2.js" 			type="text/javascript"></script>
     <script src="lib/bootstrap/bootstrap-navlist.js" type="text/javascript"></script>
     <script src="lib/wr.js" 						 type="text/javascript"></script>
     <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
