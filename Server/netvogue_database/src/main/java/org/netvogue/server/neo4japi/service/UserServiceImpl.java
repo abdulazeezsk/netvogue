@@ -154,7 +154,11 @@ public class UserServiceImpl implements UserService{
 	//Queries related to collections
 	public Iterable<Collection> getCollections(User user) {
 		if(null != user) {
-			return userRepo.getCollections(user.getUsername());
+			if(USER_TYPE.BOUTIQUE == user.getUserType()) {
+				return userRepo.getMyNetworkCollections(user.getUsername());
+			} else if(USER_TYPE.BRAND == user.getUserType()) {
+				return userRepo.getCollections(user.getUsername());
+			}
 		}
 		return null;
 	}
@@ -189,6 +193,11 @@ public class UserServiceImpl implements UserService{
 	
 	public Iterable<Linesheet> getLinesheets(User user) {
 		if(null != user) {
+			if(USER_TYPE.BOUTIQUE == user.getUserType()) {
+				return userRepo.getMyNetworkLinesheets(user.getUsername());
+			} else if(USER_TYPE.BRAND == user.getUserType()) {
+				return userRepo.getLinesheets(user.getUsername());
+			}
 			return userRepo.getLinesheets(user.getUsername());
 		}
 		return null;

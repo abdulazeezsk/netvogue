@@ -52,71 +52,88 @@ public class CollectionController {
 	@Autowired
 	private UploadManager uploadManager;
 
-	@RequestMapping(value="getcollections", method=RequestMethod.GET)
+	@RequestMapping(value={"getcollections", "getcollections/profileid"}, method=RequestMethod.GET)
 	public @ResponseBody Collections GetCollections(@ModelAttribute("profileid") String profileid, 
 												@RequestParam("galleryname") String galleryname,
 												@RequestParam("category") String categoryname,
 												@RequestParam("brandname") String brandname) {
 		System.out.println("Get Collections: " + galleryname);
 		Collections collections = new Collections();
-		User loggedinUser = userDetailsService.getUserFromSession();
-		if(profileid.isEmpty()) {
-			collections.setName(loggedinUser.getName());
-			collections.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
-			Set<Collection> collectionTemp = new LinkedHashSet<Collection>();
-			Iterable<org.netvogue.server.neo4japi.domain.Collection> dbCollections;
-			if(galleryname.isEmpty()) {
-				dbCollections = userService.getCollections(loggedinUser);
-			} else {
-				dbCollections = userService.searchCollections(loggedinUser.getUsername(), galleryname, categoryname, brandname);
-			}
-			if(null == dbCollections) {
+		
+		User user;
+		if(!profileid.isEmpty()) {
+			user = userService.getUserByUsername(profileid);
+			if(user == null || USER_TYPE.BOUTIQUE == user.getUserType()) {
 				return collections;
 			}
-			Iterator<org.netvogue.server.neo4japi.domain.Collection> first = dbCollections.iterator();
-			while ( first.hasNext() ){
-				org.netvogue.server.neo4japi.domain.Collection dbCollection = first.next() ;
-				System.out.println("Get Collection" + dbCollection.getCollectionname());
-				collectionTemp.add(conversionService.convert(dbCollection, Collection.class));
-			}
-			collections.setCollections(collectionTemp);
+		} else {
+			 user = userDetailsService.getUserFromSession();
 		}
+		
+		collections.setName(user.getName());
+		collections.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		Set<Collection> collectionTemp = new LinkedHashSet<Collection>();
+		Iterable<org.netvogue.server.neo4japi.domain.Collection> dbCollections;
+		if(galleryname.isEmpty()) {
+			dbCollections = userService.getCollections(user);
+		} else {
+			dbCollections = userService.searchCollections(user.getUsername(), galleryname, categoryname, brandname);
+		}
+		if(null == dbCollections) {
+			return collections;
+		}
+		Iterator<org.netvogue.server.neo4japi.domain.Collection> first = dbCollections.iterator();
+		while ( first.hasNext() ){
+			org.netvogue.server.neo4japi.domain.Collection dbCollection = first.next() ;
+			System.out.println("Get Collection" + dbCollection.getCollectionname());
+			collectionTemp.add(conversionService.convert(dbCollection, Collection.class));
+		}
+		collections.setCollections(collectionTemp);
+		
 		return collections;
 	}
 	
-	@RequestMapping(value="collection/getphotos", method=RequestMethod.GET)
+	@RequestMapping(value={"collection/getphotos", "collection/getphotos/profileid"}, method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname
 											 ) {
 		System.out.println("Get collection Photos: " + photoname);
 		Photos photos = new Photos();
-		User loggedinUser = userDetailsService.getUserFromSession();
 		if(galleryid.isEmpty()) {
 			return photos;
 		}
 		
-		if(profileid.isEmpty()) {
-			photos.setName(loggedinUser.getName());
-			photos.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
-			photos.setGalleryname(collectionService.getCollection(galleryid).getCollectionseasonname());
-			Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
-			Iterable<CollectionPhoto> dbPhotos;
-			if(photoname.isEmpty()) {
-				dbPhotos = collectionService.getPhotos(galleryid);
-			} else {
-				dbPhotos = collectionService.searchPhotoByName(galleryid, photoname);
-			}
-			if(null == dbPhotos) {
+		User user;
+		if(!profileid.isEmpty()) {
+			user = userService.getUserByUsername(profileid);
+			if(user == null || USER_TYPE.BOUTIQUE == user.getUserType()) {
 				return photos;
 			}
-			Iterator<CollectionPhoto> first = dbPhotos.iterator();
-			while ( first.hasNext() ){
-				CollectionPhoto dbPhoto = first.next() ;
-				photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
-			}
-			photos.setPhotos(photosTemp);
+		} else {
+			 user = userDetailsService.getUserFromSession();
 		}
+		
+		photos.setName(user.getName());
+		photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		photos.setGalleryname(collectionService.getCollection(galleryid).getCollectionseasonname());
+		Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
+		Iterable<CollectionPhoto> dbPhotos;
+		if(photoname.isEmpty()) {
+			dbPhotos = collectionService.getPhotos(galleryid);
+		} else {
+			dbPhotos = collectionService.searchPhotoByName(galleryid, photoname);
+		}
+		if(null == dbPhotos) {
+			return photos;
+		}
+		Iterator<CollectionPhoto> first = dbPhotos.iterator();
+		while ( first.hasNext() ){
+			CollectionPhoto dbPhoto = first.next() ;
+			photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
+		}
+		photos.setPhotos(photosTemp);
+		
 		return photos;
 	}
 	

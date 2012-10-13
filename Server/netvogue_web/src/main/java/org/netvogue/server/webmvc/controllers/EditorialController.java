@@ -47,69 +47,86 @@ public class EditorialController {
 	@Autowired
 	private UploadManager uploadManager;
 
-	@RequestMapping(value="geteditorials", method=RequestMethod.GET)
+	@RequestMapping(value={"geteditorials", "geteditorials/profileid"}, method=RequestMethod.GET)
 	public @ResponseBody Editorials GetEditorials(@ModelAttribute("profileid") String profileid, 
 												@RequestParam("galleryname") String galleryname) {
 		System.out.println("Get Editorials: " + galleryname);
 		Editorials campaigns = new Editorials();
-		User loggedinUser = userDetailsService.getUserFromSession();
-		if(profileid.isEmpty()) {
-			campaigns.setName(loggedinUser.getName());
-			campaigns.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
-			Set<Editorial> campaignTemp = new LinkedHashSet<Editorial>();
-			Iterable<org.netvogue.server.neo4japi.domain.Editorial> dbCampaigns;
-			if(galleryname.isEmpty()) {
-				dbCampaigns = userService.getEditorials(loggedinUser);
-			} else {
-				dbCampaigns = userService.searchEditorialByName(loggedinUser, galleryname);
-			}
-			if(null == dbCampaigns) {
+		
+		User user;
+		if(!profileid.isEmpty()) {
+			user = userService.getUserByUsername(profileid);
+			if(user == null) {
 				return campaigns;
 			}
-			Iterator<org.netvogue.server.neo4japi.domain.Editorial> first = dbCampaigns.iterator();
-			while ( first.hasNext() ){
-				org.netvogue.server.neo4japi.domain.Editorial dbCampaign = first.next() ;
-				System.out.println("Get Editorial" + dbCampaign.getEditorialname());
-				campaignTemp.add(conversionService.convert(dbCampaign, Editorial.class));
-			}
-			campaigns.setGalleries(campaignTemp);
+		} else {
+			 user = userDetailsService.getUserFromSession();
 		}
+		
+		campaigns.setName(user.getName());
+		campaigns.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		Set<Editorial> campaignTemp = new LinkedHashSet<Editorial>();
+		Iterable<org.netvogue.server.neo4japi.domain.Editorial> dbCampaigns;
+		if(galleryname.isEmpty()) {
+			dbCampaigns = userService.getEditorials(user);
+		} else {
+			dbCampaigns = userService.searchEditorialByName(user, galleryname);
+		}
+		if(null == dbCampaigns) {
+			return campaigns;
+		}
+		Iterator<org.netvogue.server.neo4japi.domain.Editorial> first = dbCampaigns.iterator();
+		while ( first.hasNext() ){
+			org.netvogue.server.neo4japi.domain.Editorial dbCampaign = first.next() ;
+			System.out.println("Get Editorial" + dbCampaign.getEditorialname());
+			campaignTemp.add(conversionService.convert(dbCampaign, Editorial.class));
+		}
+		campaigns.setGalleries(campaignTemp);
+		
 		return campaigns;
 	}
 	
-	@RequestMapping(value="editorial/getphotos", method=RequestMethod.GET)
+	@RequestMapping(value={"editorial/getphotos", "editorial/getphotos/profileid"}, method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname
 											 ) {
 		System.out.println("Get editorial Photos: " + photoname);
 		Photos photos = new Photos();
-		User loggedinUser = userDetailsService.getUserFromSession();
 		if(galleryid.isEmpty()) {
 			return photos;
 		}
 		
-		if(profileid.isEmpty()) {
-			photos.setName(loggedinUser.getName());
-			photos.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
-			photos.setGalleryname(editorialService.getEditorial(galleryid).getEditorialname());
-			Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
-			Iterable<EditorialPhoto> dbPhotos;
-			if(photoname.isEmpty()) {
-				dbPhotos = editorialService.getPhotos(galleryid);
-			} else {
-				dbPhotos = editorialService.searchPhotoByName(galleryid, photoname);
-			}
-			if(null == dbPhotos) {
+		User user;
+		if(!profileid.isEmpty()) {
+			user = userService.getUserByUsername(profileid);
+			if(user == null) {
 				return photos;
 			}
-			Iterator<EditorialPhoto> first = dbPhotos.iterator();
-			while ( first.hasNext() ){
-				EditorialPhoto dbPhoto = first.next() ;
-				photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
-			}
-			photos.setPhotos(photosTemp);
+		} else {
+			 user = userDetailsService.getUserFromSession();
 		}
+		
+		photos.setName(user.getName());
+		photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		photos.setGalleryname(editorialService.getEditorial(galleryid).getEditorialname());
+		Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
+		Iterable<EditorialPhoto> dbPhotos;
+		if(photoname.isEmpty()) {
+			dbPhotos = editorialService.getPhotos(galleryid);
+		} else {
+			dbPhotos = editorialService.searchPhotoByName(galleryid, photoname);
+		}
+		if(null == dbPhotos) {
+			return photos;
+		}
+		Iterator<EditorialPhoto> first = dbPhotos.iterator();
+		while ( first.hasNext() ){
+			EditorialPhoto dbPhoto = first.next() ;
+			photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
+		}
+		photos.setPhotos(photosTemp);
+			
 		return photos;
 	}
 	

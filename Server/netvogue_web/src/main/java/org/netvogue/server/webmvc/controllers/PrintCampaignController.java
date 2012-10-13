@@ -47,73 +47,91 @@ public class PrintCampaignController {
 	@Autowired
 	private UploadManager uploadManager;
 		
-	@RequestMapping(value="getprintcampaigns", method=RequestMethod.GET)
+	@RequestMapping(value={"getprintcampaigns", "getprintcampaigns/profileid"}, method=RequestMethod.GET)
 	public @ResponseBody PrintCampaigns GetPrintCampaigns(@ModelAttribute("profileid") String profileid, 
 												@RequestParam("galleryname") String galleryname) {
-		System.out.println("Get PrintCampaigns: " + galleryname);
+		
+		System.out.println("Get PrintCampaigns: " + profileid + ":" + galleryname);
 		PrintCampaigns campaigns = new PrintCampaigns();
-		User loggedinUser = userDetailsService.getUserFromSession();
-		if(profileid.isEmpty()) {
-			campaigns.setName(loggedinUser.getName());
-			campaigns.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
-			Set<PrintCampaign> campaignTemp = new LinkedHashSet<PrintCampaign>();
-			Iterable<org.netvogue.server.neo4japi.domain.PrintCampaign> dbPrintCampaigns;
-			if(galleryname.isEmpty()) {
-				dbPrintCampaigns = userService.getPrintCampaigns(loggedinUser);
-			} else {
-				dbPrintCampaigns = userService.searchPrintCampaignByName(loggedinUser, galleryname);
-			}
-			if(null == dbPrintCampaigns) {
+		
+		User user;
+		if(!profileid.isEmpty()) {
+			user = userService.getUserByUsername(profileid);
+			if(user == null) {
 				return campaigns;
 			}
-			Iterator<org.netvogue.server.neo4japi.domain.PrintCampaign> first = dbPrintCampaigns.iterator();
-			while ( first.hasNext() ){
-				org.netvogue.server.neo4japi.domain.PrintCampaign dbPrintCampaign = first.next() ;
-				System.out.println("Print Campaign name: " + dbPrintCampaign.getPrintcampaignname());
-				campaignTemp.add(conversionService.convert(dbPrintCampaign, PrintCampaign.class));
-			}
-			campaigns.setGalleries(campaignTemp);
+		} else {
+			 user = userDetailsService.getUserFromSession();
 		}
+		
+		campaigns.setName(user.getName());
+		campaigns.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		Set<PrintCampaign> campaignTemp = new LinkedHashSet<PrintCampaign>();
+		Iterable<org.netvogue.server.neo4japi.domain.PrintCampaign> dbPrintCampaigns;
+		if(galleryname.isEmpty()) {
+			dbPrintCampaigns = userService.getPrintCampaigns(user);
+		} else {
+			dbPrintCampaigns = userService.searchPrintCampaignByName(user, galleryname);
+		}
+		if(null == dbPrintCampaigns) {
+			return campaigns;
+		}
+		Iterator<org.netvogue.server.neo4japi.domain.PrintCampaign> first = dbPrintCampaigns.iterator();
+		while ( first.hasNext() ){
+			org.netvogue.server.neo4japi.domain.PrintCampaign dbPrintCampaign = first.next() ;
+			System.out.println("Print Campaign name: " + dbPrintCampaign.getPrintcampaignname());
+			campaignTemp.add(conversionService.convert(dbPrintCampaign, PrintCampaign.class));
+		}
+		campaigns.setGalleries(campaignTemp);
+		
 		return campaigns;
 	}
 	
-	@RequestMapping(value="printcampaign/getphotos", method=RequestMethod.GET)
+	@RequestMapping(value={"printcampaign/getphotos", "printcampaign/getphotos/profileid"}, method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname
 											 ) {
 		System.out.println("Get Print Campaign Photos: " + photoname);
 		Photos photos = new Photos();
-		User loggedinUser = userDetailsService.getUserFromSession();
 		if(galleryid.isEmpty()) {
 			return photos;
 		}
 		
-		if(profileid.isEmpty()) {
-			photos.setName(loggedinUser.getName());
-			photos.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
-			org.netvogue.server.neo4japi.domain.PrintCampaign printcampaign = printcampaignService.getPrintCampaign(galleryid);
-			if(null == printcampaign) {
+		User user;
+		if(!profileid.isEmpty()) {
+			user = userService.getUserByUsername(profileid);
+			if(user == null) {
 				return photos;
 			}
-			photos.setGalleryname(printcampaign.getPrintcampaignname());
-			Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
-			Iterable<PrintCampaignPhoto> dbPhotos;
-			if(photoname.isEmpty()) {
-				dbPhotos = printcampaignService.getPhotos(galleryid);
-			} else {
-				dbPhotos = printcampaignService.searchPhotoByName(galleryid, photoname);
-			}
-			if(null == dbPhotos) {
-				return photos;
-			}
-			Iterator<PrintCampaignPhoto> first = dbPhotos.iterator();
-			while ( first.hasNext() ){
-				PrintCampaignPhoto dbPhoto = first.next() ;
-				photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
-			}
-			photos.setPhotos(photosTemp);
+		} else {
+			 user = userDetailsService.getUserFromSession();
 		}
+		
+		photos.setName(user.getName());
+		photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		org.netvogue.server.neo4japi.domain.PrintCampaign printcampaign = printcampaignService.getPrintCampaign(galleryid);
+		if(null == printcampaign) {
+			return photos;
+		}
+		photos.setGalleryname(printcampaign.getPrintcampaignname());
+		Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
+		Iterable<PrintCampaignPhoto> dbPhotos;
+		if(photoname.isEmpty()) {
+			dbPhotos = printcampaignService.getPhotos(galleryid);
+		} else {
+			dbPhotos = printcampaignService.searchPhotoByName(galleryid, photoname);
+		}
+		if(null == dbPhotos) {
+			return photos;
+		}
+		Iterator<PrintCampaignPhoto> first = dbPhotos.iterator();
+		while ( first.hasNext() ){
+			PrintCampaignPhoto dbPhoto = first.next() ;
+			photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
+		}
+		photos.setPhotos(photosTemp);
+		
 		return photos;
 	}
 	

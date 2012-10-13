@@ -47,74 +47,90 @@ public class GalleryController {
 	@Autowired
 	private UploadManager uploadManager;
 		
-	@RequestMapping(value="getgalleries", method=RequestMethod.GET)
+	@RequestMapping(value={"getgalleries", "getgallaries/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Galleries GetGalleries(@ModelAttribute("profileid") String profileid, 
 												@RequestParam("galleryname") String galleryname) {
 		System.out.println("Get Galleries: " + galleryname);
 		Galleries galleries = new Galleries();
-		User loggedinUser = userDetailsService.getUserFromSession();
-		if(profileid.isEmpty()) {
-			galleries.setName(loggedinUser.getName());
-			galleries.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
-			Set<Gallery> galleriesTemp = new LinkedHashSet<Gallery>();
-			Iterable<org.netvogue.server.neo4japi.domain.Gallery> dbGalleries;
-			if(galleryname.isEmpty()) {
-				dbGalleries = userService.GetGalleries(loggedinUser);
-			} else {
-				dbGalleries = userService.searchGalleryByName(loggedinUser, galleryname);
-			}
-			if(null == dbGalleries) {
+		User user;
+		if(!profileid.isEmpty()) {
+			user = userService.getUserByUsername(profileid);
+			if(user == null) {
 				return galleries;
 			}
-			Iterator<org.netvogue.server.neo4japi.domain.Gallery> first = dbGalleries.iterator();
-			while ( first.hasNext() ){
-				org.netvogue.server.neo4japi.domain.Gallery dbGallery = first.next() ;
-				System.out.println("Gallery name: " + dbGallery.getGalleryname());
-				galleriesTemp.add(conversionService.convert(dbGallery, Gallery.class));
-			}
-			galleries.setGalleries(galleriesTemp);
+		} else {
+			 user = userDetailsService.getUserFromSession();
 		}
+		
+		galleries.setName(user.getName());
+		galleries.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		Set<Gallery> galleriesTemp = new LinkedHashSet<Gallery>();
+		Iterable<org.netvogue.server.neo4japi.domain.Gallery> dbGalleries;
+		if(galleryname.isEmpty()) {
+			dbGalleries = userService.GetGalleries(user);
+		} else {
+			dbGalleries = userService.searchGalleryByName(user, galleryname);
+		}
+		if(null == dbGalleries) {
+			return galleries;
+		}
+		Iterator<org.netvogue.server.neo4japi.domain.Gallery> first = dbGalleries.iterator();
+		while ( first.hasNext() ){
+			org.netvogue.server.neo4japi.domain.Gallery dbGallery = first.next() ;
+			System.out.println("Gallery name: " + dbGallery.getGalleryname());
+			galleriesTemp.add(conversionService.convert(dbGallery, Gallery.class));
+		}
+		galleries.setGalleries(galleriesTemp);
+		
 		
 		return galleries;
 	}
 	
-	@RequestMapping(value="gallery/getphotos", method=RequestMethod.GET)
+	@RequestMapping(value={"gallery/getphotos", "gallery/getphotos/profileid"}, method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname
 											 ) {
 		System.out.println("Get Galleries: " + photoname);
 		Photos photos = new Photos();
-		User loggedinUser = userDetailsService.getUserFromSession();
 		if(galleryid.isEmpty()) {
 			return photos;
 		}
 		
-		if(profileid.isEmpty()) {
-			photos.setName(loggedinUser.getName());
-			photos.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
-			org.netvogue.server.neo4japi.domain.Gallery gTemp = galleryService.GetGallery(galleryid);
-			if(null == gTemp) {
+		User user;
+		if(!profileid.isEmpty()) {
+			user = userService.getUserByUsername(profileid);
+			if(user == null) {
 				return photos;
 			}
-			photos.setGalleryname(gTemp.getGalleryname());
-			Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
-			Iterable<org.netvogue.server.neo4japi.domain.Photo> dbPhotos;
-			if(photoname.isEmpty()) {
-				dbPhotos = galleryService.GetPhotos(galleryid);
-			} else {
-				dbPhotos = galleryService.searchPhotoByName(galleryid, photoname);
-			}
-			if(null == dbPhotos) {
-				return photos;
-			}
-			Iterator<org.netvogue.server.neo4japi.domain.Photo> first = dbPhotos.iterator();
-			while ( first.hasNext() ){
-				org.netvogue.server.neo4japi.domain.Photo dbPhoto = first.next() ;
-				photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
-			}
-			photos.setPhotos(photosTemp);
+		} else {
+			 user = userDetailsService.getUserFromSession();
 		}
+		
+		photos.setName(user.getName());
+		photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		org.netvogue.server.neo4japi.domain.Gallery gTemp = galleryService.GetGallery(galleryid);
+		if(null == gTemp) {
+			return photos;
+		}
+		photos.setGalleryname(gTemp.getGalleryname());
+		Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
+		Iterable<org.netvogue.server.neo4japi.domain.Photo> dbPhotos;
+		if(photoname.isEmpty()) {
+			dbPhotos = galleryService.GetPhotos(galleryid);
+		} else {
+			dbPhotos = galleryService.searchPhotoByName(galleryid, photoname);
+		}
+		if(null == dbPhotos) {
+			return photos;
+		}
+		Iterator<org.netvogue.server.neo4japi.domain.Photo> first = dbPhotos.iterator();
+		while ( first.hasNext() ){
+			org.netvogue.server.neo4japi.domain.Photo dbPhoto = first.next() ;
+			photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
+		}
+		photos.setPhotos(photosTemp);
+			
 		return photos;
 	}
 	
