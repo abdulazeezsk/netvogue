@@ -127,7 +127,7 @@ angular.module('netVogue.services', []).
             	  return profileinfo.name;
               }
           },
-          isbrand: function() {
+          isbrand: function(routeparams) {
         	  if (angular.isUndefined(routeparams.profileid)) {
                   return myprofile.isbrand();
               } else {
