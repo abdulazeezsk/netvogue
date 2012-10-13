@@ -40,7 +40,7 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
     //Also, if there is any existing data, this data will be shown to user until we get response from server
     $scope.updatedata = function() {
 	    $scope.entityname  		= srvprofile.getname($routeParams);
-	    $scope.iambrand			= srvprofile.isbrand($routeparams);
+	    $scope.iambrand			= srvprofile.isbrand($routeParams);
 	    $scope.aboutus 			= srvprofile.getaboutus($routeParams);
 	    $scope.profilepic		= srvprofile.getprofilepic($routeParams);
 	    $scope.brandscarried 	= srvprofile.getbrandscarried($routeParams);
@@ -106,7 +106,7 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 	
 	$scope.updatedata = function() {
 		$scope.entityname 		= srvnetwork.getname($routeParams);
-		$scope.iambrand			= srvnetwork.isbrand($routeparams);
+		$scope.iambrand			= srvnetwork.isbrand($routeParams);
 		$scope.profilepic 		= srvnetwork.getprofilepic($routeParams);
 		$scope.contactinfo		= srvnetwork.getcontactinfo($routeParams);
 		$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
