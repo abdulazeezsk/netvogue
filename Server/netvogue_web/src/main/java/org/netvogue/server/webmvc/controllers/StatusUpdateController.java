@@ -9,6 +9,7 @@ import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
 import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.StatusUpdateData;
 import org.netvogue.server.neo4japi.service.StatusUpdateService;
@@ -53,6 +54,7 @@ public class StatusUpdateController {
 		}
 
 		updates.setName(user.getName());
+		updates.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
 		//Set profile pic
 		if(null != user.getProfilePicLink()) {
 			updates.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));

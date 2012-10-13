@@ -25,6 +25,11 @@ angular.module('netVogue.services', []).
 	    	setname: function(name) {
 	    		profileinfo.name = name;
 	    	},
+	    	isbrand: function() {
+	    		if(angular.isUndefined(profileinfo.isbrand))
+	        		return false;
+	    		return profileinfo.isbrand;
+	    	},
 	        getaboutus: function () {
 	        	if(angular.isUndefined(profileinfo.aboutus))
 	        		return "";
@@ -121,7 +126,16 @@ angular.module('netVogue.services', []).
   	        		return "";
             	  return profileinfo.name;
               }
-	    	},
+          },
+          isbrand: function() {
+        	  if (angular.isUndefined(routeparams.profileid)) {
+                  return myprofile.isbrand();
+              } else {
+            	  if(angular.isUndefined(profileinfo.isbrand))
+  	        		return false;
+                  return profileinfo.isbrand;
+              }
+          },
           getaboutus: function (routeparams) {
               if (angular.isUndefined(routeparams.profileid)) {
                   return myprofile.getaboutus();
@@ -238,7 +252,7 @@ angular.module('netVogue.services', []).
 	    	},
 	    	setgalleries: function(galleriestemp) {
 	    		name = galleriestemp.name;
-	    		profilepic = galleriestemp.profilepic
+	    		profilepic = galleriestemp.profilepic;
 	    		angular.copy(galleriestemp.galleries, galleries);
 	    	},
 	    	getname: function() {
@@ -1211,6 +1225,7 @@ angular.module('netVogue.services', []).
 }).service('mynetwork', function ($http) {
 	var networks = [];
 	var name;
+	var isbrand;
 	var profilepic;
 	var contactinfo;
 	return {
@@ -1219,6 +1234,7 @@ angular.module('netVogue.services', []).
     	},
     	setnetworks: function(temp) {
     		name = temp.name;
+    		isbrand = temp.isbrand;
     		profilepic = temp.profilepic;
     		contactinfo = angular.copy(temp.contactinfo);
     		networks = angular.copy(temp.networks);
@@ -1230,6 +1246,11 @@ angular.module('netVogue.services', []).
     	},
     	setname: function(name) {
     		this.name = name;
+    	},
+    	isbrand: function() {
+    		if(angular.isUndefined(isbrand))
+        		return false;
+    		return isbrand;
     	},
     	getprofilepic: function() {
     		if(angular.isUndefined(profilepic))
@@ -1313,18 +1334,24 @@ angular.module('netVogue.services', []).
     var network = new netvogue.hashtable();
     return {
   	  getname: function(routeparams) {
-      	  var result;
-            if (angular.isUndefined(routeparams.profileid)) {
-                return mynetwork.getname();
-            } else {
-            	if(angular.isUndefined(network.name))
-            		return "";
-        		return network.name;
-            }
-            return result;
+			if (angular.isUndefined(routeparams.profileid)) {
+			    return mynetwork.getname();
+			} else {
+				if(angular.isUndefined(network.name))
+					return "";
+				return network.name;
+			}
+  	  },
+  	  isbrand: function(routeparams) {
+	      if (angular.isUndefined(routeparams.profileid)) {
+	          return mynetwork.isbrand();
+	      } else {
+	      	if(angular.isUndefined(network.isbrand))
+	      		return false;
+	  		return network.isbrand;
+	      }
   	  },
   	  getprofilepic: function(routeparams) {
-  		  var result;
             if (angular.isUndefined(routeparams.profileid)) {
                 return mynetwork.getprofilepic();
             } else {
@@ -1332,10 +1359,8 @@ angular.module('netVogue.services', []).
             		return "";
         		return network.profilepic;
             }
-            return result;
   	  },
   	  getcontactinfo: function(routeparams) {
-		  var result;
           if (angular.isUndefined(routeparams.profileid)) {
               return mynetwork.getcontactinfo();
           } else {
@@ -1343,7 +1368,6 @@ angular.module('netVogue.services', []).
           		return {};
       		return network.contactinfo;
           }
-          return result;
 	  },
   	  getnetworks: function (routeparams) {
 	          if (angular.isUndefined(routeparams.profileid)) {
@@ -1373,6 +1397,7 @@ angular.module('netVogue.services', []).
     };
 }).service('mytimeline', function ($http) {
 	var updates = [];
+	var isbrand;
 	var name;
 	var profilepic;
 	var contactinfo;
@@ -1382,6 +1407,7 @@ angular.module('netVogue.services', []).
     	},
     	setupdates: function(temp) {
     		name = temp.name;
+    		isbrand = temp.isbrand;
     		profilepic = temp.profilepic;
     		contactinfo = angular.copy(temp.contactinfo);
     		updates = angular.copy(temp.updates);
@@ -1393,6 +1419,11 @@ angular.module('netVogue.services', []).
     	},
     	setname: function(name) {
     		this.name = name;
+    	},
+    	isbrand: function() {
+    		if(angular.isUndefined(isbrand))
+        		return false;
+    		return isbrand;
     	},
     	getprofilepic: function() {
     		if(angular.isUndefined(profilepic))
@@ -1460,7 +1491,6 @@ angular.module('netVogue.services', []).
     var updates = new netvogue.hashtable();
     return {
   	  getname: function(routeparams) {
-      	  var result;
             if (angular.isUndefined(routeparams.profileid)) {
                 return mytimeline.getname();
             } else {
@@ -1468,10 +1498,17 @@ angular.module('netVogue.services', []).
             		return "";
         		return updates.name;
             }
-            return result;
   	  },
+  	  isbrand: function(routeparams) {
+        if (angular.isUndefined(routeparams.profileid)) {
+            return mynetwork.isbrand();
+        } else {
+        	if(angular.isUndefined(updates.isbrand))
+        		return false;
+    		return updates.isbrand;
+        }
+	  },
   	  getprofilepic: function(routeparams) {
-  		  var result;
             if (angular.isUndefined(routeparams.profileid)) {
                 return mytimeline.getprofilepic();
             } else {
@@ -1479,10 +1516,8 @@ angular.module('netVogue.services', []).
             		return "";
         		return updates.profilepic;
             }
-            return result;
   	  },
   	  getcontactinfo: function(routeparams) {
-		  var result;
           if (angular.isUndefined(routeparams.profileid)) {
               return mytimeline.getcontactinfo();
           } else {
@@ -1490,7 +1525,6 @@ angular.module('netVogue.services', []).
           		return {};
       		return updates.contactinfo;
           }
-          return result;
 	  },
   	  getupdates: function (routeparams) {
 	          if (angular.isUndefined(routeparams.profileid)) {

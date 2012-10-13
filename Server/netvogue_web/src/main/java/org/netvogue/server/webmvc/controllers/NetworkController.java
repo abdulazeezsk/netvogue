@@ -10,6 +10,7 @@ import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
 import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.NetworkService;
 import org.netvogue.server.neo4japi.service.UserService;
@@ -53,6 +54,7 @@ public class NetworkController {
 			}
 		}
 		response.setName(user.getName());
+		response.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
 		response.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
 		Set<Network> networksTemp = new LinkedHashSet<Network>();
 		

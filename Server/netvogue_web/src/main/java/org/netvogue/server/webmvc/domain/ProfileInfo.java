@@ -5,6 +5,7 @@ import java.util.Set;
 public class ProfileInfo {
 	String name		 	= "";
 	String profileid 	= "";
+	boolean isbrand;
 	String networkstatus= "";
 	String aboutus 		= "";
 	ImageURLsResponse profilepic;
@@ -13,7 +14,11 @@ public class ProfileInfo {
 	Set<BrandsCarried> brandscarried;	//netvogue.brandscarried
 	
 	boolean status = false;
+
+	public ProfileInfo() {
 	
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -22,7 +27,12 @@ public class ProfileInfo {
 		this.name = name;
 	}
 
-	public ProfileInfo() {
+	public boolean isIsbrand() {
+		return isbrand;
+	}
+
+	public void setIsbrand(boolean isbrand) {
+		this.isbrand = isbrand;
 	}
 
 	public String getProfileid() {
