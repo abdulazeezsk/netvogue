@@ -1,5 +1,6 @@
 package org.netvogue.server.neo4japi.service;
 
+import java.util.Map;
 import java.util.Set;
 
 import org.netvogue.server.neo4japi.common.NetworkStatus;
@@ -152,7 +153,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	//Queries related to collections
-	public Iterable<Collection> getCollections(User user) {
+	public Iterable<CollectionData> getCollections(User user) {
 		if(null != user) {
 			if(USER_TYPE.BOUTIQUE == user.getUserType()) {
 				return userRepo.getMyNetworkCollections(user.getUsername());
@@ -163,15 +164,15 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 	
-	public Iterable<Collection> searchCollectionByName(User user, String name) {
+	public Iterable<CollectionData> searchCollectionByName(User user, String name) {
 		return searchCollectionByName(user.getUsername(), name);
 	}
 	
-	public Iterable<Collection> searchCollectionByName(String username, String seasonname) {
+	public Iterable<CollectionData> searchCollectionByName(String username, String seasonname) {
 		return userRepo.searchCollectionByName(username, Utils.SerializeQueryParamForSearch(seasonname));
 	}
 	
-	public Iterable<Collection> searchCollections(String username, String seasonname, String category, String brandname){
+	public Iterable<CollectionData> searchCollections(String username, String seasonname, String category, String brandname){
 		//if(category.isEmpty() && 
 		return userRepo.searchCollectionByName(username, Utils.SerializeQueryParamForSearch(seasonname));
 	}
@@ -191,7 +192,7 @@ public class UserServiceImpl implements UserService{
 		return userRepo.searchStylesheetByName(username, name);
 	}
 	
-	public Iterable<Linesheet> getLinesheets(User user) {
+	public Iterable<LinesheetData> getLinesheets(User user) {
 		if(null != user) {
 			if(USER_TYPE.BOUTIQUE == user.getUserType()) {
 				return userRepo.getMyNetworkLinesheets(user.getUsername());
@@ -203,11 +204,11 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 	
-	public Iterable<Linesheet> searchLinesheetByName(User user, String name) {
+	public Iterable<LinesheetData> searchLinesheetByName(User user, String name) {
 		return searchLinesheetByName(user.getUsername(), name);
 	}
 	
-	public Iterable<Linesheet> searchLinesheetByName(String username, String name) {
+	public Iterable<LinesheetData> searchLinesheetByName(String username, String name) {
 		return userRepo.searchLinesheetByName(username, name);
 	}
 }

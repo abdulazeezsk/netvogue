@@ -2,6 +2,7 @@ package org.netvogue.server.webmvc.controllers;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.netvogue.server.aws.core.UploadManager;
@@ -12,6 +13,7 @@ import org.netvogue.server.neo4japi.domain.Category;
 import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
+import org.netvogue.server.neo4japi.service.LinesheetData;
 import org.netvogue.server.neo4japi.service.LinesheetService;
 import org.netvogue.server.neo4japi.service.StylesheetService;
 import org.netvogue.server.neo4japi.service.UserService;
@@ -67,7 +69,7 @@ public class LinesheetController {
 		linesheets.setName(user.getName());
 		linesheets.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
 		Set<Linesheet> linesheetTemp = new LinkedHashSet<Linesheet>();
-		Iterable<org.netvogue.server.neo4japi.domain.Linesheet> dbLinesheets;
+		Iterable<LinesheetData> dbLinesheets;
 		if(linesheetname.isEmpty()) {
 			dbLinesheets = userService.getLinesheets(user);
 		} else {
@@ -77,11 +79,13 @@ public class LinesheetController {
 		if(null == dbLinesheets) {
 			return linesheets;
 		}
-		Iterator<org.netvogue.server.neo4japi.domain.Linesheet> first = dbLinesheets.iterator();
+		Iterator<LinesheetData> first = dbLinesheets.iterator();
 		while ( first.hasNext() ){
-			org.netvogue.server.neo4japi.domain.Linesheet dbSheet = first.next() ;
-			System.out.println("line sheet name" + dbSheet.getLinesheetname());
-			linesheetTemp.add(conversionService.convert(dbSheet, Linesheet.class));
+			LinesheetData dbSheet = first.next();
+			
+			Linesheet sheet = conversionService.convert(dbSheet.getLinesheet(), Linesheet.class);
+			sheet.setBrandname(dbSheet.getName());
+			linesheetTemp.add(sheet);
 		}
 		linesheets.setLinesheets(linesheetTemp);
 		

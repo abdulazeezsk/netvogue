@@ -16,7 +16,9 @@ import org.netvogue.server.neo4japi.domain.Category;
 import org.netvogue.server.neo4japi.domain.CollectionPhoto;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
+import org.netvogue.server.neo4japi.service.CollectionData;
 import org.netvogue.server.neo4japi.service.CollectionService;
+import org.netvogue.server.neo4japi.service.LinesheetData;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.domain.Collection;
 import org.netvogue.server.webmvc.domain.CollectionJSONRequest;
@@ -73,7 +75,7 @@ public class CollectionController {
 		collections.setName(user.getName());
 		collections.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
 		Set<Collection> collectionTemp = new LinkedHashSet<Collection>();
-		Iterable<org.netvogue.server.neo4japi.domain.Collection> dbCollections;
+		Iterable<CollectionData> dbCollections;
 		if(galleryname.isEmpty()) {
 			dbCollections = userService.getCollections(user);
 		} else {
@@ -82,11 +84,14 @@ public class CollectionController {
 		if(null == dbCollections) {
 			return collections;
 		}
-		Iterator<org.netvogue.server.neo4japi.domain.Collection> first = dbCollections.iterator();
+		Iterator<CollectionData> first = dbCollections.iterator();
 		while ( first.hasNext() ){
-			org.netvogue.server.neo4japi.domain.Collection dbCollection = first.next() ;
-			System.out.println("Get Collection" + dbCollection.getCollectionname());
-			collectionTemp.add(conversionService.convert(dbCollection, Collection.class));
+			CollectionData dbCollection = first.next();
+			
+			Collection collection = conversionService.convert(dbCollection.getCollection(), Collection.class);
+			collection.setBrandname(dbCollection.getName());
+			collectionTemp.add(collection);
+			
 		}
 		collections.setCollections(collectionTemp);
 		

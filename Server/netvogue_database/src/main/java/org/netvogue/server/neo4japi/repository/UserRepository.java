@@ -1,7 +1,10 @@
 package org.netvogue.server.neo4japi.repository;
 
+import java.util.Map;
 import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.domain.*;
+import org.netvogue.server.neo4japi.service.CollectionData;
+import org.netvogue.server.neo4japi.service.LinesheetData;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
 
@@ -60,23 +63,26 @@ public interface UserRepository extends GraphRepository<User> {
 	Iterable<Editorial> searchEditorialByName(String username, String editorialname);
 	
 	//queries related to collections
-	@Query( "START n=node:search(username={0}) MATCH n-[:COLLECTION]->c RETURN c ORDER BY c.createdDate DESC")
-	Iterable<Collection> getCollections(String username);
+	@Query( "START n=node:search(username={0}) MATCH n-[:COLLECTION]->collection " +
+			"RETURN n.name as name, collection ORDER BY collection.createdDate DESC")
+	Iterable<CollectionData> getCollections(String username);
 	
 	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-user r.status? = 'CONFIRMED') " +
 			"WITH user" +
-			"MATCH user-[:COLLECTION]->c RETURN c ORDER BY c.createdDate DESC")
-	Iterable<Collection> getMyNetworkCollections(String username);
+			"MATCH user-[:COLLECTION]->collection " +
+			"RETURN user.name as name, collection ORDER BY collection.createdDate DESC")
+	Iterable<CollectionData> getMyNetworkCollections(String username);
 	
-	@Query( "START n=node:search(username={0}) MATCH n-[:COLLECTION]->c WHERE c.collectionseasonname =~ {1} " +
-			"RETURN c ORDER BY c.createdDate DESC")
-	Iterable<Collection> searchCollectionByName(String username, String collectionseasonname);
+	@Query( "START n=node:search(username={0}) MATCH n-[:COLLECTION]->collection " +
+			"WHERE collection.collectionseasonname =~ {1} " +
+			"RETURN n.name as name, collection ORDER BY collection.createdDate DESC")
+	Iterable<CollectionData> searchCollectionByName(String username, String collectionseasonname);
 	
 	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-user r.status? = 'CONFIRMED') " +
 			"WITH user" +
-			"MATCH user-[:COLLECTION]->c WHERE c.collectionseasonname =~ {1} " +
-			"RETURN c ORDER BY c.createdDate DESC")
-	Iterable<Collection> searchNetworkCollectionByName(String username, String collectionseasonname);
+			"MATCH user-[:COLLECTION]->collection WHERE collection.collectionseasonname =~ {1} " +
+			"RETURN user.name as name, collection ORDER BY collection.createdDate DESC")
+	Iterable<CollectionData> searchNetworkCollectionByName(String username, String collectionseasonname);
 
 	//queries related to stylesheets
 	@Query( "START n=node:search(username={0}) MATCH n-[:STYLESHEET]->c RETURN c ORDER BY c.createdDate DESC")
@@ -87,22 +93,24 @@ public interface UserRepository extends GraphRepository<User> {
 	Iterable<Stylesheet> searchStylesheetByName(String username, String stylesheetname);
 	
 	//queries related to linesheets
-	@Query( "START n=node:search(username={0}) MATCH n-[:LINESHEET]->c RETURN c ORDER BY c.createdDate DESC")
-	Iterable<Linesheet> getLinesheets(String username);
+	@Query( "START n=node:search(username={0}) MATCH n-[:LINESHEET]->linesheet " +
+			"RETURN n.name as name, linesheet ORDER BY linesheet.createdDate DESC")
+	Iterable<LinesheetData> getLinesheets(String username);
 	
 	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-user r.status? = 'CONFIRMED') " +
 			"WITH user" +
-			"MATCH user-[:LINESHEET]->c RETURN c ORDER BY c.createdDate DESC")
-	Iterable<Linesheet> getMyNetworkLinesheets(String username);
+			"MATCH user-[:LINESHEET]->linesheet " +
+			"RETURN user.name as name, linesheet ORDER BY linesheet.createdDate DESC")
+	Iterable<LinesheetData> getMyNetworkLinesheets(String username);
 	
-	@Query( "START n=node:search(username={0}) MATCH n-[:LINESHEET]->c WHERE c.linesheetname =~ {1} " +
-			"RETURN c ORDER BY c.createdDate DESC")
-	Iterable<Linesheet> searchLinesheetByName(String username, String linesheetname);
+	@Query( "START n=node:search(username={0}) MATCH n-[:LINESHEET]->linesheet WHERE linesheet.linesheetname =~ {1} " +
+			"RETURN n.name as name, linesheet ORDER BY linesheet.createdDate DESC")
+	Iterable<LinesheetData> searchLinesheetByName(String username, String linesheetname);
 	
 	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-user r.status? = 'CONFIRMED') " +
 			"WITH user" +
-			"MATCH user-[:LINESHEET]->c WHERE c.linesheetname =~ {1} " +
-			"RETURN c ORDER BY c.createdDate DESC")
-	Iterable<Linesheet> searchNetworkLinesheetByName(String username, String linesheetname);
+			"MATCH user-[:LINESHEET]->linesheet WHERE linesheet.linesheetname =~ {1} " +
+			"RETURN user.name as name, linesheet ORDER BY c.createdDate DESC")
+	Iterable<LinesheetData> searchNetworkLinesheetByName(String username, String linesheetname);
 
 }

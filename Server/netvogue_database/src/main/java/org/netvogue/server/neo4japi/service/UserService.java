@@ -1,5 +1,6 @@
 package org.netvogue.server.neo4japi.service;
 
+import java.util.Map;
 import java.util.Set;
 
 import org.netvogue.server.neo4japi.common.NetworkStatus;
@@ -42,10 +43,10 @@ public interface UserService {
 	public Iterable<Editorial> searchEditorialByName(String username, String name);
 	
 	//Queries related to collections
-	public Iterable<Collection> getCollections(User user);
-	public Iterable<Collection> searchCollectionByName(User user, String name);
-	public Iterable<Collection> searchCollectionByName(String username, String name);
-	public Iterable<Collection> searchCollections(String username, String seasonname, String category, String brandname);
+	public Iterable<CollectionData> getCollections(User user);
+	public Iterable<CollectionData> searchCollectionByName(User user, String name);
+	public Iterable<CollectionData> searchCollectionByName(String username, String name);
+	public Iterable<CollectionData> searchCollections(String username, String seasonname, String category, String brandname);
 
 	//Queries related to Stylesheets
 	public Iterable<Stylesheet> getStylesheets(User user);
@@ -53,7 +54,7 @@ public interface UserService {
 	public Iterable<Stylesheet> searchStylesheetByName(String username, String name);
 	
 	//Queries related to Linesheets
-	public Iterable<Linesheet> getLinesheets(User user);
-	public Iterable<Linesheet> searchLinesheetByName(User user, String name);
-	public Iterable<Linesheet> searchLinesheetByName(String username, String name);
+	public Iterable<LinesheetData> getLinesheets(User user);
+	public Iterable<LinesheetData> searchLinesheetByName(User user, String name);
+	public Iterable<LinesheetData> searchLinesheetByName(String username, String name);
 }
