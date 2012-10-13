@@ -41,17 +41,32 @@
 		<!-- left pane -->
 		<!-- right pane -->
 		<div class="span9">
-			<div>
+			<!-- <div>
 				<span class="left heading_btn header_width"> <a href="#/linesheets">Line
 						sheets</a> <span class="divider">/</span> <span> <a
 						ng-href="#/styles?id={{linesheetid}}&&cat={{category}}">{{linesheetname}}</a></span>
 				</span> <span class="right"> <a ng-href="#{{backButton}}"
 					class="rightpane_back_btn">Back</a></span>
 				<div class="divi2 right_pane_underline"></div>
+			</div> -->
+			
+			<!--    header -->
+			<div style="border-bottom: 1px solid black; position: relative; top: -2px;margin-bottom:10px;">
+				<span class="left ywbreadcrumb header_width"> <a
+					class="nonactive"
+					ng-href="#/styles?id={{linesheetid}}&&cat={{category}}"> Rebecca
+						minkoff {{linesheetname}}</a>
+				</span>
+				<span class="right">
+					<a ng-href="#{{backButton}}" class="rightpane_back_btn">Back</a>
+				</span>
 			</div>
-
+			 <!--    header -->
 		</div>
+			
 
+		<!-- </div> -->
+		<!-- right pane data -->
 		<div>
 			<div class="span4">
 				<ul class="thumbnails">
@@ -111,7 +126,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- right pane -->
+		<!-- right pane data -->
 	</div>
 </div>
 <!-- body -->

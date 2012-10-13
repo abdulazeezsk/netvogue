@@ -56,7 +56,7 @@
 		<!-- right pane -->
 		<div class="span9">
 			<div>
-				<div>
+				<!-- <div>
 					<span class="left heading_btn header_width"> <a href="#/linesheets">Line
 							sheets</a> <span class="divider">/</span> <span>
 							<a ng-href="#/styles?id={{linesheetid}}&&cat={{category}}">Rebecca Minkoff {{linesheetname}}</a></span>
@@ -68,7 +68,21 @@
 						class="rightpane_add_btn">Organize</a>
 					</span>
 					<div class="divi2 right_pane_underline"></div>
+				</div> -->
+				
+				<!-- header pane -->
+				<div style="border-bottom: 1px solid black; position: relative; top: -2px;">
+					<span class="left ywbreadcrumb header_width"> <a class="nonactive"
+						href="#/linesheets" >Linesheets</a> <span class="ywdivider">/</span> <span>
+						Rebecca Minkoff {{linesheetname}}</span></span>
 				</div>
+				<div style="border-bottom: 1px solid black;margin-bottom:10px;">
+					<span class="left right_pane_info"> Find styles using the
+						filters </span> <span class="right"> <a
+						href="#/addlinesheets?id={{linesheetid}}&&cat={{category}}" class="rightpane_add_btn">Organize</a>
+					</span>
+				</div>
+				<!-- header pane -->
 
 				<div>
 				<ul class="thumbnails">
