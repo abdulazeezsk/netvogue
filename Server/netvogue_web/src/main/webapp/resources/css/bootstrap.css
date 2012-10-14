@@ -4615,7 +4615,7 @@ to {
  * versions in the future. If you wish to customize Yourwindow for your
  * needs please refer to http://www.Yourwindow.com for more information.
  *
- * @copyright  Copyright (c) 2008 Yourwindow
+ * @copyright  Copyright (c) 2012 Yourwindow
  */
 
 font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -5219,6 +5219,15 @@ padding: 0;
 float: right;
 }
 
+.footbar ul
+{
+	list-style-type:none;
+}
+
+.footbar li
+{
+	display:inline;
+}
 
 /*Product Selection styles Begin ============================================================= */
 
@@ -5252,7 +5261,7 @@ float: right;
 /* Miscellaneous ============================================================= */
 
 .minimum_height {
-	min-height: 571px;
+	min-height: 670px;
 }
 
 .container .span10 {

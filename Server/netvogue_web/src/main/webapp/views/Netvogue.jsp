@@ -74,49 +74,36 @@ body {
 	</div>
 	<!-- footer -->
 	<div class="footer">
-		<div class="footer_in">
-			<span>© 2012 NET VOGUE</span> <span>
-				<ul class="menu social">
-					<li id="itemPinterest1"
-						style="margin-top: -1px; margin-left: -1px; list-style-type: none; float: left;">
-						<a
-						onmouseover="document.getElementById('pinterest1').src ='http://assets.matchesfashion.com/content/img/facebook-on.jpg';"
-						onmouseout="document.getElementById('pinterest1').src ='http://assets.matchesfashion.com/content/img/facebook.jpg';"
-						href="#" title="Go to Facebook page"><img id="pinterest1"
-							src="http://assets.matchesfashion.com/content/img/facebook.jpg"
-							border="0" alt="Facebook"></a>
-					</li>
-					<li id="itemPinterest2"
-						style="margin-top: -1px; list-style-type: none; float: left;">
-						<a
-						onmouseover="document.getElementById('pinterest2').src ='http://assets.matchesfashion.com/content/img/twitter-on.jpg';"
-						onmouseout="document.getElementById('pinterest2').src ='http://assets.matchesfashion.com/content/img/twitter.jpg';"
-						href="#" title="Go to Twitter page"><img id="pinterest2"
-							src="http://assets.matchesfashion.com/content/img/twitter.jpg"
-							border="0" alt="Twitter"></a>
-					</li>
+		<div class=" footer_in">
+			<ul class="footbar pull-left" style="padding-top:4px;" >
+				<li  id="YourWindow"><span>© 2012 YourWindow</span> <span></li>
+			</ul>
 
-					<li id="itemPinterest3"
-						style="margin-top: -2px; list-style-type: none; float: left;">
-						<a
-						onmouseover="document.getElementById('pinterest3').src ='http://assets.matchesfashion.com/content/img/Pinterest-logo-on.jpg';"
-						onmouseout="document.getElementById('pinterest3').src ='http://assets.matchesfashion.com/content/img/Pinterest-logo-off.jpg';"
-						href="#" title="Go to Pinterest page"><img id="pinterest3"
-							src="http://assets.matchesfashion.com/content/img/Pinterest-logo-off.jpg"
-							border="0" alt="Pinterest"></a>
-					</li>
+			<ul class="footbar pull-right">
+				<li  id="itemPinterest1"><a
+					onmouseover="document.getElementById('pinterest1').src ='img/facebook-on.jpeg';"
+					onmouseout="document.getElementById('pinterest1').src ='img/facebook.jpeg';"
+					href="#" title="Go to Facebook page"> <img id="pinterest1"
+						src="img/facebook.jpeg" border="0" alt="Facebook" />
+				</a></li>
+				<li id="itemPinterest2"><a
+					onmouseover="document.getElementById('pinterest2').src ='img/twitter-on.jpeg';"
+					onmouseout="document.getElementById('pinterest2').src ='img/twitter.jpeg';"
+					href="#" title="Go to Twitter page"><img id="pinterest2"
+						src="img/twitter.jpeg" border="0" alt="Twitter"></a></li>
 
-					<li id="itemPinterest"
-						style="margin-top: -1px; list-style-type: none; float: left;">
-						<a
-						onmouseover="document.getElementById('pinterest').src ='http://assets.matchesfashion.com/content/img/blog-on.jpg';"
-						onmouseout="document.getElementById('pinterest').src ='http://assets.matchesfashion.com/content/img/blog.jpg';"
-						href="#" title="Go to Blog page"><img id="pinterest"
-							src="http://assets.matchesfashion.com/content/img/blog.jpg"
-							border="0" alt="Blog "></a>
-					</li>
-				</ul>
-			</span>
+				<li id="itemPinterest3"><a
+					onmouseover="document.getElementById('pinterest3').src ='img/Pinterest-logo-on.jpeg';"
+					onmouseout="document.getElementById('pinterest3').src ='img/Pinterest.jpeg';"
+					href="#" title="Go to Pinterest page"><img id="pinterest3"
+						src="img/Pinterest.jpeg" border="0" alt="Pinterest"></a></li>
+
+				<li id="itemPinterest4"><a
+					onmouseover="document.getElementById('pinterest').src ='img/blog-on.jpeg';"
+					onmouseout="document.getElementById('pinterest').src ='img/blog.jpeg';"
+					href="#" title="Go to Blog page"><img id="pinterest"
+						src="img/blog.jpeg" border="0" alt="Blog "></a></li>
+			</ul>
 		</div>
 	</div>
 	<!-- footer -->
