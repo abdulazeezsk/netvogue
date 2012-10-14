@@ -117,13 +117,18 @@ angular.module('netVogue.directives', []).
 					border		: 3,
 					minItems    : 3,
 				});
+	    		var i=0;
+    			angular.forEach(angular.element(element).find("a#single_image"), function(imgElement) {
+    				angular.element(imgElement).attr('href', newValue[i++].piclink);
+    			});
 	    		angular.element(element).find("a#single_image").fancybox({
 					overlayOpacity: 0,
 					padding: 0,
 					showCloseButton: true,
 					autoScale: false,
 					hideOnContentClick: true,
-					margin: 50
+					margin: 50,
+					type:'image'
 				});
 	    	});
 	    };
