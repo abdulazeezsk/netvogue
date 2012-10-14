@@ -73,8 +73,8 @@ body {
 		</div>
 	</div>
 	<!-- footer -->
-	<div class="footer">
-		<div class=" footer_in">
+	<div class="ywfooter">
+		<div class="ywfooter_in">
 			<ul class="footbar pull-left" style="padding-top:4px;" >
 				<li  id="YourWindow"><span>© 2012 YourWindow</span> <span></li>
 			</ul>
