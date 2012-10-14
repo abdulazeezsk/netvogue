@@ -90,13 +90,17 @@
 							<h4>{{styletdetails.stylesize}}</h4>
 						</div>
 						<div class="clr"></div>
-						<div class="style_colors">
+						<div>
 							<p>Colors</p>
-							<div class="color_pallet">
-								<span></span><span style="background: #0066FF;"></span><span
-									style="background: #666666;"> </span><span
-									style="background: #009900;"></span><span
-									style="background: #CC9900;"> </span>
+							<div class="swatches">
+								<a rel="tooltip" data-original-title="SALSA RED/ RED" ><img width="20" height="20" src="img/Red.jpeg" alt="" style="margin-bottom:3px;"></a>
+								<a rel="tooltip" data-original-title="SALSA BLACK/ BLACK" ><img width="20" height="20" src="img/Black.jpeg" alt="" style="margin-bottom:3px;"></a>
+								<a rel="tooltip" data-original-title="SALSA RED/ RED" ><img width="20" height="20" src="img/Red.jpeg" alt="" style="margin-bottom:3px;"></a>
+								<a rel="tooltip" data-original-title="SALSA Gray/ Gray" ><img width="20" height="20" src="img/Gray.jpeg" alt="" style="margin-bottom:3px;"></a>
+								<a rel="tooltip" data-original-title="SALSA RED/ Maroon" ><img width="20" height="20" src="img/Maroon.jpeg" alt="" style="margin-bottom:3px;" ></a>
+								<a rel="tooltip" data-original-title="SALSA BLACK/ BLACK" ><img width="20" height="20" src="img/Black.jpeg" alt="" style="margin-bottom:3px;"></a>
+								<a rel="tooltip" data-original-title="SALSA RED/ RED" ><img width="20" height="20" src="img/Red.jpeg" alt="" style="margin-bottom:3px;"></a>
+								<a rel="tooltip" data-original-title="SALSA BLACK/ BLACK" ><img width="20" height="20" src="img/Black.jpeg" alt="" style="margin-bottom:3px;"></a>
 							</div>
 						</div>
 					</div>
@@ -109,21 +113,22 @@
 							<p>Delivery Date:</p>
 							<h4>{{styletdetails.stylederliverydate}}</h4>
 						</div>
-						<div class="price">
+						<div class="delevry_date">
 							<p>Price</p>
-							<h4>{{mainstyle.price}}</h4>
+							<h4><span class="WebRupee" style="font-size: 15px;">Rs.</span>{{mainstyle.price}}</h4>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-			 
-			 
-		 
-		
-
 		
 		<!-- right pane -->
 	</div>
 </div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery("[rel=tooltip]").tooltip();
+	});
+</script>
 <!-- body -->
