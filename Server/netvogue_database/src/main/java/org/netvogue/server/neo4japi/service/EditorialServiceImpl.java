@@ -13,7 +13,7 @@ public class EditorialServiceImpl implements EditorialService {
 	@Autowired Neo4jTemplate			neo4jTemplate;
 	@Autowired EditorialRepository		editorialRepo;
 
-	public ResultStatus SaveEditorial(Editorial newEditorial, String error) {
+	public ResultStatus SaveEditorial(Editorial newEditorial, StringBuffer error) {
 		try {
 			//New Categories node will be created an relationship will also be added for this.
 			//Saving it through Template instead of boutiquerepo so that categories node can also be saved
@@ -22,7 +22,7 @@ public class EditorialServiceImpl implements EditorialService {
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error for" + newEditorial.getEditorialname() + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
@@ -32,36 +32,47 @@ public class EditorialServiceImpl implements EditorialService {
 		return editorialRepo.getEditorial(editorialid);
 	}
 	
-	public ResultStatus editEditorial(String editorialid, String name, String desc, String error) {
+	public ResultStatus editEditorial(String editorialid, String name, String desc, StringBuffer error) {
 		try {
 			editorialRepo.editEditorial(editorialid, name, desc);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing editorial" + editorialid + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
-	public ResultStatus editEditorialName(String editorialid, String name, String error) {
+	public ResultStatus editEditorialName(String editorialid, String name, StringBuffer error) {
 		try {
 			editorialRepo.editEditorialName(editorialid, name);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing editorial" + editorialid + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
-	public ResultStatus deleteEditorial(String editorialid, String error)  {
+	public ResultStatus setProfilepic(String editorialid, String uniqueid, StringBuffer error) {
+		try {
+			editorialRepo.setProfilepic(editorialid, uniqueid);
+			System.out.println("Profile pic has been set for editorial:" + editorialid);
+			return ResultStatus.SUCCESS;
+		} catch(Exception e) {
+			System.out.println("There was an error while setting cover pic for editorial:" + editorialid + " - " + e.toString());
+			error.append(e.toString());
+			return ResultStatus.FAILURE;
+		}
+	}
+	public ResultStatus deleteEditorial(String editorialid, StringBuffer error)  {
 		try {
 			editorialRepo.deleteEditorial(editorialid);
 			System.out.println("deleted editorial:" + editorialid);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while deleting editorial:" + editorialid + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
@@ -81,12 +92,12 @@ public class EditorialServiceImpl implements EditorialService {
 		return editorialRepo.searchPhotosByName(editorialId, Utils.SerializeQueryParamForSearch(name));
 	}
 	
-	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, String error) {
+	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, StringBuffer error) {
 		if(null == photoId || photoId.isEmpty()) {
-			error = "photoid is empty";
+			error.append("photoid is empty");
 			return ResultStatus.FAILURE;
 		} else if(null == name || null == seasonname) {
-			error = "name/season name is empty";
+			error.append("name/season name is empty");
 			return ResultStatus.FAILURE;
 		}
 		try {
@@ -94,37 +105,37 @@ public class EditorialServiceImpl implements EditorialService {
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing photo name" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
-	public ResultStatus editPhotoName(String photoId, String name, String error) {
+	public ResultStatus editPhotoName(String photoId, String name, StringBuffer error) {
 		try {
 			editorialRepo.editPhotoName(photoId, name);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing photo name" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
-	public ResultStatus editPhotoDescription(String photoId, String desc, String error) {
+	public ResultStatus editPhotoDescription(String photoId, String desc, StringBuffer error) {
 		try {
 			editorialRepo.editPhotoDescription(photoId, desc);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing photo desc" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
 	
-	public ResultStatus deletePhoto(String photoId, String error)  {
+	public ResultStatus deletePhoto(String photoId, StringBuffer error)  {
 		if(null == photoId || photoId.isEmpty()){
-			error = "Photoid is empty";
+			error.append("Photoid is empty");
 			return ResultStatus.FAILURE;
 		}
 		try {
@@ -132,7 +143,7 @@ public class EditorialServiceImpl implements EditorialService {
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while deleting photo" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}

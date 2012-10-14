@@ -140,10 +140,11 @@ angular.module('netVogue.directives', []).
 	    return {
 	        restrict:'A',
 	        scope: {
-	            data		: '=data',
-	            isEditMode	: '=editMode',
-	            updateData	: '&updateData',
-	            deletedata	: '&deleteData',
+	            data			: '=data',
+	            isEditMode		: '=editMode',
+	            setprofilepic	: '&setProfilepic',
+	            updateData		: '&updateData',
+	            deletedata		: '&deleteData',
 	        },
 	        templateUrl: 'templates/Edit_Text.htm',
 	        link: function(scope, elm, attrs) {
@@ -247,6 +248,9 @@ angular.module('netVogue.directives', []).
 		        }
 		    });
     	});
+		scope.setprofilepicToParent = function(uniqueid) {
+			scope.setprofilepic({uniqueid:uniqueid});
+		};
 		scope.updatedataToParent = function(label, seasonname, photoid) {
 			scope.updatedata({label:label, seasonname:seasonname, photoid:photoid});
 		};
@@ -283,6 +287,7 @@ angular.module('netVogue.directives', []).
 			maxheight		: '=maxHeight',
 			minheight		: '=minHeight',
 			galleryid		: '=galleryId',
+			setprofilepic	: '&setProfilepic',
 			updatedata		: '&updateData',
 			deletedata		: '&deleteData',
 			filesadded		: '=filesAdded'

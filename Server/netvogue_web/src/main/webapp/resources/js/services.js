@@ -308,6 +308,14 @@ angular.module('netVogue.services', []).
 	    			}
 	    		}
 	    	},
+	    	setprofilepic: function(ajaxrequestcall, datatosend) {
+	    		var config = {
+		    			method: "POST",
+		    			data: datatosend,
+		                url: ajaxrequestcall + "/setprofilepic"
+		            };
+		    		return $http(config);
+	    	},
 	    	deletegallery: function(ajaxrequestcall, galleryid) {
 	    		var config = {
 	    			method: "POST",
@@ -523,6 +531,14 @@ angular.module('netVogue.services', []).
 	    				break;
 	    			}
 	    		}
+	    	},
+	    	setprofilepic: function(datatosend) {
+	    		var config = {
+		    			method: "POST",
+		    			data: datatosend,
+		                url: "collection/setprofilepic"
+		            };
+		    		return $http(config);
 	    	},
 	    	deletecollection: function(galleryid) {
 	    		var config = {

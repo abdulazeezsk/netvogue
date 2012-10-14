@@ -140,7 +140,7 @@ public class GalleryController {
 	@RequestMapping(value="gallery/create", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse CreateGallery(@RequestBody String galleryname) {
 		System.out.println("Create Gallery");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		User loggedinUser = userDetailsService.getUserFromSession();
 		org.netvogue.server.neo4japi.domain.Gallery newGallery = new org.netvogue.server.neo4japi.domain.Gallery(galleryname, loggedinUser);
 		
@@ -151,7 +151,7 @@ public class GalleryController {
 			response.setIdcreated(newGallery.getGalleryid());
 		}
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -159,7 +159,7 @@ public class GalleryController {
 	@RequestMapping(value="gallery/edit", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditGallery(@RequestBody JsonRequest request) {
 		System.out.println("Edit Gallery Name");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		
 		if(null == request.getId() || request.getId().isEmpty()) {
@@ -170,15 +170,32 @@ public class GalleryController {
 			if(ResultStatus.SUCCESS == galleryService.editGalleryName(request.getId(), request.getValue(), error))   
 				response.setStatus(true);
 			else
-				response.setError(error);
+				response.setError(error.toString());
 		}
+		return response;
+	}
+	
+	@RequestMapping(value="gallery/setprofilepic", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse EditPhotoInfo(@RequestBody JsonRequest profilepic) {
+		System.out.println("Set Profile pic for gallery:" + profilepic.getId());
+		StringBuffer error = new StringBuffer();
+		JsonResponse response = new JsonResponse();
+		if(profilepic.getId().isEmpty() || profilepic.getValue().isEmpty()) {
+			response.setError("galleryid or profile pic is empty");
+			return response;
+		}
+		if(ResultStatus.SUCCESS == galleryService.setProfilepic(profilepic.getId(), profilepic.getValue(), error)) 
+			response.setStatus(true);
+		else
+			response.setError(error.toString());
+		
 		return response;
 	}
 	
 	@RequestMapping(value="gallery/delete", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeleteGallery(@RequestBody String galleryid) {
 		System.out.println("Delete Gallery:"+ galleryid);
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		
 		if(null == galleryid || galleryid.isEmpty()) {
@@ -189,7 +206,7 @@ public class GalleryController {
 			response.setStatus(true);
 		}
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -215,31 +232,24 @@ public class GalleryController {
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
 			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.GALLERY);
-			String imagePath = (String)uploadMap.get(UploadManager.QUERY_STRING);
 			Photo newPhoto = new Photo((String)uploadMap.get(UploadManager.FILE_ID));
 			gallery.addPhotos(newPhoto);
 			JSONFileData.add(conversionService.convert(newPhoto, PhotoWeb.class));
 		}
-		String error ="";
+		StringBuffer error = new StringBuffer();
 		if(ResultStatus.SUCCESS == galleryService.SaveGallery(gallery, error)) {  
 			response.setStatus(true);
 			response.setFilesuploaded(JSONFileData);
 		}
 		else
-			response.setError(error);
-		/*if ( collection.getFileData() instanceof MultipartFile )
-			
-		else {
-			LinkedList<MultipartFile> list = (LinkedList<MultipartFile>)collection.getFileData();
-			uploadManager.processUpload(list, ImageType.COLLECTIONS);
-		}*/
+			response.setError(error.toString());
 		return response;
 	}
 	
 	@RequestMapping(value="gallery/editphotoinfo", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse EditPhotoInfo(@RequestBody PhotoInfoJsonRequest photoInfo) {
+	public @ResponseBody JsonResponse setCoverPic(@RequestBody PhotoInfoJsonRequest photoInfo) {
 		System.out.println("Edit Photo Info:" + photoInfo.toString());
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		String photoId = photoInfo.getPhotoid();
 		if(null == photoId || photoId.isEmpty()) {
@@ -250,7 +260,7 @@ public class GalleryController {
 													photoInfo.getSeasonname(), error))
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -258,14 +268,14 @@ public class GalleryController {
 	@RequestMapping(value="gallery/editphotoname", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPhotoName(@RequestBody JsonRequest request) {
 		System.out.println("Edit Photo Name");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		
 		if(ResultStatus.SUCCESS == galleryService.editPhotoName(request.getId(), request.getValue(), error))   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -275,14 +285,14 @@ public class GalleryController {
 														  @RequestParam("seasonname") String seasonname, 
 														  @RequestParam("photoid") String photoid) {
 		System.out.println("Edit Photo Name");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		
 		if(ResultStatus.SUCCESS == galleryService.editPhotoInfo(photoid, photoname, seasonname, error))   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -290,7 +300,7 @@ public class GalleryController {
 	@RequestMapping(value="gallery/deletephoto", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeletePhoto(@RequestBody String photoid) {
 		System.out.println("Delete Photo:" + photoid);
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		if(!photoid.isEmpty()) {
@@ -298,7 +308,7 @@ public class GalleryController {
 				response.setStatus(true);
 			}
 			else
-				response.setError(error);
+				response.setError(error.toString());
 		} else {
 			response.setError("photoid is empty");
 		}

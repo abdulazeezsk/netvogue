@@ -13,6 +13,9 @@ public interface GalleryRepository extends GraphRepository<Gallery>{
 	@Query("START p = node:galleryid(galleryid={0}) SET p.galleryname = {1}")
 	void editGalleryName(String galleryid, String name);
 	
+	@Query("START p = node:galleryid(galleryid={0}) SET p.profilePicLink = {1}")
+	void setProfilepic(String galleryid, String uniqueid);
+	
 	@Query("START n=node:galleryid(galleryid={0}) MATCH n-[rels*0..]->p FOREACH(rel IN rels: DELETE rel) DELETE p " +
 			"WITH n MATCH n<-[r]-() DELETE n, r")
 	void deleteGallery(String galleryId);

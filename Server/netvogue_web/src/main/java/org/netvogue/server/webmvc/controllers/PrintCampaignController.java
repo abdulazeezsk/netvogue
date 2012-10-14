@@ -141,7 +141,7 @@ public class PrintCampaignController {
 	@RequestMapping(value="printcampaign/create", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse CreatePrintCampaign(@RequestBody CampaignJSONRequest request) {
 		System.out.println("Create Print campaiggn");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		User loggedinUser = userDetailsService.getUserFromSession();
 		org.netvogue.server.neo4japi.domain.PrintCampaign newPrintcampaign = 
 				new org.netvogue.server.neo4japi.domain.PrintCampaign(request.getName(), request.getDesc(), loggedinUser);
@@ -153,7 +153,7 @@ public class PrintCampaignController {
 			response.setIdcreated(newPrintcampaign.getPrintcampaignid());
 		}
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -161,7 +161,7 @@ public class PrintCampaignController {
 	@RequestMapping(value="printcampaign/edit", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPrintCampaign(@RequestBody CampaignJSONRequest request) {
 		System.out.println("Edit Print Campaign");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		
 		if(null == request.getId() || request.getId().isEmpty()) {
@@ -176,7 +176,24 @@ public class PrintCampaignController {
 							request.getName(), request.getDesc(), error))   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
+		
+		return response;
+	}
+	
+	@RequestMapping(value="printcampaign/setprofilepic", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse setProfilepic(@RequestBody JsonRequest profilepic) {
+		System.out.println("Set Profile pic for campaign:" + profilepic.getId());
+		StringBuffer error = new StringBuffer();
+		JsonResponse response = new JsonResponse();
+		if(profilepic.getId().isEmpty() || profilepic.getValue().isEmpty()) {
+			response.setError("campaignid or profile pic is empty");
+			return response;
+		}
+		if(ResultStatus.SUCCESS == printcampaignService.setProfilepic(profilepic.getId(), profilepic.getValue(), error)) 
+			response.setStatus(true);
+		else
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -184,7 +201,7 @@ public class PrintCampaignController {
 	@RequestMapping(value="printcampaign/delete", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeleteCampaign(@RequestBody String galleryid) {
 		System.out.println("Delete Print Campaign:"+ galleryid);
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		
 		if(null == galleryid || galleryid.isEmpty()) {
@@ -195,7 +212,7 @@ public class PrintCampaignController {
 			response.setStatus(true);
 		}
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -221,26 +238,25 @@ public class PrintCampaignController {
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
 			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.PRINT_CAMPAIGN);
-			//String imagePath = (String)uploadMap.get(UploadManager.QUERY_STRING);
 			PrintCampaignPhoto newPhoto = new PrintCampaignPhoto((String)uploadMap.get(UploadManager.FILE_ID));
 			printcampaign.addPhotos(newPhoto);
 			
 			JSONFileData.add(conversionService.convert(newPhoto, PhotoWeb.class));
 		}
-		String error ="";
+		StringBuffer error = new StringBuffer();
 		if(ResultStatus.SUCCESS == printcampaignService.SavePrintCampaign(printcampaign, error)) {  
 			response.setStatus(true);
 			response.setFilesuploaded(JSONFileData);
 		}
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		return response;
 	}
 	
 	@RequestMapping(value="printcampaign/editphotoinfo", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPhotoInfo(@RequestBody PhotoInfoJsonRequest photoInfo) {
 		System.out.println("Edit Photo Info:" + photoInfo.toString());
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		String photoId = photoInfo.getPhotoid();
 		if(null == photoId || photoId.isEmpty())
@@ -249,7 +265,7 @@ public class PrintCampaignController {
 													photoInfo.getSeasonname(), error))
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -257,14 +273,14 @@ public class PrintCampaignController {
 	@RequestMapping(value="printcampaign/editphotoname", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPhotoName(@RequestBody JsonRequest request) {
 		System.out.println("Edit Photo Name");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		
 		if(ResultStatus.SUCCESS == printcampaignService.editPhotoName(request.getId(), request.getValue(), error))   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -274,14 +290,14 @@ public class PrintCampaignController {
 														  @RequestParam("seasonname") String seasonname, 
 														  @RequestParam("photoid") String photoid) {
 		System.out.println("Edit Photo Name");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		
 		if(ResultStatus.SUCCESS == printcampaignService.editPhotoInfo(photoid, photoname, seasonname, error))   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -289,7 +305,7 @@ public class PrintCampaignController {
 	@RequestMapping(value="printcampaign/deletephoto", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeletePhoto(@RequestBody String photoid) {
 		System.out.println("Delete Photo:" + photoid);
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		if(!photoid.isEmpty()) {
@@ -297,7 +313,7 @@ public class PrintCampaignController {
 				response.setStatus(true);
 			}
 			else
-				response.setError(error);
+				response.setError(error.toString());
 		} else {
 			response.setError("photoid is empty");
 		}

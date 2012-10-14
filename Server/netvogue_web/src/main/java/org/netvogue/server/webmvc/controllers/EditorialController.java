@@ -136,7 +136,7 @@ public class EditorialController {
 	@RequestMapping(value="editorial/create", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse CreateEditorial(@RequestBody CampaignJSONRequest request) {
 		System.out.println("Create Editorial");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		User loggedinUser = userDetailsService.getUserFromSession();
 		org.netvogue.server.neo4japi.domain.Editorial newEditorial = 
 				new org.netvogue.server.neo4japi.domain.Editorial(request.getName(), request.getDesc(), loggedinUser);
@@ -148,7 +148,7 @@ public class EditorialController {
 			response.setIdcreated(newEditorial.getEditorialid());
 		}
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -156,7 +156,7 @@ public class EditorialController {
 	@RequestMapping(value="editorial/edit", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditEditorial(@RequestBody CampaignJSONRequest request) {
 		System.out.println("Edit Editorial");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		
 		if(null == request.getId() || request.getId().isEmpty()) {
@@ -171,7 +171,24 @@ public class EditorialController {
 							request.getName(), request.getDesc(), error))   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
+		
+		return response;
+	}
+	
+	@RequestMapping(value="editorial/setprofilepic", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse setProfilepic(@RequestBody JsonRequest profilepic) {
+		System.out.println("Set Profile pic for editorial:" + profilepic.getId());
+		StringBuffer error = new StringBuffer();
+		JsonResponse response = new JsonResponse();
+		if(profilepic.getId().isEmpty() || profilepic.getValue().isEmpty()) {
+			response.setError("editorialid or profile pic is empty");
+			return response;
+		}
+		if(ResultStatus.SUCCESS == editorialService.setProfilepic(profilepic.getId(), profilepic.getValue(), error)) 
+			response.setStatus(true);
+		else
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -179,7 +196,7 @@ public class EditorialController {
 	@RequestMapping(value="editorial/delete", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeleteEditorial(@RequestBody String galleryid) {
 		System.out.println("Delete Print Campaign:"+ galleryid);
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		
 		if(null == galleryid || galleryid.isEmpty()) {
@@ -190,7 +207,7 @@ public class EditorialController {
 			response.setStatus(true);
 		}
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -216,26 +233,25 @@ public class EditorialController {
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
 			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.EDITORIAL);
-			//String imagePath = (String)uploadMap.get(UploadManager.QUERY_STRING);
 			EditorialPhoto newPhoto = new EditorialPhoto((String)uploadMap.get(UploadManager.FILE_ID));
 			editorial.addPhotos(newPhoto);
 			
 			JSONFileData.add(conversionService.convert(newPhoto, PhotoWeb.class));
 		}
-		String error ="";
+		StringBuffer error = new StringBuffer();
 		if(ResultStatus.SUCCESS == editorialService.SaveEditorial(editorial, error)) {  
 			response.setStatus(true);
 			response.setFilesuploaded(JSONFileData);
 		}
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		return response;
 	}
 	
 	@RequestMapping(value="editorial/editphotoinfo", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPhotoInfo(@RequestBody PhotoInfoJsonRequest photoInfo) {
 		System.out.println("Edit Photo Info:" + photoInfo.toString());
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		String photoId = photoInfo.getPhotoid();
 		if(null == photoId || photoId.isEmpty())
@@ -244,7 +260,7 @@ public class EditorialController {
 													photoInfo.getSeasonname(), error))
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -252,14 +268,14 @@ public class EditorialController {
 	@RequestMapping(value="editorial/editphotoname", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPhotoName(@RequestBody JsonRequest request) {
 		System.out.println("Edit Photo Name");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		
 		if(ResultStatus.SUCCESS == editorialService.editPhotoName(request.getId(), request.getValue(), error))   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -269,14 +285,14 @@ public class EditorialController {
 														  @RequestParam("seasonname") String seasonname, 
 														  @RequestParam("photoid") String photoid) {
 		System.out.println("Edit Photo Name");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		
 		if(ResultStatus.SUCCESS == editorialService.editPhotoInfo(photoid, photoname, seasonname, error))   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -284,7 +300,7 @@ public class EditorialController {
 	@RequestMapping(value="editorial/deletephoto", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeletePhoto(@RequestBody String photoid) {
 		System.out.println("Delete Photo:" + photoid);
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		if(!photoid.isEmpty()) {
@@ -292,7 +308,7 @@ public class EditorialController {
 				response.setStatus(true);
 			}
 			else
-				response.setError(error);
+				response.setError(error.toString());
 		} else {
 			response.setError("photoid is empty");
 		}

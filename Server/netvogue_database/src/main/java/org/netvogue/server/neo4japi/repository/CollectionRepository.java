@@ -19,6 +19,9 @@ public interface CollectionRepository extends GraphRepository<Collection> {
 	@Query("START p = node:collectionid(collectionid={0}) SET p.description = {1}")
 	void editCollectionDesc(String collectionid, String desc);
 	
+	@Query("START p = node:collectionid(collectionid={0}) SET p.profilePicLink = {1}")
+	void setProfilepic(String collectionid, String uniqueid);
+	
 	@Query("START n=node:collectionid(collectionid={0}) MATCH n-[rels*0..]->p " +
 			"FOREACH(rel IN rels: DELETE rel) DELETE p " +
 			"WITH n MATCH n<-[r]-() DELETE n, r")

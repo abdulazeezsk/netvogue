@@ -39,7 +39,15 @@ function MyCtrlAddGallery($scope, $routeParams, $location, srvgallery, mygallery
 			$scope.$broadcast('filesadded', element.files);
 		});
 	};
-	
+	$scope.setprofilepic = function(uniqueid) {
+    	var datatosend = new netvogue.jsonrequest($scope.galleryid, uniqueid);
+    	mygallery.setprofilepic(ajaxrequestcall,datatosend).success(function(data) {
+    		
+    	}).error(function(data) {
+    		
+    	});
+    };
+    
 	$scope.updatephoto = function(label, seasonname, photoid) {
 		mygallery.savephotoinfo(ajaxrequestcall, label, seasonname, photoid).success(function(data) {
 			if(data.status == true) {
@@ -103,6 +111,15 @@ function MyCtrlAddPrintCampaign($scope, $routeParams, $location, srvgallery, myg
 		});
 	};
 	
+	$scope.setprofilepic = function(uniqueid) {
+    	var datatosend = new netvogue.jsonrequest($scope.galleryid, uniqueid);
+    	mygallery.setprofilepic(ajaxrequestcall,datatosend).success(function(data) {
+    		
+    	}).error(function(data) {
+    		
+    	});
+    };
+    
 	$scope.updatephoto = function(label, seasonname, photoid) {
 		mygallery.savephotoinfo(ajaxrequestcall, label, seasonname, photoid).success(function(data) {
 			if(data.status == true) {
@@ -189,6 +206,15 @@ function MyCtrlAddNewsletter($scope, $routeParams, $location, srvgallery, mygall
 		});
 	};
 	
+	$scope.setprofilepic = function(uniqueid) {
+    	var datatosend = new netvogue.jsonrequest($scope.galleryid, uniqueid);
+    	mygallery.setprofilepic(ajaxrequestcall,datatosend).success(function(data) {
+    		
+    	}).error(function(data) {
+    		
+    	});
+    };
+    
 	$scope.updatephoto = function(label, seasonname, photoid) {
 		mygallery.savephotoinfo(ajaxrequestcall, label, seasonname, photoid).success(function(data) {
 			if(data.status == true) {
@@ -255,6 +281,15 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 		});
 	};
 	
+	$scope.setprofilepic = function(uniqueid) {
+    	var datatosend = new netvogue.jsonrequest($scope.galleryid, uniqueid);
+    	mycollection.setprofilepic(datatosend).success(function(data) {
+    		
+    	}).error(function(data) {
+    		
+    	});
+    };
+    
 	$scope.updatephoto = function(label, seasonname, photoid) {
 		mycollection.savephotoinfo(label, seasonname, photoid).success(function(data) {
 			if(data.status == true) {

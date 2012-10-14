@@ -16,7 +16,7 @@ public class CollectionServiceImpl implements CollectionService {
 	@Autowired Neo4jTemplate			neo4jTemplate;
 	@Autowired CollectionRepository		collectionRepo;
 
-	public ResultStatus SaveCollection(Collection newCollection, String error) {
+	public ResultStatus SaveCollection(Collection newCollection, StringBuffer error) {
 		try {
 			//New Categories node will be created an relationship will also be added for this.
 			//Saving it through Template instead of boutiquerepo so that categories node can also be saved
@@ -25,7 +25,7 @@ public class CollectionServiceImpl implements CollectionService {
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error for" + newCollection.getCollectionname() + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
@@ -35,36 +35,47 @@ public class CollectionServiceImpl implements CollectionService {
 		return collectionRepo.getCollection(collectionid);
 	}
 	
-	public ResultStatus editCollection(String collectionid, String seasonname, String desc, String error) {
+	public ResultStatus editCollection(String collectionid, String seasonname, String desc, StringBuffer error) {
 		try {
 			collectionRepo.editCollection(collectionid, seasonname, desc);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing Collection" + collectionid + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
-	public ResultStatus editCollectionSeasonName(String collectionid, String seasonname, String error) {
+	public ResultStatus editCollectionSeasonName(String collectionid, String seasonname, StringBuffer error) {
 		try {
 			collectionRepo.editCollectionSeasonName(collectionid, seasonname);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing Collection" + collectionid + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
-	public ResultStatus deleteCollection(String collectionid, String error)  {
+	public ResultStatus setProfilepic(String collectionid, String uniqueid, StringBuffer error) {
+		try {
+			collectionRepo.setProfilepic(collectionid, uniqueid);
+			return ResultStatus.SUCCESS;
+		} catch(Exception e) {
+			System.out.println("There was an error while setting profile pic for Collection" + collectionid + " - " + e.toString());
+			error.append(e.toString());
+			return ResultStatus.FAILURE;
+		}
+	}
+	
+	public ResultStatus deleteCollection(String collectionid, StringBuffer error)  {
 		try {
 			collectionRepo.deleteCollection(collectionid);
 			System.out.println("deleted collection:" + collectionid);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while deleting collection:" + collectionid + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
@@ -84,12 +95,12 @@ public class CollectionServiceImpl implements CollectionService {
 		return collectionRepo.searchPhotosByName(collectionid, Utils.SerializeQueryParamForSearch(name));
 	}
 	
-	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, String error) {
+	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, StringBuffer error) {
 		if(null == photoId || photoId.isEmpty()) {
-			error = "photoid is empty";
+			error.append("photoid is empty");
 			return ResultStatus.FAILURE;
 		} else if(null == name || null == seasonname) {
-			error = "name/season name is empty";
+			error.append("name/season name is empty");
 			return ResultStatus.FAILURE;
 		}
 		try {
@@ -97,37 +108,37 @@ public class CollectionServiceImpl implements CollectionService {
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing photo name" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
-	public ResultStatus editPhotoName(String photoId, String name, String error) {
+	public ResultStatus editPhotoName(String photoId, String name, StringBuffer error) {
 		try {
 			collectionRepo.editPhotoName(photoId, name);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing photo name" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
-	public ResultStatus editPhotoDescription(String photoId, String desc, String error) {
+	public ResultStatus editPhotoDescription(String photoId, String desc, StringBuffer error) {
 		try {
 			collectionRepo.editPhotoDescription(photoId, desc);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing photo desc" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
 	
-	public ResultStatus deletePhoto(String photoId, String error)  {
+	public ResultStatus deletePhoto(String photoId, StringBuffer error)  {
 		if(null == photoId || photoId.isEmpty()){
-			error = "Photoid is empty";
+			error.append("Photoid is empty");
 			return ResultStatus.FAILURE;
 		}
 		try {
@@ -135,7 +146,7 @@ public class CollectionServiceImpl implements CollectionService {
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while deleting photo" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
