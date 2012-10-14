@@ -5229,6 +5229,16 @@ float: right;
 	display:inline;
 }
 
+.collectionshowcase ul
+{
+	list-style-type:none;
+}
+
+.collectionshowcase li
+{
+	display:inline;
+}
+
 /*Product Selection styles Begin ============================================================= */
 
 .ProductSelection {
@@ -6526,6 +6536,7 @@ ul.n-wizard-brand-list {
 	float: left;
 	margin: 0 10px 0 0;
 	width: 220px;
+	/* height:150px; */
 	min-height: 150px;
 	max-height: 150px;
 	overflow-x: hidden;
@@ -7318,6 +7329,19 @@ float:left;
     transition-delay: 0.3s; */
 }
 
+.ywstylename
+{
+	font: normal 14px Helvetica, Arial, sans-serif;
+	border-bottom:1px solid #000;
+	text-transform:uppercase;
+}
+
+.ywstyledesc
+{
+	font: normal 10px Helvetica, Arial, sans-serif;
+	border-bottom:1px solid #000;
+}
+
 
 /* .view-third img {   
     transition: all 0.2s ease-in; 
@@ -7387,26 +7411,8 @@ margin: 5px 0;
 cursor: pointer;
 }
 
-/* @font-face
-{
-	font-family:ÔWebRupeeÕ;
-	src:url(ÔWebRupee.V2.0.eotÕ);
-	src:local(ÔWebRupeeÕ), url(ÔWebRupee.V2.0.ttfÕ)format(ÔtruetypeÕ),url(ÔWebRupee.V2.0.woffÕ)format(ÔwoffÕ),url(ÔWebRupee.V2.0.svgÕ)format(ÔsvgÕ);
-	font-weight:normal;
-	font-style:normal;
-}
-.WebRupee
-{
-font-family:WebRupee;
-} */
 
-/* html>body.WebRupee{margin-right:2px;}
-html>body.WebRupee{*margin-right:0;}
-#container{width:500px;margin:50pxauto;}
-
-user agent stylesheet
- */
-.breadcrumbyw ul {
+/* .breadcrumbyw ul {
 	width:700px;
 }
 
@@ -7419,16 +7425,16 @@ user agent stylesheet
 	border-bottom: 1px solid #000;
 	position:relative;
 	top:-1px;
-	/* -webkit-border-radius: 3px;
+	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 	-webkit-box-shadow: inset 0 1px 0 #ffffff;
 	-moz-box-shadow: inset 0 1px 0 #ffffff;
 	box-shadow: inset 0 1px 0 #ffffff;
-	background-image: linear-gradient(top, #ffffff, #f5f5f5); */
-}
+	background-image: linear-gradient(top, #ffffff, #f5f5f5);
+} */
 
-
+/* 
 .breadcrumbyw li {
 	display: inline-block;
 	*display: inline;
@@ -7459,7 +7465,7 @@ user agent stylesheet
 .breadcrumbyw .active a {
 	color: #333333;
 	text-transform:uppercase; 
-}
+} */
 
 
 

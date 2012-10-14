@@ -21,10 +21,10 @@
 			<div elastislide>
 				<div id="lookbookS" class="lookbook-wrapper">
 					<div class="lookbook">
-						<ul class="nav nav-tab" style="width: 8746px; margin-left: 0px; " ng-repeat="collection in photogallery">
-                        	<li style="margin-right: 5px; width: 306.6666666666667px; ">
+						<ul class="collectionshowcase" style="width: 8746px; margin-left: 0px; ">
+                        	<li ng-repeat="collection in photogallery" style="margin-right: 5px; height:450px; width: 306.6666666666667px;">
                        	 		<a id="single_image" style="border-width: 3px;">
-                               		<img ng-src="{{collection.thumbnail_url}}">
+                               		<img style=" height:450px; width: 306.6666666666667px;" ng-src="{{collection.thumbnail_url}}">
                                	</a>
                             </li>
 						</ul>
