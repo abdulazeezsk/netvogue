@@ -304,8 +304,8 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 	};
 	
 	$scope.deletephoto = function(photoid) {
-		mycollection.deletephoto(ajaxrequestcall, photoid).success(function(data) {
-			mygallery.deletephotoslocally(photoid);
+		mycollection.deletephoto(photoid).success(function(data) {
+			mycollection.deletephotoslocally(photoid);
 			$scope.existingfiles	= srvcollection.getphotos($routeParams);
 		}).error(function(data) {
 			alert("error: " + data.error);
