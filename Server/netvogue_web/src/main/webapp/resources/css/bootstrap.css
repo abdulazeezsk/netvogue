@@ -5152,9 +5152,28 @@ height: 356px;
 .swatches
 {
 width: 110px;
-height: 356px;	
+height: 75px;	
 }
- 
+
+.imageprevw
+{
+width: 290px;
+height: 356px;
+float:left;
+}
+
+.styles-specs
+{
+width: 400px;
+height: 356px;
+float:left;
+}
+.moreviews-styles
+{
+width: 277px;
+height: 356px;
+clear:both;
+}
 
 
 /* SubHeading Style Begin ============================================================= */
