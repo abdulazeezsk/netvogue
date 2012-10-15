@@ -44,15 +44,25 @@
 				</div>
 			</div>
 			<!-- header -->
+			<div>
+				<div class="alert alert-info" style="margin: 10px 0;">
+					<button type="button" class="close" data-dismiss="alert">
+						<small>x</small>
+					</button>
+					Drag & drop Collections here or Choose Collections to upload You've used 10%
+					of your 300 MB upload limit Pro members get unlimited uploads.
+					Upgrade?
+				</div>
 
-			<!-- upload plugin -->
-			<div fileupload-plugin ng-model="existingfiles" new-files="newfiles"
-				min-height="300" max-height="300" gallery-id="galleryid"
-				set-profilepic="setprofilepic(uniqueid)"
-				update-data="updatephoto(label, seasonname, photoid)"
-				delete-data="deletephoto(photoid)" files-added="filesadded"></div>
-			<!-- upload plugin -->
+				<!-- upload plugin -->
+				<div fileupload-plugin ng-model="existingfiles" new-files="newfiles"
+					min-height="300" max-height="300" gallery-id="galleryid"
+					set-profilepic="setprofilepic(uniqueid)"
+					update-data="updatephoto(label, seasonname, photoid)"
+					delete-data="deletephoto(photoid)" files-added="filesadded"></div>
+				<!-- upload plugin -->
 
+			</div>
 		</div>
 		<!-- right pane -->
 	</div>

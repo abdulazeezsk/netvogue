@@ -27,33 +27,40 @@
 		<!-- left pane -->
 		<!-- right pane-->
 		<div class="span9">
-		
-		<!-- header -->
+
+			<!-- header -->
 			<div>
 				<div
 					style="border-bottom: 1px solid black; position: relative; top: -2px;">
-					<span class="left ywbreadcrumb header_width"> <a class="nonactive"
-						href="#/gallery" >Gallery</a> <span class="ywdivider">/</span> <a class="nonactive"
-						ng-href="#/photos?id={{galleryid}}" >{{galleryname}}</a> <span class="ywdivider">/</span> <span>
-						Organize</span></span> <span
+					<span class="left ywbreadcrumb header_width"> <a
+						class="nonactive" href="#/gallery">Gallery</a> <span
+						class="ywdivider">/</span> <a class="nonactive"
+						ng-href="#/photos?id={{galleryid}}">{{galleryname}}</a> <span
+						class="ywdivider">/</span> <span> Organize</span></span> <span
 						class="right"> <a ng-href="#/photos?id={{galleryid}}"
 						class="rightpane_back_btn nodeco">Back</a>
 					</span>
 				</div>
 				<div style="border-bottom: 1px solid black;">
 					<span class="left right_pane_info">Find Photos using the
-						filters</span> 
-						<span class="right fileinput-button"> <span
+						filters</span> <span class="right fileinput-button"> <span
 						class="rightpane_add_btn">Upload Photos</span> <input
 						id="fileupload" type="file" name="files[]" multiple
 						data-url="gallery/addphotos"
 						onchange="angular.element(this).scope().addfiles(this)">
-						</span>
+					</span>
 				</div>
 			</div>
 			<!-- header -->
-			
+
 			<div>
+				<div class="alert alert-info" style="margin:10px 0;">
+					<button type="button" class="close" data-dismiss="alert">
+						<small>x</small>
+					</button>
+					Drag & drop photos here or Choose photos to
+					upload You've used 10% of your 300 MB upload limit Pro members get unlimited uploads. Upgrade?
+				</div>
 				<!-- data pannel -->
 				<div fileupload-plugin ng-model="existingfiles" new-files="newfiles"
 					min-height="150" max-height="150" gallery-id="galleryid"
