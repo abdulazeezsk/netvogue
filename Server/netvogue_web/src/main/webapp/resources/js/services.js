@@ -314,7 +314,15 @@ angular.module('netVogue.services', []).
 		    			data: datatosend,
 		                url: ajaxrequestcall + "/setprofilepic"
 		            };
-		    		return $http(config);
+		    	return $http(config);
+	    	},
+	    	sortphotos: function(ajaxrequestcall, datatosend) {
+	    		var config = {
+		    			method: "POST",
+		    			data: datatosend,
+		                url: ajaxrequestcall + "/sortphotos"
+		            };
+		    	return $http(config);
 	    	},
 	    	deletegallery: function(ajaxrequestcall, galleryid) {
 	    		var config = {
@@ -539,6 +547,14 @@ angular.module('netVogue.services', []).
 		                url: "collection/setprofilepic"
 		            };
 		    		return $http(config);
+	    	},
+	    	sortphotos: function(datatosend) {
+	    		var config = {
+		    			method: "POST",
+		    			data: datatosend,
+		                url: "collection/sortphotos"
+		            };
+		    	return $http(config);
 	    	},
 	    	deletecollection: function(galleryid) {
 	    		var config = {

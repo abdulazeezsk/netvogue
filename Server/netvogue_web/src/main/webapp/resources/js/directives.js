@@ -248,6 +248,9 @@ angular.module('netVogue.directives', []).
 		        }
 		    });
     	});
+		scope.orderchangedNew = function() {
+			console.log("order changed");
+		};
 		scope.setprofilepicToParent = function(uniqueid) {
 			scope.setprofilepic({uniqueid:uniqueid});
 		};
@@ -259,24 +262,6 @@ angular.module('netVogue.directives', []).
 		};
 		scope.progressVisible = true;
 		scope.progress = 0;
-		
-		/*scope.$watch('existingfiles', function(newValue, oldValue) {
-    		if(angular.isUndefined(newValue)) {
-				return;
-			}
-    		
-    		var i=0;
-			angular.forEach(angular.element(element).find('img'), function(imgElement) {
-				angular.element(imgElement).attr('src', newValue[i++].thumbnail_url);
-			});
-			element.imagesLoaded(function() {
-				scope.$apply( function() {
-					element.masonry({
-						itemSelector : '.box'
-					});
-				});
-			});
-		}, true);*/
 	};
 	return {
 		templateUrl	: 'templates/fileupload_plugin.htm',
@@ -321,52 +306,9 @@ angular.module('netVogue.directives', []).
 	var linkFn;
 	linkFn = function(scope, element, attrs) {
 		scope.newfiles = [];
-		var filesinprocess = 0;
-		/*var addfiles = function(files) {
-			scope.newfiles = [];
-			scope.newfiles.push(loadingImage.src);
-			var i;
-			for (i = 0; i < files.length; i++) {
-				scope.senttoserver = true;
-				if(4 == (i +  scope.existingfiles.length + filesinprocess))
-		    		break;
-		    	var loadingImage = window.loadImage(
-		    			files[i],
-		    	        function (img) {
-		    	            
-		    	        },
-		    	        {maxWidth: 600}
-		    	    );
-		    	if (!loadingImage) {
-		    		loadingImage.src = "http://placehold.it/130X151";
-		    	}
-		    	scope.newfiles.push(loadingImage.src);
-		    }
-			filesinprocess = i;
-			checkremainingfiles();
-		};*/
-		
-		var checkremainingfiles = function() {
-			//Only four files can be added
-			var remainingimages = 4 - (scope.existingfiles.length + filesinprocess);
-			if(remainingimages < 0)
-				remainingimages = 0;
-			/*for (var i = 0; i < remainingimages; i++) {
-				scope.newfiles.push("http://placehold.it/130X151");
-			}*/
-		};
-		checkremainingfiles();
 		
 		scope.isEditMode = false;
-		scope.filesadded	= function(element) {
-			scope.$apply(function(scope) {
-				// Turn the FileList object into an Array
-				//addfiles(element.files);
-				scope.newfiles = [];
-				scope.newfiles.push("");
-				scope.senttoserver = true;
-			});
-		};
+		
 		var stylesheetid = {
 				"stylesheetid" : scope.stylesheetid
 		};
@@ -396,8 +338,6 @@ angular.module('netVogue.directives', []).
 			        			};
 			        			scope.senttoserver = false;
 			        			scope.newfiles = [];
-			        			checkremainingfiles();
-			        			filesinprocess = 0;
 		        			}
 		        		} else {
 		        			alert("error");
@@ -411,27 +351,9 @@ angular.module('netVogue.directives', []).
 			scope.newfiles = [];
 			//checkremainingfiles();
 		};
-		scope.updatedataToParent = function(label, seasonname, photoid) {
-			//scope.updatedata({label:label, seasonname:seasonname, photoid:photoid});
-		};
-		scope.progressVisible = true;
-		scope.progress = 0;
-		
-		scope.$watch('existingfiles', function() {
-			scope.newfiles = [];
-			checkremainingfiles();
-		});
 	};
 	return {
-		templateUrl	: 'templates/brand/Styleupload_Plugin.htm',
-		replace		: false,
-		transclude	: true,
 		restrict	: 'A',
-		scope		: {
-			existingfiles	: '=ngModel',
-			stylesheetid	: '=stylesheetId',
-			senttoserver	: '=filesAdded'
-		},
 		link		: linkFn
 	};	
 }).directive('smartWizard', function() { // This is used in initiate page

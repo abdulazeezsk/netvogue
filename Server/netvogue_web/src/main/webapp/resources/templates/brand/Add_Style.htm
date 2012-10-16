@@ -73,11 +73,14 @@
 				</div>
 				<!-- header -->
 
-				<div id="stylecontainer">
+				<div id="stylecontainer" styleupload-plugin>
+					<input id="styleupload" type="file" name="files[]" multiple
+						data-url="stylesheet/addstyleimages"
+						onchange="angular.element(this).scope().filesadded(this)">
 					<div class="imageprevw">
 						<ul class="thumbnails">
 							<li class="spanstyle" style="display: inline;"><img
-								width="257" height="365" src="img/Rebeccaminkoff.jpeg" alt=""></li>
+								width="257" height="365" ng-src="{{existingfiles[0].thumbnail_url}}" alt=""></li>
 						</ul>
 					</div>
 					<div class="styles-specs">
@@ -191,18 +194,9 @@
 				</div>
 				<div class="divi2"></div>
 				<div class="moreviews-styles">
-					<a><img class="thumbnailz" width="85"
-						style="max-height: 113px;" src="img/Rebeccaminkoff.jpeg" alt=""></a>
-					<a><img class="thumbnailz" width="85"
-						style="max-height: 113px;" src="img/Rebeccaminkoff.jpeg" alt=""></a>
-					<a><img class="thumbnailz" width="85"
-						style="max-height: 113px;" src="img/Rebeccaminkoff.jpeg" alt=""></a>
-					<a><img class="thumbnailz" width="85"
-						style="max-height: 113px;" src="img/Rebeccaminkoff.jpeg" alt=""></a>
-					<a><img class="thumbnailz" width="85"
-						style="max-height: 113px;" src="img/Rebeccaminkoff.jpeg" alt=""></a>
-					<a><img class="thumbnailz" width="85"
-						style="max-height: 113px;" src="img/Rebeccaminkoff.jpeg" alt=""></a>
+					<a ng-repeat="eachfile in existingfiles">
+						<img class="thumbnailz" width="85"
+							style="max-height: 113px;" ng-src="{{eachfile.thumbnail_url}}" alt=""></a>
 				</div>
 				<!-- <div class="controls pull-right" style="clear: both;">
 					<button type="button" class="btn" ng-click="exitstylepane()">

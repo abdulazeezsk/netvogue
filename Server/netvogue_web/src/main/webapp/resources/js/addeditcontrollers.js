@@ -48,6 +48,14 @@ function MyCtrlAddGallery($scope, $routeParams, $location, srvgallery, mygallery
     	});
     };
     
+    $scope.sortphotos = function(photosorder) {
+    	mygallery.sortphotos(ajaxrequestcall, $scope.galleryid, photosorder).success(function(data) {
+    		
+    	}).error(function(data) {
+    		
+    	});
+    };
+    
 	$scope.updatephoto = function(label, seasonname, photoid) {
 		mygallery.savephotoinfo(ajaxrequestcall, label, seasonname, photoid).success(function(data) {
 			if(data.status == true) {
@@ -114,6 +122,14 @@ function MyCtrlAddPrintCampaign($scope, $routeParams, $location, srvgallery, myg
 	$scope.setprofilepic = function(uniqueid) {
     	var datatosend = new netvogue.jsonrequest($scope.galleryid, uniqueid);
     	mygallery.setprofilepic(ajaxrequestcall,datatosend).success(function(data) {
+    		
+    	}).error(function(data) {
+    		
+    	});
+    };
+    
+    $scope.sortphotos = function(photosorder) {
+    	mygallery.sortphotos(ajaxrequestcall, photosorder).success(function(data) {
     		
     	}).error(function(data) {
     		
@@ -215,6 +231,14 @@ function MyCtrlAddNewsletter($scope, $routeParams, $location, srvgallery, mygall
     	});
     };
     
+    $scope.sortphotos = function(photosorder) {
+    	mygallery.sortphotos(ajaxrequestcall, photosorder).success(function(data) {
+    		
+    	}).error(function(data) {
+    		
+    	});
+    };
+    
 	$scope.updatephoto = function(label, seasonname, photoid) {
 		mygallery.savephotoinfo(ajaxrequestcall, label, seasonname, photoid).success(function(data) {
 			if(data.status == true) {
@@ -284,6 +308,14 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 	$scope.setprofilepic = function(uniqueid) {
     	var datatosend = new netvogue.jsonrequest($scope.galleryid, uniqueid);
     	mycollection.setprofilepic(datatosend).success(function(data) {
+    		
+    	}).error(function(data) {
+    		
+    	});
+    };
+    
+    $scope.sortphotos = function(photosorder) {
+    	mycollection.sortphotos(photosorder).success(function(data) {
     		
     	}).error(function(data) {
     		
@@ -369,6 +401,16 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
     }).error(function(data) {
     	
     });
+	
+    $scope.filesadded	= function(element) {
+		$scope.$apply(function(scope) {
+			// Turn the FileList object into an Array
+			//addfiles(element.files);
+			$scope.newfiles = [];
+			$scope.newfiles.push("");
+			$scope.senttoserver = true;
+		});
+	};
 	
 	$scope.exitstylepane = function() {
 		$scope.newstyle.empty();
