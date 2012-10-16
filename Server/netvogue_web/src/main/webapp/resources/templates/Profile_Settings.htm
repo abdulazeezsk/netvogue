@@ -49,20 +49,9 @@
                     </h4>
                     <div class="divi2 right_pane_underline">
                     </div>
-                    
-                    <div class="alert alert-info" ng-show="showalertAU">
-						<button type="button" class="close" data-dismiss="alert">
-							<small>x</small>
-						</button>
-						Well done! You successfully saved About Us
-					</div>
-                    
                     <div style="width: 680px; height: 355px;">
                         <textarea id="textarea" rows="18" style="width: 680px;" ng-model="aboutus"></textarea>
                     </div>
-                    
-                    
-					
                     <div style="padding-left: 585px;">
                         <button type="submit" class="btn btn-primary" style="" data-loading-text="Saving..."
                             ng-click="updateaboutus(aboutus, $event)">
@@ -82,14 +71,6 @@
                             <input type="checkbox" ng-model="line.selected" /><span
                                 class="Title">{{line.productlinename}}</span></div>
                     </div>
-                    
-                    <div class="alert alert-info" ng-show="showalertPL">
-						<button type="button" class="close" data-dismiss="alert">
-							<small>x</small>
-						</button>
-						Well done! You successfully saved Product Line
-					</div>
-                    
                     <div class="pull-right">
                         <button type="submit" class="btn btn-primary" style="" data-loading-text="Saving..."
                         	ng-click="updateproductline(productline, $event)">
@@ -213,14 +194,6 @@
                         </div>
                         <div class="divi2">
                         </div>
-                        
-                        <div class="alert alert-info" ng-show="showalert">
-						<button type="button" class="close" data-dismiss="alert">
-							<small>x</small>
-						</button>
-						Well done! You successfully saved the Contact Info
-					</div>
-                        
                         <div class="controls" style="padding-left: 390px;">
                             <button type="submit" class="btn btn-primary" data-loading-text="Saving..."
                             	ng-click="updatecontactinfo(contactinfo, $event)">
