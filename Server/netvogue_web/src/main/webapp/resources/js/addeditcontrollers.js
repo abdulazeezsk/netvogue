@@ -377,6 +377,7 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
 	$scope.filesadded = false;
 	$scope.existingfiles = [];
 	$scope.edit = false;
+	scope.isEditMode = false;
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvstylesheet.getname($routeParams);
