@@ -90,6 +90,17 @@ angular.module('netVogue.directives', []).
 				        });
 				      }
 				);*/
+	    	angular.element(element).find("a#single_image").fancybox({
+//						overlayOpacity: 0,
+//						padding: 0,
+//						showCloseButton: true,
+//						autoScale: false,
+//						hideOnContentClick: true,
+//						margin: 50,
+	    		openEffect	: 'none',
+	    		closeEffect	: 'none',
+						type:'image'
+					});
 	    	});
 	    };
 	    return {

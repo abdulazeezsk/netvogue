@@ -4695,8 +4695,11 @@ font-size:14px;
 }
 
 .leftpanefeed_text h3 {
+	font: bold 9px  Helvetica, Arial, sans-serif;;
+	padding: 0;
+}
+.leftpanefeed_text h2 {
 	font: normal 9px  Helvetica, Arial, sans-serif;;
-	font-weight: bold;
 	padding: 0;
 }
 
