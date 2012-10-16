@@ -4,6 +4,7 @@
     <title>Brand Registration</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/StyleSheet.css" rel="stylesheet" />
+    <link href="css/select2.css" rel="stylesheet" />
     <style type="text/css">
         body
         {
@@ -169,12 +170,19 @@
                         <label class="control-label">
                             City</label>
                         <div class="controls">
-                            <input type="text" id="txt_entity_city" data-items="7" ng-model="entity.city" class="span3" placeholder="City" name="uCity"
+                        <select ui-select2 ng-model="entity.city">														
+					 <option value="">Alabama</option>
+						<option value="WY">Wyoming</option>
+						<option value="A">AAAAAAA</option>
+						<option value="B">BBBBBB</option>
+					</select>
+                        
+                            <!-- <input type="text" id="txt_entity_city" data-items="7" ng-model="entity.city" class="span3" placeholder="City" name="uCity"
                                 required maxlength="25" ng-pattern="/^\w*$/" ui-jq="typeahead" ui-options="{ source: cities }"/>
                             <div ng-show="form.uCity.$dirty && form.uCity.$invalid">
                                 <span ng-show="form.uCity.$error.required" class="validation_msg">City Is Required</span>
                                 <span ng-show="form.uCity.$error.pattern" class="validation_msg">City Is Invalid</span>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="divi2">
                         </div>
@@ -324,8 +332,11 @@
         var entity = "boutique";
     </script>
     <script src="lib/jquery/jquery.js" type="text/javascript"></script>
+    <script src="lib/jquery/jquery-ui.min.js" type="text/javascript"></script>
     <script src="lib/bootstrap/bootstrap.min.js" type="text/javascript"></script>
     <script src="lib/angular/angular.js" type="text/javascript"></script>
-    <script src="js/regcontroller.js" type="text/javascript"></script>s
+    <script src="lib/angular/angular-ui.js" type="text/javascript"></script>
+    <script src="js/regcontroller.js" type="text/javascript"></script>
+    <script src="js/select2.js" type="text/javascript"></script>
 </body>
 </html>

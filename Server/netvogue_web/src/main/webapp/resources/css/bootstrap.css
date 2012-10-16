@@ -7060,3 +7060,31 @@ float:left;
 	overflow-y: hidden;
 }
 /*  Line sheets,stylesheets & collections ================================================================================= */
+
+ 
+ .info-box{
+    overflow:hidden;  
+    height: 15em;
+    width: 150px;
+    font-size: 1em;
+    line-height: 1em;
+   
+}
+
+.info-box span{
+    position:relative;    
+    display:inline-block;
+}
+
+ul a.selected
+{
+font-size: 10px;
+line-height: 16px;
+display: inline;
+
+padding-left: 10px;
+background-position:left;
+background-repeat:no-repeat;
+text-decoration: none;
+color: #0099cc;
+}

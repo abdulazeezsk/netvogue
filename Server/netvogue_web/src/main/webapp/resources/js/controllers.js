@@ -1357,6 +1357,7 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
     	myprofile.posttoserver(aboutme, "aboutus").success(function(data) {
         	if(data.status == true) {
         		myprofile.setaboutus(aboutme);
+        		$scope.showalertAU=true;
         	} else {
         		alert(data.error);
         	}
@@ -1371,6 +1372,7 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
     	myprofile.posttoserver(contactinfotemp, "contactinfo").success(function(data) {
         	if(data.status == true) {
         		myprofile.setcontactinfo(contactinfotemp);
+        		$scope.showalert=true;
         	} else {
         		alert(data.error);
         	}
@@ -1391,6 +1393,7 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
     	myprofile.posttoserver(productlines, "productline").success(function(data) {
         	if(data.status == true) {
         		myprofile.setproductline(productlinetemp);
+        		$scope.showalertPL=true;
         	} else {
         		alert(data.error);
         	}
