@@ -49,6 +49,14 @@
                     </h4>
                     <div class="divi2 right_pane_underline">
                     </div>
+                    
+                    <div class="alert alert-info" ng-show="showalertAU">
+						<button type="button" class="close" data-dismiss="alert">
+							<small>x</small>
+						</button>
+						Well done! You successfully saved About Us
+					</div>
+                    
                     <div style="width: 680px; height: 355px;">
                         <textarea id="textarea" rows="18" style="width: 680px;" ng-model="aboutus"></textarea>
                     </div>
@@ -64,6 +72,15 @@
                     </h4>
                     <div class="divi2 right_pane_underline">
                     </div>
+                    
+                    <div class="alert alert-info" ng-show="showalertPL">
+						<button type="button" class="close" data-dismiss="alert">
+							<small>x</small>
+						</button>
+						Well done! You successfully saved Product Line
+					</div>
+                    
+                    
                     <div style="width: 100%;" class="ProductSelection">
                         <div class="divi2">
                         </div>
@@ -121,7 +138,8 @@
                         Contact Info
                     </h4>
                     <div class="divi2 right_pane_underline">
-                    </div>
+                    </div>                    
+                    
                     <form class="form-horizontal">
                     <div class="control-group pull-left span8">
                         <label class="control-label">
@@ -194,6 +212,14 @@
                         </div>
                         <div class="divi2">
                         </div>
+                        
+                        <div class="alert alert-info" ng-show="showalert">
+						<button type="button" class="close" data-dismiss="alert">
+							<small>x</small>
+						</button>
+						Well done! You successfully saved Contact info
+					</div>
+                        
                         <div class="controls" style="padding-left: 390px;">
                             <button type="submit" class="btn btn-primary" data-loading-text="Saving..."
                             	ng-click="updatecontactinfo(contactinfo, $event)">
