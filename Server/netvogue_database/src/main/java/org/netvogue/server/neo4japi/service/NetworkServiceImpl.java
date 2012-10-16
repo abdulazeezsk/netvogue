@@ -97,7 +97,6 @@ public class NetworkServiceImpl implements NetworkService {
 				}				
 			}
 			System.out.println("Create notification in DB");
-			notification = new Notification(userBy);
 			notification.setDesc("You got new network request");
 			otherUser.addNotification(notification);
 			System.out.println("Save notification in DB");
@@ -129,7 +128,6 @@ public class NetworkServiceImpl implements NetworkService {
 				error ="Bad other username";
 				return ResultStatus.FAILURE;
 			}
-			notification = new Notification(confirmedBy, NetworkStatus.CONFIRMED);
 			notification.setDesc("Your network request is accepted");
 			otherUser.addNotification(notification);
 			networkRepo.ConfirmNetwork(confirmedBy.getUsername(), confirmTo);

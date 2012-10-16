@@ -19,6 +19,9 @@ public interface EditorialRepository extends GraphRepository<Editorial> {
 	@Query("START p = node:editorialid(editorialid={0}) SET p.description = {1}")
 	void editEditorialDesc(String editorialid, String desc);
 	
+	@Query("START p = node:editorialid(editorialid={0}) SET p.profilePicLink = {1}")
+	void setProfilepic(String editorialid, String uniqueid);
+	
 	@Query("START n=node:editorialid(editorialid={0}) MATCH n-[rels*0..]->p " +
 			"FOREACH(rel IN rels: DELETE rel) DELETE p " +
 			"WITH n MATCH n<-[r]-() DELETE n, r")

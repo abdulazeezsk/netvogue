@@ -10,6 +10,7 @@ import java.util.Set;
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.UploadManager;
 import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.EditorialPhoto;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.EditorialService;
@@ -47,76 +48,95 @@ public class EditorialController {
 	@Autowired
 	private UploadManager uploadManager;
 
-	@RequestMapping(value="geteditorials", method=RequestMethod.GET)
+	@RequestMapping(value={"geteditorials", "geteditorials/profileid"}, method=RequestMethod.GET)
 	public @ResponseBody Editorials GetEditorials(@ModelAttribute("profileid") String profileid, 
 												@RequestParam("galleryname") String galleryname) {
 		System.out.println("Get Editorials: " + galleryname);
 		Editorials campaigns = new Editorials();
-		User loggedinUser = userDetailsService.getUserFromSession();
-		if(profileid.isEmpty()) {
-			campaigns.setName(loggedinUser.getName());
-			campaigns.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
-			Set<Editorial> campaignTemp = new LinkedHashSet<Editorial>();
-			Iterable<org.netvogue.server.neo4japi.domain.Editorial> dbCampaigns;
-			if(galleryname.isEmpty()) {
-				dbCampaigns = userService.getEditorials(loggedinUser);
-			} else {
-				dbCampaigns = userService.searchEditorialByName(loggedinUser, galleryname);
-			}
-			if(null == dbCampaigns) {
+		
+		User user;
+		if(!profileid.isEmpty()) {
+			user = userService.getUserByUsername(profileid);
+			if(user == null) {
 				return campaigns;
 			}
-			Iterator<org.netvogue.server.neo4japi.domain.Editorial> first = dbCampaigns.iterator();
-			while ( first.hasNext() ){
-				org.netvogue.server.neo4japi.domain.Editorial dbCampaign = first.next() ;
-				System.out.println("Get Editorial" + dbCampaign.getEditorialname());
-				campaignTemp.add(conversionService.convert(dbCampaign, Editorial.class));
-			}
-			campaigns.setGalleries(campaignTemp);
+		} else {
+			 user = userDetailsService.getUserFromSession();
 		}
+		
+		campaigns.setName(user.getName());
+		campaigns.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
+		campaigns.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		Set<Editorial> campaignTemp = new LinkedHashSet<Editorial>();
+		Iterable<org.netvogue.server.neo4japi.domain.Editorial> dbCampaigns;
+		if(galleryname.isEmpty()) {
+			dbCampaigns = userService.getEditorials(user);
+		} else {
+			dbCampaigns = userService.searchEditorialByName(user, galleryname);
+		}
+		if(null == dbCampaigns) {
+			return campaigns;
+		}
+		Iterator<org.netvogue.server.neo4japi.domain.Editorial> first = dbCampaigns.iterator();
+		while ( first.hasNext() ){
+			org.netvogue.server.neo4japi.domain.Editorial dbCampaign = first.next() ;
+			System.out.println("Get Editorial" + dbCampaign.getEditorialname());
+			campaignTemp.add(conversionService.convert(dbCampaign, Editorial.class));
+		}
+		campaigns.setGalleries(campaignTemp);
+		
 		return campaigns;
 	}
 	
-	@RequestMapping(value="editorial/getphotos", method=RequestMethod.GET)
+	@RequestMapping(value={"editorial/getphotos", "editorial/getphotos/profileid"}, method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname
 											 ) {
 		System.out.println("Get editorial Photos: " + photoname);
 		Photos photos = new Photos();
-		User loggedinUser = userDetailsService.getUserFromSession();
 		if(galleryid.isEmpty()) {
 			return photos;
 		}
 		
-		if(profileid.isEmpty()) {
-			photos.setName(loggedinUser.getName());
-			photos.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
-			photos.setGalleryname(editorialService.getEditorial(galleryid).getEditorialname());
-			Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
-			Iterable<EditorialPhoto> dbPhotos;
-			if(photoname.isEmpty()) {
-				dbPhotos = editorialService.getPhotos(galleryid);
-			} else {
-				dbPhotos = editorialService.searchPhotoByName(galleryid, photoname);
-			}
-			if(null == dbPhotos) {
+		User user;
+		if(!profileid.isEmpty()) {
+			user = userService.getUserByUsername(profileid);
+			if(user == null) {
 				return photos;
 			}
-			Iterator<EditorialPhoto> first = dbPhotos.iterator();
-			while ( first.hasNext() ){
-				EditorialPhoto dbPhoto = first.next() ;
-				photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
-			}
-			photos.setPhotos(photosTemp);
+		} else {
+			 user = userDetailsService.getUserFromSession();
 		}
+		
+		photos.setName(user.getName());
+		photos.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
+		photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		photos.setGalleryname(editorialService.getEditorial(galleryid).getEditorialname());
+		Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
+		Iterable<EditorialPhoto> dbPhotos;
+		if(photoname.isEmpty()) {
+			dbPhotos = editorialService.getPhotos(galleryid);
+		} else {
+			dbPhotos = editorialService.searchPhotoByName(galleryid, photoname);
+		}
+		if(null == dbPhotos) {
+			return photos;
+		}
+		Iterator<EditorialPhoto> first = dbPhotos.iterator();
+		while ( first.hasNext() ){
+			EditorialPhoto dbPhoto = first.next() ;
+			photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
+		}
+		photos.setPhotos(photosTemp);
+			
 		return photos;
 	}
 	
 	@RequestMapping(value="editorial/create", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse CreateEditorial(@RequestBody CampaignJSONRequest request) {
 		System.out.println("Create Editorial");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		User loggedinUser = userDetailsService.getUserFromSession();
 		org.netvogue.server.neo4japi.domain.Editorial newEditorial = 
 				new org.netvogue.server.neo4japi.domain.Editorial(request.getName(), request.getDesc(), loggedinUser);
@@ -128,7 +148,7 @@ public class EditorialController {
 			response.setIdcreated(newEditorial.getEditorialid());
 		}
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -136,7 +156,7 @@ public class EditorialController {
 	@RequestMapping(value="editorial/edit", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditEditorial(@RequestBody CampaignJSONRequest request) {
 		System.out.println("Edit Editorial");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		
 		if(null == request.getId() || request.getId().isEmpty()) {
@@ -151,7 +171,24 @@ public class EditorialController {
 							request.getName(), request.getDesc(), error))   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
+		
+		return response;
+	}
+	
+	@RequestMapping(value="editorial/setprofilepic", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse setProfilepic(@RequestBody JsonRequest profilepic) {
+		System.out.println("Set Profile pic for editorial:" + profilepic.getId());
+		StringBuffer error = new StringBuffer();
+		JsonResponse response = new JsonResponse();
+		if(profilepic.getId().isEmpty() || profilepic.getValue().isEmpty()) {
+			response.setError("editorialid or profile pic is empty");
+			return response;
+		}
+		if(ResultStatus.SUCCESS == editorialService.setProfilepic(profilepic.getId(), profilepic.getValue(), error)) 
+			response.setStatus(true);
+		else
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -159,7 +196,7 @@ public class EditorialController {
 	@RequestMapping(value="editorial/delete", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeleteEditorial(@RequestBody String galleryid) {
 		System.out.println("Delete Print Campaign:"+ galleryid);
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		
 		if(null == galleryid || galleryid.isEmpty()) {
@@ -170,7 +207,7 @@ public class EditorialController {
 			response.setStatus(true);
 		}
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -196,26 +233,25 @@ public class EditorialController {
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
 			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.EDITORIAL);
-			//String imagePath = (String)uploadMap.get(UploadManager.QUERY_STRING);
 			EditorialPhoto newPhoto = new EditorialPhoto((String)uploadMap.get(UploadManager.FILE_ID));
 			editorial.addPhotos(newPhoto);
 			
 			JSONFileData.add(conversionService.convert(newPhoto, PhotoWeb.class));
 		}
-		String error ="";
+		StringBuffer error = new StringBuffer();
 		if(ResultStatus.SUCCESS == editorialService.SaveEditorial(editorial, error)) {  
 			response.setStatus(true);
 			response.setFilesuploaded(JSONFileData);
 		}
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		return response;
 	}
 	
 	@RequestMapping(value="editorial/editphotoinfo", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPhotoInfo(@RequestBody PhotoInfoJsonRequest photoInfo) {
 		System.out.println("Edit Photo Info:" + photoInfo.toString());
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		String photoId = photoInfo.getPhotoid();
 		if(null == photoId || photoId.isEmpty())
@@ -224,7 +260,7 @@ public class EditorialController {
 													photoInfo.getSeasonname(), error))
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -232,14 +268,14 @@ public class EditorialController {
 	@RequestMapping(value="editorial/editphotoname", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPhotoName(@RequestBody JsonRequest request) {
 		System.out.println("Edit Photo Name");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		
 		if(ResultStatus.SUCCESS == editorialService.editPhotoName(request.getId(), request.getValue(), error))   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -249,14 +285,14 @@ public class EditorialController {
 														  @RequestParam("seasonname") String seasonname, 
 														  @RequestParam("photoid") String photoid) {
 		System.out.println("Edit Photo Name");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		
 		if(ResultStatus.SUCCESS == editorialService.editPhotoInfo(photoid, photoname, seasonname, error))   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -264,7 +300,7 @@ public class EditorialController {
 	@RequestMapping(value="editorial/deletephoto", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeletePhoto(@RequestBody String photoid) {
 		System.out.println("Delete Photo:" + photoid);
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		if(!photoid.isEmpty()) {
@@ -272,7 +308,7 @@ public class EditorialController {
 				response.setStatus(true);
 			}
 			else
-				response.setError(error);
+				response.setError(error.toString());
 		} else {
 			response.setError("photoid is empty");
 		}

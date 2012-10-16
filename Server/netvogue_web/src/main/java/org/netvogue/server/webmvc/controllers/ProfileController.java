@@ -20,6 +20,7 @@ import org.netvogue.server.aws.core.UploadManager;
 import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.common.ProductLines;
 import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.*;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
 import org.netvogue.server.neo4japi.service.UserService;
@@ -69,6 +70,7 @@ public class ProfileController {
 		}
 
 		profile.setProfileid(user.getUsername());
+		profile.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
 		profile.setName(user.getName());
 		profile.setAboutus(user.getAboutUs());
 		//Set profile pic

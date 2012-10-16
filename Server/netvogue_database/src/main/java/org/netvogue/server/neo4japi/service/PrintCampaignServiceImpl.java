@@ -13,7 +13,7 @@ public class PrintCampaignServiceImpl implements PrintCampaignService {
 	@Autowired Neo4jTemplate			neo4jTemplate;
 	@Autowired PrintCampaignRepository	printcampaignRepo;
 
-	public ResultStatus SavePrintCampaign(PrintCampaign newPrintCampaign, String error) {
+	public ResultStatus SavePrintCampaign(PrintCampaign newPrintCampaign, StringBuffer error) {
 		try {
 			//New Categories node will be created an relationship will also be added for this.
 			//Saving it through Template instead of boutiquerepo so that categories node can also be saved
@@ -22,7 +22,7 @@ public class PrintCampaignServiceImpl implements PrintCampaignService {
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error for" + newPrintCampaign.getPrintcampaignname() + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
@@ -32,36 +32,47 @@ public class PrintCampaignServiceImpl implements PrintCampaignService {
 		return printcampaignRepo.getPrintCampaign(printcampaignId);
 	}
 	
-	public ResultStatus editPrintCampaign(String printCampaignId, String name, String desc, String error) {
+	public ResultStatus editPrintCampaign(String printCampaignId, String name, String desc, StringBuffer error) {
 		try {
 			printcampaignRepo.editPrintCampaign(printCampaignId, name, desc);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing print campaign" + printCampaignId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
-	public ResultStatus editPrintCampaignName(String printCampaignId, String name, String error) {
+	public ResultStatus editPrintCampaignName(String printCampaignId, String name, StringBuffer error) {
 		try {
 			printcampaignRepo.editPrintCampaignName(printCampaignId, name);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing print campaign" + printCampaignId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
-	public ResultStatus deletePrintCampaign(String printCampaignId, String error)  {
+	public ResultStatus setProfilepic(String printcampaignid, String uniqueid, StringBuffer error) {
+		try {
+			printcampaignRepo.setProfilepic(printcampaignid, uniqueid);
+			System.out.println("Profilepic has been set:" + printcampaignid);
+			return ResultStatus.SUCCESS;
+		} catch(Exception e) {
+			System.out.println("There was an error while setting profile pic:" + printcampaignid + " - " + e.toString());
+			error.append(e.toString());
+			return ResultStatus.FAILURE;
+		}
+	}
+	public ResultStatus deletePrintCampaign(String printCampaignId, StringBuffer error)  {
 		try {
 			printcampaignRepo.deletePrintCampaign(printCampaignId);
 			System.out.println("deleted gallery:" + printCampaignId);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while deleting print campaign:" + printCampaignId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
@@ -81,12 +92,12 @@ public class PrintCampaignServiceImpl implements PrintCampaignService {
 		return printcampaignRepo.searchPhotosByName(printcampaignId, Utils.SerializeQueryParamForSearch(name));
 	}
 	
-	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, String error) {
+	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, StringBuffer error) {
 		if(null == photoId || photoId.isEmpty()) {
-			error = "photoid is empty";
+			error.append("photoid is empty");
 			return ResultStatus.FAILURE;
 		} else if(null == name || null == seasonname) {
-			error = "name/season name is empty";
+			error.append("name/season name is empty");
 			return ResultStatus.FAILURE;
 		}
 		try {
@@ -94,37 +105,37 @@ public class PrintCampaignServiceImpl implements PrintCampaignService {
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing photo name" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
-	public ResultStatus editPhotoName(String photoId, String name, String error) {
+	public ResultStatus editPhotoName(String photoId, String name, StringBuffer error) {
 		try {
 			printcampaignRepo.editPhotoName(photoId, name);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing photo name" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
-	public ResultStatus editPhotoDescription(String photoId, String desc, String error) {
+	public ResultStatus editPhotoDescription(String photoId, String desc, StringBuffer error) {
 		try {
 			printcampaignRepo.editPhotoDescription(photoId, desc);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing photo desc" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
 	
-	public ResultStatus deletePhoto(String photoId, String error)  {
+	public ResultStatus deletePhoto(String photoId, StringBuffer error)  {
 		if(null == photoId || photoId.isEmpty()){
-			error = "Photoid is empty";
+			error.append("Photoid is empty");
 			return ResultStatus.FAILURE;
 		}
 		try {
@@ -132,7 +143,7 @@ public class PrintCampaignServiceImpl implements PrintCampaignService {
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while deleting photo" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}

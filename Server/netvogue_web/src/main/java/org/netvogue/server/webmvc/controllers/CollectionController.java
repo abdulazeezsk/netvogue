@@ -16,6 +16,7 @@ import org.netvogue.server.neo4japi.domain.Category;
 import org.netvogue.server.neo4japi.domain.CollectionPhoto;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
+import org.netvogue.server.neo4japi.service.CollectionData;
 import org.netvogue.server.neo4japi.service.CollectionService;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.domain.Collection;
@@ -52,78 +53,98 @@ public class CollectionController {
 	@Autowired
 	private UploadManager uploadManager;
 
-	@RequestMapping(value="getcollections", method=RequestMethod.GET)
+	@RequestMapping(value={"getcollections", "getcollections/profileid"}, method=RequestMethod.GET)
 	public @ResponseBody Collections GetCollections(@ModelAttribute("profileid") String profileid, 
 												@RequestParam("galleryname") String galleryname,
 												@RequestParam("category") String categoryname,
 												@RequestParam("brandname") String brandname) {
 		System.out.println("Get Collections: " + galleryname);
 		Collections collections = new Collections();
-		User loggedinUser = userDetailsService.getUserFromSession();
-		if(profileid.isEmpty()) {
-			collections.setName(loggedinUser.getName());
-			collections.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
-			Set<Collection> collectionTemp = new LinkedHashSet<Collection>();
-			Iterable<org.netvogue.server.neo4japi.domain.Collection> dbCollections;
-			if(galleryname.isEmpty()) {
-				dbCollections = userService.getCollections(loggedinUser);
-			} else {
-				dbCollections = userService.searchCollections(loggedinUser.getUsername(), galleryname, categoryname, brandname);
-			}
-			if(null == dbCollections) {
+		
+		User user;
+		if(!profileid.isEmpty()) {
+			user = userService.getUserByUsername(profileid);
+			if(user == null || USER_TYPE.BOUTIQUE == user.getUserType()) {
 				return collections;
 			}
-			Iterator<org.netvogue.server.neo4japi.domain.Collection> first = dbCollections.iterator();
-			while ( first.hasNext() ){
-				org.netvogue.server.neo4japi.domain.Collection dbCollection = first.next() ;
-				System.out.println("Get Collection" + dbCollection.getCollectionname());
-				collectionTemp.add(conversionService.convert(dbCollection, Collection.class));
-			}
-			collections.setCollections(collectionTemp);
+		} else {
+			 user = userDetailsService.getUserFromSession();
 		}
+		
+		collections.setName(user.getName());
+		collections.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		Set<Collection> collectionTemp = new LinkedHashSet<Collection>();
+		Iterable<CollectionData> dbCollections;
+		if(galleryname.isEmpty()) {
+			dbCollections = userService.getCollections(user);
+		} else {
+			dbCollections = userService.searchCollections(user.getUsername(), galleryname, categoryname, brandname);
+		}
+		if(null == dbCollections) {
+			return collections;
+		}
+		Iterator<CollectionData> first = dbCollections.iterator();
+		while ( first.hasNext() ){
+			CollectionData dbCollection = first.next();
+			
+			Collection collection = conversionService.convert(dbCollection.getCollection(), Collection.class);
+			collection.setBrandname(dbCollection.getName());
+			collectionTemp.add(collection);
+			
+		}
+		collections.setCollections(collectionTemp);
+		
 		return collections;
 	}
 	
-	@RequestMapping(value="collection/getphotos", method=RequestMethod.GET)
+	@RequestMapping(value={"collection/getphotos", "collection/getphotos/profileid"}, method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname
 											 ) {
 		System.out.println("Get collection Photos: " + photoname);
 		Photos photos = new Photos();
-		User loggedinUser = userDetailsService.getUserFromSession();
 		if(galleryid.isEmpty()) {
 			return photos;
 		}
 		
-		if(profileid.isEmpty()) {
-			photos.setName(loggedinUser.getName());
-			photos.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
-			photos.setGalleryname(collectionService.getCollection(galleryid).getCollectionseasonname());
-			Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
-			Iterable<CollectionPhoto> dbPhotos;
-			if(photoname.isEmpty()) {
-				dbPhotos = collectionService.getPhotos(galleryid);
-			} else {
-				dbPhotos = collectionService.searchPhotoByName(galleryid, photoname);
-			}
-			if(null == dbPhotos) {
+		User user;
+		if(!profileid.isEmpty()) {
+			user = userService.getUserByUsername(profileid);
+			if(user == null || USER_TYPE.BOUTIQUE == user.getUserType()) {
 				return photos;
 			}
-			Iterator<CollectionPhoto> first = dbPhotos.iterator();
-			while ( first.hasNext() ){
-				CollectionPhoto dbPhoto = first.next() ;
-				photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
-			}
-			photos.setPhotos(photosTemp);
+		} else {
+			 user = userDetailsService.getUserFromSession();
 		}
+		
+		photos.setName(user.getName());
+		photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		photos.setGalleryname(collectionService.getCollection(galleryid).getCollectionseasonname());
+		Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
+		Iterable<CollectionPhoto> dbPhotos;
+		if(photoname.isEmpty()) {
+			dbPhotos = collectionService.getPhotos(galleryid);
+		} else {
+			dbPhotos = collectionService.searchPhotoByName(galleryid, photoname);
+		}
+		if(null == dbPhotos) {
+			return photos;
+		}
+		Iterator<CollectionPhoto> first = dbPhotos.iterator();
+		while ( first.hasNext() ){
+			CollectionPhoto dbPhoto = first.next() ;
+			photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
+		}
+		photos.setPhotos(photosTemp);
+		
 		return photos;
 	}
 	
 	@RequestMapping(value="collection/create", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse CreateCollection(@RequestBody CollectionJSONRequest request) {
 		System.out.println("Create Collection");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		
 		User loggedinUser = userDetailsService.getUserFromSession();
@@ -144,7 +165,7 @@ public class CollectionController {
 			response.setIdcreated(newCollection.getCollectionid());
 		}
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -152,7 +173,7 @@ public class CollectionController {
 	@RequestMapping(value="collection/edit", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditCollection(@RequestBody CollectionJSONRequest request) {
 		System.out.println("Edit Collection");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		
 		if(null == request.getId() || request.getId().isEmpty()) {
@@ -173,7 +194,7 @@ public class CollectionController {
 								request.getSeasonname(), request.getDesc(), error))   
 				response.setStatus(true);
 			else
-				response.setError(error);
+				response.setError(error.toString());
 		} else { //If we can write a cypher query for the below operation, then we can replace
 			//this else part
 			collection.setCollectionseasonname(request.getSeasonname());
@@ -186,8 +207,25 @@ public class CollectionController {
 				response.setIdcreated(collection.getCollectionid());
 			}
 			else
-				response.setError(error);
+				response.setError(error.toString());
 		}
+		
+		return response;
+	}
+	
+	@RequestMapping(value="collection/setprofilepic", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse setProfilepic(@RequestBody JsonRequest profilepic) {
+		System.out.println("Set Profile pic for collection:" + profilepic.getId());
+		StringBuffer error = new StringBuffer();
+		JsonResponse response = new JsonResponse();
+		if(profilepic.getId().isEmpty() || profilepic.getValue().isEmpty()) {
+			response.setError("collectionid or profile pic is empty");
+			return response;
+		}
+		if(ResultStatus.SUCCESS == collectionService.setProfilepic(profilepic.getId(), profilepic.getValue(), error)) 
+			response.setStatus(true);
+		else
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -196,7 +234,7 @@ public class CollectionController {
 	@RequestMapping(value="collection/delete", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeleteCollection(@RequestBody String galleryid) {
 		System.out.println("Delete Collection:"+ galleryid);
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		
 		if(null == galleryid || galleryid.isEmpty()) {
@@ -207,7 +245,7 @@ public class CollectionController {
 			response.setStatus(true);
 		}
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -233,26 +271,25 @@ public class CollectionController {
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
 			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.COLLECTION);
-			//String imagePath = (String)uploadMap.get(UploadManager.QUERY_STRING);
 			CollectionPhoto newPhoto = new CollectionPhoto((String)uploadMap.get(UploadManager.FILE_ID));
 			collection.addPhotos(newPhoto);
 			
 			JSONFileData.add(conversionService.convert(newPhoto, PhotoWeb.class));
 		}
-		String error ="";
+		StringBuffer error = new StringBuffer();
 		if(ResultStatus.SUCCESS == collectionService.SaveCollection(collection, error)) {  
 			response.setStatus(true);
 			response.setFilesuploaded(JSONFileData);
 		}
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		return response;
 	}
 	
 	@RequestMapping(value="collection/editphotoinfo", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPhotoInfo(@RequestBody PhotoInfoJsonRequest photoInfo) {
 		System.out.println("Edit Photo Info:" + photoInfo.toString());
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		String photoId = photoInfo.getPhotoid();
 		if(null == photoId || photoId.isEmpty())
@@ -261,7 +298,7 @@ public class CollectionController {
 													photoInfo.getSeasonname(), error))
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -269,14 +306,14 @@ public class CollectionController {
 	@RequestMapping(value="collection/editphotoname", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPhotoName(@RequestBody JsonRequest request) {
 		System.out.println("Edit Photo Name");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		
 		if(ResultStatus.SUCCESS == collectionService.editPhotoName(request.getId(), request.getValue(), error))   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -286,14 +323,14 @@ public class CollectionController {
 														  @RequestParam("seasonname") String seasonname, 
 														  @RequestParam("photoid") String photoid) {
 		System.out.println("Edit Photo Name");
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		
 		if(ResultStatus.SUCCESS == collectionService.editPhotoInfo(photoid, photoname, seasonname, error))   
 			response.setStatus(true);
 		else
-			response.setError(error);
+			response.setError(error.toString());
 		
 		return response;
 	}
@@ -301,7 +338,7 @@ public class CollectionController {
 	@RequestMapping(value="collection/deletephoto", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeletePhoto(@RequestBody String photoid) {
 		System.out.println("Delete Photo:" + photoid);
-		String error = "";
+		StringBuffer error = new StringBuffer();
 		
 		JsonResponse response = new JsonResponse();
 		if(!photoid.isEmpty()) {
@@ -309,7 +346,7 @@ public class CollectionController {
 				response.setStatus(true);
 			}
 			else
-				response.setError(error);
+				response.setError(error.toString());
 		} else {
 			response.setError("photoid is empty");
 		}

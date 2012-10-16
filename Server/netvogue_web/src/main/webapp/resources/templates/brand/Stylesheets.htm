@@ -86,7 +86,7 @@
 					<li ng-repeat="stylesheet in stylesheets">
 						<div align="center" style="position: relative;">
 							<a class="product-image"
-								ng-href="#/stylesheet?id={{stylesheet.galleryid}}" title="">
+								ng-href="#/stylesheet?id={{stylesheet.galleryid}}&&cat={{stylesheet.category}}" title="">
 								<img ng-src="{{stylesheet.gallerypic}}" class="fade_spot"
 								width="220" height="300" alt="Dumont Coat" title="Dumont Coat">
 							</a>
@@ -101,7 +101,7 @@
 								<span class="designer">Rebecca Minkoff</span>
 							</div>
 							<div class="stylesheet-name">
-								<span class="season">Winter/fall stylesheets</span>
+								<span class="season">{{stylesheet.galleryname}}</span>
 							</div>
 						</div>
 					</li>

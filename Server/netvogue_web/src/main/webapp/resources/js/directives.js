@@ -103,14 +103,48 @@ angular.module('netVogue.directives', []).
 	        restrict: 'A',
 	        link: linkFn
 	    };	    
+ }).directive('elastislide', function() {
+	    var linkFn;
+	    linkFn = function(scope, element, attrs) {
+	    	scope.$watch('photogallery', function(newValue, oldValue) {
+	    		if(angular.isUndefined(newValue)) {
+    				return;
+    			}
+	    		angular.element(element).find('#lookbookS').elastislide({
+					speed       : 750,						
+					imageW 		: 320,
+					margin		: 5,
+					border		: 3,
+					minItems    : 3,
+				});
+	    		var i=0;
+    			angular.forEach(angular.element(element).find("a#single_image"), function(imgElement) {
+    				angular.element(imgElement).attr('href', newValue[i++].piclink);
+    			});
+	    		angular.element(element).find("a#single_image").fancybox({
+					overlayOpacity: 0,
+					padding: 0,
+					showCloseButton: true,
+					autoScale: false,
+					hideOnContentClick: true,
+					margin: 50,
+					type:'image'
+				});
+	    	});
+	    };
+	    return {
+	        restrict: 'A',
+	        link: linkFn
+	    };	    
  }).directive('editText', function () {        
 	    return {
 	        restrict:'A',
 	        scope: {
-	            data		: '=data',
-	            isEditMode	: '=editMode',
-	            updateData	: '&updateData',
-	            deletedata	: '&deleteData',
+	            data			: '=data',
+	            isEditMode		: '=editMode',
+	            setprofilepic	: '&setProfilepic',
+	            updateData		: '&updateData',
+	            deletedata		: '&deleteData',
 	        },
 	        templateUrl: 'templates/Edit_Text.htm',
 	        link: function(scope, elm, attrs) {
@@ -214,6 +248,9 @@ angular.module('netVogue.directives', []).
 		        }
 		    });
     	});
+		scope.setprofilepicToParent = function(uniqueid) {
+			scope.setprofilepic({uniqueid:uniqueid});
+		};
 		scope.updatedataToParent = function(label, seasonname, photoid) {
 			scope.updatedata({label:label, seasonname:seasonname, photoid:photoid});
 		};
@@ -250,6 +287,7 @@ angular.module('netVogue.directives', []).
 			maxheight		: '=maxHeight',
 			minheight		: '=minHeight',
 			galleryid		: '=galleryId',
+			setprofilepic	: '&setProfilepic',
 			updatedata		: '&updateData',
 			deletedata		: '&deleteData',
 			filesadded		: '=filesAdded'

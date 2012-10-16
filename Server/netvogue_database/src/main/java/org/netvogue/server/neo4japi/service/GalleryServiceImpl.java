@@ -13,7 +13,7 @@ public class GalleryServiceImpl implements GalleryService {
 	@Autowired Neo4jTemplate		neo4jTemplate;
 	@Autowired GalleryRepository	galleryRepo;
 
-	public ResultStatus SaveGallery(Gallery newGallery, String error) {
+	public ResultStatus SaveGallery(Gallery newGallery, StringBuffer error) {
 		try {
 			//New Categories node will be created an relationship will also be added for this.
 			//Saving it through Template instead of boutiquerepo so that categories node can also be saved
@@ -22,7 +22,7 @@ public class GalleryServiceImpl implements GalleryService {
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error for" + newGallery.getGalleryname() + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
@@ -32,26 +32,38 @@ public class GalleryServiceImpl implements GalleryService {
 		return galleryRepo.getGallery(galleryId);
 	}
 	
-	public ResultStatus editGalleryName(String galleryId, String name, String error) {
+	public ResultStatus editGalleryName(String galleryId, String name, StringBuffer error) {
 		try {
 			System.out.println("Editing gallery with id" + galleryId + " - name: " + name);
 			galleryRepo.editGalleryName(galleryId, name);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing gallery" + galleryId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
-	public ResultStatus deleteGallery(String galleryId, String error)  {
+	public ResultStatus deleteGallery(String galleryId, StringBuffer error)  {
 		try {
 			galleryRepo.deleteGallery(galleryId);
 			System.out.println("deleted gallery:" + galleryId);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while deleting gallery:" + galleryId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
+			return ResultStatus.FAILURE;
+		}
+	}
+	
+	public ResultStatus setProfilepic(String galleryid, String uniqueid, StringBuffer error) {
+		try {
+			galleryRepo.setProfilepic(galleryid, uniqueid);
+			System.out.println("Cover pic has been set:" + galleryid);
+			return ResultStatus.SUCCESS;
+		} catch(Exception e) {
+			System.out.println("There was an error while setting gallery cover pic:" + galleryid + " - " + e.toString());
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
@@ -71,12 +83,12 @@ public class GalleryServiceImpl implements GalleryService {
 		return galleryRepo.searchPhotosByName(galleryid, Utils.SerializeQueryParamForSearch(name));
 	}
 	
-	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, String error) {
+	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, StringBuffer error) {
 		if(null == photoId || photoId.isEmpty()) {
-			error = "photoid is empty";
+			error.append("photoid is empty");
 			return ResultStatus.FAILURE;
 		} else if(null == name || null == seasonname) {
-			error = "name/season name is empty";
+			error.append("name/season name is empty");
 			return ResultStatus.FAILURE;
 		}
 		try {
@@ -84,37 +96,37 @@ public class GalleryServiceImpl implements GalleryService {
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing photo name" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
-	public ResultStatus editPhotoName(String photoId, String name, String error) {
+	public ResultStatus editPhotoName(String photoId, String name, StringBuffer error) {
 		try {
 			galleryRepo.editPhotoName(photoId, name);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing photo name" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
-	public ResultStatus editPhotoSeasonName(String photoId, String name, String error) {
+	public ResultStatus editPhotoSeasonName(String photoId, String name, StringBuffer error) {
 		try {
 			galleryRepo.editPhotoSeasonName(photoId, name);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while editing photo name" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}
 	
 	
-	public ResultStatus deletePhoto(String photoId, String error)  {
+	public ResultStatus deletePhoto(String photoId, StringBuffer error)  {
 		if(null == photoId || photoId.isEmpty()){
-			error = "Photoid is empty";
+			error.append("Photoid is empty");
 			return ResultStatus.FAILURE;
 		}
 		try {
@@ -122,7 +134,7 @@ public class GalleryServiceImpl implements GalleryService {
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while deleting photo" + photoId + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}

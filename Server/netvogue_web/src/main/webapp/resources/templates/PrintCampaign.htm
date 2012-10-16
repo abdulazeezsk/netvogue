@@ -34,18 +34,18 @@
 		<div class="span9">
 
 
-			<div>
-				<span class="left rightpane_subHeading"> Print Campaigns </span> <span
+			<div style="border-bottom:1px solid black;position:relative;top:-2px;">
+				<span class="left rightpane_subHeading"> Print Campaign</span> <span
 					class="right"> <a ng-href="#{{backButton}}"
 					class="rightpane_back_btn"> Back</a>
 				</span>
-				<div class="divi2 right_pane_underline"></div>
+			</div>
+			<div style="border-bottom:1px solid black;">
 				<span class="left right_pane_info"> Find print campaigns
 					using the filters </span> <span class="right"> <a
 					data-toggle="modal" href="#CreatePrintcampaign"
 					class="rightpane_add_btn">create print campaign</a>
 				</span>
-				<div class="divi2 right_pane_underline"></div>
 			</div>
 
 
@@ -80,13 +80,13 @@
 					<ul class="thumbnails">
 						<li ng-repeat="gallery in galleries" style="position: relative;margin-top:20px;" >
 							<!--  ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize" -->
-							<div class="directory view-directory">
+							<div class="press view-press">
 								<a ng-href="#/campaign?id={{gallery.galleryid}}" > <img
 									ng-src="{{gallery.gallerypic}}" alt=""></a>
 								<div class="content">
 							     	<div class="mask">
                                     </div>
-                                    <ul class="atr">
+                                    <ul class="prs">
                                        <li><a ng-click="deletegallery(gallery.galleryid)"
 										title="Delete"><i class="icon-trash icon-white"></i></a></li>
 									<li><a
@@ -99,7 +99,7 @@
 								</div> 
 								<div class="divi2"></div>
 							</div>
-							<div class="directorytitle">
+							<div class="presstitle">
 								<h3>{{gallery.galleryname}}</h3>
 							</div>
 						</li>

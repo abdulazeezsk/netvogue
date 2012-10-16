@@ -4,12 +4,13 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
 import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.common.ResultStatus;
-import org.netvogue.server.neo4japi.domain.Notification;
+import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.NetworkService;
 import org.netvogue.server.neo4japi.service.UserService;
@@ -18,6 +19,8 @@ import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.Network;
 import org.netvogue.server.webmvc.domain.Networks;
+import org.netvogue.server.webmvc.domain.Notification;
+import org.netvogue.server.webmvc.pusher.PusherChannel;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -26,7 +29,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -52,6 +54,7 @@ public class NetworkController {
 			}
 		}
 		response.setName(user.getName());
+		response.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
 		response.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
 		Set<Network> networksTemp = new LinkedHashSet<Network>();
 		
@@ -126,10 +129,22 @@ public class NetworkController {
 		}
 		
 		User user = userDetailsService.getUserFromSession();
-		Notification newNotification = null;
-		if(ResultStatus.SUCCESS == networkService.CreateNetwork(user, profileid, newNotification, error)) {  
+		org.netvogue.server.neo4japi.domain.Notification newNotification =  
+				new org.netvogue.server.neo4japi.domain.Notification(user);
+		if(ResultStatus.SUCCESS == networkService.CreateNetwork(user, profileid, newNotification, error)) {
+			//Add notification to pubsub node here //Azeez
+			//Make this call asynchronous
+			ObjectMapper mapper = new ObjectMapper();
+			Notification notification = conversionService.convert(newNotification, Notification.class);
+			PusherChannel pusher= new PusherChannel(profileid);
+			try{
+				String notificationToSent = mapper.writeValueAsString(notification);
+				pusher.pushEvent("notification", notificationToSent);
+			} catch (Exception e) {
+				System.out.println("Error in pusher" + error);
+				return response;
+			}
 			response.setStatus(true);
-			//Add notification to pubsub node here //Azeez 
 		}
 		else
 			response.setError(error);
@@ -149,8 +164,23 @@ public class NetworkController {
 		}
 		
 		User user = userDetailsService.getUserFromSession();
-		Notification newNotification = null;
-		if(ResultStatus.SUCCESS == networkService.ConfirmNetwork(user, profileid, newNotification, error)) {  
+		org.netvogue.server.neo4japi.domain.Notification newNotification = 
+				new org.netvogue.server.neo4japi.domain.Notification(user, NetworkStatus.CONFIRMED);;
+		if(ResultStatus.SUCCESS == networkService.ConfirmNetwork(user, profileid, newNotification, error)) {
+			//Add notification to pubsub node here //Azeez
+			//Make this call asynchronous
+			ObjectMapper mapper = new ObjectMapper();
+			Notification notification = conversionService.convert(newNotification, Notification.class);
+			PusherChannel pusher= new PusherChannel(profileid);
+			try{
+				String notificationToSent = mapper.writeValueAsString(notification);
+				System.out.println("notifi in pusher" + notificationToSent);
+				System.out.println("ori notifi in pusher" + notification.getName());
+				pusher.pushEvent("notification", notificationToSent);
+			} catch (Exception e) {
+				System.out.println("Error in pusher" + e.toString());
+				return response;
+			}
 			response.setStatus(true);
 			//Add notification to pubsub node here //Azeez 
 		}

@@ -11,6 +11,8 @@ function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search, m
 		$scope.notifications 		= mynotifications.getunreadnotifications();
 		
 		currentvisitedprofile.setmyprofileid($scope.myprofileid);
+		createpusherchannel($scope.myprofileid);
+		//createpubnubchannel($scope.myprofileid);
 	};
 	
 	mynotifications.notificationsunread().success(function(data) {
@@ -41,4 +43,26 @@ function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search, m
 	    	
 	    });
 	};
+	var createpusherchannel = function(id) {
+		//Register pusher to receive notifications
+		$scope.pusher = new Pusher('15b40a25fa57725931ad'); // Replace with your app key
+		var channel = $scope.pusher.subscribe(id);
+		channel.bind('notification', function(data) {
+		      alert(data);
+		      $scope.unreadnotifications++ ;
+		      $scope.notifications.push(data);
+		 });
+	};
+	
+	/*var createpubnubchannel = function(id) {
+		PUBNUB.subscribe({
+		    channel  : id,
+		    callback : function(message) { alert("message"); },
+		    error    : function(e) {
+		        // Do not call subscribe() here!
+		        // PUBNUB will auto-reconnect.
+		        console.log(e);
+		    }
+		});
+	};*/
 }

@@ -2,12 +2,12 @@
 </input>
 
 <span ui-if="emptylabel" ng-hide="isEditMode" ng-click="switchToEdit()"
-	style="color: #20ACB8; font-weight: normal; font-size: 14px; cursor: pointer; text-transform: uppercase;">
+	style="color: #000; font-weight: normal; font-size: 14px; cursor: pointer; text-transform: uppercase;">
 	Click here to add title</span>
 
 <span ui-if="!emptylabel" ng-hide="isEditMode" ng-click="switchToEdit()"
 	ng-bind-html-unsafe="data.label"
-	style="color: #20ACB8; font-weight: normal; font-size: 14px; cursor: pointer; text-transform: uppercase;"></span>
+	style="color: #000; font-weight: normal; font-size: 14px; cursor: pointer; text-transform: uppercase;"></span>
 
 <span ng-hide="isEditMode" class="btn-group pull-right">
 	<button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
@@ -16,7 +16,7 @@
 	<ul class="dropdown-menu">
 		<li><a ng-click="deletedata({photoid:data.uniqueid})" >Delete</a></li>
 		<li class="divider"></li>
-		<li><a href="#">Set as cover</a></li>
+		<li><a ng-click="setprofilepic({uniqueid:data.uniqueid})">Set as cover</a></li>
 		<li class="divider"></li>
 		<li><a href="#">Public</a></li>
 		<li><a href="#">Private</a></li>

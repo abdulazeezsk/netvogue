@@ -3,211 +3,41 @@
 	<div class="row">
 		<!-- Main pane -->
 		<div class="span12">
-			<div id="lookbookS" class="lookbook-wrapper">
+		<div>
+				
+			<!-- header pane -->
+			<div style="border-bottom: 1px solid black; position: relative; top: -2px;">
+				<span class="left ywbreadcrumb header_width"> <a class="nonactive"
+					href="#/collections">collection</a> <span class="ywdivider">/</span> <span>
+					Rebecca Minkoff {{galleryname}}</span></span>
+			</div>
+			<div style="border-bottom: 1px solid black;">
+				<span class="left right_pane_info"> shop this collection  </span> <span class="right"> <a
+					ng-href="#/addcollections?id={{galleryid}}" class="rightpane_add_btn">Organize</a>
+				</span>
+			</div>
+			<!-- header pane -->
+			
+			<div elastislide>
+				<div id="lookbookS" class="lookbook-wrapper">
 					<div class="lookbook">
-						<ul class="nav nav-tab" style="width: 8746px; margin-left: 0px; ">
-                        	<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/1.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/1.jpg" alt="Flookbook1">
-                                </a>
+						<ul class="collectionshowcase" style="width: 8746px; margin-left: 0px; ">
+                        	<li ng-repeat="collection in photogallery" style="margin-right: 5px; height:450px; width: 306.6666666666667px;">
+                       	 		<a id="single_image" style="border-width: 3px;">
+                               		<img style=" height:450px; width: 306.6666666666667px;" ng-src="{{collection.thumbnail_url}}">
+                               	</a>
                             </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/2.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/2.jpg" alt="Flookbook2">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/3.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/3.jpg" alt="Flookbook3">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/4.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/4.jpg" alt="Flookbook4">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/5.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/5.jpg" alt="Flookbook5">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/6.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/6.jpg" alt="Flookbook6">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/7.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/7.jpg" alt="Flookbook7">
-                                </a>
-                            </li>
-                            <li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/8.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/8.jpg" alt="Flookbook8">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/9.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/9.jpg" alt="Flookbook9">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/10.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/10.jpg" alt="Flookbook10">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/11.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/11.jpg" alt="Flookbook11">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/12.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/12.jpg" alt="Flookbook12">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/13.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/13.jpg" alt="Flookbook13">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/14.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/14.jpg" alt="Flookbook14">
-                                </a>
-                            </li>
-                            <li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/15.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/15.jpg" alt="Flookbook15">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/16.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/16.jpg" alt="Flookbook16">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/17.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/17.jpg" alt="Flookbook17">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/18.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/18.jpg" alt="Flookbook18">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/19.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/19.jpg" alt="Flookbook19">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/20.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/20.jpg" alt="Flookbook20">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/21.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/21.jpg" alt="Flookbook21">
-                                </a>
-                            </li>
-                        	<!--<li><a href="#"><img src="images/Spring-Lookbook-2012/RM_SP2011_lookbook_0.jpg" alt="lookbook0" /></a></li>-->
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/22.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/22.jpg" alt="Flookbook22">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/23.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/23.jpg" alt="Flookbook23">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/24.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/24.jpg" alt="Flookbook24">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/25.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/25.jpg" alt="Flookbook25">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/26.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/26.jpg" alt="Flookbook26">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/27.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/27.jpg" alt="Flookbook27">
-                                </a>
-                            </li>
-							<li style="margin-right: 5px; width: 306.6666666666667px; ">
-                            	<a id="single_image" href="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/28.jpg" style="border-width: 3px; ">
-                                	<img src="http://rebeccaminkoff.com/lookbooks/images/fall12apparel/28.jpg" alt="Flookbook28">
-                                </a>
-                            </li>
-							                             
-														
 						</ul>
 					</div>
+			
 					<div class="es-nav">
 						<span class="es-nav-prev" style="display: none; ">Previous</span>
 						<span class="es-nav-next" style="display: none; ">Next</span>
 					</div>
+				</div>
 			</div>
-	
-					<script type="text/javascript">
-
-			jQuery('#lookbookS').elastislide({
-				speed       : 750,						
-				imageW 		: 320,
-				margin		: 5,
-				border		: 3,
-				minItems    : 3,
-				
-			});
-			
-			
-			jQuery(document).ready(function() {
-				/* This is basic - uses default settings */
-				jQuery("a#single_image").fancybox({
-					overlayOpacity: 0,
-					padding: 0,
-					showCloseButton: true,
-					autoScale: false,
-					hideOnContentClick: true,
-					margin: 50
-				});
-		
-			});
-			
-						
-		</script>
 		</div>
 		<!-- Main pane -->
 	</div>
 </div>
-<div id="fancybox-tmp" style="padding: 50px; "></div>
-<div id="fancybox-loading" style="display: none; "><div></div></div>
-<div id="fancybox-overlay" style="background-color: rgb(119, 119, 119); opacity: 0; cursor: pointer; height: 739px; display: none; "></div>
-<div id="fancybox-wrap" style="width: 1000px; height: auto; top: 30px; left: 120px; display: none; ">
-	<div id="fancybox-outer">
-		<div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div>
-		<div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div>
-		<div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div>
-		<div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div>
-		<div id="fancybox-content" style="border-width: 0px; width: 1000px; height: 1500px; "></div>
-		<a id="fancybox-close" style="display: none; "></a>
-		<div id="fancybox-title" style="display: none; "></div>
-		<a href="javascript:;" id="fancybox-left" style="display: none; ">
-			<span class="fancy-ico" id="fancybox-left-ico"></span>
-		</a>
-		<a href="javascript:;" id="fancybox-right" style="display: none; ">
-			<span class="fancy-ico" id="fancybox-right-ico"></span>
-		</a>
-	</div>
-</div>
-
-
 <!--body-->

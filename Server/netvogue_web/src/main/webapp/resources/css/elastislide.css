@@ -9,7 +9,7 @@
 }
 .lookbook{
 	overflow:hidden;
-	background:#fff; /* large block on right side, was black, changed to white, how to remove???*/
+	/* background:#fff;  *//* large block on right side, was black, changed to white, how to remove???*/
 }
 
 .lookbook ul{
@@ -36,7 +36,8 @@
 	position:absolute;
 	top:50%;
 	left:12px;
-	background:transparent url(http://rebeccaminkoff.com/lookbooks/images/finalSCROLL.jpg) no-repeat top left;
+	background:transparent url(../img/finalSCROLL.jpeg) no-repeat top left;
+/* 	background:transparent url(http://rebeccaminkoff.com/lookbooks/images/finalSCROLL.jpg) no-repeat top left; */
 	width:70px;
 	height:75px;
 	margin-top:-13px;

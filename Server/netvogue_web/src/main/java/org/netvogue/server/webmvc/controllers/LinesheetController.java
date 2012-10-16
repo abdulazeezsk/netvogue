@@ -2,6 +2,7 @@ package org.netvogue.server.webmvc.controllers;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.netvogue.server.aws.core.UploadManager;
@@ -12,6 +13,7 @@ import org.netvogue.server.neo4japi.domain.Category;
 import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
+import org.netvogue.server.neo4japi.service.LinesheetData;
 import org.netvogue.server.neo4japi.service.LinesheetService;
 import org.netvogue.server.neo4japi.service.StylesheetService;
 import org.netvogue.server.neo4japi.service.UserService;
@@ -47,77 +49,96 @@ public class LinesheetController {
 	@Autowired
 	private UploadManager uploadManager;
 
-	@RequestMapping(value="getlinesheets", method=RequestMethod.GET)
+	@RequestMapping(value={"getlinesheets", "getlinesheets/profileid"}, method=RequestMethod.GET)
 	public @ResponseBody Linesheets GetLinesheets(@ModelAttribute("profileid") String profileid, 
 												@RequestParam("linesheetname") String linesheetname,
 												@RequestParam("category") String categoryname) {
 		System.out.println("Get Linesheets: " + linesheetname);
 		Linesheets linesheets = new Linesheets();
-		User loggedinUser = userDetailsService.getUserFromSession();
-		if(profileid.isEmpty()) {
-			linesheets.setName(loggedinUser.getName());
-			linesheets.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
-			Set<Linesheet> linesheetTemp = new LinkedHashSet<Linesheet>();
-			Iterable<org.netvogue.server.neo4japi.domain.Linesheet> dbLinesheets;
-			if(linesheetname.isEmpty()) {
-				dbLinesheets = userService.getLinesheets(loggedinUser);
-			} else {
-				dbLinesheets = userService.getLinesheets(loggedinUser);
-				//dbCollections = userService.searchCollections(loggedinUser.getUsername(), stylesheetname, categoryname);
-			}
-			if(null == dbLinesheets) {
+		
+		User user;
+		if(!profileid.isEmpty()) {
+			user = userService.getUserByUsername(profileid);
+			if(user == null || USER_TYPE.BOUTIQUE == user.getUserType()) {
 				return linesheets;
 			}
-			Iterator<org.netvogue.server.neo4japi.domain.Linesheet> first = dbLinesheets.iterator();
-			while ( first.hasNext() ){
-				org.netvogue.server.neo4japi.domain.Linesheet dbSheet = first.next() ;
-				System.out.println("line sheet name" + dbSheet.getLinesheetname());
-				linesheetTemp.add(conversionService.convert(dbSheet, Linesheet.class));
-			}
-			linesheets.setLinesheets(linesheetTemp);
+		} else {
+			 user = userDetailsService.getUserFromSession();
 		}
+		
+		linesheets.setName(user.getName());
+		linesheets.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		Set<Linesheet> linesheetTemp = new LinkedHashSet<Linesheet>();
+		Iterable<LinesheetData> dbLinesheets;
+		if(linesheetname.isEmpty()) {
+			dbLinesheets = userService.getLinesheets(user);
+		} else {
+			dbLinesheets = userService.getLinesheets(user);
+			//dbCollections = userService.searchCollections(loggedinUser.getUsername(), stylesheetname, categoryname);
+		}
+		if(null == dbLinesheets) {
+			return linesheets;
+		}
+		Iterator<LinesheetData> first = dbLinesheets.iterator();
+		while ( first.hasNext() ){
+			LinesheetData dbSheet = first.next();
+			
+			Linesheet sheet = conversionService.convert(dbSheet.getLinesheet(), Linesheet.class);
+			sheet.setBrandname(dbSheet.getName());
+			linesheetTemp.add(sheet);
+		}
+		linesheets.setLinesheets(linesheetTemp);
+		
 		return linesheets;
 	}
 	
-	@RequestMapping(value="linesheet/getstyles", method=RequestMethod.GET)
+	@RequestMapping(value={"linesheet/getstyles", "linesheet/getstyles/profileid"}, method=RequestMethod.GET)
 	public @ResponseBody Styles GetStyles(@ModelAttribute("profileid") String profileid, 
 										  @RequestParam("linesheetid") String stylesheetid,
 										  @RequestParam(value="searchquery", required=false) String searchquery
 											 ) {
 		System.out.println("Get Styles: " + searchquery);
 		Styles styles = new Styles();
-		User loggedinUser = userDetailsService.getUserFromSession();
 		if(stylesheetid.isEmpty()) {
 			return styles;
 		}
 		
-		if(profileid.isEmpty()) {
-			styles.setName(loggedinUser.getName());
-			styles.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
-			//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
-			org.netvogue.server.neo4japi.domain.Linesheet s = linesheetService.getLinesheet(stylesheetid);
-			if(null == s)
-				return styles;
-			styles.setStylesheetname(s.getLinesheetname());
-			Set<StyleResponse> stylesTemp = new LinkedHashSet<StyleResponse>();
-			Iterable<Style> dbStyles;
-			if(null == searchquery || searchquery.isEmpty()) {
-				dbStyles = linesheetService.getStyles(stylesheetid);
-			} else {
-				//Change this after implementing query
-				//dbStyles = collectionService.searchPhotoByName(stylesheetid, photoname);
-				dbStyles = linesheetService.getStyles(stylesheetid);
-			}
-			if(null == dbStyles) {
+		User user;
+		if(!profileid.isEmpty()) {
+			user = userService.getUserByUsername(profileid);
+			if(user == null || USER_TYPE.BOUTIQUE == user.getUserType()) {
 				return styles;
 			}
-			Iterator<Style> first = dbStyles.iterator();
-			while ( first.hasNext() ){
-				Style dbStyle = first.next() ;
-				stylesTemp.add(conversionService.convert(dbStyle, StyleResponse.class));
-			}
-			styles.setStyles(stylesTemp);
+		} else {
+			 user = userDetailsService.getUserFromSession();
 		}
+		
+		styles.setName(user.getName());
+		styles.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
+		org.netvogue.server.neo4japi.domain.Linesheet s = linesheetService.getLinesheet(stylesheetid);
+		if(null == s)
+			return styles;
+		styles.setStylesheetname(s.getLinesheetname());
+		Set<StyleResponse> stylesTemp = new LinkedHashSet<StyleResponse>();
+		Iterable<Style> dbStyles;
+		if(null == searchquery || searchquery.isEmpty()) {
+			dbStyles = linesheetService.getStyles(stylesheetid);
+		} else {
+			//Change this after implementing query
+			//dbStyles = collectionService.searchPhotoByName(stylesheetid, photoname);
+			dbStyles = linesheetService.getStyles(stylesheetid);
+		}
+		if(null == dbStyles) {
+			return styles;
+		}
+		Iterator<Style> first = dbStyles.iterator();
+		while ( first.hasNext() ){
+			Style dbStyle = first.next() ;
+			stylesTemp.add(conversionService.convert(dbStyle, StyleResponse.class));
+		}
+		styles.setStyles(stylesTemp);
+		
 		return styles;
 	}
 	

@@ -1,57 +1,79 @@
 <!--body-->
 <div class="container minimum_height">
-    <div class="row">
-        <!-- left pane -->
-        <div class="span3">
-            <h4 class="leftpane_entity_heading">
-                Brand</h4>
-            <div class="divi2">
-            </div>
-            <ul class="thumbnails">
+	<div class="row">
+		<!-- left pane -->
+		<div class="span3">
+			<h4 class="leftpane_entity_heading">Brand</h4>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
 				<li class="span3">
 					<div>
 						<span> <a href="#profile"> <img alt=""
 								ng-src={{profilepic.thumbnail_url}}
-								class="pull-left leftpane_profile_img"></a> </span>
-								<span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
 					</div>
 				</li>
 			</ul>
-        </div>
-        <!-- left pane -->
-        <!-- right pane-->
-        <div class="span9">
-          	<div>
-                <span class="left rightpane_subHeading">
-                        Add Photos
-                </span>
-                <div class="divi2 right_pane_underline">
-                </div>
-                <span class="left right_pane_info" style="width:75%">
-                    <a href="#/gallery">Gallery</a>
-                    <span class="divider">/</span>
-                    <span><a ng-href="#/photos?id={{galleryid}}">{{galleryname}}</a></span>
-                </span>
-                <span class="right fileinput-button"> 
-                	<span class="rightpane_add_btn">Upload Photos</span> 
-                	<input id="fileupload" type="file" name="files[]" multiple data-url="gallery/addphotos"
-                			onchange="angular.element(this).scope().addfiles(this)" >
-				</span>
-                <div class="divi2 right_pane_underline">
-                </div>
-            </div>
-            <div>
-                <!-- data pannel -->
-            <div fileupload-plugin ng-model="existingfiles" new-files="newfiles" 
-            			min-height="150" max-height="150" gallery-id="galleryid" 
-            			update-data="updatephoto(label, seasonname, photoid)"
-            			delete-data="deletephoto(photoid)" files-added="filesadded">
-            </div>
-                <!-- data pannel -->
-            </div>
-        </div>
-        <!-- right pane -->
-    </div>
+			<div class="leftpane_subheading">FILTERS</div>
+			<div class="divi2"></div>
+			<div class="leftpane_filter_name">
+				<span class="leftpane_filter_name">Photo name</span> <input
+					ng-model="searchphotoname" type="text" placeholder="Photo name"
+					class="span3" ng-change="getphotos()" />
+			</div>
+		</div>
+		<!-- left pane -->
+		<!-- right pane-->
+		<div class="span9">
+
+			<!-- header -->
+			<div>
+				<div
+					style="border-bottom: 1px solid black; position: relative; top: -2px;">
+					<span class="left ywbreadcrumb header_width"> <a
+						class="nonactive" href="#/gallery">Gallery</a> <span
+						class="ywdivider">/</span> <a class="nonactive"
+						ng-href="#/photos?id={{galleryid}}">{{galleryname}}</a> <span
+						class="ywdivider">/</span> <span> Organize</span></span> <span
+						class="right"> <a ng-href="#/photos?id={{galleryid}}"
+						class="rightpane_back_btn nodeco">Back</a>
+					</span>
+				</div>
+				<div style="border-bottom: 1px solid black;">
+					<span class="left right_pane_info">Find Photos using the
+						filters</span> <span class="right fileinput-button"> <span
+						class="rightpane_add_btn">Upload Photos</span> <input
+						id="fileupload" type="file" name="files[]" multiple
+						data-url="gallery/addphotos"
+						onchange="angular.element(this).scope().addfiles(this)">
+					</span>
+				</div>
+			</div>
+			<!-- header -->
+
+			<div>
+				<div class="alert alert-info" style="margin:10px 0;">
+					<button type="button" class="close" data-dismiss="alert">
+						<small>x</small>
+					</button>
+					Drag & drop photos here or Choose photos to
+					upload You've used 10% of your 300 MB upload limit Pro members get unlimited uploads. Upgrade?
+				</div>
+				<!-- data pannel -->
+				<div fileupload-plugin ng-model="existingfiles" new-files="newfiles"
+					min-height="150" max-height="150" gallery-id="galleryid"
+					set-profilepic="setprofilepic(uniqueid)"
+					update-data="updatephoto(label, seasonname, photoid)"
+					delete-data="deletephoto(photoid)" files-added="filesadded">
+				</div>
+				<!-- data pannel -->
+			</div>
+		</div>
+		<!-- right pane -->
+	</div>
 </div>
+<!--body-->
+
 <!--body-->

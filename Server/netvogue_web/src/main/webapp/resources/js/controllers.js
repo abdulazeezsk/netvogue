@@ -40,6 +40,7 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
     //Also, if there is any existing data, this data will be shown to user until we get response from server
     $scope.updatedata = function() {
 	    $scope.entityname  		= srvprofile.getname($routeParams);
+	    $scope.iambrand			= srvprofile.isbrand($routeParams);
 	    $scope.aboutus 			= srvprofile.getaboutus($routeParams);
 	    $scope.profilepic		= srvprofile.getprofilepic($routeParams);
 	    $scope.brandscarried 	= srvprofile.getbrandscarried($routeParams);
@@ -105,6 +106,7 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 	
 	$scope.updatedata = function() {
 		$scope.entityname 		= srvnetwork.getname($routeParams);
+		$scope.iambrand			= srvnetwork.isbrand($routeParams);
 		$scope.profilepic 		= srvnetwork.getprofilepic($routeParams);
 		$scope.contactinfo		= srvnetwork.getcontactinfo($routeParams);
 		$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
@@ -186,10 +188,13 @@ function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisi
 	$scope.newupdate ="";
 	$scope.updatedata = function(routeparams) {
 		$scope.entityname 		= srvtimeline.getname(routeparams);
+		$scope.iambrand			= srvtimeline.isbrand(routeparams);
 		$scope.profilepic 		= srvtimeline.getprofilepic(routeparams);
 		$scope.contactinfo		= srvtimeline.getcontactinfo(routeparams);
 		$scope.newsfeeds 		= srvtimeline.getupdates(routeparams);
 		$scope.getcontactinfo 	= addresstostring($scope.contactinfo);
+		
+		createpusherchannel();
 	};
 	
 	$scope.getupdates = function(routeparams) {
@@ -252,6 +257,21 @@ function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisi
 		});
 	};
 
+	//for new updates
+	var createpusherchannel = function() {
+		var id;
+		if (!angular.isUndefined($routeParams.profileid)) {
+			id = $routeParams.profileid;
+		} else {
+			id = $scope.$parent.myprofileid;
+		}
+		
+		//Register pusher to receive notifications
+		var channel = $scope.$parent.pusher.subscribe(id);
+		channel.bind('statusupdate', function(data) {
+		      $scope.newsfeeds.push(data);
+		 });
+	};
 	$scope.trending = trending.getTrending();
 }
 
@@ -275,6 +295,7 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, s
 	var ajaxrequestcall	 = "gallery";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleries		= srvgallery.getgalleries($routeParams);
     };
@@ -346,6 +367,7 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, srvgallery, m
 	$scope.searchphotoname = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.photogallery		= srvgallery.getphotos($routeParams);
@@ -390,6 +412,7 @@ function MyCtrlViewPhotos($scope, $routeParams, currentvisitedprofile, srvgaller
 	}
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.viewPhotos		= srvgallery.getphotos($routeParams);
@@ -429,6 +452,7 @@ function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprof
 	var ajaxrequestcall	 = "printcampaign";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleries		= srvgallery.getgalleries($routeParams);
     };
@@ -498,6 +522,7 @@ function MyCtrlCampaign($scope, $routeParams, currentvisitedprofile, srvgallery,
 	$scope.searchphotoname = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.photogallery		= srvgallery.getphotos($routeParams);
@@ -542,6 +567,7 @@ function MyCtrlviewPrintcampaign($scope, $routeParams, currentvisitedprofile, sr
 	var ajaxrequestcall	 = "printcampaign";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.viewPhotos		= srvgallery.getphotos($routeParams);
@@ -597,6 +623,7 @@ function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile
 	var ajaxrequestcall	 = "editorial";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleries		= srvgallery.getgalleries($routeParams);
     };
@@ -666,6 +693,7 @@ function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile, srvgallery
 	$scope.searchphotoname = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.photogallery		= srvgallery.getphotos($routeParams);
@@ -712,6 +740,7 @@ function MyCtrlViewNewsLetters($scope, $routeParams, currentvisitedprofile, srvg
 	var ajaxrequestcall	 = "editorial";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvgallery.getname($routeParams);
+	    $scope.iambrand			= srvgallery.isbrand($routeParams);
 	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
 	    $scope.viewPhotos		= srvgallery.getphotos($routeParams);
