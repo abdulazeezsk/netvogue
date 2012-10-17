@@ -31,13 +31,17 @@
 			<div>
 			<!-- header pane -->
 				<div style="border-bottom: 1px solid black; position: relative; top: -2px;">
-					<span class="left ywbreadcrumb header_width"> <a class="nonactive"
-						href="#/gallery">gallery</a> <span class="ywdivider">/</span> <span>
-						{{galleryname}}</span></span>
+					<span class="left ywbreadcrumb header_width"> 
+						<a class="nonactive" ui-if="isMyProfile" ng-href="#/gallery">gallery</a>
+						<a class="nonactive" ui-if="!isMyProfile" ng-href="#/{{profileid}}/gallery">gallery</a> 
+						
+						<span class="ywdivider">/</span> 
+						<span>{{galleryname}}</span>
+					</span>
 				</div>
 				<div style="border-bottom: 1px solid black;">
 					<span class="left right_pane_info"> Find Photos using the
-						filters </span> <span class="right"> <a
+						filters </span> <span class="right" ui-if="isMyProfile"> <a
 						ng-href="#/addgallery?id={{galleryid}}" class="rightpane_add_btn">Organize</a>
 					</span>
 				</div>

@@ -60,7 +60,7 @@ angular.module('netVogue', ['netVogue.constants', 'netVogue.filters', 'netVogue.
 	  $routeProvider.when('/:profileid/videocampaign/:videoid', 	{templateUrl: 'templates/Videos.htm', 					controller: MyCtrlVideos });
 	  $routeProvider.when('/viewcollection', 			{templateUrl: 'templates/brand/View_Collection.htm', 			controller: MyCtrlViewcollection });
 	  $routeProvider.when('/gallery',                   { templateUrl: 'templates/Gallery.htm',                    			controller: MyCtrlGallery });
-	  $routeProvider.when('/:profileid/gallery',                   { templateUrl: 'templates/Gallery.htm',                    			controller: MyCtrlGallery });
+	  $routeProvider.when('/:profileid/gallery',        { templateUrl: 'templates/Gallery.htm',                    			controller: MyCtrlGallery });
 	  $routeProvider.when('/help',                      { templateUrl: 'templates/Help.htm',                       			controller: MyCtrlHelp });
 	  $routeProvider.when('/privacysettings',           { templateUrl: 'templates/Privacy_Settings.htm',           			controller: MyCtrlPrivacySettings });
 	  $routeProvider.when('/organizestyle',             { templateUrl: 'templates/boutique/Organize_Style.htm',             controller: MyCtrlOrganizestyle });
@@ -71,6 +71,7 @@ angular.module('netVogue', ['netVogue.constants', 'netVogue.filters', 'netVogue.
 	  $routeProvider.when('/stylesheet',             	{ templateUrl: 'templates/brand/Stylesheet.htm',              	controller: MyCtrlStylesheet });
 	  $routeProvider.when('/stylepreview',             	{ templateUrl: 'templates/brand/Style_Preview.htm',              controller: MyCtrlStylesPreview });
 	  $routeProvider.when('/photos',             		{ templateUrl: 'templates/Photos.htm',           		   			controller: MyCtrlPhotos });
+	  $routeProvider.when('/:profileid/photos',         { templateUrl: 'templates/Photos.htm',           		   			controller: MyCtrlPhotos });
 	  $routeProvider.when('/viewphotos',             	{ templateUrl: 'templates/View_Photos.htm',     	     			controller: MyCtrlViewPhotos });
 	  $routeProvider.when('/campaign',					{ templateUrl: 'templates/campaign.htm',         			 		controller: MyCtrlCampaign });
 

@@ -2,7 +2,7 @@
 
 /* Add and Edit Controllers */
 
-function MyCtrlAddGallery($scope, $routeParams, $location, srvgallery, mygallery, currentvisitedprofile) {
+function MyCtrlAddGallery($scope, $routeParams, $location, mygallery, currentvisitedprofile) {
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
 	if(!$scope.isMyProfile) {
 		$location.url($routeParams.profileid + "/gallery");
@@ -18,16 +18,16 @@ function MyCtrlAddGallery($scope, $routeParams, $location, srvgallery, mygallery
 	}
 	
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvgallery.getname($routeParams);
-	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
-	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
-	    $scope.existingfiles	= srvgallery.getphotos($routeParams);
+	    $scope.entityname  		= mygallery.getname($routeParams);
+	    $scope.profilepic		= mygallery.getprofilepic($routeParams);
+	    $scope.galleryname  	= mygallery.getgalleryname($routeParams);
+	    $scope.existingfiles	= mygallery.getphotos($routeParams);
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, "").success(function(data) {
-    	srvgallery.setphotoslocally(data, $routeParams);
+    mygallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, "").success(function(data) {
+    	mygallery.setphotoslocally(data, $routeParams);
     	$scope.updatedata();
     }).error(function(data) {
     	

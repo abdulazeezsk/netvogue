@@ -27,8 +27,6 @@
 		<!-- left pane -->
 		<!-- right pane-->
 		<div class="span9">
-		
-		
 			 <div style="border-bottom:1px solid black;position:relative;top:-2px;">
 				<span class="left rightpane_subHeading">Gallery </span> <span class="right">
 					<a ng-href="#{{backButton}}" class="rightpane_back_btn">Back</a>
@@ -36,7 +34,7 @@
 			</div>
 			<div style="border-bottom:1px solid black;">
 				<span class="left right_pane_info"> Find galleries using the
-					filters </span> <span class="right"> <a data-toggle="modal"
+					filters </span> <span class="right" ui-if="isMyProfile"> <a data-toggle="modal"
 					href="#CreateGallery" class="rightpane_add_btn">create gallery</a>
 				</span>
 			</div>
@@ -108,7 +106,9 @@
 						style="position: relative; margin-top: 20px;">
 						<!--  ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize" -->
 						<div class="press view-press">
-							<a ng-href="#/photos?id={{gallery.galleryid}}"> <img
+							<a ui-if="isMyProfile" ng-href="#/photos?id={{gallery.galleryid}}" > <img
+								ng-src="{{gallery.gallerypic}}" alt=""></a>
+							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/photos?id={{gallery.galleryid}}" > <img
 								ng-src="{{gallery.gallerypic}}" alt=""></a>
 							<div class="content">
 								<div class="mask"></div>
@@ -120,7 +120,9 @@
 										title="Edit"><i class="icon-edit icon-white"></i> </a></li>
 								</ul>
 								<h1>
-									<a ng-href="#/photos?id={{gallery.galleryid}}"
+									<a ui-if="isMyProfile" ng-href="#/photos?id={{gallery.galleryid}}"
+										class="mask_edit">View</a>
+									<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/photos?id={{gallery.galleryid}}"
 										class="mask_edit">View</a>
 								</h1>
 							</div>

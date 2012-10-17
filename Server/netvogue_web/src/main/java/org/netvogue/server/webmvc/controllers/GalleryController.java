@@ -48,7 +48,7 @@ public class GalleryController {
 	@Autowired
 	private UploadManager uploadManager;
 		
-	@RequestMapping(value={"getgalleries", "getgallaries/{profileid}"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/getgalleries", "/getgalleries/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Galleries GetGalleries(@ModelAttribute("profileid") String profileid, 
 												@RequestParam("galleryname") String galleryname) {
 		System.out.println("Get Galleries: " + galleryname);
@@ -88,7 +88,7 @@ public class GalleryController {
 		return galleries;
 	}
 	
-	@RequestMapping(value={"gallery/getphotos", "gallery/getphotos/profileid"}, method=RequestMethod.GET)
+	@RequestMapping(value={"gallery/getphotos", "gallery/getphotos/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname
