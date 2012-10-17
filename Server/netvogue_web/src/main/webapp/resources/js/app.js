@@ -28,9 +28,11 @@ angular.module('netVogue', ['netVogue.constants', 'netVogue.filters', 'netVogue.
 	  $routeProvider.when('/:profileid/corner',			{templateUrl: 'templates/Corner.htm', 								controller: MyCtrlCorner});
 	  $routeProvider.when('/initiate', 					{templateUrl: 'templates/initiate.htm', 							controller: MyCtrlInitiate });
 	  $routeProvider.when('/linesheets', 				{templateUrl: 'templates/brand/Linesheets.htm', 					controller: MyCtrlLinesheets });
-	  $routeProvider.when('/styles', 					{templateUrl: 'templates/brand/Styles.htm', 						controller: MyCtrlStyles });
 	  $routeProvider.when('/:profileid/linesheets', 	{templateUrl: 'templates/brand/Linesheets.htm', 					controller: MyCtrlLinesheets });
-	  $routeProvider.when('/:profileid/linesheets/:lineid', 		{templateUrl: 'templates/brand/Styles.htm', 			controller: MyCtrlStyles });
+	  $routeProvider.when('/styles', 					{templateUrl: 'templates/brand/Styles.htm', 						controller: MyCtrlStyles });
+	  $routeProvider.when('/:profileid/styles', 		{templateUrl: 'templates/brand/Styles.htm', 						controller: MyCtrlStyles });
+	  $routeProvider.when('/style', 					{templateUrl: 'templates/brand/Style.htm', 							controller: MyCtrlStyle });
+	  $routeProvider.when('/:profile/style', 			{templateUrl: 'templates/brand/Style.htm', 							controller: MyCtrlStyle });
 	  $routeProvider.when('/network', 					{templateUrl: 'templates/Network.htm', 								controller: MyCtrlNetwork});
 	  $routeProvider.when('/:profileid/network', 		{templateUrl: 'templates/Network.htm', 								controller: MyCtrlNetwork});
 	  $routeProvider.when('/newsletter', 				{templateUrl: 'templates/Newsletter.htm', 							controller: MyCtrlNewsletter });
@@ -45,10 +47,7 @@ angular.module('netVogue', ['netVogue.constants', 'netVogue.filters', 'netVogue.
 	  $routeProvider.when('/viewprintcampaign', 		{templateUrl: 'templates/View_PrintCampaign.htm', 					controller: MyCtrlviewPrintcampaign });
 	  $routeProvider.when('/profilesettings', 			{templateUrl: 'templates/Profile_Settings.htm', 					controller: MyCtrlProfileSettings});
 	  $routeProvider.when('/profile', 					{templateUrl: 'templates/Profile.htm', 								controller: MyCtrlProfile});
-	  $routeProvider.when('/:profileid/profile',		{templateUrl: 'templates/Profile.htm', 								controller: MyCtrlProfile});
-	  $routeProvider.when('/style', 					{templateUrl: 'templates/brand/Style.htm', 						controller: MyCtrlStyle });
-	  $routeProvider.when('/:profileid/videocampaign', 	{templateUrl: 'templates/VideoCampaign.htm', 						controller: MyCtrlVideocampaign });
-	  $routeProvider.when('/:profileid/videocampaign/:videoid', 	{templateUrl: 'templates/Videos.htm', 					controller: MyCtrlVideos });
+	  $routeProvider.when('/:profileid/profile',		{templateUrl: 'templates/Profile.htm', 								controller: MyCtrlProfile});	  
 	  $routeProvider.when('/viewcollection', 			{templateUrl: 'templates/brand/View_Collection.htm', 			controller: MyCtrlViewcollection });
 	  $routeProvider.when('/gallery',                   { templateUrl: 'templates/Gallery.htm',                    			controller: MyCtrlGallery });
 	  $routeProvider.when('/:profileid/gallery',        { templateUrl: 'templates/Gallery.htm',                    			controller: MyCtrlGallery });
@@ -57,7 +56,6 @@ angular.module('netVogue', ['netVogue.constants', 'netVogue.filters', 'netVogue.
 	  $routeProvider.when('/organizestyle',             { templateUrl: 'templates/boutique/Organize_Style.htm',             controller: MyCtrlOrganizestyle });
 	  $routeProvider.when('/notification',              { templateUrl: 'templates/Notifications.htm',              			controller: MyCtrlNotifications });
 	  $routeProvider.when('/addgallery',              	{ templateUrl: 'templates/Add_Gallery.htm',              			controller: MyCtrlAddGallery });
-	  $routeProvider.when('/editgallery',             	{ templateUrl: 'templates/Edit_Gallery.htm',               			controller: MyCtrlNotifications });
 	  $routeProvider.when('/stylesheets',             	{ templateUrl: 'templates/brand/Stylesheets.htm',              	controller: MyCtrlStylesheets });
 	  $routeProvider.when('/stylesheet',             	{ templateUrl: 'templates/brand/Stylesheet.htm',              	controller: MyCtrlStylesheet });
 	  $routeProvider.when('/stylepreview',             	{ templateUrl: 'templates/brand/Style_Preview.htm',              controller: MyCtrlStylesPreview });
