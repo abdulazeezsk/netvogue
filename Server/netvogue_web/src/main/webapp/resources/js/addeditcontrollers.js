@@ -467,7 +467,7 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
 		});
 	};    
 }
-function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile, mylinesheet) {
+function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile, mylinesheet, mystylesheet) {
 
 	if($scope.$parent.iambrand == false) {
 		$location.url("linesheets");
