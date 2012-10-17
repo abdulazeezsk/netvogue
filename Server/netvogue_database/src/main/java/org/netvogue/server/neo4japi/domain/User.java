@@ -90,10 +90,10 @@ public class User {
 	//Azeez -- How do we connect it to existing brands in our network or to the new network.
 	
 	@RelatedTo(type="NOTIFICATION")
-	@Fetch Set<Notification> notifications = new LinkedHashSet<Notification>();
+	Set<Notification> notifications = new LinkedHashSet<Notification>();
 	
 	@RelatedTo(type="NETWORK")
-	@Fetch private Iterable<User> friends; //revisit this once again
+	private Iterable<User> friends; //revisit this once again
 	
 	public User() {
 		
