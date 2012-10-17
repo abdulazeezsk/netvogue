@@ -179,7 +179,8 @@ public class CollectionController {
 		if(null == request.getId() || request.getId().isEmpty()) {
 			response.setError("editorial Id is empty");
 			return response;
-		} else if(null == request.getSeasonname() || request.getDesc().isEmpty()) {
+		} else if(null == request.getSeasonname() || request.getSeasonname().isEmpty() || 
+				  null == request.getDesc()		  || request.getDesc().isEmpty()) {
 			response.setError("new name or description is empty");
 			return response;
 		}
