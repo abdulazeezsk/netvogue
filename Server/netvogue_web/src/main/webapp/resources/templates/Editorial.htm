@@ -52,14 +52,17 @@
 			<!-- header pane -->
 			<div
 				style="border-bottom: 1px solid black; position: relative; top: -2px;">
-				<span class="left ywbreadcrumb header_width"> <a
-					class="nonactive" href="#/newsletter">Editorial</a> <span
-					class="ywdivider">/</span> <span> {{galleryname}} </span></span>
+				<span class="left ywbreadcrumb header_width"> 
+					<a ui-if="isMyProfile" class="nonactive" ng-href="#/newsletter">Editorial</a>
+					<a ui-if="!isMyProfile" class="nonactive" ng-href="#/{{profileid}}/newsletter">Editorial</a> 
+					
+					<span class="ywdivider">/</span> <span> {{galleryname}} </span></span>
 			</div>
 			<div style="border-bottom: 1px solid black;">
 				<span class="left right_pane_info"> Find Editorials using the
-					filters </span> <span class="right"> <a
-					href="#/addnewsletter?id={{galleryid}}" class="rightpane_add_btn">Organize</a>
+					filters </span> 
+				<span class="right" ui-if="isMyProfile"> 
+					<a ng-href="#/addnewsletter?id={{galleryid}}" class="rightpane_add_btn">Organize</a>
 				</span>
 			</div>
 			<!-- header pane -->

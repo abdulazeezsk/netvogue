@@ -39,8 +39,9 @@
 					class="rightpane_back_btn"> Back</a></span>
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info"> Find Editorials using the
-					filters </span> <span class="right" ng-show="isMyProfile"> <a
-					data-toggle="modal" href="#CreateEditorial" class="rightpane_add_btn">Create Editorial</a>
+					filters </span> 
+				<span class="right" ng-show="isMyProfile"> 
+					<a data-toggle="modal" ng-href="#CreateEditorial" class="rightpane_add_btn">Create Editorial</a>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 			</div>
@@ -98,20 +99,25 @@
 						<li ng-repeat="gallery in galleries" style="position: relative;margin-top:20px;" >
 							<!--  ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize" -->
 							<div class="press view-press">
-								<a href="#/editorial?id={{gallery.galleryid}}" > <img
+								<a ui-if="isMyProfile" ng-href="#/editorial?id={{gallery.galleryid}}" > <img
 									ng-src="{{gallery.gallerypic}}" alt=""></a>
+								<a ui-if="!isMyProfile" ng-href="#/{{profileid}}editorial?id={{gallery.galleryid}}" > <img
+									ng-src="{{gallery.gallerypic}}" alt=""></a>	
 								<div class="content">
 							     	<div class="mask">
                                     </div>
-                                    <ul class="prs">
+                                    <ul class="prs" ng-show="isMyProfile">
                                        <li><a ng-click="deletegallery(gallery.galleryid)"
-										title="Delete"><i class="icon-trash icon-white"></i></a></li>
-									<li><a
-										ng-click="editgallery(gallery.galleryid, gallery.galleryname, gallery.gallerydesc)"
-										title="Edit"><i class="icon-edit icon-white"></i> </a></li>
-							    </ul>
+											title="Delete"><i class="icon-trash icon-white"></i></a>
+										</li>
+										<li><a
+											ng-click="editgallery(gallery.galleryid, gallery.galleryname, gallery.gallerydesc)"
+											title="Edit"><i class="icon-edit icon-white"></i> </a>
+										</li>
+							    	</ul>
 									<h1>
-									<a href="#/editorial?id={{gallery.galleryid}}"  class="mask_edit">View</a>
+									<a ui-if="isMyProfile" ng-href="#/editorial?id={{gallery.galleryid}}" class="mask_edit">View</a>
+									<a ui-if="!isMyProfile" ng-href="#/{{profileid}}editorial?id={{gallery.galleryid}}" class="mask_edit">View</a>
 									</h1>
 								</div> 
 								<div class="divi2"></div>
