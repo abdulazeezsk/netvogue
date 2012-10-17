@@ -742,12 +742,12 @@ angular.module('netVogue.services', []).
             };
             return $http(config);
         },
-        setstylesheetlocally: function(data) {
+        setstylesheetlocally: function(temp) {
         	name = temp.name;
     		profilepic = temp.profilepic;
     		angular.copy(temp.stylesheets, stylesheets);
         },
-        setstyleslocally: function(data) {
+        setstyleslocally: function(temp) {
         	name = temp.name;
     		stylesheetname = temp.stylesheetname;
     		angular.copy(temp.styles, styles);
@@ -887,12 +887,12 @@ angular.module('netVogue.services', []).
             };
             return $http(config);
         },
-        setlinesheetlocally: function(data) {
+        setlinesheetlocally: function(temp) {
         	name = temp.name;
     		profilepic = temp.profilepic;
     		angular.copy(temp.linesheets, linesheets);
         },
-        setstyleslocally: function(data) {
+        setstyleslocally: function(temp) {
         	name = temp.name;
     		linesheetname = temp.stylesheetname;//We are using same styles for both stylesheet and linesheet
     		angular.copy(temp.styles, styles);
