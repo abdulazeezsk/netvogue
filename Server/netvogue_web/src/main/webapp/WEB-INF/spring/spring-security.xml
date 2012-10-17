@@ -25,7 +25,9 @@
 		
 		<security:intercept-url pattern="/Netvogue.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/boutique_Registration.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/boutique/AvailabilityStatus.htm" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/boutique/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/brand_Registration.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/brand/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		
 		<security:intercept-url pattern="/home.htm" access="ROLE_BOUTIQUE,ROLE_BRAND"/>
 		<security:intercept-url pattern="/templates/**" access="ROLE_BOUTIQUE,ROLE_BRAND"/>
