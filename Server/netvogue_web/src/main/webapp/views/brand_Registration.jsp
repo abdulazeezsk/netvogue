@@ -80,7 +80,7 @@
                         <label class="control-label">
                             Email</label>
                         <div class="controls">
-                            <input type="text" ng-model="entity.email" class="span3" placeholder="Email" maxlength="25"
+                            <input type="text" ng-model="entity.email" class="span3" placeholder="Email" maxlength="50"
                                 name="uEmail" required ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/"
                                 ui-validate="{oldemail:emailchanged}" />
                             <div ng-show="form.uEmail.$dirty && form.uEmail.$invalid">

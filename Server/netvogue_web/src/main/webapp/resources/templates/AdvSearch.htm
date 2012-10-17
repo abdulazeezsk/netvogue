@@ -76,18 +76,6 @@
 					<ul class="thumbnails">
 						<li ng-repeat="user in advancedsearch"
 							style="position: relative; margin-top: 20px;">
-							<!--  ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize" -->
-							<!-- <div class="view view-second">
-								<img ng-src="{{user.thumbpic}}" />
-								<div class="mask">
-									<h2>{{user.name}}</h2>
-									<p>{{user.city}},{{user.country}}</p>
-									<a ng-href="#/{{user.username}}/profile" class="info">View</a>
-								</div>
-							</div>
-							<div class="directorytitle">
-								<h3>{{user.name}}</h3>
-							</div> -->
 							 <div class="directory view-directory">
 								<a ng-href="#/{{user.username}}/profile"> <img
 									ng-src="{{user.thumbpic}}" alt=""></a>
@@ -95,7 +83,7 @@
 									<div class="mask"></div>
 									<ul class="atr">
 										<li><a class="searchlocation"
-											style="text-decoration: none;">{{user.city}},{{user.country}},</a></li>
+											style="text-decoration: none;">{{user.city}},{{user.country}}</a></li>
 										<!-- <li><a class="searchlocation"
 											style="text-decoration: none;">India</a></li> -->
 									</ul>
@@ -111,36 +99,6 @@
 						</li>
 					</ul>
 				</div>
-				<!--  <div class="view view-second">
-					<img src="img/donna_karan_adriana_lima_2.jpg" />
-					<div class="mask">
-						<h2>Matches</h2>
-						<p>Bangalore,India</p>
-						<a href="#" class="info">View</a>
-					</div>
-				</div> -->
-				<!-- <div class="view view-third">
-					<img src="img/donna_karan_adriana_lima_2.jpg" />
-					<div class="mask">
-						<h2>Matches</h2>
-						<p>Bangalore,India</p>
-						<a href="#" class="info">View</a>
-					</div>
-				</div>  -->
-
-				<!-- 	<div class="pagination"
-					style="margin-left: auto; margin-right: auto; width: 35%;">
-					<ul>
-						<li><a ng-disabled="pagenumber == 0"
-							ng-click="pagenumber=pagenumber-1" class="bx-prev"> Prev</a></li>
-						<li ng-repeat="number in pagenumbers"
-							ng-class="{active: $index == pagenumber}"><a href="#">{{number}}</a>
-						</li>
-						<li><a
-							ng-disabled="currentPage >= advancedsearch.length/pageSize - 1"
-							ng-click="pagenumber=pagenumber+1" class="bx-next">Next</a></li>
-					</ul>
-				</div> -->
 			</div>
 		</div>
 		<!-- right pane -->
