@@ -7,13 +7,17 @@
 				
 			<!-- header pane -->
 			<div style="border-bottom: 1px solid black; position: relative; top: -2px;">
-				<span class="left ywbreadcrumb header_width"> <a class="nonactive"
-					href="#/collections">collection</a> <span class="ywdivider">/</span> <span>
-					Rebecca Minkoff {{galleryname}}</span></span>
+				<span class="left ywbreadcrumb header_width"> 
+					<a ui-if="isMyProfile" class="nonactive" ng-href="#/collections">collection</a>
+					<a ui-if="!isMyProfile" class="nonactive" ng-href="#/{{profileid}}/collections">collection</a> 
+					<span class="ywdivider">/</span> 
+					<span>Rebecca Minkoff {{galleryname}}</span>
+				</span>
 			</div>
 			<div style="border-bottom: 1px solid black;">
-				<span class="left right_pane_info"> shop this collection  </span> <span class="right"> <a
-					ng-href="#/addcollections?id={{galleryid}}" class="rightpane_add_btn">Organize</a>
+				<span class="left right_pane_info"> shop this collection  </span> 
+				<span class="right" ui-if="isMyProfile"> 
+					<a ng-href="#/addcollections?id={{galleryid}}" class="rightpane_add_btn">Organize</a>
 				</span>
 			</div>
 			<!-- header pane -->

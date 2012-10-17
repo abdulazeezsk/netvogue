@@ -542,95 +542,50 @@ angular.module('netVogue.services', []).
 	    			}
 	    		}
 	    		photos.splice(i, 1);
-	    	}
-		};
-}).service('srvcollection', function ($http, mycollection) {
-    var collections= new netvogue.hashtable();
-    return {
-  	  getname: function(routeparams) {
-      	  var result;
-            if (angular.isUndefined(routeparams.profileid)) {
-                return mycollection.getname();
-            } else {
-                /*angular.forEach(profiles, function (profile) {
-                    if (angular.equals(profile['profileid'], routeparams.profileid)) {
-                        result = profile['aboutus'];
-                    }
-                });*/
-            }
-            return result;
-  	  },
-  	  getprofilepic: function(routeparams) {
-		  var result;
-        if (angular.isUndefined(routeparams.profileid)) {
-            return mycollection.getprofilepic();
-        } else {
-            /*angular.forEach(profiles, function (profile) {
-                if (angular.equals(profile['profileid'], routeparams.profileid)) {
-                    result = profile['aboutus'];
-                }
-            });*/
-        }
-        return result;
-	  },
-  	  getgalleryname: function (routeparams) {
-	          if (angular.isUndefined(routeparams.profileid)) {
-	        	  return mycollection.getgalleryname();
-	          }
 	    	},
-  	  getcollections: function (routeparams) {
-	          if (angular.isUndefined(routeparams.profileid)) {
-	        	  return mycollection.getcollections();
-	          }
-	      },
-  	  collections: function(routeparams, jsonrequest) {
-	          var profileid = "";
-	          if (!angular.isUndefined(routeparams.profileid)) {
-	        	  profileid = routeparams.profileid;
-	          }
-	          var config = {
-	              method: "GET",
-	              params: jsonrequest,
-	              url:   "getcollections/" + profileid
-	          };
-	          return $http(config);
-	      },
-	      photos: function (routeparams, galleryid, photoname) {
-	          var profileid = "";
-	          if (!angular.isUndefined(routeparams.profileid)) {
-	        	  profileid = routeparams.profileid;
-	          }
-	          var datatosend = {
-	  				"photoname" : photoname,
-	  				"galleryid" : galleryid
-	  		};
-	          var config = {
-	              method: "GET",
-	              params: datatosend,
-	              url: "collection/getphotos/" + profileid
-	          };
-	          return $http(config);
-	      },
-	      setcollectionlocally: function(data, routeparams) {
-	    	  if (angular.isUndefined(routeparams.profileid)) {
-	        	  mycollection.setcollections(data);
-	          } else {
-	        	  //galleries.push(angular.copy(galleriesdata));
-	          }
-	      },
-	      setphotoslocally: function(galleriesdata, routeparams) {
-	    	  if (angular.isUndefined(routeparams.profileid)) {
-	    		  mycollection.setphotos(galleriesdata);
-	          } else {
-	        	  //galleries.push(angular.copy(galleriesdata));
-	          }
-	      },
-	      getphotos: function (routeparams) {
-	          if (angular.isUndefined(routeparams.profileid)) {
-	        	  return mycollection.getphotos();
-	          }
-	      }
-    };
+	    	collections: function(routeparams, jsonrequest) {
+		          var profileid = "";
+		          if (!angular.isUndefined(routeparams.profileid)) {
+		        	  profileid = routeparams.profileid;
+		          }
+		          var config = {
+		              method: "GET",
+		              params: jsonrequest,
+		              url:   "getcollections/" + profileid
+		          };
+		          return $http(config);
+		      },
+		      photos: function (routeparams, galleryid, photoname) {
+		          var profileid = "";
+		          if (!angular.isUndefined(routeparams.profileid)) {
+		        	  profileid = routeparams.profileid;
+		          }
+		          var datatosend = {
+		  				"photoname" : photoname,
+		  				"galleryid" : galleryid
+		  		};
+		          var config = {
+		              method: "GET",
+		              params: datatosend,
+		              url: "collection/getphotos/" + profileid
+		          };
+		          return $http(config);
+		      },
+		      setcollectionlocally: function(data, routeparams) {
+		    	  if (angular.isUndefined(routeparams.profileid)) {
+		        	  mycollection.setcollections(data);
+		          } else {
+		        	  //galleries.push(angular.copy(galleriesdata));
+		          }
+		      },
+		      setphotoslocally: function(galleriesdata, routeparams) {
+		    	  if (angular.isUndefined(routeparams.profileid)) {
+		    		  mycollection.setphotos(galleriesdata);
+		          } else {
+		        	  //galleries.push(angular.copy(galleriesdata));
+		          }
+		      }
+		};
 }).service('mystylesheet', function ($http) {
 	var name;
 	var profilepic;

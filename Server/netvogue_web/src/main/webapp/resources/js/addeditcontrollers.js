@@ -262,7 +262,7 @@ function MyCtrlAddNewsletter($scope, $routeParams, $location, mygallery, current
 	};
 }
 
-function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedprofile, srvcollection, mycollection) {
+function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedprofile, mycollection) {
 
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
 	if(!$scope.isMyProfile) {
@@ -282,16 +282,16 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 	}
 	
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvcollection.getname($routeParams);
-	    $scope.profilepic		= srvcollection.getprofilepic($routeParams);
-	    $scope.galleryname  	= srvcollection.getgalleryname($routeParams);
-	    $scope.existingfiles	= srvcollection.getphotos($routeParams);
+	    $scope.entityname  		= mycollection.getname($routeParams);
+	    $scope.profilepic		= mycollection.getprofilepic($routeParams);
+	    $scope.galleryname  	= mycollection.getgalleryname($routeParams);
+	    $scope.existingfiles	= mycollection.getphotos($routeParams);
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    srvcollection.photos($routeParams, $scope.galleryid, "").success(function(data) {
-    	srvcollection.setphotoslocally(data, $routeParams);
+    mycollection.photos($routeParams, $scope.galleryid, "").success(function(data) {
+    	mycollection.setphotoslocally(data, $routeParams);
     	$scope.updatedata();
     }).error(function(data) {
     	
@@ -338,7 +338,7 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 	$scope.deletephoto = function(photoid) {
 		mycollection.deletephoto(photoid).success(function(data) {
 			mycollection.deletephotoslocally(photoid);
-			$scope.existingfiles	= srvcollection.getphotos($routeParams);
+			$scope.existingfiles	= mycollection.getphotos($routeParams);
 		}).error(function(data) {
 			alert("error: " + data.error);
 		});

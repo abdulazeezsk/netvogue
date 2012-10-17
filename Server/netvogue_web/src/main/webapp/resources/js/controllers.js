@@ -786,7 +786,7 @@ function MyCtrlViewNewsLetters($scope, $routeParams, currentvisitedprofile, myga
 
 }
 
-function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofile, srvcollection, mycollection) {
+function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofile, mycollection) {
 
 	$scope.$parent.title = 'Collections';
 	
@@ -814,9 +814,9 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
 	$scope.searchcollectioncat  = "";
 	$scope.searchbrandname		= "";
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvcollection.getname($routeParams);
-	    $scope.profilepic		= srvcollection.getprofilepic($routeParams);
-	    $scope.collections		= srvcollection.getcollections($routeParams);
+	    $scope.entityname  		= mycollection.getname($routeParams);
+	    $scope.profilepic		= mycollection.getprofilepic($routeParams);
+	    $scope.collections		= mycollection.getcollections($routeParams);
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
@@ -827,8 +827,8 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
     			"category"		:$scope.searchcollectioncat,
     			"brandname"		:$scope.searchbrandname,
     	};
-    	srvcollection.collections($routeParams, searchcollections).success(function(data) {
-    		srvcollection.setcollectionlocally(data, $routeParams);
+    	mycollection.collections($routeParams, searchcollections).success(function(data) {
+    		mycollection.setcollectionlocally(data, $routeParams);
         	$scope.updatedata();
         }).error(function(data) {
         	
@@ -861,7 +861,7 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
     			$scope.editcollectiondesc, $scope.editcollectioncat, editcollectionid);
     	mycollection.updatecollection(jsonrequest).success(function(data) {
     		mycollection.updatecollectionlocally($scope.editgalleryid, $scope.editgalleryname);//Azeez
-    		$scope.collections		= srvcollection.getcollections($routeParams);
+    		$scope.collections		= mycollection.getcollections($routeParams);
     	}).error(function(data) {
  
     	});
@@ -871,7 +871,7 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
     $scope.deletecollection = function(id) {
     	mycollection.deletecollection(id).success(function(data) {
     		mycollection.deletecollectionlocally(id);
-    		$scope.collections		= srvcollection.getcollections($routeParams);
+    		$scope.collections		= mycollection.getcollections($routeParams);
     	}).error(function(data) {
     		
     	});
@@ -880,7 +880,7 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
 	$scope.searchFilter = new netvogue.searchFilter();
 }
 
-function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, srvcollection, mycollection) {
+function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, mycollection) {
 
 	$scope.$parent.title = "Collection";
 	
@@ -897,11 +897,11 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, srvcollec
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvcollection.getname($routeParams);
-	    $scope.profilepic		= srvcollection.getprofilepic($routeParams);
-	    $scope.galleryname  	= srvcollection.getgalleryname($routeParams);
-	    $scope.collections		= srvcollection.getcollections($routeParams);
-	    $scope.photogallery		= srvcollection.getphotos($routeParams);
+	    $scope.entityname  		= mycollection.getname($routeParams);
+	    $scope.profilepic		= mycollection.getprofilepic($routeParams);
+	    $scope.galleryname  	= mycollection.getgalleryname($routeParams);
+	    $scope.collections		= mycollection.getcollections($routeParams);
+	    $scope.photogallery		= mycollection.getphotos($routeParams);
     };
     
     //searchcollection is not required. had to send it ,as it is mandatory in backend. need to change in backend later
@@ -910,9 +910,9 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, srvcollec
 			"category"		:"",
 			"brandname"		:""
 	};
-	srvcollection.collections($routeParams, searchcollections).success(function(data) {
-		srvcollection.setcollectionlocally(data, $routeParams);
-		$scope.collections		= srvcollection.getcollections($routeParams);
+    mycollection.collections($routeParams, searchcollections).success(function(data) {
+    	mycollection.setcollectionlocally(data, $routeParams);
+		$scope.collections		= mycollection.getcollections($routeParams);
     }).error(function(data) {
     	
     });
@@ -920,8 +920,8 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, srvcollec
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getphotos = function() {
-    	srvcollection.photos($routeParams, $scope.galleryid, "").success(function(data) {
-    		srvcollection.setphotoslocally(data, $routeParams);
+    	mycollection.photos($routeParams, $scope.galleryid, "").success(function(data) {
+    		mycollection.setphotoslocally(data, $routeParams);
         	$scope.updatedata();
         }).error(function(data) {
         	
@@ -932,7 +932,7 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, srvcollec
     $scope.deletephoto = function(uniqueid) {
     	mycollection.deletephoto(uniqueid).success(function(data) {
 			mycollection.deletephotoslocally(uniqueid);
-			$scope.photogallery	= srvgallery.getphotos($routeParams);
+			$scope.photogallery	= mycollection.getphotos($routeParams);
 		}).error(function(data) {
 			alert("error");
 		});

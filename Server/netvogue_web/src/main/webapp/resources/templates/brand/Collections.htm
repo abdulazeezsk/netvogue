@@ -8,10 +8,15 @@
 			<ul class="thumbnails">
 				<li class="span3">
 					<div>
-						<span> <a href="#profile"> <img alt=""
-								ng-src={{profilepic.thumbnail_url}}
-								class="pull-left leftpane_profile_img"></a> </span>
-								<span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						<span> 
+							<a ui-if="isMyProfile" ng-href="#profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
+										class="pull-left leftpane_profile_img"></a>
+							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
+										class="pull-left leftpane_profile_img"></a>
+						</span> 
+						<span> 
+							<a ui-if="isMyProfile" ng-href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
 					</div>
 				</li>
@@ -46,7 +51,7 @@
 					Find Collections using the filters
 				</span>
 				<span class="right" >
-				<a data-toggle="modal"	href="#CreateCollection" class="rightpane_add_btn">create collection</a></span>
+				<a ui-if="isMyProfile" data-toggle="modal"	ng-href="#CreateCollection" class="rightpane_add_btn">create collection</a></span>
 				<div class="divi2 right_pane_underline"></div>
 				<!-- <ul class="thumbnails">
 					<li ng-repeat="collection in collections" style="position: relative;">
@@ -79,12 +84,15 @@
 				<ul class="thumbnails">
 					<li ng-repeat="collection in collections">
 						<div align="center" style="position: relative;">
-							<a class="product-image"
-								ng-href="#/collection?id={{collection.galleryid}}" title="">
+							<a ui-if="isMyProfile" class="product-image" ng-href="#/collection?id={{collection.galleryid}}" title="">
 								<img ng-src="{{collection.gallerypic}}"  class="fade_spot"
 								width="220" height="300" alt="Dumont Coat" title="Dumont Coat">
 							</a>
-							<div class="stylesheet-edit-delete">
+							<a ui-if="!isMyProfile" class="product-image" ng-href="#/{{profileid}}collection?id={{collection.galleryid}}" title="">
+								<img ng-src="{{collection.gallerypic}}"  class="fade_spot"
+								width="220" height="300" alt="Dumont Coat" title="Dumont Coat">
+							</a>
+							<div ui-if="isMyProfile" class="stylesheet-edit-delete">
 								<span class="edit-delete"><a
 									ng-click="deletecollection(collection.galleryid)" 
 									title="Delete"><i class="icon-trash icon-black"></i></a><a
