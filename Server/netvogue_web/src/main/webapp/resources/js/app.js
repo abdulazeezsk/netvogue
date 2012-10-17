@@ -32,7 +32,7 @@ angular.module('netVogue', ['netVogue.constants', 'netVogue.filters', 'netVogue.
 	  $routeProvider.when('/styles', 					{templateUrl: 'templates/brand/Styles.htm', 						controller: MyCtrlStyles });
 	  $routeProvider.when('/:profileid/styles', 		{templateUrl: 'templates/brand/Styles.htm', 						controller: MyCtrlStyles });
 	  $routeProvider.when('/style', 					{templateUrl: 'templates/brand/Style.htm', 							controller: MyCtrlStyle });
-	  $routeProvider.when('/:profile/style', 			{templateUrl: 'templates/brand/Style.htm', 							controller: MyCtrlStyle });
+	  $routeProvider.when('/:profileid/style', 			{templateUrl: 'templates/brand/Style.htm', 							controller: MyCtrlStyle });
 	  $routeProvider.when('/network', 					{templateUrl: 'templates/Network.htm', 								controller: MyCtrlNetwork});
 	  $routeProvider.when('/:profileid/network', 		{templateUrl: 'templates/Network.htm', 								controller: MyCtrlNetwork});
 	  $routeProvider.when('/newsletter', 				{templateUrl: 'templates/Newsletter.htm', 							controller: MyCtrlNewsletter });
