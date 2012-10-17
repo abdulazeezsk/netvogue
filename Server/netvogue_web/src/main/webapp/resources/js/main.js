@@ -22,7 +22,7 @@ function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search, m
 		
 	});
 	
-	$scope.$on('profilepicchanged', function(profilepic) {
+	$scope.$on('profilepicchanged', function(event, profilepic) {
 		$scope.profilepic = profilepic;
 	});
 	// Not required anymore, as we have changed Find Boutiques and Brands to directory
