@@ -95,6 +95,8 @@
 								<span
 									style="font-weight: Bold; font-size: 14px; cursor: pointer; text-transform: uppercase;">
 									Style Name </span> <span class="btn-group pull-right">
+									<input type="text" class="spanedt_txt" ng-show="isEditMode"	 placeholder="Add style name">
+									</input>
 									<button class="btn btn-inverse dropdown-toggle"
 										data-toggle="dropdown">
 										Action <span class="caret"></span>
@@ -116,6 +118,8 @@
 								<span
 									style="font-weight: normal; font-size: 10px; cursor: pointer; text-transform: uppercase;">
 									Style Number </span>
+									<input type="text" class="spanedt_txt" ng-show="isEditMode"	 placeholder="Add style number here">
+									</input>
 								<div class="divi2"></div>
 								<div
 									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
@@ -123,7 +127,10 @@
 								</div>
 								<span
 									style="font-weight: normal; font-size: 10px; cursor: pointer; text-transform: uppercase;">
-									Fabrication </span> <br> <br>
+									Fabrication </span> <br>
+									<input type="text" class="spanedt_txt" ng-show="isEditMode"	 placeholder="Add fabrication here">
+									</input>
+									 <br>
 								<div
 									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
 									<u>Description </u>
@@ -135,7 +142,8 @@
 									galley of type and scrambled it to make a type specimen book.
 									It has survived not only five centuries, but also the leap into
 									electronic typesetting, remaining essentially unchang</p>
-
+								<textarea class="spanedt_txt1" rows="5" ng-show="isEditMode" placeholder="Add description">
+								</textarea>
 								<div
 									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase; margin-bottom: 2px;">
 									<u>Swatches</u>
@@ -183,6 +191,8 @@
 									style="font-weight: normal; font-size: 12px; cursor: pointer; text-transform: uppercase;">
 									<span class="WebRupee" style="font-size: 12px;">Rs.</span>0.00
 								</span>
+								<input type="text" class="spanedt_txt" ng-show="isEditMode"	 placeholder="Add price here">
+									</input>
 								<div class="divi2"></div>
 								<div class="controls pull-right">
 									<button type="button" class="btn" ng-click="exitstylepane()">
