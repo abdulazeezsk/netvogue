@@ -1321,8 +1321,11 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, mylinesheet) 
 function MyCtrlStyle($scope, $routeParams, currentvisitedprofile, mylinesheet) {
 
 	$scope.$parent.title = 'Style';
-	$scope.backButton = currentvisitedprofile.getBackHistory();
 	
+	$scope.profileid = "";
+	if(!angular.isUndefined($routeParams.profileid)) {
+		$scope.profileid = $routeParams.profileid;
+	}
 	$scope.linesheetid = "";
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.linesheetid = $routeParams.id;
@@ -1335,6 +1338,7 @@ function MyCtrlStyle($scope, $routeParams, currentvisitedprofile, mylinesheet) {
 		$scope.styleid = $routeParams.styleid;
 	}
 	
+	$scope.backButton = currentvisitedprofile.getBackHistory();
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mylinesheet.getname($routeParams);
 	    $scope.profilepic		= mylinesheet.getprofilepic($routeParams);
