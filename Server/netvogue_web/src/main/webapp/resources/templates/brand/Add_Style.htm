@@ -31,13 +31,19 @@
 								</a>
 							</div>
 							<div class="leftpanefeed_text">
-								<h3>
-									<a
-										nghref="#/stylepreview?id={{style.styleid}}&&cat={{category}}&&stylesheetid={{style.styleid}}"
-										title="">{{style.stylename}}</a>
+							<h3>
+									<a ng-click="setmainstyle(style)" title="">Rebecca Minkoff</a>
 								</h3>
-								<p>{{style.stylename}}</p>
-								<p>
+								<h2>
+									<a ng-click="setmainstyle(style)" title="">{{style.stylename}}</a>
+								</h2>
+								<h2 style="margin-top: 5px;">
+									<span
+										style="font-weight: normal; font-size: 12px; cursor: pointer; text-transform: uppercase;">
+										<span class="WebRupee" style="font-size: 12px;margin-right:3px;">Rs.</span>{{style.price}}
+									</span>
+								</h2>
+								<p style="margin-top:3px;font-weight:bold;">
 									<span><a ng-click="editstyle(style)">Edit</a></span> <span
 										class="divider">/</span> <span><a
 										ng-click="deletestyle(style.styleid)">Delete</a></span>

@@ -26,17 +26,25 @@
 				<h4 class="leftpane_subheading">Styles</h4>
 				<ul class="nav nav-tab nav-stacked">
 					<li ng-repeat="style in allstyles">
-						<div class="leftpanefeed">
+						<div class="leftpanefeed fade_spot">
 							<div class="feedimage">
 								<a href="#/{{style.stylelistitemid}}"> <img alt=""
 									ng-src="{{style.profileleftpic}}" class="pull-left"></a>
 							</div>
 							<div class="leftpanefeed_text">
-								<h3>
-									<a href="#/{{trend.trendlistitemID}}" title="">{{style.stylename}}</a>
+							<h3>
+									<a ng-click="setmainstyle(style)" title="">Rebecca Minkoff</a>
 								</h3>
-								<p>{{style.stylename}}</p>
-								<p>
+								<h2>
+									<a ng-click="setmainstyle(style)" title="">{{style.stylename}}</a>
+								</h2>
+								<h2 style="margin-top: 5px;">
+									<span
+										style="font-weight: normal; font-size: 12px; cursor: pointer; text-transform: uppercase;">
+										<span class="WebRupee" style="font-size: 12px;margin-right:3px;">Rs.</span>{{style.price}}
+									</span>
+								</h2>
+								<p style="margin-top:3px;font-weight:bold;">
 									<a ng-click="addstyle(style)">ADD</a>
 								</p>
 							</div>

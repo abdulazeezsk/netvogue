@@ -22,16 +22,25 @@
 				<div class="divi2"></div>
 				<ul class="nav nav-tab nav-stacked">
 					<li ng-repeat="style in styles">
-						<div class="leftpanefeed">
+						<div class="leftpanefeed fade_spot">
 							<div class="feedimage">
 								<a ng-click="setmainstyle(style)"> <img alt=""
 									ng-src="{{style.profileleftpic}}" class="pull-left"></a>
 							</div>
 							<div class="leftpanefeed_text">
 								<h3>
-									<a ng-click="setmainstyle(style)" title="">{{style.name}}</a>
+									<a ng-click="setmainstyle(style)" title="">Rebecca Minkoff</a>
 								</h3>
-								<p>{{style.stylename}}</p>
+								<h2>
+									<a ng-click="setmainstyle(style)" title="">{{style.stylename}}</a>
+								</h2>
+								<h2 style="margin-top: 5px;">
+									<span
+										style="font-weight: normal; font-size: 12px; cursor: pointer; text-transform: uppercase;">
+										<span class="WebRupee" style="font-size: 12px;margin-right:3px;">Rs.</span>{{style.price}}
+									</span>
+								</h2>
+								
 							</div>
 						</div>
 					</li>
@@ -59,7 +68,7 @@
 					<div class="imageprevw">
 						<ul class="thumbnails">
 							<li class="spanstyle" style="display: inline;"><img
-								width="257" height="365" src="{{mainstyle.profilethumbpic}}" alt=""></li>
+								width="257" height="365" ng-src="{{mainstyle.profilethumbpic}}" alt=""></li>
 						</ul>
 					</div>
 					<div class="styles-specs">
