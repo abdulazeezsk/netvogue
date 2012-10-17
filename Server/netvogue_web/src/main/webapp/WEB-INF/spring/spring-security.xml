@@ -17,6 +17,7 @@
 	<security:http pattern="/blog.htm" security="none" />
 	<security:http pattern="/about_Us.htm" security="none" />
 	<security:http pattern="/Netvogue.htm" security="none" />
+	<security:http pattern="/favicon.ico" security="none" />
 		 
 	<security:http auto-config="true" >	
 		<security:custom-filter ref="captchaCaptureFilter" before="FORM_LOGIN_FILTER"/>
@@ -26,12 +27,10 @@
 		<security:intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/boutique_Registration.htm" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/boutique/AvailabilityStatus.htm" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/Brand_Registration_Success.htm" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		
-<!-- 		<security:intercept-url pattern="/**" access="ROLE_BOUTIQUE,ROLE_BRAND"/> -->
-		
 		<security:intercept-url pattern="/home.htm" access="ROLE_BOUTIQUE,ROLE_BRAND"/>
 		<security:intercept-url pattern="/templates/**" access="ROLE_BOUTIQUE,ROLE_BRAND"/>
+		
+ 		<security:intercept-url pattern="/**" access="ROLE_BOUTIQUE,ROLE_BRAND"/>
 		<!-- Security related to Boutiques --> 
  		<security:intercept-url pattern="/*/boutique/**" access="ROLE_BOUTIQUE"/>
 		

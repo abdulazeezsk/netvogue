@@ -46,6 +46,9 @@ public class StatusUpdateController {
 		System.out.println("Get Statuspupdates: " + profileid);
 		StatusUpdates updates = new StatusUpdates();
 		User user = userDetailsService.getUserFromSession();
+		if(user == null) {
+			return updates;
+		}
 		if(!profileid.isEmpty()) {
 			user = userService.getUserByUsername(profileid);
 			if(user == null) {
