@@ -251,6 +251,7 @@ angular.module('netVogue.directives', []).
 			        			scope.existingfiles = angular.copy(replyFromServer);
 			        			scope.newfiles = [];
 			        			scope.filesadded = false;
+			        			//scope.$emit('filesuploaded');
 		        			}
 		        		} else {
 		        			alert("error");

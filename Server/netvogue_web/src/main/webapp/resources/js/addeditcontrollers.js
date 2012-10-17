@@ -27,7 +27,7 @@ function MyCtrlAddGallery($scope, $routeParams, $location, mygallery, currentvis
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     mygallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, "").success(function(data) {
-    	mygallery.setphotoslocally(data, $routeParams);
+    	mygallery.setphotoslocally(data);
     	$scope.updatedata();
     }).error(function(data) {
     	
@@ -66,13 +66,12 @@ function MyCtrlAddGallery($scope, $routeParams, $location, mygallery, currentvis
 		}).error(function(data) {
 			
 		});
-		alert(label + seasonname + photoid);
 	};
 	
 	$scope.deletephoto = function(photoid) {
 		mygallery.deletephoto(ajaxrequestcall, photoid).success(function(data) {
 			mygallery.deletephotoslocally(photoid);
-			$scope.existingfiles	= mygallery.getphotos($routeParams);
+			//$scope.existingfiles	= mygallery.getphotos($routeParams);
 		}).error(function(data) {
 			alert("error: " + data.error);
 		});
@@ -105,7 +104,7 @@ function MyCtrlAddPrintCampaign($scope, $routeParams, $location, mygallery, curr
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     mygallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, "").success(function(data) {
-    	mygallery.setphotoslocally(data, $routeParams);
+    	mygallery.setphotoslocally(data);
     	$scope.updatedata();
     }).error(function(data) {
     	
@@ -152,7 +151,6 @@ function MyCtrlAddPrintCampaign($scope, $routeParams, $location, mygallery, curr
 	$scope.deletephoto = function(photoid) {
 		mygallery.deletephoto(ajaxrequestcall, photoid).success(function(data) {
 			mygallery.deletephotoslocally(photoid);
-			$scope.existingfiles	= mygallery.getphotos($routeParams);
 		}).error(function(data) {
 			alert("error: " + data.error);
 		});
@@ -208,7 +206,7 @@ function MyCtrlAddNewsletter($scope, $routeParams, $location, mygallery, current
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     mygallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, "").success(function(data) {
-    	mygallery.setphotoslocally(data, $routeParams);
+    	mygallery.setphotoslocally(data);
     	$scope.updatedata();
     }).error(function(data) {
     	
@@ -255,7 +253,6 @@ function MyCtrlAddNewsletter($scope, $routeParams, $location, mygallery, current
 	$scope.deletephoto = function(photoid) {
 		mygallery.deletephoto(ajaxrequestcall, photoid).success(function(data) {
 			mygallery.deletephotoslocally(photoid);
-			$scope.existingfiles	= mygallery.getphotos($routeParams);
 		}).error(function(data) {
 			alert("error: " + data.error);
 		});
@@ -338,7 +335,6 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 	$scope.deletephoto = function(photoid) {
 		mycollection.deletephoto(photoid).success(function(data) {
 			mycollection.deletephotoslocally(photoid);
-			$scope.existingfiles	= mycollection.getphotos($routeParams);
 		}).error(function(data) {
 			alert("error: " + data.error);
 		});
