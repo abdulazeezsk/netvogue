@@ -30,12 +30,12 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
     if (!angular.isUndefined($routeParams.profileid)) {
 		$scope.profileid = $routeParams.profileid;
 	}
-    
-    $scope.entityname  		= "";
-    $scope.profilepic		= "";
     $scope.links = currentvisitedprofile.getleftpanellinks();
     
     $scope.showCreateNetwork = false;
+    
+    $scope.entityname = "";
+	$scope.profilepic = "";
     //This will initialize all the variables inside controller.
     //Also, if there is any existing data, this data will be shown to user until we get response from server
     $scope.updatedata = function() {
@@ -99,11 +99,10 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 	$scope.currentPage = 'Network';
 	$scope.$parent.title = "Network";
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
-
-	$scope.entityname = "";
-	$scope.profilepic = "";
 	$scope.links = currentvisitedprofile.getleftpanellinks();
 	
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.updatedata = function() {
 		$scope.entityname 		= srvnetwork.getname($routeParams);
 		$scope.iambrand			= srvnetwork.isbrand($routeParams);
@@ -174,9 +173,7 @@ function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisi
 	$scope.currentPage = 'Corner';
 	$scope.$parent.title = "Corner";
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
-
-	$scope.entityname = "";
-	$scope.profilepic = "";
+	
 	$scope.links = currentvisitedprofile.getleftpanellinks();
 	if (!angular.isUndefined($routeParams.profileid)) {
 		$scope.profileid = $routeParams.profileid;
@@ -186,6 +183,9 @@ function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisi
 			
 	};
 	$scope.newupdate ="";
+	
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.updatedata = function(routeparams) {
 		$scope.entityname 		= srvtimeline.getname(routeparams);
 		$scope.iambrand			= srvtimeline.isbrand(routeparams);
@@ -296,6 +296,9 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, m
 	$scope.showEditGallery	 = false;
 	
 	var ajaxrequestcall	 = "gallery";
+	
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
 	    $scope.iambrand			= mygallery.isbrand($routeParams);
@@ -372,6 +375,9 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, mygallery) {
 	
 	var ajaxrequestcall	 = "gallery";
 	$scope.searchphotoname = "";
+	
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
 	    $scope.iambrand			= mygallery.isbrand($routeParams);
@@ -416,6 +422,9 @@ function MyCtrlViewPhotos($scope, $routeParams, currentvisitedprofile, mygallery
 	}
 	
 	$scope.backButton = currentvisitedprofile.getBackHistory();
+	
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
 	    $scope.iambrand			= mygallery.isbrand($routeParams);
@@ -459,6 +468,9 @@ function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprof
 	$scope.showEditGallery	 = false;
 	
 	var ajaxrequestcall	 = "printcampaign";
+	
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
 	    $scope.iambrand			= mygallery.isbrand($routeParams);
@@ -535,6 +547,9 @@ function MyCtrlCampaign($scope, $routeParams, currentvisitedprofile, mygallery) 
 	
 	var ajaxrequestcall	 = "printcampaign";
 	$scope.searchphotoname = "";
+	
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
 	    $scope.iambrand			= mygallery.isbrand($routeParams);
@@ -641,6 +656,9 @@ function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile
 	$scope.showEditGallery	 = false;
 	
 	var ajaxrequestcall	 = "editorial";
+	
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
 	    $scope.iambrand			= mygallery.isbrand($routeParams);
@@ -716,6 +734,9 @@ function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile, mygallery)
 	}
 	var ajaxrequestcall	 = "editorial";
 	$scope.searchphotoname = "";
+	
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
 	    $scope.iambrand			= mygallery.isbrand($routeParams);
@@ -813,6 +834,9 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
 	$scope.searchcollectionname = "";
 	$scope.searchcollectioncat  = "";
 	$scope.searchbrandname		= "";
+	
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mycollection.getname($routeParams);
 	    $scope.profilepic		= mycollection.getprofilepic($routeParams);
@@ -896,6 +920,8 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, mycollect
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mycollection.getname($routeParams);
 	    $scope.profilepic		= mycollection.getprofilepic($routeParams);
@@ -1200,6 +1226,8 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
 	$scope.editlinesheetid	 	= "";
 	$scope.showEditLinesheet	 = false;	
 	
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mylinesheet.getname($routeParams);
 	    $scope.profilepic		= mylinesheet.getprofilepic($routeParams);
@@ -1287,7 +1315,8 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, mylinesheet) 
 	if (!angular.isUndefined($routeParams.cat)) {
 		$scope.category = $routeParams.cat;
 	}
-	
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mylinesheet.getname($routeParams);
 	    $scope.profilepic		= mylinesheet.getprofilepic($routeParams);
@@ -1335,6 +1364,8 @@ function MyCtrlStyle($scope, $routeParams, currentvisitedprofile, mylinesheet) {
 	}
 	
 	$scope.backButton = currentvisitedprofile.getBackHistory();
+	$scope.entityname = "";
+	$scope.profilepic = "";
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mylinesheet.getname($routeParams);
 	    $scope.profilepic		= mylinesheet.getprofilepic($routeParams);
