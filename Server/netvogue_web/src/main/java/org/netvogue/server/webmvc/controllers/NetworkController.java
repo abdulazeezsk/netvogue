@@ -80,15 +80,17 @@ public class NetworkController {
 			}
 			Network newNetwork = conversionService.convert(dbNetwork, Network.class);
 			String thumbpic = "";
-			if(username.equals(dbNetwork.getRequestBy().getUsername())) {
-				newNetwork.setProfileid(dbNetwork.getRequestTo().getUsername());
-				newNetwork.setName(dbNetwork.getRequestTo().getName());
-				thumbpic = dbNetwork.getRequestTo().getProfilePicLink();
-			} else {
-				newNetwork.setProfileid(dbNetwork.getRequestBy().getUsername());
-				newNetwork.setName(dbNetwork.getRequestBy().getName());
-				thumbpic = dbNetwork.getRequestBy().getProfilePicLink();
+			
+			User networkUser = dbNetwork.getRequestBy();
+			if(username.equals(networkUser.getUsername())) {
+				networkUser = dbNetwork.getRequestTo();
 			}
+			newNetwork.setProfileid(networkUser.getUsername());
+			newNetwork.setLocation(networkUser.getCity());
+			newNetwork.setUsertype(networkUser.getUserType() == USER_TYPE.BRAND? "BRAND": "BOUTIQUE");
+			newNetwork.setName(networkUser.getName());
+			thumbpic = networkUser.getProfilePicLink();
+			
 			if(null != thumbpic) {
 				thumbpic = uploadManager.getQueryString(thumbpic, ImageType.PROFILE_PIC, Size.PThumb);
 			}

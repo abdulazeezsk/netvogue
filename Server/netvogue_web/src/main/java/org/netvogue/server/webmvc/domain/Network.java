@@ -3,6 +3,8 @@ package org.netvogue.server.webmvc.domain;
 public class Network {
 
 	String networkstatus;
+	String location;
+	String usertype;
 	String name;
 	String profileid;
 	String thumbnail_url;
@@ -11,6 +13,18 @@ public class Network {
 	}
 	public void setNetworkstatus(String networkstatus) {
 		this.networkstatus = networkstatus;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getUsertype() {
+		return usertype;
+	}
+	public void setUsertype(String isbrand) {
+		this.usertype = isbrand;
 	}
 	public String getName() {
 		return name;
