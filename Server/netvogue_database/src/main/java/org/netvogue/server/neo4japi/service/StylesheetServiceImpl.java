@@ -81,9 +81,9 @@ public class StylesheetServiceImpl implements StylesheetService {
 		}
 		return null;
 	}
-	public Iterable<Style> getStylesbyCategory(String category) {
+	public Iterable<Style> getStylesbyCategory(String username, String category) {
 		if(!category.isEmpty()) {
-			return stylesheetRepo.getStylesByCategory(category);
+			return stylesheetRepo.getStylesByCategory(username, category);
 		}
 		return null;
  	}

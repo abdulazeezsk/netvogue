@@ -25,10 +25,10 @@ public interface StylesheetRepository extends GraphRepository<Stylesheet> {
 			"MATCH n-[:SS_STYLE]->p RETURN p ORDER BY p.createdDate DESC")
 	Iterable<Style> getStyles(String stylesheetid);
 	
-	@Query( "START n=node:stylesheetid('stylesheetid:*') " +
-			"MATCH n<-[:Stylesheet_Category]-p WHERE p.productline = {0}" +
+	@Query( "START n=node:search(username={0}) MATCH n-[:STYLESHEET]<-[:Stylesheet_Category]-p " +
+			"WHERE p.productline = {0}" +
 			"WITH n MATCH n-[:SS_STYLE]-s RETURN s ORDER BY s.createdDate DESC")
-	Iterable<Style> getStylesByCategory(String category);
+	Iterable<Style> getStylesByCategory(String username, String category);
 	
 	/*@Query( "START n=node:stylesheetid(printcampaignid={0}) " +
 			"MATCH n-[:PRINTCAMPAIGNPHOTO]->p WHERE p.printcampaignphotoname! =~ {1} " +

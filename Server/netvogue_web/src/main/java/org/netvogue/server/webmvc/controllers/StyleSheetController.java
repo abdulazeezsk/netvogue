@@ -151,7 +151,7 @@ public class StyleSheetController {
 		Iterable<Style> dbStyles;
 		ProductLines productline = ProductLines.getValueOf(category);
 		if(null == searchquery || searchquery.isEmpty()) {
-			dbStyles = stylesheetService.getStylesbyCategory(productline.toString());
+			dbStyles = stylesheetService.getStylesbyCategory(loggedinUser.getUsername(), productline.toString());
 		} else {
 			//Change this after implementing query
 			//dbStyles = collectionService.searchPhotoByName(stylesheetid, photoname);

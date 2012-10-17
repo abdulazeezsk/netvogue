@@ -1279,10 +1279,6 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, mylinesheet) 
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
 	
-	if($scope.$parent.iambrand == false) {
-		$location.url("linesheets");
-	}
-	
     $scope.linesheetid = "";
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.linesheetid = $routeParams.id;
