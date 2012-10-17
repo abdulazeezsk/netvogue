@@ -6,6 +6,7 @@ public class Styles {
 	String name;
 	ImageURLsResponse profilepic;
 	String stylesheetname;
+	String brandname;
 	Set<StyleResponse> styles;
 	public String getName() {
 		return name;
@@ -18,6 +19,12 @@ public class Styles {
 	}
 	public void setStylesheetname(String stylesheetname) {
 		this.stylesheetname = stylesheetname;
+	}
+	public String getBrandname() {
+		return brandname;
+	}
+	public void setBrandname(String brandname) {
+		this.brandname = brandname;
 	}
 	public Set<StyleResponse> getStyles() {
 		return styles;

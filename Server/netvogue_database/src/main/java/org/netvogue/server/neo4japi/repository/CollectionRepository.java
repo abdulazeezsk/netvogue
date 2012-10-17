@@ -2,6 +2,7 @@ package org.netvogue.server.neo4japi.repository;
 
 import org.netvogue.server.neo4japi.domain.Collection;
 import org.netvogue.server.neo4japi.domain.CollectionPhoto;
+import org.netvogue.server.neo4japi.service.CollectionPhotoData;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
 
@@ -28,13 +29,13 @@ public interface CollectionRepository extends GraphRepository<Collection> {
 	void deleteCollection(String collectionid);
 	
 	@Query( "START n=node:collectionid(collectionid={0}) " +
-			"MATCH n-[:COLLECTIONPHOTO]->p RETURN p ORDER BY p.createdDate DESC")
-	Iterable<CollectionPhoto> getPhotos(String collectionid);
+			"MATCH n-[:COLLECTIONPHOTO]->photos RETURN n.name as name, photos ORDER BY photos.createdDate DESC")
+	Iterable<CollectionPhotoData> getPhotos(String collectionid);
 	
 	@Query( "START n=node:collectionid(collectionid={0}) " +
-			"MATCH n-[:COLLECTIONPHOTO]->p WHERE p.collectionphotoname! =~ {1} " +
-			"RETURN p ORDER BY p.createdDate DESC")
-	Iterable<CollectionPhoto> searchPhotosByName(String collectionid, String photoname);
+			"MATCH n-[:COLLECTIONPHOTO]->photos WHERE photos.collectionphotoname! =~ {1} " +
+			"RETURN n.name as name, photos ORDER BY photos.createdDate DESC")
+	Iterable<CollectionPhotoData> searchPhotosByName(String collectionid, String photoname);
 	
 	@Query("START p = node:collectionphotouniqueid(collectionphotouniqueid={0}) MATCH p-[r]-() DELETE p, r")
 	void deletePhoto(String collectionphotouniqueid);

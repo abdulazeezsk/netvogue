@@ -4,6 +4,7 @@ package org.netvogue.server.neo4japi.repository;
 import java.util.Date;
 
 import org.netvogue.server.neo4japi.domain.*;
+import org.netvogue.server.neo4japi.service.StyleData;
 import org.springframework.data.neo4j.annotation.Query;
 //Spring specific
 import org.springframework.data.neo4j.repository.*;
@@ -20,8 +21,8 @@ public interface LinesheetRepository extends GraphRepository<Linesheet>{
 	void deleteLinesheet(String linesheetid);
 
 	@Query( "START n=node:linesheetid(linesheetid={0}) " +
-			"MATCH n-[:LS_STYLE]->p RETURN p ORDER BY p.createdDate DESC")
-	Iterable<Style> getStyles(String linesheetid);
+			"MATCH n-[:LS_STYLE]->styles RETURN n.name as name, styles ORDER BY styles.createdDate DESC")
+	Iterable<StyleData> getStyles(String linesheetid);
 	
 	/*@Query( "START n=node:stylesheetid(printcampaignid={0}) " +
 			"MATCH n-[:PRINTCAMPAIGNPHOTO]->p WHERE p.printcampaignphotoname! =~ {1} " +

@@ -15,6 +15,7 @@ import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
 import org.netvogue.server.neo4japi.service.LinesheetData;
 import org.netvogue.server.neo4japi.service.LinesheetService;
+import org.netvogue.server.neo4japi.service.StyleData;
 import org.netvogue.server.neo4japi.service.StylesheetService;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.domain.ImageURLsResponse;
@@ -121,7 +122,7 @@ public class LinesheetController {
 			return styles;
 		styles.setStylesheetname(s.getLinesheetname());
 		Set<StyleResponse> stylesTemp = new LinkedHashSet<StyleResponse>();
-		Iterable<Style> dbStyles;
+		Iterable<StyleData> dbStyles;
 		if(null == searchquery || searchquery.isEmpty()) {
 			dbStyles = linesheetService.getStyles(stylesheetid);
 		} else {
@@ -132,10 +133,13 @@ public class LinesheetController {
 		if(null == dbStyles) {
 			return styles;
 		}
-		Iterator<Style> first = dbStyles.iterator();
+		Iterator<StyleData> first = dbStyles.iterator();
 		while ( first.hasNext() ){
-			Style dbStyle = first.next() ;
-			stylesTemp.add(conversionService.convert(dbStyle, StyleResponse.class));
+			StyleData dbStyle = first.next() ;
+			
+			StyleResponse newResponse = conversionService.convert(dbStyle.getStyle(), StyleResponse.class);
+			styles.setBrandname(dbStyle.getName()); //See for better way of implementation
+			stylesTemp.add(newResponse);
 		}
 		styles.setStyles(stylesTemp);
 		

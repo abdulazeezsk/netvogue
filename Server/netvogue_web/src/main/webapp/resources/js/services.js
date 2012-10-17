@@ -415,6 +415,7 @@ angular.module('netVogue.services', []).
 		var name;
 		var profilepic;
 		var galleryname;
+		var brandname;
 		var collections = [];
 		var photos    = [];
 		return {
@@ -441,6 +442,11 @@ angular.module('netVogue.services', []).
 	    	},
 	    	setgalleryname: function(name) {
 	    		this.galleryname = name;
+	    	},
+	    	getbrandname: function() {
+	    		if(angular.isUndefined(brandname))
+	        		return "";
+	    		return brandname;
 	    	},
 	    	createcollection: function(jsonrequest) {
 	    		var config = {
@@ -569,6 +575,7 @@ angular.module('netVogue.services', []).
 		     setphotoslocally: function(photostemp) {
 		    	 name = photostemp.name;
 		    	 galleryname = photostemp.galleryname;
+		    	 brandname = photostemp.brandname;
 		    	 angular.copy(photostemp.photos, photos);
 		     }
 		};
@@ -576,6 +583,7 @@ angular.module('netVogue.services', []).
 	var name;
 	var profilepic;
 	var stylesheetname;
+	var brandname;
 	var stylesheets = [];
 	var styles    = [];
 	return {
@@ -602,6 +610,11 @@ angular.module('netVogue.services', []).
     	},
     	setstylesheetname: function(name) {
     		this.stylesheetname = name;
+    	},
+    	getbrandname: function() {
+    		if(angular.isUndefined(brandname))
+        		return "";
+    		return brandname;
     	},
     	createstylesheet: function(jsonrequest) {
     		var config = {
@@ -750,11 +763,13 @@ angular.module('netVogue.services', []).
         setstyleslocally: function(temp) {
         	name = temp.name;
     		stylesheetname = temp.stylesheetname;
+    		//brandname = temp.brandname;
     		angular.copy(temp.styles, styles);
         }
 	};
 }).service('mylinesheet', function ($http) {
 	var name;
+	var brandname;
 	var profilepic;
 	var linesheetname;
 	var linesheets = [];
@@ -783,6 +798,11 @@ angular.module('netVogue.services', []).
     	},
     	setlinesheetname: function(name) {
     		this.linesheetname = name;
+    	},
+    	getbrandname: function() {
+    		if(angular.isUndefined(brandname))
+        		return "";
+    		return brandname;
     	},
     	createlinesheet: function(jsonrequest) {
     		var config = {
@@ -895,6 +915,7 @@ angular.module('netVogue.services', []).
         setstyleslocally: function(temp) {
         	name = temp.name;
     		linesheetname = temp.stylesheetname;//We are using same styles for both stylesheet and linesheet
+    		brandname = temp.brandname;
     		angular.copy(temp.styles, styles);
         }
 	};

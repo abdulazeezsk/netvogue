@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.Linesheet;
-import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.neo4japi.repository.LinesheetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.neo4j.support.Neo4jTemplate;
@@ -56,7 +55,7 @@ public class LinesheetServiceImpl implements LinesheetService {
 		}
 	}
 	
-	public Iterable<Style> getStyles(String linesheetId) {
+	public Iterable<StyleData> getStyles(String linesheetId) {
 		if(!linesheetId.isEmpty()) {
 			return linesheetRepo.getStyles(linesheetId);
 		}

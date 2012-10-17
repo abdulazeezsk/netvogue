@@ -7,6 +7,7 @@ import org.netvogue.server.webmvc.domain.PhotoWeb;
 public class Photos extends CommonResponse {
 	
 	String galleryname;
+	String brandname;
 	Set<PhotoWeb> photos;
 	
 	public Set<PhotoWeb> getPhotos() {
@@ -14,6 +15,12 @@ public class Photos extends CommonResponse {
 	}
 	public void setPhotos(Set<PhotoWeb> photos) {
 		this.photos = photos;
+	}
+	public String getBrandname() {
+		return brandname;
+	}
+	public void setBrandname(String brandname) {
+		this.brandname = brandname;
 	}
 	public String getGalleryname() {
 		return galleryname;

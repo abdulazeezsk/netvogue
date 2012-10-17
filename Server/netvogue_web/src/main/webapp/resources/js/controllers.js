@@ -923,11 +923,12 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, mycollect
 	$scope.entityname = "";
 	$scope.profilepic = "";
 	$scope.updatedata = function() {
-	    $scope.entityname  		= mycollection.getname($routeParams);
-	    $scope.profilepic		= mycollection.getprofilepic($routeParams);
-	    $scope.galleryname  	= mycollection.getgalleryname($routeParams);
-	    $scope.collections		= mycollection.getcollections($routeParams);
-	    $scope.photogallery		= mycollection.getphotos($routeParams);
+	    $scope.entityname  		= mycollection.getname();
+	    $scope.profilepic		= mycollection.getprofilepic();
+	    $scope.galleryname  	= mycollection.getgalleryname();
+	    $scope.brandname		= mycollection.getbrandname();
+	    $scope.collections		= mycollection.getcollections();
+	    $scope.photogallery		= mycollection.getphotos();
     };
     
     //searchcollection is not required. had to send it ,as it is mandatory in backend. need to change in backend later
@@ -938,7 +939,7 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, mycollect
 	};
     mycollection.collections($routeParams, searchcollections).success(function(data) {
     	mycollection.setcollectionlocally(data);
-		$scope.collections		= mycollection.getcollections($routeParams);
+		$scope.collections		= mycollection.getcollections();
     }).error(function(data) {
     	
     });
@@ -958,7 +959,7 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, mycollect
     $scope.deletephoto = function(uniqueid) {
     	mycollection.deletephoto(uniqueid).success(function(data) {
 			mycollection.deletephotoslocally(uniqueid);
-			$scope.photogallery	= mycollection.getphotos($routeParams);
+			$scope.photogallery	= mycollection.getphotos();
 		}).error(function(data) {
 			alert("error");
 		});
@@ -1318,18 +1319,19 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, mylinesheet) 
 	$scope.entityname = "";
 	$scope.profilepic = "";
 	$scope.updatedata = function() {
-	    $scope.entityname  		= mylinesheet.getname($routeParams);
-	    $scope.profilepic		= mylinesheet.getprofilepic($routeParams);
-	    $scope.linesheetname  	= mylinesheet.getlinesheetname($routeParams);
-	    $scope.linesheets		= mylinesheet.getlinesheets($routeParams);
-	    $scope.styles			= mylinesheet.getstyles($routeParams);
+	    $scope.entityname  		= mylinesheet.getname();
+	    $scope.profilepic		= mylinesheet.getprofilepic();
+	    $scope.linesheetname  	= mylinesheet.getlinesheetname();
+	    $scope.brandname		= mylinesheet.getbrandname();
+	    $scope.linesheets		= mylinesheet.getlinesheets();
+	    $scope.styles			= mylinesheet.getstyles();
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getstyles = function() {
     	mylinesheet.styles($routeParams, $scope.linesheetid, "").success(function(data) {
-    		mylinesheet.setstyleslocally(data, $routeParams);
+    		mylinesheet.setstyleslocally(data);
 	    	$scope.updatedata();
 	    }).error(function(data) {
 	    	
@@ -1367,10 +1369,11 @@ function MyCtrlStyle($scope, $routeParams, currentvisitedprofile, mylinesheet) {
 	$scope.entityname = "";
 	$scope.profilepic = "";
 	$scope.updatedata = function() {
-	    $scope.entityname  		= mylinesheet.getname($routeParams);
-	    $scope.profilepic		= mylinesheet.getprofilepic($routeParams);
-	    $scope.linesheetname  	= mylinesheet.getlinesheetname($routeParams);
-	    $scope.styles			= mylinesheet.getstyles($routeParams);
+	    $scope.entityname  		= mylinesheet.getname();
+	    $scope.profilepic		= mylinesheet.getprofilepic();
+	    $scope.linesheetname  	= mylinesheet.getlinesheetname();
+	    $scope.brandname		= mylinesheet.getbrandname();
+	    $scope.styles			= mylinesheet.getstyles();
     	for(var i=0; i < $scope.styles.length; i++) {
     		if($scope.styleid == $scope.styles[i].styleid) {
     			$scope.mainstyle = $scope.styles[i];
@@ -1382,7 +1385,7 @@ function MyCtrlStyle($scope, $routeParams, currentvisitedprofile, mylinesheet) {
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     mylinesheet.styles($routeParams, $scope.linesheetid, "").success(function(data) {
-    	mylinesheet.setstyleslocally(data, $routeParams);
+    	mylinesheet.setstyleslocally(data);
     	$scope.updatedata();
     }).error(function(data) {
     	

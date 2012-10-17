@@ -4,10 +4,7 @@ import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Collection;
 import org.netvogue.server.neo4japi.domain.CollectionPhoto;
-import org.netvogue.server.neo4japi.domain.Editorial;
-import org.netvogue.server.neo4japi.domain.EditorialPhoto;
 import org.netvogue.server.neo4japi.repository.CollectionRepository;
-import org.netvogue.server.neo4japi.repository.EditorialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.neo4j.support.Neo4jTemplate;
 
@@ -80,18 +77,18 @@ public class CollectionServiceImpl implements CollectionService {
 		}
 	}
 	
-	public Iterable<CollectionPhoto> getPhotos(String collectionid) {
+	public Iterable<CollectionPhotoData> getPhotos(String collectionid) {
 		if(!collectionid.isEmpty()) {
 			return collectionRepo.getPhotos(collectionid);
 		}
 		return null;
 	}
 	
-	public Iterable<CollectionPhoto> searchPhotoByName(Collection collection, String seasonname) {
+	public Iterable<CollectionPhotoData> searchPhotoByName(Collection collection, String seasonname) {
 		return searchPhotoByName(collection.getCollectionid(), seasonname);
 	}
 	
-	public Iterable<CollectionPhoto> searchPhotoByName(String collectionid, String name) {
+	public Iterable<CollectionPhotoData> searchPhotoByName(String collectionid, String name) {
 		return collectionRepo.searchPhotosByName(collectionid, Utils.SerializeQueryParamForSearch(name));
 	}
 	

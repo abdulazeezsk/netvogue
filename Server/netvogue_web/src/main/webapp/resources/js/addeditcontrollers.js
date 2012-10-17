@@ -376,10 +376,11 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
 	$scope.mainimage = "http://placehold.it/257x365";
 	
 	$scope.updatedata = function() {
-	    $scope.entityname  		= mystylesheet.getname($routeParams);
-	    $scope.profilepic		= mystylesheet.getprofilepic($routeParams);
-	    $scope.stylesheetname  	= mystylesheet.getstylesheetname($routeParams);
-	    $scope.styles			= mystylesheet.getstyles($routeParams);
+	    $scope.entityname  		= mystylesheet.getname();
+	    $scope.profilepic		= mystylesheet.getprofilepic();
+	    $scope.stylesheetname  	= mystylesheet.getstylesheetname();
+	    $scope.brandname		= mylinesheet.getbrandname();
+	    $scope.styles			= mystylesheet.getstyles();
 	    if(!angular.isUndefined($routeParams.styleid)) {
 	    	for(var i=0; i < $scope.styles.length; i++) {
 	    		if($scope.editstyleid == $scope.styles[i].styleid) {
@@ -393,7 +394,7 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     mystylesheet.styles($routeParams, $scope.stylesheetid, "").success(function(data) {
-    	mystylesheet.setstyleslocally(data, $routeParams);
+    	mystylesheet.setstyleslocally(data);
     	$scope.updatedata();
     }).error(function(data) {
     	
@@ -488,10 +489,11 @@ function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile, myline
 	$scope.allstyles = [];
 	$scope.styles    = [];
 	$scope.updatedata = function() {
-	    $scope.entityname  		= mylinesheet.getname($routeParams);
-	    $scope.profilepic		= mylinesheet.getprofilepic($routeParams);
-	    $scope.linesheetname  	= mylinesheet.getlinesheetname($routeParams);
-	    $scope.styles			= mylinesheet.getstyles($routeParams);
+	    $scope.entityname  		= mylinesheet.getname();
+	    $scope.profilepic		= mylinesheet.getprofilepic();
+	    $scope.linesheetname  	= mylinesheet.getlinesheetname();
+	    $scope.brandname		= mylinesheet.getbrandname();
+	    $scope.styles			= mylinesheet.getstyles();
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
@@ -504,7 +506,7 @@ function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile, myline
     });
 	
     mylinesheet.styles($routeParams, $scope.linesheetid, "").success(function(data) {
-    	mylinesheet.setstyleslocally(data, $routeParams);
+    	mylinesheet.setstyleslocally(data);
     	$scope.updatedata();
     	updateallstyles();
     }).error(function(data) {

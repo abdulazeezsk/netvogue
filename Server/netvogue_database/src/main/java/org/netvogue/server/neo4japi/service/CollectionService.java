@@ -2,7 +2,6 @@ package org.netvogue.server.neo4japi.service;
 
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.Collection;
-import org.netvogue.server.neo4japi.domain.CollectionPhoto;
 
 public interface CollectionService {
 
@@ -14,9 +13,9 @@ public interface CollectionService {
 	public ResultStatus setProfilepic(String collectionid, String uniqueid, StringBuffer error);
 	public ResultStatus deleteCollection(String collectionId, StringBuffer error);
 	
-	public Iterable<CollectionPhoto> getPhotos(String collectionId);
-	public Iterable<CollectionPhoto> searchPhotoByName(Collection printCampaign, String name);
-	public Iterable<CollectionPhoto> searchPhotoByName(String collectionId, String name);
+	public Iterable<CollectionPhotoData> getPhotos(String collectionId);
+	public Iterable<CollectionPhotoData> searchPhotoByName(Collection printCampaign, String name);
+	public Iterable<CollectionPhotoData> searchPhotoByName(String collectionId, String name);
 	public ResultStatus editPhotoInfo(String photoId, String seasonname, String desc, StringBuffer error);
 	public ResultStatus editPhotoName(String photoId, String name, StringBuffer error);
 	//public ResultStatus editPhotoSeasonName(String photoId, String name, String error);
