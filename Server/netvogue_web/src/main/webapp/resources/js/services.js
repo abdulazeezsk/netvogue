@@ -561,12 +561,12 @@ angular.module('netVogue.services', []).
 		          };
 		          return $http(config);
 		     },
-		     setcollectionlocally: function(data, routeparams) {
+		     setcollectionlocally: function(temp) {
 		    	 name = temp.name;
 		    	 profilepic = temp.profilepic;
 		    	 angular.copy(temp.collections, collections);
 		     },
-		     setphotoslocally: function(galleriesdata, routeparams) {
+		     setphotoslocally: function(photostemp) {
 		    	 name = photostemp.name;
 		    	 galleryname = photostemp.galleryname;
 		    	 angular.copy(photostemp.photos, photos);

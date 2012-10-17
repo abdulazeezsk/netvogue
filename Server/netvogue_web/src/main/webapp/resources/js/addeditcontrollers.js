@@ -291,7 +291,7 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     mycollection.photos($routeParams, $scope.galleryid, "").success(function(data) {
-    	mycollection.setphotoslocally(data, $routeParams);
+    	mycollection.setphotoslocally(data);
     	$scope.updatedata();
     }).error(function(data) {
     	

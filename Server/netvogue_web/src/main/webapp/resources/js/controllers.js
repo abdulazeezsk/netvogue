@@ -828,7 +828,7 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
     			"brandname"		:$scope.searchbrandname,
     	};
     	mycollection.collections($routeParams, searchcollections).success(function(data) {
-    		mycollection.setcollectionlocally(data, $routeParams);
+    		mycollection.setcollectionlocally(data);
         	$scope.updatedata();
         }).error(function(data) {
         	
@@ -911,7 +911,7 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, mycollect
 			"brandname"		:""
 	};
     mycollection.collections($routeParams, searchcollections).success(function(data) {
-    	mycollection.setcollectionlocally(data, $routeParams);
+    	mycollection.setcollectionlocally(data);
 		$scope.collections		= mycollection.getcollections($routeParams);
     }).error(function(data) {
     	
@@ -921,7 +921,7 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, mycollect
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getphotos = function() {
     	mycollection.photos($routeParams, $scope.galleryid, "").success(function(data) {
-    		mycollection.setphotoslocally(data, $routeParams);
+    		mycollection.setphotoslocally(data);
         	$scope.updatedata();
         }).error(function(data) {
         	
