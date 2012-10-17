@@ -21,6 +21,10 @@ function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search, m
 	}).error(function(data) {
 		
 	});
+	
+	$scope.$on('profilepicchanged', function(profilepic) {
+		$scope.profilepic = profilepic;
+	});
 	// Not required anymore, as we have changed Find Boutiques and Brands to directory
 	/*$scope.brandsorboutiques = "Brands";
 	$scope.$watch('iambrand', function(newValue, oldValue) {

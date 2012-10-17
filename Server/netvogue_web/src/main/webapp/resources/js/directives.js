@@ -302,6 +302,7 @@ angular.module('netVogue.directives', []).
 		        	scope.$apply(function(scope) {
 		        		if(data.result.status == true) {
 		        			scope.profilepic = data.result.filesuploaded[0];
+		        			scope.$emit('profilepicchanged', scope.profilepic);
 		        		} else {
 		        			alert("error");
 		        		}
