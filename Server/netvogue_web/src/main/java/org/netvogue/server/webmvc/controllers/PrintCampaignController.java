@@ -48,7 +48,7 @@ public class PrintCampaignController {
 	@Autowired
 	private UploadManager uploadManager;
 		
-	@RequestMapping(value={"getprintcampaigns", "getprintcampaigns/profileid"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/getprintcampaigns", "/getprintcampaigns/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody PrintCampaigns GetPrintCampaigns(@ModelAttribute("profileid") String profileid, 
 												@RequestParam("galleryname") String galleryname) {
 		
@@ -89,7 +89,7 @@ public class PrintCampaignController {
 		return campaigns;
 	}
 	
-	@RequestMapping(value={"printcampaign/getphotos", "printcampaign/getphotos/profileid"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/printcampaign/getphotos", "/printcampaign/getphotos/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname

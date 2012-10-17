@@ -49,7 +49,7 @@ public class LinesheetController {
 	@Autowired
 	private UploadManager uploadManager;
 
-	@RequestMapping(value={"getlinesheets", "getlinesheets/profileid"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/getlinesheets", "/getlinesheets/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Linesheets GetLinesheets(@ModelAttribute("profileid") String profileid, 
 												@RequestParam("linesheetname") String linesheetname,
 												@RequestParam("category") String categoryname) {
@@ -92,7 +92,7 @@ public class LinesheetController {
 		return linesheets;
 	}
 	
-	@RequestMapping(value={"linesheet/getstyles", "linesheet/getstyles/profileid"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/linesheet/getstyles", "/linesheet/getstyles/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Styles GetStyles(@ModelAttribute("profileid") String profileid, 
 										  @RequestParam("linesheetid") String stylesheetid,
 										  @RequestParam(value="searchquery", required=false) String searchquery

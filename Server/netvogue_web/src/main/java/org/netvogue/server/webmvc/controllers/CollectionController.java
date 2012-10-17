@@ -53,7 +53,7 @@ public class CollectionController {
 	@Autowired
 	private UploadManager uploadManager;
 
-	@RequestMapping(value={"getcollections", "getcollections/profileid"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/getcollections", "/getcollections/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Collections GetCollections(@ModelAttribute("profileid") String profileid, 
 												@RequestParam("galleryname") String galleryname,
 												@RequestParam("category") String categoryname,
@@ -97,7 +97,7 @@ public class CollectionController {
 		return collections;
 	}
 	
-	@RequestMapping(value={"collection/getphotos", "collection/getphotos/profileid"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/collection/getphotos", "/collection/getphotos/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname

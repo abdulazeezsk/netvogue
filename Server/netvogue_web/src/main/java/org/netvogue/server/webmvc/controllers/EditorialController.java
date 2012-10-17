@@ -48,7 +48,7 @@ public class EditorialController {
 	@Autowired
 	private UploadManager uploadManager;
 
-	@RequestMapping(value={"geteditorials", "geteditorials/profileid"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/geteditorials", "/geteditorials/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Editorials GetEditorials(@ModelAttribute("profileid") String profileid, 
 												@RequestParam("galleryname") String galleryname) {
 		System.out.println("Get Editorials: " + galleryname);
@@ -88,7 +88,7 @@ public class EditorialController {
 		return campaigns;
 	}
 	
-	@RequestMapping(value={"editorial/getphotos", "editorial/getphotos/profileid"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/editorial/getphotos", "/editorial/getphotos/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname
