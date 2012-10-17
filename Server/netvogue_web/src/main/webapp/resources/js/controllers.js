@@ -944,7 +944,7 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, mycollect
     };
 }
 
-function MyCtrlViewcollection($scope, $routeParams, currentvisitedprofile, srvcollection) {
+function MyCtrlViewcollection($scope, $routeParams, currentvisitedprofile, mycollection) {
 
 	$scope.$parent.title = 'ViewCollection';
 	$scope.backButton = currentvisitedprofile.getBackHistory();
@@ -960,15 +960,15 @@ function MyCtrlViewcollection($scope, $routeParams, currentvisitedprofile, srvco
 	
 	$scope.collectionlikes = 0;
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvcollection.getname($routeParams);
-	    $scope.profilepic		= srvcollection.getprofilepic($routeParams);
-	    $scope.galleryname  	= srvcollection.getgalleryname($routeParams);
-	    $scope.viewPhotos		= srvcollection.getphotos($routeParams);
+	    $scope.entityname  		= mycollection.getname($routeParams);
+	    $scope.profilepic		= mycollection.getprofilepic($routeParams);
+	    $scope.galleryname  	= mycollection.getgalleryname($routeParams);
+	    $scope.viewPhotos		= mycollection.getphotos($routeParams);
     };
     
     $scope.getphotos = function() {
-    	srvcollection.photos($routeParams, $scope.galleryid, "").success(function(data) {
-    		srvcollection.setphotoslocally(data, $routeParams);
+    	mycollection.photos($routeParams, $scope.galleryid, "").success(function(data) {
+    		mycollection.setphotoslocally(data, $routeParams);
         	$scope.updatedata();
         }).error(function(data) {
         	
@@ -983,7 +983,7 @@ function MyCtrlViewcollection($scope, $routeParams, currentvisitedprofile, srvco
     };
 }
 
-function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofile, srvstylesheet, mystylesheet) {
+function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofile, mystylesheet) {
 	
 	$scope.$parent.title = 'Style sheets';
 	
@@ -1006,9 +1006,9 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
 	$scope.showEditStylesheet	 = false;	
 	
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvstylesheet.getname($routeParams);
-	    $scope.profilepic		= srvstylesheet.getprofilepic($routeParams);
-	    $scope.stylesheets		= srvstylesheet.getstylesheets($routeParams);
+	    $scope.entityname  		= mystylesheet.getname($routeParams);
+	    $scope.profilepic		= mystylesheet.getprofilepic($routeParams);
+	    $scope.stylesheets		= mystylesheet.getstylesheets($routeParams);
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
@@ -1018,8 +1018,8 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
     			"stylesheetname" :$scope.searchstylesheetname,
     			"category"		 :$scope.searchstylesheetcat,
     	};
-    	srvstylesheet.stylesheets($routeParams, searchstylesheets).success(function(data) {
-    		srvstylesheet.setstylesheetlocally(data, $routeParams);
+    	mystylesheet.stylesheets($routeParams, searchstylesheets).success(function(data) {
+    		mystylesheet.setstylesheetlocally(data, $routeParams);
         	$scope.updatedata();
         }).error(function(data) {
         	
@@ -1049,7 +1049,7 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
     	var jsonrequest = new netvogue.stylesheetjsonrequest($scope.editstylesheetname, $scope.editstylesheetcat, $scope.editstylesheetid);
     	mystylesheet.updatestylesheet(jsonrequest).success(function(data) {
     		mystylesheet.updatestylesheetlocally(jsonrequest);
-    		$scope.stylesheets		= srvstylesheet.getstylesheets($routeParams);
+    		$scope.stylesheets		= mystylesheet.getstylesheets($routeParams);
     	}).error(function(data) {
  
     	});
@@ -1059,7 +1059,7 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
     $scope.deletestylesheet = function(id) {
     	mystylesheet.deletestylesheet(id).success(function(data) {
     		mystylesheet.deletestylesheetlocally(id);
-    		$scope.stylesheets		= srvstylesheet.getstylesheets($routeParams);
+    		$scope.stylesheets		= mystylesheet.getstylesheets($routeParams);
     	}).error(function(data) {
     		
     	});
@@ -1068,7 +1068,7 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
 	$scope.searchFilter = new netvogue.searchFilter();
 }
 
-function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, srvstylesheet, mystylesheet) {
+function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, mystylesheet) {
 
 	$scope.$parent.title = 'Styles';
 
@@ -1094,16 +1094,16 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, srvstyles
 	$scope.searchFilter = new netvogue.searchFilter();
 	
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvstylesheet.getname($routeParams);
-	    $scope.profilepic		= srvstylesheet.getprofilepic($routeParams);
-	    $scope.stylesheetname  	= srvstylesheet.getstylesheetname($routeParams);
-	    $scope.styles			= srvstylesheet.getstyles($routeParams);
+	    $scope.entityname  		= mystylesheet.getname($routeParams);
+	    $scope.profilepic		= mystylesheet.getprofilepic($routeParams);
+	    $scope.stylesheetname  	= mystylesheet.getstylesheetname($routeParams);
+	    $scope.styles			= mystylesheet.getstyles($routeParams);
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    srvstylesheet.styles($routeParams, $scope.stylesheetid, "").success(function(data) {
-    	srvstylesheet.setstyleslocally(data, $routeParams);
+    mystylesheet.styles($routeParams, $scope.stylesheetid, "").success(function(data) {
+    	mystylesheet.setstyleslocally(data, $routeParams);
     	$scope.updatedata();
     }).error(function(data) {
     	
@@ -1112,14 +1112,14 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, srvstyles
 	$scope.deletestyle = function(styleid) {
 		mystylesheet.deletestyle(styleid).success(function(data) {
 			mystylesheet.deletestyleslocally(styleid);
-			$scope.styles	= srvstylesheet.getstyles($routeParams);
+			$scope.styles	= mystylesheet.getstyles($routeParams);
 		}).error(function(data) {
 			alert("error: " + data.error);
 		});
 	};
 }
 
-function MyCtrlStylesPreview($scope, $routeParams, currentvisitedprofile, srvstylesheet, mystylesheet) {
+function MyCtrlStylesPreview($scope, $routeParams, currentvisitedprofile, mystylesheet) {
 
 	$scope.$parent.title = 'Style';
 	$scope.backButton = currentvisitedprofile.getBackHistory();
@@ -1137,9 +1137,9 @@ function MyCtrlStylesPreview($scope, $routeParams, currentvisitedprofile, srvsty
 	}
 	
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvstylesheet.getname($routeParams);
-	    $scope.stylesheetname  	= srvstylesheet.getstylesheetname($routeParams);
-	    $scope.styles			= srvstylesheet.getstyles($routeParams);
+	    $scope.entityname  		= mystylesheet.getname($routeParams);
+	    $scope.stylesheetname  	= mystylesheet.getstylesheetname($routeParams);
+	    $scope.styles			= mystylesheet.getstyles($routeParams);
     	for(var i=0; i < $scope.styles.length; i++) {
     		if($scope.styleid == $scope.styles[i].styleid) {
     			$scope.mainstyle = $scope.styles[i];
@@ -1150,8 +1150,8 @@ function MyCtrlStylesPreview($scope, $routeParams, currentvisitedprofile, srvsty
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    srvstylesheet.styles($routeParams, $scope.stylesheetid, "").success(function(data) {
-    	srvstylesheet.setstyleslocally(data, $routeParams);
+    mystylesheet.styles($routeParams, $scope.stylesheetid, "").success(function(data) {
+    	mystylesheet.setstyleslocally(data, $routeParams);
     	$scope.updatedata();
     }).error(function(data) {
     	
@@ -1167,7 +1167,7 @@ function MyCtrlStylesPreview($scope, $routeParams, currentvisitedprofile, srvsty
 	};
 }
 
-function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile, srvlinesheet, mylinesheet) {
+function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile, mylinesheet) {
 
 	$scope.$parent.title = 'Linesheets';
 	
@@ -1201,9 +1201,9 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
 	$scope.showEditLinesheet	 = false;	
 	
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvlinesheet.getname($routeParams);
-	    $scope.profilepic		= srvlinesheet.getprofilepic($routeParams);
-	    $scope.linesheets		= srvlinesheet.getlinesheets($routeParams);
+	    $scope.entityname  		= mylinesheet.getname($routeParams);
+	    $scope.profilepic		= mylinesheet.getprofilepic($routeParams);
+	    $scope.linesheets		= mylinesheet.getlinesheets($routeParams);
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
@@ -1213,8 +1213,8 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
     			"linesheetname" :$scope.searchlinesheetname,
     			"category"		 :$scope.searchlinesheetcat,
     	};
-    	srvlinesheet.linesheets($routeParams, searchlinesheets).success(function(data) {
-    		srvlinesheet.setlinesheetlocally(data, $routeParams);
+    	mylinesheet.linesheets($routeParams, searchlinesheets).success(function(data) {
+    		mylinesheet.setlinesheetlocally(data, $routeParams);
         	$scope.updatedata();
         }).error(function(data) {
         	
@@ -1250,7 +1250,7 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
     			$scope.editlinesheetcat, $scope.editdeliverydate, $scope.editlinesheetid);
     	mylinesheet.updatelinesheet(jsonrequest).success(function(data) {
     		mylinesheet.updatelinesheetlocally(jsonrequest);
-    		$scope.linesheets		= srvlinesheet.getlinesheets($routeParams);
+    		$scope.linesheets		= mylinesheet.getlinesheets($routeParams);
     	}).error(function(data) {
  
     	});
@@ -1260,7 +1260,7 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
     $scope.deletelinesheet = function(id) {
     	mylinesheet.deletelinesheet(id).success(function(data) {
     		mylinesheet.deletelinesheetlocally(id);
-    		$scope.linesheets		= srvlinesheet.getlinesheets($routeParams);
+    		$scope.linesheets		= mylinesheet.getlinesheets($routeParams);
     	}).error(function(data) {
     		
     	});
@@ -1268,7 +1268,7 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
 }
 
 
-function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, srvlinesheet, mylinesheet) {
+function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, mylinesheet) {
 
 	$scope.$parent.title = 'Styles';
 
@@ -1293,18 +1293,18 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, srvlinesheet,
 	}
 	
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvlinesheet.getname($routeParams);
-	    $scope.profilepic		= srvlinesheet.getprofilepic($routeParams);
-	    $scope.linesheetname  	= srvlinesheet.getlinesheetname($routeParams);
-	    $scope.linesheets		= srvlinesheet.getlinesheets($routeParams);
-	    $scope.styles			= srvlinesheet.getstyles($routeParams);
+	    $scope.entityname  		= mylinesheet.getname($routeParams);
+	    $scope.profilepic		= mylinesheet.getprofilepic($routeParams);
+	    $scope.linesheetname  	= mylinesheet.getlinesheetname($routeParams);
+	    $scope.linesheets		= mylinesheet.getlinesheets($routeParams);
+	    $scope.styles			= mylinesheet.getstyles($routeParams);
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getstyles = function() {
-	    srvlinesheet.styles($routeParams, $scope.linesheetid, "").success(function(data) {
-	    	srvlinesheet.setstyleslocally(data, $routeParams);
+    	mylinesheet.styles($routeParams, $scope.linesheetid, "").success(function(data) {
+    		mylinesheet.setstyleslocally(data, $routeParams);
 	    	$scope.updatedata();
 	    }).error(function(data) {
 	    	
@@ -1318,7 +1318,7 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, srvlinesheet,
     };
 }
 
-function MyCtrlStyle($scope, $routeParams, currentvisitedprofile, srvlinesheet, mylinesheet) {
+function MyCtrlStyle($scope, $routeParams, currentvisitedprofile, mylinesheet) {
 
 	$scope.$parent.title = 'Style';
 	$scope.backButton = currentvisitedprofile.getBackHistory();
@@ -1336,10 +1336,10 @@ function MyCtrlStyle($scope, $routeParams, currentvisitedprofile, srvlinesheet, 
 	}
 	
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvlinesheet.getname($routeParams);
-	    $scope.profilepic		= srvlinesheet.getprofilepic($routeParams);
-	    $scope.linesheetname  	= srvlinesheet.getlinesheetname($routeParams);
-	    $scope.styles			= srvlinesheet.getstyles($routeParams);
+	    $scope.entityname  		= mylinesheet.getname($routeParams);
+	    $scope.profilepic		= mylinesheet.getprofilepic($routeParams);
+	    $scope.linesheetname  	= mylinesheet.getlinesheetname($routeParams);
+	    $scope.styles			= mylinesheet.getstyles($routeParams);
     	for(var i=0; i < $scope.styles.length; i++) {
     		if($scope.styleid == $scope.styles[i].styleid) {
     			$scope.mainstyle = $scope.styles[i];
@@ -1350,8 +1350,8 @@ function MyCtrlStyle($scope, $routeParams, currentvisitedprofile, srvlinesheet, 
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    srvlinesheet.styles($routeParams, $scope.linesheetid, "").success(function(data) {
-    	srvlinesheet.setstyleslocally(data, $routeParams);
+    mylinesheet.styles($routeParams, $scope.linesheetid, "").success(function(data) {
+    	mylinesheet.setstyleslocally(data, $routeParams);
     	$scope.updatedata();
     }).error(function(data) {
     	

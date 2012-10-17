@@ -341,7 +341,7 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 	};
 }
 
-function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, srvstylesheet, mystylesheet) {
+function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, mystylesheet) {
 
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
 	if(!$scope.isMyProfile) {
@@ -376,10 +376,10 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
 	$scope.mainimage = "http://placehold.it/257x365";
 	
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvstylesheet.getname($routeParams);
-	    $scope.profilepic		= srvstylesheet.getprofilepic($routeParams);
-	    $scope.stylesheetname  	= srvstylesheet.getstylesheetname($routeParams);
-	    $scope.styles			= srvstylesheet.getstyles($routeParams);
+	    $scope.entityname  		= mystylesheet.getname($routeParams);
+	    $scope.profilepic		= mystylesheet.getprofilepic($routeParams);
+	    $scope.stylesheetname  	= mystylesheet.getstylesheetname($routeParams);
+	    $scope.styles			= mystylesheet.getstyles($routeParams);
 	    if(!angular.isUndefined($routeParams.styleid)) {
 	    	for(var i=0; i < $scope.styles.length; i++) {
 	    		if($scope.editstyleid == $scope.styles[i].styleid) {
@@ -392,8 +392,8 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    srvstylesheet.styles($routeParams, $scope.stylesheetid, "").success(function(data) {
-    	srvstylesheet.setstyleslocally(data, $routeParams);
+    mystylesheet.styles($routeParams, $scope.stylesheetid, "").success(function(data) {
+    	mystylesheet.setstyleslocally(data, $routeParams);
     	$scope.updatedata();
     }).error(function(data) {
     	
@@ -440,7 +440,7 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
 		mystylesheet.updatestyle($scope.newstyle, $scope.edit).success(function(data) {
 			if(data.status == true) {
 				mystylesheet.updatestyleslocally(data.style);
-				$scope.styles	= srvstylesheet.getstyles($routeParams);
+				$scope.styles	= mystylesheet.getstyles($routeParams);
 				//alert("Updated successfully" + data.status);
 			} else {
 				alert("error" + data.status + data.error);
@@ -458,7 +458,7 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
 		}
 		mystylesheet.deletestyle(styleid).success(function(data) {
 			mystylesheet.deletestyleslocally(styleid);
-			$scope.styles	= srvstylesheet.getstyles($routeParams);
+			$scope.styles	= mystylesheet.getstyles($routeParams);
 			if(styleid == $scope.newstyle.styleid) {
 				$scope.exitstylepane();
 			}
@@ -467,7 +467,7 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
 		});
 	};    
 }
-function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile, srvlinesheet, mylinesheet, srvstylesheet) {
+function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile, mylinesheet) {
 
 	if($scope.$parent.iambrand == false) {
 		$location.url("linesheets");
@@ -488,23 +488,23 @@ function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile, srvlin
 	$scope.allstyles = [];
 	$scope.styles    = [];
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvlinesheet.getname($routeParams);
-	    $scope.profilepic		= srvlinesheet.getprofilepic($routeParams);
-	    $scope.linesheetname  	= srvlinesheet.getlinesheetname($routeParams);
-	    $scope.styles			= srvlinesheet.getstyles($routeParams);
+	    $scope.entityname  		= mylinesheet.getname($routeParams);
+	    $scope.profilepic		= mylinesheet.getprofilepic($routeParams);
+	    $scope.linesheetname  	= mylinesheet.getlinesheetname($routeParams);
+	    $scope.styles			= mylinesheet.getstyles($routeParams);
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    srvstylesheet.stylesbycategory($routeParams, $scope.category, "").success(function(data) {
+    mystylesheet.stylesbycategory($routeParams, $scope.category, "").success(function(data) {
     	$scope.allstyles = data.styles;
     	updateallstyles();
     }).error(function(data) {
     	
     });
 	
-    srvlinesheet.styles($routeParams, $scope.linesheetid, "").success(function(data) {
-    	srvlinesheet.setstyleslocally(data, $routeParams);
+    mylinesheet.styles($routeParams, $scope.linesheetid, "").success(function(data) {
+    	mylinesheet.setstyleslocally(data, $routeParams);
     	$scope.updatedata();
     	updateallstyles();
     }).error(function(data) {
@@ -530,7 +530,7 @@ function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile, srvlin
 		mylinesheet.addstyle(jsonrequest).success(function(data) {
 			if(data.status == true) {
 				mylinesheet.addstylelocally(newstyle);
-				$scope.styles	= srvlinesheet.getstyles($routeParams);
+				$scope.styles	= mylinesheet.getstyles($routeParams);
 				updateallstyles();
 				//alert("added successfully" + data.status);
 			} else {
@@ -544,7 +544,7 @@ function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile, srvlin
 	$scope.deletestyle = function(style) {
 		mylinesheet.deletestyle(style.styleid).success(function(data) {
 			mylinesheet.deletestyleslocally(style.styleid);
-			$scope.styles	= srvlinesheet.getstyles($routeParams);
+			$scope.styles	= mylinesheet.getstyles($routeParams);
 			$scope.allstyles.push(style);
 		}).error(function(data) {
 			alert("error: " + data.error);

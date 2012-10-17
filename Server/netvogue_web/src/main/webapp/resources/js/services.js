@@ -582,11 +582,6 @@ angular.module('netVogue.services', []).
 		getstylesheets: function() {
     		return stylesheets;
     	},
-    	setstylesheets: function(temp) {
-    		name = temp.name;
-    		profilepic = temp.profilepic;
-    		angular.copy(temp.stylesheets, stylesheets);
-    	},
     	getname: function() {
     		if(angular.isUndefined(name))
         		return "";
@@ -654,11 +649,6 @@ angular.module('netVogue.services', []).
     	getstyles: function() {
     		return styles;
     	},
-    	setstyles: function(temp) {
-    		name = temp.name;
-    		stylesheetname = temp.stylesheetname;
-    		angular.copy(temp.styles, styles);
-    	},
     	updatestyle: function(style, edit) { //Same for create style
     		var images = [];
     		for(var i=0;i < style.availableImages.length;i++) {
@@ -707,110 +697,61 @@ angular.module('netVogue.services', []).
     			}
     		}
     		styles.splice(i, 1);
-    	}
-	};
-}).service('srvstylesheet', function ($http, mystylesheet) {
-	var stylesheets = new netvogue.hashtable();
-	return {
-	  getname: function(routeparams) {
-  	  var result;
-        if (angular.isUndefined(routeparams.profileid)) {
-            return mystylesheet.getname();
-        } else {
-            /*angular.forEach(profiles, function (profile) {
-                if (angular.equals(profile['profileid'], routeparams.profileid)) {
-                    result = profile['aboutus'];
-                }
-            });*/
-        }
-        return result;
-	  },
-	  getprofilepic: function(routeparams) {
-		  var result;
-          if (angular.isUndefined(routeparams.profileid)) {
-              return mystylesheet.getprofilepic();
-          } else {
-              /*angular.forEach(profiles, function (profile) {
-                  if (angular.equals(profile['profileid'], routeparams.profileid)) {
-                      result = profile['aboutus'];
-                  }
-              });*/
-          }
-          return result;
-	  },
-	  getstylesheetname: function (routeparams) {
-          if (angular.isUndefined(routeparams.profileid)) {
-        	  return mystylesheet.getstylesheetname();
-          }
     	},
-	  getstylesheets: function (routeparams) {
-          if (angular.isUndefined(routeparams.profileid)) {
-        	  return mystylesheet.getstylesheets();
-          }
-      },
-	  stylesheets: function(routeparams, jsonrequest) {
-          var profileid = "";
-          if (!angular.isUndefined(routeparams.profileid)) {
-        	  profileid = routeparams.profileid;
-          }
-          var config = {
-              method: "GET",
-              params: jsonrequest,
-              url:   "getstylesheets/" + profileid
-          };
-          return $http(config);
-      },
-      styles: function (routeparams, id, name) {
-          var profileid = "";
-          if (!angular.isUndefined(routeparams.profileid)) {
-        	  profileid = routeparams.profileid;
-          }
-          var datatosend = {
-  				"stylename" : name,
-  				"stylesheetid" : id
-  		};
-          var config = {
-              method: "GET",
-              params: datatosend,
-              url: "stylesheet/getstyles/" + profileid
-          };
-          return $http(config);
-      },
-      stylesbycategory: function (routeparams, category, name) {
-          var profileid = "";
-          if (!angular.isUndefined(routeparams.profileid)) {
-        	  profileid = routeparams.profileid;
-          }
-          var datatosend = {
-  				"stylename" : name,
-  				"category" : category
-  		};
-          var config = {
-              method: "GET",
-              params: datatosend,
-              url: "stylesheet/getstylesbycat/" + profileid
-          };
-          return $http(config);
-      },
-      setstylesheetlocally: function(data, routeparams) {
-    	  if (angular.isUndefined(routeparams.profileid)) {
-    		  mystylesheet.setstylesheets(data);
-          } else {
-        	  //galleries.push(angular.copy(galleriesdata));
-          }
-      },
-      setstyleslocally: function(data, routeparams) {
-    	  if (angular.isUndefined(routeparams.profileid)) {
-    		  mystylesheet.setstyles(data);
-          } else {
-        	  //galleries.push(angular.copy(galleriesdata));
-          }
-      },
-      getstyles: function (routeparams) {
-          if (angular.isUndefined(routeparams.profileid)) {
-        	  return mystylesheet.getstyles();
-          }
-      }
+    	stylesheets: function(routeparams, jsonrequest) {
+            var profileid = "";
+            if (!angular.isUndefined(routeparams.profileid)) {
+          	  profileid = routeparams.profileid;
+            }
+            var config = {
+                method: "GET",
+                params: jsonrequest,
+                url:   "getstylesheets/" + profileid
+            };
+            return $http(config);
+        },
+        styles: function (routeparams, id, name) {
+            var profileid = "";
+            if (!angular.isUndefined(routeparams.profileid)) {
+          	  profileid = routeparams.profileid;
+            }
+            var datatosend = {
+    				"stylename" : name,
+    				"stylesheetid" : id
+    		};
+            var config = {
+                method: "GET",
+                params: datatosend,
+                url: "stylesheet/getstyles/" + profileid
+            };
+            return $http(config);
+        },
+        stylesbycategory: function (routeparams, category, name) {
+            var profileid = "";
+            if (!angular.isUndefined(routeparams.profileid)) {
+          	  profileid = routeparams.profileid;
+            }
+            var datatosend = {
+    				"stylename" : name,
+    				"category" : category
+    		};
+            var config = {
+                method: "GET",
+                params: datatosend,
+                url: "stylesheet/getstylesbycat/" + profileid
+            };
+            return $http(config);
+        },
+        setstylesheetlocally: function(data) {
+        	name = temp.name;
+    		profilepic = temp.profilepic;
+    		angular.copy(temp.stylesheets, stylesheets);
+        },
+        setstyleslocally: function(data) {
+        	name = temp.name;
+    		stylesheetname = temp.stylesheetname;
+    		angular.copy(temp.styles, styles);
+        }
 	};
 }).service('mylinesheet', function ($http) {
 	var name;
@@ -821,11 +762,6 @@ angular.module('netVogue.services', []).
 	return {
 		getlinesheets: function() {
     		return linesheets;
-    	},
-    	setlinesheets: function(temp) {
-    		name = temp.name;
-    		profilepic = temp.profilepic;
-    		angular.copy(temp.linesheets, linesheets);
     	},
     	getname: function() {
     		if(angular.isUndefined(name))
@@ -895,11 +831,6 @@ angular.module('netVogue.services', []).
     	getstyles: function() {
     		return styles;
     	},
-    	setstyles: function(temp) {
-    		name = temp.name;
-    		linesheetname = temp.stylesheetname;//We are using same styles for both stylesheet and linesheet
-    		angular.copy(temp.styles, styles);
-    	},
     	addstyle: function(styleid) { //Same for create style
     		var config = {
         			method: "POST",
@@ -927,94 +858,45 @@ angular.module('netVogue.services', []).
     			}
     		}
     		styles.splice(i, 1);
-    	}
-	};
-}).service('srvlinesheet', function ($http, mylinesheet) {
-	var linesheets = new netvogue.hashtable();
-	return {
-	  getname: function(routeparams) {
-		  var result;
-		  if (angular.isUndefined(routeparams.profileid)) {
-			  return mylinesheet.getname();
-		  } else {
-            /*angular.forEach(profiles, function (profile) {
-                if (angular.equals(profile['profileid'], routeparams.profileid)) {
-                    result = profile['aboutus'];
-                }
-            });*/
-		  }
-		  return result;
-	  },
-	  getprofilepic: function(routeparams) {
-		  var result;
-          if (angular.isUndefined(routeparams.profileid)) {
-              return mylinesheet.getprofilepic();
-          } else {
-              /*angular.forEach(profiles, function (profile) {
-                  if (angular.equals(profile['profileid'], routeparams.profileid)) {
-                      result = profile['aboutus'];
-                  }
-              });*/
-          }
-          return result;
-	  },
-	  getlinesheetname: function (routeparams) {
-          if (angular.isUndefined(routeparams.profileid)) {
-        	  return mylinesheet.getlinesheetname();
-          }
     	},
-	  getlinesheets: function (routeparams) {
-          if (angular.isUndefined(routeparams.profileid)) {
-        	  return mylinesheet.getlinesheets();
-          }
-      },
-	  linesheets: function(routeparams, jsonrequest) {
-          var profileid = "";
-          if (!angular.isUndefined(routeparams.profileid)) {
-        	  profileid = routeparams.profileid;
-          }
-          var config = {
-              method: "GET",
-              params: jsonrequest,
-              url:   "getlinesheets/" + profileid
-          };
-          return $http(config);
-      },
-      styles: function (routeparams, id, name) {
-          var profileid = "";
-          if (!angular.isUndefined(routeparams.profileid)) {
-        	  profileid = routeparams.profileid;
-          }
-          var datatosend = {
-  				"linename" : name,
-  				"linesheetid" : id
-  		  };
-          var config = {
-              method: "GET",
-              params: datatosend,
-              url: "linesheet/getstyles/" + profileid
-          };
-          return $http(config);
-      },
-      setlinesheetlocally: function(data, routeparams) {
-    	  if (angular.isUndefined(routeparams.profileid)) {
-    		  mylinesheet.setlinesheets(data);
-          } else {
-        	  //galleries.push(angular.copy(galleriesdata));
-          }
-      },
-      setstyleslocally: function(data, routeparams) {
-    	  if (angular.isUndefined(routeparams.profileid)) {
-    		  mylinesheet.setstyles(data);
-          } else {
-        	  //galleries.push(angular.copy(galleriesdata));
-          }
-      },
-      getstyles: function (routeparams) {
-          if (angular.isUndefined(routeparams.profileid)) {
-        	  return mylinesheet.getstyles();
-          }
-      }
+    	linesheets: function(routeparams, jsonrequest) {
+            var profileid = "";
+            if (!angular.isUndefined(routeparams.profileid)) {
+          	  profileid = routeparams.profileid;
+            }
+            var config = {
+                method: "GET",
+                params: jsonrequest,
+                url:   "getlinesheets/" + profileid
+            };
+            return $http(config);
+        },
+        styles: function (routeparams, id, name) {
+            var profileid = "";
+            if (!angular.isUndefined(routeparams.profileid)) {
+          	  profileid = routeparams.profileid;
+            }
+            var datatosend = {
+    				"linename" : name,
+    				"linesheetid" : id
+    		  };
+            var config = {
+                method: "GET",
+                params: datatosend,
+                url: "linesheet/getstyles/" + profileid
+            };
+            return $http(config);
+        },
+        setlinesheetlocally: function(data) {
+        	name = temp.name;
+    		profilepic = temp.profilepic;
+    		angular.copy(temp.linesheets, linesheets);
+        },
+        setstyleslocally: function(data) {
+        	name = temp.name;
+    		linesheetname = temp.stylesheetname;//We are using same styles for both stylesheet and linesheet
+    		angular.copy(temp.styles, styles);
+        }
 	};
 }).service('trending', function () {
      var trending = [
