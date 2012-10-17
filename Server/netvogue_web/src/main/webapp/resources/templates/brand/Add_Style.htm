@@ -95,15 +95,9 @@
 									style="font-weight: Bold; font-size: 14px; cursor: pointer; text-transform: uppercase;">
 									<u>Style Name </u>
 								</div>
-								<span ng-show="!isEditMode && newstyle.isstylenameempty()" ng-click="editstyle()"
-									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
-									Click here to edit Style name</span>
-								<span ng-show="!isEditMode && !newstyle.isstylenameempty()" ng-click="editstyle()"
-									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
-									{{newstyle.stylename}}</span> <span class="btn-group pull-right">
-									<input type="text" class="spanedt_txt" ng-show="isEditMode" ng-model="newstyle.stylename"	 
+								<input type="text" class="spanedt_txt"  ng-model="newstyle.stylename"	 
 									placeholder="Add style name"> </input>
-									<button class="btn btn-inverse dropdown-toggle"
+									<!-- <button class="btn btn-inverse dropdown-toggle"
 										data-toggle="dropdown">
 										Action <span class="caret"></span>
 									</button>
@@ -115,43 +109,27 @@
 										<li><a href="#">Public</a></li>
 										<li><a href="#">Private</a></li>
 										<li><a href="#">Network</a></li>
-									</ul>
-								</span> <br> <br>
+									</ul> -->
+								</span> <br>
 								<div
 									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
 									<u>Style Number </u>
 								</div>
-								<span ng-show="!isEditMode && newstyle.isstylenoempty()" ng-click="editstyle()"
-									style="font-weight: normal; font-size: 10px; cursor: pointer; text-transform: uppercase;">
-									Click here to edit Style no </span>
-								<span ng-show="!isEditMode && !newstyle.isstylenoempty()" ng-click="editstyle()"
-									style="font-weight: normal; font-size: 10px; cursor: pointer; text-transform: uppercase;">
-									{{newstyle.styleno}} </span>
-									<input type="text" class="spanedt_txt" ng-show="isEditMode" ng-model="newstyle.styleno"	 
+								<input type="text" class="spanedt_txt"  ng-model="newstyle.styleno"	 
 									placeholder="Add style number here"> </input>
 								<div class="divi2"></div>
 								<div
 									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
 									<u>Fabrication </u>
 								</div>
-								<span ng-show="!isEditMode && newstyle.isfabricationempty()" ng-click="editstyle()"
-									style="font-weight: normal; font-size: 10px; cursor: pointer; text-transform: uppercase;">
-									Click here to edit fabrication </span>
-								<span ng-show="!isEditMode && !newstyle.isfabricationempty()" ng-click="editstyle()"
-									style="font-weight: normal; font-size: 10px; cursor: pointer; text-transform: uppercase;">
-									{{newstyle.fabrication}} </span> <br>
-									<input type="text" class="spanedt_txt" ng-show="isEditMode" ng-model="newstyle.fabrication"	 
+								<input type="text" class="spanedt_txt" ng-model="newstyle.fabrication"	 
 									placeholder="Add fabrication here"> </input>
 									 <br>
 								<div
 									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
 									<u>Description </u>
 								</div>	
-								<p ng-show="!isEditMode && newstyle.isdescriptionempty()" ng-click="editstyle()" style="font: normal 11px Helvetica, Arial, sans-serif;">
-									{{newstyle.description}} </p>
-								<p ng-show="!isEditMode && !newstyle.isdescriptionempty()" ng-click="editstyle()" style="font: normal 11px Helvetica, Arial, sans-serif;">
-									{{newstyle.description}} </p>
-								<textarea class="spanedt_txt1" rows="5" ng-show="isEditMode" ng-model="newstyle.description"
+								<textarea class="spanedt_txt1" rows="5"  ng-model="newstyle.description"
 								placeholder="Add description"></textarea>
 								<div
 									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase; margin-bottom: 2px;">
@@ -196,14 +174,7 @@
 									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
 									<u>Price</u>
 								</div>
-								<span ng-show="!isEditMode && newstyle.ispriceempty()" ng-click="editstyle()" ng-model="newstyle.price"
-									style="font-weight: normal; font-size: 12px; cursor: pointer; text-transform: uppercase;"> 
-									Click here to edit price</span>
-								<span ng-show="!isEditMode && !newstyle.ispriceempty()" ng-click="editstyle()" ng-model="newstyle.price"
-									style="font-weight: normal; font-size: 12px; cursor: pointer; text-transform: uppercase;">
-									<span class="WebRupee" style="font-size: 12px;">Rs.</span>{{newstyle.price}}
-								</span>
-								<input type="text" class="spanedt_txt" ng-show="isEditMode" ng-model="newstyle.price"	 
+								<input type="text" class="spanedt_txt"  ng-model="newstyle.price"	 
 									placeholder="Add price here"> </input>
 								<div class="divi2"></div>
 								<div class="controls pull-right">
