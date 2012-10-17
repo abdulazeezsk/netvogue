@@ -29,12 +29,14 @@ public interface CollectionRepository extends GraphRepository<Collection> {
 	void deleteCollection(String collectionid);
 	
 	@Query( "START n=node:collectionid(collectionid={0}) " +
-			"MATCH n-[:COLLECTIONPHOTO]->photos RETURN n.name as name, photos ORDER BY photos.createdDate DESC")
+			"MATCH n-[:COLLECTIONPHOTO]->photos, n-[:COLLECTION]-user " +
+			"RETURN user.name as name, photos ORDER BY photos.createdDate DESC")
 	Iterable<CollectionPhotoData> getPhotos(String collectionid);
 	
 	@Query( "START n=node:collectionid(collectionid={0}) " +
-			"MATCH n-[:COLLECTIONPHOTO]->photos WHERE photos.collectionphotoname! =~ {1} " +
-			"RETURN n.name as name, photos ORDER BY photos.createdDate DESC")
+			"MATCH n-[:COLLECTIONPHOTO]->photos, n-[:COLLECTION]-user " +
+			"WHERE photos.collectionphotoname! =~ {1} " +
+			"RETURN user.name as name, photos ORDER BY photos.createdDate DESC")
 	Iterable<CollectionPhotoData> searchPhotosByName(String collectionid, String photoname);
 	
 	@Query("START p = node:collectionphotouniqueid(collectionphotouniqueid={0}) MATCH p-[r]-() DELETE p, r")

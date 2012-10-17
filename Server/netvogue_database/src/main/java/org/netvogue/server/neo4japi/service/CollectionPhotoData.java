@@ -7,7 +7,7 @@ import org.springframework.data.neo4j.annotation.ResultColumn;
 @MapResult
 public interface CollectionPhotoData {
 
-	@ResultColumn("photo")
+	@ResultColumn("photos")
 	CollectionPhoto getCollectionPhoto();
 	
 	@ResultColumn("name")

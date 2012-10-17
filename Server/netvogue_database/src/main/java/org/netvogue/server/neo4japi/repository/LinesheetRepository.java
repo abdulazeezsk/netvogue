@@ -21,7 +21,8 @@ public interface LinesheetRepository extends GraphRepository<Linesheet>{
 	void deleteLinesheet(String linesheetid);
 
 	@Query( "START n=node:linesheetid(linesheetid={0}) " +
-			"MATCH n-[:LS_STYLE]->styles RETURN n.name as name, styles ORDER BY styles.createdDate DESC")
+			"MATCH n-[:LS_STYLE]->styles, n-[:LINESHEET]-user " +
+			"RETURN user.name as name, styles ORDER BY styles.createdDate DESC")
 	Iterable<StyleData> getStyles(String linesheetid);
 	
 	/*@Query( "START n=node:stylesheetid(printcampaignid={0}) " +
