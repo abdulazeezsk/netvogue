@@ -421,11 +421,6 @@ angular.module('netVogue.services', []).
 			getcollections: function() {
 	    		return collections;
 	    	},
-	    	setcollections: function(temp) {
-	    		name = temp.name;
-	    		profilepic = temp.profilepic;
-	    		angular.copy(temp.collections, collections);
-	    	},
 	    	getname: function() {
 	    		if(angular.isUndefined(name))
 	        		return "";
@@ -508,11 +503,6 @@ angular.module('netVogue.services', []).
 	    	getphotos: function() {
 	    		return photos;
 	    	},
-	    	setphotos: function(photostemp) {
-	    		name = photostemp.name;
-	    		galleryname = photostemp.galleryname;
-	    		angular.copy(photostemp.photos, photos);
-	    	},
 	    	savephotoinfo: function(label, seasonname, photoid) {
 	    		var datatosend = {
 	    				"photoname" : label,
@@ -554,8 +544,8 @@ angular.module('netVogue.services', []).
 		              url:   "getcollections/" + profileid
 		          };
 		          return $http(config);
-		      },
-		      photos: function (routeparams, galleryid, photoname) {
+		     },
+		     photos: function (routeparams, galleryid, photoname) {
 		          var profileid = "";
 		          if (!angular.isUndefined(routeparams.profileid)) {
 		        	  profileid = routeparams.profileid;
@@ -563,28 +553,24 @@ angular.module('netVogue.services', []).
 		          var datatosend = {
 		  				"photoname" : photoname,
 		  				"galleryid" : galleryid
-		  		};
+		  		  };
 		          var config = {
 		              method: "GET",
 		              params: datatosend,
 		              url: "collection/getphotos/" + profileid
 		          };
 		          return $http(config);
-		      },
-		      setcollectionlocally: function(data, routeparams) {
-		    	  if (angular.isUndefined(routeparams.profileid)) {
-		        	  mycollection.setcollections(data);
-		          } else {
-		        	  //galleries.push(angular.copy(galleriesdata));
-		          }
-		      },
-		      setphotoslocally: function(galleriesdata, routeparams) {
-		    	  if (angular.isUndefined(routeparams.profileid)) {
-		    		  mycollection.setphotos(galleriesdata);
-		          } else {
-		        	  //galleries.push(angular.copy(galleriesdata));
-		          }
-		      }
+		     },
+		     setcollectionlocally: function(data, routeparams) {
+		    	 name = temp.name;
+		    	 profilepic = temp.profilepic;
+		    	 angular.copy(temp.collections, collections);
+		     },
+		     setphotoslocally: function(galleriesdata, routeparams) {
+		    	 name = photostemp.name;
+		    	 galleryname = photostemp.galleryname;
+		    	 angular.copy(photostemp.photos, photos);
+		     }
 		};
 }).service('mystylesheet', function ($http) {
 	var name;
