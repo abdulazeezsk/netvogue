@@ -12,11 +12,11 @@
 	<security:http pattern="/img/**" security="none"/>
 	<security:http pattern="/js/**" security="none"/>
 	<security:http pattern="/lib/**" security="none"/>
-	<security:http pattern="/brand_Registration.htm" security="none" />
-	<security:http pattern="/boutique_Registration.htm" security="none" />
-	<security:http pattern="/blog.htm" security="none" />
-	<security:http pattern="/about_Us.htm" security="none" />
-	<security:http pattern="/Netvogue.htm" security="none" />
+	<security:http pattern="/brand_Registration.html" security="none" />
+	<security:http pattern="/boutique_Registration.html" security="none" />
+	<security:http pattern="/blog.html" security="none" />
+	<security:http pattern="/about_Us.html" security="none" />
+	<security:http pattern="/Netvogue.html" security="none" />
 	<security:http pattern="/favicon.ico" security="none" />
 		 
 	<security:http auto-config="true" >	
@@ -24,12 +24,11 @@
 		<security:custom-filter ref="captchaVerifierFilter" after="FORM_LOGIN_FILTER"/>
 		
 		<security:intercept-url pattern="/Netvogue.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/boutique_Registration.htm" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/boutique_Registration.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/boutique/AvailabilityStatus.htm" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		
 		<security:intercept-url pattern="/home.htm" access="ROLE_BOUTIQUE,ROLE_BRAND"/>
 		<security:intercept-url pattern="/templates/**" access="ROLE_BOUTIQUE,ROLE_BRAND"/>
-		
  		<security:intercept-url pattern="/**" access="ROLE_BOUTIQUE,ROLE_BRAND"/>
 		<!-- Security related to Boutiques --> 
  		<security:intercept-url pattern="/*/boutique/**" access="ROLE_BOUTIQUE"/>
