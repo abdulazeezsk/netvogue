@@ -72,7 +72,7 @@ function MyCtrlAddGallery($scope, $routeParams, $location, mygallery, currentvis
 	$scope.deletephoto = function(photoid) {
 		mygallery.deletephoto(ajaxrequestcall, photoid).success(function(data) {
 			mygallery.deletephotoslocally(photoid);
-			$scope.existingfiles	= srvgallery.getphotos($routeParams);
+			$scope.existingfiles	= mygallery.getphotos($routeParams);
 		}).error(function(data) {
 			alert("error: " + data.error);
 		});
