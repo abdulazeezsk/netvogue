@@ -318,6 +318,36 @@ netvogue.stylejsonrequest = function(stylesheetid) {
 		this.availableImages= [];
     };
     
+    this.isstylenameempty = function() {
+    	if(this.stylename == "" || this.stylename == null) {
+    		return true;
+    	} 
+    	return false;
+    };
+    this.isstylenoempty = function() {
+    	if(this.styleno == "" || this.styleno == null) {
+    		return true;
+    	} 
+    	return false;
+    };
+    this.isdescriptionempty = function() {
+    	if(this.description == "" || this.description == null) {
+    		return true;
+    	} 
+    	return false;
+    };
+    this.isfabricationempty = function() {
+    	if(this.fabrication == "" || this.fabrication == null) {
+    		return true;
+    	} 
+    	return false;
+    };
+    this.ispriceempty = function() {
+    	if(this.price == "" || this.price == null) {
+    		return true;
+    	} 
+    	return false;
+    };
     this.copy = function(existingstyle) {
 		this.styleid		= existingstyle.styleid;
 		this.stylename 		= existingstyle.stylename;
@@ -327,7 +357,7 @@ netvogue.stylejsonrequest = function(stylesheetid) {
 		this.price			= existingstyle.price;
 		this.availableSizes = existingstyle.availableSizes;
 		this.availableColors= [];
-		this.availableImages= []; //This part is done from existing files
+		this.availableImages= existingstyle.availableImages; //This part is done from existing files
     };
 };
 

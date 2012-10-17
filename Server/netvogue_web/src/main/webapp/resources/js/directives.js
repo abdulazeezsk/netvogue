@@ -317,17 +317,14 @@ angular.module('netVogue.directives', []).
 	var linkFn;
 	linkFn = function(scope, element, attrs) {
 		scope.newfiles = [];
-		
-		scope.isEditMode = false;
-		
 		var stylesheetid = {
-				"stylesheetid" : scope.stylesheetid
+				"stylesheetid": scope.stylesheetid
 		};
 		angular.element(element).ready(function() {
 			jQuery('#styleupload').fileupload({
 		        dataType: 'json',
 		        singleFileUploads: false,
-		        limitMultiFileUploads: 4 - scope.existingfiles.length,
+		        limitMultiFileUploads: 9 ,
 		        formData: stylesheetid,
 		        progressall: function (e, data) {
 		        	var progtemp = parseInt(data.loaded / data.total * 100, 10);
@@ -345,11 +342,12 @@ angular.module('netVogue.directives', []).
 		        		if(data.result.status == true) {
 		        			if(true == scope.senttoserver) {
 			        			for(var i=0; i < data.result.filesuploaded.length; i++){
-			        				scope.existingfiles.push(data.result.filesuploaded[i]);
+			        				scope.newstyle.availableImages.push(data.result.filesuploaded[i]);
 			        			};
+			        			scope.mainimage = scope.newstyle.availableImages[0].thumbnail_url;
 			        			scope.senttoserver = false;
 			        			scope.newfiles = [];
-		        			}
+		        			};
 		        		} else {
 		        			alert("error");
 		        		}
@@ -407,7 +405,7 @@ angular.module('netVogue.directives', []).
 		      // otherwise when the user clicks we process the closing before we process the click.
 		      $timeout(function() {
 		        scope.$eval(attrs.focused + '=false');
-		      });
+		      }, 100);
 		    });
 		    scope.$eval(attrs.focused + '=true');
 	};

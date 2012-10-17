@@ -787,6 +787,12 @@ angular.module('netVogue.services', []).
     		angular.copy(temp.styles, styles);
     	},
     	updatestyle: function(style, edit) { //Same for create style
+    		var images = [];
+    		for(var i=0;i < style.availableImages.length;i++) {
+    			images.push(style.availableImages[i].uniqueid);
+    		}
+    		style.availableImages = images;
+    		
     		var request = "";
     		if(edit)
     			request = "editstyle";

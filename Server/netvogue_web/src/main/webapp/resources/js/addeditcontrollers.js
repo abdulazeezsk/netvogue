@@ -375,9 +375,9 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
 	$scope.newstyle = new netvogue.stylejsonrequest($scope.stylesheetid);
 	$scope.stylesizes = netvogue.defaultstylesizes;
 	$scope.filesadded = false;
-	$scope.existingfiles = [];
 	$scope.edit = false;
-	scope.isEditMode = false;
+	$scope.isEditMode = false;
+	$scope.mainimage = "http://placehold.it/257x365";
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvstylesheet.getname($routeParams);
@@ -415,15 +415,19 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
 	
 	$scope.exitstylepane = function() {
 		$scope.newstyle.empty();
-		$scope.existingfiles = [];
 		$scope.edit = false;
+		$scope.isEditMode = false;
+		$scope.mainimage = "http://placehold.it/257x365";
 	};
 	
 	$scope.editstyle   = function(style) {
 		//Convert this to $scope.newstyle and open edit window for this...
-		$scope.newstyle.copy(style);
-		$scope.existingfiles = style.availableImages;
-		$scope.edit = true;
+		if(!angular.isUndefined(style)) {
+			$scope.newstyle.copy(style);
+			$scope.mainimage = $scope.newstyle.availableImages[0].thumbnail_url;
+			$scope.edit = true;
+		}
+		$scope.isEditMode = true;
 	};
 	
 	$scope.updatestyle = function() {
@@ -432,11 +436,6 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
 			if($scope.stylesizes[i].available == true) {
 				$scope.newstyle.availableSizes.push($scope.stylesizes[i].size);
 			}
-		}
-		
-		//Add Images
-		for(var i=0;i < $scope.existingfiles.length;i++) {
-			$scope.newstyle.availableImages.push($scope.existingfiles[i].uniqueid);
 		}
 		
 		//Add colors
@@ -457,9 +456,16 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
 	};
 	
 	$scope.deletestyle = function(styleid) {
+		if(angular.isUndefined(styleid)) {
+			$scope.newstyle.empty();
+			$scope.isEditMode = false;
+		}
 		mystylesheet.deletestyle(styleid).success(function(data) {
 			mystylesheet.deletestyleslocally(styleid);
 			$scope.styles	= srvstylesheet.getstyles($routeParams);
+			if(styleid == $scope.newstyle.styleid) {
+				$scope.exitstylepane();
+			}
 		}).error(function(data) {
 			alert("error: " + data.error);
 		});
