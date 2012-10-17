@@ -4985,7 +4985,7 @@ float:left;
 width:100%;	
 border-bottom:1px solid black;	
 }
-/*  Addvertizement feed ============================================================= */
+/*  Addvertizement & privacysettings feed ============================================================= */
 
 
 .privacysettingsfeed {
@@ -5138,7 +5138,19 @@ border-bottom:1px solid black;
 	border: solid 1px #CCCCCC;
 }
  */
- 
+
+.ywstylename
+{
+	font: normal 14px Helvetica, Arial, sans-serif;
+	border-bottom:1px solid #000;
+	text-transform:uppercase;
+}
+
+.ywstyledesc
+{
+	font: normal 10px Helvetica, Arial, sans-serif;
+	border-bottom:1px solid #000;
+}
  
 .price h4 {
 	background: url(../images/rupee_icon.jpg) no-repeat 0 5px;
@@ -5179,19 +5191,10 @@ clear:both;
 .thumbnailz {
 	line-height: 1;
 	border: 1px solid #ddd;
-	
-	webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
-	-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
-	0,
-	0.075);
 }
 
 a.thumbnailz:hover {
 	border-color: #0088cc;
-	-webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
-	-moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
-	box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 }
 
 .colors {
@@ -5201,6 +5204,9 @@ margin: 5px 0;
 .tooltip {
 cursor: pointer;
 }
+
+
+
 
 /* SubHeading Style Begin ============================================================= */
 
@@ -5256,10 +5262,7 @@ cursor: pointer;
 	width: 940px;
 	padding: 11px 0 0 170px;
 }
-.menu {
-margin: 0;
-padding: 0;
-}
+
 .social {
 float: right;
 }
@@ -5273,6 +5276,12 @@ float: right;
 {
 	display:inline;
 }
+
+/* .menu {
+margin: 0;
+padding: 0;
+} */
+
 
 
 
@@ -5739,7 +5748,7 @@ background: url(../img/red-cross.png);
 /*Gallery styles Begin ================================================================================= */
 
 
-/* Trending styles Begin ================================================================================= */
+/* Trending, reference feed styles ================================================================================= */
 
 
 .trending_head {
@@ -5822,7 +5831,7 @@ background: url(../img/red-cross.png);
 }
 
 
-/*Network styles End ================================================================================= */
+/*Network page style================================================================================ */
 
 .network {
 	width: 100%;
@@ -5839,6 +5848,7 @@ background: url(../img/red-cross.png);
 	margin: 0 10px 0 0;
 	width: 100px;
 	min-height: 72px;
+	max-height:72px;
 	overflow-x: hidden;
 }
 .network_entity_name{
@@ -5856,9 +5866,15 @@ background: url(../img/red-cross.png);
 }
 
 .network_text h3 {
-	font: normal 9px  Helvetica, Arial, sans-serif;
-	font-weight: bold;
+	font: bold 12px  Helvetica, Arial, sans-serif;
 	padding: 0;
+	text-transform:capitalize;
+}
+
+.network_text h2 {
+	font: normal 10px  Helvetica, Arial, sans-serif;
+	padding: 0;
+	text-transform:capitalize;
 }
 
 .network_text p {
@@ -7398,21 +7414,6 @@ float:left;
    /*  transform: translateY(0px);
     transition-delay: 0.3s; */
 }
-
-.ywstylename
-{
-	font: normal 14px Helvetica, Arial, sans-serif;
-	border-bottom:1px solid #000;
-	text-transform:uppercase;
-}
-
-.ywstyledesc
-{
-	font: normal 10px Helvetica, Arial, sans-serif;
-	border-bottom:1px solid #000;
-}
-
-
 
 /*shashank added this style*/
 
