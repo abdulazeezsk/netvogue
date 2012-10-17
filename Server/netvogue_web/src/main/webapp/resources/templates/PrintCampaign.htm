@@ -16,7 +16,7 @@
 						</span> 
 						<span> 
 							<a ui-if="isMyProfile" ng-href="#profile" class="leftpane_entity_name">{{entityname}}</a>
-							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}profile" class="leftpane_entity_name">{{entityname}}</a>
+							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
 					</div>
 				</li>
@@ -86,7 +86,7 @@
 							<div class="press view-press">
 								<a ui-if="isMyProfile" ng-href="#/campaign?id={{gallery.galleryid}}" > <img
 									ng-src="{{gallery.gallerypic}}" alt=""></a>
-								<a ui-if="!isMyProfile" ng-href="#/{{profile}}campaign?id={{gallery.galleryid}}" > <img
+								<a ui-if="!isMyProfile" ng-href="#/{{profile}}/campaign?id={{gallery.galleryid}}" > <img
 									ng-src="{{gallery.gallerypic}}" alt=""></a>	
 								<div class="content">
 							     	<div class="mask">

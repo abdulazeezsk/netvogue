@@ -16,7 +16,7 @@
 						</span> 
 						<span> 
 							<a ui-if="isMyProfile" ng-href="#profile" class="leftpane_entity_name">{{entityname}}</a>
-							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}profile" class="leftpane_entity_name">{{entityname}}</a>
+							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
 					</div>
 				</li>
@@ -101,7 +101,7 @@
 							<div class="press view-press">
 								<a ui-if="isMyProfile" ng-href="#/editorial?id={{gallery.galleryid}}" > <img
 									ng-src="{{gallery.gallerypic}}" alt=""></a>
-								<a ui-if="!isMyProfile" ng-href="#/{{profileid}}editorial?id={{gallery.galleryid}}" > <img
+								<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/editorial?id={{gallery.galleryid}}" > <img
 									ng-src="{{gallery.gallerypic}}" alt=""></a>	
 								<div class="content">
 							     	<div class="mask">
@@ -117,7 +117,7 @@
 							    	</ul>
 									<h1>
 									<a ui-if="isMyProfile" ng-href="#/editorial?id={{gallery.galleryid}}" class="mask_edit">View</a>
-									<a ui-if="!isMyProfile" ng-href="#/{{profileid}}editorial?id={{gallery.galleryid}}" class="mask_edit">View</a>
+									<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/editorial?id={{gallery.galleryid}}" class="mask_edit">View</a>
 									</h1>
 								</div> 
 								<div class="divi2"></div>
