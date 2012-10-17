@@ -79,7 +79,7 @@ function MyCtrlAddGallery($scope, $routeParams, $location, mygallery, currentvis
 	};
 }
 
-function MyCtrlAddPrintCampaign($scope, $routeParams, $location, srvgallery, mygallery, currentvisitedprofile) {
+function MyCtrlAddPrintCampaign($scope, $routeParams, $location, mygallery, currentvisitedprofile) {
 
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
 	if(!$scope.isMyProfile) {
@@ -96,16 +96,16 @@ function MyCtrlAddPrintCampaign($scope, $routeParams, $location, srvgallery, myg
 	}
 	
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvgallery.getname($routeParams);
-	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
-	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
-	    $scope.existingfiles	= srvgallery.getphotos($routeParams);
+	    $scope.entityname  		= mygallery.getname($routeParams);
+	    $scope.profilepic		= mygallery.getprofilepic($routeParams);
+	    $scope.galleryname  	= mygallery.getgalleryname($routeParams);
+	    $scope.existingfiles	= mygallery.getphotos($routeParams);
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, "").success(function(data) {
-    	srvgallery.setphotoslocally(data, $routeParams);
+    mygallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, "").success(function(data) {
+    	mygallery.setphotoslocally(data, $routeParams);
     	$scope.updatedata();
     }).error(function(data) {
     	
@@ -152,7 +152,7 @@ function MyCtrlAddPrintCampaign($scope, $routeParams, $location, srvgallery, myg
 	$scope.deletephoto = function(photoid) {
 		mygallery.deletephoto(ajaxrequestcall, photoid).success(function(data) {
 			mygallery.deletephotoslocally(photoid);
-			$scope.existingfiles	= srvgallery.getphotos($routeParams);
+			$scope.existingfiles	= mygallery.getphotos($routeParams);
 		}).error(function(data) {
 			alert("error: " + data.error);
 		});
@@ -182,7 +182,7 @@ function MyCtrlAddVideoCampaign($scope, $routeParams, currentvisitedprofile) {
                        ];
 }
 
-function MyCtrlAddNewsletter($scope, $routeParams, $location, srvgallery, mygallery, currentvisitedprofile) {
+function MyCtrlAddNewsletter($scope, $routeParams, $location, mygallery, currentvisitedprofile) {
 
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
 	if(!$scope.isMyProfile) {
@@ -199,16 +199,16 @@ function MyCtrlAddNewsletter($scope, $routeParams, $location, srvgallery, mygall
 	}
 	
 	$scope.updatedata = function() {
-	    $scope.entityname  		= srvgallery.getname($routeParams);
-	    $scope.profilepic		= srvgallery.getprofilepic($routeParams);
-	    $scope.galleryname  	= srvgallery.getgalleryname($routeParams);
-	    $scope.existingfiles	= srvgallery.getphotos($routeParams);
+	    $scope.entityname  		= mygallery.getname($routeParams);
+	    $scope.profilepic		= mygallery.getprofilepic($routeParams);
+	    $scope.galleryname  	= mygallery.getgalleryname($routeParams);
+	    $scope.existingfiles	= mygallery.getphotos($routeParams);
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    srvgallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, "").success(function(data) {
-    	srvgallery.setphotoslocally(data, $routeParams);
+    mygallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, "").success(function(data) {
+    	mygallery.setphotoslocally(data, $routeParams);
     	$scope.updatedata();
     }).error(function(data) {
     	
@@ -255,7 +255,7 @@ function MyCtrlAddNewsletter($scope, $routeParams, $location, srvgallery, mygall
 	$scope.deletephoto = function(photoid) {
 		mygallery.deletephoto(ajaxrequestcall, photoid).success(function(data) {
 			mygallery.deletephotoslocally(photoid);
-			$scope.existingfiles	= srvgallery.getphotos($routeParams);
+			$scope.existingfiles	= mygallery.getphotos($routeParams);
 		}).error(function(data) {
 			alert("error: " + data.error);
 		});

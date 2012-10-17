@@ -438,12 +438,17 @@ function MyCtrlViewPhotos($scope, $routeParams, currentvisitedprofile, mygallery
 
 function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprofile, mygallery) {
 
-	$scope.galleryname = "new";
-	$scope.gallerydesc = "description";	
 	$scope.$parent.title = 'Print Campaigns';
 	
+	$scope.profileid = "";
+	if(!angular.isUndefined($routeParams.profileid)) {
+		$scope.profileid = $routeParams.profileid;
+	}
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
+	
+	$scope.galleryname = "new";
+	$scope.gallerydesc = "description";	
 	
 	$scope.searchgalleryname = ""; 
 	
@@ -515,13 +520,19 @@ function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprof
 function MyCtrlCampaign($scope, $routeParams, currentvisitedprofile, mygallery) {
 
 	$scope.$parent.title = 'Print Campaign';
-	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
-
-	$scope.backButton = currentvisitedprofile.getBackHistory();
+	
+	$scope.profileid = "";
+	if(!angular.isUndefined($routeParams.profileid)) {
+		$scope.profileid = $routeParams.profileid;
+	}
 	$scope.galleryid = "";
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.galleryid = $routeParams.id;
 	}
+	
+	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+	
 	var ajaxrequestcall	 = "printcampaign";
 	$scope.searchphotoname = "";
 	$scope.updatedata = function() {
@@ -607,12 +618,17 @@ function MyCtrlVideocampaign($scope, $routeParams, currentvisitedprofile,
 
 function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile, mygallery) {
 
-	$scope.galleryname = "new";
-	$scope.gallerydesc = "description";	
 	$scope.$parent.title = 'News letters';
 	
+	$scope.profileid = "";
+	if(!angular.isUndefined($routeParams.profileid)) {
+		$scope.profileid = $routeParams.profileid;
+	}
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
+	
+	$scope.galleryname = "new";
+	$scope.gallerydesc = "description";	
 	
 	//Related to search
 	$scope.searchgalleryname = ""; 
@@ -686,9 +702,14 @@ function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile
 function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile, mygallery) {
 
 	$scope.$parent.title = 'Newsletter';
+	
+	$scope.profileid = "";
+	if(!angular.isUndefined($routeParams.profileid)) {
+		$scope.profileid = $routeParams.profileid;
+	}
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
-
 	$scope.backButton = currentvisitedprofile.getBackHistory();
+	
 	$scope.galleryid = "";
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.galleryid = $routeParams.id;
@@ -723,14 +744,12 @@ function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile, mygallery)
 			alert("error");
 		});
     };
-
 }
-
 
 function MyCtrlViewNewsLetters($scope, $routeParams, currentvisitedprofile, mygallery) {
 
 	$scope.$parent.title = 'ViewNewsLetter';
-
+	
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	
 	$scope.photoid = "";
@@ -771,6 +790,10 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
 
 	$scope.$parent.title = 'Collections';
 	
+	$scope.profileid = "";
+	if(!angular.isUndefined($routeParams.profileid)) {
+		$scope.profileid = $routeParams.profileid;
+	}
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 
@@ -860,13 +883,19 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
 function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, srvcollection, mycollection) {
 
 	$scope.$parent.title = "Collection";
-	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
-
-	$scope.backButton = currentvisitedprofile.getBackHistory();
+	
+	$scope.profileid = "";
+	if(!angular.isUndefined($routeParams.profileid)) {
+		$scope.profileid = $routeParams.profileid;
+	}
 	$scope.galleryid = "";
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.galleryid = $routeParams.id;
 	}
+	
+	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
+	$scope.backButton = currentvisitedprofile.getBackHistory();
+	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= srvcollection.getname($routeParams);
 	    $scope.profilepic		= srvcollection.getprofilepic($routeParams);
@@ -1141,6 +1170,11 @@ function MyCtrlStylesPreview($scope, $routeParams, currentvisitedprofile, srvsty
 function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile, srvlinesheet, mylinesheet) {
 
 	$scope.$parent.title = 'Linesheets';
+	
+	$scope.profileid = "";
+	if(!angular.isUndefined($routeParams.profileid)) {
+		$scope.profileid = $routeParams.profileid;
+	}
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	
@@ -1238,6 +1272,10 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, srvlinesheet,
 
 	$scope.$parent.title = 'Styles';
 
+	$scope.profileid = "";
+	if(!angular.isUndefined($routeParams.profileid)) {
+		$scope.profileid = $routeParams.profileid;
+	}
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
 	

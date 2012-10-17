@@ -1,9 +1,6 @@
 <!--body-->
 <div class="container minimum_height">
 	<div class="row">
-
-
-
 		<!-- left pane -->
 		<div class="span3">
 			<h4 class="leftpane_entity_heading">Boutique</h4>
@@ -11,10 +8,15 @@
 			<ul class="thumbnails">
 				<li class="span3">
 					<div>
-						<span> <a href="#profile"> <img alt=""
-								ng-src={{profilepic.thumbnail_url}}
-								class="pull-left leftpane_profile_img"></a>
-						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						<span> 
+							<a ui-if="isMyProfile" ng-href="#profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
+										class="pull-left leftpane_profile_img"></a>
+							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
+										class="pull-left leftpane_profile_img"></a>
+						</span> 
+						<span> 
+							<a ui-if="isMyProfile" ng-href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
 					</div>
 				</li>
@@ -42,9 +44,10 @@
 			</div>
 			<div style="border-bottom:1px solid black;">
 				<span class="left right_pane_info"> Find print campaigns
-					using the filters </span> <span class="right"> <a
-					data-toggle="modal" href="#CreatePrintcampaign"
-					class="rightpane_add_btn">create print campaign</a>
+					using the filters </span> 
+				<span class="right" ui-if="isMyProfile"> 
+					<a data-toggle="modal" ng-href="#CreatePrintcampaign"
+						class="rightpane_add_btn">create print campaign</a>
 				</span>
 			</div>
 
@@ -81,12 +84,14 @@
 						<li ng-repeat="gallery in galleries" style="position: relative;margin-top:20px;" >
 							<!--  ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize" -->
 							<div class="press view-press">
-								<a ng-href="#/campaign?id={{gallery.galleryid}}" > <img
+								<a ui-if="isMyProfile" ng-href="#/campaign?id={{gallery.galleryid}}" > <img
 									ng-src="{{gallery.gallerypic}}" alt=""></a>
+								<a ui-if="!isMyProfile" ng-href="#/{{profile}}campaign?id={{gallery.galleryid}}" > <img
+									ng-src="{{gallery.gallerypic}}" alt=""></a>	
 								<div class="content">
 							     	<div class="mask">
                                     </div>
-                                    <ul class="prs">
+                                    <ul class="prs" ui-if="isMyProfile">
                                        <li><a ng-click="deletegallery(gallery.galleryid)"
 										title="Delete"><i class="icon-trash icon-white"></i></a></li>
 									<li><a
@@ -94,7 +99,10 @@
 										title="Edit"><i class="icon-edit icon-white"></i> </a></li>
 							    	</ul>
 									<h1>
-									<a ng-href="#/campaign?id={{gallery.galleryid}}" class="mask_edit">View</a>
+									<a ui-if="isMyProfile" ng-href="#/campaign?id={{gallery.galleryid}}" 
+												class="mask_edit">View</a>
+									<a ui-if="!isMyProfile" ng-href="#/{{profile}}/campaign?id={{gallery.galleryid}}" 
+												class="mask_edit">View</a>
 									</h1>
 								</div> 
 								<div class="divi2"></div>

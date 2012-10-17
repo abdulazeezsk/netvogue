@@ -8,10 +8,15 @@
 			<ul class="thumbnails">
 				<li class="span3">
 					<div>
-						<span> <a href="#profile"> <img alt=""
-								ng-src={{profilepic.thumbnail_url}}
-								class="pull-left leftpane_profile_img"></a>
-						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						<span> 
+							<a ui-if="isMyProfile" ng-href="#profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
+										class="pull-left leftpane_profile_img"></a>
+							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
+										class="pull-left leftpane_profile_img"></a>
+						</span> 
+						<span> 
+							<a ui-if="isMyProfile" ng-href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
 					</div>
 				</li>
@@ -33,15 +38,17 @@
 			<!-- header pane -->
 			<div
 				style="border-bottom: 1px solid black; position: relative; top: -2px;">
-				<span class="left ywbreadcrumb header_width"> <a
-					class="nonactive" href="#/printcampaign">print campaign</a> <span
-					class="ywdivider">/</span> <span> {{galleryname}}</span></span>
+				<span class="left ywbreadcrumb header_width"> 
+					<a ui-if="isMyProfile" class="nonactive" ng-href="#/printcampaign">print campaign</a>
+					<a ui-if="!isMyProfile" class="nonactive" ng-href="#/{{profileid}}printcampaign">print campaign</a> 
+					
+					<span class="ywdivider">/</span> <span> {{galleryname}}</span></span>
 			</div>
 			<div style="border-bottom: 1px solid black;">
 				<span class="left right_pane_info"> Find Print Campaigns
-					using the filters </span> <span class="right"> <a
-					ng-href="#/addprintcampaign?id={{galleryid}}"
-					class="rightpane_add_btn">Organize</a>
+					using the filters </span> <span class="right"> 
+					<a ui-if="isMyProfile" ng-href="#/addprintcampaign?id={{galleryid}}"
+						class="rightpane_add_btn">Organize</a>
 				</span>
 			</div>
 			<!-- header pane -->
