@@ -155,7 +155,7 @@ public class StyleSheetController {
 		} else {
 			//Change this after implementing query
 			//dbStyles = collectionService.searchPhotoByName(stylesheetid, photoname);
-			dbStyles = stylesheetService.getStylesbyCategory(category);
+			dbStyles = stylesheetService.getStylesbyCategory(loggedinUser.getUsername(), category);
 		}
 		if(null == dbStyles) {
 			return styles;
