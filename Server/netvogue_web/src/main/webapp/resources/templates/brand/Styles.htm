@@ -86,13 +86,16 @@
 				
 				<!-- header pane -->
 				<div style="border-bottom: 1px solid black; position: relative; top: -2px;">
-					<span class="left ywbreadcrumb header_width"> <a class="nonactive"
-						href="#/linesheets" >Linesheets</a> <span class="ywdivider">/</span> <span>
+					<span class="left ywbreadcrumb header_width"> 
+						<a ui-if="isMyProfile" class="nonactive" ng-href="#/linesheets" >Linesheets</a>
+						<a ui-if="!isMyProfile" class="nonactive" ng-href="#/{{profileid}}/linesheets" >Linesheets</a> 
+						<span class="ywdivider">/</span> <span>
 						Rebecca Minkoff {{linesheetname}}</span></span>
 				</div>
 				<div style="border-bottom: 1px solid black;margin-bottom:10px;">
 					<span class="left right_pane_info"> Find styles using the
-						filters </span> <span class="right"> <a
+						filters </span> 
+					<span class="right" ui-if="isMyProfile"> <a
 						href="#/addlinesheets?id={{linesheetid}}&&cat={{category}}" class="rightpane_add_btn">Organize</a>
 					</span>
 				</div>
@@ -102,8 +105,12 @@
 				<ul class="thumbnails">
 					<li ng-repeat="style in styles">
 						<div align="center" style="position: relative;">
-							<a class="product-image"
+							<a class="product-image" ui-if="isMyProfile" 
 								ng-href="#/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}"
+								title=""> <img ng-src="{{style.profilethumbpic}}" class="fade_spot"
+								width="220" height="300" alt="" title=""></a>
+							<a class="product-image" ui-if="!isMyProfile" 
+								ng-href="#/{{profileid}}/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}"
 								title=""> <img ng-src="{{style.profilethumbpic}}" class="fade_spot"
 								width="220" height="300" alt="" title=""></a>
 							<div class="linesheet-designer">

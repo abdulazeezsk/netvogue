@@ -72,8 +72,9 @@
 					class="rightpane_back_btn">Back</a></span>
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info"> Find linesheets using the
-					filters </span> <span class="right"> <a data-toggle="modal"
-					href="#Createlinesheet" class="rightpane_add_btn">Create line
+					filters </span> 
+				<span class="right" ui-if="isMyProfile"> <a data-toggle="modal"
+					ng-href="#Createlinesheet" class="rightpane_add_btn">Create line
 						sheet</a>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
@@ -84,12 +85,17 @@
 						<div align="center" style="position: relative;">
 						   	<div class="view-linesheet">
 						   	<div class="mask"></div>
-							<a class="product-image"
-								ng-href="#/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}"
-								title="Dumont Coat"> <img ng-src="{{linesheet.gallerypic}}" class="fade_spot"
-								width="220" height="300" alt="Dumont Coat" title="Dumont Coat"></a>
+								<a ui-if="isMyProfile" class="product-image" 
+									ng-href="#/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}"
+									title="Dumont Coat"> <img ng-src="{{linesheet.gallerypic}}" class="fade_spot"
+									width="220" height="300" alt="Dumont Coat" title="Dumont Coat"></a>
+								<a ui-if="!isMyProfile" class="product-image" 
+									ng-href="#/{{profileid}}/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}"
+									title="Dumont Coat"> <img ng-src="{{linesheet.gallerypic}}" class="fade_spot"
+									width="220" height="300" alt="Dumont Coat" title="Dumont Coat"></a>
+									
 							</div>
-							<div class="linesheet-edit-delete">
+							<div class="linesheet-edit-delete" ui-if="isMyProfile">
 								<span class="edit-delete"><a ng-click="deletelinesheet(linesheet.galleryid)" title="Delete"><i
 												class="icon-trash icon-black"></i></a><a ng-click="editlinesheet(linesheet.galleryid, linesheet.galleryname, linesheet.category, linesheet.deliverydate)" 
 										title="Edit"><i class="icon-edit icon-black"></i></a></span>
