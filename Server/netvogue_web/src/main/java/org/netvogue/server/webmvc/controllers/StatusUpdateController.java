@@ -1,10 +1,12 @@
 package org.netvogue.server.webmvc.controllers;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
@@ -18,10 +20,8 @@ import org.netvogue.server.webmvc.domain.ContactInfo;
 import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
-import org.netvogue.server.webmvc.domain.Notification;
 import org.netvogue.server.webmvc.domain.StatusUpdate;
 import org.netvogue.server.webmvc.domain.StatusUpdates;
-import org.netvogue.server.webmvc.pusher.PusherChannel;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -94,8 +94,12 @@ public class StatusUpdateController {
 			}
 		} else {
 			Iterable<org.netvogue.server.neo4japi.domain.StatusUpdate> dbupdates;
+			Format formatter = new SimpleDateFormat("HH:mm:ss.SSS");
+			
+			System.out.println("Before call: Current time is:" + formatter.format(new Date()));
 			dbupdates = statusUpdateService.getMyStatusUpdates(user.getUsername());
-		
+			System.out.println("After call: Current time is:" + formatter.format(new Date()));
+			
 			if(null == dbupdates) {
 				return updates;
 			}
