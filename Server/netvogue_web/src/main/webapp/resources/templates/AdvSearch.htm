@@ -77,7 +77,7 @@
 						<li ng-repeat="user in advancedsearch"
 							style="position: relative; margin-top: 20px;">
 							<!--  ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize" -->
-							<div class="view view-second">
+							<!-- <div class="view view-second">
 								<img ng-src="{{user.thumbpic}}" />
 								<div class="mask">
 									<h2>{{user.name}}</h2>
@@ -87,7 +87,8 @@
 							</div>
 							<div class="directorytitle">
 								<h3>{{user.name}}</h3>
-							</div> <!-- <div class="directory view-directory">
+							</div> -->
+							 <div class="directory view-directory">
 								<a ng-href="#/{{user.username}}/profile"> <img
 									ng-src="{{user.thumbpic}}" alt=""></a>
 								<div class="content">
@@ -106,7 +107,7 @@
 							</div>
 							<div class="directorytitle">
 								<h3>{{user.name}}</h3>
-							</div> -->
+							</div>
 						</li>
 					</ul>
 				</div>
