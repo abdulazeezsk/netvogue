@@ -1,17 +1,13 @@
 package org.netvogue.server.neo4japi.service;
 
-import java.util.Map;
 import java.util.Set;
 
 import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
-import org.netvogue.server.neo4japi.domain.Collection;
 import org.netvogue.server.neo4japi.domain.Editorial;
 import org.netvogue.server.neo4japi.domain.Gallery;
-import org.netvogue.server.neo4japi.domain.Linesheet;
 import org.netvogue.server.neo4japi.domain.PrintCampaign;
-import org.netvogue.server.neo4japi.domain.Stylesheet;
 import org.netvogue.server.neo4japi.domain.User;
 
 public interface UserService {
@@ -49,9 +45,9 @@ public interface UserService {
 	public Iterable<CollectionData> searchCollections(String username, String seasonname, String category, String brandname);
 
 	//Queries related to Stylesheets
-	public Iterable<Stylesheet> getStylesheets(User user);
-	public Iterable<Stylesheet> searchStylesheetByName(User user, String name);
-	public Iterable<Stylesheet> searchStylesheetByName(String username, String name);
+	public Iterable<StylesheetData> getStylesheets(User user);
+	public Iterable<StylesheetData> searchStylesheetByName(User user, String name);
+	public Iterable<StylesheetData> searchStylesheetByName(String username, String name);
 	
 	//Queries related to Linesheets
 	public Iterable<LinesheetData> getLinesheets(User user);

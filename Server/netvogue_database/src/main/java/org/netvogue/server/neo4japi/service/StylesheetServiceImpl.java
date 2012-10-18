@@ -75,13 +75,13 @@ public class StylesheetServiceImpl implements StylesheetService {
 		}
 		return null;
 	}
-	public Iterable<Style> getStyles(String stylesheetId) {
+	public Iterable<StyleData> getStyles(String stylesheetId) {
 		if(!stylesheetId.isEmpty()) {
 			return stylesheetRepo.getStyles(stylesheetId);
 		}
 		return null;
 	}
-	public Iterable<Style> getStylesbyCategory(String username, String category) {
+	public Iterable<StyleData> getStylesbyCategory(String username, String category) {
 		if(!category.isEmpty()) {
 			return stylesheetRepo.getStylesByCategory(username, category);
 		}

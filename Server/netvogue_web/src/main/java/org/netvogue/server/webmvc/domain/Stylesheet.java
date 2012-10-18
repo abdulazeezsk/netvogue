@@ -3,6 +3,7 @@ package org.netvogue.server.webmvc.domain;
 public class Stylesheet extends GenericGallery {
 	String category;
 	String left_url;
+	String brandname;
 	public String getCategory() {
 		return category;
 	}
@@ -14,5 +15,11 @@ public class Stylesheet extends GenericGallery {
 	}
 	public void setLeftpic(String left_url) {
 		this.left_url = left_url;
+	}
+	public String getBrandname() {
+		return brandname;
+	}
+	public void setBrandname(String brandname) {
+		this.brandname = brandname;
 	}
 }

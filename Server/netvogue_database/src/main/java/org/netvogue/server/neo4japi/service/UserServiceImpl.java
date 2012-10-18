@@ -177,18 +177,18 @@ public class UserServiceImpl implements UserService{
 		return userRepo.searchCollectionByName(username, Utils.SerializeQueryParamForSearch(seasonname));
 	}
 	
-	public Iterable<Stylesheet> getStylesheets(User user) {
+	public Iterable<StylesheetData> getStylesheets(User user) {
 		if(null != user) {
 			return userRepo.getStylesheets(user.getUsername());
 		}
 		return null;
 	}
 	
-	public Iterable<Stylesheet> searchStylesheetByName(User user, String name) {
+	public Iterable<StylesheetData> searchStylesheetByName(User user, String name) {
 		return searchStylesheetByName(user.getUsername(), name);
 	}
 	
-	public Iterable<Stylesheet> searchStylesheetByName(String username, String name) {
+	public Iterable<StylesheetData> searchStylesheetByName(String username, String name) {
 		return userRepo.searchStylesheetByName(username, name);
 	}
 	

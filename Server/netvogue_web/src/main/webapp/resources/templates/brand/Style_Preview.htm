@@ -3,7 +3,7 @@
 	<div class="row">
 		<!-- left pane -->
 		<div class="span3">
-			<h4 class="leftpane_entity_heading">Boutique</h4>
+			<h4 class="leftpane_entity_heading">Brand</h4>
 			<div class="divi2"></div>
 			<ul class="thumbnails">
 				<li class="span3">
@@ -29,7 +29,7 @@
 							</div>
 							<div class="leftpanefeed_text">
 								<h3>
-									<a ng-click="setmainstyle(style)" title="">Rebecca Minkoff</a>
+									<a ng-click="setmainstyle(style)" title="">{{brandname}}</a>
 								</h3>
 								<h2>
 									<a ng-click="setmainstyle(style)" title="">{{style.stylename}}</a>
@@ -55,8 +55,8 @@
 			<div style="border-bottom: 1px solid black; position: relative; top: -2px;margin-bottom:10px;">
 				<span class="left ywbreadcrumb header_width"> <a
 					class="nonactive"
-					ng-href="#/stylesheet?id={{stylesheetid}}&&cat={{category}}"> Rebecca
-						minkoff {{stylesheetname}}</a>
+					ng-href="#/stylesheet?id={{stylesheetid}}&&cat={{category}}"> 
+						{{brandname}} {{stylesheetname}}</a>
 				</span>
 				<span class="right">
 					<a ng-href="#{{backButton}}" class="rightpane_back_btn">Back</a>

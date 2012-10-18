@@ -18,6 +18,8 @@ import org.netvogue.server.neo4japi.domain.Category;
 import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
+import org.netvogue.server.neo4japi.service.StyleData;
+import org.netvogue.server.neo4japi.service.StylesheetData;
 import org.netvogue.server.neo4japi.service.StylesheetService;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.domain.ImageURLsResponse;
@@ -71,7 +73,7 @@ public class StyleSheetController {
 		stylesheets.setName(loggedinUser.getName());
 		stylesheets.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
 		Set<Stylesheet> stylesheetTemp = new LinkedHashSet<Stylesheet>();
-		Iterable<org.netvogue.server.neo4japi.domain.Stylesheet> dbStylesheets;
+		Iterable<StylesheetData> dbStylesheets;
 		if(stylesheetname.isEmpty()) {
 			dbStylesheets = userService.getStylesheets(loggedinUser);
 		} else {
@@ -81,11 +83,12 @@ public class StyleSheetController {
 		if(null == dbStylesheets) {
 			return stylesheets;
 		}
-		Iterator<org.netvogue.server.neo4japi.domain.Stylesheet> first = dbStylesheets.iterator();
+		Iterator<StylesheetData> first = dbStylesheets.iterator();
 		while ( first.hasNext() ){
-			org.netvogue.server.neo4japi.domain.Stylesheet dbStylesheet = first.next() ;
-			System.out.println("Style sheet name" + dbStylesheet.getStylesheetname());
-			stylesheetTemp.add(conversionService.convert(dbStylesheet, Stylesheet.class));
+			StylesheetData dbStylesheet = first.next() ;
+			Stylesheet newResponse = conversionService.convert(dbStylesheet.getStylesheet(), Stylesheet.class);
+			newResponse.setBrandname(dbStylesheet.getName());
+			stylesheetTemp.add(newResponse);
 		}
 		stylesheets.setStylesheets(stylesheetTemp);
 		
@@ -111,7 +114,7 @@ public class StyleSheetController {
 			return styles;
 		styles.setStylesheetname(s.getStylesheetname());
 		Set<StyleResponse> stylesTemp = new LinkedHashSet<StyleResponse>();
-		Iterable<Style> dbStyles;
+		Iterable<StyleData> dbStyles;
 		if(null == searchquery || searchquery.isEmpty()) {
 			dbStyles = stylesheetService.getStyles(stylesheetid);
 		} else {
@@ -122,10 +125,12 @@ public class StyleSheetController {
 		if(null == dbStyles) {
 			return styles;
 		}
-		Iterator<Style> first = dbStyles.iterator();
+		Iterator<StyleData> first = dbStyles.iterator();
 		while ( first.hasNext() ){
-			Style dbStyle = first.next() ;
-			stylesTemp.add(conversionService.convert(dbStyle, StyleResponse.class));
+			StyleData dbStyle = first.next() ;
+			StyleResponse newResponse = conversionService.convert(dbStyle.getStyle(), StyleResponse.class);
+			styles.setBrandname(dbStyle.getName());
+			stylesTemp.add(newResponse);
 		}
 		styles.setStyles(stylesTemp);
 		
@@ -148,7 +153,7 @@ public class StyleSheetController {
 		styles.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
 		//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
 		Set<StyleResponse> stylesTemp = new LinkedHashSet<StyleResponse>();
-		Iterable<Style> dbStyles;
+		Iterable<StyleData> dbStyles;
 		ProductLines productline = ProductLines.getValueOf(category);
 		if(null == searchquery || searchquery.isEmpty()) {
 			dbStyles = stylesheetService.getStylesbyCategory(loggedinUser.getUsername(), productline.toString());
@@ -160,10 +165,12 @@ public class StyleSheetController {
 		if(null == dbStyles) {
 			return styles;
 		}
-		Iterator<Style> first = dbStyles.iterator();
+		Iterator<StyleData> first = dbStyles.iterator();
 		while ( first.hasNext() ){
-			Style dbStyle = first.next() ;
-			stylesTemp.add(conversionService.convert(dbStyle, StyleResponse.class));
+			StyleData dbStyle = first.next() ;
+			StyleResponse newResponse = conversionService.convert(dbStyle.getStyle(), StyleResponse.class);
+			styles.setBrandname(dbStyle.getName());
+			stylesTemp.add(newResponse);
 		}
 		System.out.println("No:of Styles: " + stylesTemp.size());
 		styles.setStyles(stylesTemp);

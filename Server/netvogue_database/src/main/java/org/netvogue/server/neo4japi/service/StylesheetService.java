@@ -13,8 +13,8 @@ public interface StylesheetService {
 	public ResultStatus deleteStylesheet(String id, String error);
 	
 	public Style getStyle(String styleid, String error);
-	public Iterable<Style> getStylesbyCategory(String username, String category);
-	public Iterable<Style> getStyles(String StylesheetId);
+	public Iterable<StyleData> getStylesbyCategory(String username, String category);
+	public Iterable<StyleData> getStyles(String StylesheetId);
 	/*public Iterable<PrintCampaignPhoto> searchPhotoByName(PrintCampaign printCampaign, String name);
 	public Iterable<PrintCampaignPhoto> searchPhotoByName(String printcampaignId, String name);*/
 	public ResultStatus deleteStyle(String styleId, String error);

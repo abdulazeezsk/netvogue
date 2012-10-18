@@ -1124,6 +1124,7 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, mystylesh
 	    $scope.entityname  		= mystylesheet.getname($routeParams);
 	    $scope.profilepic		= mystylesheet.getprofilepic($routeParams);
 	    $scope.stylesheetname  	= mystylesheet.getstylesheetname($routeParams);
+	    $scope.brandname		= mystylesheet.getbrandname();
 	    $scope.styles			= mystylesheet.getstyles($routeParams);
     };
     
@@ -1166,6 +1167,7 @@ function MyCtrlStylesPreview($scope, $routeParams, currentvisitedprofile, mystyl
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mystylesheet.getname($routeParams);
 	    $scope.stylesheetname  	= mystylesheet.getstylesheetname($routeParams);
+	    $scope.brandname		= mystylesheet.getbrandname();
 	    $scope.styles			= mystylesheet.getstyles($routeParams);
     	for(var i=0; i < $scope.styles.length; i++) {
     		if($scope.styleid == $scope.styles[i].styleid) {

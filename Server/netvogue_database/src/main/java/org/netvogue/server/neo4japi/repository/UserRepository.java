@@ -5,6 +5,7 @@ import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.domain.*;
 import org.netvogue.server.neo4japi.service.CollectionData;
 import org.netvogue.server.neo4japi.service.LinesheetData;
+import org.netvogue.server.neo4japi.service.StylesheetData;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
 
@@ -85,12 +86,14 @@ public interface UserRepository extends GraphRepository<User> {
 	Iterable<CollectionData> searchNetworkCollectionByName(String username, String collectionseasonname);
 
 	//queries related to stylesheets
-	@Query( "START n=node:search(username={0}) MATCH n-[:STYLESHEET]->c RETURN c ORDER BY c.createdDate DESC")
-	Iterable<Stylesheet> getStylesheets(String username);
+	@Query( "START n=node:search(username={0}) MATCH n-[:STYLESHEET]->stylesheet " +
+			"RETURN n.name as name, stylesheet ORDER BY stylesheet.createdDate DESC")
+	Iterable<StylesheetData> getStylesheets(String username);
 	
-	@Query( "START n=node:search(username={0}) MATCH n-[:STYLESHEET]->c WHERE c.stylesheetname =~ {1} " +
-			"RETURN c ORDER BY c.createdDate DESC")
-	Iterable<Stylesheet> searchStylesheetByName(String username, String stylesheetname);
+	@Query( "START n=node:search(username={0}) MATCH n-[:STYLESHEET]->stylesheet " +
+			"WHERE stylesheet.stylesheetname =~ {1} " +
+			"RETURN n.name as name, stylesheet ORDER BY stylesheet.createdDate DESC")
+	Iterable<StylesheetData> searchStylesheetByName(String username, String stylesheetname);
 	
 	//queries related to linesheets
 	@Query( "START n=node:search(username={0}) MATCH n-[:LINESHEET]->linesheet " +

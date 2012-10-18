@@ -763,7 +763,7 @@ angular.module('netVogue.services', []).
         setstyleslocally: function(temp) {
         	name = temp.name;
     		stylesheetname = temp.stylesheetname;
-    		//brandname = temp.brandname;
+    		brandname = temp.brandname;
     		angular.copy(temp.styles, styles);
         }
 	};
