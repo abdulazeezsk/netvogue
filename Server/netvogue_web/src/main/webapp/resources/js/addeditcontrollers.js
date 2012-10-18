@@ -379,7 +379,7 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
 	    $scope.entityname  		= mystylesheet.getname();
 	    $scope.profilepic		= mystylesheet.getprofilepic();
 	    $scope.stylesheetname  	= mystylesheet.getstylesheetname();
-	    $scope.brandname		= mylinesheet.getbrandname();
+	    $scope.brandname		= mystylesheet.getbrandname();
 	    $scope.styles			= mystylesheet.getstyles();
 	    if(!angular.isUndefined($routeParams.styleid)) {
 	    	for(var i=0; i < $scope.styles.length; i++) {
