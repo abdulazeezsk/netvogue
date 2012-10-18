@@ -39,13 +39,17 @@
     <li class="leftmenu_tabs"><a ng-href="{{links.printcampaign}}">Print Campaign</a> </li>
  <!--    <li class="leftmenu_tabs"><a ng-href="{{links.videocampaign}}">Video Campaign</a> </li> -->
     <li class="leftmenu_tabs"><a ng-href="{{links.newsletter}}">Editorials</a> </li>
-    <li class="nav-header" ng-hide="iambrand">My Shop </li>
+    <li class="nav-header" ng-show="!iambrand && isMyProfile">My Shop </li>
     <li class="nav-header" ng-show="iambrand">My Works </li>
-    <li class="leftmenu_tabs"><a ng-href="{{links.linesheets}}">Line Sheets</a> </li>
-    <li class="leftmenu_tabs" ng-show="iambrand && isMyProfile"><a ng-href="{{links.stylesheets}}">StyleSheets</a></li>
-    <li class="leftmenu_tabs"><a ng-href="{{links.collections}}">Collections</a> </li>
-    <li class="nav-header">Invite</li>
-    <li class="leftmenu_tabs" ><a href="#invite" data-toggle="modal">Send Invite</a></li>
+    <div ng-show="iambrand || (!iambrand && isMyProfile)">
+	    <li class="leftmenu_tabs"><a ng-href="{{links.linesheets}}">Line Sheets</a> </li>
+	    <li class="leftmenu_tabs" ng-show="iambrand && isMyProfile"><a ng-href="{{links.stylesheets}}">StyleSheets</a></li>
+	    <li class="leftmenu_tabs"><a ng-href="{{links.collections}}">Collections</a> </li>
+	    <div ng-show="isMyProfile">
+		    <li class="nav-header">Invite</li>
+		    <li class="leftmenu_tabs" ><a href="#invite" data-toggle="modal">Send Invite</a></li>
+	    </div>
+    </div>
     <!--     <li class="nav-header">Inspire </li>
     <li><a ng-href="{{links.printcampaign}}">Blog</a> </li>-->
 </ul>
