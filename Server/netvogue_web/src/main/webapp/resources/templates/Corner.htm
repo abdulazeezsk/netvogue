@@ -44,20 +44,36 @@
         <!-- middle pannel -->
         <!-- right pannel -->
         <div class="span3">
-            <h4 class="trending_head">
-                Network</h4>
-            <div class="divi2">
-            </div>
-            <ul class="thumbnails">
-                <li class="span3 fade_spot" ng-repeat="network in mynetwork | limitTo:4">
-                    <div>
-                        <a ng-href="#/{{network.profileid}}/profile">
-                            <img alt="" ng-src="{{network.thumbnail_url}}" class="pull-left"></a> 
-                        <a ng-href="#/{{network.profileid}}/profile"
-                                class="network_entity_name">{{network.name}}</a>
-                    </div>
-                </li>
-            </ul>
+           <div>
+             <h4 class="reference_head">
+                    Network</h4>
+                <ul class="nav nav-tab nav-stacked">
+                    <li ng-repeat="network in mynetwork | limitTo:4">
+                        <div class="referencefeed  fade_spot">
+                           <!--  <div class="ntwrkimg">
+                                 <a ng-href="#/{{network.profileid}}/profile">
+                            <img alt="" ng-src="{{network.thumbnail_url}}" class="pull-left"></a></div>
+                            <div class="trendfeed_text">
+                                <h3>
+                                     <a ng-href="#/{{network.profileid}}/profile"
+                                class="network_entity_name">{{network.name}}</a></h3>
+                            </div> -->
+                            
+                            <div class="img">
+								  <a ng-href="#/{{network.profileid}}/profile">
+                            <img alt="" ng-src="{{network.thumbnail_url}}" class="pull-left"></a>
+							</div>
+							<div class="referencefeed_text">
+								<h3>
+									<a ng-href="#/{{reference.profileid}}/profile" title="">{{reference.name}}</a>
+								</h3>
+								<h2><a ng-href="#/{{network.profileid}}/profile"
+                                class="network_entity_name">{{network.name}}</a></h2>
+							</div>
+                        </div>
+                    </li>
+                </ul>
+                </div>
             <div>
                 <h4 class="trending_head">
                     TRENDING</h4>
@@ -92,7 +108,7 @@
 								<h3>
 									<a ng-href="#/{{reference.profileid}}/profile" title="">{{reference.name}}</a>
 								</h3>
-								<p>{{reference.mutualfriends}} Mutual Friends</p>
+								<h2>{{reference.mutualfriends}} Mutual Friends</h2>
 							</div>
                         </div>
                     </li>
