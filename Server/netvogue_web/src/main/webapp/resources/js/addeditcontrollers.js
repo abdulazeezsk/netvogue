@@ -279,10 +279,11 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 	}
 	
 	$scope.updatedata = function() {
-	    $scope.entityname  		= mycollection.getname($routeParams);
-	    $scope.profilepic		= mycollection.getprofilepic($routeParams);
-	    $scope.galleryname  	= mycollection.getgalleryname($routeParams);
-	    $scope.existingfiles	= mycollection.getphotos($routeParams);
+	    $scope.entityname  		= mycollection.getname();
+	    $scope.profilepic		= mycollection.getprofilepic();
+	    $scope.galleryname  	= mycollection.getgalleryname();
+	    $scope.brandname  		= mycollection.getbrandname();
+	    $scope.existingfiles	= mycollection.getphotos();
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 

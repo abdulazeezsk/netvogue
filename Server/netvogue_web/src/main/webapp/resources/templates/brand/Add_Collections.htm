@@ -8,10 +8,10 @@
 			<ul class="thumbnails">
 				<li class="span3">
 					<div>
-						<span> <a href="#profile"> <img alt=""
+						<span> <a ng-href="#profile"> <img alt=""
 								ng-src={{profilepic.thumbnail_url}}
 								class="pull-left leftpane_profile_img"></a>
-						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span> <span> <a ng-href="#profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
 					</div>
 				</li>
@@ -27,7 +27,7 @@
 					<span class="left ywbreadcrumb header_width"> <a
 						class="nonactive" href="#/collections">Collections</a> <span
 						class="ywdivider">/</span> <a class="nonactive"
-						ng-href="#/collection?id={{galleryid}}">{{galleryname}}</a> <span
+						ng-href="#/collection?id={{galleryid}}">{{brandname}}{{galleryname}}</a> <span
 						class="ywdivider">/</span> <span> Organize</span></span> <span
 						class="right"> <a ng-href="#/collection?id={{galleryid}}"
 						class="rightpane_back_btn nodeco">Back</a>
