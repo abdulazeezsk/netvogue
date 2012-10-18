@@ -162,8 +162,7 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile, m
 	$scope.trending = trending.getTrending();
 }
 
-function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisitedprofile, 
-							mynetwork, trending) {
+function MyCtrlCorner($scope, $routeParams, mytimeline, currentvisitedprofile, mynetwork, trending) {
 	$scope.navClass = function(page1) {
 		return {
 			// last: this.$last,
@@ -187,19 +186,19 @@ function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisi
 	$scope.entityname = "";
 	$scope.profilepic = "";
 	$scope.updatedata = function(routeparams) {
-		$scope.entityname 		= srvtimeline.getname(routeparams);
-		$scope.iambrand			= srvtimeline.isbrand(routeparams);
-		$scope.profilepic 		= srvtimeline.getprofilepic(routeparams);
-		$scope.contactinfo		= srvtimeline.getcontactinfo(routeparams);
-		$scope.newsfeeds 		= srvtimeline.getupdates(routeparams);
+		$scope.entityname 		= mytimeline.getname(routeparams);
+		$scope.iambrand			= mytimeline.isbrand(routeparams);
+		$scope.profilepic 		= mytimeline.getprofilepic(routeparams);
+		$scope.contactinfo		= mytimeline.getcontactinfo(routeparams);
+		$scope.newsfeeds 		= mytimeline.getupdates(routeparams);
 		$scope.getcontactinfo 	= addresstostring($scope.contactinfo);
 		
 		createpusherchannel();
 	};
 	
 	$scope.getupdates = function(routeparams) {
-		srvtimeline.updates(routeparams).success(function(data) {
-			srvtimeline.setupdateslocally(routeparams, data);
+		mytimeline.updates(routeparams).success(function(data) {
+			mytimeline.setupdateslocally(data);
 			$scope.updatedata(routeparams);
 		}).error(function(data) {
 		});
@@ -211,7 +210,7 @@ function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisi
 	};	
 	$scope.getallupdates = function() {
 		$scope.routeparams.profileid = undefined;
-		$scope.getupdates($routeParams);
+		$scope.getupdates($routeParams); //This is capital P only -- not a mistake
 	};	
 	$scope.getallupdates();
 	
@@ -225,7 +224,7 @@ function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisi
 		mytimeline.addupdate($scope.newupdate).success(function(data) {
 			if(data != null) {
 				mytimeline.addupdatelocally(data);
-				$scope.newsfeeds 		= srvtimeline.getupdates($routeParams);
+				$scope.newsfeeds 		= mytimeline.getupdates($scope.routeparams);
 				$scope.newupdate = "";
 			} else {
 				alert("There is some error");
@@ -239,7 +238,7 @@ function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisi
 		mytimeline.editupdate(id, update).success(function(data) {
 			if(data.status == true) {
 				mytimeline.editupdatelocally(id, update);
-				$scope.newsfeeds 		= srvtimeline.getupdates($routeParams);
+				$scope.newsfeeds 		= mytimeline.getupdates($scope.routeparams);
 			} else {
 				alert(data.error);
 			}
@@ -252,7 +251,7 @@ function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisi
 		mytimeline.deleteupdate(id).success(function(data) {
 			if(data.status == true) {
 				mytimeline.editupdatelocally(id);
-				$scope.newsfeeds 		= srvtimeline.getupdates($routeParams);
+				$scope.newsfeeds 		= mytimeline.getupdates($scope.routeparams);
 			} else {
 				alert(data.error);
 			}

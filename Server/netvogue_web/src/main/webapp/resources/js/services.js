@@ -1181,13 +1181,6 @@ angular.module('netVogue.services', []).
 		getupdates: function() {
     		return updates;
     	},
-    	setupdates: function(temp) {
-    		name = temp.name;
-    		isbrand = temp.isbrand;
-    		profilepic = temp.profilepic;
-    		contactinfo = angular.copy(temp.contactinfo);
-    		updates = angular.copy(temp.updates);
-    	},
     	getname: function() {
     		if(angular.isUndefined(name))
         		return "";
@@ -1261,55 +1254,8 @@ angular.module('netVogue.services', []).
     			}
     		}
     		updates.splice(index, 1);
-    	}
-      };
-}).service('srvtimeline', function ($http, mytimeline) {
-    var updates = new netvogue.hashtable();
-    return {
-  	  getname: function(routeparams) {
-            if (angular.isUndefined(routeparams.profileid)) {
-                return mytimeline.getname();
-            } else {
-            	if(angular.isUndefined(updates.name))
-            		return "";
-        		return updates.name;
-            }
-  	  },
-  	  isbrand: function(routeparams) {
-        if (angular.isUndefined(routeparams.profileid)) {
-            return mytimeline.isbrand();
-        } else {
-        	if(angular.isUndefined(updates.isbrand))
-        		return false;
-    		return updates.isbrand;
-        }
-	  },
-  	  getprofilepic: function(routeparams) {
-            if (angular.isUndefined(routeparams.profileid)) {
-                return mytimeline.getprofilepic();
-            } else {
-            	if(angular.isUndefined(updates.profilepic))
-            		return "";
-        		return updates.profilepic;
-            }
-  	  },
-  	  getcontactinfo: function(routeparams) {
-          if (angular.isUndefined(routeparams.profileid)) {
-              return mytimeline.getcontactinfo();
-          } else {
-        	  if(angular.isUndefined(updates.contactinfo))
-          		return {};
-      		return updates.contactinfo;
-          }
-	  },
-  	  getupdates: function (routeparams) {
-	          if (angular.isUndefined(routeparams.profileid)) {
-	        	  return mytimeline.getupdates();
-	          } else {
-	        	  return updates.updates;  
-	          }
-  	  },
-  	  updates: function (routeparams) {
+    	},
+    	updates: function (routeparams) {
 	          var profileid = "";
 	          if (!angular.isUndefined(routeparams.profileid)) {
 	        	  profileid = routeparams.profileid;
@@ -1319,15 +1265,15 @@ angular.module('netVogue.services', []).
 	              url: "getstatusupdates/" + profileid
 	          };
 	          return $http(config);
-  	  },
-  	  setupdateslocally: function(routeparams, data) {
-	  		if (angular.isUndefined(routeparams.profileid)) {
-	  			mytimeline.setupdates(data);
-	        } else {
-	        	updates = angular.copy(data);
-	        }
-  	  }
-    };
+    	},
+    	setupdateslocally: function(temp) {
+    		name = temp.name;
+    		isbrand = temp.isbrand;
+    		profilepic = temp.profilepic;
+    		contactinfo = angular.copy(temp.contactinfo);
+    		updates = angular.copy(temp.updates);
+    	}
+	};
 }).service('search', function ($http) {
       return {
           getallusers: function() {
