@@ -19,6 +19,7 @@ function MyCtrlAddGallery($scope, $routeParams, $location, mygallery, currentvis
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
+	    $scope.iambrand			= mygallery.isbrand($routeParams);
 	    $scope.profilepic		= mygallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= mygallery.getgalleryname($routeParams);
 	    $scope.existingfiles	= mygallery.getphotos($routeParams);
@@ -96,6 +97,7 @@ function MyCtrlAddPrintCampaign($scope, $routeParams, $location, mygallery, curr
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
+	    $scope.iambrand			= mygallery.isbrand($routeParams);
 	    $scope.profilepic		= mygallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= mygallery.getgalleryname($routeParams);
 	    $scope.existingfiles	= mygallery.getphotos($routeParams);
@@ -198,6 +200,7 @@ function MyCtrlAddNewsletter($scope, $routeParams, $location, mygallery, current
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
+	    $scope.iambrand			= mygallery.isbrand($routeParams);
 	    $scope.profilepic		= mygallery.getprofilepic($routeParams);
 	    $scope.galleryname  	= mygallery.getgalleryname($routeParams);
 	    $scope.existingfiles	= mygallery.getphotos($routeParams);
