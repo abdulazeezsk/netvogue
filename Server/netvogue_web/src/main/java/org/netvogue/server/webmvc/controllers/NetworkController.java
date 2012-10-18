@@ -86,7 +86,8 @@ public class NetworkController {
 				networkUser = dbNetwork.getRequestTo();
 			}
 			newNetwork.setProfileid(networkUser.getUsername());
-			newNetwork.setLocation(networkUser.getCity());
+			newNetwork.setCity(networkUser.getCity());
+			newNetwork.setCountry(networkUser.getCountry());
 			newNetwork.setUsertype(networkUser.getUserType() == USER_TYPE.BRAND? "BRAND": "BOUTIQUE");
 			newNetwork.setName(networkUser.getName());
 			thumbpic = networkUser.getProfilePicLink();

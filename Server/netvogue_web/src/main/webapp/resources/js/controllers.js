@@ -88,8 +88,7 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
     $scope.trending = trending.getTrending();
 }
 
-function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
-		srvnetwork, mynetwork, trending) {
+function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile, mynetwork, trending) {
 	$scope.navClass = function(page1) {
 		return {
 			// last: this.$last,
@@ -104,16 +103,16 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 	$scope.entityname = "";
 	$scope.profilepic = "";
 	$scope.updatedata = function() {
-		$scope.entityname 		= srvnetwork.getname($routeParams);
-		$scope.iambrand			= srvnetwork.isbrand($routeParams);
-		$scope.profilepic 		= srvnetwork.getprofilepic($routeParams);
-		$scope.contactinfo		= srvnetwork.getcontactinfo($routeParams);
-		$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
+		$scope.entityname 		= mynetwork.getname();
+		$scope.iambrand			= mynetwork.isbrand();
+		$scope.profilepic 		= mynetwork.getprofilepic();
+		$scope.contactinfo		= mynetwork.getcontactinfo();
+		$scope.mynetwork 		= mynetwork.getnetworks();
 		$scope.getcontactinfo 	= addresstostring($scope.contactinfo);
 	};
 	
-	srvnetwork.networks($routeParams).success(function(data) {
-		srvnetwork.setnetworkslocally($routeParams, data);
+	mynetwork.networks($routeParams).success(function(data) {
+		mynetwork.setnetworkslocally(data);
 		$scope.updatedata();
 	}).error(function(data) {
 		
@@ -123,7 +122,7 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 		mynetwork.confirmnetwork(profileid).success(function(data) {
 			if(data.status == true) {
 				mynetwork.confirmnetworklocally(profileid);
-				$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
+				$scope.mynetwork 		= mynetwork.getnetworks();
 			} else {
 				alert(data.error);
 			}
@@ -135,7 +134,7 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 	$scope.deletenetwork = function(profileid) {
 		mynetwork.deletenetwork(profileid).success(function(data) {
 			mynetwork.deletenetworklocally(profileid);
-			$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
+			$scope.mynetwork 		= mynetwork.getnetworks();
 		}).error(function(data) {
 			
 		});
@@ -144,7 +143,7 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 	$scope.blocknetwork = function(profileid) {
 		mynetwork.blocknetwork(profileid).success(function(data) {
 			mynetwork.blocknetworklocally(profileid);
-			$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
+			$scope.mynetwork 		= mynetwork.getnetworks();
 		}).error(function(data) {
 			
 		});
@@ -153,7 +152,7 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 	$scope.unblocknetwork = function(profileid) {
 		mynetwork.unblocknetwork(profileid).success(function(data) {
 			mynetwork.deletenetworklocally(profileid);
-			$scope.mynetwork 		= srvnetwork.getnetworks($routeParams);
+			$scope.mynetwork 		= mynetwork.getnetworks();
 		}).error(function(data) {
 			
 		});
@@ -163,7 +162,8 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile,
 	$scope.trending = trending.getTrending();
 }
 
-function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisitedprofile, trending) {
+function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisitedprofile, 
+							mynetwork, trending) {
 	$scope.navClass = function(page1) {
 		return {
 			// last: this.$last,
@@ -208,14 +208,18 @@ function MyCtrlCorner($scope, $routeParams, srvtimeline, mytimeline, currentvisi
 	$scope.getmyupdates = function() {
 		$scope.routeparams.profileid = $scope.$parent.myprofileid;
 		$scope.getupdates($scope.routeparams);
-	};
-	
+	};	
 	$scope.getallupdates = function() {
 		$scope.routeparams.profileid = undefined;
 		$scope.getupdates($routeParams);
-	};
-	
+	};	
 	$scope.getallupdates();
+	
+	mynetwork.networks($routeParams).success(function(data) {
+		$scope.mynetwork 		= data.networks;
+	}).error(function(data) {
+		
+	});
 	
 	$scope.addupdate = function() {
 		mytimeline.addupdate($scope.newupdate).success(function(data) {

@@ -1062,13 +1062,6 @@ angular.module('netVogue.services', []).
 		getnetworks: function() {
     		return networks;
     	},
-    	setnetworks: function(temp) {
-    		name = temp.name;
-    		isbrand = temp.isbrand;
-    		profilepic = temp.profilepic;
-    		contactinfo = angular.copy(temp.contactinfo);
-    		networks = angular.copy(temp.networks);
-    	},
     	getname: function() {
     		if(angular.isUndefined(name))
         		return "";
@@ -1158,55 +1151,8 @@ angular.module('netVogue.services', []).
     			}
     		}
     		networks.splice(index, 1);
-    	}
-      };
-}).service('srvnetwork', function ($http, mynetwork) {
-    var network = new netvogue.hashtable();
-    return {
-  	  getname: function(routeparams) {
-			if (angular.isUndefined(routeparams.profileid)) {
-			    return mynetwork.getname();
-			} else {
-				if(angular.isUndefined(network.name))
-					return "";
-				return network.name;
-			}
-  	  },
-  	  isbrand: function(routeparams) {
-	      if (angular.isUndefined(routeparams.profileid)) {
-	          return mynetwork.isbrand();
-	      } else {
-	      	if(angular.isUndefined(network.isbrand))
-	      		return false;
-	  		return network.isbrand;
-	      }
-  	  },
-  	  getprofilepic: function(routeparams) {
-            if (angular.isUndefined(routeparams.profileid)) {
-                return mynetwork.getprofilepic();
-            } else {
-            	if(angular.isUndefined(network.profilepic))
-            		return "";
-        		return network.profilepic;
-            }
-  	  },
-  	  getcontactinfo: function(routeparams) {
-          if (angular.isUndefined(routeparams.profileid)) {
-              return mynetwork.getcontactinfo();
-          } else {
-        	  if(angular.isUndefined(network.contactinfo))
-          		return {};
-      		return network.contactinfo;
-          }
-	  },
-  	  getnetworks: function (routeparams) {
-	          if (angular.isUndefined(routeparams.profileid)) {
-	        	  return mynetwork.getnetworks();
-	          } else {
-	        	  return network.networks;  
-	          }
-  	  },
-  	  networks: function (routeparams) {
+    	},
+    	networks: function (routeparams) {
 	          var profileid = "";
 	          if (!angular.isUndefined(routeparams.profileid)) {
 	        	  profileid = routeparams.profileid;
@@ -1216,15 +1162,15 @@ angular.module('netVogue.services', []).
 	              url: "network/getnetworks/" + profileid
 	          };
 	          return $http(config);
-  	  },
-  	  setnetworkslocally: function(routeparams, data) {
-	  		if (angular.isUndefined(routeparams.profileid)) {
-	  			mynetwork.setnetworks(data);
-	        } else {
-	        	network = angular.copy(data);
-	        }
-  	  }
-    };
+    	},
+    	setnetworkslocally: function(temp) {
+    		name = temp.name;
+    		isbrand = temp.isbrand;
+    		profilepic = temp.profilepic;
+    		contactinfo = angular.copy(temp.contactinfo);
+    		networks = angular.copy(temp.networks);
+    	}
+	};
 }).service('mytimeline', function ($http) {
 	var updates = [];
 	var isbrand;
