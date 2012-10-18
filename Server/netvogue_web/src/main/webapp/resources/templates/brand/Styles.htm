@@ -48,7 +48,7 @@
 							</div>
 							<div class="leftpanefeed_text">
 								 <h3>
-									<a ng-click="setlinesheet(linesheet.galleryid)" title="">Rebecca Minkoff</a>
+									<a ng-click="setlinesheet(linesheet.galleryid)" title="">{{brandname}}</a>
 								</h3>
 								<h2>
 									<a ng-click="setlinesheet(linesheet.galleryid)" title="">{{linesheet.galleryname}}</a>
@@ -90,7 +90,7 @@
 						<a ui-if="isMyProfile" class="nonactive" ng-href="#/linesheets" >Linesheets</a>
 						<a ui-if="!isMyProfile" class="nonactive" ng-href="#/{{profileid}}/linesheets" >Linesheets</a> 
 						<span class="ywdivider">/</span> <span>
-						Rebecca Minkoff {{linesheetname}}</span></span>
+						{{brandname}} {{linesheetname}}</span></span>
 				</div>
 				<div style="border-bottom: 1px solid black;margin-bottom:10px;">
 					<span class="left right_pane_info"> Find styles using the
@@ -114,7 +114,7 @@
 								title=""> <img ng-src="{{style.profilethumbpic}}" class="fade_spot"
 								width="220" height="300" alt="" title=""></a>
 							<div class="linesheet-designer">
-								<span class="designer">Rebecca Minkoff</span>
+								<span class="designer">{{brandname}}</span>
 							</div>
 							<div class="linesheet-season">
 								<span class="season">{{style.stylename}}</span>

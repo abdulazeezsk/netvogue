@@ -34,7 +34,7 @@
 							</div>
 							<div class="leftpanefeed_text">
 								<h3>
-									<a ng-click="setmainstyle(style)" title="">Rebecca Minkoff</a>
+									<a ng-click="setmainstyle(style)" title="">{{brandname}}</a>
 								</h3>
 								<h2>
 									<a ng-click="setmainstyle(style)" title="">{{style.stylename}}</a>
@@ -60,10 +60,10 @@
 				<span class="left ywbreadcrumb header_width"> 
 					<a class="nonactive" ui-if="isMyProfile"
 						ng-href="#/styles?id={{linesheetid}}&&cat={{category}}">
-						Rebecca minkoff {{linesheetname}}</a>
+						{{brandname}} {{linesheetname}}</a>
 					<a class="nonactive" ui-if="!isMyProfile"
 						ng-href="#/{{profileid}}/styles?id={{linesheetid}}&&cat={{category}}">
-						Rebecca minkoff {{linesheetname}}</a>	
+						{{brandname}} {{linesheetname}}</a>	
 				</span> <span class="right"> <a ng-href="#{{backButton}}"
 					class="rightpane_back_btn">Back</a>
 				</span>
