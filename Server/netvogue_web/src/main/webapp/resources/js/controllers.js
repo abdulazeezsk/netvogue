@@ -90,10 +90,10 @@ function MyCtrlProfile($scope, $routeParams, $timeout, srvprofile, currentvisite
 	    myreferences.references($scope.pagenumber).success(function(data) {
 	    	if(null != data && data.length > 0) {
 		    	$scope.references = angular.copy(data);
-		    	$timeout(function() {
+		    	/*$timeout(function() {
 		    		$scope.pagenumber++;
 		    		getreferences();
-		    	}, 5000);
+		    	}, 5000);*/
 	    	}
 	    }).error(function(data) {
 	    	
@@ -129,7 +129,7 @@ function MyCtrlNetwork($scope, $routeParams, $timeout, myprofile, currentvisited
 		$scope.getcontactinfo 	= addresstostring($scope.contactinfo);
 	};
 	
-	mynetwork.networks($routeParams).success(function(data) {
+	mynetwork.networks($routeParams, false).success(function(data) {
 		mynetwork.setnetworkslocally(data);
 		$scope.updatedata();
 	}).error(function(data) {
@@ -181,10 +181,10 @@ function MyCtrlNetwork($scope, $routeParams, $timeout, myprofile, currentvisited
 	    myreferences.references($scope.pagenumber).success(function(data) {
 	    	if(null != data && data.length > 0) {
 		    	$scope.references = angular.copy(data);
-		    	$timeout(function() {
+		    	/*$timeout(function() {
 		    		$scope.pagenumber++;
 		    		getreferences();
-		    	}, 5000);
+		    	}, 5000);*/
 	    	}
 	    }).error(function(data) {
 	    	
@@ -248,7 +248,7 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 	};	
 	$scope.getallupdates();
 	
-	mynetwork.networks($routeParams).success(function(data) {
+	mynetwork.networks($routeParams, true).success(function(data) {
 		$scope.mynetwork 		= data.networks;
 	}).error(function(data) {
 		
@@ -315,10 +315,10 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 	    myreferences.references($scope.pagenumber).success(function(data) {
 	    	if(null != data && data.length > 0) {
 		    	$scope.references = angular.copy(data);
-		    	$timeout(function() {
+		    	/*$timeout(function() {
 		    		$scope.pagenumber++;
 		    		getreferences();
-		    	}, 5000);
+		    	}, 5000);*/
 	    	}
 	    }).error(function(data) {
 	    	

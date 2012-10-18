@@ -1152,13 +1152,17 @@ angular.module('netVogue.services', []).
     		}
     		networks.splice(index, 1);
     	},
-    	networks: function (routeparams) {
+    	networks: function (routeparams, onlyconfirmed) {
 	          var profileid = "";
 	          if (!angular.isUndefined(routeparams.profileid)) {
 	        	  profileid = routeparams.profileid;
 	          }
+	          var datatosend = {
+	        	  "onlyconfirmed" : onlyconfirmed
+	          };
 	          var config = {
 	              method: "GET",
+	              params: datatosend,
 	              url: "network/getnetworks/" + profileid
 	          };
 	          return $http(config);

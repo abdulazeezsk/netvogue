@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -41,7 +42,8 @@ public class NetworkController {
 	@Autowired UploadManager 		uploadManager;
 	
 	@RequestMapping(value={"network/getnetworks", "network/getnetworks/{profileid}"}, method=RequestMethod.GET)
-	public @ResponseBody Networks GetNetworks(@ModelAttribute("profileid") String profileid) {
+	public @ResponseBody Networks GetNetworks(@ModelAttribute("profileid") String profileid,
+											  @RequestParam(value="onlyconfirmed", required=false) boolean onlyconfirmed) {
 		System.out.println("Get Networks: id is:" + profileid);
 		User user = userDetailsService.getUserFromSession();
 		String loggedinuser = user.getUsername();
@@ -59,7 +61,8 @@ public class NetworkController {
 		Set<Network> networksTemp = new LinkedHashSet<Network>();
 		
 		String username = user.getUsername();
-		Iterable<org.netvogue.server.neo4japi.domain.Network> dbNetworks = networkService.getNetworks(user.getUsername(), false);
+		Iterable<org.netvogue.server.neo4japi.domain.Network> dbNetworks = 
+									networkService.getNetworks(user.getUsername(), onlyconfirmed);
 		if(null == dbNetworks) {
 			System.out.println("No networks found: ");
 			return response;
