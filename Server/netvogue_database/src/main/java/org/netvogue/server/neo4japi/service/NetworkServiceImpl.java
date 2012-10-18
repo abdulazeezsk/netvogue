@@ -42,7 +42,9 @@ public class NetworkServiceImpl implements NetworkService {
 	}
 	
 	@Override
-	public Iterable<Network> getNetworks(String username) {
+	public Iterable<Network> getNetworks(String username, boolean onlyconfirmed) {
+		if(onlyconfirmed)
+			return networkRepo.getConfirmedNetworks(username);
 		return networkRepo.getNetworks(username);
 	}
 

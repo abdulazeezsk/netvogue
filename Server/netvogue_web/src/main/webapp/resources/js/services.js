@@ -1171,6 +1171,27 @@ angular.module('netVogue.services', []).
     		networks = angular.copy(temp.networks);
     	}
 	};
+}).service('myreferences', function ($http) {
+	var references = [];
+	return {
+		getreferences: function() {
+    		return references;
+    	},
+    	references: function (pagenumber) {
+    		var datatosend = {
+    			"pagenumber": pagenumber
+    		};
+    		var config = {
+    			method: "GET",
+	             params: datatosend,
+	             url: "getreferences"
+	        };
+	        return $http(config);
+    	},
+    	setreferenceslocally: function(temp) {
+    		references = angular.copy(temp);
+    	}
+	};
 }).service('mytimeline', function ($http) {
 	var updates = [];
 	var isbrand;

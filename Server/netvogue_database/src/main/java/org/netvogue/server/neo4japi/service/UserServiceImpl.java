@@ -3,6 +3,7 @@ package org.netvogue.server.neo4japi.service;
 import java.util.Map;
 import java.util.Set;
 
+import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
@@ -102,6 +103,13 @@ public class UserServiceImpl implements UserService{
 	//Network related
 	public NetworkStatus getNetworkStatus(String username1, String username2) {
 		return userRepo.getNetworkStatus(username1, username2);
+	}
+	
+	//References
+	public Iterable<ReferenceData> getReferences(String username, int pagenumber) {
+		if(username.isEmpty()) 
+			return null;
+		return userRepo.getReferences(username, Constants.REFERENCES_PER_CALL * pagenumber, Constants.REFERENCES_PER_CALL);
 	}
 	
 	//Queries related to galleries

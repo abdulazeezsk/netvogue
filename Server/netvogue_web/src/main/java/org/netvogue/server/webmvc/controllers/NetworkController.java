@@ -59,7 +59,7 @@ public class NetworkController {
 		Set<Network> networksTemp = new LinkedHashSet<Network>();
 		
 		String username = user.getUsername();
-		Iterable<org.netvogue.server.neo4japi.domain.Network> dbNetworks = networkService.getNetworks(user.getUsername());
+		Iterable<org.netvogue.server.neo4japi.domain.Network> dbNetworks = networkService.getNetworks(user.getUsername(), false);
 		if(null == dbNetworks) {
 			System.out.println("No networks found: ");
 			return response;

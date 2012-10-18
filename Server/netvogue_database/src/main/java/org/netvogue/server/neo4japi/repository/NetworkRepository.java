@@ -10,6 +10,10 @@ public interface NetworkRepository extends GraphRepository<Network> {
 			"WHERE r.status IN ['CONFIRMED', 'PENDING', 'BLOCK'] RETURN r")
 	Iterable<Network> getNetworks(String username);
 	
+	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-() " +
+			"WHERE r.status='CONFIRMED' RETURN r")
+	Iterable<Network> getConfirmedNetworks(String username);
+	
 	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-f WHERE f.username={1} " +
 			"RETURN r")
 	Network getNetwork(String username1, String username2);

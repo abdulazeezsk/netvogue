@@ -198,17 +198,17 @@
 				<div>
 					<h4 class="reference_head">References</h4>
 					<ul class="nav nav-tab nav-stacked">
-						<li ng-repeat="reco in recommendations">
+						<li ng-repeat="reference in references|limitTo:2">
 							<div class="referencefeed spotlight">
 								<div class="img">
-									<a href="#"> <img alt=""
-										ng-src="{{reco.recommendationpiclink}}" class="pull-left"></a>
+									<a ng-href="#/{{reference.profileid}}/profile"> <img alt=""
+										ng-src="{{reference.thumbnail_url}}" class="pull-left"></a>
 								</div>
 								<div class="referencefeed_text">
 									<h3>
-										<a href="#/{{reco.recommendationlistitemID}}" title="">{{reco.recommendationlistitem}}</a>
+										<a ng-href="#/{{reference.profileid}}/profile" title="">{{reference.name}}</a>
 									</h3>
-									<p>{{reco.post}}</p>
+									<p>{{reference.mutualfriends}} Mutual Friends</p>
 								</div>
 							</div>
 						</li>

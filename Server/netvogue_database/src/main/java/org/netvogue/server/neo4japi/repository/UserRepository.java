@@ -5,6 +5,7 @@ import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.domain.*;
 import org.netvogue.server.neo4japi.service.CollectionData;
 import org.netvogue.server.neo4japi.service.LinesheetData;
+import org.netvogue.server.neo4japi.service.ReferenceData;
 import org.netvogue.server.neo4japi.service.StylesheetData;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
@@ -38,6 +39,17 @@ public interface UserRepository extends GraphRepository<User> {
 	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-f WHERE f.username={1} " +
 			"RETURN r.status")
 	NetworkStatus getNetworkStatus(String username1, String username2);
+	
+	//Related to references
+	@Query(	"START n=node:search(username={0}) MATCH n-[rels:NETWORK*2.2]-references " +
+			"WHERE ALL(r in rels WHERE r.status? = 'CONFIRMED') and not(n-[:NETWORK]-references) " +
+			"WITH n, references " +
+			"MATCH mutualfriends = n-[f1?:NETWORK]-(mf)-[f2?:NETWORK]-references " +
+			"WHERE f1.status = 'CONFIRMED' and f2.status = 'CONFIRMED' " +
+			"RETURN references, count(distinct mutualfriends) as mutualfriends " +
+			"ORDER BY count(mutualfriends) DESC " +
+			"SKIP 0 LIMIT 2")
+	Iterable<ReferenceData> getReferences(String username, int pagenumber, int resultsperpage);
 	
 	//Queries related to gallery
 	@Query( "START n=node:search(username={0}) MATCH n-[:GALLERY]->g RETURN g ORDER BY g.createdDate DESC")

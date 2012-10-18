@@ -17,7 +17,8 @@ function MyCtrlInitiate($scope, $location) {
 	});
 }
 
-function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, trending, mynetwork) {
+function MyCtrlProfile($scope, $routeParams, $timeout, srvprofile, currentvisitedprofile, 
+		trending, myreferences, mynetwork) {
     $scope.navClass = function (page1) {
         return {
             //last: this.$last,
@@ -83,12 +84,29 @@ function MyCtrlProfile($scope, $routeParams, srvprofile, currentvisitedprofile, 
     		
     	});
     };
-        
+    
+    $scope.pagenumber = 0;
+    var getreferences = function() {
+	    myreferences.references($scope.pagenumber).success(function(data) {
+	    	if(null != data && data.length > 0) {
+		    	$scope.references = angular.copy(data);
+		    	$timeout(function() {
+		    		$scope.pagenumber++;
+		    		getreferences();
+		    	}, 5000);
+	    	}
+	    }).error(function(data) {
+	    	
+	    });
+    };
+    getreferences();
+    
     //Yet to get data about trending and myfriend details
     $scope.trending = trending.getTrending();
 }
 
-function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile, mynetwork, trending) {
+function MyCtrlNetwork($scope, $routeParams, $timeout, myprofile, currentvisitedprofile, mynetwork, 
+		myreferences, trending) {
 	$scope.navClass = function(page1) {
 		return {
 			// last: this.$last,
@@ -158,11 +176,27 @@ function MyCtrlNetwork($scope, $routeParams, myprofile, currentvisitedprofile, m
 		});
 	};
 	
+	$scope.pagenumber = 0;
+    var getreferences = function() {
+	    myreferences.references($scope.pagenumber).success(function(data) {
+	    	if(null != data && data.length > 0) {
+		    	$scope.references = angular.copy(data);
+		    	$timeout(function() {
+		    		$scope.pagenumber++;
+		    		getreferences();
+		    	}, 5000);
+	    	}
+	    }).error(function(data) {
+	    	
+	    });
+    };
+    getreferences();
 	//trending data
 	$scope.trending = trending.getTrending();
 }
 
-function MyCtrlCorner($scope, $routeParams, mytimeline, currentvisitedprofile, mynetwork, trending) {
+function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisitedprofile, 
+		mynetwork, trending, myreferences) {
 	$scope.navClass = function(page1) {
 		return {
 			// last: this.$last,
@@ -275,6 +309,22 @@ function MyCtrlCorner($scope, $routeParams, mytimeline, currentvisitedprofile, m
 		      $scope.newsfeeds.push(data);
 		 });
 	};
+	
+	$scope.pagenumber = 0;
+    var getreferences = function() {
+	    myreferences.references($scope.pagenumber).success(function(data) {
+	    	if(null != data && data.length > 0) {
+		    	$scope.references = angular.copy(data);
+		    	$timeout(function() {
+		    		$scope.pagenumber++;
+		    		getreferences();
+		    	}, 5000);
+	    	}
+	    }).error(function(data) {
+	    	
+	    });
+    };
+    getreferences();
 	$scope.trending = trending.getTrending();
 }
 

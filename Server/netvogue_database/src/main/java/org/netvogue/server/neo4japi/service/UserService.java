@@ -23,6 +23,11 @@ public interface UserService {
 	//network related
 	NetworkStatus getNetworkStatus(String username1, String username2);
 	
+	//References
+	public Iterable<ReferenceData> getReferences(String username, int pagenumber);
+	
+	//Trending
+	
 	//Gallery related
 	public Iterable<Gallery> GetGalleries(User user);
 	public Iterable<Gallery> searchGalleryByName(User user, String name);
