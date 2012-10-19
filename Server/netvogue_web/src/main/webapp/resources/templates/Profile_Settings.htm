@@ -44,7 +44,7 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane" ng-class="{active: tabposition == 0}" id="about_us">
-                    <h4 class="rightpane_subHeading">
+                    <h4 class="rightpane_subHeading" style="position:relative;">
                         About Us
                     </h4>
                     <div class="divi2 right_pane_underline">
@@ -57,10 +57,10 @@
 						Well done! You successfully saved About Us
 					</div>
                     
-                    <div style="width: 680px; height: 355px;position:relative;">
-                        <textarea id="textarea" rows="22" style="width: 680px;" ng-model="aboutus"></textarea>
+                    <div style="width: 680px; height: 355px;">
+                        <textarea id="textarea" rows="16" style="width: 680px;" ng-model="aboutus"></textarea>
                     </div>
-                    <div style="padding-left: 585px;position:absolute;top:500px;">
+                    <div style="padding-left: 585px;position:absolute;top:530px;">
                         <button type="submit" class="btn btn-primary" style="" data-loading-text="Saving..."
                             ng-click="updateaboutus(aboutus, $event)">
                             Save changes</button>
