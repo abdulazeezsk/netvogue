@@ -1460,6 +1460,7 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
 	$scope.brands 			= []; //List of brands for searching
 	$scope.brandscarried	= new netvogue.hashtable();  //Names entered in control
 	var brandsReceived		= new netvogue.hashtable();
+	
 	$scope.updatedata = function() {
     	$scope.aboutus 			= myprofile.getaboutus();
     	$scope.profilepic		= myprofile.getprofilepic();
@@ -1492,7 +1493,7 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
 	if(netvogue.yettocontact || angular.isUndefined($routeParams.t)) {
 		//Get all the profile data from the Server. Make AJAX call
 		srvprofile.profileinfo($routeParams).success(function(data) {
-        	srvprofile.setProfileLocally(data);
+        	srvprofile.setProfileLocally(data, $routeParams);
         	$scope.updatedata();
         }).error(function(data) {
         	
