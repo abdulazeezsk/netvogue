@@ -85,7 +85,7 @@
 					<div class="imageprevw">
 						<ul class="thumbnails">
 							<li class="spanstyle" style="display: inline;"><img
-								width="257" height="365" ng-src="{{mainimage}}" alt=""></li>
+								width="271" height="365" ng-src="{{mainimage}}" alt=""></li>
 						</ul>
 					</div>
 					<div class="styles-specs">
@@ -193,7 +193,11 @@
 				</div>
 				<div class="divi2"></div>
 				<div class="moreviews-styles" ui-sortable ng-model="newstyle.availableImages">
-					<a ng-repeat="eachfile in newstyle.availableImages">
+				
+					<a ng-repeat="eachfile in newstyle.availableImages" style="position:relative;">
+					<span  title="Delete"
+					style="background: url(img/red-cross.png); width: 25px; height: 25px; 
+					display: block;cursor: pointer; z-index: 100;position:absolute;top:-50px;"></span>
 						<img class="thumbnailz" width="85"
 							style="max-height: 113px;" ng-src="{{eachfile.thumbnail_url}}" alt=""></a>
 				</div>
