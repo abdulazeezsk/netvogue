@@ -348,6 +348,14 @@ netvogue.stylejsonrequest = function(stylesheetid) {
     	} 
     	return false;
     };
+    this.removeimage = function(uniqueid) {
+    	for(var i=0; i < this.availableImages.length;i++) {
+    		if(this.availableImages[i].uniqueid == uniqueid) {
+    			this.availableImages.splice(i, 1);
+    			break;
+    		}
+    	}
+    };
     this.copy = function(existingstyle) {
 		this.styleid		= existingstyle.styleid;
 		this.stylename 		= existingstyle.stylename;
@@ -355,9 +363,9 @@ netvogue.stylejsonrequest = function(stylesheetid) {
 		this.description	= existingstyle.description;
 		this.fabrication	= existingstyle.fabrication;
 		this.price			= existingstyle.price;
-		this.availableSizes = existingstyle.availableSizes;
+		this.availableSizes = angular.copy(existingstyle.availableSizes);
 		this.availableColors= [];
-		this.availableImages= existingstyle.availableImages; //This part is done from existing files
+		this.availableImages= angular.copy(existingstyle.availableImages); //This part is done from existing files
     };
 };
 

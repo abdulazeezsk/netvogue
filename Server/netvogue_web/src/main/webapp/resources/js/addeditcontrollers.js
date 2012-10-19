@@ -470,7 +470,11 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
 		}).error(function(data) {
 			alert("error: " + data.error);
 		});
-	};    
+	};
+	
+	$scope.deleteimage = function(uniqueid) {
+		$scope.newstyle.removeimage(uniqueid);
+	};
 }
 function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile, mylinesheet, mystylesheet) {
 
