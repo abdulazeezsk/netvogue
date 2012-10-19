@@ -42,7 +42,7 @@
     <li class="nav-header" ng-show="!iambrand && isMyProfile">My Shop </li>
     <li class="nav-header" ng-show="iambrand">My Works </li>
 	    <li ng-show="iambrand || (!iambrand && isMyProfile)" class="leftmenu_tabs"><a ng-href="{{links.linesheets}}">Line Sheets</a> </li>
-	    <li ng-show="iambrand || (!iambrand && isMyProfile)" class="leftmenu_tabs" ng-show="iambrand && isMyProfile"><a ng-href="{{links.stylesheets}}">StyleSheets</a></li>
+	    <li ng-show="iambrand && (isMyProfile)" class="leftmenu_tabs"><a ng-href="{{links.stylesheets}}">StyleSheets</a></li>
 	    <li ng-show="iambrand || (!iambrand && isMyProfile)" class="leftmenu_tabs"><a ng-href="{{links.collections}}">Collections</a> </li>
 		<li ng-show="isMyProfile" class="nav-header">Invite</li>
 		<li ng-show="isMyProfile" class="leftmenu_tabs" ><a href="#invite" data-toggle="modal">Send Invite</a></li>
