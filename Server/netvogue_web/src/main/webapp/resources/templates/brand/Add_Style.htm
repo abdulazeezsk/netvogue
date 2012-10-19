@@ -25,12 +25,13 @@
 					<li ng-repeat="style in styles">
 						<div class="leftpanefeed">
 							<div class="feedimage">
-								<a ng-href="#/stylepreview?id={{style.styleid}}&&cat={{category}}&&stylesheetid={{style.styleid}}">
+								<a
+									ng-href="#/stylepreview?id={{style.styleid}}&&cat={{category}}&&stylesheetid={{style.styleid}}">
 									<img alt="" ng-src="{{style.profileleftpic}}" class="pull-left">
 								</a>
 							</div>
 							<div class="leftpanefeed_text">
-							<h3>
+								<h3>
 									<a title="">{{brandname}}</a>
 								</h3>
 								<h2>
@@ -39,10 +40,11 @@
 								<h2 style="margin-top: 5px;">
 									<span
 										style="font-weight: normal; font-size: 12px; cursor: pointer; text-transform: uppercase;">
-										<span class="WebRupee" style="font-size: 12px;margin-right:3px;">Rs.</span>{{style.price}}
+										<span class="WebRupee"
+										style="font-size: 12px; margin-right: 3px;">Rs.</span>{{style.price}}
 									</span>
 								</h2>
-								<p style="margin-top:3px;font-weight:bold;">
+								<p style="margin-top: 3px; font-weight: bold;">
 									<span><a ng-click="editstyle(style)">Edit</a></span> <span
 										class="divider">/</span> <span><a
 										ng-click="deletestyle(style.styleid)">Delete</a></span>
@@ -64,8 +66,8 @@
 						class="nonactive" href="#/stylesheets">Stylesheets</a> <span
 						class="ywdivider">/</span> <a class="nonactive"
 						ng-href="#/stylesheet?id={{stylesheetid}}&&cat={{category}}">
-							{{brandname}} {{stylesheetname}}</a> <span class="ywdivider">/</span> <span>
-							Organize</span></span>
+							{{brandname}} {{stylesheetname}}</a> <span class="ywdivider">/</span>
+						<span> Organize</span></span>
 				</div>
 
 				<div class="alert alert-info" style="margin: 10px 0;">
@@ -95,9 +97,10 @@
 									style="font-weight: Bold; font-size: 14px; cursor: pointer; text-transform: uppercase;">
 									<u>Style Name </u>
 								</div>
-								<input type="text" class="spanedt_txt"  ng-model="newstyle.stylename"	 
-									placeholder="Add style name"> </input>
-									<!-- <button class="btn btn-inverse dropdown-toggle"
+								<input type="text" class="spanedt_txt"
+									ng-model="newstyle.stylename" placeholder="Add style name">
+								</input>
+								<!-- <button class="btn btn-inverse dropdown-toggle"
 										data-toggle="dropdown">
 										Action <span class="caret"></span>
 									</button>
@@ -110,98 +113,88 @@
 										<li><a href="#">Private</a></li>
 										<li><a href="#">Network</a></li>
 									</ul> -->
-								</span> <br>
-								<div
-									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
-									<u>Style Number </u>
-								</div>
-								<input type="text" class="spanedt_txt"  ng-model="newstyle.styleno"	 
-									placeholder="Add style number here"> </input>
-								<div class="divi2"></div>
-								<div
-									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
-									<u>Fabrication </u>
-								</div>
-								<input type="text" class="spanedt_txt" ng-model="newstyle.fabrication"	 
-									placeholder="Add fabrication here"> </input>
-									 <br>
-								<div
-									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
-									<u>Description </u>
-								</div>	
-								<textarea class="spanedt_txt1" rows="5"  ng-model="newstyle.description"
-								placeholder="Add description"></textarea>
-								<div
-									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase; margin-bottom: 2px;">
-									<u>Swatches</u>
-								</div>
-								<div class="swatches">
-									<a rel="tooltip" data-original-title="SALSA RED/ RED"><img
-										width="20" height="20" src="img/Red.jpeg" alt=""
-										style="margin-bottom: 3px;"></a> <a rel="tooltip"
-										data-original-title="SALSA BLACK/ BLACK"><img width="20"
-										height="20" src="img/Black.jpeg" alt=""
-										style="margin-bottom: 3px;"></a> <a rel="tooltip"
-										data-original-title="SALSA RED/ RED"><img width="20"
-										height="20" src="img/Red.jpeg" alt=""
-										style="margin-bottom: 3px;"></a> <a rel="tooltip"
-										data-original-title="SALSA Gray/ Gray"><img width="20"
-										height="20" src="img/Gray.jpeg" alt=""
-										style="margin-bottom: 3px;"></a> <a rel="tooltip"
-										data-original-title="SALSA RED/ Maroon"><img width="20"
-										height="20" src="img/Maroon.jpeg" alt=""
-										style="margin-bottom: 3px;"></a> <a rel="tooltip"
-										data-original-title="SALSA BLACK/ BLACK"><img width="20"
-										height="20" src="img/Black.jpeg" alt=""
-										style="margin-bottom: 3px;"></a> <a rel="tooltip"
-										data-original-title="SALSA RED/ RED"><img width="20"
-										height="20" src="img/Red.jpeg" alt=""
-										style="margin-bottom: 3px;"></a> <a rel="tooltip"
-										data-original-title="SALSA BLACK/ BLACK"><img width="20"
-										height="20" src="img/Black.jpeg" alt=""
-										style="margin-bottom: 3px;"></a>
-								</div>
-								<div class="divi2"></div>
-								<div
-									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
-									<u>Size</u>
-								</div>
-								<span
-									style="font-weight: normal; font-size: 10px; cursor: pointer; text-transform: uppercase;">
-									S L Xl</span>
-								<div class="divi2"></div>
-								<div
-									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
-									<u>Price</u>
-								</div>
-								<input type="text" class="spanedt_txt"  ng-model="newstyle.price"	 
-									placeholder="Add price here"> </input>
-								<div class="divi2"></div>
-								<div class="controls pull-right">
-									<button type="button" class="btn" ng-click="exitstylepane()">
-										<i class=""></i><span>Exit</span>
-									</button>
-									<button type="button" class="btn btn-primary"
-										ng-disabled="form.$invalid" ng-click="updatestyle()">
-										<i class=""></i><span>Add to Stylesheet</span>
-									</button>
+						</span> <br>
+						<div
+							style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
+							<u>Style Number </u>
+						</div>
+						<input type="text" class="spanedt_txt" ng-model="newstyle.styleno"
+							placeholder="Add style number here"> </input>
+						<div class="divi2"></div>
+						<div
+							style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
+							<u>Fabrication </u>
+						</div>
+						<input type="text" class="spanedt_txt"
+							ng-model="newstyle.fabrication"
+							placeholder="Add fabrication here"> </input> <br>
+						<div
+							style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
+							<u>Description </u>
+						</div>
+						<textarea class="spanedt_txt1" rows="5"
+							ng-model="newstyle.description" placeholder="Add description"></textarea>
+						<div
+							style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase; margin-bottom: 2px;">
+							<u>Swatches</u>
+						</div>
+						<div style="border-bottom: 1px solid black;">
+						 <span class="right fileinput-button"> <span
+								class="rightpane_add_btn">Upload Swatch</span> <input
+								id="fileupload" type="file" name="files[]" multiple
+								data-url="collection/addphotos"
+								onchange="angular.element(this).scope().addfiles(this)">
+							</span>
+						</div>
+						<br>
+						<div class="addswatches">
+							<a rel="tooltip" data-original-title="SALSA RED/ RED"><img
+								width="25" height="25" src="img/Red.jpeg" alt=""
+								style="margin-bottom: 6px;"></a> 
+								<input type="text" class="spanedt_txt" 
+							placeholder="Add swatch name here"> </input>
+						</div>
+						<div class="divi2"></div>
+						<div
+							style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
+							<u>Size</u>
+						</div>
+						<span
+							style="font-weight: normal; font-size: 10px; cursor: pointer; text-transform: uppercase;">
+							S L Xl</span>
+						<div class="divi2"></div>
+						<div
+							style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
+							<u>Price</u>
+						</div>
+						<input type="text" class="spanedt_txt" ng-model="newstyle.price"
+							placeholder="Add price here"> </input>
+						<div class="divi2"></div>
+						<div class="controls pull-right">
+							<button type="button" class="btn" ng-click="exitstylepane()">
+								<i class=""></i><span>Exit</span>
+							</button>
+							<button type="button" class="btn btn-primary"
+								ng-disabled="form.$invalid" ng-click="updatestyle()">
+								<i class=""></i><span>Add to Stylesheet</span>
+							</button>
 
-								</div>
-							</div>
-						</span>
+						</div>
 					</div>
+					</span>
 				</div>
-				<div class="divi2"></div>
-				<div class="moreviews-styles" ui-sortable ng-model="newstyle.availableImages">
-				
-					<a ng-repeat="eachfile in newstyle.availableImages" style="position:relative;">
-					<span  title="Delete"
-					style="background: url(img/red-cross.png); width: 25px; height: 25px; 
-					display: block;cursor: pointer; z-index: 100;position:absolute;top:-50px;"></span>
-						<img class="thumbnailz" width="85"
-							style="max-height: 113px;" ng-src="{{eachfile.thumbnail_url}}" alt=""></a>
-				</div>
-				<!-- <div class="controls pull-right" style="clear: both;">
+			</div>
+			<div class="divi2"></div>
+			<div class="moreviews-styles" ui-sortable
+				ng-model="newstyle.availableImages">
+
+				<a ng-repeat="eachfile in newstyle.availableImages"
+					style="position: relative;"> <span title="Delete"
+					style="background: url(img/red-cross.png); width: 25px; height: 25px; display: block; cursor: pointer; z-index: 100; position: absolute; top: -50px;"></span>
+					<img class="thumbnailz" width="85" style="max-height: 113px;"
+					ng-src="{{eachfile.thumbnail_url}}" alt=""></a>
+			</div>
+			<!-- <div class="controls pull-right" style="clear: both;">
 					<button type="button" class="btn" ng-click="exitstylepane()">
 						<i class=""></i><span>Exit</span>
 					</button>
@@ -212,9 +205,9 @@
 
 				</div> -->
 
-			</div>
-
 		</div>
 
 	</div>
-	<!--body-->
+
+</div>
+<!--body-->
