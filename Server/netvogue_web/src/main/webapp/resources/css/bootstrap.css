@@ -5789,6 +5789,8 @@ background: url(../img/red-cross.png);
 	overflow-x: hidden;
 }
 
+
+
 .trendfeed_text {
 	float: left;
 	width: 110px;
@@ -5830,6 +5832,17 @@ background: url(../img/red-cross.png);
 	max-width: 50px;
 	max-height: 50px;
 	overflow-x: hidden;
+}
+
+.referencefeed .imgntwrk {
+	float: left;
+	margin: 0 10px 0 0;
+	min-width: 50px;
+	min-height: 34px;
+	max-width: 50px;
+	max-height: 34px;
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 
 .referencefeed_text {
