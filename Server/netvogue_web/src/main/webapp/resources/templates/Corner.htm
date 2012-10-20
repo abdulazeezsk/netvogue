@@ -27,6 +27,10 @@
             <ul class="nav nav-tab nav-stacked">
                 <li ng-repeat="news in newsfeeds">
                     <div class="newsfeed">
+                     <div>
+                      	 <a href="#" class="pull-right" style="margin-left:3px;" ><i class="icon-remove icon-Black"></i></a>
+                      	 <a href="#" class="pull-right" style="margin-left:3px;" ><i class="icon-lock icon-Black"></i></a>
+                      </div>
                         <div class="brand_image">
                             <a ng-href="#/{{news.profileid}}/profile">
                                 <img alt="" ng-src="{{news.left_url}}" class="pull-left"></a></div>
