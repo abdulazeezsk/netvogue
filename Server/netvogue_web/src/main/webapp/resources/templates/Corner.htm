@@ -29,8 +29,8 @@
                 <li ng-repeat="news in newsfeeds">
                     <div class="newsfeed">
                      <div>
-                      	 <a href="#" class="pull-right" style="margin-left:3px;" ><i class="icon-remove icon-Black"></i></a>
-                      	 <a href="#" class="pull-right" style="margin-left:3px;" ><i class="icon-lock icon-Black"></i></a>
+                      	 <a href="#" title="Delete post" class="pull-right" style="margin-left:3px;" ><i class="icon-remove icon-Black"></i></a>
+                      	<!--  <a href="#" title="Privacy settings" class="pull-right" style="margin-left:3px;" ><i class="icon-lock icon-Black"></i></a> -->
                       </div>
                         <div class="brand_image">
                             <a ng-href="#/{{news.profileid}}/profile">
@@ -42,6 +42,9 @@
                                 {{news.status}}
                             </p>
                         </div>
+                        <div>
+                         <img src="img/ajax-loadersmall.gif" style="float:right;margin-right:5px;" >
+                         </div>
                     </div>
                 </li>
             </ul>
