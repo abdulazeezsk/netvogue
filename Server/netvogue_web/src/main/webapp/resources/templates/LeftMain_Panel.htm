@@ -1,15 +1,12 @@
 <div class="span2">
     <ul class="thumbnails">
         <li class="span2">
-            <div class="viewprofile view-firstprofile">
+            <div style="position: relative;">
                 <a href="#">
-                    <img ng-src={{profilepic.thumbnail_url}} alt="" /></a>
-                <div class="contentprofile">
-                    <div class="maskprofile">
-                    </div>
-                    <h1 ng-show="isMyProfile">
-                       <span class="fileinput-button"> <span
-							class="rightpane_add_btn"><i class="icon-edit icon-white"></i>change
+                    <img ng-src={{profilepic.thumbnail_url}} width="140" height="100" alt="" /></a>
+                <div class="masklayer">
+                    <h1 class="fileup" ng-show="isMyProfile">
+                       <span class="fileinput-button"> <span><i class="icon-edit icon-white"></i>change
 								Image</span> 
 							<input id="profileupload" type="file" name="files[]" 
 							data-url="profile/profilepic" profileupload-plugin >
