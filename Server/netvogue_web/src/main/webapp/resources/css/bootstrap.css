@@ -5360,10 +5360,14 @@ float: right;
 .spanpreview_details {
 	width: 350px;
 }
+
+
 /* .spanpreviewstyle {
 	width: 300px;
 	border:1px solid black;
 } */
+
+
 .percent {
     position: relative;
 	top: 3px; width: 20px; height: 14px; z-index: 1; text-align: center; font-size: 0.8em; color: black;
@@ -6443,21 +6447,6 @@ ul.n-wizard-brand-list {
 }
 
 
-/* .videos_text {
-	float: left;
-	width: 200px;
-}
-
-.videos_text h3 {
-	font: normal 9px Verdana;
-	font-weight: bold;
-	padding: 0;
-}
-
-.videos_text p {
-	font: normal 9px Verdana;
-} */
-
 
 /*  Begin ================================================================================= */
 
@@ -7147,140 +7136,7 @@ opacity:0;
 
 
 
-/*  Line sheets,stylesheets & collections ================================================================================= */
-
-
-
-/*+++++++++++++++++++++++++*/
-
-.view {
-    width: 220px;
-    height: 150px;
-    float: left;
-    border: 0px solid #fff;
-    overflow: hidden;
-    position: relative;
-    text-align: center;
-    box-shadow: 1px 1px 2px #e6e6e6;
-    cursor: default;
-}
-.view .mask, .view .content {
-    width: 220px;
-    height: 150px;
-    position: absolute;
-    overflow: hidden;
-    top: 0;
-    left: 0
-}
-.view img {
-    display: block;
-    position: relative
-}
-.view h2 {
-    text-transform: uppercase;
-    color: #fff;
-    text-align: center;
-    position: relative;
-    font-size: 12px;
-    background: rgba(0, 0, 0, 0.8);
-    margin: 20px 0 0 0
-}
-.view p {
-    font-family: Georgia, serif;
-    font-style: italic;
-    font-size: 12px;
-    position: relative;
-    color: #fff;
-    padding: 10px 20px 20px;
-    text-align: center
-}
-.view a.info {
-    display: inline-block;
-    text-decoration: none;
-   /*  padding: 2px 14px; */
-    /* background: #000; */
-    color: #fff;
-    text-transform: uppercase;
-   /*  box-shadow: 0 0 1px #000 */
-}
-.view a.info:hover {
-    /* box-shadow: 0 0 5px #000 */
-}
-
-.view-second img {  
-    transition: all 0.2s ease-in;
-}
-.view-second .mask { 
-  /*   background-color: rgba(115,146,184, 0.7);  */
-    /* width: 220px;
-    padding: 60px;
-    height: 150px; */
-    /* opacity: 0; */
-   /*  transform: translate(265px, 145px) rotate(45deg);
-    transition: all 0.2s ease-in-out; */
-    
-    background-color: rgba(0,0,0,0.6);
-    opacity: 0;
-    transform: translate(460px, -100px) rotate(180deg);
-    transition: all 0.2s 0.4s ease-in-out;
-}
-.view-second h2 {
-    border-bottom: 1px solid white;
-    background: transparent;
-    margin: 20px 40px 0px 40px;
-    transform: translate(150px, -150px);
-    transition: all 0.2s ease-in-out;
-    
-   /*  transform: translateY(-100px);
-    transition: all 0.2s ease-in-out; */
-}
-.view-second p { 
-    /* transform: translate(-150px, 150px);
-    transition: all 0.2s ease-in-out; */
-    
-    transform: translateX(220px) rotate(90deg);
-    transition: all 0.4s ease-in-out;
-}
-.view-second a.info { 
-   /*  transform: translate(0px, 100px);
-    transition: all 0.2s 0.1s ease-in-out; */
-    
-    transform: translateY(-150px);
-    transition: all 0.4s ease-in-out;
-} 
-
-
-.view-second:hover .mask { 
-   /*  opacity:1; 
-    transform: translate(-80px, -125px) rotate(45deg); */
-    
-    opacity:1; 
-    transition-delay: 0s;                            
-    transform: translate(0px, 0px);
-}                             
-.view-second:hover h2 { 
-    transform: translate(0px,0px);
-    transition-delay: 0.3s; 
-    
-    /* transform: translateY(0px); 
-    transition-delay: 0.5s; */
-}
-.view-second:hover p { 
-    transform: translate(0px,0px); 
-    transition-delay: 0.4s;
-    
-    /* transform: translateX(0px) rotate(0deg);
-    transition-delay: 0.4s; */
-}
-.view-second:hover a.info { 
-    transform: translate(0px,0px); 
-    transition-delay: 0.5s;
-    
-   /*  transform: translateY(0px);
-    transition-delay: 0.3s; */
-}
-
-/*shashank added this style*/
+/*  End here ================================================================================= */
 
 
 
