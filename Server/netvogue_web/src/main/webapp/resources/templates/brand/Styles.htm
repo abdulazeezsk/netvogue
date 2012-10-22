@@ -103,7 +103,51 @@
 				<!-- header pane -->
 
 				<div>
+				
 				<ul class="thumbnails">
+					<li  ng-repeat="style in styles">
+						<div style="position: relative;">
+							<img ng-src="{{style.profilethumbpic}}" class="fade_spot"
+								width="220" height="300" alt="" title="">
+							<div class="masklayer">
+								<h1 class="style-brandname" style="text-align:center;" >
+								{{brandname}}
+								</h1>
+								<h1 class="style-seasonname" >
+									<i>{{linesheetname}}</i>
+								</h1>
+								<h1 class="style-name">
+									<u>Style:</u>
+								</h1>
+								<h1 class="name">
+									<i>{{style.stylename}}</i>
+								</h1>
+								<h1 class="pricez">
+								<span class="WebRupee" style="font-size: 15px;margin-left:3px;">Rs.</span>
+								<span class="regular-price"  id="product-price-11072"> <span
+									class="price">{{style.price}}</span>
+								</span>
+								</h1>
+								  <p>
+									 <a  style="color:white;text-decoration:none;"
+									ng-href="#/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}">
+									View </a>
+								</p>
+							</div>
+						</div>
+						<div class="linesheet-designer">
+								<h1 class="designer" >
+									{{brandname}} </h1>
+						</div>
+						<div class="linesheet-style">
+								<h1 class="name" >
+									{{style.stylename}} </h1> 
+							</div>
+					</li>
+				</ul>
+			
+				
+				<!-- <ul class="thumbnails">
 					<li ng-repeat="style in styles">
 						<div align="center" style="position: relative;">
 							<a class="product-image" ui-if="isMyProfile" 
@@ -129,7 +173,7 @@
 							</div>
 						</div>
 					</li>
-				</ul>
+				</ul> -->
 				</div>
 			</div>
 			<!-- right pane -->
