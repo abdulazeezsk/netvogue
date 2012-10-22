@@ -107,7 +107,7 @@
 				<ul class="thumbnails">
 					<li  ng-repeat="style in styles">
 						<div style="position: relative;">
-							<img ng-src="{{style.profilethumbpic}}" class="fade_spot"
+							<img ng-src="{{style.profilethumbpic}}" 
 								width="220" height="300" alt="" title="">
 							<div class="masklayer">
 								<h1 class="style-brandname" style="text-align:center;" >
@@ -129,8 +129,11 @@
 								</span>
 								</h1>
 								  <p>
-									 <a  style="color:white;text-decoration:none;"
-									ng-href="#/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}">
+									 <a ui-if="isMyProfile"   style="color:white;text-decoration:none;" title="Click here to add details"
+									ng-href="#/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" >
+									View </a>
+									 <a ui-if="!isMyProfile"   style="color:white;text-decoration:none;" title="Click here to add details"
+									ng-href="#/{{profileid}}/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" >
 									View </a>
 								</p>
 							</div>
