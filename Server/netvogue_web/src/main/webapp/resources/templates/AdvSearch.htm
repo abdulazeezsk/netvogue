@@ -28,7 +28,7 @@
 			</div>
 			<div class="divi2"></div>
 			<div ui-if="isbrandsearch == 'true'">
-				<span class="leftpane_filter_name">search.usertype</span> <input type="text"
+				<span class="leftpane_filter_name">Brand</span> <input type="text"
 					class="span3" placeholder="Brand name" ng-model="search.name"
 					ng-change="getsearchResults()" /> <span
 					class="leftpane_filter_name">Stockists</span>
@@ -43,7 +43,7 @@
 					ng-model="search.location" ng-change="getsearchResults()" />
 			</div>
 			<div ui-if="isbrandsearch == 'false'">
-				<span class="leftpane_filter_name">search.usertype</span> <input
+				<span class="leftpane_filter_name">Boutique</span> <input
 					type="text" class="span3" placeholder="Boutique name"
 					ng-model="search.name" ng-change="getsearchResults()" /> <span
 					class="leftpane_filter_name"> Brands CARRIED</span>
@@ -82,7 +82,7 @@
 								width="220" height="150">
 							<div class="masklayer">
 								<h1 class="usertype">
-									<u>Brand</u>
+									<u>{{user.usertype}}</u>
 								</h1>
 								<h1 class="username">
 									{{user.name}}
@@ -92,7 +92,7 @@
 								</h1>
 								 <p class="viewdetails">
 									 <a  style="color:white;text-decoration:none;"
-									ng-href="#/{{profileid}}/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}">
+									ng-href="#/{{user.username}}/profile">
 									View </a>
 								</p>
 								
