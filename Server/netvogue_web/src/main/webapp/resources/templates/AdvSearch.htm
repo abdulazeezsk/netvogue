@@ -73,7 +73,65 @@
 				Use the filters below to discover Brands and boutiques you know based on Name,location and more. </span>
 				<div class="divi2 right_pane_underline"></div>
 				<div>
-					<ul class="thumbnails">
+				
+				
+				<ul class="thumbnails">
+					<li ng-repeat="user in advancedsearch">
+						<div style="position: relative;">
+							<img ng-src="{{user.thumbpic}}"
+								width="220" height="150">
+							<div class="masklayer">
+								<h1 class="usertype">
+									<u>Brand</u>
+								</h1>
+								<h1 class="username">
+									{{user.name}}
+								</h1>
+								<h1 class="userlocation">
+									{{user.city}},{{user.country}}
+								</h1>
+								 <p class="viewdetails">
+									 <a  style="color:white;text-decoration:none;"
+									ng-href="#/{{profileid}}/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}">
+									View </a>
+								</p>
+								
+							</div>
+						</div> 
+						<div class="search-user">
+							<h1 class="user" >{{user.name}}</h1>
+						</div>
+					</li>
+				</ul>
+				
+				
+				<!-- <ul class="thumbnails">
+					<li ng-repeat="user in advancedsearch">
+						<div style="position: relative;">
+							<img ng-src="{{user.thumbpic}}"
+								width="220" height="150">
+							<div class="search">
+								<h1 class="usertype">
+									Brand
+								</h1>
+								<h1 class="username">
+									<i>Rebecca MInkoff</i>
+								</h1>
+								<h1 class="userlocation">
+								{{user.city}},{{user.country}}
+								</h1>
+								 <p>
+									 <a  style="color:white;text-decoration:none;"
+									 ng-href="#/{{user.username}}/profile" >
+									View </a>
+								</p>
+							</div>
+						</div> 
+					</li>
+				</ul> -->
+				
+				
+					<!-- <ul class="thumbnails">
 						<li ng-repeat="user in advancedsearch"
 							style="position: relative; margin-top: 20px;">
 							 <div class="directory view-directory">
@@ -84,8 +142,8 @@
 									<ul class="atr">
 										<li><a class="searchlocation"
 											style="text-decoration: none;">{{user.city}},{{user.country}}</a></li>
-										<!-- <li><a class="searchlocation"
-											style="text-decoration: none;">India</a></li> -->
+										<li><a class="searchlocation"
+											style="text-decoration: none;">India</a></li>
 									</ul>
 									<h1>
 										<a ng-href="#/{{user.username}}/profile" class="mask_edit">View</a>
@@ -97,7 +155,7 @@
 								<h3>{{user.name}}</h3>
 							</div>
 						</li>
-					</ul>
+					</ul> -->
 				</div>
 			</div>
 		</div>

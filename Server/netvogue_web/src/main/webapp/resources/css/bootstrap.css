@@ -5038,107 +5038,6 @@ border-bottom:1px solid black;
 
 /*Style Preview &Buypoint ============================================================= */
 
-/* .styleimg
-{
-	list-style-type:none;
-	float:left;
-}
-
-.spanstyle
-{
-	width:267px;
-	height:356px;
-}
-
-.style_description {
-	width: 412px;
-	float: left;
-}
-
-.style_description h2 {
-	width: 100%;
-	border-bottom: solid 1px #666666;
-	padding: 0 0 2px 0;
-}
-
-.style_description .h_line {
-	width: 100%;
-	height: 19px;
-	border-bottom: solid 1px #666666;
-}
-
-.style_description p {
-	width: 280px;
-	padding: 15px 0 0 0;
-	font: normal 12px arial;
-}
-
-.style_dimentions {
-	width: 135px;
-	float: left;
-	margin: 0 45px 0 0;
-}
-
-.style_type_cost {
-	width: 100px;
-	float: left;
-}
-
-.style_dimentions p,.style_type_cost p {
-	font: normal 12px  Helvetica, Arial, sans-serif;
-	text-decoration: underline;
-	padding: 0;
-	width: auto;
-}
-
-.styl_number,.style_cloth {
-	padding: 15px 0 0 0;
-}
-
-.styl_number h4,.style_type_cost h4 {
-	font: normal 13px  Helvetica, Arial, sans-serif;
-	border: none;
-	padding: 2px 0 0 0;
-}
-
-.style_sizes p {
-	padding: 0 0 5px 0;
-}
-
-.style_sizes {
-	margin: 10px 0 0 0;
-}
-
-.style_sizes .check input {
-	float: left;
-	margin: 0 4px 0 0;
-}
-
-.style_sizes .check {
-	font: normal 12px/12px  Helvetica, Arial, sans-serif;
-	float: left;
-	padding: 0 6px 0 0;
-}
-
-.style_colors,.delevry_date,.price {
-	margin: 10px 0 0 0;
-}
-
-.color_pallet {
-	margin: 0 0 0 0;
-	width: 105px;
-}
-
-.color_pallet span {
-	width: 9px;
-	height: 9px;
-	background: #990000;
-	float: left;
-	margin: 7px 15px 0 0;
-	border: solid 1px #CCCCCC;
-}
- */
-
 .ywstylename
 {
 	font: normal 14px Helvetica, Arial, sans-serif;
@@ -5282,13 +5181,6 @@ float: right;
 {
 	display:inline;
 }
-
-/* .menu {
-margin: 0;
-padding: 0;
-} */
-
-
 
 
 /*Product Selection styles Begin ============================================================= */
@@ -6922,277 +6814,240 @@ padding:0px 7px 0px 0px;
 opacity:0;
 }
 
-.directory
-{
-    width: 220px;
-    float: left;
-    overflow: hidden;
-    position: relative;
-    text-align: center;
-    cursor: default;
-    height:150px;
-}
-
-.directory .mask, .directory .content
-{
-    width: 220px;
-    height: 150px;
-    position: absolute;
-    overflow: hidden;
-    top: 0;
-    left: 0px;
-}
-.directory img
-{
-    display: block;
-    position: relative;
-}
-
-.directory h1
-{
-    text-transform: uppercase;
-    color: #fff;
-    text-align: center;
-    position: relative;
-    font-size: 12px;
-    text-decoration:underline;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0);
-    margin: -60px 0 0 0;
-}
-
-.directory a.info
-{
-    display: inline-block;
-    text-decoration: none;
-    padding: 7px 14px;
-    background: #000;
-    color: #fff;
-    text-transform: uppercase;
-    -webkit-box-shadow: 0 0 1px #000;
-    -moz-box-shadow: 0 0 1px #000;
-    box-shadow: 0 0 1px #000;
-}
-
-.directorytitle {
-	width: 220px;
-	margin: 10px 0 0 0;
-	text-align: center;
-	padding: 0 0 10px 0;
-	border-bottom: solid 1px #666666;
-	position: absolute;
-	display: block;
-	top: 154px;
-}
-
-
-.directorytitle h3 {
-	font: normal 13px  Helvetica, Arial, sans-serif;
-	text-transform: uppercase;
-	position: absolute;
-	display: block;
-	top: -10px;
-	cursor: pointer;
-	width:100%;
-	margin:auto;
-
-}
-
-.view-directory img
-{
-    -webkit-transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-    -ms-transition: all 0.2s linear;
-    transition: all 0.2s linear;
-}
-
-.view-directory .mask
-{
-    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    opacity: 0;
-    background-color: Black;
-    -webkit-transition: all 0.4s ease-in-out;
-    -moz-transition: all 0.4s ease-in-out;
-    -o-transition: all 0.4s ease-in-out;
-    -ms-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
-}
-
-.view-directory :hover h1
-{
-    margin-top: 45px;
-    margin-left:auto;
-    margin-right:auto;
-}
-.view-directory :hover h1
-{
-    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    opacity: 1;
-    -webkit-transform: translateY(0px);
-    -moz-transform: translateY(0px);
-    -o-transform: translateY(0px);
-    -ms-transform: translateY(0px);
-    transform: translateY(0px);
-}
-
-.view-directory  a
-{
-   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    opacity: 1;
-    -webkit-transition: all 0.4s ease-in-out;
-    -moz-transition: all 0.4s ease-in-out;
-    -o-transition: all 0.4s ease-in-out;
-    -ms-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
-    color:White;
-}
-
-.view-directory :hover .mask
-{
-    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    filter: alpha(opacity=50);
-    opacity: 0.5;
-}
-.view-directory :hover a.info
-{
-    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    opacity: 1;
-    -webkit-transform: translateY(0px);
-    -moz-transform: translateY(0px);
-    -o-transform: translateY(0px);
-    -ms-transform: translateY(0px);
-    transform: translateY(0px);
-}
-
-.view-directory :hover ul
-{
--ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
- filter: alpha(opacity=100);
-opacity: 1;
--webkit-transform: translateY(0px);
--moz-transform: translateY(0px);
--o-transform: translateY(0px);
--ms-transform: translateY(0px);
-transform: translateY(0px);
-display: inline-block;
-*display: inline;
-margin-bottom: 0;
-margin-left: 0;
-float:left;
-}
-.view-directory :hover  li {
-  display: inline;
-  padding:0px 7px 0px 0px;
-  opacity:1;
-}
-
-.searchlocation
-{
-	font: normal 12px  Helvetica, Arial, sans-serif;
-	cursor:default;
-}
-
-
-
  /* Line sheets,stylesheets & collections ================================================================================= */
-.linesheet-edit-delete
+
+.masklayer .usertype
 {
-	width:100%;
-	height:12px;
-	margin-bottom:3px;
+	position:absolute;
+	margin-top:85px;
+	margin-left:2px;
+	color:white;
+	font:bold 12px Helvetica, Arial, sans-serif;
+	text-align:center;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-transform:capitalize;	
+}
+
+.masklayer .fileup
+{
+	position:absolute;
+	margin-top:1px;
+	margin-left:2px;
+	color:white;
+	font:bold 12px Helvetica, Arial, sans-serif;
+	text-align:center;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-transform:capitalize;	
+}
+
+.masklayer .username
+{
+	position:absolute;
+	margin-top:100px;
+	margin-left:2px;
+	color:white;
+	font:bold 12px Helvetica, Arial, sans-serif;
+	text-align:center;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-transform:capitalize;	
+}
+
+.masklayer .userlocation
+{
+	position:absolute;
+	margin-top:115px;
+	margin-left:2px;
+	color:white;
+	font:bold 12px Helvetica, Arial, sans-serif;
+	text-align:center;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-transform:capitalize;	
+}
+
+.masklayer .viewdetails
+{
+	position:absolute;
+	margin-top:60px;
+	color:white;
+	font:bold 15px Helvetica, Arial, sans-serif;
+	text-align:center;
+	margin-left:90px;
+	text-decoration:none;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-transform:uppercase;
+}
+
+.masklayer .pricez
+{
+	position:absolute;
+	margin-top:250px;
+	color:white;
+	font:bold 12px Helvetica, Arial, sans-serif;
+	text-align:center;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-transform:capitalize;	
+}
+
+.masklayer .style-brandname
+{
+	position:absolute;
+	margin-top:180px;
+	color:white;
+	font:bold 12px Helvetica, Arial, sans-serif;
+	text-align:center;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-transform:capitalize;	
+}
+.masklayer .style-seasonname
+{
+	position:absolute;
+	margin-top:195px;
+	color:white;
+	font:bold 12px Helvetica, Arial, sans-serif;
+	text-align:center;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-transform:capitalize;	
+}
+
+.masklayer .style-name
+{
+	position:absolute;
+	margin-top:220px;
+	color:white;
+	font:bold 12px Helvetica, Arial, sans-serif;
+	text-align:center;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-transform:capitalize;	
+}
+.masklayer .name
+{
+	position:absolute;
+	margin-top:235px;
+	color:white;
+	font:bold 12px Helvetica, Arial, sans-serif;
+	text-align:center;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-transform:capitalize;	
+}
+.style a
+{
+	position:absolute;
+	margin-top:120px;
+	color:white;
+	font:bold 15px Helvetica, Arial, sans-serif;
+	text-align:center;
+	margin-left:90px;
+	text-decoration:none;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-transform:uppercase;
 }
 
 
-.linesheet-designer
+
+.style:hover
 {
-	width:100%;
-	height:12px;
-	margin-bottom:3px;
+	opacity:.6;
 }
 
 
 
-.linesheet-season
+.masklayer
 {
 	width:100%;
-	height:12px;
-	margin-bottom:3px;
+	height:100%;
+	opacity:0;
+	position:absolute;
+	top:0;
+	-webkit-transition: opacity 1s ease-in;
+    -moz-transition:  opacity 1s ease-in;
+    -o-transition:  opacity 1s ease-in;
+    -ms-transition:  opacity 1s ease-in;
+    transition:  opacity 1s ease-in;
+    background-color:black;
 }
 
-.linesheet-deliverydate
+.masklayer  .editdel
 {
-	width:100%;
-	height:12px;
-	border-bottom:1px solid #000;
-	margin: 5px 0 3px 0;
-	padding-bottom: 10px;
+	position:absolute;
+	margin-top:2px;
+	color:white;
+	font:bold 15px Helvetica, Arial, sans-serif;
+	margin-right:180px;
+	text-decoration:none;
+	padding-top:5px;
+	padding-bottom:5px;
 }
-
-.stylesheet-edit-delete
+.masklayer  p
 {
-	width:100%;
-	height:12px;
-	margin-bottom:3px;
+	position:absolute;
+	margin-top:120px;
+	color:white;
+	font:bold 15px Helvetica, Arial, sans-serif;
+	text-align:center;
+	margin-left:90px;
+	text-decoration:none;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-transform:uppercase;
 }
 
-.stylesheet-designer
+.masklayer .linesheet-brandname
 {
-	width:100%;
-	height:12px;
-	margin-bottom:3px;
+	position:absolute;
+	margin-top:200px;
+	color:white;
+	font:bold 12px Helvetica, Arial, sans-serif;
+	padding-top:5px;
+	padding-bottom:5px;
 }
 
-.stylesheet-name
+.masklayer .linesheet-season-name
 {
-	width:100%;
-	height:12px;
-	border-bottom:1px solid #000;
-	margin: 5px 0 3px 0;
-	padding-bottom: 10px;
+	position:absolute;
+	margin-top:215px;
+	color:white;
+	font:bold 12px Helvetica, Arial, sans-serif;
+	padding-top:5px;
+	padding-bottom:5px;
 }
 
-.style-name
+.masklayer .linesheet-delivery-date
 {
-	width:100%;
-	height:12px;
-	margin-bottom:3px;
+	position:absolute;
+	margin-top:240px;
+	color:white;
+	font:bold 12px Helvetica, Arial, sans-serif;
+	padding-top:5px;
+	padding-bottom:5px;
 }
-
-.style-designer
+.masklayer .date
 {
-	width:100%;
-	height:12px;
-	margin-bottom:3px;
+	position:absolute;
+	margin-top:255px;
+	color:white;
+	font:bold 12px Helvetica, Arial, sans-serif;
+	padding-top:5px;
+	padding-bottom:5px;
 }
 
 
-.collection-edit-delete
+.masklayer:hover
 {
-	width:100%;
-	height:12px;
-	margin-bottom:3px;
+	opacity:.6;
 }
 
-.collection-designer
-{
-	width:100%;
-	height:12px;
-	margin-bottom:3px;
-}
 
-.collection-season
-{
-	width:100%;
-	height:12px;
-	border-bottom:1px solid #000;
-	margin: 5px 0 3px 0;
-	padding-bottom: 10px;
-}
 
 .collectionshowcase ul
 {
@@ -7205,58 +7060,68 @@ float:left;
 }
 
 
-.edit-delete
+
+.linesheet-designer
 {
-	font: normal 12px  Helvetica, Arial, sans-serif;
-	text-transform: uppercase;
-	font-weight:bold;
-	position: absolute;
-	display: block;
 	width:100%;
+	height:12px;
 	margin:auto;
 }
 
-.name
+.linesheet-designer .designer
 {
 	font: normal 12px  Helvetica, Arial, sans-serif;
 	text-transform: uppercase;
-	position: absolute;
-	display: block;
-	width:100%;
-	margin:auto;
+	text-align:center;
 }
 
-.deliverydate
+.linesheet-season
+{
+	width:100%;
+	height:12px;
+	border-bottom:1px solid #000;
+	margin: 5px 0 3px 0;
+	padding-bottom: 10px;
+}
+
+.linesheet-season .season
 {
 	font: normal 12px  Helvetica, Arial, sans-serif;
 	text-transform: uppercase;
-	position: absolute;
-	display: block;
-	width:100%;
-	margin:auto;
+	text-align:center;
 }
 
-.season
+.linesheet-style
+{
+	width:100%;
+	height:12px;
+	border-bottom:1px solid #000;
+	margin: 5px 0 3px 0;
+	padding-bottom: 10px;
+}
+
+.linesheet-style .name
 {
 	font: normal 12px  Helvetica, Arial, sans-serif;
 	text-transform: uppercase;
-	position: absolute;
-	display: block;
-	width:100%;
-	margin:auto;
+	text-align:center;
 }
 
-.designer
+.search-user
+{
+	width:100%;
+	height:12px;
+	border-bottom:1px solid #000;
+	margin: 5px 0 3px 0;
+	padding-bottom: 10px;
+}
+
+.search-user .user
 {
 	font: normal 12px  Helvetica, Arial, sans-serif;
 	text-transform: uppercase;
-	font-weight:bold;
-	position: absolute;
-	display: block;
-	width:100%;
-	margin:auto;
+	text-align:center;
 }
-
 
 
 .organiselinesheet{
@@ -7279,65 +7144,7 @@ float:left;
 	overflow-y: hidden;
 }
 
-.view-linesheet img
-{
-    -webkit-transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-    -ms-transition: all 0.2s linear;
-    transition: all 0.2s linear;
-}
 
-.view-linesheet .mask
-{
-    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    opacity: 0;
-    background-color: Black;
-    -webkit-transition: all 0.4s ease-in-out;
-    -moz-transition: all 0.4s ease-in-out;
-    -o-transition: all 0.4s ease-in-out;
-    -ms-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
-}
-
-.view-linesheet :hover h1
-{
-    margin-top: 45px;
-    margin-left:auto;
-    margin-right:auto;
-}
-.view-linesheet :hover h1
-{
-    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    opacity: 1;
-    -webkit-transform: translateY(0px);
-    -moz-transform: translateY(0px);
-    -o-transform: translateY(0px);
-    -ms-transform: translateY(0px);
-    transform: translateY(0px);
-}
-
-.view-linesheet  a
-{
-   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    opacity: 1;
-    -webkit-transition: all 0.4s ease-in-out;
-    -moz-transition: all 0.4s ease-in-out;
-    -o-transition: all 0.4s ease-in-out;
-    -ms-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
-    color:White;
-}
-
-.view-linesheet :hover .mask
-{
-    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    filter: alpha(opacity=50);
-    opacity: 0.5;
-}
 
 
 /*  Line sheets,stylesheets & collections ================================================================================= */
