@@ -63,34 +63,56 @@
 				<!-- header pane -->
 					<div class="divi2"></div>
 			<div>
-				<!-- <ul class="thumbnails">
-					<li ng-repeat="style in styles" style="position: relative;">
-						<div class="view view-first">
-							<a ng-href="#/stylepreview?id={{stylesheetid}}&&cat={{category}}&&styleid={{style.styleid}}"> <img
-								ng-src="{{style.profilethumbpic}}" alt=""></a>
-							<div class="content">
-								<div class="mask">
-									<ul ng-show="isMyProfile">
-										<li><a ng-click="deletestyle(style.styleid)" title="Delete"><i
-												class="icon-trash icon-white"></i></a></li>
-										<li><a href="#/addstyle?id={{stylesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" 
-										title="Edit"><i class="icon-edit icon-white"></i></a></li>
-									</ul>
-									<h1>
-										<a ng-href="#/stylepreview?id={{stylesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" class="mask_edit">view</a>
-									</h1>
-								</div>
+			
+			<ul class="thumbnails">
+					<li  ng-repeat="style in styles">
+						<div style="position: relative;">
+							<img ng-src="{{style.profilethumbpic}}"
+								width="220" height="300" alt="" title="">
+							<div class="masklayer">
+							<h1 class="editdel" ui-if="isMyProfile" >
+								<a ng-click="deletestyle(style.styleid)"
+									title="Delete"><i class="icon-trash icon-white"></i></a><a
+									href="#/addstyle?id={{stylesheetid}}&&cat={{category}}&&styleid={{style.styleid}}"
+									title="Edit"><i class="icon-edit icon-white"></i></a>
+							</h1>
+								<h1 class="style-brandname" style="text-align:center;" >
+								{{brandname}}
+								</h1>
+								<h1 class="style-seasonname" >
+									<i>{{stylesheetname}}</i>
+								</h1>
+								<h1 class="style-name">
+									<u>Style:</u>
+								</h1>
+								<h1 class="name">
+									<i>{{style.stylename}}</i>
+								</h1>
+								<h1 class="pricez">
+								<span class="WebRupee" style="font-size: 15px;margin-left:3px;">Rs.</span>
+								<span class="regular-price"  id="product-price-11072"> <span
+									class="price">{{style.price}}</span>
+								</span>
+								</h1>
+								  <p>
+									 <a  style="color:white;text-decoration:none;"
+									ng-href="#/stylepreview?id={{stylesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" >
+									View </a>
+								</p>
 							</div>
-							<div class="divi2"></div>
 						</div>
-						<div class="campaigntitle">
-							<h3>{{style.stylename}}</h3>
-							<h3>{{style.stylebrandname}}</h3>
-							<h3>{{style.styleprice}}</h3>
+						<div class="linesheet-designer">
+								<h1 class="designer" >
+									{{brandname}} </h1>
 						</div>
+						<div class="linesheet-style">
+								<h1 class="name" >
+									{{style.stylename}} </h1> 
+							</div>
 					</li>
-				</ul> -->
-
+				</ul>
+			
+			<!-- 
 				<ul class="thumbnails">
 					<li ng-repeat="style in styles">
 						<div align="center" style="position: relative;">
@@ -120,7 +142,7 @@
 							</div>
 						</div>
 					</li>
-				</ul>				
+				</ul>	 -->			
 				
 				
 			</div>
