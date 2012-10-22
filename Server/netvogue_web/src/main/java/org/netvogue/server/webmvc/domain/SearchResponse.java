@@ -7,6 +7,8 @@ public class SearchResponse {
 	String thumbpic;
 	String country;
 	String city;
+	String usertype;
+	
 	public String getUsername() {
 		return username;
 	}
@@ -42,5 +44,11 @@ public class SearchResponse {
 	}
 	public void setCity(String city) {
 		this.city = city;
+	}
+	public String getUsertype() {
+		return usertype;
+	}
+	public void setUsertype(String usertype) {
+		this.usertype = usertype;
 	}
 }
