@@ -18,7 +18,8 @@ public class SearchConverter implements Converter<User, SearchResponse> {
 		response.setUsername(source.getUsername());
 		response.setCity(source.getCity());
 		response.setCountry(source.getCountry());
-		response.setUsertype(source.getUserType().toString());
+		if(null != source.getUserType())
+			response.setUsertype(source.getUserType().toString());
 		if(null != source.getProfilePicLink()) {
 			String smallpic = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.PROFILE_PIC); 
 			response.setSmallpic(smallpic);
