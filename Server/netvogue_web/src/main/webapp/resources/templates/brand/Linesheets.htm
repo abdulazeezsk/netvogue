@@ -9,15 +9,16 @@
 			<ul class="thumbnails">
 				<li class="span3">
 					<div>
-						<span> 
-							<a ui-if="isMyProfile" ng-href="#profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
-										class="pull-left leftpane_profile_img"></a>
-							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
-										class="pull-left leftpane_profile_img"></a>
-						</span> 
-						<span> 
-							<a ui-if="isMyProfile" ng-href="#profile" class="leftpane_entity_name">{{entityname}}</a>
-							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile" class="leftpane_entity_name">{{entityname}}</a>
+						<span> <a ui-if="isMyProfile" ng-href="#profile"> <img
+								alt="" ng-src={{profilepic.thumbnail_url}}
+								class="pull-left leftpane_profile_img"></a> <a
+							ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile"> <img
+								alt="" ng-src={{profilepic.thumbnail_url}}
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a ui-if="isMyProfile" ng-href="#profile"
+							class="leftpane_entity_name">{{entityname}}</a> <a
+							ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile"
+							class="leftpane_entity_name">{{entityname}}</a>
 						</span>
 					</div>
 				</li>
@@ -73,44 +74,50 @@
 					class="rightpane_back_btn">Back</a></span>
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info"> Find linesheets using the
-					filters </span> 
-				<span class="right" ui-if="isMyProfile && iambrand"> <a data-toggle="modal"
-					ng-href="#Createlinesheet" class="rightpane_add_btn">Create line
-						sheet</a>
+					filters </span> <span class="right" ui-if="isMyProfile && iambrand">
+					<a data-toggle="modal" ng-href="#Createlinesheet"
+					class="rightpane_add_btn">Create line sheet</a>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 			</div>
 			<div>
+
 				<ul class="thumbnails">
 					<li ng-repeat="linesheet in linesheets">
-						<div align="center" style="position: relative;">
-						   	<div class="view-linesheet">
-						   	<div class="mask"></div>
-								<a ui-if="isMyProfile" class="product-image" 
-									ng-href="#/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}"
-									title="Dumont Coat"> <img ng-src="{{linesheet.gallerypic}}" class="fade_spot"
-									width="220" height="300" alt="Dumont Coat" title="Dumont Coat"></a>
-								<a ui-if="!isMyProfile" class="product-image" 
-									ng-href="#/{{profileid}}/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}"
-									title="Dumont Coat"> <img ng-src="{{linesheet.gallerypic}}" class="fade_spot"
-									width="220" height="300" alt="Dumont Coat" title="Dumont Coat"></a>
-									
+						<div style="position: relative;">
+							<img ng-src="{{linesheet.gallerypic}}"
+								width="220" height="300">
+							<div class="masklayer">
+							<h1 class="editdel" ui-if="isMyProfile" >
+									<a ng-click="deletelinesheet(linesheet.galleryid)" title="Delete"><i class="icon-trash icon-white"></i></a>
+									<a ng-click="editlinesheet(linesheet.galleryid, linesheet.galleryname, linesheet.category, linesheet.deliverydate)" 
+										title="Edit"><i class="icon-edit icon-white"></i></a>
+							</h1>
+								<h1 class="linesheet-brandname">
+									{{linesheet.brandname}}
+								</h1>
+								<h1 class="linesheet-season-name">
+									<i>{{linesheet.galleryname}}</i>
+								</h1>
+								<h1 class="linesheet-delivery-date">
+									<u>Delivery Date:</u>
+								</h1>
+								<h1 class="date">
+									<i>{{linesheet.deliverydate}}</i>
+								</h1>
+								 <p>
+									 <a  style="color:white;text-decoration:none;"
+									ng-href="#/{{profileid}}/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}">
+									View </a>
+								</p>
+								
 							</div>
-							<div class="linesheet-edit-delete" ui-if="isMyProfile">
-								<span class="edit-delete"><a ng-click="deletelinesheet(linesheet.galleryid)" title="Delete"><i
-												class="icon-trash icon-black"></i></a><a ng-click="editlinesheet(linesheet.galleryid, linesheet.galleryname, linesheet.category, linesheet.deliverydate)" 
-										title="Edit"><i class="icon-edit icon-black"></i></a></span>
-							</div>
-							<div class="linesheet-designer">
-								<span class="designer">{{linesheet.brandname}}</span>
-							</div>
-							<div class="linesheet-season">
-								<span class="season">{{linesheet.galleryname}} </span>
-							</div>
-							<div class="linesheet-deliverydate">
-								<span class="deliverydate"> DELIVERY DATE:
-									{{linesheet.deliverydate}}</span>
-							</div>
+						</div> 
+						 <div class="linesheet-designer">
+							<h1 class="designer" >{{linesheet.brandname}}</h1>
+						</div>
+						<div class="linesheet-season">
+							<h1 class="season" >{{linesheet.galleryname}}</h1>
 						</div>
 					</li>
 				</ul>
