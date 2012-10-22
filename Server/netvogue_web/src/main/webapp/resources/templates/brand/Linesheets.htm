@@ -82,6 +82,16 @@
 			</div>
 			<div>
 
+							<!-- 	<a ui-if="isMyProfile" class="product-image" 
+									ng-href="#/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}"
+									title="Dumont Coat"> <img ng-src="{{linesheet.gallerypic}}" class="fade_spot"
+									width="220" height="300" alt="Dumont Coat" title="Dumont Coat"></a>
+								<a ui-if="!isMyProfile" class="product-image" 
+									ng-href="#/{{profileid}}/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}"
+									title="Dumont Coat"> <img ng-src="{{linesheet.gallerypic}}" class="fade_spot"
+									width="220" height="300" alt="Dumont Coat" title="Dumont Coat"></a> -->
+
+
 				<ul class="thumbnails">
 					<li ng-repeat="linesheet in linesheets">
 						<div style="position: relative;">
@@ -106,8 +116,11 @@
 									<i>{{linesheet.deliverydate}}</i>
 								</h1>
 								 <p>
-									 <a  style="color:white;text-decoration:none;"
-									ng-href="#/{{profileid}}/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}">
+									 <a ui-if="isMyProfile"  style="color:white;text-decoration:none;"
+									ng-href="#/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}" >
+									View </a>
+									 <a ui-if="!isMyProfile"  style="color:white;text-decoration:none;"
+									ng-href="#/{{profileid}}/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}" >
 									View </a>
 								</p>
 								
