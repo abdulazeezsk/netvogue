@@ -48,41 +48,37 @@
 				<div class="divi2 right_pane_underline"></div>
 			</div>
 			<div>
-				<!-- <ul class="thumbnails">
-					<li ng-repeat="stylesheet in stylesheets"
-						style="position: relative;">
-						<div class="view view-first">
-							<a ng-href="#/stylesheet?id={{stylesheet.galleryid}}"> <img
-								ng-src="{{stylesheet.gallerypic}}" alt=""></a>
-							<div class="content">
-								<div class="mask">
-									<ul>
-										<li><a ng-click="deletestylesheet(stylesheet.galleryid)"
-											title="Delete"><i class="icon-trash icon-white"></i></a></li>
-										<li><a title="Edit"
-											ng-click="editstylesheet(stylesheet.galleryid, stylesheet.galleryname, stylesheet.category)">
-												<i class="icon-edit icon-white"></i>
-										</a></li>
-									</ul>
-									<h1>
-										<a
-											ng-href="#/stylesheet?id={{stylesheet.galleryid}}&&cat={{stylesheet.category}}"
-											class="mask_edit">view</a>
-									</h1>
-								</div>
+				
+				<ul class="thumbnails">
+					<li ng-repeat="stylesheet in stylesheets">
+						<div style="position: relative;">
+							<img ng-src="{{stylesheet.gallerypic}}" width="220" height="300">
+							<div class="masklayer">
+								<h1 class="editdel" ui-if="isMyProfile">
+									<a
+									ng-click="deletestylesheet(stylesheet.galleryid)"
+									title="Delete"><i class="icon-trash icon-white"></i></a><a
+									ng-click="editstylesheet(stylesheet.galleryid, stylesheet.galleryname, stylesheet.category)"
+									title="Edit"><i class="icon-edit icon-white"></i></a>
+								</h1>
+								<p>
+									<a style="color: white; text-decoration: none;"
+										ng-href="#/stylesheet?id={{stylesheet.galleryid}}&&cat={{stylesheet.category}}">
+										View </a>
+								</p>
+
 							</div>
-							<div class="divi2"></div>
 						</div>
-						<div class="campaigntitle">
-							<h3>{{style.stylename}}</h3>
-							<h3>{{style.stylebrandname}}</h3>
-							<h3>{{style.styleprice}}</h3>
+						<div class="linesheet-designer">
+							<h1 class="designer">{{stylesheet.brandname}}</h1>
+						</div>
+						<div class="linesheet-season">
+							<h1 class="season">{{stylesheet.galleryname}}</h1>
 						</div>
 					</li>
-				</ul> -->
+				</ul>
 
-
-				<ul class="thumbnails">
+			<!-- 	<ul class="thumbnails">
 					<li ng-repeat="stylesheet in stylesheets">
 						<div align="center" style="position: relative;">
 							<a class="product-image"
@@ -105,7 +101,7 @@
 							</div>
 						</div>
 					</li>
-				</ul>
+				</ul> -->
 
 
 			</div>
