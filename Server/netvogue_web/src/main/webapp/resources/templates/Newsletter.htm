@@ -9,15 +9,16 @@
 			<ul class="thumbnails">
 				<li class="span3">
 					<div>
-						<span> 
-							<a ui-if="isMyProfile" ng-href="#profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
-										class="pull-left leftpane_profile_img"></a>
-							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
-										class="pull-left leftpane_profile_img"></a>
-						</span> 
-						<span> 
-							<a ui-if="isMyProfile" ng-href="#profile" class="leftpane_entity_name">{{entityname}}</a>
-							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile" class="leftpane_entity_name">{{entityname}}</a>
+						<span> <a ui-if="isMyProfile" ng-href="#profile"> <img
+								alt="" ng-src={{profilepic.thumbnail_url}}
+								class="pull-left leftpane_profile_img"></a> <a
+							ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile"> <img
+								alt="" ng-src={{profilepic.thumbnail_url}}
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a ui-if="isMyProfile" ng-href="#profile"
+							class="leftpane_entity_name">{{entityname}}</a> <a
+							ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile"
+							class="leftpane_entity_name">{{entityname}}</a>
 						</span>
 					</div>
 				</li>
@@ -26,8 +27,10 @@
 			<div class="divi2"></div>
 			<div class="leftpane_filter_name">
 				<span class="leftpane_filter_name">TITLE</span> <input type="text"
-					class="span3" ng-model="searchgalleryname" ng-change="getgalleries()"/> <span class="leftpane_filter_name">DESCRIPTION</span>
-				<input type="text" class="span3" ng-model="searchgallerydesc" ng-change="getgalleries()"/>
+					class="span3" ng-model="searchgalleryname"
+					ng-change="getgalleries()" /> <span class="leftpane_filter_name">DESCRIPTION</span>
+				<input type="text" class="span3" ng-model="searchgallerydesc"
+					ng-change="getgalleries()" />
 			</div>
 
 		</div>
@@ -40,95 +43,55 @@
 					class="rightpane_back_btn"> Back</a></span>
 				<div class="divi2 right_pane_underline"></div>
 				<span class="left right_pane_info"> Find Editorials using the
-					filters </span> 
-				<span class="right" ng-show="isMyProfile"> 
-					<a data-toggle="modal" ng-href="#CreateEditorial" class="rightpane_add_btn">Create Editorial</a>
+					filters </span> <span class="right" ng-show="isMyProfile"> <a
+					data-toggle="modal" ng-href="#CreateEditorial"
+					class="rightpane_add_btn">Create Editorial</a>
 				</span>
 				<div class="divi2 right_pane_underline"></div>
 			</div>
 
 			<div>
-			<!-- 	<ul class="thumbnails">
-					<li ng-repeat="gallery in galleries" style="position: relative;margin-top:15px;">
-						<div class="view view-first">
-							<a ng-href="#/newsletter?id={{gallery.galleryid}}">
-                                <img ng-src="{{gallery.gallerypic}}" alt=""></a>
-							<div class="content">
-								<div class="mask">
-									<ul ng-show="isMyProfile">
-										<li><a ng-click="deletegallery(gallery.galleryid)" title="Delete"><i
-												class="icon-trash icon-white"></i></a></li>
-										<li><a ng-click="editgallery(gallery.galleryid, gallery.galleryname, gallery.gallerydesc)"  
-												title="Edit"><i class="icon-edit icon-white"></i></a></li>
-									</ul>
-									<h1>
-										<a href="#/editorial?id={{gallery.galleryid}}" class="mask_edit">view</a>
-									</h1>
-								</div>
+
+				<ul class="thumbnails">
+					<li ng-repeat="gallery in galleries"
+						style="position: relative; margin-top: 20px;">
+						<div class="press">
+							<a ui-if="isMyProfile"
+								ng-href="#/editorial?id={{gallery.galleryid}}"> <img
+								ng-src="{{gallery.gallerypic}}" alt=""></a> <a
+								ui-if="!isMyProfile"
+								ng-href="#/{{profileid}}/editorial?id={{gallery.galleryid}}">
+								<img ng-src="{{gallery.gallerypic}}" alt="">
+							</a>
+							<div class="masklayer">
+
+
+								<h1 class="editdel" ui-if="isMyProfile">
+									<a ng-click="deletegallery(gallery.galleryid)" title="Delete"><i
+										class="icon-trash icon-white"></i></a> <a
+										ng-click="editgallery(gallery.galleryid, gallery.galleryname, gallery.gallerydesc)"
+										title="Edit"><i class="icon-edit icon-white"></i></a>
+								</h1>
+
+								<p class="viewdetails">
+									<a style="color: white; text-decoration: none;"
+										ui-if="isMyProfile"
+										ng-href="#/editorial?id={{gallery.galleryid}}"> View </a> <a
+										style="color: white; text-decoration: none;"
+										ui-if="!isMyProfile"
+										ng-href="#/{{profileid}}/editorial?id={{gallery.galleryid}}">
+										View </a>
+								</p>
+
 							</div>
 							<div class="divi2"></div>
 						</div>
-						<div class="campaigntitle">
+						<div class="presstitle">
 							<h3>{{gallery.galleryname}}</h3>
 						</div>
 					</li>
-				</ul> -->
-				
-					<!-- <ul class="thumbnails">
-					<li ng-repeat="gallery in galleries" >
-						<div align="center" style="position: relative;">
-							<a class="product-image"
-								href="#/editorial?id={{gallery.galleryid}}" title="">
-								<img  ng-src="{{gallery.gallerypic}}" class="fade_spot"
-								width="220" height="260">
-							</a>
-							<div class="stylesheet-edit-delete">
-								<span class="edit-delete"><a
-									ng-click="deletegallery(gallery.galleryid)"
-									title="Delete"><i class="icon-trash icon-black"></i></a><a
-									ng-click="editgallery(gallery.galleryid, gallery.galleryname)"
-									title="Edit"><i class="icon-edit icon-black"></i></a></span>
-							</div>
-							<div class="gallery-name">
-								<span class="designer">{{gallery.galleryname}}</span>
-							</div>
-						</div>
-					</li>
-				</ul> -->
-				
-				<ul class="thumbnails">
-						<li ng-repeat="gallery in galleries" style="position: relative;margin-top:20px;" >
-							<!--  ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize" -->
-							<div class="press view-press">
-								<a ui-if="isMyProfile" ng-href="#/editorial?id={{gallery.galleryid}}" > <img
-									ng-src="{{gallery.gallerypic}}" alt=""></a>
-								<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/editorial?id={{gallery.galleryid}}" > <img
-									ng-src="{{gallery.gallerypic}}" alt=""></a>	
-								<div class="content">
-							     	<div class="mask">
-                                    </div>
-                                    <ul class="prs" ng-show="isMyProfile">
-                                       <li><a ng-click="deletegallery(gallery.galleryid)"
-											title="Delete"><i class="icon-trash icon-white"></i></a>
-										</li>
-										<li><a
-											ng-click="editgallery(gallery.galleryid, gallery.galleryname, gallery.gallerydesc)"
-											title="Edit"><i class="icon-edit icon-white"></i> </a>
-										</li>
-							    	</ul>
-									<h1>
-									<a ui-if="isMyProfile" ng-href="#/editorial?id={{gallery.galleryid}}" class="mask_edit">View</a>
-									<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/editorial?id={{gallery.galleryid}}" class="mask_edit">View</a>
-									</h1>
-								</div> 
-								<div class="divi2"></div>
-							</div>
-							<div class="presstitle">
-								<h3>{{gallery.galleryname}}</h3>
-							</div>
-						</li>
-					</ul>
-				
+				</ul>
+
 			</div>
 
 		</div>
@@ -145,35 +108,40 @@
 	</div>
 	<div class="modal-body">
 		<div>
-			<input type="text" class="span4" ng-model="galleryname" placeholder="Editorial name" />
-			<textarea style="width: 500px;" rows="9" ng-model="gallerydesc" placeholder="Enter description"></textarea>
+			<input type="text" class="span4" ng-model="galleryname"
+				placeholder="Editorial name" />
+			<textarea style="width: 500px;" rows="9" ng-model="gallerydesc"
+				placeholder="Enter description"></textarea>
 		</div>
-		</div>
+	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" data-dismiss="modal" ng-click="creategallery()">
-			Create editorial</a>
+			class="btn btn-primary" data-dismiss="modal"
+			ng-click="creategallery()"> Create editorial</a>
 	</div>
 </div>
 <!-- modal -->
 
 
 <!-- modal -->
-<div ui-modal class="modal  hide" ng-model="showEditGallery"id="EditEditorial">
+<div ui-modal class="modal  hide" ng-model="showEditGallery"
+	id="EditEditorial">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal"></button>
 		<h4 class="subHeading_no_underline">Edit Editorial</h4>
 	</div>
 	<div class="modal-body">
 		<div>
-			<input type="text" class="span4" ng-model="editgalleryname" placeholder="Editorial name" />
-			<textarea style="width: 500px;" rows="9" ng-model="editgallerydesc" placeholder="Enter description"></textarea>
+			<input type="text" class="span4" ng-model="editgalleryname"
+				placeholder="Editorial name" />
+			<textarea style="width: 500px;" rows="9" ng-model="editgallerydesc"
+				placeholder="Enter description"></textarea>
 		</div>
-		</div>
+	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" ng-click="updategallery()">
-			Update editorial</a>
+			class="btn btn-primary" ng-click="updategallery()"> Update
+			editorial</a>
 	</div>
 </div>
 <!-- modal -->

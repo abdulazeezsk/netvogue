@@ -44,93 +44,34 @@
 					href="#CreateGallery" class="rightpane_add_btn">create gallery</a>
 				</span>
 			</div>
-			<!-- 
-			<div class="headerspanline">
-				<span class="left rightpane_subHeading"> Print Campaigns </span> <span
-					class="right"> <a ng-href="#{{backButton}}"
-					class="rightpane_back_btn"> Back</a>
-				</span>
-			</div>
-			<div style="border-bottom:1px solid black;">
-				<span class="left right_pane_info"> Find print campaigns
-					using the filters </span> <span class="right"> <a
-					data-toggle="modal" href="#CreatePrintcampaign"
-					class="rightpane_add_btn">create print campaign</a>
-				</span>
-			</div> -->
-			<div>
-				<!-- 	<ul class="thumbnails">position:relative;top:-2px;
-						<li ng-repeat="gallery in galleries" style="position: relative;margin-top:20px;">
-							<div class="galleryview view-firstg">
-								<a ng-href="#/photos?id={{gallery.galleryid}}"> <img
-									ng-src="{{gallery.gallerypic}}" alt=""></a>
-								<div class="content">
-							     	<ul class="mask" ng-show="isMyProfile">
-                                        <li><a ng-click="deletegallery(gallery.galleryid)" title="Delete"><i class="icon-trash icon-white"></i></a></li>
-                                        <li><a ng-click="editgallery(gallery.galleryid, gallery.galleryname)" title="Edit">
-                                        <i class="icon-edit icon-white"></i>
-                                        </a></li>
-                                    </ul>
-									<h1>
-										<a ng-href="#/photos?id={{gallery.galleryid}}" class="mask_edit">View</a>
-									</h1>
-								</div> 
-								<div class="divi2"></div>
-							</div>
-							<div class="gallerytitle">
-								<h3>{{gallery.galleryname}}</h3>
-							</div>
-						</li>
-					</ul> -->
-
-
-				<!-- <ul class="thumbnails">
-					<li ng-repeat="gallery in galleries" >
-						<div align="center" style="position: relative;">
-							<a class="product-image"
-								ng-href="#/photos?id={{gallery.galleryid}}" title="">
-								<img  ng-src="{{gallery.gallerypic}}" class="fade_spot"
-								width="220" height="230">
-							</a>
-							<div class="stylesheet-edit-delete">
-								<span class="edit-delete"><a
-									ng-click="deletegallery(gallery.galleryid)"
-									title="Delete"><i class="icon-trash icon-black"></i></a><a
-									ng-click="editgallery(gallery.galleryid, gallery.galleryname)"
-									title="Edit"><i class="icon-edit icon-black"></i></a></span>
-							</div>
-							<div class="gallery-name">
-								<span class="designer">{{gallery.galleryname}}</span>
-							</div>
-						</div>
-					</li>
-				</ul> -->
-
 
 				<ul class="thumbnails">
 					<li ng-repeat="gallery in galleries"
 						style="position: relative; margin-top: 20px;">
-						<!--  ng-repeat="user in advancedsearch | startFrom:pagenumber*pageSize | limitTo:pageSize" -->
-						<div class="press view-press">
+						<div class="press">
+						
 							<a ui-if="isMyProfile" ng-href="#/photos?id={{gallery.galleryid}}" > <img
 								ng-src="{{gallery.gallerypic}}" alt=""></a>
 							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/photos?id={{gallery.galleryid}}" > <img
 								ng-src="{{gallery.gallerypic}}" alt=""></a>
-							<div class="content">
-								<div class="mask"></div>
-								<ul class="prs">
-									<li><a ng-click="deletegallery(gallery.galleryid)"
-										title="Delete"><i class="icon-trash icon-white"></i></a></li>
-									<li><a
-										ng-click="editgallery(gallery.galleryid, gallery.galleryname, gallery.gallerydesc)"
-										title="Edit"><i class="icon-edit icon-white"></i> </a></li>
-								</ul>
-								<h1>
-									<a ui-if="isMyProfile" ng-href="#/photos?id={{gallery.galleryid}}"
-										class="mask_edit">View</a>
-									<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/photos?id={{gallery.galleryid}}"
-										class="mask_edit">View</a>
-								</h1>
+							<div class="masklayer">
+								
+								<h1 class="editdel" ui-if="isMyProfile" >
+									<a ng-click="deletegallery(gallery.galleryid)" title="Delete"><i class="icon-trash icon-white"></i></a>
+									<a ng-click="editgallery(gallery.galleryid, gallery.galleryname, gallery.gallerydesc)"
+										title="Edit"><i class="icon-edit icon-white"></i></a>
+									</h1>
+							    	
+							    	<p class="viewdetails">
+									 <a  style="color:white;text-decoration:none;"
+									ui-if="isMyProfile"  ng-href="#/photos?id={{gallery.galleryid}}" >
+									View </a>
+									 <a  style="color:white;text-decoration:none;"
+									ui-if="!isMyProfile" ng-href="#/{{profileid}}/photos?id={{gallery.galleryid}}"  >
+									View </a>
+									</p>
+								
+								
 							</div>
 							<div class="divi2"></div>
 						</div>
@@ -143,7 +84,6 @@
 		</div>
 		<!-- right pane -->
 	</div>
-</div>
 <!--body-->
 
 <!-- modal -->
