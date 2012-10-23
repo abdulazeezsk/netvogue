@@ -131,9 +131,9 @@
                         <div class="divi2">
                         </div>
                         <label class="control-label">
-                            Brand Name</label>
+                            Boutique Name</label>
                         <div class="controls">
-                            <input type="text" ng-model="entity.name" class="span3" placeholder="Brand Name"
+                            <input type="text" ng-model="entity.name" class="span3" placeholder="Boutique Name"
                                 name="uBrandName" required maxlength="25" />
                             <div ng-show="form.uBrandName.$dirty && form.uBrandName.$invalid">
                                 <span ng-show="form.uBrandName.$error.required" class="validation_msg">Brand Name Is
