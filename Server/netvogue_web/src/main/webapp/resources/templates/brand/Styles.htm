@@ -23,23 +23,26 @@
 				</li>
 			</ul>
 
-			<div class="leftpane_subheading">FILTERS</div>
+		 <div class="leftpane_subheading">FILTERS</div>
 			<div class="divi2"></div>
 			<div class="leftpane_filter_name">
-				<span class="leftpane_filter_name">Style name</span> <input
-					type="text" placeholder="Style name" class="span3" /> <span
+				 <span
 					class="leftpane_filter_name">Style number</span> <input type="text"
-					placeholder="Style number" class="span3" /> <span
-					class="leftpane_filter_name">Fabrication</span> <input type="text"
-					placeholder="Fabrication" class="span3" /> <span
-					class="leftpane_filter_name">Price</span> <input type="text"
-					class="span3" />
+					placeholder="Style number" class="span3" />
+					<span
+					class="leftpane_filter_name">Price range</span> <br> <input
+					type="text" class="spanpricerange-leftpane"
+					placeholder="From price" required ng-minlength="6" maxlength="6"
+					 /> - <input
+					type="text"  class="spanpricerange-leftpane"
+					placeholder="To price" required ng-minlength="6" maxlength="6"
+					 />
 			</div>
 			<div>
-				<!-- <h4 class="leftpane_subheading">Line sheets in this brand</h4> -->
-				<span class="leftpane_filter_name">Line sheets in this brand</span> 
+				<div  class="leftpane_subheading">Line sheets in this brand</div> 
+				<div class="divi2"></div>
 				<input
-					type="text" placeholder="linesheets in this brand" class="span3"/>
+					type="text" placeholder="Search linesheets in this brand" class="span3"/>
 				<ul class="nav nav-tab nav-stacked">
 					<li ng-repeat="linesheet in linesheets">
 						<div class="leftpanefeed fade_spot">
@@ -120,7 +123,7 @@
 									<u>Style:</u>
 								</h1>
 								<h1 class="name">
-									<i>{{style.stylename}}</i>
+									<i>{{style.styleno}}</i>
 								</h1>
 								<h1 class="pricez">
 								<span class="WebRupee" style="font-size: 15px;margin-left:3px;">Rs.</span>
