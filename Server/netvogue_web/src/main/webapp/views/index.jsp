@@ -7,7 +7,7 @@
     <link href="css/StyleSheet.css" rel="stylesheet" type="text/css" />
     <link href="css/jquery.fileupload-ui.css" rel="stylesheet" type="text/css" />
     <link href="css/select2.css" rel="stylesheet" type="text/css" />
-   	<link href="css/styles.css" rel="stylesheet" type="text/css" />
+   	<!-- <link href="css/styles.css" rel="stylesheet" type="text/css" /> -->
     <link href="css/style.css" rel="stylesheet" type="text/css" />
  	<link href="css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
     <link href="css/elastislide.css" rel="stylesheet" type="text/css" />
@@ -17,7 +17,8 @@
     <style type="text/css">
         body
         {
-            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+            padding-top: 60px;
+             /* 60px to make the container go all the way to the bottom of the topbar */
         }
     </style>
 </head>
