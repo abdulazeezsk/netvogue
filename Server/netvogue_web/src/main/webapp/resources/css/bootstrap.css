@@ -4795,7 +4795,7 @@ font-size:14px;
 }
 
 .profile-pricerange {
-	font: normal 11px  Helvetica, Arial, sans-serif;
+	font: bold 11px  Helvetica, Arial, sans-serif;
 	text-align: left;
 }
 
@@ -5514,6 +5514,14 @@ cursor: pointer;
 z-index: 100;
 background-image: url("../img/red-cross.png");
 background: url(../img/red-cross.png);
+}
+
+.spanpricerange
+{
+	width:94px;
+}
+input.spanpricerange,textarea.spanpricerange,.uneditable-input.spanpricerange {
+	width: 94px;
 }
 
 
