@@ -19,132 +19,121 @@
 			<div class="leftpane_subheading">FILTERS</div>
 			<div class="divi2"></div>
 			<div class="leftpane_filter_name">
-				<span class="leftpane_filter_name">Style name</span> <input
-					type="text" placeholder="Style name" class="span3" /> <span
-					class="leftpane_filter_name">Style number</span> <input type="text"
-					placeholder="Style number" class="span3" /> <span
+				<span class="leftpane_filter_name">Style number</span> <input
+					type="text" placeholder="Style number" class="span3" /> <span
 					class="leftpane_filter_name">Fabrication</span> <input type="text"
 					placeholder="Fabrication" class="span3" /> <span
-					class="leftpane_filter_name">Price</span> <input type="text"
-					class="span3" />
+					class="leftpane_filter_name">Price range</span> <br> <input
+					type="text" class="spanpricerange-leftpane"
+					placeholder="From price" required ng-minlength="6" maxlength="6"
+					 /> - <input
+					type="text"  class="spanpricerange-leftpane"
+					placeholder="To price" required ng-minlength="6" maxlength="6"
+					 />
+			</div>
+						<div>
+				<div  class="leftpane_subheading">Lookbooks</div> 
+				<div class="divi2"></div>
+				<input
+					type="text" placeholder="Search lookbooks" class="span3"/>
+				<ul class="nav nav-tab nav-stacked">
+					<li ng-repeat="linesheet in linesheets">
+						<div class="leftpanefeed fade_spot">
+							<div class="feedimage">
+								<a ng-click="setlinesheet(linesheet.galleryid)"> <img alt=""
+									ng-src="{{linesheet.leftpic}}" class="pull-left"></a>
+							</div>
+							<div class="leftpanefeed_text">
+								 <h3>
+									<a ng-click="setlinesheet(linesheet.galleryid)" title="">{{brandname}}</a>
+								</h3>
+								<h2>
+									<a ng-click="setlinesheet(linesheet.galleryid)" title="">{{linesheet.galleryname}}</a>
+								</h2>
+								<h3 style="margin-top:3px;">
+									<span ng-click="setlinesheet(linesheet.galleryid)" title="">Delivery Date</span>
+								</h3>
+								<h2>
+									<span ng-click="setlinesheet(linesheet.galleryid)" title="">26-Aug-2012</span>
+								</h2>
+								<p>{{style.stylename}}</p>
+							</div>
+						</div>
+					</li> 
+				</ul>
 			</div>
 		</div>
 		<!-- left pane -->
 
 		<!-- right pane -->
 		<div class="span9">
-			<!-- <div>
-				<span class="left heading_btn"> <a ng-href="#/stylesheets">Style sheets</a>
-					<span class="divider">/</span>
-					<span><a
-						ng-href="#/stylesheet?id={{stylesheetid}}&&cat={{category}}">Rebecca minkoff {{stylesheetname}}</a> </span>
-				</span> <span class="right"> <a ng-href="#{{backButton}}"
-					class="rightpane_back_btn">Back</a></span>
-				<div class="divi2 right_pane_underline"></div>
-				<span class="left right_pane_info"> Find styles using the
-					filters </span> <span class="right"> <a ng-href="#/addstyle?id={{stylesheetid}}&&cat={{category}}"
-					class="rightpane_add_btn">Organise</a>
-				</span>
-				<div class="divi2 right_pane_underline"></div>
-			</div> -->
 
-				<!-- header pane -->
-				<div style="border-bottom: 1px solid black; position: relative; top: -2px;">
-					<span class="left ywbreadcrumb header_width"> <a class="nonactive"
-						ng-href="#/stylesheets">Stylesheets</a> <span class="ywdivider">/</span> <span>
-						{{brandname}} {{stylesheetname}}</span></span>
-				</div>
-				<div style="border-bottom: 1px solid black;">
-					<span class="left right_pane_info"> Find styles using the
+			<!-- header pane -->
+			<div
+				style="border-bottom: 1px solid black; position: relative; top: -2px;">
+				<span class="left ywbreadcrumb header_width"> <a
+					class="nonactive" ng-href="#/stylesheets">Lookbooks</a> <span
+					class="ywdivider">/</span> <span> {{brandname}}
+						{{stylesheetname}}</span></span>
+			</div>
+			<div style="border-bottom: 1px solid black;">
+				<span class="left right_pane_info"> Find styles using the
 					filters </span> <span class="right"> <a
-						ng-href="#/addstyle?id={{stylesheetid}}&&cat={{category}}" class="rightpane_add_btn">Organize</a>
-					</span>
-				</div>
-				<!-- header pane -->
-					<div class="divi2"></div>
+					ng-href="#/addstyle?id={{stylesheetid}}&&cat={{category}}"
+					class="rightpane_add_btn">Organize</a>
+				</span>
+			</div>
+			<!-- header pane -->
+			<div class="divi2"></div>
 			<div>
-			
-			<ul class="thumbnails">
-					<li  ng-repeat="style in styles">
+
+				<ul class="thumbnails">
+					<li ng-repeat="style in styles">
 						<div style="position: relative;">
-							<img ng-src="{{style.profilethumbpic}}"
-								width="220" height="300" alt="" title="">
+							<img ng-src="{{style.profilethumbpic}}" width="220" height="300"
+								alt="" title="">
 							<div class="masklayer">
-							<h1 class="editdel" ui-if="isMyProfile" >
-								<a ng-click="deletestyle(style.styleid)"
-									title="Delete"><i class="icon-trash icon-white"></i></a><a
-									href="#/addstyle?id={{stylesheetid}}&&cat={{category}}&&styleid={{style.styleid}}"
-									title="Edit"><i class="icon-edit icon-white"></i></a>
-							</h1>
-								<h1 class="style-brandname" style="text-align:center;" >
-								{{brandname}}
+								<h1 class="editdel" ui-if="isMyProfile">
+									<a ng-click="deletestyle(style.styleid)" title="Delete"><i
+										class="icon-trash icon-white"></i></a><a
+										href="#/addstyle?id={{stylesheetid}}&&cat={{category}}&&styleid={{style.styleid}}"
+										title="Edit"><i class="icon-edit icon-white"></i></a>
 								</h1>
-								<h1 class="style-seasonname" >
+								<h1 class="style-brandname" style="text-align: center;">
+									{{brandname}}</h1>
+								<h1 class="style-seasonname">
 									<i>{{stylesheetname}}</i>
 								</h1>
 								<h1 class="style-name">
 									<u>Style:</u>
 								</h1>
 								<h1 class="name">
-									<i>{{style.stylename}}</i>
+									<i>{{style.styleno}}</i>
 								</h1>
 								<h1 class="pricez">
-								<span class="WebRupee" style="font-size: 15px;margin-left:3px;">Rs.</span>
-								<span class="regular-price"  id="product-price-11072"> <span
-									class="price">{{style.price}}</span>
-								</span>
+									<span class="WebRupee"
+										style="font-size: 15px; margin-left: 3px;">Rs.</span> <span
+										class="regular-price" id="product-price-11072"> <span
+										class="price">{{style.price}}</span>
+									</span>
 								</h1>
-								  <p>
-									 <a  style="color:white;text-decoration:none;"
-									ng-href="#/stylepreview?id={{stylesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" >
-									View </a>
+								<p>
+									<a style="color: white; text-decoration: none;"
+										ng-href="#/stylepreview?id={{stylesheetid}}&&cat={{category}}&&styleid={{style.styleid}}">
+										View </a>
 								</p>
 							</div>
 						</div>
 						<div class="linesheet-designer">
-								<h1 class="designer" >
-									{{brandname}} </h1>
+							<h1 class="designer">{{brandname}}</h1>
 						</div>
 						<div class="linesheet-style">
-								<h1 class="name" >
-									{{style.stylename}} </h1> 
-							</div>
-					</li>
-				</ul>
-			
-			<!-- 
-				<ul class="thumbnails">
-					<li ng-repeat="style in styles">
-						<div align="center" style="position: relative;">
-							<a class="product-image"
-								ng-href="#/stylepreview?id={{stylesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" title="">
-								<img ng-src="{{style.profilethumbpic}}" class="fade_spot"
-								width="220" height="300" alt="Dumont Coat" title="Dumont Coat">
-							</a>
-							<div class="stylesheet-edit-delete">
-								<span class="edit-delete"><a
-									ng-click="deletestyle(style.styleid)"
-									title="Delete"><i class="icon-trash icon-black"></i></a><a
-									href="#/addstyle?id={{stylesheetid}}&&cat={{category}}&&styleid={{style.styleid}}"
-									title="Edit"><i class="icon-edit icon-black"></i></a></span>
-							</div>
-							<div class="style-designer">
-								<span class="designer">{{brandname}}</span>
-							</div>
-							<div class="style-name">
-								<span class="name">{{style.stylename}}</span>
-							</div>
-							<div class="price-box">
-								<span class="WebRupee" style="font-size: 15px;">Rs.</span>
-								<span class="regular-price" id="product-price-11072"> <span
-									class="price">{{style.price}}</span>
-								</span>
-							</div>
+							<h1 class="name">{{style.styleno}}</h1>
 						</div>
 					</li>
-				</ul>	 -->			
-				
-				
+				</ul>
+
+
 			</div>
 		</div>
 		<!-- right pane -->
