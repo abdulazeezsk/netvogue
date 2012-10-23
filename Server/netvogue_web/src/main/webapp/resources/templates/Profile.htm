@@ -87,14 +87,14 @@
 					<p class="noInfo">No Info Available</p>
 				</div>
 				<div ui-if="null != contactinfo">
-					<ul style="list-style-type: none;">
+					<ul class="contatus">
 						<li>
 							<div>
 
 								<table>
 									<tr>
-										<td valign="top" style="width: 55px;"><span
-											class="contatus_profile">Email:</span></td>
+										<td><span
+											class="contatus_profile_title">Email:</span></td>
 										<td><span class="contatus_profile">{{contactinfo.email}}</span>
 										</td>
 									</tr>
@@ -106,8 +106,8 @@
 							<div>
 								<table>
 									<tr>
-										<td valign="top" style="width: 55px;"><span
-											class="contatus_profile">Mobile:</span></td>
+										<td><span
+											class="contatus_profile_title">Mobile:</span></td>
 										<td><span class="contatus_profile">{{contactinfo.mobile}}</span>
 										</td>
 									</tr>
@@ -119,8 +119,8 @@
 							<div>
 								<table>
 									<tr>
-										<td valign="top" style="width: 55px;"><span
-											class="contatus_profile">Landline:</span></td>
+										<td><span
+											class="contatus_profile_title">Landline:</span></td>
 										<td><span class="contatus_profile">{{contactinfo.landline1}}</span>
 										</td>
 									</tr>
@@ -132,24 +132,21 @@
 							<div>
 								<table>
 									<tr>
-										<td valign="top" style="width: 55px;"><span
-											class="contatus_profile">Address:</span></td>
+										<td><span
+											class="contatus_profile_title">Address:</span></td>
 										<td><span class="contatus_profile">{{contactinfo.address}}</span>
 										</td>
 									</tr>
 								</table>
-							</div> <!-- <div>
-                                <p>
-                                    <span class="contatus_profile"> Address: {{contactinfo.address}}</span></p>
-                            </div> -->
+							</div> 
 						</li>
 						<li>
 							<div>
 
 								<table>
 									<tr>
-										<td valign="top" style="width: 55px;"><span
-											class="contatus_profile">City:</span></td>
+										<td><span
+											class="contatus_profile_title">City:</span></td>
 										<td><span class="contatus_profile">{{contactinfo.city}}</span>
 										</td>
 									</tr>
@@ -162,14 +159,12 @@
 							<div>
 								<table>
 									<tr>
-										<td valign="top" style="width: 55px;"><span
-											class="contatus_profile">Zip:</span></td>
+										<td><span
+											class="contatus_profile_title">Zip:</span></td>
 										<td><span class="contatus_profile">{{contactinfo.zip}}</span>
 										</td>
 									</tr>
 								</table>
-
-
 							</div>
 						</li>
 					</ul>

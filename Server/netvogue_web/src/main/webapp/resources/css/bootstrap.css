@@ -5524,6 +5524,15 @@ input.spanpricerange,textarea.spanpricerange,.uneditable-input.spanpricerange {
 	width: 94px;
 }
 
+.spanpricerange-leftpane
+{
+	width:93px;
+}
+input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-input..spanpricerange-leftpane
+ {
+	width: 93px;
+}
+
 
 /* Profile styles   =============================================================== */
 
@@ -5594,22 +5603,38 @@ input.spanpricerange,textarea.spanpricerange,.uneditable-input.spanpricerange {
 /*brands carried  ends  here  */
 
 /*contactUs in the  profile page start here  */
+.contatus_profile_title
+{
+	color: black;
+	font: bold 12px  Helvetica, Arial, sans-serif;
+	text-transform: capitalize;
+}
 
 .contatus_profile {
 	color: black;
-	font: normal 10px  Helvetica, Arial, sans-serif;
-	text-transform: uppercase;
+	font: normal 12px  Helvetica, Arial, sans-serif;
+	text-transform: capitalize;
+	width: 55px;
+	valign:top;
+}
+
+.contatus ul
+{
+	list-style-type:none;
+}
+
+.contatus li
+{
+	display:inline;
 }
 
 /*contactUs in the  profile page ends here  */
 
-.productline_text,.brandscarried_text,.seasonname_text {
+.productline_text ,  .brandscarried_text  ,  .seasonname_text {
 	font: normal 10px  Helvetica, Arial, sans-serif;
-	text-transform: uppercase;
+	text-transform: capitalize;
 	text-align: center;
 }
-
-
 
 
 .newsletter_text,.video_text {
@@ -6834,11 +6859,11 @@ opacity:0;
 	opacity:0;
 	position:absolute;
 	top:0;
-	-webkit-transition: opacity 1s ease-in;
-    -moz-transition:  opacity 1s ease-in;
-    -o-transition:  opacity 1s ease-in;
-    -ms-transition:  opacity 1s ease-in;
-    transition:  opacity 1s ease-in;
+	-webkit-transition: opacity 0.5s ease-in;
+    -moz-transition:  opacity 0.5s ease-in;
+    -o-transition:  opacity 0.5s ease-in;
+    -ms-transition:  opacity 0.5s ease-in;
+    transition:  opacity 0.5s ease-in;
     background-color:black;
 }
 
