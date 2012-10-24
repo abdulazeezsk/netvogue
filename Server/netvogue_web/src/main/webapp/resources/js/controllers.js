@@ -885,8 +885,8 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
 	$scope.showEditCollection	= false;
 	
 	$scope.searchcollectionname = "";
-	$scope.searchcollectioncat  = "";
 	$scope.searchbrandname		= "";
+	$scope.searchFilter = new netvogue.searchFilter();
 	
 	$scope.entityname = "";
 	$scope.profilepic = "";
@@ -901,7 +901,7 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
     $scope.getcollections = function() {
     	var searchcollections = {
     			"galleryname" 	:$scope.searchcollectionname,
-    			"category"		:$scope.searchcollectioncat,
+    			"category"		:$scope.searchFilter.getCheckedFilters(),
     			"brandname"		:$scope.searchbrandname,
     	};
     	mycollection.collections($routeParams, searchcollections).success(function(data) {
@@ -953,8 +953,6 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
     		
     	});
     };
-
-	$scope.searchFilter = new netvogue.searchFilter();
 }
 
 function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, mycollection) {

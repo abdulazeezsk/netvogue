@@ -26,16 +26,20 @@
 			<div class="leftpane_subheading">FILTERS</div>
 			<div class="divi2"></div>
 			<div>
-				<span class="leftpane_filter_name">BRAND</span> <input type="text"
-					class="span3" placeholder="Brand name" /> <span
-					class="leftpane_filter_name">SEASON</span> <input type="text"
-					class="span3" placeholder="Season name" />
+				<div ng-show="isMyProfile && !iambrand">
+					<span class="leftpane_filter_name">BRAND</span> 
+						<input type="text" class="span3" placeholder="Brand name" 
+							ng-model="searchbrandname" ng-change="getcollections()"/>
+				</div> 
+				<span class="leftpane_filter_name">SEASON</span> 
+					<input type="text" class="span3" placeholder="Season name" 
+							ng-model="searchcollectionname" ng-change="getcollections()"/>
 			</div>
 			<div>
 				<span class="leftpane_filter_name">CATEGORY</span>
 			</div>
 			<div>
-				<div checkbox-tree ng-model="searchFilter"></div>
+				<div checkbox-tree ng-model="searchFilter" ng-change="getcollections()"></div>
 			</div>
 		</div>
 		<!-- left pane -->

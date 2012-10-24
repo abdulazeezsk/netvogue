@@ -125,7 +125,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public Iterable<Gallery> searchGalleryByName(String username, String name) {
-		return userRepo.searchGalleryByName(username, Utils.SerializeQueryParamForSearch(name));
+		return userRepo.searchGalleryByName(username, Utils.SerializePropertyParamForSearch(name));
 	}
 	
 	//Queries related to printcampaigns
@@ -141,7 +141,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public Iterable<PrintCampaign> searchPrintCampaignByName(String username, String name) {
-		return userRepo.searchPrintCampaignByName(username, Utils.SerializeQueryParamForSearch(name));
+		return userRepo.searchPrintCampaignByName(username, Utils.SerializePropertyParamForSearch(name));
 	}
 	
 	//Queries related to Editorials
@@ -157,7 +157,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public Iterable<Editorial> searchEditorialByName(String username, String name) {
-		return userRepo.searchEditorialByName(username, Utils.SerializeQueryParamForSearch(name));
+		return userRepo.searchEditorialByName(username, Utils.SerializePropertyParamForSearch(name));
 	}
 	
 	//Queries related to collections
@@ -172,17 +172,23 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 	
-	public Iterable<CollectionData> searchCollectionByName(User user, String name) {
-		return searchCollectionByName(user.getUsername(), name);
-	}
-	
-	public Iterable<CollectionData> searchCollectionByName(String username, String seasonname) {
-		return userRepo.searchCollectionByName(username, Utils.SerializeQueryParamForSearch(seasonname));
-	}
-	
-	public Iterable<CollectionData> searchCollections(String username, String seasonname, String category, String brandname){
-		//if(category.isEmpty() && 
-		return userRepo.searchCollectionByName(username, Utils.SerializeQueryParamForSearch(seasonname));
+	public Iterable<CollectionData> searchCollections(User user, String seasonname, Set<String> categories, String brandname){
+		if(null != user) {
+			String username = user.getUsername();
+			String season = Utils.SerializePropertyParamForSearch(seasonname);
+			String brand = Utils.SerializePropertyParamForSearch(brandname);
+			String category = Utils.SerializeQueryParamForSet(Constants.Category_Productline, categories);
+			System.out.println("user name is" + username);
+			System.out.println("Season name is" + season);
+			System.out.println("brand name is" + brand);
+			System.out.println("Category is" + category);
+			if(USER_TYPE.BOUTIQUE == user.getUserType()) {
+				return userRepo.searchMyNetworkCollections(username, season, category, brand);
+			} else if(USER_TYPE.BRAND == user.getUserType()) {
+				return userRepo.searchCollections(username, season, category);
+			}
+		}
+		return null; 
 	}
 	
 	public Iterable<StylesheetData> getStylesheets(User user) {

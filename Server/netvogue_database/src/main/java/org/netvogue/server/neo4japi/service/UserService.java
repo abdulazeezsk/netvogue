@@ -45,9 +45,7 @@ public interface UserService {
 	
 	//Queries related to collections
 	public Iterable<CollectionData> getCollections(User user);
-	public Iterable<CollectionData> searchCollectionByName(User user, String name);
-	public Iterable<CollectionData> searchCollectionByName(String username, String name);
-	public Iterable<CollectionData> searchCollections(String username, String seasonname, String category, String brandname);
+	public Iterable<CollectionData> searchCollections(User user, String seasonname, Set<String> categories, String brandname);
 
 	//Queries related to Stylesheets
 	public Iterable<StylesheetData> getStylesheets(User user);

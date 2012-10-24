@@ -1,6 +1,8 @@
 package org.netvogue.server.webmvc.controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -57,9 +59,9 @@ public class CollectionController {
 	@RequestMapping(value={"/getcollections", "/getcollections/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Collections GetCollections(@ModelAttribute("profileid") String profileid, 
 												@RequestParam("galleryname") String galleryname,
-												@RequestParam("category") String categoryname,
+												@RequestParam("category") String categories,
 												@RequestParam("brandname") String brandname) {
-		System.out.println("Get Collections: " + galleryname);
+		System.out.println("Get Collections: " + galleryname+ ":" + categories + ":" + brandname);
 		Collections collections = new Collections();
 		
 		User user;
@@ -76,10 +78,21 @@ public class CollectionController {
 		collections.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
 		Set<Collection> collectionTemp = new LinkedHashSet<Collection>();
 		Iterable<CollectionData> dbCollections;
-		if(galleryname.isEmpty()) {
+		if(galleryname.isEmpty() && categories.isEmpty() && brandname.isEmpty()) {
 			dbCollections = userService.getCollections(user);
 		} else {
-			dbCollections = userService.searchCollections(user.getUsername(), galleryname, categoryname, brandname);
+			Set<String> productlines = new HashSet<String>();
+			List<String> categoriesafter =  Arrays.asList(categories.split(","));
+			for(String productline: categoriesafter) {
+				ProductLines productLine = ProductLines.getValueOf(productline);
+				if(null != productLine) {
+					System.out.println("product line is:" + productLine.toString());
+					productlines.add(productLine.toString());
+				}
+				else
+					System.out.println("product line is null");
+			}
+			dbCollections = userService.searchCollections(user, galleryname, productlines, brandname);
 		}
 		if(null == dbCollections) {
 			return collections;

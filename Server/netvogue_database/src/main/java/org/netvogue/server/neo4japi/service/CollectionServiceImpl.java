@@ -89,7 +89,7 @@ public class CollectionServiceImpl implements CollectionService {
 	}
 	
 	public Iterable<CollectionPhotoData> searchPhotoByName(String collectionid, String name) {
-		return collectionRepo.searchPhotosByName(collectionid, Utils.SerializeQueryParamForSearch(name));
+		return collectionRepo.searchPhotosByName(collectionid, Utils.SerializePropertyParamForSearch(name));
 	}
 	
 	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, StringBuffer error) {

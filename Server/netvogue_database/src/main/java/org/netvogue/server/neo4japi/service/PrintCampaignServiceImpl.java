@@ -89,7 +89,7 @@ public class PrintCampaignServiceImpl implements PrintCampaignService {
 	}
 	
 	public Iterable<PrintCampaignPhoto> searchPhotoByName(String printcampaignId, String name) {
-		return printcampaignRepo.searchPhotosByName(printcampaignId, Utils.SerializeQueryParamForSearch(name));
+		return printcampaignRepo.searchPhotosByName(printcampaignId, Utils.SerializePropertyParamForSearch(name));
 	}
 	
 	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, StringBuffer error) {

@@ -27,6 +27,7 @@ angular.module('netVogue.directives', []).
 	    		angular.forEach(mainfilter.children, function(children) {
 	    			children.checked = mainfilter.checked;
 	              });
+	    		scope.updateToParent();
 	    	};
 	    	scope.selectParentFilters= function(mainfilter){
 	    		var allChildren = true;
@@ -36,6 +37,7 @@ angular.module('netVogue.directives', []).
 	    			}
 	              });
 	    		mainfilter.checked = allChildren;
+	    		scope.updateToParent();
 	    	};
 	    };
 	    return {
@@ -44,6 +46,7 @@ angular.module('netVogue.directives', []).
 	    	transclude: true,
 	    	scope: {
 	    		searchfilter: '=ngModel',
+	    		updateToParent: '&ngChange'
 	    	},
 	        restrict: 'A',
 	        link: linkFn

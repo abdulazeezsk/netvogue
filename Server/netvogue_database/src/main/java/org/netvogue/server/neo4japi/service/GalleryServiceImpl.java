@@ -80,7 +80,7 @@ public class GalleryServiceImpl implements GalleryService {
 	}
 	
 	public Iterable<Photo> searchPhotoByName(String galleryid, String name) {
-		return galleryRepo.searchPhotosByName(galleryid, Utils.SerializeQueryParamForSearch(name));
+		return galleryRepo.searchPhotosByName(galleryid, Utils.SerializePropertyParamForSearch(name));
 	}
 	
 	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, StringBuffer error) {

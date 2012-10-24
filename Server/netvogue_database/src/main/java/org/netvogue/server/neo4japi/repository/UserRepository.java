@@ -86,16 +86,19 @@ public interface UserRepository extends GraphRepository<User> {
 			"RETURN user.name as name, collection ORDER BY collection.createdDate DESC")
 	Iterable<CollectionData> getMyNetworkCollections(String username);
 	
-	@Query( "START n=node:search(username={0}) MATCH n-[:COLLECTION]->collection " +
+	@Query( "START n=node:search(username={0}), categories = node:productline({2}) " +
+			"MATCH n-[:COLLECTION]->collection-[:Collection_Category]-categories " +
 			"WHERE collection.collectionseasonname =~ {1} " +
-			"RETURN n.name as name, collection ORDER BY collection.createdDate DESC")
-	Iterable<CollectionData> searchCollectionByName(String username, String collectionseasonname);
+			"RETURN DISTINCT n.name as name, collection ORDER BY collection.createdDate DESC")
+	Iterable<CollectionData> searchCollections(String username, String seasonname, String category);
 	
-	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-user r.status? = 'CONFIRMED') " +
-			"WITH user" +
-			"MATCH user-[:COLLECTION]->collection WHERE collection.collectionseasonname =~ {1} " +
-			"RETURN user.name as name, collection ORDER BY collection.createdDate DESC")
-	Iterable<CollectionData> searchNetworkCollectionByName(String username, String collectionseasonname);
+	@Query("START n=node:search(username={0}) " +
+			"MATCH n-[r:NETWORK]-user WHERE r.status? = 'CONFIRMED' AND user.name = {4} " +
+			"WITH user START categories = node:productline({2}) " +
+			"MATCH user-[:COLLECTION]->collection-[:Collection_Category]-categories " +
+			"WHERE collection.collectionseasonname =~ {1} " +
+			"RETURN DISTINCT user.name as name, collection ORDER BY collection.createdDate DESC")
+	Iterable<CollectionData> searchMyNetworkCollections(String username, String seasonname, String category, String brandname);
 
 	//queries related to stylesheets
 	@Query( "START n=node:search(username={0}) MATCH n-[:STYLESHEET]->stylesheet " +

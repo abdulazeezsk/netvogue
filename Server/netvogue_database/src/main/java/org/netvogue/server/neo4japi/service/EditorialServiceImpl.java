@@ -89,7 +89,7 @@ public class EditorialServiceImpl implements EditorialService {
 	}
 	
 	public Iterable<EditorialPhoto> searchPhotoByName(String editorialId, String name) {
-		return editorialRepo.searchPhotosByName(editorialId, Utils.SerializeQueryParamForSearch(name));
+		return editorialRepo.searchPhotosByName(editorialId, Utils.SerializePropertyParamForSearch(name));
 	}
 	
 	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, StringBuffer error) {
