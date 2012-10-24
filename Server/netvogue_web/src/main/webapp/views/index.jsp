@@ -31,7 +31,7 @@
 	<div class="ywfooter" style="max-height:10px;">
 		<div class="ywfooter_in">
 			<ul class="footbar pull-left" >
-				<li  id="YourWindow" ><span>© 2012 YourWindow</span></li>
+				<li  id="YourWindow" ><span>© 2012 NETVOGUE</span></li>
 			</ul>
 		</div>
 	</div>

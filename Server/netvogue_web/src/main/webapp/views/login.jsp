@@ -18,7 +18,7 @@
             <div class="container">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
                     class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                </a><a class="brand" href="Netvogue.html">Net Vogue</a>
+                </a><a class="brand" href="Netvogue.html">NETVOGUE</a>
                 <!-- /.nav-collapse -->
             </div>
             <!-- /.container -->
@@ -98,7 +98,7 @@
 	<div class="ywfooter">
 		<div class="ywfooter_in">
 			<ul class="footbar pull-left" style="padding-top:4px;" >
-				<li  id="YourWindow"><span>© 2012 YourWindow</span> <span></li>
+				<li  id="YourWindow"><span>© 2012 NETVOGUE</span> <span></li>
 			</ul>
 
 			<ul class="footbar pull-right">
