@@ -41,19 +41,24 @@
 		<!-- left pane -->
 		<!-- right pane -->
 		<div class="span9">
-			<div>
-				<span class="left rightpane_subHeading"> Collections </span> <span
+				
+				<!-- header pane -->
+				<div style="border-bottom: 1px solid black; position: relative; top: -2px;">
+					<span class="left rightpane_subHeading"> Collections </span> <span
 					class="right"> <a ng-href="#{{backButton}}"
 					class="rightpane_back_btn">Back</a>
 				</span>
-				<div class="divi2 right_pane_underline"></div>
+				</div>
+				<div style="border-bottom: 1px solid black;margin-bottom:10px;">
 				<span class="left right_pane_info"> Find Collections using
 					the filters </span> <span class="right"> <a
 					ui-if="isMyProfile && iambrand" data-toggle="modal"
 					ng-href="#CreateCollection" class="rightpane_add_btn">create
 						collection</a></span>
-				<div class="divi2 right_pane_underline"></div>
-
+				</div>
+				<!-- header pane -->
+				
+               <div>
 				<ul class="thumbnails">
 					<li ng-repeat="collection in collections">
 						<div style="position: relative;">

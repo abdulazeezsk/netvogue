@@ -35,18 +35,24 @@
 
 		<!-- right pane -->
 		<div class="span9">
-			<div>
-				<span class="left rightpane_subHeading">Lookbooks</span> <span
+			
+				<!-- header pane -->
+				<div style="border-bottom: 1px solid black; position: relative; top: -2px;">
+					<span class="left rightpane_subHeading">Lookbooks</span> <span
 					class="right"> <a ng-href="#{{backButton}}"
 					class="rightpane_back_btn">Back</a></span>
-				<div class="divi2 right_pane_underline"></div>
-				<span class="left right_pane_info"> Find lookbooks using
+				</div>
+				<div style="border-bottom: 1px solid black;margin-bottom:10px;">
+					<span class="left right_pane_info"> Find lookbooks using
 					the filters </span> <span class="right"> <a data-toggle="modal"
 					href="#Createstylesheet" class="rightpane_add_btn">create lookbook
 						</a>
 				</span>
-				<div class="divi2 right_pane_underline"></div>
-			</div>
+				</div>
+				<!-- header pane -->
+			
+			
+			
 			<div>
 				
 				<ul class="thumbnails">
@@ -77,31 +83,6 @@
 						</div>
 					</li>
 				</ul>
-
-			<!-- 	<ul class="thumbnails">
-					<li ng-repeat="stylesheet in stylesheets">
-						<div align="center" style="position: relative;">
-							<a class="product-image"
-								ng-href="#/stylesheet?id={{stylesheet.galleryid}}&&cat={{stylesheet.category}}" title="">
-								<img ng-src="{{stylesheet.gallerypic}}" class="fade_spot"
-								width="220" height="300" alt="Dumont Coat" title="Dumont Coat">
-							</a>
-							<div class="stylesheet-edit-delete">
-								<span class="edit-delete"><a
-									ng-click="deletestylesheet(stylesheet.galleryid)"
-									title="Delete"><i class="icon-trash icon-black"></i></a><a
-									ng-click="editstylesheet(stylesheet.galleryid, stylesheet.galleryname, stylesheet.category)"
-									title="Edit"><i class="icon-edit icon-black"></i></a></span>
-							</div>
-							<div class="stylesheet-designer">
-								<span class="designer">{{stylesheet.brandname}}</span>
-							</div>
-							<div class="stylesheet-name">
-								<span class="season">{{stylesheet.galleryname}}</span>
-							</div>
-						</div>
-					</li>
-				</ul> -->
 
 
 			</div>
