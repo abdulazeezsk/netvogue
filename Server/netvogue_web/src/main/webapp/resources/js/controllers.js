@@ -937,7 +937,7 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
     	var jsonrequest = new netvogue.collectionjsonrequest($scope.editcollectionname, 
     			$scope.editcollectiondesc, $scope.editcollectioncat, editcollectionid);
     	mycollection.updatecollection(jsonrequest).success(function(data) {
-    		mycollection.updatecollectionlocally($scope.editgalleryid, $scope.editgalleryname);//Azeez
+    		mycollection.updatecollectionlocally(editcollectionid, $scope.editcollectionname, $scope.editcollectiondesc);
     		$scope.collections		= mycollection.getcollections($routeParams);
     	}).error(function(data) {
  

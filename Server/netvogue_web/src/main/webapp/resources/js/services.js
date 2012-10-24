@@ -464,11 +464,12 @@ angular.module('netVogue.services', []).
 	                };
 	            return $http(config);
 	    	},
-	    	updatecollectionlocally: function(id, data) {
+	    	updatecollectionlocally: function(id, name, desc) {
 	    		var index=0;
 	    		for(index=0; index <  collections.length; index++) {
 	    			if(collections[index].galleryid == id) {
-	    				collections[index] = data;
+	    				collections[index].galleryname = name;
+	    				collections[index].gallerydesc = desc;
 	    				break;
 	    			}
 	    		}

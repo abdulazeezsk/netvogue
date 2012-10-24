@@ -189,16 +189,16 @@ public class CollectionController {
 	
 	@RequestMapping(value="collection/edit", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditCollection(@RequestBody CollectionJSONRequest request) {
-		System.out.println("Edit Collection");
+		System.out.println("Edit Collection" + request.getSeasonname());
 		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		
 		if(null == request.getId() || request.getId().isEmpty()) {
 			response.setError("editorial Id is empty");
 			return response;
-		} else if(null == request.getSeasonname() || request.getSeasonname().isEmpty() || 
-				  null == request.getDesc()		  || request.getDesc().isEmpty()) {
-			response.setError("new name or description is empty");
+		} else if((null == request.getSeasonname() || request.getSeasonname().isEmpty()) && 
+				  (null == request.getDesc()		  || request.getDesc().isEmpty())) {
+			response.setError("new name and description are empty");
 			return response;
 		}
 		
@@ -227,7 +227,7 @@ public class CollectionController {
 			else
 				response.setError(error.toString());
 		}
-		
+		System.out.println("Edited Collection " + error);
 		return response;
 	}
 	
