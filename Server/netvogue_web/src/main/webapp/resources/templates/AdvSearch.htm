@@ -44,11 +44,9 @@
 					ng-model="search.location" ng-change="getsearchResults()" /> <span
 					class="leftpane_filter_name">Price range</span> <br> <input
 					type="text" class="spanpricerange-leftpane"
-					placeholder="From price" required ng-minlength="6" maxlength="6"
-					 /> - <input
-					type="text" ng-model class="spanpricerange-leftpane"
-					placeholder="To price" required ng-minlength="6" maxlength="6"
-					 />
+					placeholder="From price" required ng-minlength="6" maxlength="6" />
+				- <input type="text" ng-model class="spanpricerange-leftpane"
+					placeholder="To price" required ng-minlength="6" maxlength="6" />
 
 			</div>
 			<div ui-if="isbrandsearch == 'false'">
@@ -84,47 +82,51 @@
 
 		<!-- right pane -->
 		<div class="span9">
-			<div>
+
+
+			<div
+				style="border-bottom: 1px solid black; position: relative; top: -2px;">
 				<span class="left rightpane_subHeading"> Directory </span>
-				<div class="divi2 right_pane_underline"></div>
+			</div>
+			<div style="border-bottom: 1px solid black;">
 				<span class="left right_pane_info"> Use the filters below to
 					discover Brands and boutiques you know based on Name,location and
 					more. </span>
-				<div class="divi2 right_pane_underline"></div>
-				<div>
+			</div>
 
 
-					<ul class="thumbnails">
-						<li ng-repeat="user in advancedsearch">
-							<div style="position: relative;">
-								<img ng-src="{{user.thumbpic}}" width="220" height="150">
-								<div class="masklayer">
-									<h1 class="usertype">
-										<u>{{user.usertype}}</u>
-									</h1>
-									<h1 class="username">{{user.name}}</h1>
-									<h1 class="userlocation">{{user.city}},{{user.country}}</h1>
-									<p class="viewdetails">
-										<a style="color: white; text-decoration: none;"
-											ng-href="#/{{user.username}}/profile"> View </a>
-									</p>
+			<div>
+				<div class="divi2"></div>
 
-								</div>
+				<ul class="thumbnails">
+					<li ng-repeat="user in advancedsearch">
+						<div style="position: relative;">
+							<img ng-src="{{user.thumbpic}}" width="220" height="150">
+							<div class="masklayer">
+								<h1 class="usertype">
+									<u>{{user.usertype}}</u>
+								</h1>
+								<h1 class="username">{{user.name}}</h1>
+								<h1 class="userlocation">{{user.city}},{{user.country}}</h1>
+								<p class="viewdetails">
+									<a style="color: white; text-decoration: none;"
+										ng-href="#/{{user.username}}/profile"> View </a>
+								</p>
+
 							</div>
-							<div class="search-user">
-								<h1 class="user">{{user.name}}</h1>
-							</div>
-						</li>
-					</ul>
+						</div>
+						<div class="search-user">
+							<h1 class="user">{{user.name}}</h1>
+						</div>
+					</li>
+				</ul>
 
 
-				</div>
 			</div>
 		</div>
 		<!-- right pane -->
-
-
 	</div>
+	
 </div>
 
 <!--body-->
