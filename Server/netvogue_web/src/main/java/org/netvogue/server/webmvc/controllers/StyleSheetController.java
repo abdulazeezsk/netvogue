@@ -1,6 +1,8 @@
 package org.netvogue.server.webmvc.controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -62,7 +64,7 @@ public class StyleSheetController {
 	@RequestMapping(value="getstylesheets", method=RequestMethod.GET)
 	public @ResponseBody Stylesheets GetStylesheets( 
 												@RequestParam(value="stylesheetname", required=false) String stylesheetname,
-												@RequestParam(value="category", required=false) String categoryname) {
+												@RequestParam(value="category", required=false) String categories) {
 		System.out.println("Get Stylesheets: " + stylesheetname);
 		Stylesheets stylesheets = new Stylesheets();
 		User loggedinUser = userDetailsService.getUserFromSession();
@@ -74,11 +76,21 @@ public class StyleSheetController {
 		stylesheets.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
 		Set<Stylesheet> stylesheetTemp = new LinkedHashSet<Stylesheet>();
 		Iterable<StylesheetData> dbStylesheets;
-		if(stylesheetname.isEmpty()) {
+		if(stylesheetname.isEmpty() && categories.isEmpty()) {
 			dbStylesheets = userService.getStylesheets(loggedinUser);
 		} else {
-			dbStylesheets = userService.getStylesheets(loggedinUser);
-			//dbCollections = userService.searchCollections(loggedinUser.getUsername(), stylesheetname, categoryname);
+			Set<String> productlines = new HashSet<String>();
+			List<String> categoriesafter =  Arrays.asList(categories.split(","));
+			for(String productline: categoriesafter) {
+				ProductLines productLine = ProductLines.getValueOf(productline);
+				if(null != productLine) {
+					System.out.println("product line is:" + productLine.toString());
+					productlines.add(productLine.toString());
+				}
+				else
+					System.out.println("product line is null");
+			}
+			dbStylesheets = userService.searchStylesheets(loggedinUser, stylesheetname, productlines);
 		}
 		if(null == dbStylesheets) {
 			return stylesheets;

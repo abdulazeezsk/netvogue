@@ -1075,7 +1075,7 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
 	
 	//Related to search
 	$scope.searchstylesheetname = ""; 
-	$scope.searchstylesheetcat  = "";
+	$scope.searchFilter = new netvogue.searchFilter();
 	
 	//Related to edit stylesheet
 	$scope.editstylesheetname   = "";
@@ -1094,7 +1094,7 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
     $scope.getstylesheets = function() {
     	var searchstylesheets = {
     			"stylesheetname" :$scope.searchstylesheetname,
-    			"category"		 :$scope.searchstylesheetcat,
+    			"category"		 :$scope.searchFilter.getCheckedFilters()
     	};
     	mystylesheet.stylesheets($routeParams, searchstylesheets).success(function(data) {
     		mystylesheet.setstylesheetlocally(data, $routeParams);
@@ -1142,8 +1142,6 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
     		
     	});
     };
-
-	$scope.searchFilter = new netvogue.searchFilter();
 }
 
 function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, mystylesheet) {

@@ -198,12 +198,17 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 	
-	public Iterable<StylesheetData> searchStylesheetByName(User user, String name) {
-		return searchStylesheetByName(user.getUsername(), name);
-	}
-	
-	public Iterable<StylesheetData> searchStylesheetByName(String username, String name) {
-		return userRepo.searchStylesheetByName(username, name);
+	public Iterable<StylesheetData> searchStylesheets(User user, String name, Set<String> categories) {
+		if(null != user) {
+			String username = user.getUsername();
+			String stylesheetname = Utils.SerializePropertyParamForSearch(name);
+			String category = Utils.SerializeQueryParamForSet(Constants.Category_Productline, categories);
+			System.out.println("user name is" + username);
+			System.out.println("Stylesheet name is" + stylesheetname);
+			System.out.println("Category is" + category);
+			return userRepo.searchStylesheets(username, stylesheetname, category);
+		}
+		return null;
 	}
 	
 	public Iterable<LinesheetData> getLinesheets(User user) {

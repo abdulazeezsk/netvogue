@@ -11,7 +11,7 @@
 						<span> <a href="#profile"> <img alt=""
 								ng-src={{profilepic.thumbnail_url}}
 								class="pull-left leftpane_profile_img"></a>
-						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span> <span> <a ng-href="#profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
 					</div>
 				</li>
@@ -19,15 +19,15 @@
 			<div class="leftpane_subheading">FILTERS</div>
 			<div class="divi2"></div>
 			<div>
-				<span class="leftpane_filter_name">Lookbook</span> <input
-					type="text" placeholder="Search lookbooks by name"
-					ng-model="searchstylesheetname" class="span3" />
+				<span class="leftpane_filter_name">Lookbook</span> 
+					<input type="text" placeholder="Search lookbooks by name" class="span3"
+						ng-model="searchstylesheetname" ng-change="getstylesheets()"  />
 			</div>
 			<div>
 				<span class="leftpane_filter_name">CATEGORY</span>
 			</div>
 			<div>
-				<div checkbox-tree ng-model="searchFilter"></div>
+				<div checkbox-tree ng-model="searchFilter" ng-change="getstylesheets()"></div>
 			</div>
 		</div>
 		<!-- left-pane -->

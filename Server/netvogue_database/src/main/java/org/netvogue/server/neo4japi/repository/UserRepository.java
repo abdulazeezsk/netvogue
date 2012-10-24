@@ -105,10 +105,11 @@ public interface UserRepository extends GraphRepository<User> {
 			"RETURN n.name as name, stylesheet ORDER BY stylesheet.createdDate DESC")
 	Iterable<StylesheetData> getStylesheets(String username);
 	
-	@Query( "START n=node:search(username={0}) MATCH n-[:STYLESHEET]->stylesheet " +
+	@Query( "START n=node:search(username={0}), categories = node:productline({2}) " +
+			"MATCH n-[:STYLESHEET]->stylesheet-[:Stylesheet_Category]-categories " +
 			"WHERE stylesheet.stylesheetname =~ {1} " +
-			"RETURN n.name as name, stylesheet ORDER BY stylesheet.createdDate DESC")
-	Iterable<StylesheetData> searchStylesheetByName(String username, String stylesheetname);
+			"RETURN DISTINCT n.name as name, stylesheet ORDER BY stylesheet.createdDate DESC")
+	Iterable<StylesheetData> searchStylesheets(String username, String stylesheetname, String category);
 	
 	//queries related to linesheets
 	@Query( "START n=node:search(username={0}) MATCH n-[:LINESHEET]->linesheet " +

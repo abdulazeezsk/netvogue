@@ -49,8 +49,7 @@ public interface UserService {
 
 	//Queries related to Stylesheets
 	public Iterable<StylesheetData> getStylesheets(User user);
-	public Iterable<StylesheetData> searchStylesheetByName(User user, String name);
-	public Iterable<StylesheetData> searchStylesheetByName(String username, String name);
+	public Iterable<StylesheetData> searchStylesheets(User user, String name, Set<String> categories);
 	
 	//Queries related to Linesheets
 	public Iterable<LinesheetData> getLinesheets(User user);
