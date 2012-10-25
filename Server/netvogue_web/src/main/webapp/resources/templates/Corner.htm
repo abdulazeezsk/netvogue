@@ -11,8 +11,8 @@
                 Update status</h6>
             <textarea class="span7" id="textarea" rows="3" placeholder="Whats on your mind..." ng-model="newupdate">
             </textarea>
-            <img src="img/ajax-loadersmall.gif" style="float:left;margin-left:5px;" >
-            <button class="btn btn-primary pull-right" ng-click="addupdate()">
+            <img ng-show="addingupdate" src="img/ajax-loadersmall.gif" style="float:left;margin-left:5px;" >
+            <button class="btn btn-primary pull-right" ng-click="addupdate()" ng-disabled="addingupdate">
                 Post</button>
             <div class="divi2">
             </div>
@@ -29,7 +29,9 @@
                 <li ng-repeat="news in newsfeeds">
                     <div class="newsfeed">
                      <div>
-                      	 <a href="#" title="Delete post" class="pull-right" style="margin-left:3px;" ><i class="icon-remove icon-Black"></i></a>
+                      	 <a ng-click="deleteupdate()" title="Delete post" class="pull-right" style="margin-left:3px;" >
+                      	 	<i class="icon-remove icon-Black"></i>
+                      	 </a>
                       	<!--  <a href="#" title="Privacy settings" class="pull-right" style="margin-left:3px;" ><i class="icon-lock icon-Black"></i></a> -->
                       </div>
                         <div class="brand_image">
@@ -43,7 +45,7 @@
                             </p>
                         </div>
                         <div>
-                         <img src="img/ajax-loadersmall.gif" style="float:right;margin-right:5px;" >
+                         <img ng-show="deletingupdate" src="img/ajax-loadersmall.gif" style="float:right;margin-right:5px;" >
                          </div>
                     </div>
                 </li>
