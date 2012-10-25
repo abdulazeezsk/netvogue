@@ -258,6 +258,7 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 	});
 	
 	$scope.addupdate = function() {
+		$scope.addingupdate = true;
 		mytimeline.addupdate($scope.newupdate).success(function(data) {
 			if(data != null) {
 				mytimeline.addupdatelocally(data);
@@ -266,8 +267,10 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 			} else {
 				alert("There is some error");
 			}
+			$scope.addingupdate = false;
 		}).error(function(data) {
 			alert("error");
+			$scope.addingupdate = false;
 		});
 	};
 	
@@ -285,6 +288,7 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 	};
 	
 	$scope.deleteupdate = function(id) {
+		$scope.deletingupdate = true;
 		mytimeline.deleteupdate(id).success(function(data) {
 			if(data.status == true) {
 				mytimeline.editupdatelocally(id);
@@ -292,6 +296,7 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 			} else {
 				alert(data.error);
 			}
+			$scope.deletingupdate = false;
 		}).error(function(data) {
 			alert("error");
 		});
