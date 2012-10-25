@@ -127,6 +127,8 @@ netvogue.contactinfo	= function(email, mobile, landline1, landline2, address, ci
     this.country	= country;
     this.website	= website;
     this.yearest	= yearest;
+    this.fromprice  = 0;
+    this.toprice    = 0;
 };
 
 netvogue.productline 	= function(productlinename, category) {
@@ -420,6 +422,16 @@ netvogue.linesheetjsonrequest = function(name, category, deliverydate, id) {
 	this.name			= name;
 	this.category 		= category;
 	this.deliverydate 	= deliverydate;
+};
+
+netvogue.linesheetsearchjsonrequest = function() {
+	this.linesheetname 	= "";
+	this.brandname 		= "";
+	this.category;
+	this.fromdate 		= 0;
+	this.todate 		= 0;
+	this.fromprice 		= 0;
+	this.toprice 		= 0;
 };
 
 /*************************************************************************/

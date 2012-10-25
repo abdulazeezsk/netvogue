@@ -39,7 +39,7 @@
                     Brands Carried</a></li>
                 <li ng-class="{active: tabposition == 2}" ui-if="iambrand"><a href="#brands_carried" data-toggle="tab">
                     Stockists</a></li>
-                <li ng-class="{active: tabposition == 4}"><a href="#contact_info" data-toggle="tab">
+                <li ng-class="{active: tabposition == 3}"><a href="#contact_info" data-toggle="tab">
                     Contact Info</a></li>
             </ul>
             <div class="tab-content">
@@ -133,7 +133,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="tab-pane" ng-class="{active: tabposition == 4}" id="contact_info">
+                <div class="tab-pane" ng-class="{active: tabposition == 3}" id="contact_info">
                     <h4 class="rightpane_subHeading">
                         Contact Info
                     </h4>
@@ -216,10 +216,10 @@
                         <label class="control-label">
                             Price Range:</label>
                         <div class="controls">
-                        <input type="text"  class="spanpricerange" placeholder="From price"
+                        <input type="text" class="spanpricerange" placeholder="From price" ng-model="contactinfo.fromprice"
                      	 required ng-minlength="6" maxlength="6" ng-pattern="/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/" />
                        -
-                        <input type="text" ng-model class="spanpricerange" placeholder="To price"
+                        <input type="text" class="spanpricerange" placeholder="To price" ng-model="contactinfo.toprice"
                         required ng-minlength="6" maxlength="6" ng-pattern="/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/" />
                      
                        
