@@ -81,7 +81,8 @@ public interface UserRepository extends GraphRepository<User> {
 			"RETURN n.name as name, collection ORDER BY collection.createdDate DESC")
 	Iterable<CollectionData> getCollections(String username);
 	
-	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-user r.status? = 'CONFIRMED') " +
+	@Query( "START n=node:search(username={0}) " +
+			"MATCH n-[r:NETWORK]-user WHERE r.status? = 'CONFIRMED') " +
 			"WITH user" +
 			"MATCH user-[:COLLECTION]->collection " +
 			"RETURN user.name as name, collection ORDER BY collection.createdDate DESC")
