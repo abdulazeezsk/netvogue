@@ -1,0 +1,128 @@
+<!--body-->
+<div class="container minimum_height">
+	<div class="row">
+		<!-- left-pane -->
+		<div class="span3">
+			<h4 ui-if="isMyProfile && !iambrand" class="leftpane_entity_heading">Boutique</h4>
+			<h4 ui-if="!isMyProfile || iambrand" class="leftpane_entity_heading">Brand</h4>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> 
+							<a ui-if="isMyProfile" ng-href="#profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
+										class="pull-left leftpane_profile_img"></a>
+							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
+										class="pull-left leftpane_profile_img"></a>
+						</span> 
+						<span> 
+							<a ui-if="isMyProfile" ng-href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+					</div>
+				</li>
+			</ul>
+
+		
+				<div  class="leftpane_subheading">Contacts in Your Network</div> 
+				<div class="divi2"></div>
+				<input
+					type="text" placeholder="Search contacts in your network" class="span3"/>
+				<ul class="nav nav-tab nav-stacked">
+					<li ng-repeat="linesheet in linesheets">
+						<div class="leftpanefeed fade_spot">
+							<div class="feedimage">
+								<a ng-click="setlinesheet(linesheet.galleryid)"> <img alt=""
+									ng-src="{{linesheet.leftpic}}" class="pull-left"></a>
+							</div>
+							<div class="leftpanefeed_text">
+								 <h3>
+									<a ng-click="setlinesheet(linesheet.galleryid)" title="">{{brandname}}</a>
+								</h3>
+								<h2>
+									<a ng-click="setlinesheet(linesheet.galleryid)" title="">{{linesheet.galleryname}}</a>
+								</h2>
+								<h3 style="margin-top:3px;">
+									<span ng-click="setlinesheet(linesheet.galleryid)" title="">Delivery Date</span>
+								</h3>
+								<h2>
+									<span ng-click="setlinesheet(linesheet.galleryid)" title="">26-Aug-2012</span>
+								</h2>
+								<p>{{style.stylename}}</p>
+							</div>
+						</div>
+					</li> 
+				</ul>
+			</div>
+		</div>
+		<!-- left-pane -->
+		<!-- right pane -->
+		<div class="span9">
+			<div>
+				
+				<!-- header pane -->
+				<div style="border-bottom: 1px solid black; position: relative; top: -2px;">
+					<span class="left ywbreadcrumb header_width">
+						<a ui-if="isMyProfile" class="nonactive" ng-href="#/linesheets" >Linesheets</a>
+						<span class="ywdivider">/</span> <span>
+						network settings</span></span>
+				</div>
+				<div style="border-bottom: 1px solid black;margin-bottom:10px;">
+					<span class="left right_pane_info"> Find contacts within your network using the
+						filters </span> 
+				</div>
+				<!-- header pane -->
+
+				<div>
+				
+				<ul class="thumbnails">
+					<li  ng-repeat="style in styles">
+						<div style="position: relative;">
+							<img ng-src="{{style.profilethumbpic}}" 
+								width="220" height="300" alt="" title="">
+							<div class="masklayer">
+								<h1 class="style-brandname" style="text-align:center;" >
+								{{brandname}}
+								</h1>
+								<h1 class="style-seasonname" >
+									<i>{{linesheetname}}</i>
+								</h1>
+								<h1 class="style-name">
+									<u>Style:</u>
+								</h1>
+								<h1 class="name">
+									<i>{{style.styleno}}</i>
+								</h1>
+								<h1 class="pricez">
+								<span class="WebRupee" style="font-size: 15px;margin-left:3px;">Rs.</span>
+								<span class="regular-price"  id="product-price-11072"> <span
+									class="price">{{style.price}}</span>
+								</span>
+								</h1>
+								  <p>
+									 <a ui-if="isMyProfile"   style="color:white;text-decoration:none;" title="Click here to add details"
+									ng-href="#/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" >
+									View </a>
+									 <a ui-if="!isMyProfile"   style="color:white;text-decoration:none;" title="Click here to add details"
+									ng-href="#/{{profileid}}/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" >
+									View </a>
+								</p>
+							</div>
+						</div>
+						<div class="linesheet-designer">
+								<h1 class="designer" >
+									{{brandname}} </h1>
+						</div>
+						<div class="linesheet-style">
+								<h1 class="name" >
+									{{style.stylename}} </h1> 
+							</div>
+					</li>
+				</ul>
+				</div>
+			</div>
+			<!-- right pane -->
+		</div>
+	</div>
+</div>
+<!--body-->
