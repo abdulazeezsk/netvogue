@@ -35,13 +35,13 @@
 			<ul class="nav nav-list" id="leftmenu">
 				<li class="nav-header">Favourites</li>
 				<li class="ng-scope leftmenu_tabs" ng-class="navClass('Corner')"><a
-					ng-href="{{links.corner}}">Window <img
+					ng-href="{{links.corner}}">Window <img ng-show="gettingupdates"
 						src="img/ajax-loadersmall.gif" style="float: right;"></a></li>
 				<li class="ng-scope leftmenu_tabs" ng-class="navClass('Profile')"><a
-					ng-href="{{links.profile}}">Profile <img
+					ng-href="{{links.profile}}">Profile <img ng-show="gettingprofile"
 						src="img/ajax-loadersmall.gif" style="float: right;"></a></li>
 				<li class="ng-scope leftmenu_tabs" ng-class="navClass('Network')"><a
-					ng-href="{{links.network}}">Network <img
+					ng-href="{{links.network}}">Network <img ng-show="gettingnetwork"
 						src="img/ajax-loadersmall.gif" style="float: right;"></a></li>
 				<li class="ng-scope leftmenu_tabs" ng-class="navClass('Gallery')"><a
 					ng-href="{{links.gallery}}">Gallery</a></li>
