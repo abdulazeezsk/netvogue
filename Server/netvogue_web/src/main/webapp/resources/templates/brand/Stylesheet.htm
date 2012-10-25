@@ -25,17 +25,14 @@
 					placeholder="Fabrication" class="span3" /> <span
 					class="leftpane_filter_name">Price range</span> <br> <input
 					type="text" class="spanpricerange-leftpane"
-					placeholder="From price" required ng-minlength="6" maxlength="6"
-					 /> - <input
-					type="text"  class="spanpricerange-leftpane"
-					placeholder="To price" required ng-minlength="6" maxlength="6"
-					 />
+					placeholder="From price" required ng-minlength="6" maxlength="6" />
+				- <input type="text" class="spanpricerange-leftpane"
+					placeholder="To price" required ng-minlength="6" maxlength="6" />
 			</div>
-						<div>
-				<div  class="leftpane_subheading">Lookbooks</div> 
+			<div>
+				<div class="leftpane_subheading">Lookbooks</div>
 				<div class="divi2"></div>
-				<input
-					type="text" placeholder="Search lookbooks" class="span3"/>
+				<input type="text" placeholder="Search lookbooks" class="span3" />
 				<ul class="nav nav-tab nav-stacked">
 					<li ng-repeat="linesheet in linesheets">
 						<div class="leftpanefeed fade_spot">
@@ -44,14 +41,15 @@
 									ng-src="{{linesheet.leftpic}}" class="pull-left"></a>
 							</div>
 							<div class="leftpanefeed_text">
-								 <h3>
+								<h3>
 									<a ng-click="setlinesheet(linesheet.galleryid)" title="">{{brandname}}</a>
 								</h3>
 								<h2>
 									<a ng-click="setlinesheet(linesheet.galleryid)" title="">{{linesheet.galleryname}}</a>
 								</h2>
-								<h3 style="margin-top:3px;">
-									<span ng-click="setlinesheet(linesheet.galleryid)" title="">Delivery Date</span>
+								<h3 style="margin-top: 3px;">
+									<span ng-click="setlinesheet(linesheet.galleryid)" title="">Delivery
+										Date</span>
 								</h3>
 								<h2>
 									<span ng-click="setlinesheet(linesheet.galleryid)" title="">26-Aug-2012</span>
@@ -59,7 +57,7 @@
 								<p>{{style.stylename}}</p>
 							</div>
 						</div>
-					</li> 
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -84,9 +82,13 @@
 				</span>
 			</div>
 			<!-- header pane -->
+
 			<div class="divi2"></div>
 			<div>
-
+				<div>
+					<img src="img/ajax-loadersmall.gif" style="float: left;"><br>
+				</div>
+				
 				<ul class="thumbnails">
 					<li ng-repeat="style in styles">
 						<div style="position: relative;">
