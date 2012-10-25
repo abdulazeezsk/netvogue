@@ -1,8 +1,14 @@
 package org.netvogue.server.webmvc.controllers;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 
 import org.netvogue.server.aws.core.UploadManager;
@@ -52,11 +58,28 @@ public class LinesheetController {
 
 	@RequestMapping(value={"/getlinesheets", "/getlinesheets/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Linesheets GetLinesheets(@ModelAttribute("profileid") String profileid, 
-												@RequestParam("linesheetname") String linesheetname,
-												@RequestParam("category") String categoryname) {
+											@RequestParam("brandname") String brandname,
+											@RequestParam("category") String categories,
+											@RequestParam("fromdate") String fromDate,
+											@RequestParam("linesheetname") String linesheetname,
+											@RequestParam("todate") String toDate,
+											@RequestParam("fromprice") long fromPrice,
+											@RequestParam("toprice") long toPrice) {
 		System.out.println("Get Linesheets: " + linesheetname);
 		Linesheets linesheets = new Linesheets();
 		
+		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy"); 
+		Date todate = new Date();
+		Date fromdate = new Date();
+		try {
+			if(!toDate.equals("0"))
+				todate = format.parse(toDate);
+			if(!fromDate.equals("0"))
+				fromdate = format.parse(fromDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		User user;
 		if(!profileid.isEmpty()) {
 			user = userService.getUserByUsername(profileid);
@@ -71,11 +94,24 @@ public class LinesheetController {
 		linesheets.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
 		Set<Linesheet> linesheetTemp = new LinkedHashSet<Linesheet>();
 		Iterable<LinesheetData> dbLinesheets;
-		if(linesheetname.isEmpty()) {
+		if(linesheetname.isEmpty() && brandname.isEmpty() && categories.isEmpty() 
+				&& fromDate.isEmpty() && toDate.isEmpty() && 0 == fromPrice && 0 == toPrice) {
 			dbLinesheets = userService.getLinesheets(user);
 		} else {
-			dbLinesheets = userService.getLinesheets(user);
-			//dbCollections = userService.searchCollections(loggedinUser.getUsername(), stylesheetname, categoryname);
+			Set<String> productlines = new HashSet<String>();
+			List<String> categoriesafter =  Arrays.asList(categories.split(","));
+			for(String productline: categoriesafter) {
+				ProductLines productLine = ProductLines.getValueOf(productline);
+				if(null != productLine) {
+					System.out.println("product line is:" + productLine.toString());
+					productlines.add(productLine.toString());
+				}
+				else
+					System.out.println("product line is null");
+			}
+			dbLinesheets = userService.searchLinesheets(user, linesheetname, productlines,
+															fromdate, todate, fromPrice, toPrice,
+															brandname);
 		}
 		if(null == dbLinesheets) {
 			return linesheets;

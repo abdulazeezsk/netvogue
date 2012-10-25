@@ -1,5 +1,6 @@
 package org.netvogue.server.neo4japi.repository;
 
+import java.util.Date;
 import java.util.Map;
 import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.domain.*;
@@ -122,14 +123,24 @@ public interface UserRepository extends GraphRepository<User> {
 			"RETURN user.name as name, linesheet ORDER BY linesheet.createdDate DESC")
 	Iterable<LinesheetData> getMyNetworkLinesheets(String username);
 	
-	@Query( "START n=node:search(username={0}) MATCH n-[:LINESHEET]->linesheet WHERE linesheet.linesheetname =~ {1} " +
+	@Query( "START n=node:search(username={0}), categories = node:productline({2}) " +
+			"MATCH n-[:LINESHEET]->linesheet-[:Linesheet_Category]-categories, linesheet-[:LS_STYLE]-style " +
+			"WHERE linesheet.linesheetname =~ {1} " +
+			"AND linesheet.deliveryDate >= {3} AND linesheet.deliveryDate <= {4} " +
+			"AND style.price <= {5} AND style.price >= {6}" +
 			"RETURN n.name as name, linesheet ORDER BY linesheet.createdDate DESC")
-	Iterable<LinesheetData> searchLinesheetByName(String username, String linesheetname);
+	Iterable<LinesheetData> searchLinesheets(String username, String linesheetname, String category,
+											Date fromdate, Date todate,
+											long fromPrice, long toPrice);
 	
 	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-user r.status? = 'CONFIRMED') " +
 			"WITH user" +
 			"MATCH user-[:LINESHEET]->linesheet WHERE linesheet.linesheetname =~ {1} " +
 			"RETURN user.name as name, linesheet ORDER BY c.createdDate DESC")
-	Iterable<LinesheetData> searchNetworkLinesheetByName(String username, String linesheetname);
+	Iterable<LinesheetData> searchMyNetworkLinesheets(String username, String linesheetname, String category,
+														Date fromdate, Date todate,
+														long fromPrice, long toPrice,
+														String brandname);
+	
 
 }

@@ -428,8 +428,8 @@ netvogue.linesheetsearchjsonrequest = function() {
 	this.linesheetname 	= "";
 	this.brandname 		= "";
 	this.category;
-	this.fromdate 		= 0;
-	this.todate 		= 0;
+	this.fromdate 		= "";
+	this.todate 		= "";
 	this.fromprice 		= 0;
 	this.toprice 		= 0;
 };

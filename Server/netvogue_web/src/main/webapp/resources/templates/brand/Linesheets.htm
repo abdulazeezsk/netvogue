@@ -26,10 +26,14 @@
 			<div class="leftpane_subheading">FILTERS</div>
 			<div class="divi2"></div>
 			<div>
-				<span class="leftpane_filter_name">BRAND</span> <input type="text"
-					class="span3" placeholder="Brand name" /> <span
-					class="leftpane_filter_name">SEASON</span> <input type="text"
-					class="span3" placeholder="Season name" />
+				<div ng-show="isMyProfile && !iambrand">
+					<span class="leftpane_filter_name">BRAND</span> 
+					<input type="text" class="span3" placeholder="Brand name" 
+							ng-model="searchlinesheets.brandname" ng-change="getlinesheets()"/>
+				</div> 
+				<span class="leftpane_filter_name">SEASON</span> 
+					<input type="text" class="span3" placeholder="Season name" 
+						ng-model="searchlinesheets.linesheetname" ng-change="getlinesheets()"/>
 			</div>
 			<div>
 				<!-- <div class="leftpane_subheading">DELIVERY DATE</div> -->
@@ -53,26 +57,26 @@
 				<div class="divi2"></div>
 				<div ng-hide="deliverydate == 'true'">
 				<span class="leftpane_filter_name">Date range</span> <br> 
-					<input type="text" class="spanpricerange-leftpane"
-						placeholder="Enter from date" ng-model="fromdate" ui-date /> - <input
-						type="text" class="spanpricerange-leftpane"
-						placeholder="Enter to date" ng-model="todate" ui-date />
+					<input type="text" class="spanpricerange-leftpane" ng-change="getlinesheets()"
+						placeholder="Enter from date" ng-model="searchlinesheets.fromdate" ui-date /> - <input
+						type="text" class="spanpricerange-leftpane" ng-change="getlinesheets()"
+						placeholder="Enter to date" ng-model="searchlinesheets.todate" ui-date />
 				</div>
 				<div class="divi2"></div>
 
 				<div>
-					<span class="leftpane_filter_name">Price range</span> <br> <input
-						type="text" class="spanpricerange-leftpane"
-						placeholder="From price" required ng-minlength="6" maxlength="6" />
-					- <input type="text" class="spanpricerange-leftpane"
-						placeholder="To price" required ng-minlength="6" maxlength="6" />
+					<span class="leftpane_filter_name">Price range</span> <br> 
+						<input type="text" class="spanpricerange-leftpane" ng-model="searchlinesheets.fromprice" 
+						ng-change="getlinesheets()" placeholder="From price" required ng-minlength="6" maxlength="6" />
+					- 	<input type="text" class="spanpricerange-leftpane" ng-model="searchlinesheets.toprice" 
+						ng-change="getlinesheets()" placeholder="To price" required ng-minlength="6" maxlength="6" />
 
 				</div>
 				<div class="divi2"></div>
 				<span class="leftpane_filter_name">CATEGORY</span>
 			</div>
 			<div>
-				<div checkbox-tree ng-model="searchFilter"></div>
+				<div checkbox-tree ng-model="searchFilter" ng-change="getlinesheets()"></div>
 			</div>
 		</div>
 		<!-- left-pane -->

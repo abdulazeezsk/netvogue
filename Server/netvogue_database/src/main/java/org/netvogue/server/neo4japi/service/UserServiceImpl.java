@@ -1,5 +1,6 @@
 package org.netvogue.server.neo4japi.service;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
@@ -223,11 +224,28 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 	
-	public Iterable<LinesheetData> searchLinesheetByName(User user, String name) {
-		return searchLinesheetByName(user.getUsername(), name);
-	}
-	
-	public Iterable<LinesheetData> searchLinesheetByName(String username, String name) {
-		return userRepo.searchLinesheetByName(username, name);
+	public Iterable<LinesheetData> searchLinesheets(User user, String seasonname, 
+														 Set<String> categories,
+														 Date fromDate, Date toDate,
+														 long fromPrice, long toPrice,
+														 String brandname) {
+		if(null != user) {
+			String username = user.getUsername();
+			String season = Utils.SerializePropertyParamForSearch(seasonname);
+			String brand = Utils.SerializePropertyParamForSearch(brandname);
+			String category = Utils.SerializeQueryParamForSet(Constants.Category_Productline, categories);
+			System.out.println("user name is" + username);
+			System.out.println("Season name is" + season);
+			System.out.println("brand name is" + brand);
+			System.out.println("Category is" + category);
+			if(USER_TYPE.BOUTIQUE == user.getUserType()) {
+				return userRepo.searchMyNetworkLinesheets(username, season, category, 
+														fromDate, toDate, fromPrice, toPrice, brand);
+			} else if(USER_TYPE.BRAND == user.getUserType()) {
+				return userRepo.searchLinesheets(username, season, category,
+															fromDate, toDate, fromPrice, toPrice);
+			}
+		}
+		return null;
 	}
 }

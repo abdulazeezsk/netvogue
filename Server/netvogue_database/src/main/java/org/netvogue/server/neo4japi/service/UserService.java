@@ -1,5 +1,6 @@
 package org.netvogue.server.neo4japi.service;
 
+import java.util.Date;
 import java.util.Set;
 
 import org.netvogue.server.neo4japi.common.NetworkStatus;
@@ -53,6 +54,7 @@ public interface UserService {
 	
 	//Queries related to Linesheets
 	public Iterable<LinesheetData> getLinesheets(User user);
-	public Iterable<LinesheetData> searchLinesheetByName(User user, String name);
-	public Iterable<LinesheetData> searchLinesheetByName(String username, String name);
+	public Iterable<LinesheetData> searchLinesheets(User user, String seasonname, Set<String> categories,
+			 			Date fromDate, Date toDate, long fromPrice, long toPrice, String brandname);
+	
 }

@@ -1256,8 +1256,6 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	
-	$scope.searchFilter = new netvogue.searchFilter();
-	
 	$scope.immediate = "true";
 	$scope.editimmediate = "false";
 
@@ -1268,8 +1266,8 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
 	$scope.defaultcategories	= netvogue.defaultproductlines;
 	
 	//Related to search
-	$scope.searchlinesheetname = ""; 
-	$scope.searchlinesheetcat  = "";
+	$scope.searchlinesheets = new netvogue.linesheetsearchjsonrequest();
+	$scope.searchFilter = new netvogue.searchFilter();
 	
 	//Related to edit stylesheet
 	$scope.editlinesheetname   = "";
@@ -1289,11 +1287,8 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getlinesheets = function() {
-    	var searchlinesheets = {
-    			"linesheetname" :$scope.searchlinesheetname,
-    			"category"		 :$scope.searchlinesheetcat,
-    	};
-    	mylinesheet.linesheets($routeParams, searchlinesheets).success(function(data) {
+    	$scope.searchlinesheets.category = $scope.searchFilter.getCheckedFilters();
+    	mylinesheet.linesheets($routeParams, $scope.searchlinesheets).success(function(data) {
     		mylinesheet.setlinesheetlocally(data, $routeParams);
         	$scope.updatedata();
         }).error(function(data) {
