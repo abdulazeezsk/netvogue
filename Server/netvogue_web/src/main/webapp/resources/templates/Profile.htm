@@ -19,8 +19,9 @@
 				<br />
 				<ul class="thumbnails" ui-if="null != aboutus && '' != aboutus">
 					<li>
-						<div class="aboutus" >
-							<pre style="background-color:white;color:black;border-color:white;" >{{aboutus}}</pre>
+						<div class="aboutus">
+							<pre
+								style="background-color: white; color: black; border-color: white;">{{aboutus}}</pre>
 						</div>
 					</li>
 				</ul>
@@ -90,81 +91,38 @@
 					<ul class="contatus">
 						<li>
 							<div>
-
-								<table>
-									<tr>
-										<td><span
-											class="contatus_profile_title">Email:</span></td>
-										<td><span class="contatus_profile">{{contactinfo.email}}</span>
-										</td>
-									</tr>
-								</table>
-
+								<span class="contatus_profile_title">Email:</span> <span
+									class="contatus_profile">{{contactinfo.email}}</span>
 							</div>
 						</li>
 						<li>
 							<div>
-								<table>
-									<tr>
-										<td><span
-											class="contatus_profile_title">Mobile:</span></td>
-										<td><span class="contatus_profile">{{contactinfo.mobile}}</span>
-										</td>
-									</tr>
-								</table>
-
+								<span class="contatus_profile_title">Mobile:</span> <span
+									class="contatus_profile">{{contactinfo.mobile}}</span>
 							</div>
 						</li>
 						<li>
 							<div>
-								<table>
-									<tr>
-										<td><span
-											class="contatus_profile_title">Landline:</span></td>
-										<td><span class="contatus_profile">{{contactinfo.landline1}}</span>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</li>
-						<li>
-
-							<div>
-								<table>
-									<tr>
-										<td><span
-											class="contatus_profile_title">Address:</span></td>
-										<td><span class="contatus_profile">{{contactinfo.address}}</span>
-										</td>
-									</tr>
-								</table>
-							</div> 
-						</li>
-						<li>
-							<div>
-
-								<table>
-									<tr>
-										<td><span
-											class="contatus_profile_title">City:</span></td>
-										<td><span class="contatus_profile">{{contactinfo.city}}</span>
-										</td>
-									</tr>
-								</table>
-
-
+								<span class="contatus_profile_title">Landline:</span>
+								<span class="contatus_profile">{{contactinfo.landline1}}</span>
 							</div>
 						</li>
 						<li>
 							<div>
-								<table>
-									<tr>
-										<td><span
-											class="contatus_profile_title">Zip:</span></td>
-										<td><span class="contatus_profile">{{contactinfo.zip}}</span>
-										</td>
-									</tr>
-								</table>
+								<span class="contatus_profile_title">Address:</span>
+								<span class="contatus_profile" >{{contactinfo.address}}</span>
+							</div>
+						</li>
+						<li>
+							<div>
+								<span class="contatus_profile_title">City:</span>
+								<span class="contatus_profile">{{contactinfo.city}}</span>
+							</div>
+						</li>
+						<li>
+							<div>
+							<span class="contatus_profile_title">Zip:</span>
+								<span class="contatus_profile">{{contactinfo.zip}}</span>
 							</div>
 						</li>
 					</ul>
@@ -203,9 +161,7 @@
 									<h3>
 										<a ng-href="#/{{reference.profileid}}/profile" title="">{{reference.name}}</a>
 									</h3>
-									<h2>
-									{{reference.mutualfriends}} Mutual Contact
-									</h2>
+									<h2>{{reference.mutualfriends}} Mutual Contact</h2>
 								</div>
 							</div>
 						</li>
