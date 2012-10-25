@@ -32,7 +32,7 @@ function MyCtrlProfile($scope, $routeParams, $timeout, srvprofile, currentvisite
 		$scope.profileid = $routeParams.profileid;
 	}
     $scope.links = currentvisitedprofile.getleftpanellinks();
-    
+    $scope.gettingprofile = true;
     $scope.showCreateNetwork = false;
     
     $scope.entityname = "";
@@ -61,6 +61,7 @@ function MyCtrlProfile($scope, $routeParams, $timeout, srvprofile, currentvisite
     	if(data.status == true) {
     		srvprofile.setProfileLocally(data, $routeParams);
     		$scope.updatedata();
+    		$scope.gettingprofile = false;
     	} else {
     		alert("No user available with this name");
     	}
@@ -117,7 +118,7 @@ function MyCtrlNetwork($scope, $routeParams, $timeout, myprofile, currentvisited
 	$scope.$parent.title = "Network";
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
 	$scope.links = currentvisitedprofile.getleftpanellinks();
-	
+	$scope.gettingnetwork = true;
 	$scope.entityname = "";
 	$scope.profilepic = "";
 	$scope.updatedata = function() {
@@ -132,6 +133,7 @@ function MyCtrlNetwork($scope, $routeParams, $timeout, myprofile, currentvisited
 	mynetwork.networks($routeParams, false).success(function(data) {
 		mynetwork.setnetworkslocally(data);
 		$scope.updatedata();
+		$scope.gettingnetwork = false;
 	}).error(function(data) {
 		
 	});
@@ -206,7 +208,7 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 	$scope.currentPage = 'Corner';
 	$scope.$parent.title = "Corner";
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
-	
+	$scope.gettingupdates = true;
 	$scope.links = currentvisitedprofile.getleftpanellinks();
 	if (!angular.isUndefined($routeParams.profileid)) {
 		$scope.profileid = $routeParams.profileid;
@@ -234,6 +236,7 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 		mytimeline.updates(routeparams).success(function(data) {
 			mytimeline.setupdateslocally(data);
 			$scope.updatedata(routeparams);
+			$scope.gettingupdates = false;
 		}).error(function(data) {
 		});
 	};
