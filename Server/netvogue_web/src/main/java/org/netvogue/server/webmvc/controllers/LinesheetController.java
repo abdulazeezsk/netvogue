@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.netvogue.server.aws.core.UploadManager;
+import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ProductLines;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
@@ -58,24 +59,38 @@ public class LinesheetController {
 
 	@RequestMapping(value={"/getlinesheets", "/getlinesheets/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Linesheets GetLinesheets(@ModelAttribute("profileid") String profileid, 
-											@RequestParam("brandname") String brandname,
-											@RequestParam("category") String categories,
-											@RequestParam("fromdate") String fromDate,
-											@RequestParam("linesheetname") String linesheetname,
-											@RequestParam("todate") String toDate,
-											@RequestParam("fromprice") long fromPrice,
-											@RequestParam("toprice") long toPrice) {
-		System.out.println("Get Linesheets: " + linesheetname);
+											@RequestParam(value="brandname", required=false) String brandname,
+											@RequestParam(value="category", required=false) String categories,
+											@RequestParam(value="fromdate", required=false) String fromDate,
+											@RequestParam(value="linesheetname", required=false) String linesheetname,
+											@RequestParam(value="todate", required=false) String toDate,
+											@RequestParam(value="fromprice", required=false) long fromPrice,
+											@RequestParam(value="toprice", required=false) long toPrice) {
+		System.out.println("Get Linesheets: " + linesheetname +
+				"\nCategory: " + categories +
+				"\nFrom Date: " + fromDate +
+				"\nTo Date: " + toDate +
+				"\nFrom Price: " + fromPrice +
+				"\nTo Price: " + toPrice);
 		Linesheets linesheets = new Linesheets();
 		
 		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy"); 
-		Date todate = new Date();
-		Date fromdate = new Date();
+		Date todate = null;
+		Date fromdate = null;
 		try {
-			if(!toDate.equals("0"))
-				todate = format.parse(toDate);
-			if(!fromDate.equals("0"))
+			//From Date
+			if(null == fromDate || fromDate.equals("0") || fromDate.isEmpty() || fromDate.equals(Constants.IMMEDIATE))
+				fromdate = new Date(0);
+			else 
 				fromdate = format.parse(fromDate);
+			
+			//To date
+			if(null == toDate || toDate.equals("0") || toDate.isEmpty())
+				todate = new Date(Long.MAX_VALUE);
+			else if(toDate.equals(Constants.IMMEDIATE))
+				todate = new Date(0);
+			else
+				todate = format.parse(toDate);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,8 +109,13 @@ public class LinesheetController {
 		linesheets.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
 		Set<Linesheet> linesheetTemp = new LinkedHashSet<Linesheet>();
 		Iterable<LinesheetData> dbLinesheets;
-		if(linesheetname.isEmpty() && brandname.isEmpty() && categories.isEmpty() 
-				&& fromDate.isEmpty() && toDate.isEmpty() && 0 == fromPrice && 0 == toPrice) {
+		if( (null == linesheetname || linesheetname.isEmpty()) && 
+			(null == brandname || brandname.isEmpty()) && 
+			(null == categories || categories.isEmpty()) && 
+			(null == fromDate || fromDate.isEmpty()) && 
+			(null == toDate || toDate.isEmpty()) && 
+			(0 == fromPrice && 0 == toPrice)
+		) {
 			dbLinesheets = userService.getLinesheets(user);
 		} else {
 			Set<String> productlines = new HashSet<String>();

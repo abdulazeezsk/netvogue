@@ -126,21 +126,27 @@ public interface UserRepository extends GraphRepository<User> {
 	Iterable<LinesheetData> getMyNetworkLinesheets(String username);
 	
 	@Query( "START n=node:search(username={0}), categories = node:productline({2}) " +
-			"MATCH n-[:LINESHEET]->linesheet-[:Linesheet_Category]-categories, linesheet-[:LS_STYLE]-style " +
+			"MATCH n-[:LINESHEET]->linesheet-[:Linesheet_Category]-categories " +
 			"WHERE linesheet.linesheetname =~ {1} " +
 			"AND linesheet.deliveryDate >= {3} AND linesheet.deliveryDate <= {4} " +
-			"AND style.price <= {5} AND style.price >= {6}" +
+			"WITH n,linesheet MATCH linesheet-[?:LS_STYLE]-style " +
+			"WHERE style=null OR (style.price <= {5} AND style.price >= {6}) " +
 			"RETURN n.name as name, linesheet ORDER BY linesheet.createdDate DESC")
 	Iterable<LinesheetData> searchLinesheets(String username, String linesheetname, String category,
-											Date fromdate, Date todate,
+											String fromdate, String todate,
 											long fromPrice, long toPrice);
 	
-	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-user r.status? = 'CONFIRMED') " +
-			"WITH user" +
-			"MATCH user-[:LINESHEET]->linesheet WHERE linesheet.linesheetname =~ {1} " +
-			"RETURN user.name as name, linesheet ORDER BY c.createdDate DESC")
+	@Query( "START n=node:search(username={0}) " +
+			"MATCH n-[r:NETWORK]-user RETURN r.status? = 'CONFIRMED') AND user.name = {7} " +
+			"WITH user categories = node:productline({2}) " +
+			"MATCH user-[:LINESHEET]->linesheet-[:Linesheet_Category]-categories " +
+			"WHERE linesheet.linesheetname =~ {1} " +
+			"AND linesheet.deliveryDate >= {3} AND linesheet.deliveryDate <= {4} " +
+			"WITH user,linesheet MATCH linesheet-[?:LS_STYLE]-style " +
+			"WHERE style=null OR (style.price <= {5} AND style.price >= {6}) " +
+			"RETURN user.name as name, linesheet ORDER BY linesheet.createdDate DESC")
 	Iterable<LinesheetData> searchMyNetworkLinesheets(String username, String linesheetname, String category,
-														Date fromdate, Date todate,
+														String fromdate, String todate,
 														long fromPrice, long toPrice,
 														String brandname);
 	

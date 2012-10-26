@@ -41,26 +41,26 @@
 				<!-- <div class="divi2"></div> -->
 				<div>
 					<div>
-						<input type="radio" name="Date" checked value="true"
-							ng-model="deliverydate"> All Available
+						<input type="radio" name="SearchDate" value="all"
+							ng-model="searchdeliverydate" ng-change="getlinesheets()"> All Available
 					</div>
 					<div>
-						<input type="radio" name="Date" checked value="true"
-							ng-model="deliverydate"> Immediates
+						<input type="radio" name="SearchDate" checked value="immediates"
+							ng-model="searchdeliverydate" ng-change="getlinesheets()"> Immediates
 					</div>
 					<div>
 
-						<input type="radio" name="Date" value="false"
-							ng-model="deliverydate"> Select Date Range
+						<input type="radio" name="SearchDate" value="daterange"
+							ng-model="searchdeliverydate" ng-change="getlinesheets()"> Select Date Range
 					</div>
 				</div>
 				<div class="divi2"></div>
-				<div ng-hide="deliverydate == 'true'">
+				<div ng-show="searchdeliverydate == 'daterange'">
 				<span class="leftpane_filter_name">Date range</span> <br> 
 					<input type="text" class="spanpricerange-leftpane" ng-change="getlinesheets()"
-						placeholder="Enter from date" ng-model="searchlinesheets.fromdate" ui-date /> - <input
+						placeholder="Enter from date" ng-model="fromdate" ui-date /> - <input
 						type="text" class="spanpricerange-leftpane" ng-change="getlinesheets()"
-						placeholder="Enter to date" ng-model="searchlinesheets.todate" ui-date />
+						placeholder="Enter to date" ng-model="todate" ui-date />
 				</div>
 				<div class="divi2"></div>
 

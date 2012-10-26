@@ -238,12 +238,26 @@ public class UserServiceImpl implements UserService{
 			System.out.println("Season name is" + season);
 			System.out.println("brand name is" + brand);
 			System.out.println("Category is" + category);
+		
+			Long fromprice = Long.MIN_VALUE;
+			Long toprice = Long.MAX_VALUE;
+			if(0 == fromPrice)
+				fromprice = fromPrice;
+			if(0 == toPrice)
+				toprice = toPrice;
+			
+			String fromdate = String.valueOf(fromDate.getTime());
+			String todate = String.valueOf(toDate.getTime());
+			System.out.println("From Price is" + fromprice);
+			System.out.println("To Price is" + toprice);
+			System.out.println("From Date is" + fromDate.getTime());
+			System.out.println("To Date is" + toDate.getTime());
 			if(USER_TYPE.BOUTIQUE == user.getUserType()) {
 				return userRepo.searchMyNetworkLinesheets(username, season, category, 
-														fromDate, toDate, fromPrice, toPrice, brand);
+														fromdate, todate, fromprice, toprice, brand);
 			} else if(USER_TYPE.BRAND == user.getUserType()) {
 				return userRepo.searchLinesheets(username, season, category,
-															fromDate, toDate, fromPrice, toPrice);
+															fromdate, todate, fromPrice, toPrice);
 			}
 		}
 		return null;
