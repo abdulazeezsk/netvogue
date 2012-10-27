@@ -14,7 +14,6 @@ public interface LinesheetService {
 	public ResultStatus deleteLinesheet(String id, String error);
 	
 	public Iterable<StyleData> getStyles(String linesheetId);
-	/*public Iterable<PrintCampaignPhoto> searchPhotoByName(PrintCampaign printCampaign, String name);
-	public Iterable<PrintCampaignPhoto> searchPhotoByName(String printcampaignId, String name);*/
+	public Iterable<StyleData> searchStyles(String linesheetId, String styleno, long fromPrice, long toPrice);
 	public ResultStatus deleteStyle(String styleId, String error);
 }

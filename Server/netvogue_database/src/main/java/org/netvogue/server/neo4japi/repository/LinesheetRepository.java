@@ -25,10 +25,11 @@ public interface LinesheetRepository extends GraphRepository<Linesheet>{
 			"RETURN user.name as name, styles ORDER BY styles.createdDate DESC")
 	Iterable<StyleData> getStyles(String linesheetid);
 	
-	/*@Query( "START n=node:stylesheetid(printcampaignid={0}) " +
-			"MATCH n-[:PRINTCAMPAIGNPHOTO]->p WHERE p.printcampaignphotoname! =~ {1} " +
-			"RETURN p ORDER BY p.createdDate DESC")
-	Iterable<Style> searchStyles(String stylesheetid, String query);*/
+	@Query( "START n=node:linesheetid(linesheetid={0}) " +
+			"MATCH n-[:LS_STYLE]->styles, n-[:LINESHEET]-user " +
+			"WHERE styles.styleno = {1} AND styles.price >= {2} AND styles.price <= {3}" +
+			"RETURN user.name as name, styles ORDER BY styles.createdDate DESC")
+	Iterable<StyleData> searchStyles(String stylesheetid, String styleno, long fromprice, long toprice);
 	
 	@Query("START p = node:styleid(styleid={0}) MATCH p-[r:LS_STYLE]-() DELETE r")
 	void deleteStyle(String styleid);

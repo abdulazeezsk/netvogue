@@ -1173,9 +1173,13 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, mystylesh
 	if (!angular.isUndefined($routeParams.cat)) {
 		$scope.category = netvogue.getparentcategory($routeParams.cat);
 	}
-	
 	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.searchFilter = new netvogue.searchFilter();
+	
+	//Search related
+	$scope.searchstyleno = "";
+	$scope.searchfabrication = "";
+	$scope.searchfromprice = 0;
+	$scope.searchtoprice = 0;
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mystylesheet.getname($routeParams);
@@ -1187,12 +1191,20 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, mystylesh
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    mystylesheet.styles($routeParams, $scope.stylesheetid, "").success(function(data) {
-    	mystylesheet.setstyleslocally(data, $routeParams);
-    	$scope.updatedata();
-    }).error(function(data) {
-    	
-    });
+    vat getstyles = function() {
+	    if(null == $scope.fromprice)
+			$scope.fromprice = 0;
+		if(null == $scope.toprice)
+			$scope.toprice = 0;
+	    mystylesheet.styles($routeParams, $scope.stylesheetid, $scope.searchstyleno, $scope.searchfabrication, 
+	    		$scope.searchfromprice, $scope.searchtoprice).success(function(data) {
+	    	mystylesheet.setstyleslocally(data, $routeParams);
+	    	$scope.updatedata();
+	    }).error(function(data) {
+	    	
+	    });
+    }
+    getstyles();
     
 	$scope.deletestyle = function(styleid) {
 		mystylesheet.deletestyle(styleid).success(function(data) {
@@ -1388,6 +1400,12 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, mylinesheet) 
 	if (!angular.isUndefined($routeParams.cat)) {
 		$scope.category = $routeParams.cat;
 	}
+	
+	//Search related
+	$scope.searchstyleno = "";
+	$scope.searchfromprice = 0;
+	$scope.searchtoprice = 0;
+	
 	$scope.entityname = "";
 	$scope.profilepic = "";
 	$scope.updatedata = function() {
@@ -1402,7 +1420,12 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, mylinesheet) 
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getstyles = function() {
-    	mylinesheet.styles($routeParams, $scope.linesheetid, "").success(function(data) {
+    	if(null == $scope.fromprice)
+    		$scope.fromprice = 0;
+    	if(null == $scope.toprice)
+    		$scope.toprice = 0;
+    	mylinesheet.styles($routeParams, $scope.linesheetid, $scope.searchstyleno, 
+    									$scope.searchfromprice, $scope.searchtoprice).success(function(data) {
     		mylinesheet.setstyleslocally(data);
 	    	$scope.updatedata();
 	    }).error(function(data) {

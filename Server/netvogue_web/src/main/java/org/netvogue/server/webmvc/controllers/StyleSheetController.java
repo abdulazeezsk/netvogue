@@ -109,9 +109,17 @@ public class StyleSheetController {
 	
 	@RequestMapping(value="stylesheet/getstyles", method=RequestMethod.GET)
 	public @ResponseBody Styles GetStyles(@RequestParam("stylesheetid") String stylesheetid,
-										  @RequestParam(value="searchquery", required=false) String searchquery
+										  @RequestParam(value="styleno", required=false) String styleno,
+										  @RequestParam(value="fabrication", required=false) String fabrication,
+										  @RequestParam(value="fromprice", required=false) long fromPrice,
+										  @RequestParam(value="toprice", required=false) long toPrice
 											 ) {
-		System.out.println("Get Styles: " + searchquery);
+		System.out.println("Get Styles: " + stylesheetid +
+				"\n Styleno:" + styleno +
+				"\n fabrication" + fabrication +
+				"\n fromprice" + fromPrice +
+				"\n toprice" + toPrice);
+		
 		Styles styles = new Styles();
 		User loggedinUser = userDetailsService.getUserFromSession();
 		if(stylesheetid.isEmpty() || USER_TYPE.BRAND != loggedinUser.getUserType()) {
@@ -127,12 +135,13 @@ public class StyleSheetController {
 		styles.setStylesheetname(s.getStylesheetname());
 		Set<StyleResponse> stylesTemp = new LinkedHashSet<StyleResponse>();
 		Iterable<StyleData> dbStyles;
-		if(null == searchquery || searchquery.isEmpty()) {
+		if(	(null == styleno || styleno.isEmpty()) &&
+		    (null == fabrication || fabrication.isEmpty()) &&	
+			(0 == fromPrice) && (0 == toPrice)
+			) {
 			dbStyles = stylesheetService.getStyles(stylesheetid);
 		} else {
-			//Change this after implementing query
-			//dbStyles = collectionService.searchPhotoByName(stylesheetid, photoname);
-			dbStyles = stylesheetService.getStyles(stylesheetid);
+			dbStyles = stylesheetService.searchStyles(stylesheetid, styleno, fabrication, fromPrice, toPrice);
 		}
 		if(null == dbStyles) {
 			return styles;

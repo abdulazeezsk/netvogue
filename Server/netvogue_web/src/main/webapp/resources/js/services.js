@@ -724,14 +724,17 @@ angular.module('netVogue.services', []).
             };
             return $http(config);
         },
-        styles: function (routeparams, id, name) {
+        styles: function (routeparams, id, styleno, fabrication, fromprice, toprice) {
             var profileid = "";
             if (!angular.isUndefined(routeparams.profileid)) {
           	  profileid = routeparams.profileid;
             }
             var datatosend = {
-    				"stylename" : name,
-    				"stylesheetid" : id
+    				"stylesheetid" 	: id,
+    				"styleno"		: styleno,
+    				"fabrication"	: fabrication,
+    				"fromprice"		: fromprice,
+    				"toprice"		: toprice
     		};
             var config = {
                 method: "GET",
@@ -892,14 +895,16 @@ angular.module('netVogue.services', []).
             };
             return $http(config);
         },
-        styles: function (routeparams, id, name) {
+        styles: function (routeparams, id, styleno, fromprice, toprice) {
             var profileid = "";
             if (!angular.isUndefined(routeparams.profileid)) {
           	  profileid = routeparams.profileid;
             }
             var datatosend = {
-    				"linename" : name,
-    				"linesheetid" : id
+    				"linesheetid" 	: id,
+    				"styleno"		: styleno,
+    				"fromprice"		: fromprice,
+    				"toprice"		: toprice
     		  };
             var config = {
                 method: "GET",

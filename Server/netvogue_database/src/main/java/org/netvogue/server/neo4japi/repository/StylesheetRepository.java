@@ -33,10 +33,13 @@ public interface StylesheetRepository extends GraphRepository<Stylesheet> {
 			"RETURN n.name as name, styles ORDER BY styles.createdDate DESC")
 	Iterable<StyleData> getStylesByCategory(String username, String category);
 	
-	/*@Query( "START n=node:stylesheetid(printcampaignid={0}) " +
-			"MATCH n-[:PRINTCAMPAIGNPHOTO]->p WHERE p.printcampaignphotoname! =~ {1} " +
-			"RETURN p ORDER BY p.createdDate DESC")
-	Iterable<Style> searchStyles(String stylesheetid, String query);*/
+	@Query( "START n=node:stylesheetid(stylesheetid={0}) " +
+			"MATCH n-[:LS_STYLE]->styles, n-[:LINESHEET]-user " +
+			"WHERE styles.styleno = {1} AND styles.fabrication = {2}" +
+			"AND styles.price >= {3} AND styles.price <= {4} " +
+			"RETURN user.name as name, styles ORDER BY styles.createdDate DESC")
+	Iterable<StyleData> searchStyles(String stylesheetid, String styleno, String fabrication, 
+															long fromprice, long toprice);
 	
 	@Query("START p = node:styleid(styleid={0}) MATCH p-[r]-() DELETE p, r")
 	void deleteStyle(String styleid);

@@ -1,6 +1,7 @@
 package org.netvogue.server.neo4japi.service;
 
 import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.neo4japi.domain.Stylesheet;
 import org.netvogue.server.neo4japi.repository.StylesheetRepository;
@@ -87,6 +88,27 @@ public class StylesheetServiceImpl implements StylesheetService {
 		}
 		return null;
  	}
+	public Iterable<StyleData> searchStyles(String stylesheetId, String styleno, String fabrication, 
+								long fromPrice, long toPrice) {
+		if(!stylesheetId.isEmpty()) {
+			String no = Utils.SerializePropertyParamForSearch(styleno);
+			System.out.println("stylesheet ID is:" + stylesheetId);
+			System.out.println("Style number is:" + no);
+			System.out.println("fabrication is:" + fabrication);
+		
+			Long fromprice = Long.MIN_VALUE;
+			Long toprice = Long.MAX_VALUE;
+			if(0 == fromPrice)
+				fromprice = fromPrice;
+			if(0 == toPrice)
+				toprice = toPrice;
+			
+			System.out.println("From Price is" + fromprice);
+			System.out.println("To Price is" + toprice);
+			return stylesheetRepo.searchStyles(stylesheetId, no, fabrication, fromprice, toprice);
+		}
+		return null;
+	}
 	public ResultStatus deleteStyle(String styleId, String error)  {
 		if(null == styleId || styleId.isEmpty()){
 			error = "styleId is empty";

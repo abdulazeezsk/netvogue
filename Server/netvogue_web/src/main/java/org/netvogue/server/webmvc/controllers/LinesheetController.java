@@ -151,12 +151,17 @@ public class LinesheetController {
 	
 	@RequestMapping(value={"/linesheet/getstyles", "/linesheet/getstyles/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Styles GetStyles(@ModelAttribute("profileid") String profileid, 
-										  @RequestParam("linesheetid") String stylesheetid,
-										  @RequestParam(value="searchquery", required=false) String searchquery
+										  @RequestParam("linesheetid") String linesheetid,
+										  @RequestParam(value="styleno", required=false) String styleno,
+										  @RequestParam(value="fromprice", required=false) long fromPrice,
+										  @RequestParam(value="toprice", required=false) long toPrice
 											 ) {
-		System.out.println("Get Styles: " + searchquery);
+		System.out.println("Get Styles: " + linesheetid +
+							"\n Styleno:" + styleno +
+							"\n fromprice" + fromPrice +
+							"\n toprice" + toPrice);
 		Styles styles = new Styles();
-		if(stylesheetid.isEmpty()) {
+		if(linesheetid.isEmpty()) {
 			return styles;
 		}
 		
@@ -173,18 +178,18 @@ public class LinesheetController {
 		styles.setName(user.getName());
 		styles.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
 		//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
-		org.netvogue.server.neo4japi.domain.Linesheet s = linesheetService.getLinesheet(stylesheetid);
+		org.netvogue.server.neo4japi.domain.Linesheet s = linesheetService.getLinesheet(linesheetid);
 		if(null == s)
 			return styles;
 		styles.setStylesheetname(s.getLinesheetname());
 		Set<StyleResponse> stylesTemp = new LinkedHashSet<StyleResponse>();
 		Iterable<StyleData> dbStyles;
-		if(null == searchquery || searchquery.isEmpty()) {
-			dbStyles = linesheetService.getStyles(stylesheetid);
+		if((null == styleno || styleno.isEmpty()) &&
+				(0 == fromPrice) && (0 == toPrice)) {
+			dbStyles = linesheetService.getStyles(linesheetid);
 		} else {
 			//Change this after implementing query
-			//dbStyles = collectionService.searchPhotoByName(stylesheetid, photoname);
-			dbStyles = linesheetService.getStyles(stylesheetid);
+			dbStyles = linesheetService.searchStyles(linesheetid, styleno, fromPrice, toPrice);
 		}
 		if(null == dbStyles) {
 			return styles;

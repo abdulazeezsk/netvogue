@@ -2,7 +2,10 @@ package org.netvogue.server.neo4japi.service;
 
 import java.util.Date;
 
+import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Linesheet;
 import org.netvogue.server.neo4japi.repository.LinesheetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +64,27 @@ public class LinesheetServiceImpl implements LinesheetService {
 		}
 		return null;
 	}
+	
+	public Iterable<StyleData> searchStyles(String linesheetId, String styleno, long fromPrice, long toPrice) {
+		if(!linesheetId.isEmpty()) {
+			String no = Utils.SerializePropertyParamForSearch(styleno);
+			System.out.println("Linesheet ID is:" + linesheetId);
+			System.out.println("Style number is:" + no);
+		
+			Long fromprice = Long.MIN_VALUE;
+			Long toprice = Long.MAX_VALUE;
+			if(0 == fromPrice)
+				fromprice = fromPrice;
+			if(0 == toPrice)
+				toprice = toPrice;
+			
+			System.out.println("From Price is" + fromprice);
+			System.out.println("To Price is" + toprice);
+			return linesheetRepo.searchStyles(linesheetId, no, fromprice, toprice);
+		}
+		return null;
+	}
+	
 	public ResultStatus deleteStyle(String styleId, String error)  {
 		if(null == styleId || styleId.isEmpty()){
 			error = "styleId is empty";
