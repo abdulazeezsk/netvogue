@@ -1,13 +1,12 @@
 package org.netvogue.server.neo4japi.repository;
 
-import java.util.Date;
-import java.util.Map;
 import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.domain.*;
 import org.netvogue.server.neo4japi.service.CollectionData;
 import org.netvogue.server.neo4japi.service.LinesheetData;
 import org.netvogue.server.neo4japi.service.ReferenceData;
 import org.netvogue.server.neo4japi.service.StylesheetData;
+import org.netvogue.server.neo4japi.service.UserData;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
 
@@ -18,6 +17,11 @@ public interface UserRepository extends GraphRepository<User> {
 	@Query( "START n=node:email({0}) WHERE n.id <> {1} RETURN n")
 	User findByemailAndId(String email, Long id);
 	//User findByemailOrUsername(String email, String username);
+	
+	@Query( "START n=node:search(username={0}) " +
+			"MATCH n-[?:users_carried]-uc " +
+			"RETURN n as user, collect(uc.name) as brandnames, collect(uc.username) as brandusernames")
+	UserData getUserByusername(String username);
 	
 	@Query( "START n=node:search({0}) " +
 			"WHERE has(n.userType)" +

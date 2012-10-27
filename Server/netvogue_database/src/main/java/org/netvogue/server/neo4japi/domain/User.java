@@ -82,7 +82,7 @@ public class User {
 	@Fetch Set<Category> productLinesCarried = new HashSet<Category>(); 
 	
 	@RelatedTo(type="users_carried")
-	@Fetch Set<User> 	  usersCarried =  new HashSet<User>();
+	Set<User> 	  usersCarried =  new HashSet<User>();
 	//Because of this there would be two relationships between brand and boutique
 	//BrandsCarried of boutique may or may not be part of their network
 	//If any particular brand is not there in our network, just add with basic information and move ahead. Tomorrow, if someone else

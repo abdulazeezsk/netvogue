@@ -2,6 +2,7 @@ package org.netvogue.server.webmvc.controllers;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,6 +24,7 @@ import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.*;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
+import org.netvogue.server.neo4japi.service.UserData;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,10 +54,11 @@ public class ProfileController {
 		System.out.println("ProfileInfo: id is:" + profileid);
 		User user = userDetailsService.getUserFromSession();
 		ProfileInfo profile = new ProfileInfo();
-		
+		UserData userData = null;
 		if(!profileid.isEmpty()) {
 			User loggedinuser = user;
-			user = userService.getUserByUsername(profileid);
+			userData = userService.getUserDataByUsername(profileid);
+			user = userData.getUser();
 			if(user == null) {
 				return profile;
 			}
@@ -107,17 +110,37 @@ public class ProfileController {
 		}
 		profile.setProductlines(productLine);
 		
-		//Get Brands/Stockists carried info
-		Set<User> brandsCarried = user.getUsersCarried();
-		Set<BrandsCarried> brands = new HashSet<BrandsCarried>();
-		for(User product: brandsCarried) {
-			System.out.println("Name:" +  product.getName() + "username:" + product.getUsername());
-			BrandsCarried brand = new BrandsCarried();
-			brand.setBrandname(product.getName());
-			brand.setBrandusername(product.getUsername());
-			brands.add(brand);
+		if(profileid.isEmpty()) {
+			System.out.println("Get Brands Carried Information");
+			userService.getBrandsCarried(user);
+			//Get Brands/Stockists carried info
+			Set<User> brandsCarried = user.getUsersCarried();
+			Set<BrandsCarried> brands = new HashSet<BrandsCarried>();
+			for(User product: brandsCarried) {
+				System.out.println("Name:" +  product.getName() + "username:" + product.getUsername());
+				BrandsCarried brand = new BrandsCarried();
+				brand.setBrandname(product.getName());
+				brand.setBrandusername(product.getUsername());
+				brands.add(brand);
+			}
+			profile.setBrandscarried(brands);
+		} else if(null != userData){
+			Set<BrandsCarried> brands = new HashSet<BrandsCarried>();
+			
+			Iterable<String> brandnames = userData.getBrandnames();
+			Iterable<String> brandusernames = userData.getBrandusernames();
+			
+			Iterator<String> nameiterator = brandnames.iterator();
+			Iterator<String> usernameiterator = brandusernames.iterator();
+			while(nameiterator.hasNext() && usernameiterator.hasNext()) {
+				BrandsCarried brand = new BrandsCarried();
+				brand.setBrandname(nameiterator.next());
+				brand.setBrandusername(usernameiterator.next());
+				brands.add(brand);
+			}
+			profile.setBrandscarried(brands);
 		}
-		profile.setBrandscarried(brands);
+		
 		profile.setStatus(true);
 		
 		System.out.println("ProfileInfo Sent for id:" + profileid);

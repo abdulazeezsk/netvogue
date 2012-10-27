@@ -38,6 +38,14 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 	
+	public void getBrandsCarried(User user) {
+		neo4jTemplate.fetch(user.getUsersCarried());
+	}
+	
+	public UserData getUserDataByUsername(String username) {
+		return userRepo.getUserByusername(username);
+	}
+	
 	public User getUserByUsername(String username) {
 		return userRepo.findByusername(username);
 	}
