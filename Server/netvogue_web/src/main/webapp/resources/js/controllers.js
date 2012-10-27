@@ -1784,6 +1784,7 @@ function MyCtrlAdvancedSearch($scope, $http, search) {
 			location:"",
 			stockists: []
 	};
+	$scope.searching = true;
 	
 	$scope.search.getstockists =  function() {
 		var result = "";
@@ -1797,20 +1798,23 @@ function MyCtrlAdvancedSearch($scope, $http, search) {
 		$scope.entityname		= data.name;
 		$scope.profilepic		= data.profilepic;
 		$scope.advancedsearch	= data.users;
+		$scope.searching = false;
 	}).error(function(data) {
-		
+		$scope.searching = false;
 	});
 	$scope.searchFilter = new netvogue.searchFilter();
 	$scope.getsearchResults = function() {
+		$scope.searching = true;
 		var categories = $scope.searchFilter.getCheckedFilters();
 		var stockists = $scope.search.getstockists();
 		search.getadvancedsearchresults($scope.search.name, $scope.search.location, 
 										categories, $scope.isbrandsearch, stockists).
 		success(function(data) {
 			$scope.advancedsearch = data;
+			$scope.searching = false;
 	    }).
 	    error(function(data) {
-	    	
+	    	$scope.searching = false;
 	    });
 	};
 	

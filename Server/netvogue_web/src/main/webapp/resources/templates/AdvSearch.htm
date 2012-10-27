@@ -74,7 +74,7 @@
 				<span class="leftpane_filter_name">CATEGORY</span>
 			</div>
 			<div>
-				<div checkbox-tree ng-model="searchFilter"></div>
+				<div checkbox-tree ng-model="searchFilter" ng-change="getsearchResults()"></div>
 			</div>
 		</div>
 		<!-- left pane -->
@@ -97,7 +97,7 @@
 
 			<div>
 				<div class="divi2"></div>
-				<div>
+				<div ng-show="searching">
 					<img src="img/ajax-loadersmall.gif" style="float: left;"><br>
 				</div>
 				<ul class="thumbnails">
