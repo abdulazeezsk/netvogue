@@ -82,14 +82,19 @@ public class SearchController {
 
 	@RequestMapping(value="advancedsearch", method=RequestMethod.GET)
 	public @ResponseBody Set<SearchResponse> doAdvancedSearch(
-							@RequestParam("name") String name, @RequestParam("location") String location,
-							@RequestParam("categories") String categories, 
-							@RequestParam("usertype")	String searchtype	) {
+							@RequestParam(value="name", required=false) String name, 
+							@RequestParam(value="location", required=false) String location,
+							@RequestParam(value="categories", required=false) String categories, 
+							@RequestParam(value="usertype", required=false)	String searchtype,
+							@RequestParam(value="userscarried", required=false) String usersCarried,
+							@RequestParam(value="fromprice", required=false) long fromPrice,
+							@RequestParam(value="toprice", required=false) long toPrice){
 		
-		System.out.println("\nGet users: name:" + name);
-		System.out.println("location:" + location);
-		System.out.println("categories:" + categories.toString());
-		System.out.println("user type:" + searchtype);
+		System.out.println("\nGet users: name:" + name + 
+							"\nlocation:" + location +
+							"\ncategories:" + categories.toString() +
+							"\nuser type:" + searchtype +
+							"\nusers carried:" + usersCarried.toString());
 		Set<SearchResponse> response = new LinkedHashSet<SearchResponse>();
 		
 		USER_TYPE user_type;
@@ -109,7 +114,8 @@ public class SearchController {
 				System.out.println("product line is null");
 		}
 		
-		Iterable<User> users = userService.doAdvancedSearch(user_type, name, location, productlines);
+		Set<String> userscarried = new HashSet<String>(Arrays.asList(usersCarried.split(",")));
+		Iterable<User> users = userService.doAdvancedSearch(user_type, name, location, productlines, userscarried);
 		
 		if(null == users) {
 			System.out.println("No users found: ");

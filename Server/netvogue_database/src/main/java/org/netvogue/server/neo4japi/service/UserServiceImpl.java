@@ -64,10 +64,12 @@ public class UserServiceImpl implements UserService{
 		return userRepo.doBasicSearch(query);
 	}
 	
-	public Iterable<User> doAdvancedSearch(USER_TYPE userType, String name, String location, Set<String> categories) {
-		/*String query = "username:*" + name + "*";
-		String cat = "";
-		/*if(!name.isEmpty()) {
+	public Iterable<User> doAdvancedSearch(USER_TYPE userType, String name, String location, 
+					Set<String> categories, Set<String> usersCarried) {
+		
+		//Query
+		String query = "username:*" + name + "*";
+		if(!name.isEmpty()) {
 			query = "username:*" + name + "* OR " + "name:*" + name + "*" ;
 		}
 		if(!location.isEmpty()) {
@@ -80,25 +82,19 @@ public class UserServiceImpl implements UserService{
 			query = "username:*";
 		}
 		
-		if(categories.isEmpty()) {
-			cat = "productline:*";
-		} else {
-			cat = "productline:" ;
-			int index =1;
-			for(String category: categories) {
-				System.out.println("Category is:" + category);
-				cat += category ;
-				if(index++ < categories.size()) {
-					cat += " OR ";
-				}
-			}
-		}
+		//Categories
+		String cat = "productline:gth";
+		if(!categories.isEmpty())
+			cat = Utils.SerializeQueryParamForSet(Constants.Category_Productline, categories);
+		//Users carried
+		String userscarried = "username:sdf";
+		if(!usersCarried.isEmpty())
+			userscarried = Utils.SerializeQueryParamForSet(Constants.User_Username, usersCarried);
+		
 		System.out.println(query);
 		System.out.println(cat);
-		return userRepo.doAdvancedSearch(cat, query);*/
-		
-		String query = "username:*" + name + "* OR " + "name:*" + name + "*";
-		return userRepo.doBasicSearch(query);
+		System.out.println(userscarried);
+		return userRepo.doAdvancedSearch(cat, query, userType.toString(), userscarried);
 	}
 	
 	//Network related

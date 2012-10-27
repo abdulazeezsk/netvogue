@@ -19,7 +19,9 @@ public interface UserRepository extends GraphRepository<User> {
 	User findByemailAndId(String email, Long id);
 	//User findByemailOrUsername(String email, String username);
 	
-	@Query( "START n=node:search({0}) RETURN n")
+	@Query( "START n=node:search({0}) " +
+			"WHERE has(n.userType)" +
+			"RETURN n")
 	Iterable<User> doBasicSearch(String query);
 	
 	/*@Query( "start category=node:productline(productline={cat}) " +
@@ -32,10 +34,23 @@ public interface UserRepository extends GraphRepository<User> {
 									@Param("search") Map<String, String> searchIndex,
 									@Param("pagenumber") long pagenumber, @Param("pagesize") long pagesize);*/
 	
-	@Query( "START category=node:productline({0}) WITH collect(category) as categories " +
-			"START user=node:search({1}) " +
-			"WHERE ALL( c in categories WHERE user-[:has_category]->c) RETURN user")
-	Iterable<User> doAdvancedSearch(String Categories, String search);
+	/*@Query( "START category=node:productline({0}) " +
+			"WITH collect(category) as categories " +
+			"START user=node:search({1})  " +
+			"WHERE ALL( c in categories WHERE user-[:has_category]->c) AND " +
+			"user.userType! = {2} " +
+			"WITH user START userscarried=node:search({3}) " +
+			"MATCH user-[:users_carried]-userscarried " +
+			"RETURN user")*/
+	@Query( "START category=node:productline({0}),  usercarried=node:search({3}) " +
+			"WITH collect(category) as categories, collect(usercarried) as userscarried " +
+			"START user=node:search({1})  " +
+			"WHERE has(user.userType) AND " +
+			"ALL( c in categories WHERE user-[:has_category]->c) AND " +
+			"ALL(u in userscarried WHERE user-[:users_carried]-u) " +
+			//"user.userType! = {2} " +
+			"RETURN user")
+	Iterable<User> doAdvancedSearch(String Categories, String search, String usertype, String userscarried);
 	
 	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-f WHERE f.username={1} " +
 			"RETURN r.status")
