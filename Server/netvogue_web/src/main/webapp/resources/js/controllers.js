@@ -1192,7 +1192,7 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, mystylesh
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    vat getstyles = function() {
+    var getstyles = function() {
 	    if(null == $scope.fromprice)
 			$scope.fromprice = 0;
 		if(null == $scope.toprice)
@@ -1204,7 +1204,7 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, mystylesh
 	    }).error(function(data) {
 	    	alert(data);
 	    });
-    }
+    };
     getstyles();
     
     $scope.getstylesheets = function() {
