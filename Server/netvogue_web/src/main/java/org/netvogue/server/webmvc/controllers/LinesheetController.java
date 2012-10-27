@@ -119,15 +119,17 @@ public class LinesheetController {
 			dbLinesheets = userService.getLinesheets(user);
 		} else {
 			Set<String> productlines = new HashSet<String>();
-			List<String> categoriesafter =  Arrays.asList(categories.split(","));
-			for(String productline: categoriesafter) {
-				ProductLines productLine = ProductLines.getValueOf(productline);
-				if(null != productLine) {
-					System.out.println("product line is:" + productLine.toString());
-					productlines.add(productLine.toString());
+			if(null != categories && !categories.isEmpty()) {
+				List<String> categoriesafter =  Arrays.asList(categories.split(","));
+				for(String productline: categoriesafter) {
+					ProductLines productLine = ProductLines.getValueOf(productline);
+					if(null != productLine) {
+						System.out.println("product line is:" + productLine.toString());
+						productlines.add(productLine.toString());
+					}
+					else
+						System.out.println("product line is null");
 				}
-				else
-					System.out.println("product line is null");
 			}
 			dbLinesheets = userService.searchLinesheets(user, linesheetname, productlines,
 															fromdate, todate, fromPrice, toPrice,
@@ -182,8 +184,10 @@ public class LinesheetController {
 		if(null == s)
 			return styles;
 		styles.setStylesheetname(s.getLinesheetname());
+		
 		Set<StyleResponse> stylesTemp = new LinkedHashSet<StyleResponse>();
 		Iterable<StyleData> dbStyles;
+		
 		if((null == styleno || styleno.isEmpty()) &&
 				(0 == fromPrice) && (0 == toPrice)) {
 			dbStyles = linesheetService.getStyles(linesheetid);

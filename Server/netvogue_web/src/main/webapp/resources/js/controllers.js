@@ -1180,6 +1180,7 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, mystylesh
 	$scope.searchfabrication = "";
 	$scope.searchfromprice = 0;
 	$scope.searchtoprice = 0;
+	$scope.searchstylesheetname = "";
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mystylesheet.getname($routeParams);
@@ -1201,10 +1202,28 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, mystylesh
 	    	mystylesheet.setstyleslocally(data, $routeParams);
 	    	$scope.updatedata();
 	    }).error(function(data) {
-	    	
+	    	alert(data);
 	    });
     }
     getstyles();
+    
+    $scope.getstylesheets = function() {
+    	var searchstylesheets = {
+    			"stylesheetname" :$scope.searchstylesheetname,
+    	};
+    	mystylesheet.stylesheets($routeParams, searchstylesheets).success(function(data) {
+    		mystylesheet.setstylesheetlocally(data, $routeParams);
+    		$scope.stylesheets		= mystylesheet.getstylesheets($routeParams);
+        }).error(function(data) {
+        	alert(data);
+        });
+    };
+    $scope.getstylesheets();
+    
+    $scope.setstylesheet = function(galleryid) {
+    	$scope.stylesheetid = id;
+    	$scope.getstyles();
+    };
     
 	$scope.deletestyle = function(styleid) {
 		mystylesheet.deletestyle(styleid).success(function(data) {
@@ -1242,8 +1261,8 @@ function MyCtrlStylesPreview($scope, $routeParams, currentvisitedprofile, mystyl
     		if($scope.styleid == $scope.styles[i].styleid) {
     			$scope.mainstyle = $scope.styles[i];
     			break;
-    		}
-    	}
+    		};
+    	};
     };
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 

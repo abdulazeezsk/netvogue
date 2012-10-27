@@ -80,15 +80,17 @@ public class StyleSheetController {
 			dbStylesheets = userService.getStylesheets(loggedinUser);
 		} else {
 			Set<String> productlines = new HashSet<String>();
-			List<String> categoriesafter =  Arrays.asList(categories.split(","));
-			for(String productline: categoriesafter) {
-				ProductLines productLine = ProductLines.getValueOf(productline);
-				if(null != productLine) {
-					System.out.println("product line is:" + productLine.toString());
-					productlines.add(productLine.toString());
+			if(null != categories && !categories.isEmpty()) {
+				List<String> categoriesafter =  Arrays.asList(categories.split(","));
+				for(String productline: categoriesafter) {
+					ProductLines productLine = ProductLines.getValueOf(productline);
+					if(null != productLine) {
+						System.out.println("product line is:" + productLine.toString());
+						productlines.add(productLine.toString());
+					}
+					else
+						System.out.println("product line is null");
 				}
-				else
-					System.out.println("product line is null");
 			}
 			dbStylesheets = userService.searchStylesheets(loggedinUser, stylesheetname, productlines);
 		}
