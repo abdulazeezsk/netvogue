@@ -20,7 +20,7 @@ public interface UserRepository extends GraphRepository<User> {
 	
 	@Query( "START n=node:search(username={0}) " +
 			"MATCH n-[?:users_carried]-uc, n-[?:has_category]-pl " +
-			"RETURN n as user, collect(pl.productline) as productlines" +
+			"RETURN n as user, collect(pl.productline) as productlines, " +
 			"collect(uc.name) as brandnames, collect(uc.username) as brandusernames")
 	UserData getUserByusername(String username);
 	
