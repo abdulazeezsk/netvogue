@@ -1,7 +1,6 @@
 package org.netvogue.server.neo4japi.service;
 
 import java.util.Date;
-import java.util.Map;
 import java.util.Set;
 
 import org.netvogue.server.neo4japi.common.Constants;
@@ -11,10 +10,7 @@ import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Editorial;
 import org.netvogue.server.neo4japi.domain.Gallery;
-import org.netvogue.server.neo4japi.domain.Linesheet;
 import org.netvogue.server.neo4japi.domain.PrintCampaign;
-import org.netvogue.server.neo4japi.domain.Collection;
-import org.netvogue.server.neo4japi.domain.Stylesheet;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,16 +61,16 @@ public class UserServiceImpl implements UserService{
 	//Search related
 	public Iterable<User> doBasicSearch(String query) {
 		query = "username:*" + query + "* OR " + "name:*" + query + "*";
-		return userRepo.doBasicSearch(query);
+		return userRepo.doBasicSearch(query, Constants.BASICSEARCH_LIMIT, 0);
 	}
 	
-	public Iterable<User> getAllUsers() {
-		String query = "username:*";
-		return userRepo.doBasicSearch(query);
+	public Iterable<User> getAllUsers(String query) {
+		query = "username:*" + query + "* OR " + "name:*" + query + "*";
+		return userRepo.doBasicSearch(query, Constants.ADVSEARCH_LIMIT, 0);
 	}
 	
 	public Iterable<User> doAdvancedSearch(USER_TYPE userType, String name, String location, 
-					Set<String> categories, Set<String> usersCarried) {
+					Set<String> categories, Set<String> usersCarried, long fromPrice, long toPrice) {
 		
 		//Query
 		String query = "username:*" + name + "*";
@@ -90,7 +86,12 @@ public class UserServiceImpl implements UserService{
 		if(name.isEmpty() && location.isEmpty()) {
 			query = "username:*";
 		}
-		
+		Long fromprice = new Long(0);
+		Long toprice = Long.MAX_VALUE;
+		if(0 != fromPrice)
+			fromprice = fromPrice;
+		if(0 != toPrice)
+			toprice = toPrice;
 		//Categories
 		String cat = "productline:gth";
 		if(!categories.isEmpty())
@@ -103,7 +104,8 @@ public class UserServiceImpl implements UserService{
 		System.out.println(query);
 		System.out.println(cat);
 		System.out.println(userscarried);
-		return userRepo.doAdvancedSearch(cat, query, userType.toString(), userscarried);
+		return userRepo.doAdvancedSearch(cat, query, userType.toString(), userscarried,
+											fromprice, toprice);
 	}
 	
 	//Network related

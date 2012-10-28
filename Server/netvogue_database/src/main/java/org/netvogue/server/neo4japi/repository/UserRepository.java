@@ -26,8 +26,8 @@ public interface UserRepository extends GraphRepository<User> {
 	
 	@Query( "START n=node:search({0}) " +
 			"WHERE has(n.userType)" +
-			"RETURN n")
-	Iterable<User> doBasicSearch(String query);
+			"RETURN n SKIP {2} LIMIT {1}")
+	Iterable<User> doBasicSearch(String query, int limit, int skip);
 	
 	/*@Query( "start category=node:productline(productline={cat}) " +
 			"with collect(category) as categories " +
@@ -55,7 +55,8 @@ public interface UserRepository extends GraphRepository<User> {
 			"ALL(u in userscarried WHERE user-[:users_carried]-u) " +
 			//"user.userType! = {2} " +
 			"RETURN user")
-	Iterable<User> doAdvancedSearch(String Categories, String search, String usertype, String userscarried);
+	Iterable<User> doAdvancedSearch(String Categories, String search, String usertype, String userscarried,
+									long fromPrice, long toPrice);
 	
 	@Query( "START n=node:search(username={0}) MATCH n-[r:NETWORK]-f WHERE f.username={1} " +
 			"RETURN r.status")

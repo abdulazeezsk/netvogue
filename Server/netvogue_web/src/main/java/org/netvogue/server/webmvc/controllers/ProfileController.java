@@ -135,10 +135,12 @@ public class ProfileController {
 			Iterator<ProductLines> plIterator = productsCarried.iterator();
 			while(plIterator.hasNext()) {
 				ProductLines product = plIterator.next();
-				ProductLine productTemp = new ProductLine();
-				productTemp.setProductlinename(product.getDesc());
-				productTemp.setSelected(true);
-				productLine.add(productTemp);
+				if(null != product) {
+					ProductLine productTemp = new ProductLine();
+					productTemp.setProductlinename(product.getDesc());
+					productTemp.setSelected(true);
+					productLine.add(productTemp);
+				}
 			}
 			profile.setProductlines(productLine);
 			

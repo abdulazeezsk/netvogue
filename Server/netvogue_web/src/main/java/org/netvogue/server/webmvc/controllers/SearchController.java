@@ -31,8 +31,8 @@ public class SearchController {
 	@Autowired ConversionService	conversionService;
 
 	@RequestMapping(value="getallusers", method=RequestMethod.GET)
-	public @ResponseBody UsersResponse getAllUsers() {
-		System.out.println("Get all users: ");
+	public @ResponseBody UsersResponse getAllUsers(@RequestParam("query") String query) {
+		System.out.println("Get all users: " + query);
 		
 		UsersResponse response = new UsersResponse();
 		User loggedinUser = userDetailsService.getUserFromSession();
@@ -41,7 +41,7 @@ public class SearchController {
 		
 		Set<SearchResponse> allusers = new LinkedHashSet<SearchResponse>();
 		
-			Iterable<User> users = userService.getAllUsers();
+			Iterable<User> users = userService.getAllUsers(query);
 			
 			if(null == users) {
 				System.out.println("No users found: ");
@@ -115,7 +115,8 @@ public class SearchController {
 		}
 		
 		Set<String> userscarried = new HashSet<String>(Arrays.asList(usersCarried.split(",")));
-		Iterable<User> users = userService.doAdvancedSearch(user_type, name, location, productlines, userscarried);
+		Iterable<User> users = userService.doAdvancedSearch(user_type, name, location, productlines, userscarried,
+				fromPrice, toPrice);
 		
 		if(null == users) {
 			System.out.println("No users found: ");

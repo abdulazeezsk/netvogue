@@ -1307,9 +1307,13 @@ angular.module('netVogue.services', []).
 	};
 }).service('search', function ($http) {
       return {
-          getallusers: function() {
+          getallusers: function(query) {
+        	  var datatosend = {
+        			  "query": query
+        	  };
         	  var config = {
         			  method: "GET",
+        			  params: datatosend,
                       url: "getallusers"
               };
         	  return $http(config);  

@@ -31,23 +31,22 @@
 			<div ui-if="isbrandsearch == 'true'">
 				<span class="leftpane_filter_name">Brand</span> <input type="text"
 					class="span3" placeholder="Brand name" ng-model="search.name"
-					ng-change="getsearchResults()" /> <span
-					class="leftpane_filter_name">Stockists</span>
+					ng-change="getsearchResults()" /> 
+					
+				<span class="leftpane_filter_name">Stockists</span>
 				<!-- <input type="text" class="span3" placeholder="Stockists" /> -->
-
 				<select data-placeholder="Select a Stockist"
 					ui-select2="{width:'element'}" ng-model="search.stockists" multiple>
 					<option value="{{st.username}}" ng-repeat="st in usersavailable">{{st.name}}</option>
 
-				</select> <br> <span class="leftpane_filter_name">LOCATION</span> <input
-					type="text" class="span3" placeholder="Location"
-					ng-model="search.location" ng-change="getsearchResults()" /> <span
-					class="leftpane_filter_name">Price range</span> <br> <input
-					type="text" class="spanpricerange-leftpane"
-					placeholder="From price" required ng-minlength="6" maxlength="6" />
-				- <input type="text" ng-model class="spanpricerange-leftpane"
-					placeholder="To price" required ng-minlength="6" maxlength="6" />
-
+				</select> <br> <span class="leftpane_filter_name">LOCATION</span> 
+					<input type="text" class="span3" placeholder="Location"
+						ng-model="search.location" ng-change="getsearchResults()" /> 
+					<span class="leftpane_filter_name">Price range</span> <br> 
+					<input type="text" class="spanpricerange-leftpane" ng-model="search.fromprice"
+						placeholder="From price" required />
+					- <input type="text" class="spanpricerange-leftpane" ng-model="search.toprice"
+						placeholder="To price" required />
 			</div>
 			<div ui-if="isbrandsearch == 'false'">
 				<span class="leftpane_filter_name">Boutique</span> <input

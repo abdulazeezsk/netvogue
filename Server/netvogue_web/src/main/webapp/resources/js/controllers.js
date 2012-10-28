@@ -1835,9 +1835,15 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myprofile, srvprofil
     };
 }
 
-function MyCtrlAdvancedSearch($scope, $http, search) {
+function MyCtrlAdvancedSearch($scope, $routeParams, $http, search) {
 
 	$scope.$parent.title = 'AdvancedSearch';
+	
+	var query = "";
+	if (!angular.isUndefined($routeParams.query)) {
+		query = $routeParams.query;
+	}
+	
 	$scope.pagenumber = 0;
 	$scope.pagenumbers = [ 1, 2, 3, 4 ];
 	$scope.pageSize = 12;
@@ -1847,7 +1853,9 @@ function MyCtrlAdvancedSearch($scope, $http, search) {
 	$scope.search = {
 			name: "",
 			location:"",
-			stockists: []
+			stockists: [],
+			fromprice: 0,
+			toprice: 0
 	};
 	$scope.searching = true;
 	
@@ -1859,13 +1867,13 @@ function MyCtrlAdvancedSearch($scope, $http, search) {
 		return result;
 	};
 	
-	search.getallusers().success(function(data) {
+	search.getallusers(query).success(function(data) {
 		$scope.entityname		= data.name;
 		$scope.profilepic		= data.profilepic;
 		$scope.advancedsearch	= data.users;
 		$scope.searching = false;
 	}).error(function(data) {
-		$scope.searching = false;
+		$scope.searching = false;	
 	});
 	
 	$scope.searchFilter = new netvogue.searchFilter();
