@@ -4,7 +4,7 @@
 			<div style="position: relative;">
 				<a href="#"> <img ng-src={{profilepic.thumbnail_url}}
 					width="140" height="100" alt="" /></a>
-				<div class="masklayer">
+				<div ng-class={masklayer:isMyProfile}>
 					<h1 class="fileup" ng-show="isMyProfile">
 						<span class="fileinput-button"> <span><i
 								class="icon-edit icon-white"></i>change Image</span> <input
