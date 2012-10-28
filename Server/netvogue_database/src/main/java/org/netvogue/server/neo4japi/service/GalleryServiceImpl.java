@@ -87,10 +87,14 @@ public class GalleryServiceImpl implements GalleryService {
 		if(null == photoId || photoId.isEmpty()) {
 			error.append("photoid is empty");
 			return ResultStatus.FAILURE;
-		} else if(null == name || null == seasonname) {
-			error.append("name/season name is empty");
+		} else if(null == name && null == seasonname) {
+			error.append("name and season name are empty");
 			return ResultStatus.FAILURE;
 		}
+		if(null == name)
+			name = "";
+		if(null == seasonname)
+			seasonname = "";
 		try {
 			galleryRepo.editPhotoInfo(photoId, name, seasonname);
 			return ResultStatus.SUCCESS;

@@ -357,6 +357,7 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, m
 	$scope.showEditGallery	 = false;
 	
 	var ajaxrequestcall	 = "gallery";
+	$scope.gettinggallery = false;
 	
 	$scope.entityname = "";
 	$scope.profilepic = "";
@@ -370,11 +371,13 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, m
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getgalleries = function() {
+    	$scope.gettinggallery = true;
     	mygallery.galleries("getgalleries", $routeParams, $scope.searchgalleryname).success(function(data) {
+    		$scope.gettinggallery = false;
     		mygallery.setgallerylocally(data, $routeParams);
         	$scope.updatedata();
         }).error(function(data) {
-        	
+        	$scope.gettinggallery = false;
         });
     };
     $scope.getgalleries();
@@ -436,6 +439,7 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, mygallery) {
 	
 	var ajaxrequestcall	 = "gallery";
 	$scope.searchphotoname = "";
+	$scope.gettingphotos = false;
 	
 	$scope.entityname = "";
 	$scope.profilepic = "";
@@ -450,11 +454,13 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, mygallery) {
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getphotos = function() {
+    	$scope.gettingphotos = true;
     	mygallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
     		mygallery.setphotoslocally(data, $routeParams);
         	$scope.updatedata();
+        	$scope.gettingphotos = false;
         }).error(function(data) {
-        	
+        	$scope.gettingphotos = false;
         });
     };
     $scope.getphotos();
