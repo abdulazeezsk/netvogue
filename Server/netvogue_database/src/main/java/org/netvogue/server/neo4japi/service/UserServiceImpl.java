@@ -244,11 +244,11 @@ public class UserServiceImpl implements UserService{
 			System.out.println("brand name is" + brand);
 			System.out.println("Category is" + category);
 		
-			Long fromprice = Long.MIN_VALUE;
+			Long fromprice = new Long(0);
 			Long toprice = Long.MAX_VALUE;
-			if(0 == fromPrice)
+			if(0 != fromPrice)
 				fromprice = fromPrice;
-			if(0 == toPrice)
+			if(0 != toPrice)
 				toprice = toPrice;
 			
 			String fromdate = String.valueOf(fromDate.getTime());

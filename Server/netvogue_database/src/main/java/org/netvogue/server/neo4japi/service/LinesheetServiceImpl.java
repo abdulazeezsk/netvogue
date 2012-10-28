@@ -71,11 +71,11 @@ public class LinesheetServiceImpl implements LinesheetService {
 			System.out.println("Linesheet ID is:" + linesheetId);
 			System.out.println("Style number is:" + no);
 		
-			Long fromprice = Long.MIN_VALUE;
+			Long fromprice = new Long(0);
 			Long toprice = Long.MAX_VALUE;
-			if(0 == fromPrice)
+			if(0 != fromPrice)
 				fromprice = fromPrice;
-			if(0 == toPrice)
+			if(0 != toPrice)
 				toprice = toPrice;
 			
 			System.out.println("From Price is" + fromprice);

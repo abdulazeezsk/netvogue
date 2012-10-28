@@ -150,7 +150,8 @@ public interface UserRepository extends GraphRepository<User> {
 			"WHERE linesheet.linesheetname =~ {1} " +
 			"AND linesheet.deliveryDate >= {3} AND linesheet.deliveryDate <= {4} " +
 			"WITH n,linesheet MATCH linesheet-[?:LS_STYLE]-style " +
-			"WHERE style=null OR (style.price >= {5} AND style.price <= {6}) " +
+			"WHERE (style=null AND 0 = {5} AND 0 = {6}) OR " +
+			"(style.price >= {5} AND style.price <= {6}) " +
 			"RETURN n.name as name, linesheet ORDER BY linesheet.createdDate DESC")
 	Iterable<LinesheetData> searchLinesheets(String username, String linesheetname, String category,
 											String fromdate, String todate,
@@ -163,7 +164,8 @@ public interface UserRepository extends GraphRepository<User> {
 			"WHERE linesheet.linesheetname =~ {1} " +
 			"AND linesheet.deliveryDate >= {3} AND linesheet.deliveryDate <= {4} " +
 			"WITH user,linesheet MATCH linesheet-[?:LS_STYLE]-style " +
-			"WHERE style=null OR (style.price >= {5} AND style.price <= {6}) " +
+			"WHERE (style=null AND 0 = {5} AND 0 = {6}) OR " +
+			"(style.price >= {5} AND style.price <= {6}) " +
 			"RETURN user.name as name, linesheet ORDER BY linesheet.createdDate DESC")
 	Iterable<LinesheetData> searchMyNetworkLinesheets(String username, String linesheetname, String category,
 														String fromdate, String todate,
