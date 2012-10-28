@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService{
 		System.out.println(cat);
 		System.out.println(userscarried);
 		return userRepo.doAdvancedSearch(cat, query, userType.toString(), userscarried,
-											fromprice, toprice);
+											fromprice.longValue(), toprice.longValue());
 	}
 	
 	//Network related

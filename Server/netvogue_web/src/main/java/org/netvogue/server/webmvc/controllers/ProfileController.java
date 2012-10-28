@@ -115,9 +115,9 @@ public class ProfileController {
 			}
 			profile.setProductlines(productLine);
 			
-			System.out.println("Get Brands Carried Information");
 			//Get Brands/Stockists carried info
 			Set<User> brandsCarried = user.getUsersCarried();
+			System.out.println("Get Brands Carried Information:" + brandsCarried.size());
 			Set<BrandsCarried> brands = new HashSet<BrandsCarried>();
 			for(User product: brandsCarried) {
 				System.out.println("Name:" +  product.getName() + "username:" + product.getUsername());
@@ -152,10 +152,13 @@ public class ProfileController {
 			Iterator<String> usernameiterator = brandusernames.iterator();
 			while(nameiterator.hasNext() && usernameiterator.hasNext()) {
 				BrandsCarried brand = new BrandsCarried();
-				if(null == nameiterator.next())
+				String brandname = nameiterator.next();
+				String brandusername = usernameiterator.next(); 
+				if(null == brandname || null == brandusername)
 					break;
-				brand.setBrandname(nameiterator.next());
-				brand.setBrandusername(usernameiterator.next());
+				brand.setBrandname(brandname);
+				brand.setBrandusername(brandusername);
+				System.out.println("brandname: " + brandname);
 				brands.add(brand);
 			}
 			profile.setBrandscarried(brands);
