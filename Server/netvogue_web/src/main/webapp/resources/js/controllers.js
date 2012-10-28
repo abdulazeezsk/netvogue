@@ -1107,6 +1107,8 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
 	$scope.editstylesheetid	 	= "";
 	$scope.showEditStylesheet	 = false;	
 	
+	$scope.gettingstylesheets = false;
+	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mystylesheet.getname($routeParams);
 	    $scope.profilepic		= mystylesheet.getprofilepic($routeParams);
@@ -1120,11 +1122,13 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
     			"stylesheetname" :$scope.searchstylesheetname,
     			"category"		 :$scope.searchFilter.getCheckedFilters()
     	};
+    	$scope.gettingstylesheets = true;
     	mystylesheet.stylesheets($routeParams, searchstylesheets).success(function(data) {
     		mystylesheet.setstylesheetlocally(data, $routeParams);
         	$scope.updatedata();
+        	$scope.gettingstylesheets = false;
         }).error(function(data) {
-        	
+        	$scope.gettingstylesheets = false;
         });
     };
     $scope.getstylesheets();
@@ -1198,6 +1202,8 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, mystylesh
 	$scope.searchtoprice = 0;
 	$scope.searchstylesheetname = "";
 	
+	$scope.gettingstyles = false;
+	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mystylesheet.getname($routeParams);
 	    $scope.profilepic		= mystylesheet.getprofilepic($routeParams);
@@ -1213,12 +1219,15 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, mystylesh
 			$scope.fromprice = 0;
 		if(null == $scope.toprice)
 			$scope.toprice = 0;
+		$scope.gettingstyles = true;
 	    mystylesheet.styles($routeParams, $scope.stylesheetid, $scope.searchstyleno, $scope.searchfabrication, 
 	    		$scope.searchfromprice, $scope.searchtoprice).success(function(data) {
 	    	mystylesheet.setstyleslocally(data, $routeParams);
 	    	$scope.updatedata();
+	    	$scope.gettingstyles = false;
 	    }).error(function(data) {
 	    	alert(data);
+	    	$scope.gettingstyles = false;
 	    });
     };
     getstyles();
@@ -1846,6 +1855,7 @@ function MyCtrlAdvancedSearch($scope, $http, search) {
 	}).error(function(data) {
 		$scope.searching = false;
 	});
+	
 	$scope.searchFilter = new netvogue.searchFilter();
 	$scope.getsearchResults = function() {
 		$scope.searching = true;
