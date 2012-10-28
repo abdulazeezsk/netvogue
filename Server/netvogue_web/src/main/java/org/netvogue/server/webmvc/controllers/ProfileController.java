@@ -152,6 +152,8 @@ public class ProfileController {
 			Iterator<String> usernameiterator = brandusernames.iterator();
 			while(nameiterator.hasNext() && usernameiterator.hasNext()) {
 				BrandsCarried brand = new BrandsCarried();
+				if(null == nameiterator.next())
+					break;
 				brand.setBrandname(nameiterator.next());
 				brand.setBrandusername(usernameiterator.next());
 				brands.add(brand);
