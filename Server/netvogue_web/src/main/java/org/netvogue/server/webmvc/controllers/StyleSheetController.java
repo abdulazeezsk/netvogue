@@ -63,8 +63,8 @@ public class StyleSheetController {
 
 	@RequestMapping(value="getstylesheets", method=RequestMethod.GET)
 	public @ResponseBody Stylesheets GetStylesheets( 
-												@RequestParam(value="stylesheetname", required=false) String stylesheetname,
-												@RequestParam(value="category", required=false) String categories) {
+						@RequestParam(value="stylesheetname", required=false, defaultValue="") String stylesheetname,
+						@RequestParam(value="category", required=false, defaultValue="") String categories) {
 		System.out.println("Get Stylesheets: " + stylesheetname);
 		Stylesheets stylesheets = new Stylesheets();
 		User loggedinUser = userDetailsService.getUserFromSession();
