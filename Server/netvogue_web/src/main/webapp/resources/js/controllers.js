@@ -1477,7 +1477,7 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, mylinesheet) 
 	$scope.searchstyleno = "";
 	$scope.searchfromprice = 0;
 	$scope.searchtoprice = 0;
-	
+	$scope.searchlinesheetname = "";
 	$scope.entityname = "";
 	$scope.profilepic = "";
 	$scope.updatedata = function() {
@@ -1505,6 +1505,18 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, mylinesheet) 
 	    });
     };
     $scope.getstyles();
+    
+    $scope.getlinesheets = function() {
+    	var searchlinesheets = {
+    			"linesheetname" :$scope.searchlinesheetname,
+    	};
+    	mylinesheet.linesheets($routeParams, searchlinesheets).success(function(data) {
+    		mylinesheet.setlinesheetlocally(data, $routeParams);
+    		$scope.linesheets		= mylinesheet.getlinesheets();
+        }).error(function(data) {
+        	alert(data);
+        });
+    };
     
     $scope.setlinesheet = function(linesheetid) {
     	$scope.linesheetid = linesheetid;
