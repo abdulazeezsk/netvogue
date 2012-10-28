@@ -124,6 +124,10 @@ public class ProfileController {
 				BrandsCarried brand = new BrandsCarried();
 				brand.setBrandname(product.getName());
 				brand.setBrandusername(product.getUsername());
+				if(null != product.getProfilePicLink()) {
+					String thumburl = uploadManager.getQueryString(product.getProfilePicLink(), ImageType.PROFILE_PIC, Size.PThumb);
+					brand.setProfilepic(thumburl);
+				}
 				brands.add(brand);
 			}
 			profile.setBrandscarried(brands);
@@ -147,18 +151,28 @@ public class ProfileController {
 			Set<BrandsCarried> brands = new HashSet<BrandsCarried>();
 			Iterable<String> brandnames = userData.getBrandnames();
 			Iterable<String> brandusernames = userData.getBrandusernames();
+			Iterable<String> brandpics = userData.getprofilepics();
 			
 			Iterator<String> nameiterator = brandnames.iterator();
 			Iterator<String> usernameiterator = brandusernames.iterator();
+			Iterator<String> profilepiciterator = brandpics.iterator();
 			while(nameiterator.hasNext() && usernameiterator.hasNext()) {
 				BrandsCarried brand = new BrandsCarried();
 				String brandname = nameiterator.next();
-				String brandusername = usernameiterator.next(); 
+				String brandusername = usernameiterator.next();
+				String profilepic = profilepiciterator.next();
 				if(null == brandname || null == brandusername)
 					break;
 				brand.setBrandname(brandname);
 				brand.setBrandusername(brandusername);
+				if(null != profilepic) {
+					String thumburl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PThumb);
+					brand.setProfilepic(thumburl);
+				} else {
+					brand.setProfilepic("");
+				}
 				System.out.println("brandname: " + brandname);
+				
 				brands.add(brand);
 			}
 			profile.setBrandscarried(brands);

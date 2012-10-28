@@ -19,4 +19,7 @@ public interface UserData {
 	
 	@ResultColumn("brandusernames")
 	Iterable<String> getBrandusernames();
+	
+	@ResultColumn("profilepics")
+	Iterable<String> getprofilepics();
 }

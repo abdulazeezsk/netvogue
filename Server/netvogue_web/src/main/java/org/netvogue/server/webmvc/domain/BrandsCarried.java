@@ -2,8 +2,9 @@ package org.netvogue.server.webmvc.domain;
 
 public class BrandsCarried {
 	
-	String brandname 	= new String();
-	String brandusername 	= new String();
+	String brandname 	;
+	String brandusername;
+	String profilepic;
 	
 	public String getBrandname() {
 		return brandname;
@@ -16,5 +17,11 @@ public class BrandsCarried {
 	}
 	public void setBrandusername(String brandusername) {
 		this.brandusername = brandusername;
+	}
+	public String getProfilepic() {
+		return profilepic;
+	}
+	public void setProfilepic(String profilepic) {
+		this.profilepic = profilepic;
 	}		
 }
