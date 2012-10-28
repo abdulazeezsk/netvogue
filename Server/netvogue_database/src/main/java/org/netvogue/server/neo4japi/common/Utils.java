@@ -27,8 +27,12 @@ public class Utils {
 	}
 	
 	public static String SerializePropertyParamForSearch(String propertyParam) {
-		propertyParam = propertyParam.replaceAll(" ", "*");
-		propertyParam = "(?i).*" + propertyParam + ".*";
+		if(null == propertyParam || propertyParam.isEmpty()) {
+			propertyParam = ".*";
+		} else {
+			propertyParam = propertyParam.replaceAll(" ", "*");
+			propertyParam = "(?i).*" + propertyParam + ".*";
+		}
 		return propertyParam;
 	}
 }

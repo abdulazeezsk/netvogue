@@ -103,7 +103,7 @@ public interface UserRepository extends GraphRepository<User> {
 	
 	@Query( "START n=node:search(username={0}) " +
 			"MATCH n-[r:NETWORK]-user WHERE r.status? = 'CONFIRMED' " +
-			"WITH user" +
+			"WITH user " +
 			"MATCH user-[:COLLECTION]->collection " +
 			"RETURN user.name as name, collection ORDER BY collection.createdDate DESC")
 	Iterable<CollectionData> getMyNetworkCollections(String username);
@@ -139,8 +139,8 @@ public interface UserRepository extends GraphRepository<User> {
 	Iterable<LinesheetData> getLinesheets(String username);
 	
 	@Query( "START n=node:search(username={0}) " +
-			"MATCH n-[r:NETWORK]-user RETURN r.status? = 'CONFIRMED' " +
-			"WITH user" +
+			"MATCH n-[r:NETWORK]-user WHERE r.status? = 'CONFIRMED' " +
+			"WITH user " +
 			"MATCH user-[:LINESHEET]->linesheet " +
 			"RETURN user.name as name, linesheet ORDER BY linesheet.createdDate DESC")
 	Iterable<LinesheetData> getMyNetworkLinesheets(String username);
@@ -150,20 +150,20 @@ public interface UserRepository extends GraphRepository<User> {
 			"WHERE linesheet.linesheetname =~ {1} " +
 			"AND linesheet.deliveryDate >= {3} AND linesheet.deliveryDate <= {4} " +
 			"WITH n,linesheet MATCH linesheet-[?:LS_STYLE]-style " +
-			"WHERE style=null OR (style.price <= {5} AND style.price >= {6}) " +
+			"WHERE style=null OR (style.price >= {5} AND style.price <= {6}) " +
 			"RETURN n.name as name, linesheet ORDER BY linesheet.createdDate DESC")
 	Iterable<LinesheetData> searchLinesheets(String username, String linesheetname, String category,
 											String fromdate, String todate,
 											long fromPrice, long toPrice);
 	
 	@Query( "START n=node:search(username={0}) " +
-			"MATCH n-[r:NETWORK]-user RETURN r.status? = 'CONFIRMED') AND user.name = {7} " +
-			"WITH user categories = node:productline({2}) " +
+			"MATCH n-[r:NETWORK]-user WHERE r.status? = 'CONFIRMED' AND user.name = {7} " +
+			"WITH user START categories = node:productline({2}) " +
 			"MATCH user-[:LINESHEET]->linesheet-[:Linesheet_Category]-categories " +
 			"WHERE linesheet.linesheetname =~ {1} " +
 			"AND linesheet.deliveryDate >= {3} AND linesheet.deliveryDate <= {4} " +
 			"WITH user,linesheet MATCH linesheet-[?:LS_STYLE]-style " +
-			"WHERE style=null OR (style.price <= {5} AND style.price >= {6}) " +
+			"WHERE style=null OR (style.price >= {5} AND style.price <= {6}) " +
 			"RETURN user.name as name, linesheet ORDER BY linesheet.createdDate DESC")
 	Iterable<LinesheetData> searchMyNetworkLinesheets(String username, String linesheetname, String category,
 														String fromdate, String todate,

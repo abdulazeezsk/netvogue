@@ -428,10 +428,23 @@ netvogue.linesheetsearchjsonrequest = function() {
 	this.linesheetname 	= "";
 	this.brandname 		= "";
 	this.category;
-	this.fromdate;
-	this.todate;
+	this.fromdate		= 0;
+	this.todate			= 0;
 	this.fromprice 		= 0;
 	this.toprice 		= 0;
+	
+	/*this.isempty = function() {
+		if(	"" == this.linesheetname &&
+			"" == this.brandname &&
+			(null == this.category || "" == this.category) &&
+			(null == this.fromdate || 0 == this.fromdate) &&
+			(null == this.todate || 0 == this.todate) &&
+			(0 == this.fromprice) &&
+			(0 == this.toprice)) {
+			return true;
+		}
+		return false;
+	};*/
 };
 
 /*************************************************************************/

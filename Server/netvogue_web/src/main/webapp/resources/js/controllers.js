@@ -1328,7 +1328,23 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
     
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
-    $scope.getlinesheets = function() {
+    $scope.getlinesheets = function(search) {
+    	var getdata;
+    	if(search)
+    		getdata = mylinesheet.linesheets($routeParams, $scope.searchlinesheets);
+    	else 
+    		getdata = mylinesheet.linesheets($routeParams);
+    	getdata.success(function(data) {
+    		mylinesheet.setlinesheetlocally(data, $routeParams);
+        	$scope.updatedata();
+        }).error(function(data) {
+        	
+        });
+    };
+    $scope.getlinesheets(false);
+    
+    var firstcall = true;
+    $scope.searchlinesheetsfn = function() {
     	if($scope.searchdeliverydate == "all") {
     		$scope.searchlinesheets.fromdate 	= "0";
     		$scope.searchlinesheets.todate		= "0";
@@ -1345,14 +1361,26 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
     	}
     	
     	$scope.searchlinesheets.category = $scope.searchFilter.getCheckedFilters();
-    	mylinesheet.linesheets($routeParams, $scope.searchlinesheets).success(function(data) {
-    		mylinesheet.setlinesheetlocally(data, $routeParams);
-        	$scope.updatedata();
-        }).error(function(data) {
-        	
-        });
+    	var temp = $scope.searchlinesheets;
+    	var empty = false;
+    	if(firstcall) {
+    		$scope.getlinesheets(true);
+    		firstcall = false;
+    		return;
+    	}
+    	
+    	if(	"" == temp.linesheetname &&
+    			"" == temp.brandname &&
+    			(temp == this.category || "" == temp.category) &&
+    			(null == temp.fromdate || 0 == temp.fromdate) &&
+    			(null == temp.todate || 0 == temp.todate) &&
+    			(0 == temp.fromprice) &&
+    			(0 == temp.toprice)) {
+    			empty = true;
+    	}
+    	if(!empty)
+    		$scope.getlinesheets(true);
     };
-    $scope.getlinesheets();
     
     $scope.createlinesheet = function() {
     	if("true" == $scope.immediate)

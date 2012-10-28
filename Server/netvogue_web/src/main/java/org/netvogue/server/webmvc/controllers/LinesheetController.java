@@ -64,8 +64,8 @@ public class LinesheetController {
 											@RequestParam(value="fromdate", required=false) String fromDate,
 											@RequestParam(value="linesheetname", required=false) String linesheetname,
 											@RequestParam(value="todate", required=false) String toDate,
-											@RequestParam(value="fromprice", required=false) long fromPrice,
-											@RequestParam(value="toprice", required=false) long toPrice) {
+											@RequestParam(value="fromprice", required=false, defaultValue="0") long fromPrice,
+											@RequestParam(value="toprice", required=false, defaultValue="0") long toPrice) {
 		System.out.println("Get Linesheets: " + linesheetname +
 				"\nCategory: " + categories +
 				"\nFrom Date: " + fromDate +
@@ -112,8 +112,8 @@ public class LinesheetController {
 		if( (null == linesheetname || linesheetname.isEmpty()) && 
 			(null == brandname || brandname.isEmpty()) && 
 			(null == categories || categories.isEmpty()) && 
-			(null == fromDate || fromDate.isEmpty()) && 
-			(null == toDate || toDate.isEmpty()) && 
+			(null == fromDate || fromDate.isEmpty() || fromDate.equals("0")) && 
+			(null == toDate || toDate.isEmpty() || toDate.equals("0")) && 
 			(0 == fromPrice && 0 == toPrice)
 		) {
 			dbLinesheets = userService.getLinesheets(user);
