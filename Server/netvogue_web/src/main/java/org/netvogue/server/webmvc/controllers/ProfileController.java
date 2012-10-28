@@ -97,22 +97,23 @@ public class ProfileController {
 		//Add it to profile Info
 		profile.setContactinfo(contactInfo);
 		
-		//Get Productlines Info			
-		Set<Category> productsCarried = user.getProductLinesCarried();
-		int size = productsCarried.size();
-		Set<ProductLine> productLine = new HashSet<ProductLine>();
-		for(Category product: productsCarried) {
-			System.out.println("Name:" +  product.getProductLine().getDesc() + "- size:" + size );
-			ProductLine productTemp = new ProductLine();
-			productTemp.setProductlinename(product.getProductLine().getDesc());
-			productTemp.setSelected(true);
-			productLine.add(productTemp);
-		}
-		profile.setProductlines(productLine);
-		
+		//Get Productlines Info
 		if(profileid.isEmpty()) {
+			userService.getBrandsCarriedAndCategories(user);
+			
+			Set<Category> productsCarried = user.getProductLinesCarried();
+			int size = productsCarried.size();
+			Set<ProductLine> productLine = new HashSet<ProductLine>();
+			for(Category product: productsCarried) {
+				System.out.println("Name:" +  product.getProductLine().getDesc() + "- size:" + size );
+				ProductLine productTemp = new ProductLine();
+				productTemp.setProductlinename(product.getProductLine().getDesc());
+				productTemp.setSelected(true);
+				productLine.add(productTemp);
+			}
+			profile.setProductlines(productLine);
+			
 			System.out.println("Get Brands Carried Information");
-			userService.getBrandsCarried(user);
 			//Get Brands/Stockists carried info
 			Set<User> brandsCarried = user.getUsersCarried();
 			Set<BrandsCarried> brands = new HashSet<BrandsCarried>();
@@ -124,9 +125,22 @@ public class ProfileController {
 				brands.add(brand);
 			}
 			profile.setBrandscarried(brands);
-		} else if(null != userData){
-			Set<BrandsCarried> brands = new HashSet<BrandsCarried>();
 			
+		} else {
+			Set<ProductLine> productLine = new HashSet<ProductLine>();
+			Iterable<ProductLines> productsCarried = userData.getProductlines();
+			
+			Iterator<ProductLines> plIterator = productsCarried.iterator();
+			while(plIterator.hasNext()) {
+				ProductLines product = plIterator.next();
+				ProductLine productTemp = new ProductLine();
+				productTemp.setProductlinename(product.getDesc());
+				productTemp.setSelected(true);
+				productLine.add(productTemp);
+			}
+			profile.setProductlines(productLine);
+			
+			Set<BrandsCarried> brands = new HashSet<BrandsCarried>();
 			Iterable<String> brandnames = userData.getBrandnames();
 			Iterable<String> brandusernames = userData.getBrandusernames();
 			

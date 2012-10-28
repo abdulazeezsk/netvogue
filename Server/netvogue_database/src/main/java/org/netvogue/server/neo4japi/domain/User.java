@@ -79,7 +79,7 @@ public class User {
 	
 	//Add relations now
 	@RelatedTo(type="has_category")
-	@Fetch Set<Category> productLinesCarried = new HashSet<Category>(); 
+	Set<Category> productLinesCarried = new HashSet<Category>(); 
 	
 	@RelatedTo(type="users_carried")
 	Set<User> 	  usersCarried =  new HashSet<User>();

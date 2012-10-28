@@ -16,7 +16,7 @@ public interface UserService {
 	ResultStatus ValidateEmailAndId(String email, Long id);
 	public User getUserByUsername(String username);
 	public UserData getUserDataByUsername(String username);
-	public void getBrandsCarried(User user);
+	public void getBrandsCarriedAndCategories(User user);
 
 	//Search related
 	public Iterable<User> doBasicSearch(String query);
