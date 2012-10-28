@@ -31,11 +31,11 @@
 					placeholder="Style number" class="span3" ng-model="searchstyleno" ng-change="getstyles()"/>
 					<span
 					class="leftpane_filter_name">Price range</span> <br> <input
-					type="text" class="spanpricerange-leftpane" ng-model="searchfromprice" ng-change="getstyles()"
-					placeholder="From price" required ng-minlength="6" maxlength="6"
+					type="number" class="spanpricerange-leftpane" ng-model="searchfromprice" ng-change="getstyles()"
+					placeholder="From price" required
 					 /> - <input
-					type="text"  class="spanpricerange-leftpane" ng-model="searchtoprice" ng-change="getstyles()"
-					placeholder="To price" required ng-minlength="6" maxlength="6"
+					type="text"  class="spanpricerange-leftpane" ng-model="number" ng-change="getstyles()"
+					placeholder="To price" required
 					 />
 			</div>
 			<div>
