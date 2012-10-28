@@ -153,10 +153,10 @@ public class LinesheetController {
 	
 	@RequestMapping(value={"/linesheet/getstyles", "/linesheet/getstyles/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Styles GetStyles(@ModelAttribute("profileid") String profileid, 
-										  @RequestParam("linesheetid") String linesheetid,
-										  @RequestParam(value="styleno", required=false) String styleno,
-										  @RequestParam(value="fromprice", required=false) long fromPrice,
-										  @RequestParam(value="toprice", required=false) long toPrice
+							@RequestParam("linesheetid") String linesheetid,
+							@RequestParam(value="styleno", required=false, defaultValue = "") String styleno,
+							@RequestParam(value="fromprice", required=false, defaultValue = "0") long fromPrice,
+							@RequestParam(value="toprice", required=false, defaultValue = "0") long toPrice
 											 ) {
 		System.out.println("Get Styles: " + linesheetid +
 							"\n Styleno:" + styleno +

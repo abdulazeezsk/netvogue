@@ -111,10 +111,10 @@ public class StyleSheetController {
 	
 	@RequestMapping(value="stylesheet/getstyles", method=RequestMethod.GET)
 	public @ResponseBody Styles GetStyles(@RequestParam("stylesheetid") String stylesheetid,
-										  @RequestParam(value="styleno", required=false) String styleno,
-										  @RequestParam(value="fabrication", required=false) String fabrication,
-										  @RequestParam(value="fromprice", required=false) long fromPrice,
-										  @RequestParam(value="toprice", required=false) long toPrice
+						@RequestParam(value="styleno", required=false, defaultValue = "") String styleno,
+						@RequestParam(value="fabrication", required=false, defaultValue = "") String fabrication,
+						@RequestParam(value="fromprice", required=false, defaultValue = "0") long fromPrice,
+						@RequestParam(value="toprice", required=false, defaultValue = "0") long toPrice
 											 ) {
 		System.out.println("Get Styles: " + stylesheetid +
 				"\n Styleno:" + styleno +
