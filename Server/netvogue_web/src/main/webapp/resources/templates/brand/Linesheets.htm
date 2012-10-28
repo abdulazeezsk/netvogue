@@ -67,9 +67,9 @@
 				<div>
 					<span class="leftpane_filter_name">Price range</span> <br> 
 						<input type="text" class="spanpricerange-leftpane" ng-model="searchlinesheets.fromprice" 
-						ng-change="searchlinesheetsfn()" placeholder="From price" required ng-minlength="6" maxlength="6" />
+						ng-change="searchlinesheetsfn()" placeholder="From price" required maxlength="6" />
 					- 	<input type="text" class="spanpricerange-leftpane" ng-model="searchlinesheets.toprice" 
-						ng-change="searchlinesheetsfn()" placeholder="To price" required ng-minlength="6" maxlength="6" />
+						ng-change="searchlinesheetsfn()" placeholder="To price" required maxlength="6" />
 
 				</div>
 				<div class="divi2"></div>
@@ -145,6 +145,11 @@
 			</div>
 		</div>
 	</div>
+	<div class="nav" >
+		<img src="img/ajax-loadersmall.gif" style="float: left;"><br>
+	</div>
+		
+	</nav>
 	<!--body-->
 	<!-- modal -->
 	<div class="modal  hide" id="Createlinesheet">
