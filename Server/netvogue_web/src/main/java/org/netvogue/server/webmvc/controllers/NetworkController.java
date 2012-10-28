@@ -93,6 +93,7 @@ public class NetworkController {
 			newNetwork.setCountry(networkUser.getCountry());
 			newNetwork.setUsertype(networkUser.getUserType() == USER_TYPE.BRAND? "BRAND": "BOUTIQUE");
 			newNetwork.setName(networkUser.getName());
+			
 			thumbpic = networkUser.getProfilePicLink();
 			
 			if(null != thumbpic) {
@@ -118,6 +119,8 @@ public class NetworkController {
 		contactInfo.setMobile(String.valueOf(user.getMobileNo()));
 		contactInfo.setWebsite(user.getWebsite());
 		contactInfo.setYearest(user.getYearofEst());
+		contactInfo.setFromprice(user.getFromPrice());
+		contactInfo.setToprice(user.getToPrice());
 		
 		response.setContactinfo(contactInfo);
 		System.out.println("Sent Networks:" + response.getNetworks().size());

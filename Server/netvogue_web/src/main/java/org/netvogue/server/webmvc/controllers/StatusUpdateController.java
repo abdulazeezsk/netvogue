@@ -76,6 +76,9 @@ public class StatusUpdateController {
 		contactInfo.setMobile(String.valueOf(user.getMobileNo()));
 		contactInfo.setWebsite(user.getWebsite());
 		contactInfo.setYearest(user.getYearofEst());
+		contactInfo.setFromprice(user.getFromPrice());
+		contactInfo.setToprice(user.getToPrice());
+		
 		//Add it to profile Info
 		updates.setContactinfo(contactInfo);
 		
