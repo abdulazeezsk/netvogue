@@ -32,7 +32,8 @@
 			<div>
 				<div class="leftpane_subheading">Lookbooks</div>
 				<div class="divi2"></div>
-				<input type="text" placeholder="Search lookbooks" class="span3" />
+				<input type="text" placeholder="Search lookbooks" class="span3" 
+					ng-model="searchstylesheetname" ng-change="getstylesheets()"/>
 				<ul class="nav nav-tab nav-stacked">
 					<li ng-repeat="stylesheet in stylesheets">
 						<div class="leftpanefeed fade_spot">
