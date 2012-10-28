@@ -45,24 +45,25 @@
 					type="text" placeholder="Search linesheets in this brand" class="span3"
 					ng-model="searchstylesheetname" ng-change="getstylesheets()"/>
 				<ul class="nav nav-tab nav-stacked">
-					<li ng-repeat="stylesheet in stylesheets">
+					<li ng-repeat="linesheet in linesheets">
 						<div class="leftpanefeed fade_spot">
 							<div class="feedimage">
-								<a ng-click="setstylesheet(stylesheet.galleryid)"> <img alt=""
-									ng-src="{{stylesheet.leftpic}}" class="pull-left"></a>
+								<a ng-click="setlinesheet(linesheet.galleryid)"> <img alt=""
+									ng-src="{{linesheet.leftpic}}" class="pull-left"></a>
 							</div>
 							<div class="leftpanefeed_text">
-								 <h3>
-									<a ng-click="setstylesheet(stylesheet.galleryid)" title="">{{brandname}}</a>
+								<h3>
+									<a ng-click="setlinesheet(linesheet.galleryid)" title="">{{brandname}}</a>
 								</h3>
 								<h2>
-									<a ng-click="setstylesheet(stylesheet.galleryid)" title="">{{linesheet.galleryname}}</a>
+									<a ng-click="setlinesheet(linesheet.galleryid)" title="">{{linesheet.galleryname}}</a>
 								</h2>
-								<h3 style="margin-top:3px;">
-									<span ng-click="setstylesheet(stylesheet.galleryid)" title="">Delivery Date</span>
+								<h3 style="margin-top: 3px;">
+									<span ng-click="setlinesheet(linesheet.galleryid)" title="">Delivery
+										Date</span>
 								</h3>
 								<h2>
-									<span ng-click="setstylesheet(stylesheet.galleryid)" title="">26-Aug-2012</span>
+									<span ng-click="setlinesheet(linesheet.galleryid)" title="">26-Aug-2012</span>
 								</h2>
 								<p>{{style.stylename}}</p>
 							</div>
