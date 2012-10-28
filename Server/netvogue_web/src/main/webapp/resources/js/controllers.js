@@ -689,20 +689,6 @@ function MyCtrlviewPrintcampaign($scope, $routeParams, currentvisitedprofile) {
     };
 }
 
-function MyCtrlVideocampaign($scope, $routeParams, currentvisitedprofile,
-		srvprofile) {
-
-	$scope.$parent.title = 'Videocampaign';
-
-	$scope.entityname = currentvisitedprofile.getEntityName();
-	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
-
-	$scope.links = currentvisitedprofile.getleftpanellinks();
-	$scope.backButton = currentvisitedprofile.getBackHistory();
-	$scope.videocampaigns = srvprofile.getvideocampaigns($routeParams);
-
-}
-
 function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile, mygallery) {
 
 	$scope.$parent.title = 'News letters';
@@ -1915,48 +1901,6 @@ function MyCtrlAdvancedSearch($scope, $routeParams, $http, search) {
 	$scope.brandsenteredchanged("");
 }
 
-function MyCtrlVideos($scope, $routeParams, currentvisitedprofile) {
-
-	$scope.$parent.title = 'Videos';
-
-	$scope.entityname = currentvisitedprofile.getEntityName();
-
-	$scope.backButton = currentvisitedprofile.getBackHistory();
-
-	$scope.videos = [
-			{
-				"videolistitemid" : "videoid",
-				"videoname" : "Calvin Klien",
-				"videodescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi",
-				"videothumbnail" : "http://placehold.it/90x72"
-
-			},
-			{
-				"videolistitemid" : "videoid",
-				"videoname" : "Calvin Klien",
-				"videodescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi",
-				"videothumbnail" : "http://placehold.it/90x72"
-
-			},
-			{
-				"videolistitemid" : "videoid",
-				"videoname" : "Calvin Klien",
-				"videodescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi",
-				"videothumbnail" : "http://placehold.it/90x72"
-
-			},
-			{
-				"videolistitemid" : "videoid",
-				"videoname" : "Calvin Klien",
-				"videodescription" : "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi",
-				"videothumbnail" : "http://placehold.it/90x72"
-			}
-
-	];
-
-}
-
-
 function MyCtrlHelp($scope, $routeParams, currentvisitedprofile, srvprofile) {
 
 	$scope.$parent.title = 'Help';
@@ -1970,16 +1914,6 @@ function MyCtrlPrivacySettings($scope, $routeParams, currentvisitedprofile,
 		srvprofile) {
 
 	$scope.$parent.title = 'Privacy Settings';
-	$scope.entityname = currentvisitedprofile.getEntityName();
-	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
-	$scope.backButton = currentvisitedprofile.getBackHistory();
-
-}
-
-function MyCtrlOrganizestyle($scope, $routeParams, currentvisitedprofile,
-		srvprofile) {
-
-	$scope.$parent.title = 'Organize Style';
 	$scope.entityname = currentvisitedprofile.getEntityName();
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 	$scope.backButton = currentvisitedprofile.getBackHistory();

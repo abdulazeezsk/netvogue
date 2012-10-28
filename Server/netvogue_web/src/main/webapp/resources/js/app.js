@@ -17,7 +17,6 @@ angular.module('netVogue', ['netVogue.constants', 'netVogue.filters', 'netVogue.
 	  $routeProvider.when('/addstyle',                  {templateUrl: 'templates/brand/Add_Style.htm',                   	controller: MyCtrlAddStyle});
 	  $routeProvider.when('/addnewsletter',				{templateUrl: 'templates/Add_Newsletter.htm', 						controller: MyCtrlAddNewsletter});
 	  $routeProvider.when('/addprintcampaign', 			{templateUrl: 'templates/Add_PrintCampaign.htm', 					controller: MyCtrlAddPrintCampaign});
-	  $routeProvider.when('/addvideocampaign', 			{templateUrl: 'templates/Add_VideoCampaign.htm', 					controller: MyCtrlAddVideoCampaign});
 	  $routeProvider.when('/advancesearch', 			{templateUrl: 'templates/AdvSearch.htm', 							controller: MyCtrlAdvancedSearch });
 	  $routeProvider.when('/collections', 				{templateUrl: 'templates/brand/Collections.htm', 					controller: MyCtrlCollections });
 	  $routeProvider.when('/:profileid/collections', 	{templateUrl: 'templates/brand/Collections.htm', 					controller: MyCtrlCollections });
@@ -53,7 +52,6 @@ angular.module('netVogue', ['netVogue.constants', 'netVogue.filters', 'netVogue.
 	  $routeProvider.when('/:profileid/gallery',        { templateUrl: 'templates/Gallery.htm',                    			controller: MyCtrlGallery });
 	  $routeProvider.when('/help',                      { templateUrl: 'templates/Help.htm',                       			controller: MyCtrlHelp });
 	  $routeProvider.when('/privacysettings',           { templateUrl: 'templates/Privacy_Settings.htm',           			controller: MyCtrlPrivacySettings });
-	  $routeProvider.when('/organizestyle',             { templateUrl: 'templates/boutique/Organize_Style.htm',             controller: MyCtrlOrganizestyle });
 	  $routeProvider.when('/notification',              { templateUrl: 'templates/Notifications.htm',              			controller: MyCtrlNotifications });
 	  $routeProvider.when('/addgallery',              	{ templateUrl: 'templates/Add_Gallery.htm',              			controller: MyCtrlAddGallery });
 	  $routeProvider.when('/stylesheets',             	{ templateUrl: 'templates/brand/Stylesheets.htm',              	controller: MyCtrlStylesheets });
