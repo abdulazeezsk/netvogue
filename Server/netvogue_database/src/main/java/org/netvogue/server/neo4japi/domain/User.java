@@ -67,6 +67,9 @@ public class User {
 	
 	int 	yearofEst;
 	
+	long	fromPrice = 0;
+	long	toPrice = 0;
+	
 	Date	registeredDate = new Date();
 	Date	accessGrantedDate = new Date();
 	
@@ -267,6 +270,22 @@ public class User {
 		this.yearofEst = yearofEst;
 	}
 	
+	public long getFromPrice() {
+		return fromPrice;
+	}
+
+	public void setFromPrice(long fromPrice) {
+		this.fromPrice = fromPrice;
+	}
+
+	public long getToPrice() {
+		return toPrice;
+	}
+
+	public void setToPrice(long toPrice) {
+		this.toPrice = toPrice;
+	}
+
 	public Roles[] getRoles() {
         return roles;
     }

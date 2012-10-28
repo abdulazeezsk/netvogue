@@ -59,6 +59,8 @@ public class UserConverterFactory implements ConverterFactory<BoutiqueNew, User>
 			serviceUser.setTelephoneNo1(Integer.parseInt(boutiqueNew.getTelephone()));
 			serviceUser.setWebsite(boutiqueNew.getWebsite());
 			serviceUser.setYearofEst(boutiqueNew.getEstdyear());
+			serviceUser.setFromPrice(boutiqueNew.getFromprice().longValue());
+			serviceUser.setToPrice(boutiqueNew.getToprice().longValue());
 			List<String>	products		= new ArrayList<String>(Arrays.asList(boutiqueNew.getProductlines()));
 			for(String productline: products) {
 				ProductLines productLine = ProductLines.getValueOf(productline);

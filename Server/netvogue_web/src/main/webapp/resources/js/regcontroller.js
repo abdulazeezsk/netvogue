@@ -109,6 +109,8 @@ netvogue.entity 		= function() {
 	this.telephone		= "23456789";
 	this.website		= "http://netvogue.org";
 	this.estdyear		= 1989;
+	this.fromprice		= 0;
+	this.topprice		= 0;
 	this.productlines	= [];
 	this.brandsselected = [];
 };

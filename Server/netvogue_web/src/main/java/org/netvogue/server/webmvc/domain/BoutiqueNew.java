@@ -64,6 +64,9 @@ public class BoutiqueNew {
 	@Max(2014)
 	private Integer estdyear;
 	
+	private Long fromprice;
+	private Long toprice;
+	
 	private String[] productlines;
 	private String[] brandsselected;
 
@@ -172,6 +175,22 @@ public class BoutiqueNew {
 		this.website = website;
 	}
 
+	public Long getFromprice() {
+		return fromprice;
+	}
+
+	public void setFromprice(Long fromprice) {
+		this.fromprice = fromprice;
+	}
+
+	public Long getToprice() {
+		return toprice;
+	}
+
+	public void setToprice(Long toprice) {
+		this.toprice = toprice;
+	}
+
 	@Override
 	public String toString() {
 		String temp = new String();
@@ -187,6 +206,8 @@ public class BoutiqueNew {
 		temp+= "Telephone:" 	+ telephone + "\n";
 		temp+= "Website:" 		+ website 	+ "\n";
 		temp+= "Year of Est:" 	+ estdyear  + "\n";
+		temp+= "fromyear"		+ fromprice	+ "\n";
+		temp+= "toyear"			+ toprice	+ "\n";
 		temp+= "ProductLines:"	+ "\n";
 		for(int i=0; i < productlines.length; i++) {
 			temp+= "\t" + productlines[i].toString() 	+ "\n";

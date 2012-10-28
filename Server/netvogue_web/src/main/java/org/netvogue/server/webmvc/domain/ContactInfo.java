@@ -12,8 +12,8 @@ public class ContactInfo {
 	String country	=""	;
 	String website	=""	;
     Integer yearest		;
-    Integer fromprice = 0;
-    Integer toprice	  = 0;	
+    Long fromprice;
+    Long toprice;	
     
     public String getEmail() {
 		return email;
@@ -81,16 +81,16 @@ public class ContactInfo {
 	public void setYearest(Integer yearest) {
 		this.yearest = yearest;
 	}
-	public Integer getFromprice() {
+	public Long getFromprice() {
 		return fromprice;
 	}
-	public void setFromprice(Integer fromprice) {
+	public void setFromprice(Long fromprice) {
 		this.fromprice = fromprice;
 	}
-	public Integer getToprice() {
+	public Long getToprice() {
 		return toprice;
 	}
-	public void setToprice(Integer toprice) {
+	public void setToprice(Long toprice) {
 		this.toprice = toprice;
 	}
 }

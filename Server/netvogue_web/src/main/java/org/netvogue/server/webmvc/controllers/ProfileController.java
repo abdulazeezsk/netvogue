@@ -94,6 +94,8 @@ public class ProfileController {
 		contactInfo.setMobile(String.valueOf(user.getMobileNo()));
 		contactInfo.setWebsite(user.getWebsite());
 		contactInfo.setYearest(user.getYearofEst());
+		contactInfo.setFromprice(user.getFromPrice());
+		contactInfo.setToprice(user.getToPrice());
 		//Add it to profile Info
 		profile.setContactinfo(contactInfo);
 		
@@ -219,6 +221,7 @@ public class ProfileController {
 	
 	@RequestMapping(value = "/profile/contactinfo", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse setContactInfo(@RequestBody ContactInfo contactInfo) {
+		System.out.println("Update Contact Info: ");
 		JsonResponse status = new JsonResponse();
 		User user = userDetailsService.getUserFromSession();
 		try {
@@ -235,6 +238,8 @@ public class ProfileController {
 			user.setMobileNo(Long.parseLong(contactInfo.getMobile()));
 			user.setWebsite(contactInfo.getWebsite());
 			user.setYearofEst(contactInfo.getYearest());
+			user.setFromPrice(contactInfo.getFromprice().longValue());
+			user.setToPrice(contactInfo.getToprice().longValue());
 			
 			String error = new String();
 			if(ResultStatus.SUCCESS == userService.SaveUser(user, error))
@@ -246,7 +251,9 @@ public class ProfileController {
 		}*/
 		} catch(Exception e) {
 			status.setError(e.toString());
+			System.out.println(e.toString());
 		}
+		System.out.println("Updated Contact Info: ");
 		return status;
 	}
 	
