@@ -535,6 +535,7 @@ function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprof
 	$scope.showEditGallery	 = false;
 	
 	var ajaxrequestcall	 = "printcampaign";
+	$scope.gettinggallery = false;
 	
 	$scope.entityname = "";
 	$scope.profilepic = "";
@@ -548,11 +549,13 @@ function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprof
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getgalleries = function() {
+    	$scope.gettinggallery = true;
     	mygallery.galleries("getprintcampaigns", $routeParams, $scope.searchgalleryname).success(function(data) {
     		mygallery.setgallerylocally(data, $routeParams);
         	$scope.updatedata();
+        	$scope.gettinggallery = false;
         }).error(function(data) {
-        	
+        	$scope.gettinggallery = false;
         });
     };
     $scope.getgalleries();
@@ -613,6 +616,7 @@ function MyCtrlCampaign($scope, $routeParams, currentvisitedprofile, mygallery) 
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	
 	var ajaxrequestcall	 = "printcampaign";
+	$scope.gettingphotos = false;
 	$scope.searchphotoname = "";
 	
 	$scope.entityname = "";
@@ -631,8 +635,9 @@ function MyCtrlCampaign($scope, $routeParams, currentvisitedprofile, mygallery) 
     	mygallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
     		mygallery.setphotoslocally(data, $routeParams);
         	$scope.updatedata();
+        	$scope.gettingphotos = true;
         }).error(function(data) {
-        	
+        	$scope.gettingphotos = false;
         });
     };
     
@@ -723,6 +728,7 @@ function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile
 	$scope.showEditGallery	 = false;
 	
 	var ajaxrequestcall	 = "editorial";
+	$scope.gettinggallery = false;
 	
 	$scope.entityname = "";
 	$scope.profilepic = "";
@@ -736,11 +742,13 @@ function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getgalleries = function() {
+    	$scope.gettinggallery = true;
     	mygallery.galleries("geteditorials", $routeParams, $scope.searchgalleryname).success(function(data) {
+    		$scope.gettinggallery = false;
     		mygallery.setgallerylocally(data, $routeParams);
         	$scope.updatedata();
         }).error(function(data) {
-        	
+        	$scope.gettinggallery = false;
         });
     };
     $scope.getgalleries();
@@ -800,6 +808,7 @@ function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile, mygallery)
 		$scope.galleryid = $routeParams.id;
 	}
 	var ajaxrequestcall	 = "editorial";
+	$scope.gettingphotos = false;
 	$scope.searchphotoname = "";
 	
 	$scope.entityname = "";
@@ -818,8 +827,9 @@ function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile, mygallery)
     	mygallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
     		mygallery.setphotoslocally(data, $routeParams);
         	$scope.updatedata();
+        	$scope.gettingphotos = true;
         }).error(function(data) {
-        	
+        	$scope.gettingphotos = false;
         });
     };
     

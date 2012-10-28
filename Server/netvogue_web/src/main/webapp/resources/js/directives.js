@@ -54,13 +54,16 @@ angular.module('netVogue.directives', []).
  }).directive('masonry', function($timeout) {
 	    var linkFn;
 	    linkFn = function(scope, element, attrs) {
-	    	scope.$watch('$parent.photogallery', function(newValue, oldValue) {
+	    	scope.$watch('photogallery', function(newValue, oldValue) {
+	    		console.log("photogallery came here");
 	    		if(angular.isUndefined(newValue)) {
     				return;
     			}
+	    		console.log("photogallery changed");
 	    		//setTimeout(function() {
 		    		var i=0;
 	    			angular.forEach(angular.element(element).find('img'), function(imgElement) {
+	    				console.log("number of elements" + i);
 	    				angular.element(imgElement).attr('src', newValue[i++].thumbnail_url);
 	    			});
 	    			element.imagesLoaded(function() {
@@ -104,7 +107,7 @@ angular.module('netVogue.directives', []).
 	    		closeEffect	: 'none',
 						type:'image'
 					});
-	    	});
+	    	}, true);
 	    };
 	    return {
 	    	templateUrl:'templates/Photos_Masonry.htm',
@@ -144,7 +147,7 @@ angular.module('netVogue.directives', []).
 					margin: 50,
 					type:'image'
 				});
-	    	});
+	    	}, true);
 	    };
 	    return {
 	        restrict: 'A',
