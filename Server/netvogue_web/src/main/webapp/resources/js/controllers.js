@@ -911,6 +911,7 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
 	$scope.collectiondesc 		= "description";
 	$scope.collectioncategory	= "";
 	$scope.defaultcategories	= netvogue.defaultproductlines;
+	$scope.gettingcollections = false;
 	
 	//Related to edit collection
 	$scope.editcollectionname   = "";
@@ -932,6 +933,7 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getcollections = function() {
+    	$scope.gettingcollections = true;
     	var searchcollections = {
     			"galleryname" 	:$scope.searchcollectionname,
     			"category"		:$scope.searchFilter.getCheckedFilters(),
@@ -940,8 +942,9 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
     	mycollection.collections($routeParams, searchcollections).success(function(data) {
     		mycollection.setcollectionlocally(data);
         	$scope.updatedata();
+        	$scope.gettingcollections = false;
         }).error(function(data) {
-        	
+        	$scope.gettingcollections = false;
         });
     };
     $scope.getcollections();
