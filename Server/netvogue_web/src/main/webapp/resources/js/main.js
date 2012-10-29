@@ -9,7 +9,9 @@ function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search, m
 		$scope.profilepic 			= mynotifications.getprofilepic();
 		$scope.unreadnotifications 	= mynotifications.getnumberofunreadnotifications();
 		$scope.notifications 		= mynotifications.getunreadnotifications();
-		
+		$scope.contactinfo 		= {};
+	    $scope.getcontactinfo 	= addresstostring($scope.contactinfo);
+	    
 		currentvisitedprofile.setmyprofileid($scope.myprofileid);
 		createpusherchannel($scope.myprofileid);
 		//createpubnubchannel($scope.myprofileid);
