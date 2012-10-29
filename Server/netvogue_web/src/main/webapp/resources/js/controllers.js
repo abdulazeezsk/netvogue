@@ -30,13 +30,13 @@ function MyCtrlProfile($scope, $routeParams, $timeout, srvprofile, currentvisite
     $scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
     if (!angular.isUndefined($routeParams.profileid)) {
 		$scope.profileid = $routeParams.profileid;
+		$scope.entityname = "";
+		$scope.profilepic = "";
 	}
     $scope.links = currentvisitedprofile.getleftpanellinks();
     $scope.gettingprofile = true;
     $scope.showCreateNetwork = false;
     
-    $scope.entityname = "";
-	$scope.profilepic = "";
     //This will initialize all the variables inside controller.
     //Also, if there is any existing data, this data will be shown to user until we get response from server
     $scope.updatedata = function() {
@@ -117,10 +117,14 @@ function MyCtrlNetwork($scope, $routeParams, $timeout, myprofile, currentvisited
 	$scope.currentPage = 'Network';
 	$scope.$parent.title = "Network";
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
+	if (!angular.isUndefined($routeParams.profileid)) {
+		$scope.profileid = $routeParams.profileid;
+		$scope.entityname = "";
+		$scope.profilepic = "";
+	}
 	$scope.links = currentvisitedprofile.getleftpanellinks();
+	
 	$scope.gettingnetwork = true;
-	$scope.entityname = "";
-	$scope.profilepic = "";
 	$scope.updatedata = function() {
 		$scope.entityname 		= mynetwork.getname();
 		$scope.iambrand			= mynetwork.isbrand();
@@ -212,6 +216,8 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 	$scope.links = currentvisitedprofile.getleftpanellinks();
 	if (!angular.isUndefined($routeParams.profileid)) {
 		$scope.profileid = $routeParams.profileid;
+		$scope.entityname = "";
+		$scope.profilepic = "";
 	}
 	
 	$scope.routeparams = {
@@ -219,8 +225,6 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 	};
 	$scope.newupdate ="";
 	
-	$scope.entityname = "";
-	$scope.profilepic = "";
 	$scope.updatedata = function(routeparams) {
 		$scope.entityname 		= mytimeline.getname(routeparams);
 		$scope.iambrand			= mytimeline.isbrand(routeparams);
