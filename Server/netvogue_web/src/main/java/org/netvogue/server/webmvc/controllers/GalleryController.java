@@ -64,9 +64,12 @@ public class GalleryController {
 			 user = userDetailsService.getUserFromSession();
 		}
 		
-		galleries.setName(user.getName());
-		galleries.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-		galleries.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		if(0 == pagenumber) {
+			galleries.setName(user.getName());
+			galleries.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
+			galleries.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		}
+		
 		Set<Gallery> galleriesTemp = new LinkedHashSet<Gallery>();
 		Iterable<org.netvogue.server.neo4japi.domain.Gallery> dbGalleries;
 		if(galleryname.isEmpty()) {
@@ -84,7 +87,6 @@ public class GalleryController {
 			galleriesTemp.add(conversionService.convert(dbGallery, Gallery.class));
 		}
 		galleries.setGalleries(galleriesTemp);
-		
 		
 		return galleries;
 	}

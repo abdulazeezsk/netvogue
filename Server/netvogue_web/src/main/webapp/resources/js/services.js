@@ -401,17 +401,16 @@ angular.module('netVogue.services', []).
 		          return $http(config);
 		      },
 		      setgallerylocally: function(galleriestemp, pagenumber) {
-		    	  name = galleriestemp.name;
-		    	  isbrand = galleriestemp.isbrand;
-		    	  profilepic = galleriestemp.profilepic;
 		    	  if(0 == pagenumber) {
+		    		  name = galleriestemp.name;
+			    	  isbrand = galleriestemp.isbrand;
+			    	  profilepic = galleriestemp.profilepic;
 		    		  angular.copy(galleriestemp.galleries, galleries);
 		    	  } else {
 		    		  for(var i=0; i < galleriestemp.galleries.length; i++) {
 		    			  galleries.push(galleriestemp.galleries[i]);
 		    		  }
 		    	  } 
-		    		  
 		      },
 		      setphotoslocally: function(photostemp) {
 		    	  name = photostemp.name;
