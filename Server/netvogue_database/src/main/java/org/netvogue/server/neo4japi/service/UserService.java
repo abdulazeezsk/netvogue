@@ -21,7 +21,7 @@ public interface UserService {
 	//Search related
 	public Iterable<User> doBasicSearch(String query);
 	public Iterable<User> doAdvancedSearch(USER_TYPE userType, String name, String location, 
-			Set<String> categories, Set<String> usersCarried, long fromPrice, long toPrice);
+			Set<String> categories, Set<String> usersCarried, long fromPrice, long toPrice, int pagenumber);
 	public Iterable<User> getAllUsers(String query);
 	
 	//network related

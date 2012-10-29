@@ -70,7 +70,8 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public Iterable<User> doAdvancedSearch(USER_TYPE userType, String name, String location, 
-					Set<String> categories, Set<String> usersCarried, long fromPrice, long toPrice) {
+					Set<String> categories, Set<String> usersCarried, 
+					long fromPrice, long toPrice, int pagenumber) {
 		
 		//Query
 		String query = "username:*" + name + "*";

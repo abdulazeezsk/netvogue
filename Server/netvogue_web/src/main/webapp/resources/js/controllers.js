@@ -382,7 +382,7 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, m
     	mygallery.galleries("getgalleries", $routeParams, $scope.searchgalleryname, pagenumber).success(function(data) {
     		$scope.gettinggallery = false;
     		$scope.gettingmoregalleries = false;
-    		if(data.galleries.length < 9)
+    		if(data.galleries.length < netvogue.GALLERYPAGE_LIMIT)
     			$scope.nomoredataavailable = true;
     		mygallery.setgallerylocally(data, pagenumber);
         	$scope.updatedata();
@@ -1892,6 +1892,9 @@ function MyCtrlAdvancedSearch($scope, $routeParams, $http, search) {
 			toprice: 0
 	};
 	$scope.searching = true;
+	$scope.gettingmoreresults = false;
+	$scope.nomoredataavailable = false;
+	var pagenumber = 0; 
 	
 	$scope.search.getstockists =  function() {
 		var result = "";
@@ -1916,14 +1919,28 @@ function MyCtrlAdvancedSearch($scope, $routeParams, $http, search) {
 		var categories = $scope.searchFilter.getCheckedFilters();
 		var stockists = $scope.search.getstockists();
 		search.getadvancedsearchresults($scope.search.name, $scope.search.location, 
-										categories, $scope.isbrandsearch, stockists).
+										categories, $scope.isbrandsearch, stockists,
+										$scope.fromsearch, $scope.tosearch, pagenumber).
 		success(function(data) {
 			$scope.advancedsearch = data;
 			$scope.searching = false;
+			$scope.gettingmoreresults = false;
+			if(data.length < netvogue.ADVSEARCH_LIMIT) {
+				$scope.nomoredataavailable = true;
+			}
 	    }).
 	    error(function(data) {
 	    	$scope.searching = false;
+	    	$scope.gettingmoreresults = false;
 	    });
+	};
+	
+	$scope.getmoreresults = function() {
+		if(!$scope.nomoredataavailable) {
+			pagenumber++;
+			$scope.gettingmoreresults = true;
+			//$scope.getsearchResults();
+		}
 	};
 	
 	$scope.brandsenteredchanged = function(brandsentered) {

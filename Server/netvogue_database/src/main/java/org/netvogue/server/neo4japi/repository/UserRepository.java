@@ -54,8 +54,10 @@ public interface UserRepository extends GraphRepository<User> {
 			"WHERE has(user.userType) AND " +
 			"ALL( c in categories WHERE user-[:has_category]->c) AND " +
 			"ALL(u in userscarried WHERE user-[:users_carried]-u) " +
-			//"user.userType! = {2} " +
-			"RETURN user")
+			//"user.userType! = {2} AND " +
+			//"user.fromPrice >= {4} AND user.toPrice <= {5} " +
+			"RETURN user ") 
+			//"SKIP {6} LIMIT {7}")
 	Iterable<User> doAdvancedSearch(String Categories, String search, String usertype, String userscarried,
 									long fromPrice, long toPrice);
 	

@@ -4,7 +4,13 @@ if (!netvogue )
 if ( !window.netvogue ) {
 	window.netvogue = netvogue;
 }
+//Constants
+netvogue.ADVSEARCH_LIMIT = 9;
 
+//Gallery related
+netvogue.GALLERYPAGE_LIMIT = 9;
+
+//Initialization
 netvogue.yettocontact  	= true;
 netvogue.firsttimeLogin = false;
 netvogue.isbrand		= false;

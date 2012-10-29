@@ -13,7 +13,7 @@ public final class Constants {
 	
 	//Search related
 	public static final int BASICSEARCH_LIMIT = 7;
-	public static final int ADVSEARCH_LIMIT = 12;
+	public static final int ADVSEARCH_LIMIT = 9;
 	
 	//Gallery related
 	public static final int GALLERYPAGE_LIMIT = 9;

@@ -121,8 +121,14 @@
 						</div>
 					</li>
 				</ul>
-
-
+				<div get-more="getmoreresults()">
+   					<div ng-show="gettingmoreresults">
+   						<center><img src="img/ajax-loadersmall.gif"><br></center>
+   					</div>
+   					<div ng-show="nomoredataavailable">
+   						End of data
+   					</div>
+				</div>
 			</div>
 		</div>
 		<!-- right pane -->

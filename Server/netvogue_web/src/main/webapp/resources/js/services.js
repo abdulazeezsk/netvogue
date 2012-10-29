@@ -1325,15 +1325,17 @@ angular.module('netVogue.services', []).
               };
         	  return $http(config);  
           },
-          getadvancedsearchresults: function(name, location, categories, usertype, userscarried) {
+          getadvancedsearchresults: function(name, location, categories, 
+        		  usertype, userscarried, fromprice, toprice, pagenumber) {
         	  var datatosend = {
         			"name"			: name, 
         			"location"		: location,
 					"categories"	: categories, 
 					"usertype"		:	usertype,
 					"userscarried"	: userscarried,
-					"fromprice"		: 0,
-					"toprice"		: 0
+					"fromprice"		: fromprice,
+					"toprice"		: toprice,
+					"pagenumber"	: pagenumber
         	  };
         	  var config = {
                   method: "GET",

@@ -82,13 +82,14 @@ public class SearchController {
 
 	@RequestMapping(value="advancedsearch", method=RequestMethod.GET)
 	public @ResponseBody Set<SearchResponse> doAdvancedSearch(
+							@RequestParam(value="pagenumber") int pagenumber,
 							@RequestParam(value="name", required=false) String name, 
 							@RequestParam(value="location", required=false) String location,
 							@RequestParam(value="categories", required=false) String categories, 
 							@RequestParam(value="usertype", required=false)	String searchtype,
 							@RequestParam(value="userscarried", required=false) String usersCarried,
-							@RequestParam(value="fromprice", required=false) long fromPrice,
-							@RequestParam(value="toprice", required=false) long toPrice){
+							@RequestParam(value="fromprice", required=false, defaultValue="0") long fromPrice,
+							@RequestParam(value="toprice", required=false, defaultValue="0") long toPrice){
 		
 		System.out.println("\nGet users: name:" + name + 
 							"\nlocation:" + location +
@@ -116,7 +117,7 @@ public class SearchController {
 		
 		Set<String> userscarried = new HashSet<String>(Arrays.asList(usersCarried.split(",")));
 		Iterable<User> users = userService.doAdvancedSearch(user_type, name, location, productlines, userscarried,
-				fromPrice, toPrice);
+				fromPrice, toPrice, pagenumber);
 		
 		if(null == users) {
 			System.out.println("No users found: ");
