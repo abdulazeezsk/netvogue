@@ -264,11 +264,11 @@
                         <label class="control-label">
                             Price Range:</label>
                         <div class="controls">
-	                        <input type="text" ng-model="entity.fromprice" class="spanpricerange" placeholder="From price"
-	                     	 required ng-pattern="/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/" />
+	                        <input type="number" ng-model="entity.fromprice" class="spanpricerange" placeholder="From price"
+	                     	 required />
                        -
-	                        <input type="text" ng-model="entity.toprice" class="spanpricerange" placeholder="To price"
-	                        required ng-pattern="/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/" />
+	                        <input type="number" ng-model="entity.toprice" class="spanpricerange" placeholder="To price"
+	                        required />
                        
                         </div>
                         

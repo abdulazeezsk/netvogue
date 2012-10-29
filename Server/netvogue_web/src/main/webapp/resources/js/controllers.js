@@ -125,6 +125,10 @@ function MyCtrlNetwork($scope, $routeParams, $timeout, myprofile, currentvisited
 	$scope.links = currentvisitedprofile.getleftpanellinks();
 	
 	$scope.gettingnetwork = true;
+	$scope.gettingmorenetworks = false;
+	$scope.nomoredataavailable = false;
+	var pagenumber = 0;
+	
 	$scope.updatedata = function() {
 		$scope.entityname 		= mynetwork.getname();
 		$scope.iambrand			= mynetwork.isbrand();
@@ -134,13 +138,28 @@ function MyCtrlNetwork($scope, $routeParams, $timeout, myprofile, currentvisited
 		$scope.getcontactinfo 	= addresstostring($scope.contactinfo);
 	};
 	
-	mynetwork.networks($routeParams, false).success(function(data) {
-		mynetwork.setnetworkslocally(data);
-		$scope.updatedata();
-		$scope.gettingnetwork = false;
-	}).error(function(data) {
-		
-	});
+	var getnetworks = function() {
+		mynetwork.networks($routeParams, false, pagenumber).success(function(data) {
+			if(data.networks.length < netvogue.NETWORKPAGE_LIMIT)
+    			$scope.nomoredataavailable = true;
+			mynetwork.setnetworkslocally(data, pagenumber);
+			$scope.updatedata();
+			$scope.gettingnetwork = false;
+			$scope.gettingmorenetworks = false;
+		}).error(function(data) {
+			$scope.gettingnetwork = false;
+			$scope.gettingmorenetworks = false;
+		});
+	};
+	getnetworks();
+	
+	$scope.getmorenetworks = function() {
+    	if(false == $scope.nomoredataavailable) {
+    		$scope.gettingmorenetworks = true;
+    		pagenumber++;
+    		getnetworks();
+    	}
+    };
 	
 	$scope.confirmnetwork = function(profileid) {
 		mynetwork.confirmnetwork(profileid).success(function(data) {
@@ -212,8 +231,13 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 	$scope.currentPage = 'Corner';
 	$scope.$parent.title = "Corner";
 	$scope.isMyProfile 		= currentvisitedprofile.isMyProfile();
-	$scope.gettingupdates = true;
 	$scope.links = currentvisitedprofile.getleftpanellinks();
+	
+	$scope.gettingupdates = true;
+	$scope.gettingmoreupdates = false;
+	$scope.nomoredataavailable = false;
+	var pagenumber = 0;
+	
 	if (!angular.isUndefined($routeParams.profileid)) {
 		$scope.profileid = $routeParams.profileid;
 		$scope.entityname = "";
@@ -237,24 +261,42 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 	};
 	
 	$scope.getupdates = function(routeparams) {
-		mytimeline.updates(routeparams).success(function(data) {
-			mytimeline.setupdateslocally(data);
+		mytimeline.updates(routeparams, pagenumber).success(function(data) {
+			if(data.updates.length < netvogue.UPDATEPAGE_LIMIT)
+    			$scope.nomoredataavailable = true;
+			mytimeline.setupdateslocally(data, pagenumber);
 			$scope.updatedata(routeparams);
 			$scope.gettingupdates = false;
+			$scope.gettingmoreupdates = false;
 		}).error(function(data) {
+			$scope.gettingupdates = false;
+			$scope.gettingmoreupdates = false;
 		});
 	};
 	
 	$scope.getmyupdates = function() {
+		$scope.gettingupdates = true;
 		$scope.routeparams.profileid = $scope.$parent.myprofileid;
 		$scope.getupdates($scope.routeparams);
 	};	
 	$scope.getallupdates = function() {
+		$scope.gettingupdates = true;
 		$scope.routeparams.profileid = undefined;
 		$scope.getupdates($routeParams); //This is capital P only -- not a mistake
 	};	
 	$scope.getallupdates();
 	
+	$scope.getmoreupdates = function() {
+    	if(false == $scope.nomoredataavailable) {
+    		$scope.gettingmoreupdates = true;
+    		pagenumber++;
+    		if($scope.routeparams.profileid == undefined)
+    			$scope.getallupdates($routeParam);
+    		else
+    			$scope.getupdates($scope.routeparams);
+    	}
+    };
+    
 	mynetwork.networks($routeParams, true).success(function(data) {
 		$scope.mynetwork 		= data.networks;
 	}).error(function(data) {

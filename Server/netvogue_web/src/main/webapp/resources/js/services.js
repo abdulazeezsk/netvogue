@@ -1183,12 +1183,13 @@ angular.module('netVogue.services', []).
     		}
     		networks.splice(index, 1);
     	},
-    	networks: function (routeparams, onlyconfirmed) {
+    	networks: function (routeparams, onlyconfirmed, pagenumber) {
 	          var profileid = "";
 	          if (!angular.isUndefined(routeparams.profileid)) {
 	        	  profileid = routeparams.profileid;
 	          }
 	          var datatosend = {
+	        	  "pagenumber": pagenumber,
 	        	  "onlyconfirmed" : onlyconfirmed
 	          };
 	          var config = {
@@ -1198,12 +1199,18 @@ angular.module('netVogue.services', []).
 	          };
 	          return $http(config);
     	},
-    	setnetworkslocally: function(temp) {
-    		name = temp.name;
-    		isbrand = temp.isbrand;
-    		profilepic = temp.profilepic;
-    		contactinfo = angular.copy(temp.contactinfo);
-    		networks = angular.copy(temp.networks);
+    	setnetworkslocally: function(temp, pagenumber) {
+    		if(0 == pagenumber) {
+	    		name = temp.name;
+	    		isbrand = temp.isbrand;
+	    		profilepic = temp.profilepic;
+	    		contactinfo = angular.copy(temp.contactinfo);
+	    		networks = angular.copy(temp.networks);
+    		} else {
+	    		 for(var i=0; i < temp.networks.length; i++) {
+	    			 networks.push(temp.networks[i]);
+	    		  }
+	    	 }
     	}
 	};
 }).service('myreferences', function ($http) {
@@ -1311,23 +1318,33 @@ angular.module('netVogue.services', []).
     		}
     		updates.splice(index, 1);
     	},
-    	updates: function (routeparams) {
+    	updates: function (routeparams, pagenumber) {
 	          var profileid = "";
 	          if (!angular.isUndefined(routeparams.profileid)) {
 	        	  profileid = routeparams.profileid;
 	          }
+	          var datatosend = {
+	        		  "pagenumber" : pagenumber
+	          };
 	          var config = {
 	              method: "GET",
+	              params: datatosend,
 	              url: "getstatusupdates/" + profileid
 	          };
 	          return $http(config);
     	},
-    	setupdateslocally: function(temp) {
-    		name = temp.name;
-    		isbrand = temp.isbrand;
-    		profilepic = temp.profilepic;
-    		contactinfo = angular.copy(temp.contactinfo);
-    		updates = angular.copy(temp.updates);
+    	setupdateslocally: function(temp, pagenumber) {
+    		if(0 == pagenumber) {
+	    		name = temp.name;
+	    		isbrand = temp.isbrand;
+	    		profilepic = temp.profilepic;
+	    		contactinfo = angular.copy(temp.contactinfo);
+	    		updates = angular.copy(temp.updates);
+    		} else {
+	    		 for(var i=0; i < temp.updates.length; i++) {
+	    			 updates.push(temp.updates[i]);
+	    		  }
+	    	 }
     	}
 	};
 }).service('search', function ($http) {

@@ -6,6 +6,8 @@ if ( !window.netvogue ) {
 }
 //Constants
 netvogue.ADVSEARCH_LIMIT = 9;
+netvogue.NETWORKPAGE_LIMIT = 9;
+netvogue.UPDATEPAGE_LIMIT = 9;
 netvogue.GALLERYPAGE_LIMIT = 9;
 netvogue.COLLECTIONPAGE_LIMIT = 9;
 netvogue.STYLESHEETPAGE_LIMIT = 9;

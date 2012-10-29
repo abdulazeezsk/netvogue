@@ -12,13 +12,17 @@ public interface StatusUpdateRepository extends GraphRepository<StatusUpdate> {
 	@Query("START user=node:search(username={0}) MATCH user-[r?:STATUS]-update delete r return update, user")
 	StatusUpdateData getlatestStatusUpdate(String username);
 	
-	@Query("START n=node:search(username={0}) MATCH n-[r:STATUS]-oldsu-[:NEXT*0..]-su return su")
-	Iterable<StatusUpdate> getMyStatusUpdates(String username);
+	@Query("START n=node:search(username={0}) " +
+		   "MATCH n-[r:STATUS]-oldsu-[:NEXT*0..]-su " +
+		   "return su SKIP {1} LIMIT {2}")
+	Iterable<StatusUpdate> getMyStatusUpdates(String username, int skip, int limit);
 	
 	@Query("START n=node:search(username={0}) MATCH n-[rels:NETWORK*0..1]-user " +
 			"WHERE ALL(r in rels WHERE r.status? = 'CONFIRMED') " +
-			"WITH user MATCH user-[:STATUS]-oldsu-[:NEXT*0..]-update return update, user")
-	Iterable<StatusUpdateData> getAllStatusUpdates(String username);
+			"WITH user " +
+			"MATCH user-[:STATUS]-oldsu-[:NEXT*0..]-update " +
+			"return update, user SKIP {2} LIMIT {1} ")
+	Iterable<StatusUpdateData> getAllStatusUpdates(String username, int skip, int limit);
 	
 	@Query("START n=node:search(username={0}) MATCH n-[r?:STATUS]->oldsu DELETE r " +
 			"WITH n,oldsu " +

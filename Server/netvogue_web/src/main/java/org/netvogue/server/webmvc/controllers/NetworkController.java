@@ -43,7 +43,8 @@ public class NetworkController {
 	
 	@RequestMapping(value={"network/getnetworks", "network/getnetworks/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Networks GetNetworks(@ModelAttribute("profileid") String profileid,
-											  @RequestParam(value="onlyconfirmed", required=false) boolean onlyconfirmed) {
+					@RequestParam(value="pagenumber", required=false, defaultValue="0") int pagenumber,
+					@RequestParam(value="onlyconfirmed", required=false) boolean onlyconfirmed) {
 		System.out.println("Get Networks: id is:" + profileid);
 		User user = userDetailsService.getUserFromSession();
 		String loggedinuser = user.getUsername();
@@ -55,14 +56,36 @@ public class NetworkController {
 				return response;
 			}
 		}
-		response.setName(user.getName());
-		response.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-		response.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		if(0 == pagenumber) {
+			response.setName(user.getName());
+			response.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
+			response.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+			
+			//Set Contact info as well
+			//Get ContactInfo
+			ContactInfo contactInfo = new ContactInfo();
+			contactInfo.setAddress(user.getAddress());
+			contactInfo.setCity(user.getCity());
+			contactInfo.setState(user.getState());
+			contactInfo.setCountry(user.getCountry());
+			contactInfo.setZip(String.valueOf(user.getZipCode()));
+			contactInfo.setEmail(user.getEmail());
+			contactInfo.setLandline1(String.valueOf(user.getTelephoneNo1()));
+			contactInfo.setLandline2(String.valueOf(user.getTelephoneNo2()));
+			contactInfo.setMobile(String.valueOf(user.getMobileNo()));
+			contactInfo.setWebsite(user.getWebsite());
+			contactInfo.setYearest(user.getYearofEst());
+			contactInfo.setFromprice(user.getFromPrice());
+			contactInfo.setToprice(user.getToPrice());
+			
+			response.setContactinfo(contactInfo);
+		}
+		
 		Set<Network> networksTemp = new LinkedHashSet<Network>();
 		
 		String username = user.getUsername();
 		Iterable<org.netvogue.server.neo4japi.domain.Network> dbNetworks = 
-									networkService.getNetworks(user.getUsername(), onlyconfirmed);
+									networkService.getNetworks(user.getUsername(), onlyconfirmed, pagenumber);
 		if(null == dbNetworks) {
 			System.out.println("No networks found: ");
 			return response;
@@ -105,24 +128,6 @@ public class NetworkController {
 		
 		response.setNetworks(networksTemp);
 		
-		//Set Contact info as well
-		//Get ContactInfo
-		ContactInfo contactInfo = new ContactInfo();
-		contactInfo.setAddress(user.getAddress());
-		contactInfo.setCity(user.getCity());
-		contactInfo.setState(user.getState());
-		contactInfo.setCountry(user.getCountry());
-		contactInfo.setZip(String.valueOf(user.getZipCode()));
-		contactInfo.setEmail(user.getEmail());
-		contactInfo.setLandline1(String.valueOf(user.getTelephoneNo1()));
-		contactInfo.setLandline2(String.valueOf(user.getTelephoneNo2()));
-		contactInfo.setMobile(String.valueOf(user.getMobileNo()));
-		contactInfo.setWebsite(user.getWebsite());
-		contactInfo.setYearest(user.getYearofEst());
-		contactInfo.setFromprice(user.getFromPrice());
-		contactInfo.setToprice(user.getToPrice());
-		
-		response.setContactinfo(contactInfo);
 		System.out.println("Sent Networks:" + response.getNetworks().size());
 		return response;
 	}

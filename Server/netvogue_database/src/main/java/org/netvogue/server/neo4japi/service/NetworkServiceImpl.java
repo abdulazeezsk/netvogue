@@ -1,5 +1,6 @@
 package org.netvogue.server.neo4japi.service;
 
+import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.Network;
@@ -42,10 +43,12 @@ public class NetworkServiceImpl implements NetworkService {
 	}
 	
 	@Override
-	public Iterable<Network> getNetworks(String username, boolean onlyconfirmed) {
+	public Iterable<Network> getNetworks(String username, boolean onlyconfirmed, int pagenumber) {
 		if(onlyconfirmed)
-			return networkRepo.getConfirmedNetworks(username);
-		return networkRepo.getNetworks(username);
+			return networkRepo.getConfirmedNetworks(username,
+					Constants.NETWORKPAGE_LIMIT * pagenumber, Constants.NETWORKPAGE_LIMIT);
+		return networkRepo.getNetworks(username,
+				Constants.NETWORKPAGE_LIMIT * pagenumber, Constants.NETWORKPAGE_LIMIT);
 	}
 
 	@Override

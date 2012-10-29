@@ -22,4 +22,8 @@ public final class Constants {
 	public static final int COLLECTIONPAGE_LIMIT = 9;
 	public static final int STYLESHEETPAGE_LIMIT = 9;
 	public static final int LINESHEETPAGE_LIMIT = 9;
+	
+	//Network and status update
+	public static final int NETWORKPAGE_LIMIT = 9;
+	public static final int UPDATEPAGE_LIMIT = 9;
 }

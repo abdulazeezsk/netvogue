@@ -1,5 +1,6 @@
 package org.netvogue.server.neo4japi.service;
 
+import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.StatusUpdate;
 import org.netvogue.server.neo4japi.domain.User;
@@ -27,15 +28,17 @@ public class StatusUpdateServiceImpl implements StatusUpdateService {
 	}
 	
 	@Override
-	public Iterable<StatusUpdate> getMyStatusUpdates(String username) {
+	public Iterable<StatusUpdate> getMyStatusUpdates(String username, int pagenumber) {
 		if(username.isEmpty())
 			return null;
-		return statusRepo.getMyStatusUpdates(username);
+		return statusRepo.getMyStatusUpdates(username,
+				Constants.UPDATEPAGE_LIMIT * pagenumber, Constants.UPDATEPAGE_LIMIT);
 	}
 
 	@Override
-	public Iterable<StatusUpdateData> getAllStatusUpdates(String username) {
-		return statusRepo.getAllStatusUpdates(username);
+	public Iterable<StatusUpdateData> getAllStatusUpdates(String username, int pagenumber) {
+		return statusRepo.getAllStatusUpdates(username, 
+				Constants.UPDATEPAGE_LIMIT * pagenumber, Constants.UPDATEPAGE_LIMIT);
 	}
 
 	@Override

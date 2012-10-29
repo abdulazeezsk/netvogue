@@ -83,7 +83,15 @@
                         </div>
                     </li>
                 </ul>
-                </div>
+                <div get-more="getmoreupdates()">
+   					<div ng-show="gettingmoreupdates">
+   						<center><img src="img/ajax-loadersmall.gif"><br></center>
+   					</div>
+   					<div ng-show="nomoredataavailable">
+   						End of data
+   					</div>
+				</div>
+            </div>
             <div>
                 <h4 class="trending_head">
                     TRENDING</h4>

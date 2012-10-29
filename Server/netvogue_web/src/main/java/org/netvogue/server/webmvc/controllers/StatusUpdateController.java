@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -42,7 +43,8 @@ public class StatusUpdateController {
 	@Autowired UploadManager 		uploadManager;
 		
 	@RequestMapping(value={"getstatusupdates", "getstatusupdates/{profileid}"}, method=RequestMethod.GET)
-	public @ResponseBody StatusUpdates getStatusUpdates(@ModelAttribute("profileid") String profileid) {
+	public @ResponseBody StatusUpdates getStatusUpdates(@ModelAttribute("profileid") String profileid,
+													@RequestParam("pagenumber") int pagenumber) {
 		System.out.println("Get Statuspupdates: " + profileid);
 		StatusUpdates updates = new StatusUpdates();
 		User user = userDetailsService.getUserFromSession();
@@ -56,38 +58,39 @@ public class StatusUpdateController {
 			}
 		}
 
-		updates.setName(user.getName());
-		updates.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-		//Set profile pic
-		if(null != user.getProfilePicLink()) {
-			updates.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		if(0 == pagenumber) {
+			updates.setName(user.getName());
+			updates.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
+			//Set profile pic
+			if(null != user.getProfilePicLink()) {
+				updates.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+			}
+		
+			//Get ContactInfo
+			ContactInfo contactInfo = new ContactInfo();
+			contactInfo.setAddress(user.getAddress());
+			contactInfo.setCity(user.getCity());
+			contactInfo.setState(user.getState());
+			contactInfo.setCountry(user.getCountry());
+			contactInfo.setZip(String.valueOf(user.getZipCode()));
+			contactInfo.setEmail(user.getEmail());
+			contactInfo.setLandline1(String.valueOf(user.getTelephoneNo1()));
+			contactInfo.setLandline2(String.valueOf(user.getTelephoneNo2()));
+			contactInfo.setMobile(String.valueOf(user.getMobileNo()));
+			contactInfo.setWebsite(user.getWebsite());
+			contactInfo.setYearest(user.getYearofEst());
+			contactInfo.setFromprice(user.getFromPrice());
+			contactInfo.setToprice(user.getToPrice());
+			
+			//Add it to profile Info
+			updates.setContactinfo(contactInfo);
 		}
-	
-		//Get ContactInfo
-		ContactInfo contactInfo = new ContactInfo();
-		contactInfo.setAddress(user.getAddress());
-		contactInfo.setCity(user.getCity());
-		contactInfo.setState(user.getState());
-		contactInfo.setCountry(user.getCountry());
-		contactInfo.setZip(String.valueOf(user.getZipCode()));
-		contactInfo.setEmail(user.getEmail());
-		contactInfo.setLandline1(String.valueOf(user.getTelephoneNo1()));
-		contactInfo.setLandline2(String.valueOf(user.getTelephoneNo2()));
-		contactInfo.setMobile(String.valueOf(user.getMobileNo()));
-		contactInfo.setWebsite(user.getWebsite());
-		contactInfo.setYearest(user.getYearofEst());
-		contactInfo.setFromprice(user.getFromPrice());
-		contactInfo.setToprice(user.getToPrice());
-		
-		//Add it to profile Info
-		updates.setContactinfo(contactInfo);
-		
 		Set<StatusUpdate> updatesTemp = new LinkedHashSet<StatusUpdate>();
 		
 		
 		if(profileid.isEmpty()) {
 			Iterable<StatusUpdateData> dbupdates;
-			dbupdates = statusUpdateService.getAllStatusUpdates(user.getUsername());
+			dbupdates = statusUpdateService.getAllStatusUpdates(user.getUsername(), pagenumber);
 		
 			if(null == dbupdates) {
 				return updates;
@@ -103,7 +106,7 @@ public class StatusUpdateController {
 			Format formatter = new SimpleDateFormat("HH:mm:ss.SSS");
 			
 			System.out.println("Before call: Current time is:" + formatter.format(new Date()));
-			dbupdates = statusUpdateService.getMyStatusUpdates(user.getUsername());
+			dbupdates = statusUpdateService.getMyStatusUpdates(user.getUsername(), pagenumber);
 			System.out.println("After call: Current time is:" + formatter.format(new Date()));
 			
 			if(null == dbupdates) {

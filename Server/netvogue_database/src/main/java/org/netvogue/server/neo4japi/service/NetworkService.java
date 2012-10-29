@@ -7,7 +7,7 @@ import org.netvogue.server.neo4japi.domain.User;
 
 public interface NetworkService {
 	ResultStatus SaveNetwork(Network network, String error); //This can be used for creating, confirmation, deleting network
-	Iterable<Network> getNetworks(String username, boolean onlyconfirmed);
+	Iterable<Network> getNetworks(String username, boolean onlyconfirmed, int pagenumber);
 	
 	ResultStatus CreateNetwork(User userBy, String userTo, Notification notification, String error); 
 	ResultStatus CreateNetwork(String userBy, String userTo, String error); 
