@@ -48,16 +48,17 @@ public interface UserService {
 	public Iterable<Editorial> searchEditorialByName(String username, String name, int pagenumber);
 	
 	//Queries related to collections
-	public Iterable<CollectionData> getCollections(User user);
-	public Iterable<CollectionData> searchCollections(User user, String seasonname, Set<String> categories, String brandname);
+	public Iterable<CollectionData> getCollections(User user, int pagenumber);
+	public Iterable<CollectionData> searchCollections(User user, String seasonname, Set<String> categories, 
+													String brandname, int pagenumber);
 
 	//Queries related to Stylesheets
-	public Iterable<StylesheetData> getStylesheets(User user);
-	public Iterable<StylesheetData> searchStylesheets(User user, String name, Set<String> categories);
+	public Iterable<StylesheetData> getStylesheets(User user, int pagenumber);
+	public Iterable<StylesheetData> searchStylesheets(User user, String name, Set<String> categories, int pagenumber);
 	
 	//Queries related to Linesheets
-	public Iterable<LinesheetData> getLinesheets(User user);
+	public Iterable<LinesheetData> getLinesheets(User user, int pagenumber);
 	public Iterable<LinesheetData> searchLinesheets(User user, String seasonname, Set<String> categories,
-			 			Date fromDate, Date toDate, long fromPrice, long toPrice, String brandname);
+			 			Date fromDate, Date toDate, long fromPrice, long toPrice, String brandname, int pagenumber);
 	
 }

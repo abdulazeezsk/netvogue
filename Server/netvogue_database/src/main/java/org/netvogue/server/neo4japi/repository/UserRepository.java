@@ -117,52 +117,63 @@ public interface UserRepository extends GraphRepository<User> {
 	
 	//queries related to collections
 	@Query( "START n=node:search(username={0}) MATCH n-[:COLLECTION]->collection " +
-			"RETURN n.name as name, collection ORDER BY collection.createdDate DESC")
-	Iterable<CollectionData> getCollections(String username);
+			"RETURN n.name as name, collection ORDER BY collection.createdDate DESC " +
+			"SKIP {1} LIMIT {2}")
+	Iterable<CollectionData> getCollections(String username, int skip, int limit);
 	
 	@Query( "START n=node:search(username={0}) " +
 			"MATCH n-[r:NETWORK]-user WHERE r.status? = 'CONFIRMED' " +
 			"WITH user " +
 			"MATCH user-[:COLLECTION]->collection " +
-			"RETURN user.name as name, collection ORDER BY collection.createdDate DESC")
-	Iterable<CollectionData> getMyNetworkCollections(String username);
+			"RETURN user.name as name, collection ORDER BY collection.createdDate DESC " +
+			"SKIP {1} LIMIT {2}")
+	Iterable<CollectionData> getMyNetworkCollections(String username, int skip, int limit);
 	
 	@Query( "START n=node:search(username={0}), categories = node:productline({2}) " +
 			"MATCH n-[:COLLECTION]->collection-[:Collection_Category]-categories " +
 			"WHERE collection.collectionseasonname =~ {1} " +
-			"RETURN DISTINCT n.name as name, collection ORDER BY collection.createdDate DESC")
-	Iterable<CollectionData> searchCollections(String username, String seasonname, String category);
+			"RETURN DISTINCT n.name as name, collection ORDER BY collection.createdDate DESC " +
+			"SKIP {3} LIMIT {4}")
+	Iterable<CollectionData> searchCollections(String username, String seasonname, String category,
+												int skip, int limit);
 	
 	@Query("START n=node:search(username={0}) " +
 			"MATCH n-[r:NETWORK]-user WHERE r.status? = 'CONFIRMED' AND user.name = {4} " +
 			"WITH user START categories = node:productline({2}) " +
 			"MATCH user-[:COLLECTION]->collection-[:Collection_Category]-categories " +
 			"WHERE collection.collectionseasonname =~ {1} " +
-			"RETURN DISTINCT user.name as name, collection ORDER BY collection.createdDate DESC")
-	Iterable<CollectionData> searchMyNetworkCollections(String username, String seasonname, String category, String brandname);
+			"RETURN DISTINCT user.name as name, collection ORDER BY collection.createdDate DESC " +
+			"SKIP {4} LIMIT {5}")
+	Iterable<CollectionData> searchMyNetworkCollections(String username, String seasonname, 
+					String category, String brandname, int skip, int limit);
 
 	//queries related to stylesheets
 	@Query( "START n=node:search(username={0}) MATCH n-[:STYLESHEET]->stylesheet " +
-			"RETURN n.name as name, stylesheet ORDER BY stylesheet.createdDate DESC")
-	Iterable<StylesheetData> getStylesheets(String username);
+			"RETURN n.name as name, stylesheet ORDER BY stylesheet.createdDate DESC " +
+			"SKIP {1} LIMIT {2}")
+	Iterable<StylesheetData> getStylesheets(String username, int skip, int limit);
 	
 	@Query( "START n=node:search(username={0}), categories = node:productline({2}) " +
 			"MATCH n-[:STYLESHEET]->stylesheet-[:Stylesheet_Category]-categories " +
 			"WHERE stylesheet.stylesheetname =~ {1} " +
-			"RETURN DISTINCT n.name as name, stylesheet ORDER BY stylesheet.createdDate DESC")
-	Iterable<StylesheetData> searchStylesheets(String username, String stylesheetname, String category);
+			"RETURN DISTINCT n.name as name, stylesheet ORDER BY stylesheet.createdDate DESC " +
+			"SKIP {3} LIMIT {4}")
+	Iterable<StylesheetData> searchStylesheets(String username, String stylesheetname, 
+							String category, int skip, int limit);
 	
 	//queries related to linesheets
 	@Query( "START n=node:search(username={0}) MATCH n-[:LINESHEET]->linesheet " +
-			"RETURN n.name as name, linesheet ORDER BY linesheet.createdDate DESC")
-	Iterable<LinesheetData> getLinesheets(String username);
+			"RETURN n.name as name, linesheet ORDER BY linesheet.createdDate DESC " +
+			"SKIP {1} LIMIT {2}")
+	Iterable<LinesheetData> getLinesheets(String username, int skip, int limit);
 	
 	@Query( "START n=node:search(username={0}) " +
 			"MATCH n-[r:NETWORK]-user WHERE r.status? = 'CONFIRMED' " +
 			"WITH user " +
 			"MATCH user-[:LINESHEET]->linesheet " +
-			"RETURN user.name as name, linesheet ORDER BY linesheet.createdDate DESC")
-	Iterable<LinesheetData> getMyNetworkLinesheets(String username);
+			"RETURN user.name as name, linesheet ORDER BY linesheet.createdDate DESC " +
+			"SKIP {1} LIMIT {2}")
+	Iterable<LinesheetData> getMyNetworkLinesheets(String username, int skip, int limit);
 	
 	@Query( "START n=node:search(username={0}), categories = node:productline({2}) " +
 			"MATCH n-[:LINESHEET]->linesheet-[:Linesheet_Category]-categories " +
@@ -171,10 +182,11 @@ public interface UserRepository extends GraphRepository<User> {
 			"WITH n,linesheet MATCH linesheet-[?:LS_STYLE]-style " +
 			"WHERE (style=null AND 0 = {5} AND 0 = {6}) OR " +
 			"(style.price >= {5} AND style.price <= {6}) " +
-			"RETURN n.name as name, linesheet ORDER BY linesheet.createdDate DESC")
+			"RETURN n.name as name, linesheet ORDER BY linesheet.createdDate DESC " +
+			"SKIP {7} LIMIT {8}")
 	Iterable<LinesheetData> searchLinesheets(String username, String linesheetname, String category,
 											String fromdate, String todate,
-											long fromPrice, long toPrice);
+											long fromPrice, long toPrice, int skip, int limit);
 	
 	@Query( "START n=node:search(username={0}) " +
 			"MATCH n-[r:NETWORK]-user WHERE r.status? = 'CONFIRMED' AND user.name = {7} " +
@@ -185,11 +197,12 @@ public interface UserRepository extends GraphRepository<User> {
 			"WITH user,linesheet MATCH linesheet-[?:LS_STYLE]-style " +
 			"WHERE (style=null AND 0 = {5} AND 0 = {6}) OR " +
 			"(style.price >= {5} AND style.price <= {6}) " +
-			"RETURN user.name as name, linesheet ORDER BY linesheet.createdDate DESC")
+			"RETURN user.name as name, linesheet ORDER BY linesheet.createdDate DESC " +
+			"SKIP {8} LIMIT {9}")
 	Iterable<LinesheetData> searchMyNetworkLinesheets(String username, String linesheetname, String category,
 														String fromdate, String todate,
 														long fromPrice, long toPrice,
-														String brandname);
+														String brandname, int skip, int limit);
 	
 
 }

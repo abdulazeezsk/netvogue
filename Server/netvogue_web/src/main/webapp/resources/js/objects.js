@@ -6,9 +6,10 @@ if ( !window.netvogue ) {
 }
 //Constants
 netvogue.ADVSEARCH_LIMIT = 9;
-
-//Gallery related
 netvogue.GALLERYPAGE_LIMIT = 9;
+netvogue.COLLECTIONPAGE_LIMIT = 9;
+netvogue.STYLESHEETPAGE_LIMIT = 9;
+netvogue.LINESHEETPAGE_LIMIT = 9;
 
 //Initialization
 netvogue.yettocontact  	= true;
@@ -438,7 +439,7 @@ netvogue.linesheetsearchjsonrequest = function() {
 	this.todate			= 0;
 	this.fromprice 		= 0;
 	this.toprice 		= 0;
-	
+	this.pagenumber		= 0;
 	/*this.isempty = function() {
 		if(	"" == this.linesheetname &&
 			"" == this.brandname &&

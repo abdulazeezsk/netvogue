@@ -59,6 +59,7 @@ public class LinesheetController {
 
 	@RequestMapping(value={"/getlinesheets", "/getlinesheets/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Linesheets GetLinesheets(@ModelAttribute("profileid") String profileid, 
+											@RequestParam("pagenumber") int pagenumber,
 											@RequestParam(value="brandname", required=false) String brandname,
 											@RequestParam(value="category", required=false) String categories,
 											@RequestParam(value="fromdate", required=false) String fromDate,
@@ -67,6 +68,7 @@ public class LinesheetController {
 											@RequestParam(value="fromprice", required=false, defaultValue="0") long fromPrice,
 											@RequestParam(value="toprice", required=false, defaultValue="0") long toPrice) {
 		System.out.println("Get Linesheets: " + linesheetname +
+				"\nPagenumber" + pagenumber +
 				"\nCategory: " + categories +
 				"\nFrom Date: " + fromDate +
 				"\nTo Date: " + toDate +
@@ -104,9 +106,10 @@ public class LinesheetController {
 		} else {
 			 user = userDetailsService.getUserFromSession();
 		}
-		
-		linesheets.setName(user.getName());
-		linesheets.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		if(0 == pagenumber) {
+			linesheets.setName(user.getName());
+			linesheets.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		}
 		Set<Linesheet> linesheetTemp = new LinkedHashSet<Linesheet>();
 		Iterable<LinesheetData> dbLinesheets;
 		if( (null == linesheetname || linesheetname.isEmpty()) && 
@@ -116,7 +119,7 @@ public class LinesheetController {
 			(null == toDate || toDate.isEmpty() || toDate.equals("0")) && 
 			(0 == fromPrice && 0 == toPrice)
 		) {
-			dbLinesheets = userService.getLinesheets(user);
+			dbLinesheets = userService.getLinesheets(user, pagenumber);
 		} else {
 			Set<String> productlines = new HashSet<String>();
 			if(null != categories && !categories.isEmpty()) {
@@ -133,7 +136,7 @@ public class LinesheetController {
 			}
 			dbLinesheets = userService.searchLinesheets(user, linesheetname, productlines,
 															fromdate, todate, fromPrice, toPrice,
-															brandname);
+															brandname, pagenumber);
 		}
 		if(null == dbLinesheets) {
 			return linesheets;

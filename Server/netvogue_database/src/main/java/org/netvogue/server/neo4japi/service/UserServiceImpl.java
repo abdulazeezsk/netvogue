@@ -176,18 +176,21 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	//Queries related to collections
-	public Iterable<CollectionData> getCollections(User user) {
+	public Iterable<CollectionData> getCollections(User user, int pagenumber) {
 		if(null != user) {
 			if(USER_TYPE.BOUTIQUE == user.getUserType()) {
-				return userRepo.getMyNetworkCollections(user.getUsername());
+				return userRepo.getMyNetworkCollections(user.getUsername(),
+						Constants.COLLECTIONPAGE_LIMIT * pagenumber, Constants.COLLECTIONPAGE_LIMIT);
 			} else if(USER_TYPE.BRAND == user.getUserType()) {
-				return userRepo.getCollections(user.getUsername());
+				return userRepo.getCollections(user.getUsername(), 
+						Constants.COLLECTIONPAGE_LIMIT * pagenumber, Constants.COLLECTIONPAGE_LIMIT);
 			}
 		}
 		return null;
 	}
 	
-	public Iterable<CollectionData> searchCollections(User user, String seasonname, Set<String> categories, String brandname){
+	public Iterable<CollectionData> searchCollections(User user, String seasonname, Set<String> categories, 
+									String brandname, int pagenumber){
 		if(null != user) {
 			String username = user.getUsername();
 			String season = Utils.SerializePropertyParamForSearch(seasonname);
@@ -198,22 +201,25 @@ public class UserServiceImpl implements UserService{
 			System.out.println("brand name is" + brand);
 			System.out.println("Category is" + category);
 			if(USER_TYPE.BOUTIQUE == user.getUserType()) {
-				return userRepo.searchMyNetworkCollections(username, season, category, brand);
+				return userRepo.searchMyNetworkCollections(username, season, category, brand,
+						Constants.COLLECTIONPAGE_LIMIT * pagenumber, Constants.COLLECTIONPAGE_LIMIT);
 			} else if(USER_TYPE.BRAND == user.getUserType()) {
-				return userRepo.searchCollections(username, season, category);
+				return userRepo.searchCollections(username, season, category,
+						Constants.COLLECTIONPAGE_LIMIT * pagenumber, Constants.COLLECTIONPAGE_LIMIT);
 			}
 		}
 		return null; 
 	}
 	
-	public Iterable<StylesheetData> getStylesheets(User user) {
+	public Iterable<StylesheetData> getStylesheets(User user, int pagenumber) {
 		if(null != user) {
-			return userRepo.getStylesheets(user.getUsername());
+			return userRepo.getStylesheets(user.getUsername(),
+					Constants.STYLESHEETPAGE_LIMIT * pagenumber, Constants.STYLESHEETPAGE_LIMIT);
 		}
 		return null;
 	}
 	
-	public Iterable<StylesheetData> searchStylesheets(User user, String name, Set<String> categories) {
+	public Iterable<StylesheetData> searchStylesheets(User user, String name, Set<String> categories, int pagenumber) {
 		if(null != user) {
 			String username = user.getUsername();
 			String stylesheetname = Utils.SerializePropertyParamForSearch(name);
@@ -221,19 +227,22 @@ public class UserServiceImpl implements UserService{
 			System.out.println("user name is" + username);
 			System.out.println("Stylesheet name is" + stylesheetname);
 			System.out.println("Category is" + category);
-			return userRepo.searchStylesheets(username, stylesheetname, category);
+			return userRepo.searchStylesheets(username, stylesheetname, category,
+					Constants.STYLESHEETPAGE_LIMIT * pagenumber, Constants.STYLESHEETPAGE_LIMIT);
 		}
 		return null;
 	}
 	
-	public Iterable<LinesheetData> getLinesheets(User user) {
+	public Iterable<LinesheetData> getLinesheets(User user, int pagenumber) {
 		if(null != user) {
 			if(USER_TYPE.BOUTIQUE == user.getUserType()) {
-				return userRepo.getMyNetworkLinesheets(user.getUsername());
+				return userRepo.getMyNetworkLinesheets(user.getUsername(),
+						Constants.LINESHEETPAGE_LIMIT * pagenumber, Constants.LINESHEETPAGE_LIMIT);
 			} else if(USER_TYPE.BRAND == user.getUserType()) {
-				return userRepo.getLinesheets(user.getUsername());
+				return userRepo.getLinesheets(user.getUsername(),
+						Constants.LINESHEETPAGE_LIMIT * pagenumber, Constants.LINESHEETPAGE_LIMIT);
 			}
-			return userRepo.getLinesheets(user.getUsername());
+			//return userRepo.getLinesheets(user.getUsername());
 		}
 		return null;
 	}
@@ -242,7 +251,7 @@ public class UserServiceImpl implements UserService{
 														 Set<String> categories,
 														 Date fromDate, Date toDate,
 														 long fromPrice, long toPrice,
-														 String brandname) {
+														 String brandname, int pagenumber) {
 		if(null != user) {
 			String username = user.getUsername();
 			String season = Utils.SerializePropertyParamForSearch(seasonname);
@@ -268,10 +277,12 @@ public class UserServiceImpl implements UserService{
 			System.out.println("To Date is" + toDate.getTime());
 			if(USER_TYPE.BOUTIQUE == user.getUserType()) {
 				return userRepo.searchMyNetworkLinesheets(username, season, category, 
-														fromdate, todate, fromprice, toprice, brand);
+										fromdate, todate, fromprice, toprice, brand,
+										Constants.LINESHEETPAGE_LIMIT * pagenumber, Constants.LINESHEETPAGE_LIMIT);
 			} else if(USER_TYPE.BRAND == user.getUserType()) {
 				return userRepo.searchLinesheets(username, season, category,
-															fromdate, todate, fromPrice, toPrice);
+											fromdate, todate, fromPrice, toPrice,
+											Constants.LINESHEETPAGE_LIMIT * pagenumber, Constants.LINESHEETPAGE_LIMIT);
 			}
 		}
 		return null;

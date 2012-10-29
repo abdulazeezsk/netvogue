@@ -60,7 +60,8 @@ public class CollectionController {
 	public @ResponseBody Collections GetCollections(@ModelAttribute("profileid") String profileid, 
 												@RequestParam("galleryname") String galleryname,
 												@RequestParam("category") String categories,
-												@RequestParam("brandname") String brandname) {
+												@RequestParam("brandname") String brandname,
+												@RequestParam("pagenumber") int pagenumber) {
 		System.out.println("Get Collections: " + galleryname+ ":" + categories + ":" + brandname);
 		Collections collections = new Collections();
 		
@@ -74,12 +75,14 @@ public class CollectionController {
 			 user = userDetailsService.getUserFromSession();
 		}
 		
-		collections.setName(user.getName());
-		collections.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		if(0 == pagenumber) {
+			collections.setName(user.getName());
+			collections.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		}
 		Set<Collection> collectionTemp = new LinkedHashSet<Collection>();
 		Iterable<CollectionData> dbCollections;
 		if(galleryname.isEmpty() && categories.isEmpty() && brandname.isEmpty()) {
-			dbCollections = userService.getCollections(user);
+			dbCollections = userService.getCollections(user, pagenumber);
 		} else {
 			Set<String> productlines = new HashSet<String>();
 			List<String> categoriesafter =  Arrays.asList(categories.split(","));
@@ -92,7 +95,7 @@ public class CollectionController {
 				else
 					System.out.println("product line is null");
 			}
-			dbCollections = userService.searchCollections(user, galleryname, productlines, brandname);
+			dbCollections = userService.searchCollections(user, galleryname, productlines, brandname, pagenumber);
 		}
 		if(null == dbCollections) {
 			return collections;

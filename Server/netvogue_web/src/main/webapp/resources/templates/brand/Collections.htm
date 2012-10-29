@@ -29,17 +29,17 @@
 				<div ng-show="isMyProfile && !iambrand">
 					<span class="leftpane_filter_name">BRAND</span> 
 						<input type="text" class="span3" placeholder="Brand name" 
-							ng-model="searchbrandname" ng-change="getcollections()"/>
+							ng-model="searchbrandname" ng-change="searchcollections()"/>
 				</div> 
 				<span class="leftpane_filter_name">SEASON</span> 
 					<input type="text" class="span3" placeholder="Season name" 
-							ng-model="searchcollectionname" ng-change="getcollections()"/>
+							ng-model="searchcollectionname" ng-change="searchcollections()"/>
 			</div>
 			<div>
 				<span class="leftpane_filter_name">CATEGORY</span>
 			</div>
 			<div>
-				<div checkbox-tree ng-model="searchFilter" ng-change="getcollections()"></div>
+				<div checkbox-tree ng-model="searchFilter" ng-change="searchcollections()"></div>
 			</div>
 		</div>
 		<!-- left pane -->
@@ -95,9 +95,14 @@
 						</div>
 					</li>
 				</ul>
-
-
-
+				<div get-more="getmorecollections()">
+   					<div ng-show="gettingmorecollections">
+   						<center><img src="img/ajax-loadersmall.gif"><br></center>
+   					</div>
+   					<div ng-show="nomoredataavailable">
+   						End of data
+   					</div>
+				</div>
 		</div>
 		<!-- right pane -->
 	</div>

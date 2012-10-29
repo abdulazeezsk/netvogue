@@ -575,10 +575,16 @@ angular.module('netVogue.services', []).
 		          };
 		          return $http(config);
 		     },
-		     setcollectionlocally: function(temp) {
-		    	 name = temp.name;
-		    	 profilepic = temp.profilepic;
-		    	 angular.copy(temp.collections, collections);
+		     setcollectionlocally: function(temp, pagenumber) {
+		    	 if(0 == pagenumber) {
+			    	 name = temp.name;
+			    	 profilepic = temp.profilepic;
+			    	 angular.copy(temp.collections, collections);
+		    	 } else {
+		    		 for(var i=0; i < temp.collections.length; i++) {
+		    			 collections.push(temp.collections[i]);
+		    		  }
+		    	 }
 		     },
 		     setphotoslocally: function(photostemp) {
 		    	 name = photostemp.name;
@@ -766,10 +772,16 @@ angular.module('netVogue.services', []).
             };
             return $http(config);
         },
-        setstylesheetlocally: function(temp) {
-        	name = temp.name;
-    		profilepic = temp.profilepic;
-    		angular.copy(temp.stylesheets, stylesheets);
+        setstylesheetlocally: function(temp, pagenumber) {
+        	if(0 == pagenumber) {
+	        	name = temp.name;
+	    		profilepic = temp.profilepic;
+	    		angular.copy(temp.stylesheets, stylesheets);
+        	} else {
+	    		 for(var i=0; i < temp.stylesheets.length; i++) {
+	    			 stylesheets.push(temp.stylesheets[i]);
+	    		  }
+	    	 }
         },
         setstyleslocally: function(temp) {
         	name = temp.name;
@@ -920,10 +932,16 @@ angular.module('netVogue.services', []).
             };
             return $http(config);
         },
-        setlinesheetlocally: function(temp) {
-        	name = temp.name;
-    		profilepic = temp.profilepic;
-    		angular.copy(temp.linesheets, linesheets);
+        setlinesheetlocally: function(temp, pagenumber) {
+        	if(0 == pagenumber) {
+	        	name = temp.name;
+	    		profilepic = temp.profilepic;
+	    		angular.copy(temp.linesheets, linesheets);
+        	} else {
+	    		 for(var i=0; i < temp.linesheets.length; i++) {
+	    			 linesheets.push(temp.linesheets[i]);
+	    		  }
+	    	 }
         },
         setstyleslocally: function(temp) {
         	name = temp.name;

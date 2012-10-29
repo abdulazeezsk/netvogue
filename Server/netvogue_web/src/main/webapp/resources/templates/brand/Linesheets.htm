@@ -99,7 +99,10 @@
 				<!-- header pane -->
 			
 			<div>
-
+				<div ng-show="gettingstylesheets">
+                	<img src="img/ajax-loadersmall.gif" style="float:left;" >
+					<br>
+				</div>
 
 				<ul class="thumbnails">
 					<li ng-repeat="linesheet in linesheets">
@@ -142,14 +145,17 @@
 						</div>
 					</li>
 				</ul>
+				<div get-more="getmorelinesheets()">
+   					<div ng-show="gettingmorelinesheets">
+   						<center><img src="img/ajax-loadersmall.gif"><br></center>
+   					</div>
+   					<div ng-show="nomoredataavailable">
+   						End of data
+   					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	<nav>
-		<img src="img/ajax-loadersmall.gif" style="float: left;"><br>
-	</nav>
-		
-	</nav>
 	<!--body-->
 	<!-- modal -->
 	<div class="modal  hide" id="Createlinesheet">

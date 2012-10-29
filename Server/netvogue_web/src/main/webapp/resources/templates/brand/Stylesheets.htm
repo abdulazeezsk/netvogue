@@ -21,13 +21,13 @@
 			<div>
 				<span class="leftpane_filter_name">Lookbook</span> 
 					<input type="text" placeholder="Search lookbooks by name" class="span3"
-						ng-model="searchstylesheetname" ng-change="getstylesheets()"  />
+						ng-model="searchstylesheetname" ng-change="searchstylesheets()"  />
 			</div>
 			<div>
 				<span class="leftpane_filter_name">CATEGORY</span>
 			</div>
 			<div>
-				<div checkbox-tree ng-model="searchFilter" ng-change="getstylesheets()"></div>
+				<div checkbox-tree ng-model="searchFilter" ng-change="searchstylesheets()"></div>
 			</div>
 		</div>
 		<!-- left-pane -->
@@ -84,8 +84,14 @@
 						</div>
 					</li>
 				</ul>
-
-
+				<div get-more="getmorestylesheets()">
+   					<div ng-show="gettingmorestylesheets">
+   						<center><img src="img/ajax-loadersmall.gif"><br></center>
+   					</div>
+   					<div ng-show="nomoredataavailable">
+   						End of data
+   					</div>
+				</div>
 		</div>
 		<!-- right pane -->
 

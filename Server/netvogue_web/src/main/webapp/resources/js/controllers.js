@@ -364,7 +364,7 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, m
 	
 	var ajaxrequestcall	 = "gallery";
 	var pagenumber = 0;
-	$scope.gettinggallery = false;
+	$scope.gettinggallery = true;
 	$scope.gettingmoregalleries = false;
 	$scope.nomoredataavailable = false;
 	
@@ -378,14 +378,13 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, m
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getgalleries = function() {
-    	$scope.gettinggallery = true;
     	mygallery.galleries("getgalleries", $routeParams, $scope.searchgalleryname, pagenumber).success(function(data) {
-    		$scope.gettinggallery = false;
-    		$scope.gettingmoregalleries = false;
     		if(data.galleries.length < netvogue.GALLERYPAGE_LIMIT)
     			$scope.nomoredataavailable = true;
     		mygallery.setgallerylocally(data, pagenumber);
         	$scope.updatedata();
+        	$scope.gettinggallery = false;
+    		$scope.gettingmoregalleries = false;
         }).error(function(data) {
         	$scope.gettinggallery = false;
         	$scope.gettingmoregalleries = false;
@@ -403,6 +402,7 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, m
     
     $scope.searchgalleries = function() {
     	pagenumber = 0;
+    	$scope.gettinggallery = true;
     	$scope.getgalleries();
     };
     
@@ -562,7 +562,7 @@ function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprof
 	
 	var ajaxrequestcall	 = "printcampaign";
 	var pagenumber = 0;
-	$scope.gettinggallery = false;
+	$scope.gettinggallery = true;
 	$scope.gettingmoregalleries = false;
 	$scope.nomoredataavailable = false;
 	
@@ -576,7 +576,6 @@ function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprof
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getgalleries = function() {
-    	$scope.gettinggallery = true;
     	mygallery.galleries("getprintcampaigns", $routeParams, $scope.searchgalleryname, pagenumber).success(function(data) {
     		if(data.galleries.length < netvogue.GALLERYPAGE_LIMIT)
     			$scope.nomoredataavailable = true;
@@ -601,6 +600,7 @@ function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprof
     
     $scope.searchgalleries = function() {
     	pagenumber = 0;
+    	$scope.gettinggallery = true;
     	$scope.getgalleries();
     };
 
@@ -761,7 +761,7 @@ function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile
 	
 	var ajaxrequestcall	 = "editorial";
 	var pagenumber = 0;
-	$scope.gettinggallery = false;
+	$scope.gettinggallery = true;
 	$scope.gettingmoregalleries = false;
 	$scope.nomoredataavailable = false;
 	
@@ -775,7 +775,6 @@ function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getgalleries = function() {
-    	$scope.gettinggallery = true;
     	mygallery.galleries("geteditorials", $routeParams, $scope.searchgalleryname, pagenumber).success(function(data) {
     		if(data.galleries.length < netvogue.GALLERYPAGE_LIMIT)
     			$scope.nomoredataavailable = true;
@@ -800,6 +799,7 @@ function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile
     
     $scope.searchgalleries = function() {
     	pagenumber = 0;
+    	$scope.gettinggallery = true;
     	$scope.getgalleries();
     };
 
@@ -952,7 +952,10 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
 	$scope.collectiondesc 		= "description";
 	$scope.collectioncategory	= "";
 	$scope.defaultcategories	= netvogue.defaultproductlines;
-	$scope.gettingcollections = false;
+	$scope.gettingcollections = true;
+	$scope.gettingmorecollections = false;
+	$scope.nomoredataavailable = false;
+	var pagenumber = 0;
 	
 	//Related to edit collection
 	$scope.editcollectionname   = "";
@@ -974,21 +977,40 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getcollections = function() {
-    	$scope.gettingcollections = true;
     	var searchcollections = {
     			"galleryname" 	:$scope.searchcollectionname,
     			"category"		:$scope.searchFilter.getCheckedFilters(),
     			"brandname"		:$scope.searchbrandname,
+    			"pagenumber"	:pagenumber
     	};
     	mycollection.collections($routeParams, searchcollections).success(function(data) {
-    		mycollection.setcollectionlocally(data);
+    		if(data.collections.length < netvogue.COLLECTIONPAGE_LIMIT)
+    			$scope.nomoredataavailable = true;
+    		
+    		mycollection.setcollectionlocally(data, pagenumber);
         	$scope.updatedata();
         	$scope.gettingcollections = false;
+        	$scope.gettingmorecollections = false;
         }).error(function(data) {
         	$scope.gettingcollections = false;
+        	$scope.gettingmorecollections = false;
         });
     };
     $scope.getcollections();
+    
+    $scope.getmorecollections = function() {
+    	if(false == $scope.nomoredataavailable) {
+    		$scope.gettingmorecollections = true;
+    		pagenumber++;
+    		$scope.getcollections();
+    	}
+    };
+    
+    $scope.searchcollections = function() {
+    	pagenumber = 0;
+    	$scope.gettingcollections = true;
+    	$scope.getcollections();
+    };
     
     $scope.createcollection = function() {
     	var jsonrequest = new netvogue.collectionjsonrequest($scope.collectionname, $scope.collectiondesc,
@@ -1162,7 +1184,10 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
 	$scope.editstylesheetid	 	= "";
 	$scope.showEditStylesheet	 = false;	
 	
-	$scope.gettingstylesheets = false;
+	$scope.gettingstylesheets = true;
+	$scope.gettingmorestylesheets = false;
+	$scope.nomoredataavailable = false;
+	var pagenumber = 0;
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mystylesheet.getname($routeParams);
@@ -1175,18 +1200,37 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
     $scope.getstylesheets = function() {
     	var searchstylesheets = {
     			"stylesheetname" :$scope.searchstylesheetname,
-    			"category"		 :$scope.searchFilter.getCheckedFilters()
+    			"category"		 :$scope.searchFilter.getCheckedFilters(),
+    			"pagenumber"	 :pagenumber
     	};
     	$scope.gettingstylesheets = true;
     	mystylesheet.stylesheets($routeParams, searchstylesheets).success(function(data) {
-    		mystylesheet.setstylesheetlocally(data, $routeParams);
+    		if(data.stylesheets.length < netvogue.STYLESHEETPAGE_LIMIT)
+    			$scope.nomoredataavailable = true;
+    		mystylesheet.setstylesheetlocally(data, pagenumber);
         	$scope.updatedata();
         	$scope.gettingstylesheets = false;
+        	$scope.gettingmorestylesheets = false;
         }).error(function(data) {
         	$scope.gettingstylesheets = false;
+        	$scope.gettingmorestylesheets = false;
         });
     };
     $scope.getstylesheets();
+    
+    $scope.getmorestylesheets = function() {
+    	if(false == $scope.nomoredataavailable) {
+    		$scope.gettingmorestylesheets = true;
+    		pagenumber++;
+    		$scope.getstylesheets();
+    	}
+    };
+    
+    $scope.searchstylesheets = function() {
+    	pagenumber = 0;
+    	$scope.gettingstylesheets = true;
+    	$scope.getstylesheets();
+    };
     
     $scope.createstylesheet = function() {
     	var jsonrequest = new netvogue.stylesheetjsonrequest($scope.stylesheetname, $scope.stylesheetcat);
@@ -1380,6 +1424,11 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
 	$scope.immediate = "true";
 	$scope.editimmediate = "false";
 
+	$scope.gettinglinesheets = true;
+	$scope.gettingmorelinesheets = false;
+	$scope.nomoredataavailable = false;
+	var pagenumber = 0;
+	
 	//Related to new stylesheet
 	$scope.linesheetname = "new";
 	$scope.linesheetcat  = "";
@@ -1410,21 +1459,60 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getlinesheets = function(search) {
     	var getdata;
-    	if(search)
+    	if(search) {
+    		$scope.searchlinesheets.pagenumber = pagenumber;
     		getdata = mylinesheet.linesheets($routeParams, $scope.searchlinesheets);
-    	else 
-    		getdata = mylinesheet.linesheets($routeParams);
+    	}
+    	else {
+    		var datatosent = {
+    				"pagenumber" : pagenumber
+    		};
+    		getdata = mylinesheet.linesheets($routeParams, datatosent);
+    	}
     	getdata.success(function(data) {
-    		mylinesheet.setlinesheetlocally(data, $routeParams);
+    		if(data.linesheets.length < netvogue.LINESHEETPAGE_LIMIT)
+    			$scope.nomoredataavailable = true;
+    		mylinesheet.setlinesheetlocally(data, pagenumber);
         	$scope.updatedata();
+        	$scope.gettinglinesheets = false;
+        	$scope.gettingmorelinesheets = false;
         }).error(function(data) {
-        	
+        	$scope.gettinglinesheets = false;
+        	$scope.gettingmorelinesheets = false;
         });
     };
     $scope.getlinesheets(false);
     
+    $scope.getmorelinesheets = function() {
+    	if(false == $scope.nomoredataavailable) {
+    		$scope.gettingmorelinesheets = true;
+    		pagenumber++;
+    		
+    		var empty = false;
+        	if(firstcall) {
+        		$scope.getlinesheets(true);
+        		firstcall = false;
+        		return;
+        	}
+        	
+        	if(	"" == temp.linesheetname &&
+        			"" == temp.brandname &&
+        			(temp == this.category || "" == temp.category) &&
+        			(null == temp.fromdate || 0 == temp.fromdate) &&
+        			(null == temp.todate || 0 == temp.todate) &&
+        			(0 == temp.fromprice) &&
+        			(0 == temp.toprice)) {
+        		
+        		$scope.getlinesheets(false);
+        	} else {
+        		$scope.getlinesheets(true);
+        	}
+    	}
+    };
+    
     var firstcall = true;
     $scope.searchlinesheetsfn = function() {
+    	pagenumber = 0;
     	if($scope.searchdeliverydate == "all") {
     		$scope.searchlinesheets.fromdate 	= "0";
     		$scope.searchlinesheets.todate		= "0";
@@ -1458,8 +1546,10 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
     			(0 == temp.toprice)) {
     			empty = true;
     	}
-    	if(!empty)
+    	if(!empty) {
+    		$scope.gettinglinesheets = true;
     		$scope.getlinesheets(true);
+    	}
     };
     
     $scope.createlinesheet = function() {

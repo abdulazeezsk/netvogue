@@ -63,6 +63,7 @@ public class StyleSheetController {
 
 	@RequestMapping(value="getstylesheets", method=RequestMethod.GET)
 	public @ResponseBody Stylesheets GetStylesheets( 
+						@RequestParam("pagenumber") int pagenumber,
 						@RequestParam(value="stylesheetname", required=false, defaultValue="") String stylesheetname,
 						@RequestParam(value="category", required=false, defaultValue="") String categories) {
 		System.out.println("Get Stylesheets: " + stylesheetname);
@@ -72,12 +73,14 @@ public class StyleSheetController {
 			return stylesheets;
 		}
 		
-		stylesheets.setName(loggedinUser.getName());
-		stylesheets.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
+		if(0 == pagenumber) {
+			stylesheets.setName(loggedinUser.getName());
+			stylesheets.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
+		}
 		Set<Stylesheet> stylesheetTemp = new LinkedHashSet<Stylesheet>();
 		Iterable<StylesheetData> dbStylesheets;
 		if(stylesheetname.isEmpty() && categories.isEmpty()) {
-			dbStylesheets = userService.getStylesheets(loggedinUser);
+			dbStylesheets = userService.getStylesheets(loggedinUser, pagenumber);
 		} else {
 			Set<String> productlines = new HashSet<String>();
 			if(null != categories && !categories.isEmpty()) {
@@ -92,7 +95,7 @@ public class StyleSheetController {
 						System.out.println("product line is null");
 				}
 			}
-			dbStylesheets = userService.searchStylesheets(loggedinUser, stylesheetname, productlines);
+			dbStylesheets = userService.searchStylesheets(loggedinUser, stylesheetname, productlines, pagenumber);
 		}
 		if(null == dbStylesheets) {
 			return stylesheets;
