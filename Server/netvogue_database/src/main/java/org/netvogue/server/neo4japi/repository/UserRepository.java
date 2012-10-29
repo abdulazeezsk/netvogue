@@ -75,12 +75,16 @@ public interface UserRepository extends GraphRepository<User> {
 	Iterable<ReferenceData> getReferences(String username, int pagenumber, int resultsperpage);
 	
 	//Queries related to gallery
-	@Query( "START n=node:search(username={0}) MATCH n-[:GALLERY]->g RETURN g ORDER BY g.createdDate DESC")
-	Iterable<Gallery> getGalleries(String username);
+	@Query( "START n=node:search(username={0}) MATCH n-[:GALLERY]->g " +
+			"RETURN g ORDER BY g.createdDate DESC " +
+			"SKIP {1} LIMIT {2} ")
+	Iterable<Gallery> getGalleries(String username, int skip, int limit);
 	
-	@Query( "START n=node:search(username={0}) MATCH n-[:GALLERY]->g WHERE g.galleryname =~ {1} " +
-			"RETURN g ORDER BY g.createdDate DESC")
-	Iterable<Gallery> searchGalleryByName(String username, String galleryname);
+	@Query( "START n=node:search(username={0}) MATCH n-[:GALLERY]->g " +
+			"WHERE g.galleryname =~ {1} " +
+			"RETURN g ORDER BY g.createdDate DESC " +
+			"SKIP {2} LIMIT {3} ")
+	Iterable<Gallery> searchGalleryByName(String username, String galleryname, int skip, int limit);
 	
 	//Queries related to Print campaigns
 	@Query( "START n=node:search(username={0}) MATCH n-[:PRINTCAMPAIGN]->pc RETURN pc ORDER BY pc.createdDate DESC")

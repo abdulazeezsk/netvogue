@@ -387,6 +387,19 @@ angular.module('netVogue.directives', []).
 	        restrict: 'A',
 	        link: linkFn
 	    };
+}).directive('getMore', function($window, $document) { //This is used in search bar
+	  var linkFn;
+	  linkFn = function(scope, element, attrs) {
+		  jQuery($window).scroll(function() {
+		      if(jQuery($window).scrollTop() == jQuery($document).height() - jQuery($window).height()) {
+		          scope.$eval(attrs.getMore);
+		      }
+		  });
+	  };
+	  return {
+		  restrict	: 'A',
+	      link		: linkFn
+	  };
 }).directive('searchDropdown', function() { //This is used in search bar
 	  var linkFn;
 	  linkFn = function(scope, element, attrs) {

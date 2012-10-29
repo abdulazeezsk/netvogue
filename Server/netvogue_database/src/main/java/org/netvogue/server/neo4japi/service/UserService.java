@@ -33,9 +33,9 @@ public interface UserService {
 	//Trending
 	
 	//Gallery related
-	public Iterable<Gallery> GetGalleries(User user);
-	public Iterable<Gallery> searchGalleryByName(User user, String name);
-	public Iterable<Gallery> searchGalleryByName(String username, String name);
+	public Iterable<Gallery> GetGalleries(User user, int pagenumber);
+	public Iterable<Gallery> searchGalleryByName(User user, String name, int pagenumber);
+	public Iterable<Gallery> searchGalleryByName(String username, String name, int pagenumber);
 	
 	//Queries related to Printcampaigns
 	public Iterable<PrintCampaign> getPrintCampaigns(User user);

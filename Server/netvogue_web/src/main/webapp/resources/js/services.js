@@ -368,12 +368,13 @@ angular.module('netVogue.services', []).
 	    		}
 	    		photos.splice(i, 1);
 	    	},
-	    	galleries: function (ajaxrequestcall, routeparams, jsonrequest) {
+	    	galleries: function (ajaxrequestcall, routeparams, jsonrequest, pagenumber) {
 		          var profileid = "";
 		          if (!angular.isUndefined(routeparams.profileid)) {
 		        	  profileid = routeparams.profileid;
 		          }
 		          var datatosend = {
+		        		  	"pagenumber"  : pagenumber,
 			  				"galleryname" : jsonrequest
 			  	};
 		          var config = {
@@ -399,11 +400,18 @@ angular.module('netVogue.services', []).
 		          };
 		          return $http(config);
 		      },
-		      setgallerylocally: function(galleriestemp) {
+		      setgallerylocally: function(galleriestemp, pagenumber) {
 		    	  name = galleriestemp.name;
 		    	  isbrand = galleriestemp.isbrand;
 		    	  profilepic = galleriestemp.profilepic;
-		    	  angular.copy(galleriestemp.galleries, galleries);
+		    	  if(0 == pagenumber) {
+		    		  angular.copy(galleriestemp.galleries, galleries);
+		    	  } else {
+		    		  for(var i=0; i < galleriestemp.galleries.length; i++) {
+		    			  galleries.push(galleriestemp.galleries[i]);
+		    		  }
+		    	  } 
+		    		  
 		      },
 		      setphotoslocally: function(photostemp) {
 		    	  name = photostemp.name;

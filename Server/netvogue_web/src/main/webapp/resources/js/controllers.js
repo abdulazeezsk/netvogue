@@ -363,7 +363,10 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, m
 	$scope.showEditGallery	 = false;
 	
 	var ajaxrequestcall	 = "gallery";
+	var pagenumber = 0;
 	$scope.gettinggallery = false;
+	$scope.gettingmoregalleries = false;
+	$scope.nomoredataavailable = false;
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
@@ -376,15 +379,31 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, m
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getgalleries = function() {
     	$scope.gettinggallery = true;
-    	mygallery.galleries("getgalleries", $routeParams, $scope.searchgalleryname).success(function(data) {
+    	mygallery.galleries("getgalleries", $routeParams, $scope.searchgalleryname, pagenumber).success(function(data) {
     		$scope.gettinggallery = false;
-    		mygallery.setgallerylocally(data, $routeParams);
+    		$scope.gettingmoregalleries = false;
+    		if(data.galleries.length < 9)
+    			$scope.nomoredataavailable = true;
+    		mygallery.setgallerylocally(data, pagenumber);
         	$scope.updatedata();
         }).error(function(data) {
         	$scope.gettinggallery = false;
         });
     };
     $scope.getgalleries();
+    
+    $scope.getmoregalleries = function() {
+    	if(false == $scope.nomoredataavailable) {
+    		$scope.gettingmoregalleries = true;
+    		pagenumber++;
+    		$scope.getgalleries();
+    	}
+    };
+    
+    $scope.searchgalleries = function() {
+    	pagenumber = 0;
+    	$scope.getgalleries();
+    };
     
     $scope.creategallery = function() {
     	mygallery.creategallery(ajaxrequestcall, $scope.galleryname).success(function(data) {

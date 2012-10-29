@@ -50,8 +50,9 @@ public class GalleryController {
 		
 	@RequestMapping(value={"/getgalleries", "/getgalleries/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Galleries GetGalleries(@ModelAttribute("profileid") String profileid, 
+												@ModelAttribute("pagenumber") int pagenumber,
 												@RequestParam("galleryname") String galleryname) {
-		System.out.println("Get Galleries: " + galleryname);
+		System.out.println("Get Galleries: " + galleryname + ":no:" + pagenumber);
 		Galleries galleries = new Galleries();
 		User user;
 		if(!profileid.isEmpty()) {
@@ -69,9 +70,9 @@ public class GalleryController {
 		Set<Gallery> galleriesTemp = new LinkedHashSet<Gallery>();
 		Iterable<org.netvogue.server.neo4japi.domain.Gallery> dbGalleries;
 		if(galleryname.isEmpty()) {
-			dbGalleries = userService.GetGalleries(user);
+			dbGalleries = userService.GetGalleries(user, pagenumber);
 		} else {
-			dbGalleries = userService.searchGalleryByName(user, galleryname);
+			dbGalleries = userService.searchGalleryByName(user, galleryname, pagenumber);
 		}
 		if(null == dbGalleries) {
 			return galleries;

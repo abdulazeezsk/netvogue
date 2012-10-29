@@ -121,19 +121,21 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	//Queries related to galleries
-	public Iterable<Gallery> GetGalleries(User user) {
+	public Iterable<Gallery> GetGalleries(User user, int pagenumber) {
 		if(null != user) {
-			return userRepo.getGalleries(user.getUsername());
+			return userRepo.getGalleries(user.getUsername(), Constants.GALLERYPAGE_LIMIT * pagenumber,
+															Constants.GALLERYPAGE_LIMIT);
 		}
 		return null;
 	}
 	
-	public Iterable<Gallery> searchGalleryByName(User user, String name) {
-		return searchGalleryByName(user.getUsername(), name);
+	public Iterable<Gallery> searchGalleryByName(User user, String name, int pagenumber) {
+		return searchGalleryByName(user.getUsername(), name, pagenumber);
 	}
 	
-	public Iterable<Gallery> searchGalleryByName(String username, String name) {
-		return userRepo.searchGalleryByName(username, Utils.SerializePropertyParamForSearch(name));
+	public Iterable<Gallery> searchGalleryByName(String username, String name, int pagenumber) {
+		return userRepo.searchGalleryByName(username, Utils.SerializePropertyParamForSearch(name),
+				Constants.GALLERYPAGE_LIMIT * pagenumber, Constants.GALLERYPAGE_LIMIT);
 	}
 	
 	//Queries related to printcampaigns
