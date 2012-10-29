@@ -191,11 +191,11 @@ public class ProfileController {
 		try {
 			user.setAboutUs(aboutUs);
 			
-			String error = new String();
+			StringBuffer error = new StringBuffer();
 			if(ResultStatus.SUCCESS == userService.SaveUser(user, error))
 				status.setStatus(true);
 			else
-				status.setError(error);
+				status.setError(error.toString());
 		} catch(Exception e) {
 			status.setError(e.toString());
 		}
@@ -219,7 +219,7 @@ public class ProfileController {
 		System.out.println("Came here" + fileupload.getOriginalFilename());
 		Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.PROFILE_PIC);
 		user.setProfilePicLink((String)uploadMap.get(UploadManager.FILE_ID));
-		String error = new String();
+		StringBuffer error = new StringBuffer();
 		if(ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
 			response.setStatus(true);
 		
@@ -234,7 +234,7 @@ public class ProfileController {
 			
 			response.setFilesuploaded(JSONFileData);
 		} else {
-			response.setError(error);
+			response.setError(error.toString());
 		}
 	
 		return response;
@@ -262,11 +262,11 @@ public class ProfileController {
 			user.setFromPrice(contactInfo.getFromprice().longValue());
 			user.setToPrice(contactInfo.getToprice().longValue());
 			
-			String error = new String();
+			StringBuffer error = new StringBuffer();
 			if(ResultStatus.SUCCESS == userService.SaveUser(user, error))
 				status.setStatus(true);
 			else
-				status.setError(error);
+				status.setError(error.toString());
 		/*} else {
 			status.setError("Email is already existing.Try another one");
 		}*/
@@ -292,11 +292,11 @@ public class ProfileController {
 				Category cat = boutiqueService.getOrCreateCategory(productLine);
 				user.updateCategories(cat);
 			}
-			String error = new String();
+			StringBuffer error = new StringBuffer();
 			if(ResultStatus.SUCCESS == userService.SaveUser(user, error))
 				status.setStatus(true);
 			else
-				status.setError(error);
+				status.setError(error.toString());
 		} catch(Exception e) {
 			System.out.println("Exception is:" + e.getMessage());
 			status.setError(e.toString());
@@ -315,11 +315,62 @@ public class ProfileController {
 				User newUser = boutiqueService.GetOrCreateUser(productline);
 				user.updateUsersCarried(newUser);
 			}
-			String error = new String();
+			StringBuffer error = new StringBuffer();
 			if(ResultStatus.SUCCESS == userService.SaveUser(user, error))
 				status.setStatus(true);
 			else
-				status.setError(error);
+				status.setError(error.toString());
+		} catch(Exception e) {
+			System.out.println("Exception is:" + e.getMessage());
+			status.setError(e.toString());
+		}
+		return status;
+	}
+	
+	@RequestMapping(value = "/profile/addbrandscarried", method=RequestMethod.POST)
+	public @ResponseBody BrandsCarried addBrandsCarried(@RequestBody String brandsCarried) {
+		System.out.println("Add brands carried");
+		BrandsCarried brand = new BrandsCarried();
+		User user = userDetailsService.getUserFromSession();
+		try {
+			User newUser = boutiqueService.GetOrCreateUser(brandsCarried);
+			user.updateUsersCarried(newUser);
+			StringBuffer error = new StringBuffer();
+			if(ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
+				String profilepic = newUser.getProfilePicLink();
+				brand.setBrandname(user.getUsername());
+				brand.setBrandusername(user.getName());
+				if(null != profilepic) {
+					String thumburl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PThumb);
+					brand.setProfilepic(thumburl);
+				} else {
+					brand.setProfilepic("");
+				}
+			} 
+		} catch(Exception e) {
+			System.out.println("Exception is:" + e.getMessage());
+		}
+		return brand;
+	}
+	
+	@RequestMapping(value = "/profile/removebrandscarried", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse removeBrandsCarried(@RequestBody String brandsCarried) {
+		System.out.println("Remove brands carried" + brandsCarried);
+		JsonResponse status = new JsonResponse();
+		User user = userDetailsService.getUserFromSession();
+		try {
+			System.out.println("Before removing:" + user.getUsersCarried().size());
+			if(user.deleteUsersCarried(brandsCarried)) {
+				System.out.println("After removing:" + user.getUsersCarried().size());
+				StringBuffer error = new StringBuffer();
+				if(ResultStatus.SUCCESS == userService.SaveUser(user, error))
+					status.setStatus(true);
+				else
+					status.setError(error.toString());
+			} else {
+				status.setError("User doesn't exist");
+			}
+		
 		} catch(Exception e) {
 			System.out.println("Exception is:" + e.getMessage());
 			status.setError(e.toString());

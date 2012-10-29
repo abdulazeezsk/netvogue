@@ -12,7 +12,7 @@ import org.netvogue.server.neo4japi.domain.PrintCampaign;
 import org.netvogue.server.neo4japi.domain.User;
 
 public interface UserService {
-	ResultStatus SaveUser(User user, String error);
+	ResultStatus SaveUser(User user, StringBuffer error);
 	ResultStatus ValidateEmailAndId(String email, Long id);
 	public User getUserByUsername(String username);
 	public UserData getUserDataByUsername(String username);

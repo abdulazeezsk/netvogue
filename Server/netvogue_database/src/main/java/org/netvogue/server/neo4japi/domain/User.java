@@ -383,6 +383,16 @@ public class User {
 		usersCarried.add(usercarried);
 	}
 	
+	public boolean deleteUsersCarried(String usercarried) {
+		for(User user: usersCarried) {
+			if(usercarried.equals(user.getUsername())) {
+				usersCarried.remove(user);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void deleteUsersCarried() {
 		usersCarried.clear();
 	}

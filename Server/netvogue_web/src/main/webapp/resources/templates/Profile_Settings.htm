@@ -115,10 +115,10 @@
                             <li ng-repeat="brand in brandscarried.keys()">
                                 <div class="network">
                                     <span class="brand_image"><a href="#">
-                                        <img alt="" ng-src="" class="pull-left"></a> </span>
+                                        <img alt="" ng-src="{{brandscarried.getItem(brand).profilepic}}" class="pull-left"></a> </span>
                                     <span class="network_text">
                                         <h3>
-                                            <span><a ng-href="#/{{brandscarried.getItem(brand)}}/profile">{{brand}}</a></span>
+                                            <span><a ng-href="#/{{brandscarried.getItem(brand).brandusername}}/profile">{{brand}}</a></span>
                                         </h3>
                                     </span><span class="btn-group pull-right">
                                         <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">

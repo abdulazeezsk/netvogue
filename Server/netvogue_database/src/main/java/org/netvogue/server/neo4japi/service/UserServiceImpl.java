@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService{
 	@Autowired Neo4jTemplate		neo4jTemplate;
 	@Autowired UserRepository		userRepo;
 	
-	public ResultStatus SaveUser(User user, String error){
+	public ResultStatus SaveUser(User user, StringBuffer error){
 		try {
 			//New Categories node will be created an relationship will also be added for this.
 			//Saving it through Template instead of boutiquerepo so that categories node can also be saved
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService{
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error for" + user.getEmail() + " - " + e.toString());
-			error = e.toString();
+			error.append(e.toString());
 			return ResultStatus.FAILURE;
 		}
 	}

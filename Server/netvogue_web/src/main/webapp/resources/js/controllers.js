@@ -1587,7 +1587,7 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
 	    $scope.brandscarried.clear();
 	    for(var i in brandscarriedtemp) {
 	    	brandsReceived.setItem(brandscarriedtemp[i].brandname, brandscarriedtemp[i].brandusername);
-	    	$scope.brandscarried.setItem(brandscarriedtemp[i].brandname, brandscarriedtemp[i].brandusername);
+	    	$scope.brandscarried.setItem(brandscarriedtemp[i].brandname, brandscarriedtemp[i]);
 	    }
 	};
 	
@@ -1673,7 +1673,7 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
         	angular.element(event.srcElement).button('reset');
         });      
     };
-    $scope.updatebrandscarried = function (event) {
+    /*$scope.updatebrandscarried = function (event) {
     	angular.element(event.srcElement).button('loading');
     	var finalbrandscarriedlist = $scope.brandscarried.values();
     	myprofile.posttoserver(finalbrandscarriedlist, "brandscarried").success(function(data) {
@@ -1687,7 +1687,26 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
         	alert(data.error);
         	angular.element(event.srcElement).button('reset');
         });       
-    };
+    };*/
+    $scope.updatebrandscarried = function (username, addorremoveurl) {
+		myprofile.posttoserver(username, addorremoveurl).success(function(data) {
+    		if(addorremoveurl == "removebrandscarried") {
+    			if(data.status == true) {
+    				$scope.brandscarried.removeItem(username);
+    			} else {
+    	    		alert(data.error);
+    	    	}
+    		} else {
+    			if(data.brandusername != "") {
+    				$scope.brandscarried.setItem(data.brandname, data);
+    				$scope.brandsentered = "";
+    			}
+    		}
+    		myprofile.setbrandscarried($scope.brandscarried);
+	    }).error(function(data) {
+	    	alert(data.error);
+	    });       
+	};
     //Adding and removing into brands carried control
     $scope.brandsenteredchanged = function(brandsentered){
 		if("" == brandsentered){
@@ -1720,11 +1739,14 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
 		if(null == username)
 			username = brandscarried;
     	
-		$scope.brandscarried.setItem(brandscarried, username);
-		$scope.brandsentered = "";
+		$scope.updatebrandscarried(username, "addbrandscarried");
 	};
     $scope.removeBrandsCarried = function(key) {
-    	$scope.brandscarried.removeItem(key);
+    	var username = $scope.brandscarried.getItem(key).brandusername; //Here it is no brandsreceived its brands carried, as usernames are already added
+		if(null == username)
+			username = brandscarried;
+		
+		$scope.updatebrandscarried(username, "removebrandscarried");
     };
     $scope.searchFilter =  new netvogue.searchFilter();
 }

@@ -85,7 +85,7 @@ angular.module('netVogue.services', []).
 	                      method: "POST",
 	                      data: profiledata,
 	                      url: "profile/" + url
-	                };
+	            };
 	        	return $http(config);
 	        }
 	    };
