@@ -20,9 +20,9 @@
 					<p>Estd {{contactinfo.yearest}}</p>
 					<address ng-bind="getcontactinfo"></address>
 				</div>
-				<div class="profile-pricerange">
+				<div class="profile-pricerange" ng-hide="0 == contactinfo.fromprice && 0 == contactinfo.toprice">
 					<p>Price range</p>
-					<p ng-hide="0 == contactinfo.fromprice && 0 == contactinfo.toprice">
+					<p>
 						<span class="WebRupee" style="font-size: 15px; margin-left: 3px;">Rs.</span>
 					 	<span>{{contactinfo.fromprice}}</span> 
 					 	- 
