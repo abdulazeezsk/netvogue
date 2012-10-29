@@ -89,20 +89,31 @@ public interface UserRepository extends GraphRepository<User> {
 	Iterable<Gallery> searchGalleryByName(String username, String galleryname, int skip, int limit);
 	
 	//Queries related to Print campaigns
-	@Query( "START n=node:search(username={0}) MATCH n-[:PRINTCAMPAIGN]->pc RETURN pc ORDER BY pc.createdDate DESC")
-	Iterable<PrintCampaign> getPrintCampaigns(String username);
+	@Query( "START n=node:search(username={0}) " +
+			"MATCH n-[:PRINTCAMPAIGN]->pc " +
+			"RETURN pc ORDER BY pc.createdDate DESC " +
+			"SKIP {1} LIMIT {2}")
+	Iterable<PrintCampaign> getPrintCampaigns(String username, int skip, int limit);
 	
-	@Query( "START n=node:search(username={0}) MATCH n-[:PRINTCAMPAIGN]->pc WHERE pc.printcampaignname =~ {1} " +
-			"RETURN pc ORDER BY pc.createdDate DESC")
-	Iterable<PrintCampaign> searchPrintCampaignByName(String username, String printcampaignname);
+	@Query( "START n=node:search(username={0}) " +
+			"MATCH n-[:PRINTCAMPAIGN]->pc " +
+			"WHERE pc.printcampaignname =~ {1} " +
+			"RETURN pc ORDER BY pc.createdDate DESC " +
+			"SKIP {2} LIMIT {3}")
+	Iterable<PrintCampaign> searchPrintCampaignByName(String username, String printcampaignname, int skip, int limit);
 	
 	//Queries related to editorials
-	@Query( "START n=node:search(username={0}) MATCH n-[:EDITORIAL]->e RETURN e ORDER BY e.createdDate DESC")
-	Iterable<Editorial> getEditorials(String username);
+	@Query( "START n=node:search(username={0}) " +
+			"MATCH n-[:EDITORIAL]->e " +
+			"RETURN e ORDER BY e.createdDate DESC " +
+			"SKIP {1} LIMIT {2}")
+	Iterable<Editorial> getEditorials(String username, int skip, int limit);
 	
-	@Query( "START n=node:search(username={0}) MATCH n-[:EDITORIAL]->e WHERE e.editorialname =~ {1} " +
-			"RETURN e ORDER BY e.createdDate DESC")
-	Iterable<Editorial> searchEditorialByName(String username, String editorialname);
+	@Query( "START n=node:search(username={0}) " +
+			"MATCH n-[:EDITORIAL]->e WHERE e.editorialname =~ {1} " +
+			"RETURN e ORDER BY e.createdDate DESC " +
+			"SKIP {2} LIMIT {3}")
+	Iterable<Editorial> searchEditorialByName(String username, String editorialname, int skip, int limit);
 	
 	//queries related to collections
 	@Query( "START n=node:search(username={0}) MATCH n-[:COLLECTION]->collection " +

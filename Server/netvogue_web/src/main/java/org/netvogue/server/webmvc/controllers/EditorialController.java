@@ -49,7 +49,8 @@ public class EditorialController {
 	private UploadManager uploadManager;
 
 	@RequestMapping(value={"/geteditorials", "/geteditorials/{profileid}"}, method=RequestMethod.GET)
-	public @ResponseBody Editorials GetEditorials(@ModelAttribute("profileid") String profileid, 
+	public @ResponseBody Editorials GetEditorials(@ModelAttribute("profileid") String profileid,
+												@RequestParam("pagenumber") int pagenumber,
 												@RequestParam("galleryname") String galleryname) {
 		System.out.println("Get Editorials: " + galleryname);
 		Editorials campaigns = new Editorials();
@@ -63,16 +64,17 @@ public class EditorialController {
 		} else {
 			 user = userDetailsService.getUserFromSession();
 		}
-		
-		campaigns.setName(user.getName());
-		campaigns.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-		campaigns.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		if(0 == pagenumber) {
+			campaigns.setName(user.getName());
+			campaigns.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
+			campaigns.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		}
 		Set<Editorial> campaignTemp = new LinkedHashSet<Editorial>();
 		Iterable<org.netvogue.server.neo4japi.domain.Editorial> dbCampaigns;
 		if(galleryname.isEmpty()) {
-			dbCampaigns = userService.getEditorials(user);
+			dbCampaigns = userService.getEditorials(user, pagenumber);
 		} else {
-			dbCampaigns = userService.searchEditorialByName(user, galleryname);
+			dbCampaigns = userService.searchEditorialByName(user, galleryname, pagenumber);
 		}
 		if(null == dbCampaigns) {
 			return campaigns;

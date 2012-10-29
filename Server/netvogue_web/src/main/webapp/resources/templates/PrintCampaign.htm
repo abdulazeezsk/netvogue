@@ -27,7 +27,7 @@
 			<div class="leftpane_filter_name">
 				<span class="leftpane_filter_name">Campaign Name</span> <input
 					type="text" ng-model="searchgalleryname" class="span3"
-					placeholder="Campaign name" ng-change="getgalleries()" />
+					placeholder="Campaign name" ng-change="searchgalleries()" />
 			</div>
 		</div>
 		<!-- left pane -->
@@ -93,6 +93,14 @@
 							</div>
 						</li>
 					</ul>
+					<div get-more="getmoregalleries()">
+	   					<div ng-show="gettingmoregalleries">
+	   						<center><img src="img/ajax-loadersmall.gif"><br></center>
+	   					</div>
+	   					<div ng-show="nomoredataavailable">
+	   						End of data
+	   					</div>
+					</div>
 			</div>
 
 

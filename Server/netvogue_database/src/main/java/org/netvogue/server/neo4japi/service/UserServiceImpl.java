@@ -140,35 +140,39 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	//Queries related to printcampaigns
-	public Iterable<PrintCampaign> getPrintCampaigns(User user) {
+	public Iterable<PrintCampaign> getPrintCampaigns(User user, int pagenumber) {
 		if(null != user) {
-			return userRepo.getPrintCampaigns(user.getUsername());
+			return userRepo.getPrintCampaigns(user.getUsername(),
+					Constants.GALLERYPAGE_LIMIT * pagenumber, Constants.GALLERYPAGE_LIMIT);
 		}
 		return null;
 	}
 	
-	public Iterable<PrintCampaign> searchPrintCampaignByName(User user, String name) {
-		return searchPrintCampaignByName(user.getUsername(), name);
+	public Iterable<PrintCampaign> searchPrintCampaignByName(User user, String name, int pagenumber) {
+		return searchPrintCampaignByName(user.getUsername(), name, pagenumber);
 	}
 	
-	public Iterable<PrintCampaign> searchPrintCampaignByName(String username, String name) {
-		return userRepo.searchPrintCampaignByName(username, Utils.SerializePropertyParamForSearch(name));
+	public Iterable<PrintCampaign> searchPrintCampaignByName(String username, String name, int pagenumber) {
+		return userRepo.searchPrintCampaignByName(username, Utils.SerializePropertyParamForSearch(name), 
+				Constants.GALLERYPAGE_LIMIT * pagenumber, Constants.GALLERYPAGE_LIMIT);
 	}
 	
 	//Queries related to Editorials
-	public Iterable<Editorial> getEditorials(User user) {
+	public Iterable<Editorial> getEditorials(User user, int pagenumber) {
 		if(null != user) {
-			return userRepo.getEditorials(user.getUsername());
+			return userRepo.getEditorials(user.getUsername(),
+					Constants.GALLERYPAGE_LIMIT * pagenumber, Constants.GALLERYPAGE_LIMIT);
 		}
 		return null;
 	}
 	
-	public Iterable<Editorial> searchEditorialByName(User user, String name) {
-		return searchEditorialByName(user.getUsername(), name);
+	public Iterable<Editorial> searchEditorialByName(User user, String name, int pagenumber) {
+		return searchEditorialByName(user.getUsername(), name, pagenumber);
 	}
 	
-	public Iterable<Editorial> searchEditorialByName(String username, String name) {
-		return userRepo.searchEditorialByName(username, Utils.SerializePropertyParamForSearch(name));
+	public Iterable<Editorial> searchEditorialByName(String username, String name, int pagenumber) {
+		return userRepo.searchEditorialByName(username, Utils.SerializePropertyParamForSearch(name),
+				Constants.GALLERYPAGE_LIMIT * pagenumber, Constants.GALLERYPAGE_LIMIT);
 	}
 	
 	//Queries related to collections

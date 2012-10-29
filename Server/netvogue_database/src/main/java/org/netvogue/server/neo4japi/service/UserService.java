@@ -38,14 +38,14 @@ public interface UserService {
 	public Iterable<Gallery> searchGalleryByName(String username, String name, int pagenumber);
 	
 	//Queries related to Printcampaigns
-	public Iterable<PrintCampaign> getPrintCampaigns(User user);
-	public Iterable<PrintCampaign> searchPrintCampaignByName(User user, String name);
-	public Iterable<PrintCampaign> searchPrintCampaignByName(String username, String name);
+	public Iterable<PrintCampaign> getPrintCampaigns(User user, int pagenumber);
+	public Iterable<PrintCampaign> searchPrintCampaignByName(User user, String name, int pagenumber);
+	public Iterable<PrintCampaign> searchPrintCampaignByName(String username, String name, int pagenumber);
 	
 	//Queries related to Editorials
-	public Iterable<Editorial> getEditorials(User user);
-	public Iterable<Editorial> searchEditorialByName(User user, String name);
-	public Iterable<Editorial> searchEditorialByName(String username, String name);
+	public Iterable<Editorial> getEditorials(User user, int pagenumber);
+	public Iterable<Editorial> searchEditorialByName(User user, String name, int pagenumber);
+	public Iterable<Editorial> searchEditorialByName(String username, String name, int pagenumber);
 	
 	//Queries related to collections
 	public Iterable<CollectionData> getCollections(User user);

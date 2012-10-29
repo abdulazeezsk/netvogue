@@ -388,6 +388,7 @@ function MyCtrlGallery($scope, $routeParams, $location, currentvisitedprofile, m
         	$scope.updatedata();
         }).error(function(data) {
         	$scope.gettinggallery = false;
+        	$scope.gettingmoregalleries = false;
         });
     };
     $scope.getgalleries();
@@ -560,7 +561,10 @@ function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprof
 	$scope.showEditGallery	 = false;
 	
 	var ajaxrequestcall	 = "printcampaign";
+	var pagenumber = 0;
 	$scope.gettinggallery = false;
+	$scope.gettingmoregalleries = false;
+	$scope.nomoredataavailable = false;
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
@@ -573,16 +577,33 @@ function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprof
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getgalleries = function() {
     	$scope.gettinggallery = true;
-    	mygallery.galleries("getprintcampaigns", $routeParams, $scope.searchgalleryname).success(function(data) {
-    		mygallery.setgallerylocally(data, $routeParams);
+    	mygallery.galleries("getprintcampaigns", $routeParams, $scope.searchgalleryname, pagenumber).success(function(data) {
+    		if(data.galleries.length < netvogue.GALLERYPAGE_LIMIT)
+    			$scope.nomoredataavailable = true;
+    		mygallery.setgallerylocally(data, pagenumber);
         	$scope.updatedata();
         	$scope.gettinggallery = false;
+    		$scope.gettingmoregalleries = false;
         }).error(function(data) {
         	$scope.gettinggallery = false;
+        	$scope.gettingmoregalleries = false;
         });
     };
     $scope.getgalleries();
     
+    $scope.getmoregalleries = function() {
+    	if(false == $scope.nomoredataavailable) {
+    		$scope.gettingmoregalleries = true;
+    		pagenumber++;
+    		$scope.getgalleries();
+    	}
+    };
+    
+    $scope.searchgalleries = function() {
+    	pagenumber = 0;
+    	$scope.getgalleries();
+    };
+
     $scope.creategallery = function() {
     	var jsonrequest = new netvogue.campaignjsonrequest($scope.galleryname, $scope.gallerydesc, "");
     	mygallery.creategallery(ajaxrequestcall, jsonrequest).success(function(data) {
@@ -739,7 +760,10 @@ function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile
 	$scope.showEditGallery	 = false;
 	
 	var ajaxrequestcall	 = "editorial";
+	var pagenumber = 0;
 	$scope.gettinggallery = false;
+	$scope.gettingmoregalleries = false;
+	$scope.nomoredataavailable = false;
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
@@ -752,16 +776,33 @@ function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getgalleries = function() {
     	$scope.gettinggallery = true;
-    	mygallery.galleries("geteditorials", $routeParams, $scope.searchgalleryname).success(function(data) {
-    		$scope.gettinggallery = false;
-    		mygallery.setgallerylocally(data, $routeParams);
+    	mygallery.galleries("geteditorials", $routeParams, $scope.searchgalleryname, pagenumber).success(function(data) {
+    		if(data.galleries.length < netvogue.GALLERYPAGE_LIMIT)
+    			$scope.nomoredataavailable = true;
+    		mygallery.setgallerylocally(data, pagenumber);
         	$scope.updatedata();
+        	$scope.gettinggallery = false;
+    		$scope.gettingmoregalleries = false;
         }).error(function(data) {
         	$scope.gettinggallery = false;
+        	$scope.gettingmoregalleries = false;
         });
     };
     $scope.getgalleries();
     
+    $scope.getmoregalleries = function() {
+    	if(false == $scope.nomoredataavailable) {
+    		$scope.gettingmoregalleries = true;
+    		pagenumber++;
+    		$scope.getgalleries();
+    	}
+    };
+    
+    $scope.searchgalleries = function() {
+    	pagenumber = 0;
+    	$scope.getgalleries();
+    };
+
     $scope.creategallery = function() {
     	var jsonrequest = new netvogue.campaignjsonrequest($scope.galleryname, $scope.gallerydesc, "");
     	mygallery.creategallery(ajaxrequestcall, jsonrequest).success(function(data) {

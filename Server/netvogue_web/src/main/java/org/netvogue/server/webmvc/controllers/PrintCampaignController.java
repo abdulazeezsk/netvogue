@@ -49,7 +49,8 @@ public class PrintCampaignController {
 	private UploadManager uploadManager;
 		
 	@RequestMapping(value={"/getprintcampaigns", "/getprintcampaigns/{profileid}"}, method=RequestMethod.GET)
-	public @ResponseBody PrintCampaigns GetPrintCampaigns(@ModelAttribute("profileid") String profileid, 
+	public @ResponseBody PrintCampaigns GetPrintCampaigns(@ModelAttribute("profileid") String profileid,
+												@RequestParam("pagenumber") int pagenumber,
 												@RequestParam("galleryname") String galleryname) {
 		
 		System.out.println("Get PrintCampaigns: " + profileid + ":" + galleryname);
@@ -71,9 +72,9 @@ public class PrintCampaignController {
 		Set<PrintCampaign> campaignTemp = new LinkedHashSet<PrintCampaign>();
 		Iterable<org.netvogue.server.neo4japi.domain.PrintCampaign> dbPrintCampaigns;
 		if(galleryname.isEmpty()) {
-			dbPrintCampaigns = userService.getPrintCampaigns(user);
+			dbPrintCampaigns = userService.getPrintCampaigns(user, pagenumber);
 		} else {
-			dbPrintCampaigns = userService.searchPrintCampaignByName(user, galleryname);
+			dbPrintCampaigns = userService.searchPrintCampaignByName(user, galleryname, pagenumber);
 		}
 		if(null == dbPrintCampaigns) {
 			return campaigns;

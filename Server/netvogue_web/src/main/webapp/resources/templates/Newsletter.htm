@@ -28,9 +28,9 @@
 			<div class="leftpane_filter_name">
 				<span class="leftpane_filter_name">TITLE</span> <input type="text"
 					class="span3" ng-model="searchgalleryname"
-					ng-change="getgalleries()" /> <span class="leftpane_filter_name">DESCRIPTION</span>
+					ng-change="searchgalleries()" /> <span class="leftpane_filter_name">DESCRIPTION</span>
 				<input type="text" class="span3" ng-model="searchgallerydesc"
-					ng-change="getgalleries()" />
+					ng-change="searchgalleries()" />
 			</div>
 
 		</div>
@@ -93,7 +93,14 @@
 						</div>
 					</li>
 				</ul>
-
+				<div get-more="getmoregalleries()">
+   					<div ng-show="gettingmoregalleries">
+   						<center><img src="img/ajax-loadersmall.gif"><br></center>
+   					</div>
+   					<div ng-show="nomoredataavailable">
+   						End of data
+   					</div>
+				</div>
 			</div>
 
 		</div>
