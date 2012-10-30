@@ -92,6 +92,7 @@ public class PrintCampaignController {
 	
 	@RequestMapping(value={"/printcampaign/getphotos", "/printcampaign/getphotos/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
+			@RequestParam(value="pagenumber", required=false, defaultValue="0") int pagenumber,
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname
 											 ) {
@@ -110,10 +111,11 @@ public class PrintCampaignController {
 		} else {
 			 user = userDetailsService.getUserFromSession();
 		}
-		
-		photos.setName(user.getName());
-		photos.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-		photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		if(0 == pagenumber) {
+			photos.setName(user.getName());
+			photos.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
+			photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		}
 		org.netvogue.server.neo4japi.domain.PrintCampaign printcampaign = printcampaignService.getPrintCampaign(galleryid);
 		if(null == printcampaign) {
 			return photos;
@@ -122,9 +124,9 @@ public class PrintCampaignController {
 		Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
 		Iterable<PrintCampaignPhoto> dbPhotos;
 		if(photoname.isEmpty()) {
-			dbPhotos = printcampaignService.getPhotos(galleryid);
+			dbPhotos = printcampaignService.getPhotos(galleryid, pagenumber);
 		} else {
-			dbPhotos = printcampaignService.searchPhotoByName(galleryid, photoname);
+			dbPhotos = printcampaignService.searchPhotoByName(galleryid, photoname, pagenumber);
 		}
 		if(null == dbPhotos) {
 			return photos;

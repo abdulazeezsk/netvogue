@@ -24,8 +24,9 @@ public interface StylesheetRepository extends GraphRepository<Stylesheet> {
 	
 	@Query( "START n=node:stylesheetid(stylesheetid={0}) " +
 			"MATCH n-[:SS_STYLE]->styles, n-[:STYLESHEET]-user " +
-			"RETURN user.name as name, styles ORDER BY styles.createdDate DESC")
-	Iterable<StyleData> getStyles(String stylesheetid);
+			"RETURN user.name as name, styles ORDER BY styles.createdDate DESC " +
+			"SKIP {1} LIMIT {2}")
+	Iterable<StyleData> getStyles(String stylesheetid, int skip, int limit);
 	
 	@Query( "START n=node:search(username={0}) MATCH n-[:STYLESHEET]-ss<-[:Stylesheet_Category]-p " +
 			"WHERE p.productline = {1}" +
@@ -37,9 +38,10 @@ public interface StylesheetRepository extends GraphRepository<Stylesheet> {
 			"MATCH n-[:LS_STYLE]->styles, n-[:LINESHEET]-user " +
 			"WHERE styles.styleno = {1} AND styles.fabrication = {2}" +
 			"AND styles.price >= {3} AND styles.price <= {4} " +
-			"RETURN user.name as name, styles ORDER BY styles.createdDate DESC")
+			"RETURN user.name as name, styles ORDER BY styles.createdDate DESC " +
+			"SKIP {5} LIMIT {6}")
 	Iterable<StyleData> searchStyles(String stylesheetid, String styleno, String fabrication, 
-															long fromprice, long toprice);
+											long fromprice, long toprice, int skip, int limit);
 	
 	@Query("START p = node:styleid(styleid={0}) MATCH p-[r]-() DELETE p, r")
 	void deleteStyle(String styleid);

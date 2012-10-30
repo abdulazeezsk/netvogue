@@ -9,8 +9,11 @@ netvogue.ADVSEARCH_LIMIT = 9;
 netvogue.NETWORKPAGE_LIMIT = 9;
 netvogue.UPDATEPAGE_LIMIT = 9;
 netvogue.GALLERYPAGE_LIMIT = 9;
+netvogue.PHOTOPAGE_LIMIT = 9;
 netvogue.COLLECTIONPAGE_LIMIT = 9;
+netvogue.COLLECTIONPHOTOPAGE_LIMIT = 9;
 netvogue.STYLESHEETPAGE_LIMIT = 9;
+netvogue.STYLEPAGE_LIMIT = 9;
 netvogue.LINESHEETPAGE_LIMIT = 9;
 
 //Initialization

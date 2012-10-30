@@ -384,14 +384,15 @@ angular.module('netVogue.services', []).
 		          };
 		          return $http(config);
 		      },
-		      photos: function (ajaxrequestcall, routeparams, galleryid, photoname) {
+		      photos: function (ajaxrequestcall, routeparams, galleryid, photoname, pagenumber) {
 		          var profileid = "";
 		          if (!angular.isUndefined(routeparams.profileid)) {
 		        	  profileid = routeparams.profileid;
 		          }
 		          var datatosend = {
 		  				"photoname" : photoname,
-		  				"galleryid" : galleryid
+		  				"galleryid" : galleryid,
+		  				"pagenumber": pagenumber
 		  		};
 		          var config = {
 		              method: "GET",
@@ -412,10 +413,16 @@ angular.module('netVogue.services', []).
 		    		  }
 		    	  } 
 		      },
-		      setphotoslocally: function(photostemp) {
-		    	  name = photostemp.name;
-		    	  galleryname = photostemp.galleryname;
-		    	  angular.copy(photostemp.photos, photos);
+		      setphotoslocally: function(photostemp, pagenumber) {
+		    	  if(0 == pagenumber) {
+			    	  name = photostemp.name;
+			    	  galleryname = photostemp.galleryname;
+			    	  angular.copy(photostemp.photos, photos);
+		    	  } else {
+		    		  for(var i=0; i < photostemp.photos.length; i++) {
+		    			  photos.push(photostemp.photos[i]);
+		    		  }
+		    	  } 
 		      }
 		};
  }).service('mycollection', function ($http) {
@@ -559,14 +566,15 @@ angular.module('netVogue.services', []).
 		          };
 		          return $http(config);
 		     },
-		     photos: function (routeparams, galleryid, photoname) {
+		     photos: function (routeparams, galleryid, photoname, pagenumber) {
 		          var profileid = "";
 		          if (!angular.isUndefined(routeparams.profileid)) {
 		        	  profileid = routeparams.profileid;
 		          }
 		          var datatosend = {
 		  				"photoname" : photoname,
-		  				"galleryid" : galleryid
+		  				"galleryid" : galleryid,
+		  				"pagenumber": pagenumber
 		  		  };
 		          var config = {
 		              method: "GET",
@@ -586,11 +594,17 @@ angular.module('netVogue.services', []).
 		    		  }
 		    	 }
 		     },
-		     setphotoslocally: function(photostemp) {
-		    	 name = photostemp.name;
-		    	 galleryname = photostemp.galleryname;
-		    	 brandname = photostemp.brandname;
-		    	 angular.copy(photostemp.photos, photos);
+		     setphotoslocally: function(photostemp, pagenumber) {
+		    	 if(0 == pagenumber) {
+		    		 name = photostemp.name;
+		    		 galleryname = photostemp.galleryname;
+		    		 brandname = photostemp.brandname;
+		    		 angular.copy(photostemp.photos, photos);
+		    	 } else {
+		    		  for(var i=0; i < photostemp.photos.length; i++) {
+		    			  photos.push(photostemp.photos[i]);
+		    		  }
+		    	  } 
 		     }
 		};
 }).service('mystylesheet', function ($http) {
@@ -737,7 +751,7 @@ angular.module('netVogue.services', []).
             };
             return $http(config);
         },
-        styles: function (routeparams, id, styleno, fabrication, fromprice, toprice) {
+        styles: function (routeparams, id, styleno, fabrication, fromprice, toprice, pagenumber) {
             var profileid = "";
             if (!angular.isUndefined(routeparams.profileid)) {
           	  profileid = routeparams.profileid;
@@ -747,7 +761,8 @@ angular.module('netVogue.services', []).
     				"styleno"		: styleno,
     				"fabrication"	: fabrication,
     				"fromprice"		: fromprice,
-    				"toprice"		: toprice
+    				"toprice"		: toprice,
+    				"pagenumber"	: pagenumber
     		};
             var config = {
                 method: "GET",
@@ -783,11 +798,17 @@ angular.module('netVogue.services', []).
 	    		  }
 	    	 }
         },
-        setstyleslocally: function(temp) {
-        	name = temp.name;
-    		stylesheetname = temp.stylesheetname;
-    		brandname = temp.brandname;
-    		angular.copy(temp.styles, styles);
+        setstyleslocally: function(temp, pagenumber) {
+        	if(0 == pagenumber) {
+	        	name = temp.name;
+	    		stylesheetname = temp.stylesheetname;
+	    		brandname = temp.brandname;
+	    		angular.copy(temp.styles, styles);
+        	} else {
+	    		 for(var i=0; i < temp.styles.length; i++) {
+	    			 styles.push(temp.styles[i]);
+	    		  }
+	    	 }
         }
 	};
 }).service('mylinesheet', function ($http) {

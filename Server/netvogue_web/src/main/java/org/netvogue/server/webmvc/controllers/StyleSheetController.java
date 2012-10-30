@@ -63,7 +63,7 @@ public class StyleSheetController {
 
 	@RequestMapping(value="getstylesheets", method=RequestMethod.GET)
 	public @ResponseBody Stylesheets GetStylesheets( 
-						@RequestParam("pagenumber") int pagenumber,
+			@RequestParam(value="pagenumber", required=false, defaultValue="0") int pagenumber,
 						@RequestParam(value="stylesheetname", required=false, defaultValue="") String stylesheetname,
 						@RequestParam(value="category", required=false, defaultValue="") String categories) {
 		System.out.println("Get Stylesheets: " + stylesheetname);
@@ -114,12 +114,13 @@ public class StyleSheetController {
 	
 	@RequestMapping(value="stylesheet/getstyles", method=RequestMethod.GET)
 	public @ResponseBody Styles GetStyles(@RequestParam("stylesheetid") String stylesheetid,
+						@RequestParam(value="pagenumber", required=false, defaultValue="0") int pagenumber,
 						@RequestParam(value="styleno", required=false, defaultValue = "") String styleno,
 						@RequestParam(value="fabrication", required=false, defaultValue = "") String fabrication,
 						@RequestParam(value="fromprice", required=false, defaultValue = "0") long fromPrice,
 						@RequestParam(value="toprice", required=false, defaultValue = "0") long toPrice
 											 ) {
-		System.out.println("Get Styles: " + stylesheetid +
+		System.out.println("Get Styles: " + stylesheetid + ":" + pagenumber +
 				"\n Styleno:" + styleno +
 				"\n fabrication" + fabrication +
 				"\n fromprice" + fromPrice +
@@ -131,8 +132,11 @@ public class StyleSheetController {
 			return styles;
 		}
 		
-		styles.setName(loggedinUser.getName());
-		styles.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
+		if(0 == pagenumber) {
+			styles.setName(loggedinUser.getName());
+			styles.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
+		}
+		
 		//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
 		org.netvogue.server.neo4japi.domain.Stylesheet s = stylesheetService.getStylesheet(stylesheetid);
 		if(null == s)
@@ -144,9 +148,10 @@ public class StyleSheetController {
 		    (null == fabrication || fabrication.isEmpty()) &&	
 			(0 == fromPrice) && (0 == toPrice)
 			) {
-			dbStyles = stylesheetService.getStyles(stylesheetid);
+			dbStyles = stylesheetService.getStyles(stylesheetid, pagenumber);
 		} else {
-			dbStyles = stylesheetService.searchStyles(stylesheetid, styleno, fabrication, fromPrice, toPrice);
+			dbStyles = stylesheetService.searchStyles(stylesheetid, styleno, fabrication, 
+										fromPrice, toPrice, pagenumber);
 		}
 		if(null == dbStyles) {
 			return styles;

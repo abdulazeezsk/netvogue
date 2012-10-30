@@ -30,14 +30,16 @@ public interface CollectionRepository extends GraphRepository<Collection> {
 	
 	@Query( "START n=node:collectionid(collectionid={0}) " +
 			"MATCH n-[:COLLECTIONPHOTO]->photos, n-[:COLLECTION]-user " +
-			"RETURN user.name as name, photos ORDER BY photos.createdDate DESC")
-	Iterable<CollectionPhotoData> getPhotos(String collectionid);
+			"RETURN user.name as name, photos ORDER BY photos.createdDate DESC " +
+			"SKIP {1} LIMIT {2}")
+	Iterable<CollectionPhotoData> getPhotos(String collectionid, int skip, int limit);
 	
 	@Query( "START n=node:collectionid(collectionid={0}) " +
 			"MATCH n-[:COLLECTIONPHOTO]->photos, n-[:COLLECTION]-user " +
 			"WHERE photos.collectionphotoname! =~ {1} " +
-			"RETURN user.name as name, photos ORDER BY photos.createdDate DESC")
-	Iterable<CollectionPhotoData> searchPhotosByName(String collectionid, String photoname);
+			"RETURN user.name as name, photos ORDER BY photos.createdDate DESC " +
+			"SKIP {2} LIMIT {3}")
+	Iterable<CollectionPhotoData> searchPhotosByName(String collectionid, String photoname, int skip, int limit);
 	
 	@Query("START p = node:collectionphotouniqueid(collectionphotouniqueid={0}) MATCH p-[r]-() DELETE p, r")
 	void deletePhoto(String collectionphotouniqueid);

@@ -13,9 +13,9 @@ public interface CollectionService {
 	public ResultStatus setProfilepic(String collectionid, String uniqueid, StringBuffer error);
 	public ResultStatus deleteCollection(String collectionId, StringBuffer error);
 	
-	public Iterable<CollectionPhotoData> getPhotos(String collectionId);
-	public Iterable<CollectionPhotoData> searchPhotoByName(Collection printCampaign, String name);
-	public Iterable<CollectionPhotoData> searchPhotoByName(String collectionId, String name);
+	public Iterable<CollectionPhotoData> getPhotos(String collectionId, int pagenumber);
+	public Iterable<CollectionPhotoData> searchPhotoByName(Collection printCampaign, String name, int pagenumber);
+	public Iterable<CollectionPhotoData> searchPhotoByName(String collectionId, String name, int pagenumber);
 	public ResultStatus editPhotoInfo(String photoId, String seasonname, String desc, StringBuffer error);
 	public ResultStatus editPhotoName(String photoId, String name, StringBuffer error);
 	//public ResultStatus editPhotoSeasonName(String photoId, String name, String error);

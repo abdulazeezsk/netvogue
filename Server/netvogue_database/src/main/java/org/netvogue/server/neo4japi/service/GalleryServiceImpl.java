@@ -1,5 +1,6 @@
 package org.netvogue.server.neo4japi.service;
 
+import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Gallery;
@@ -68,19 +69,21 @@ public class GalleryServiceImpl implements GalleryService {
 		}
 	}
 	
-	public Iterable<Photo> GetPhotos(String galleryId) {
+	public Iterable<Photo> GetPhotos(String galleryId, int pagenumber) {
 		if(!galleryId.isEmpty()) {
-			return galleryRepo.getPhotos(galleryId);
+			return galleryRepo.getPhotos(galleryId,
+					Constants.PHOTOPAGE_LIMIT * pagenumber, Constants.PHOTOPAGE_LIMIT);
 		}
 		return null;
 	}
 	
-	public Iterable<Photo> searchPhotoByName(Gallery gallery, String name) {
-		return searchPhotoByName(gallery.getGalleryid(), name);
+	public Iterable<Photo> searchPhotoByName(Gallery gallery, String name, int pagenumber) {
+		return searchPhotoByName(gallery.getGalleryid(), name, pagenumber);
 	}
 	
-	public Iterable<Photo> searchPhotoByName(String galleryid, String name) {
-		return galleryRepo.searchPhotosByName(galleryid, Utils.SerializePropertyParamForSearch(name));
+	public Iterable<Photo> searchPhotoByName(String galleryid, String name, int pagenumber) {
+		return galleryRepo.searchPhotosByName(galleryid, Utils.SerializePropertyParamForSearch(name),
+				Constants.PHOTOPAGE_LIMIT * pagenumber, Constants.PHOTOPAGE_LIMIT);
 	}
 	
 	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, StringBuffer error) {

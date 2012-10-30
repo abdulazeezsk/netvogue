@@ -1,5 +1,6 @@
 package org.netvogue.server.neo4japi.service;
 
+import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Collection;
@@ -77,19 +78,21 @@ public class CollectionServiceImpl implements CollectionService {
 		}
 	}
 	
-	public Iterable<CollectionPhotoData> getPhotos(String collectionid) {
+	public Iterable<CollectionPhotoData> getPhotos(String collectionid, int pagenumber) {
 		if(!collectionid.isEmpty()) {
-			return collectionRepo.getPhotos(collectionid);
+			return collectionRepo.getPhotos(collectionid,
+					Constants.COLLECTIONPHOTOPAGE_LIMIT * pagenumber, Constants.COLLECTIONPHOTOPAGE_LIMIT);
 		}
 		return null;
 	}
 	
-	public Iterable<CollectionPhotoData> searchPhotoByName(Collection collection, String seasonname) {
-		return searchPhotoByName(collection.getCollectionid(), seasonname);
+	public Iterable<CollectionPhotoData> searchPhotoByName(Collection collection, String seasonname, int pagenumber) {
+		return searchPhotoByName(collection.getCollectionid(), seasonname, pagenumber);
 	}
 	
-	public Iterable<CollectionPhotoData> searchPhotoByName(String collectionid, String name) {
-		return collectionRepo.searchPhotosByName(collectionid, Utils.SerializePropertyParamForSearch(name));
+	public Iterable<CollectionPhotoData> searchPhotoByName(String collectionid, String name, int pagenumber) {
+		return collectionRepo.searchPhotosByName(collectionid, Utils.SerializePropertyParamForSearch(name),
+				Constants.COLLECTIONPHOTOPAGE_LIMIT * pagenumber, Constants.COLLECTIONPHOTOPAGE_LIMIT);
 	}
 	
 	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, StringBuffer error) {

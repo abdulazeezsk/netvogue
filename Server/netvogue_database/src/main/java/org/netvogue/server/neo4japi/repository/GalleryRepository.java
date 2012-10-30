@@ -20,12 +20,16 @@ public interface GalleryRepository extends GraphRepository<Gallery>{
 			"WITH n MATCH n<-[r]-() DELETE n, r")
 	void deleteGallery(String galleryId);
 	
-	@Query( "START n=node:galleryid(galleryid={0}) MATCH n-[:PHOTO]->p RETURN p ORDER BY p.createdDate DESC")
-	Iterable<Photo> getPhotos(String galleryid);
+	@Query( "START n=node:galleryid(galleryid={0}) MATCH n-[:PHOTO]->p " +
+			"RETURN p ORDER BY p.createdDate DESC " +
+			"SKIP {1} LIMIT {2}")
+	Iterable<Photo> getPhotos(String galleryid, int skip, int limit);
 	
-	@Query( "START n=node:galleryid(galleryid={0}) MATCH n-[:PHOTO]->p WHERE p.photoname! =~ {1} " +
-			"RETURN p ORDER BY p.createdDate DESC")
-	Iterable<Photo> searchPhotosByName(String galleryid, String photoname);
+	@Query( "START n=node:galleryid(galleryid={0}) " +
+			"MATCH n-[:PHOTO]->p WHERE p.photoname! =~ {1} " +
+			"RETURN p ORDER BY p.createdDate DESC " +
+			"SKIP {2} LIMIT {3}")
+	Iterable<Photo> searchPhotosByName(String galleryid, String photoname, int skip, int limit);
 	
 	@Query("START p = node:photouniqueid(photouniqueid={0}) MATCH p-[r]-() DELETE p, r")
 	void deletePhoto(String photoId);

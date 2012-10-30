@@ -13,7 +13,8 @@ public interface LinesheetService {
 	public ResultStatus editLinesheet(String id, String name, Date deliverydate, String error);
 	public ResultStatus deleteLinesheet(String id, String error);
 	
-	public Iterable<StyleData> getStyles(String linesheetId);
-	public Iterable<StyleData> searchStyles(String linesheetId, String styleno, long fromPrice, long toPrice);
+	public Iterable<StyleData> getStyles(String linesheetId, int pagenumber);
+	public Iterable<StyleData> searchStyles(String linesheetId, String styleno, 
+							long fromPrice, long toPrice, int pagenumber);
 	public ResultStatus deleteStyle(String styleId, String error);
 }

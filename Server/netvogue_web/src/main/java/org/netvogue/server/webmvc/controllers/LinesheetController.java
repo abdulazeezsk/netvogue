@@ -156,12 +156,13 @@ public class LinesheetController {
 	
 	@RequestMapping(value={"/linesheet/getstyles", "/linesheet/getstyles/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Styles GetStyles(@ModelAttribute("profileid") String profileid, 
+							@RequestParam(value="pagenumber", required=false, defaultValue="0") int pagenumber,
 							@RequestParam("linesheetid") String linesheetid,
 							@RequestParam(value="styleno", required=false, defaultValue = "") String styleno,
 							@RequestParam(value="fromprice", required=false, defaultValue = "0") long fromPrice,
 							@RequestParam(value="toprice", required=false, defaultValue = "0") long toPrice
 											 ) {
-		System.out.println("Get Styles: " + linesheetid +
+		System.out.println("Get Styles: " + linesheetid + ":" + pagenumber +
 							"\n Styleno:" + styleno +
 							"\n fromprice" + fromPrice +
 							"\n toprice" + toPrice);
@@ -180,8 +181,11 @@ public class LinesheetController {
 			 user = userDetailsService.getUserFromSession();
 		}
 		
-		styles.setName(user.getName());
-		styles.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		if(0 == pagenumber) {
+			styles.setName(user.getName());
+			styles.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		}
+		
 		//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
 		org.netvogue.server.neo4japi.domain.Linesheet s = linesheetService.getLinesheet(linesheetid);
 		if(null == s)
@@ -193,10 +197,10 @@ public class LinesheetController {
 		
 		if((null == styleno || styleno.isEmpty()) &&
 				(0 == fromPrice) && (0 == toPrice)) {
-			dbStyles = linesheetService.getStyles(linesheetid);
+			dbStyles = linesheetService.getStyles(linesheetid, pagenumber);
 		} else {
 			//Change this after implementing query
-			dbStyles = linesheetService.searchStyles(linesheetid, styleno, fromPrice, toPrice);
+			dbStyles = linesheetService.searchStyles(linesheetid, styleno, fromPrice, toPrice, pagenumber);
 		}
 		if(null == dbStyles) {
 			return styles;

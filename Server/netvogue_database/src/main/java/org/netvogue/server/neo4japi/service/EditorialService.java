@@ -14,9 +14,9 @@ public interface EditorialService {
 	public ResultStatus setProfilepic(String editorialid, String uniqueid, StringBuffer error);
 	public ResultStatus deleteEditorial(String editorialId, StringBuffer error);
 	
-	public Iterable<EditorialPhoto> getPhotos(String editorialId);
-	public Iterable<EditorialPhoto> searchPhotoByName(Editorial editorial, String name);
-	public Iterable<EditorialPhoto> searchPhotoByName(String editorialId, String name);
+	public Iterable<EditorialPhoto> getPhotos(String editorialId, int pagenumber);
+	public Iterable<EditorialPhoto> searchPhotoByName(Editorial editorial, String name, int pagenumber);
+	public Iterable<EditorialPhoto> searchPhotoByName(String editorialId, String name, int pagenumber);
 	public ResultStatus editPhotoInfo(String photoId, String name, String desc, StringBuffer error);
 	public ResultStatus editPhotoName(String photoId, String name, StringBuffer error);
 	public ResultStatus editPhotoDescription(String photoId, String name, StringBuffer error);

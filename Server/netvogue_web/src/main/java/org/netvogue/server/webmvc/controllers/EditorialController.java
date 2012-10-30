@@ -92,6 +92,7 @@ public class EditorialController {
 	
 	@RequestMapping(value={"/editorial/getphotos", "/editorial/getphotos/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
+				@RequestParam(value="pagenumber", required=false, defaultValue="0") int pagenumber,
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname
 											 ) {
@@ -111,16 +112,19 @@ public class EditorialController {
 			 user = userDetailsService.getUserFromSession();
 		}
 		
-		photos.setName(user.getName());
-		photos.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-		photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
-		photos.setGalleryname(editorialService.getEditorial(galleryid).getEditorialname());
+		if(0 == pagenumber) {
+			photos.setName(user.getName());
+			photos.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
+			photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+			photos.setGalleryname(editorialService.getEditorial(galleryid).getEditorialname());
+		}
+		
 		Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
 		Iterable<EditorialPhoto> dbPhotos;
 		if(photoname.isEmpty()) {
-			dbPhotos = editorialService.getPhotos(galleryid);
+			dbPhotos = editorialService.getPhotos(galleryid, pagenumber);
 		} else {
-			dbPhotos = editorialService.searchPhotoByName(galleryid, photoname);
+			dbPhotos = editorialService.searchPhotoByName(galleryid, photoname, pagenumber);
 		}
 		if(null == dbPhotos) {
 			return photos;

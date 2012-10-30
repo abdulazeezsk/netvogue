@@ -93,6 +93,7 @@ public class GalleryController {
 	
 	@RequestMapping(value={"gallery/getphotos", "gallery/getphotos/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
+				@RequestParam(value="pagenumber", required=false, defaultValue="0") int pagenumber,
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname
 											 ) {
@@ -112,9 +113,11 @@ public class GalleryController {
 			 user = userDetailsService.getUserFromSession();
 		}
 		
-		photos.setName(user.getName());
-		photos.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-		photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		if(0 == pagenumber) {
+			photos.setName(user.getName());
+			photos.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
+			photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		}
 		org.netvogue.server.neo4japi.domain.Gallery gTemp = galleryService.GetGallery(galleryid);
 		if(null == gTemp) {
 			return photos;
@@ -123,9 +126,9 @@ public class GalleryController {
 		Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
 		Iterable<org.netvogue.server.neo4japi.domain.Photo> dbPhotos;
 		if(photoname.isEmpty()) {
-			dbPhotos = galleryService.GetPhotos(galleryid);
+			dbPhotos = galleryService.GetPhotos(galleryid, pagenumber);
 		} else {
-			dbPhotos = galleryService.searchPhotoByName(galleryid, photoname);
+			dbPhotos = galleryService.searchPhotoByName(galleryid, photoname, pagenumber);
 		}
 		if(null == dbPhotos) {
 			return photos;

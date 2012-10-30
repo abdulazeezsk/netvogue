@@ -1,5 +1,6 @@
 package org.netvogue.server.neo4japi.service;
 
+import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.PrintCampaign;
@@ -77,19 +78,21 @@ public class PrintCampaignServiceImpl implements PrintCampaignService {
 		}
 	}
 	
-	public Iterable<PrintCampaignPhoto> getPhotos(String printcampaignId) {
+	public Iterable<PrintCampaignPhoto> getPhotos(String printcampaignId, int pagenumber) {
 		if(!printcampaignId.isEmpty()) {
-			return printcampaignRepo.getPhotos(printcampaignId);
+			return printcampaignRepo.getPhotos(printcampaignId,
+					Constants.PHOTOPAGE_LIMIT * pagenumber, Constants.PHOTOPAGE_LIMIT);
 		}
 		return null;
 	}
 	
-	public Iterable<PrintCampaignPhoto> searchPhotoByName(PrintCampaign printcampaign, String name) {
-		return searchPhotoByName(printcampaign.getPrintcampaignid(), name);
+	public Iterable<PrintCampaignPhoto> searchPhotoByName(PrintCampaign printcampaign, String name, int pagenumber) {
+		return searchPhotoByName(printcampaign.getPrintcampaignid(), name, pagenumber);
 	}
 	
-	public Iterable<PrintCampaignPhoto> searchPhotoByName(String printcampaignId, String name) {
-		return printcampaignRepo.searchPhotosByName(printcampaignId, Utils.SerializePropertyParamForSearch(name));
+	public Iterable<PrintCampaignPhoto> searchPhotoByName(String printcampaignId, String name, int pagenumber) {
+		return printcampaignRepo.searchPhotosByName(printcampaignId, Utils.SerializePropertyParamForSearch(name),
+				Constants.PHOTOPAGE_LIMIT * pagenumber, Constants.PHOTOPAGE_LIMIT);
 	}
 	
 	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, StringBuffer error) {

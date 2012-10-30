@@ -13,9 +13,9 @@ public interface PrintCampaignService {
 	public ResultStatus setProfilepic(String printcampaignid, String uniqueid, StringBuffer error);
 	public ResultStatus deletePrintCampaign(String printcampaignId, StringBuffer error);
 	
-	public Iterable<PrintCampaignPhoto> getPhotos(String printcampaignId);
-	public Iterable<PrintCampaignPhoto> searchPhotoByName(PrintCampaign printCampaign, String name);
-	public Iterable<PrintCampaignPhoto> searchPhotoByName(String printcampaignId, String name);
+	public Iterable<PrintCampaignPhoto> getPhotos(String printcampaignId, int pagenumber);
+	public Iterable<PrintCampaignPhoto> searchPhotoByName(PrintCampaign printCampaign, String name, int pagenumber);
+	public Iterable<PrintCampaignPhoto> searchPhotoByName(String printcampaignId, String name, int pagenumber);
 	public ResultStatus editPhotoInfo(String photoId, String name, String desc, StringBuffer error);
 	public ResultStatus editPhotoName(String photoId, String name, StringBuffer error);
 	public ResultStatus editPhotoDescription(String photoId, String name, StringBuffer error);

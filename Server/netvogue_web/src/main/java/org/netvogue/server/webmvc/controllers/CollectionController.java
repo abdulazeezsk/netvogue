@@ -58,10 +58,10 @@ public class CollectionController {
 
 	@RequestMapping(value={"/getcollections", "/getcollections/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Collections GetCollections(@ModelAttribute("profileid") String profileid, 
-												@RequestParam("galleryname") String galleryname,
-												@RequestParam("category") String categories,
-												@RequestParam("brandname") String brandname,
-												@RequestParam("pagenumber") int pagenumber) {
+									@RequestParam(value="galleryname", required=false) String galleryname,
+									@RequestParam(value="category", required=false) String categories,
+									@RequestParam(value="brandname", required=false) String brandname,
+									@RequestParam(value="pagenumber", required=false, defaultValue="0") int pagenumber) {
 		System.out.println("Get Collections: " + galleryname+ ":" + categories + ":" + brandname);
 		Collections collections = new Collections();
 		
@@ -116,6 +116,7 @@ public class CollectionController {
 	
 	@RequestMapping(value={"/collection/getphotos", "/collection/getphotos/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
+			@RequestParam(value="pagenumber", required=false, defaultValue="0") int pagenumber,
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname
 											 ) {
@@ -135,15 +136,18 @@ public class CollectionController {
 			 user = userDetailsService.getUserFromSession();
 		}
 		
-		photos.setName(user.getName());
-		photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
-		photos.setGalleryname(collectionService.getCollection(galleryid).getCollectionseasonname());
+		if(0 == pagenumber) {
+			photos.setName(user.getName());
+			photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+			photos.setGalleryname(collectionService.getCollection(galleryid).getCollectionseasonname());
+		}
+		
 		Set<PhotoWeb> photosTemp = new LinkedHashSet<PhotoWeb>();
 		Iterable<CollectionPhotoData> dbPhotos;
 		if(photoname.isEmpty()) {
-			dbPhotos = collectionService.getPhotos(galleryid);
+			dbPhotos = collectionService.getPhotos(galleryid, pagenumber);
 		} else {
-			dbPhotos = collectionService.searchPhotoByName(galleryid, photoname);
+			dbPhotos = collectionService.searchPhotoByName(galleryid, photoname, pagenumber);
 		}
 		if(null == dbPhotos) {
 			return photos;

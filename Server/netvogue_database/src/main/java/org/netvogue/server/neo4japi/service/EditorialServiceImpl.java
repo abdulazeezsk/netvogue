@@ -1,5 +1,6 @@
 package org.netvogue.server.neo4japi.service;
 
+import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Editorial;
@@ -77,19 +78,21 @@ public class EditorialServiceImpl implements EditorialService {
 		}
 	}
 	
-	public Iterable<EditorialPhoto> getPhotos(String editorialId) {
+	public Iterable<EditorialPhoto> getPhotos(String editorialId, int pagenumber) {
 		if(!editorialId.isEmpty()) {
-			return editorialRepo.getPhotos(editorialId);
+			return editorialRepo.getPhotos(editorialId,
+					Constants.PHOTOPAGE_LIMIT * pagenumber, Constants.PHOTOPAGE_LIMIT);
 		}
 		return null;
 	}
 	
-	public Iterable<EditorialPhoto> searchPhotoByName(Editorial editorial, String name) {
-		return searchPhotoByName(editorial.getEditorialid(), name);
+	public Iterable<EditorialPhoto> searchPhotoByName(Editorial editorial, String name, int pagenumber) {
+		return searchPhotoByName(editorial.getEditorialid(), name, pagenumber);
 	}
 	
-	public Iterable<EditorialPhoto> searchPhotoByName(String editorialId, String name) {
-		return editorialRepo.searchPhotosByName(editorialId, Utils.SerializePropertyParamForSearch(name));
+	public Iterable<EditorialPhoto> searchPhotoByName(String editorialId, String name, int pagenumber) {
+		return editorialRepo.searchPhotosByName(editorialId, Utils.SerializePropertyParamForSearch(name),
+				Constants.PHOTOPAGE_LIMIT * pagenumber, Constants.PHOTOPAGE_LIMIT);
 	}
 	
 	public ResultStatus editPhotoInfo(String photoId, String name, String seasonname, StringBuffer error) {

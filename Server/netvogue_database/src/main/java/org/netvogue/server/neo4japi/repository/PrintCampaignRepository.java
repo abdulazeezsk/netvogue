@@ -28,13 +28,16 @@ public interface PrintCampaignRepository extends GraphRepository<PrintCampaign> 
 	void deletePrintCampaign(String printcampaignid);
 	
 	@Query( "START n=node:printcampaignid(printcampaignid={0}) " +
-			"MATCH n-[:PRINTCAMPAIGNPHOTO]->p RETURN p ORDER BY p.createdDate DESC")
-	Iterable<PrintCampaignPhoto> getPhotos(String printcampaignid);
+			"MATCH n-[:PRINTCAMPAIGNPHOTO]->p " +
+			"RETURN p ORDER BY p.createdDate DESC " +
+			"SKIP {1} LIMIT {2}")
+	Iterable<PrintCampaignPhoto> getPhotos(String printcampaignid, int skip, int limit);
 	
 	@Query( "START n=node:printcampaignid(printcampaignid={0}) " +
 			"MATCH n-[:PRINTCAMPAIGNPHOTO]->p WHERE p.printcampaignphotoname! =~ {1} " +
-			"RETURN p ORDER BY p.createdDate DESC")
-	Iterable<PrintCampaignPhoto> searchPhotosByName(String printcampaignid, String photoname);
+			"RETURN p ORDER BY p.createdDate DESC " +
+			"SKIP {2} LIMIT {3}")
+	Iterable<PrintCampaignPhoto> searchPhotosByName(String printcampaignid, String photoname, int skip, int limit);
 	
 	@Query("START p = node:printcampaignphotouniqueid(printcampaignphotouniqueid={0}) MATCH p-[r]-() DELETE p, r")
 	void deletePhoto(String printcampaignphotouniqueid);

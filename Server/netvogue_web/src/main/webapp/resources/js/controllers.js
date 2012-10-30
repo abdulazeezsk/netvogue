@@ -507,7 +507,9 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, mygallery) {
 	
 	var ajaxrequestcall	 = "gallery";
 	$scope.searchphotoname = "";
-	$scope.gettingphotos = false;
+	$scope.gettingphotos = true;
+	$scope.gettingmorephotos = false;
+	var pagenumber = 0;
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
@@ -520,16 +522,34 @@ function MyCtrlPhotos($scope, $routeParams, currentvisitedprofile, mygallery) {
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getphotos = function() {
-    	$scope.gettingphotos = true;
-    	mygallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
-    		mygallery.setphotoslocally(data, $routeParams);
+    	mygallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, 
+    							$scope.searchphotoname, pagenumber).success(function(data) {
+    		if(data.photos.length < netvogue.PHOTOPAGE_LIMIT)
+    			$scope.nomoredataavailable = true;
+    		mygallery.setphotoslocally(data, pagenumber);
         	$scope.updatedata();
         	$scope.gettingphotos = false;
+        	$scope.gettingmorephotos = false;
         }).error(function(data) {
         	$scope.gettingphotos = false;
+        	$scope.gettingmorephotos = false;
         });
     };
     $scope.getphotos();
+    
+    $scope.getmorephotos = function() {
+    	if(false == $scope.nomoredataavailable) {
+    		$scope.gettingmorephotos = true;
+    		pagenumber++;
+    		$scope.getphotos();
+    	}
+    };
+    
+    $scope.searchphotos = function() {
+    	pagenumber = 0;
+    	$scope.gettingphotos = true;
+    	$scope.getphotos();
+    };
     
     $scope.deletephoto = function(uniqueid) {
     	mygallery.deletephoto(ajaxrequestcall, uniqueid).success(function(data) {
@@ -704,8 +724,11 @@ function MyCtrlCampaign($scope, $routeParams, currentvisitedprofile, mygallery) 
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	
 	var ajaxrequestcall	 = "printcampaign";
-	$scope.gettingphotos = false;
 	$scope.searchphotoname = "";
+	$scope.gettingphotos = true;
+	$scope.gettingmorephotos = false;
+	$scope.nomoredataavailable = false;
+	var pagenumber = 0;
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
@@ -718,16 +741,35 @@ function MyCtrlCampaign($scope, $routeParams, currentvisitedprofile, mygallery) 
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getphotos = function() {
-    	mygallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
-    		mygallery.setphotoslocally(data, $routeParams);
+    	mygallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, 
+    								$scope.searchphotoname, pagenumber).success(function(data) {
+    		if(data.photos.length < netvogue.PHOTOPAGE_LIMIT)
+    			$scope.nomoredataavailable = true;							
+    		mygallery.setphotoslocally(data, pagenumber);
         	$scope.updatedata();
-        	$scope.gettingphotos = true;
+        	$scope.gettingphotos = false;
+        	$scope.gettingmorephotos = false;
         }).error(function(data) {
         	$scope.gettingphotos = false;
+        	$scope.gettingmorephotos = false;
         });
     };
-    
     $scope.getphotos();
+    
+    $scope.getmorephotos = function() {
+    	if(false == $scope.nomoredataavailable) {
+    		$scope.gettingmorephotos = true;
+    		pagenumber++;
+    		$scope.getphotos();
+    	}
+    };
+    
+    $scope.searchphotos = function() {
+    	pagenumber = 0;
+    	$scope.gettingphotos = true;
+    	$scope.getphotos();
+    };
+    
     $scope.deletephoto = function(uniqueid) {
     	mygallery.deletephoto(ajaxrequestcall, uniqueid).success(function(data) {
 			mygallery.deletephotoslocally(uniqueid);
@@ -901,9 +943,13 @@ function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile, mygallery)
 	if (!angular.isUndefined($routeParams.id)) {
 		$scope.galleryid = $routeParams.id;
 	}
+	$scope.searchphotoname = "";
+	
 	var ajaxrequestcall	 = "editorial";
 	$scope.gettingphotos = false;
-	$scope.searchphotoname = "";
+	$scope.gettingmorephotos = false;
+	$scope.nomoredataavailable = false;
+	var pagenumber = 0;
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mygallery.getname($routeParams);
@@ -916,16 +962,35 @@ function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile, mygallery)
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getphotos = function() {
-    	mygallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, $scope.searchphotoname).success(function(data) {
-    		mygallery.setphotoslocally(data, $routeParams);
+    	mygallery.photos(ajaxrequestcall, $routeParams, $scope.galleryid, 
+    			$scope.searchphotoname, pagenumber).success(function(data) {
+    		if(data.photos.length < netvogue.PHOTOPAGE_LIMIT)
+    			$scope.nomoredataavailable = true;							
+    		mygallery.setphotoslocally(data, pagenumber);
         	$scope.updatedata();
         	$scope.gettingphotos = true;
+        	$scope.gettingmorephotos = false;
         }).error(function(data) {
         	$scope.gettingphotos = false;
+        	$scope.gettingmorephotos = false;
         });
     };
-    
     $scope.getphotos();
+    
+    $scope.getmorephotos = function() {
+    	if(false == $scope.nomoredataavailable) {
+    		$scope.gettingmorephotos = true;
+    		pagenumber++;
+    		$scope.getphotos();
+    	}
+    };
+    
+    $scope.searchphotos = function() {
+    	pagenumber = 0;
+    	$scope.gettingphotos = true;
+    	$scope.getphotos();
+    };
+    
     $scope.deletephoto = function(uniqueid) {
     	mygallery.deletephoto(ajaxrequestcall, uniqueid).success(function(data) {
 			mygallery.deletephotoslocally(uniqueid);
@@ -1114,6 +1179,11 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, mycollect
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	
+	$scope.gettingphotos = false;
+	$scope.gettingmorephotos = false;
+	$scope.nomoredataavailable = false;
+	var pagenumber = 0;
+	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mycollection.getname();
 	    $scope.profilepic		= mycollection.getprofilepic();
@@ -1139,15 +1209,34 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, mycollect
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getphotos = function() {
-    	mycollection.photos($routeParams, $scope.galleryid, "").success(function(data) {
-    		mycollection.setphotoslocally(data);
+    	mycollection.photos($routeParams, $scope.galleryid, "", pagenumber).success(function(data) {
+    		if(data.collections.length < netvogue.COLLECTIONPHOTOPAGE_LIMIT)
+    			$scope.nomoredataavailable = true;							
+    		mycollection.setphotoslocally(data, pagenumber);
         	$scope.updatedata();
+        	$scope.gettingphotos = true;
+        	$scope.gettingmorephotos = false;
         }).error(function(data) {
-        	
+        	$scope.gettingphotos = true;
+        	$scope.gettingmorephotos = false;
         });
     };
-    
     $scope.getphotos();
+    
+    $scope.getmorephotos = function() {
+    	if(false == $scope.nomoredataavailable) {
+    		$scope.gettingmorephotos = true;
+    		pagenumber++;
+    		$scope.getphotos();
+    	}
+    };
+    
+    $scope.searchphotos = function() {
+    	pagenumber = 0;
+    	$scope.gettingphotos = true;
+    	$scope.getphotos();
+    };
+    
     $scope.deletephoto = function(uniqueid) {
     	mycollection.deletephoto(uniqueid).success(function(data) {
 			mycollection.deletephotoslocally(uniqueid);
@@ -1343,7 +1432,10 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, mystylesh
 	$scope.searchtoprice = 0;
 	$scope.searchstylesheetname = "";
 	
-	$scope.gettingstyles = false;
+	$scope.gettingstyles = true;
+	$scope.gettingsmoretyles = false;
+	$scope.nomoredataavailable = false;
+	var pagenumber = 0;
 	
 	$scope.updatedata = function() {
 	    $scope.entityname  		= mystylesheet.getname($routeParams);
@@ -1360,18 +1452,35 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, mystylesh
 			$scope.fromprice = 0;
 		if(null == $scope.toprice)
 			$scope.toprice = 0;
-		$scope.gettingstyles = true;
 	    mystylesheet.styles($routeParams, $scope.stylesheetid, $scope.searchstyleno, $scope.searchfabrication, 
-	    		$scope.searchfromprice, $scope.searchtoprice).success(function(data) {
-	    	mystylesheet.setstyleslocally(data, $routeParams);
+	    		$scope.searchfromprice, $scope.searchtoprice, pagenumber).success(function(data) {
+	    	if(data.styles.length < netvogue.STYLEPAGE_LIMIT)
+	        	$scope.nomoredataavailable = true;		
+	    	mystylesheet.setstyleslocally(data, pagenumber);
 	    	$scope.updatedata();
 	    	$scope.gettingstyles = false;
+	    	$scope.gettingsmoretyles = false;
 	    }).error(function(data) {
 	    	alert(data);
 	    	$scope.gettingstyles = false;
+	    	$scope.gettingsmoretyles = false;
 	    });
     };
     getstyles();
+    
+    $scope.getmorestyles = function() {
+    	if(false == $scope.nomoredataavailable) {
+    		$scope.gettingmorestyles = true;
+    		pagenumber++;
+    		getstyles();
+    	}
+    };
+    
+    $scope.searchstyles = function() {
+    	pagenumber = 0;
+    	$scope.gettingstyles = true;
+    	getstyles();
+    };
     
     $scope.getstylesheets = function() {
     	var searchstylesheets = {
@@ -1384,6 +1493,7 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, mystylesh
         	alert(data);
         });
     };
+    
     $scope.getstylesheets();
     
     $scope.setstylesheet = function(galleryid) {
@@ -1662,6 +1772,11 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, mylinesheet) 
 		$scope.category = $routeParams.cat;
 	}
 	
+	$scope.gettingstyles = true;
+	$scope.gettingsmoretyles = false;
+	$scope.nomoredataavailable = false;
+	var pagenumber = 0;
+	
 	//Search related
 	$scope.searchstyleno = "";
 	$scope.searchfromprice = 0;
@@ -1685,14 +1800,33 @@ function MyCtrlStyles($scope, $routeParams, currentvisitedprofile, mylinesheet) 
     	if(null == $scope.toprice)
     		$scope.toprice = 0;
     	mylinesheet.styles($routeParams, $scope.linesheetid, $scope.searchstyleno, 
-    									$scope.searchfromprice, $scope.searchtoprice).success(function(data) {
-    		mylinesheet.setstyleslocally(data);
+    							$scope.searchfromprice, $scope.searchtoprice, pagenumber).success(function(data) {
+			if(data.styles.length < netvogue.STYLEPAGE_LIMIT)
+	        	$scope.nomoredataavailable = true;		
+			mylinesheet.setstyleslocally(data, pagenumber);
 	    	$scope.updatedata();
+	    	$scope.gettingstyles = false;
+	    	$scope.gettingsmoretyles = false;								
 	    }).error(function(data) {
-	    	
+	    	$scope.gettingstyles = false;
+	    	$scope.gettingsmoretyles = false;
 	    });
     };
     $scope.getstyles();
+    
+    $scope.getmorestyles = function() {
+    	if(false == $scope.nomoredataavailable) {
+    		$scope.gettingmorestyles = true;
+    		pagenumber++;
+    		getstyles();
+    	}
+    };
+    
+    $scope.searchstyles = function() {
+    	pagenumber = 0;
+    	$scope.gettingstyles = true;
+    	$scope.getstyles();
+    };
     
     $scope.getlinesheets = function() {
     	var searchlinesheets = {

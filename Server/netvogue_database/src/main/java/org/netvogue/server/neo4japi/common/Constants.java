@@ -17,10 +17,13 @@ public final class Constants {
 	
 	//Gallery related
 	public static final int GALLERYPAGE_LIMIT = 9;
+	public static final int PHOTOPAGE_LIMIT = 9;
 	
 	//Collections, stylesheet and linesheet
 	public static final int COLLECTIONPAGE_LIMIT = 9;
+	public static final int COLLECTIONPHOTOPAGE_LIMIT = 9;
 	public static final int STYLESHEETPAGE_LIMIT = 9;
+	public static final int STYLEPAGE_LIMIT = 9;
 	public static final int LINESHEETPAGE_LIMIT = 9;
 	
 	//Network and status update

@@ -58,14 +58,16 @@ public class LinesheetServiceImpl implements LinesheetService {
 		}
 	}
 	
-	public Iterable<StyleData> getStyles(String linesheetId) {
+	public Iterable<StyleData> getStyles(String linesheetId, int pagenumber) {
 		if(!linesheetId.isEmpty()) {
-			return linesheetRepo.getStyles(linesheetId);
+			return linesheetRepo.getStyles(linesheetId,
+					Constants.STYLEPAGE_LIMIT * pagenumber, Constants.STYLEPAGE_LIMIT);
 		}
 		return null;
 	}
 	
-	public Iterable<StyleData> searchStyles(String linesheetId, String styleno, long fromPrice, long toPrice) {
+	public Iterable<StyleData> searchStyles(String linesheetId, String styleno, 
+						long fromPrice, long toPrice, int pagenumber) {
 		if(!linesheetId.isEmpty()) {
 			String no = Utils.SerializePropertyParamForSearch(styleno);
 			System.out.println("Linesheet ID is:" + linesheetId);
@@ -80,7 +82,8 @@ public class LinesheetServiceImpl implements LinesheetService {
 			
 			System.out.println("From Price is" + fromprice);
 			System.out.println("To Price is" + toprice);
-			return linesheetRepo.searchStyles(linesheetId, no, fromprice, toprice);
+			return linesheetRepo.searchStyles(linesheetId, no, fromprice, toprice,
+								Constants.STYLEPAGE_LIMIT * pagenumber, Constants.STYLEPAGE_LIMIT);
 		}
 		return null;
 	}

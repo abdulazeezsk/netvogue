@@ -14,9 +14,9 @@ public interface StylesheetService {
 	
 	public Style getStyle(String styleid, String error);
 	public Iterable<StyleData> getStylesbyCategory(String username, String category);
-	public Iterable<StyleData> getStyles(String StylesheetId);
+	public Iterable<StyleData> getStyles(String StylesheetId, int pagenumber);
 	public Iterable<StyleData> searchStyles(String stylesheetId, String styleno, String fabrication, 
-			long fromPrice, long toPrice);
+			long fromPrice, long toPrice, int pagenumber);
 	public ResultStatus deleteStyle(String styleId, String error);
 	
 }

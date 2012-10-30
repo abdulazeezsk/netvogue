@@ -28,13 +28,13 @@
 			<div class="leftpane_filter_name">
 				 <span
 					class="leftpane_filter_name">Style number</span> <input type="text"
-					placeholder="Style number" class="span3" ng-model="searchstyleno" ng-change="getstyles()"/>
+					placeholder="Style number" class="span3" ng-model="searchstyleno" ng-change="searchstyles()"/>
 					<span
 					class="leftpane_filter_name">Price range</span> <br> <input
-					type="number" class="spanpricerange-leftpane" ng-model="searchfromprice" ng-change="getstyles()"
+					type="number" class="spanpricerange-leftpane" ng-model="searchfromprice" ng-change="searchstyles()"
 					placeholder="From price" required
 					 /> - <input
-					type="text"  class="spanpricerange-leftpane" ng-model="number" ng-change="getstyles()"
+					type="number"  class="spanpricerange-leftpane" ng-model="searchtoprice" ng-change="searchstyles()"
 					placeholder="To price" required
 					 />
 			</div>
@@ -95,51 +95,62 @@
 				<!-- header pane -->
 
 				<div>
-				
-				<ul class="thumbnails">
-					<li  ng-repeat="style in styles">
-						<div style="position: relative;">
-							<img ng-src="{{style.profilethumbpic}}" 
-								width="220" height="300" alt="" title="">
-							<div class="masklayer">
-								<h1 class="style-brandname" style="text-align:center;" >
-								{{brandname}}
-								</h1>
-								<h1 class="style-seasonname" >
-									<i>{{linesheetname}}</i>
-								</h1>
-								<h1 class="style-name">
-									<u>Style:</u>
-								</h1>
-								<h1 class="name">
-									<i>{{style.styleno}}</i>
-								</h1>
-								<h1 class="pricez">
-								<span class="WebRupee" style="font-size: 15px;margin-left:3px;">Rs.</span>
-								<span class="regular-price"  id="product-price-11072"> <span
-									class="price">{{style.price}}</span>
-								</span>
-								</h1>
-								  <p>
-									 <a ui-if="isMyProfile"   style="color:white;text-decoration:none;" title="Click here to add details"
-									ng-href="#/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" >
-									View </a>
-									 <a ui-if="!isMyProfile"   style="color:white;text-decoration:none;" title="Click here to add details"
-									ng-href="#/{{profileid}}/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" >
-									View </a>
-								</p>
+					<div ng-show="gettingstyles">
+                		<img src="img/ajax-loadersmall.gif" style="float:left;" >
+						<br>
+					</div>
+					<ul class="thumbnails">
+						<li  ng-repeat="style in styles">
+							<div style="position: relative;">
+								<img ng-src="{{style.profilethumbpic}}" 
+									width="220" height="300" alt="" title="">
+								<div class="masklayer">
+									<h1 class="style-brandname" style="text-align:center;" >
+									{{brandname}}
+									</h1>
+									<h1 class="style-seasonname" >
+										<i>{{linesheetname}}</i>
+									</h1>
+									<h1 class="style-name">
+										<u>Style:</u>
+									</h1>
+									<h1 class="name">
+										<i>{{style.styleno}}</i>
+									</h1>
+									<h1 class="pricez">
+									<span class="WebRupee" style="font-size: 15px;margin-left:3px;">Rs.</span>
+									<span class="regular-price"  id="product-price-11072"> <span
+										class="price">{{style.price}}</span>
+									</span>
+									</h1>
+									  <p>
+										 <a ui-if="isMyProfile"   style="color:white;text-decoration:none;" title="Click here to add details"
+										ng-href="#/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" >
+										View </a>
+										 <a ui-if="!isMyProfile"   style="color:white;text-decoration:none;" title="Click here to add details"
+										ng-href="#/{{profileid}}/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" >
+										View </a>
+									</p>
+								</div>
 							</div>
-						</div>
-						<div class="linesheet-designer">
-								<h1 class="designer" >
-									{{brandname}} </h1>
-						</div>
-						<div class="linesheet-style">
-								<h1 class="name" >
-									{{style.stylename}} </h1> 
+							<div class="linesheet-designer">
+									<h1 class="designer" >
+										{{brandname}} </h1>
 							</div>
-					</li>
-				</ul>
+							<div class="linesheet-style">
+									<h1 class="name" >
+										{{style.stylename}} </h1> 
+								</div>
+						</li>
+					</ul>
+					<div get-more="getmorestyles()">
+	   					<div ng-show="gettingmorestyles">
+	   						<center><img src="img/ajax-loadersmall.gif"><br></center>
+	   					</div>
+	   					<div ng-show="nomoredataavailable">
+	   						End of data
+	   					</div>
+					</div>
 				</div>
 			</div>
 			<!-- right pane -->

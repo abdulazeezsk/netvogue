@@ -1,5 +1,6 @@
 package org.netvogue.server.neo4japi.service;
 
+import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Style;
@@ -76,9 +77,10 @@ public class StylesheetServiceImpl implements StylesheetService {
 		}
 		return null;
 	}
-	public Iterable<StyleData> getStyles(String stylesheetId) {
+	public Iterable<StyleData> getStyles(String stylesheetId, int pagenumber) {
 		if(!stylesheetId.isEmpty()) {
-			return stylesheetRepo.getStyles(stylesheetId);
+			return stylesheetRepo.getStyles(stylesheetId,
+					Constants.STYLEPAGE_LIMIT * pagenumber, Constants.STYLEPAGE_LIMIT);
 		}
 		return null;
 	}
@@ -89,7 +91,7 @@ public class StylesheetServiceImpl implements StylesheetService {
 		return null;
  	}
 	public Iterable<StyleData> searchStyles(String stylesheetId, String styleno, String fabrication, 
-								long fromPrice, long toPrice) {
+								long fromPrice, long toPrice, int pagenumber) {
 		if(!stylesheetId.isEmpty()) {
 			String no = Utils.SerializePropertyParamForSearch(styleno);
 			System.out.println("stylesheet ID is:" + stylesheetId);
@@ -105,7 +107,8 @@ public class StylesheetServiceImpl implements StylesheetService {
 			
 			System.out.println("From Price is" + fromprice);
 			System.out.println("To Price is" + toprice);
-			return stylesheetRepo.searchStyles(stylesheetId, no, fabrication, fromprice, toprice);
+			return stylesheetRepo.searchStyles(stylesheetId, no, fabrication, fromprice, toprice,
+					Constants.STYLEPAGE_LIMIT * pagenumber, Constants.STYLEPAGE_LIMIT);
 		}
 		return null;
 	}

@@ -28,13 +28,16 @@ public interface EditorialRepository extends GraphRepository<Editorial> {
 	void deleteEditorial(String editorialid);
 	
 	@Query( "START n=node:editorialid(editorialid={0}) " +
-			"MATCH n-[:EDITORIALPHOTO]->p RETURN p ORDER BY p.createdDate DESC")
-	Iterable<EditorialPhoto> getPhotos(String editorialid);
+			"MATCH n-[:EDITORIALPHOTO]->p " +
+			"RETURN p ORDER BY p.createdDate DESC " +
+			"SKIP {1} LIMIT {2}")
+	Iterable<EditorialPhoto> getPhotos(String editorialid, int skip, int limit);
 	
 	@Query( "START n=node:editorialid(editorialid={0}) " +
 			"MATCH n-[:EDITORIALPHOTO]->p WHERE p.editorialphotoname! =~ {1} " +
-			"RETURN p ORDER BY p.createdDate DESC")
-	Iterable<EditorialPhoto> searchPhotosByName(String editorialid, String photoname);
+			"RETURN p ORDER BY p.createdDate DESC " +
+			"SKIP {2} LIMIT {3}")
+	Iterable<EditorialPhoto> searchPhotosByName(String editorialid, String photoname, int skip, int limit);
 	
 	@Query("START p = node:editorialphotouniqueid(editorialphotouniqueid={0}) MATCH p-[r]-() DELETE p, r")
 	void deletePhoto(String editorialphotouniqueid);

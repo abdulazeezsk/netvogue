@@ -22,14 +22,17 @@ public interface LinesheetRepository extends GraphRepository<Linesheet>{
 
 	@Query( "START n=node:linesheetid(linesheetid={0}) " +
 			"MATCH n-[:LS_STYLE]->styles, n-[:LINESHEET]-user " +
-			"RETURN user.name as name, styles ORDER BY styles.createdDate DESC")
-	Iterable<StyleData> getStyles(String linesheetid);
+			"RETURN user.name as name, styles ORDER BY styles.createdDate DESC " +
+			"SKIP {1} LIMIT {2}")
+	Iterable<StyleData> getStyles(String linesheetid, int skip, int limit);
 	
 	@Query( "START n=node:linesheetid(linesheetid={0}) " +
 			"MATCH n-[:LS_STYLE]->styles, n-[:LINESHEET]-user " +
 			"WHERE styles.styleno = {1} AND styles.price >= {2} AND styles.price <= {3}" +
-			"RETURN user.name as name, styles ORDER BY styles.createdDate DESC")
-	Iterable<StyleData> searchStyles(String stylesheetid, String styleno, long fromprice, long toprice);
+			"RETURN user.name as name, styles ORDER BY styles.createdDate DESC " +
+			"SKIP {4} LIMIT {5}")
+	Iterable<StyleData> searchStyles(String stylesheetid, String styleno, 
+							long fromprice, long toprice, int skip, int limit);
 	
 	@Query("START p = node:styleid(styleid={0}) MATCH p-[r:LS_STYLE]-() DELETE r")
 	void deleteStyle(String styleid);

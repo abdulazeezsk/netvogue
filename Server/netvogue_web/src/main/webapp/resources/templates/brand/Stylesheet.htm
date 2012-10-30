@@ -20,14 +20,15 @@
 			<div class="divi2"></div>
 			<div class="leftpane_filter_name">
 				<span class="leftpane_filter_name">Style number</span> <input
-					type="text" placeholder="Style number" class="span3" /> <span
+					type="text" placeholder="Style number" class="span3" 
+					ng-model="searchstyleno" ng-change="searchstyles()"/> <span
 					class="leftpane_filter_name">Fabrication</span> <input type="text"
-					placeholder="Fabrication" class="span3" /> <span
+					placeholder="Fabrication" class="span3" ng-model="searchfabrication" ng-change="searchstyles()"/> <span
 					class="leftpane_filter_name">Price range</span> <br> <input
-					type="text" class="spanpricerange-leftpane"
-					placeholder="From price" required ng-minlength="6" maxlength="6" />
-				- <input type="text" class="spanpricerange-leftpane"
-					placeholder="To price" required ng-minlength="6" maxlength="6" />
+					type="text" class="spanpricerange-leftpane" ng-model="searchfromprice" ng-change="searchstyles()" 
+					placeholder="From price" required />
+				- <input type="text" class="spanpricerange-leftpane" ng-model="searchtoprice" ng-change="searchstyles()"
+					placeholder="To price" required />
 			</div>
 			<div>
 				<div class="leftpane_subheading">Lookbooks</div>
@@ -128,8 +129,14 @@
 						</div>
 					</li>
 				</ul>
-
-
+				<div get-more="getmorestyles()">
+   					<div ng-show="gettingmorestyles">
+   						<center><img src="img/ajax-loadersmall.gif"><br></center>
+   					</div>
+   					<div ng-show="nomoredataavailable">
+   						End of data
+   					</div>
+				</div>
 			</div>
 		</div>
 		<!-- right pane -->
