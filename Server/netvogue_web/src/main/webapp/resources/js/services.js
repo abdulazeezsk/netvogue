@@ -373,6 +373,8 @@ angular.module('netVogue.services', []).
 		          if (!angular.isUndefined(routeparams.profileid)) {
 		        	  profileid = routeparams.profileid;
 		          }
+		          if(angular.isUndefined(pagenumber))
+		        	  pagenumber = 0;
 		          var datatosend = {
 		        		  	"pagenumber"  : pagenumber,
 			  				"galleryname" : jsonrequest
@@ -389,6 +391,8 @@ angular.module('netVogue.services', []).
 		          if (!angular.isUndefined(routeparams.profileid)) {
 		        	  profileid = routeparams.profileid;
 		          }
+		          if(angular.isUndefined(pagenumber))
+		        	  pagenumber = 0;
 		          var datatosend = {
 		  				"photoname" : photoname,
 		  				"galleryid" : galleryid,
@@ -402,6 +406,8 @@ angular.module('netVogue.services', []).
 		          return $http(config);
 		      },
 		      setgallerylocally: function(galleriestemp, pagenumber) {
+		    	  if(angular.isUndefined(pagenumber))
+		        	  pagenumber = 0;
 		    	  if(0 == pagenumber) {
 		    		  name = galleriestemp.name;
 			    	  isbrand = galleriestemp.isbrand;
@@ -414,6 +420,8 @@ angular.module('netVogue.services', []).
 		    	  } 
 		      },
 		      setphotoslocally: function(photostemp, pagenumber) {
+		    	  if(angular.isUndefined(pagenumber))
+		        	  pagenumber = 0;
 		    	  if(0 == pagenumber) {
 			    	  name = photostemp.name;
 			    	  galleryname = photostemp.galleryname;
@@ -571,6 +579,8 @@ angular.module('netVogue.services', []).
 		          if (!angular.isUndefined(routeparams.profileid)) {
 		        	  profileid = routeparams.profileid;
 		          }
+		          if(angular.isUndefined(pagenumber))
+		        	  pagenumber = 0;
 		          var datatosend = {
 		  				"photoname" : photoname,
 		  				"galleryid" : galleryid,
@@ -584,6 +594,8 @@ angular.module('netVogue.services', []).
 		          return $http(config);
 		     },
 		     setcollectionlocally: function(temp, pagenumber) {
+		    	 if(angular.isUndefined(pagenumber))
+		        	  pagenumber = 0;
 		    	 if(0 == pagenumber) {
 			    	 name = temp.name;
 			    	 profilepic = temp.profilepic;
@@ -595,6 +607,8 @@ angular.module('netVogue.services', []).
 		    	 }
 		     },
 		     setphotoslocally: function(photostemp, pagenumber) {
+		    	 if(angular.isUndefined(pagenumber))
+		        	  pagenumber = 0;
 		    	 if(0 == pagenumber) {
 		    		 name = photostemp.name;
 		    		 galleryname = photostemp.galleryname;
@@ -756,6 +770,8 @@ angular.module('netVogue.services', []).
             if (!angular.isUndefined(routeparams.profileid)) {
           	  profileid = routeparams.profileid;
             }
+            if(angular.isUndefined(pagenumber))
+	        	  pagenumber = 0;
             var datatosend = {
     				"stylesheetid" 	: id,
     				"styleno"		: styleno,
@@ -769,6 +785,7 @@ angular.module('netVogue.services', []).
                 params: datatosend,
                 url: "stylesheet/getstyles/" + profileid
             };
+            stylesheets = [];
             return $http(config);
         },
         stylesbycategory: function (routeparams, category, name) {
@@ -788,6 +805,8 @@ angular.module('netVogue.services', []).
             return $http(config);
         },
         setstylesheetlocally: function(temp, pagenumber) {
+        	if(angular.isUndefined(pagenumber))
+	        	  pagenumber = 0;
         	if(0 == pagenumber) {
 	        	name = temp.name;
 	    		profilepic = temp.profilepic;
@@ -799,6 +818,8 @@ angular.module('netVogue.services', []).
 	    	 }
         },
         setstyleslocally: function(temp, pagenumber) {
+        	if(angular.isUndefined(pagenumber))
+	        	  pagenumber = 0;
         	if(0 == pagenumber) {
 	        	name = temp.name;
 	    		stylesheetname = temp.stylesheetname;
@@ -935,25 +956,31 @@ angular.module('netVogue.services', []).
             };
             return $http(config);
         },
-        styles: function (routeparams, id, styleno, fromprice, toprice) {
+        styles: function (routeparams, id, styleno, fromprice, toprice, pagenumber) {
             var profileid = "";
             if (!angular.isUndefined(routeparams.profileid)) {
           	  profileid = routeparams.profileid;
             }
+            if(angular.isUndefined(pagenumber))
+	        	  pagenumber = 0;
             var datatosend = {
     				"linesheetid" 	: id,
     				"styleno"		: styleno,
     				"fromprice"		: fromprice,
-    				"toprice"		: toprice
+    				"toprice"		: toprice,
+    				"pagenumber"	: pagenumber
     		  };
             var config = {
                 method: "GET",
                 params: datatosend,
                 url: "linesheet/getstyles/" + profileid
             };
+            linesheets = [];
             return $http(config);
         },
         setlinesheetlocally: function(temp, pagenumber) {
+        	if(angular.isUndefined(pagenumber))
+	        	  pagenumber = 0;
         	if(0 == pagenumber) {
 	        	name = temp.name;
 	    		profilepic = temp.profilepic;
@@ -964,11 +991,19 @@ angular.module('netVogue.services', []).
 	    		  }
 	    	 }
         },
-        setstyleslocally: function(temp) {
+        setstyleslocally: function(temp, pagenumber) {
+        	if(angular.isUndefined(pagenumber))
+	        	  pagenumber = 0;
+        	if(0 == pagenumber) {
         	name = temp.name;
-    		linesheetname = temp.stylesheetname;//We are using same styles for both stylesheet and linesheet
-    		brandname = temp.brandname;
-    		angular.copy(temp.styles, styles);
+	    		linesheetname = temp.stylesheetname;//We are using same styles for both stylesheet and linesheet
+	    		brandname = temp.brandname;
+	    		angular.copy(temp.styles, styles);
+        	} else {
+	    		 for(var i=0; i < temp.styles.length; i++) {
+	    			 styles.push(temp.styles[i]);
+	    		  }
+	    	}
         }
 	};
 }).service('trending', function () {

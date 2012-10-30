@@ -11,27 +11,32 @@ import org.netvogue.server.neo4japi.domain.Category;
 import org.netvogue.server.webmvc.common.Constants;
 import org.netvogue.server.webmvc.domain.Linesheet;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
-public class LinesheetConverter implements Converter<org.netvogue.server.neo4japi.domain.Linesheet, Linesheet> {
+@Component
+public class LinesheetConverter /*implements Converter<org.netvogue.server.neo4japi.domain.Linesheet, Linesheet>*/ {
 
 	@Autowired
 	private UploadManager uploadManager;
 	
-	public Linesheet convert(org.netvogue.server.neo4japi.domain.Linesheet source) {
+	public Linesheet convert(org.netvogue.server.neo4japi.domain.Linesheet source, String username) {
 		Linesheet newSheet = new Linesheet();
 		newSheet.setGalleryid(source.getLinesheetid());
 		newSheet.setGalleryname(source.getLinesheetname());
-		if(0 == source.getStyles().size()) {
-			newSheet.setGallerypic(source.getProfilePicLink());
+		String profilepic = source.getProfilePicLink();
+		if(null == profilepic || profilepic.isEmpty()) {
+			newSheet.setGallerypic(Constants.LINESHEET_DefaultPic);
 		} else {
-			String thumblink = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.STYLE, Size.SThumb);
+			String thumblink = uploadManager.getQueryString(profilepic, ImageType.STYLE, 
+				Size.SThumb, username);
 			newSheet.setGallerypic(thumblink);
+			String leftlink = uploadManager.getQueryString(profilepic, ImageType.STYLE, 
+					Size.SLeft, username);
+			newSheet.setLeftpic(leftlink);
 		}
 		Category cat =  source.getProductcategory();
 		if(null != cat)
 			newSheet.setCategory(cat.getProductLine().getDesc());
-		String leftlink = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.STYLE, Size.SLeft);
 		Date deliveryDate = source.getDeliveryDate();
 		if(null != deliveryDate) {
 			if(0 == deliveryDate.compareTo(new Date(0))) 
@@ -42,7 +47,6 @@ public class LinesheetConverter implements Converter<org.netvogue.server.neo4jap
 				newSheet.setDeliverydate(delivery);
 			}
 		}
-		newSheet.setLeftpic(leftlink);
 		return newSheet;
 	}
 }

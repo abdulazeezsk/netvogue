@@ -423,11 +423,12 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
 			if(data.status == true) {
 				mystylesheet.updatestyleslocally(data.style);
 				$scope.styles	= mystylesheet.getstyles($routeParams);
+				$scope.exitstylepane();
 				//alert("Updated successfully" + data.status);
 			} else {
 				alert("error" + data.status + data.error);
+				
 			}
-			$scope.exitstylepane();
 		}).error(function(data) {
 			
 		});

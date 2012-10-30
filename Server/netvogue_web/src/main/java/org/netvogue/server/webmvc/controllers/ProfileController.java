@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.netvogue.server.webmvc.converters.ImageURLsConverter;
 import org.netvogue.server.webmvc.domain.BrandsCarried;
 import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonResponse;
@@ -45,6 +46,7 @@ public class ProfileController {
 	
 	@Autowired NetvogueUserDetailsService userDetailsService;
 	@Autowired UserService 		userService;
+	@Autowired ImageURLsConverter	imageURLsConverter;
 	@Autowired BoutiqueService  boutiqueService;
 	@Autowired ConversionService conversionService;
 	@Autowired UploadManager 	uploadManager;
@@ -78,7 +80,7 @@ public class ProfileController {
 		profile.setAboutus(user.getAboutUs());
 		//Set profile pic
 		if(null != user.getProfilePicLink()) {
-			profile.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+			profile.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 		}
 	
 		//Get ContactInfo
@@ -125,7 +127,8 @@ public class ProfileController {
 				brand.setBrandname(product.getName());
 				brand.setBrandusername(product.getUsername());
 				if(null != product.getProfilePicLink()) {
-					String thumburl = uploadManager.getQueryString(product.getProfilePicLink(), ImageType.PROFILE_PIC, Size.PThumb);
+					String thumburl = uploadManager.getQueryString(product.getProfilePicLink(), ImageType.PROFILE_PIC, 
+							Size.PThumb, user.getUsername());
 					brand.setProfilepic(thumburl);
 				}
 				brands.add(brand);
@@ -166,7 +169,8 @@ public class ProfileController {
 				brand.setBrandname(brandname);
 				brand.setBrandusername(brandusername);
 				if(null != profilepic) {
-					String thumburl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PThumb);
+					String thumburl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, 
+							Size.PThumb, brandusername);
 					brand.setProfilepic(thumburl);
 				} else {
 					brand.setProfilepic("");
@@ -217,17 +221,19 @@ public class ProfileController {
 		List<PhotoWeb> JSONFileData= new ArrayList<PhotoWeb>();
 		
 		System.out.println("Came here" + fileupload.getOriginalFilename());
-		Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.PROFILE_PIC);
+		Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.PROFILE_PIC, user.getUsername());
 		user.setProfilePicLink((String)uploadMap.get(UploadManager.FILE_ID));
 		StringBuffer error = new StringBuffer();
 		if(ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
 			response.setStatus(true);
 		
 			PhotoWeb newPhoto = new PhotoWeb();
-			String thumburl = uploadManager.getQueryString((String)uploadMap.get(UploadManager.FILE_ID), ImageType.PROFILE_PIC, Size.PThumb);
+			String thumburl = uploadManager.getQueryString(
+					(String)uploadMap.get(UploadManager.FILE_ID), ImageType.PROFILE_PIC, Size.PThumb, user.getUsername());
 			System.out.println("Image path is/Thumnail url is" + thumburl);
 			newPhoto.setThumbnail_url(thumburl);
-			String lefturl = uploadManager.getQueryString((String)uploadMap.get(UploadManager.FILE_ID), ImageType.PROFILE_PIC, Size.PTop);
+			String lefturl = uploadManager.getQueryString(
+					(String)uploadMap.get(UploadManager.FILE_ID), ImageType.PROFILE_PIC, Size.PTop, user.getUsername());
 			newPhoto.setLeft_url(lefturl);
 			newPhoto.setUniqueid((String)uploadMap.get(UploadManager.FILE_ID));
 			JSONFileData.add(newPhoto);
@@ -338,10 +344,11 @@ public class ProfileController {
 			StringBuffer error = new StringBuffer();
 			if(ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
 				String profilepic = newUser.getProfilePicLink();
-				brand.setBrandname(user.getUsername());
-				brand.setBrandusername(user.getName());
+				brand.setBrandname(newUser.getUsername());
+				brand.setBrandusername(newUser.getName());
 				if(null != profilepic) {
-					String thumburl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PThumb);
+					String thumburl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, 
+							Size.PThumb, newUser.getUsername());
 					brand.setProfilepic(thumburl);
 				} else {
 					brand.setProfilepic("");

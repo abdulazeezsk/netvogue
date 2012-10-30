@@ -25,10 +25,12 @@ public class NotificationConverter implements Converter<org.netvogue.server.neo4
 		response.setProfileid(user.getUsername());
 		String profilepic = user.getProfilePicLink();
 		if(null != profilepic) {
-			String thumburl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PThumb);
+			String thumburl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, 
+					Size.PThumb, user.getUsername());
 			response.setThumbnail_url(thumburl);
 			
-			String topurl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PTop);
+			String topurl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, 
+					Size.PTop, user.getUsername());
 			response.setTop_url(topurl);
 		}
 		response.setNotificationid(source.getNotificationid());

@@ -2,8 +2,6 @@ package org.netvogue.server.webmvc.controllers;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 import org.netvogue.server.aws.core.ImageType;
@@ -62,7 +60,7 @@ public class SpecialController {
 			thumbpic = networkUser.getProfilePicLink();
 			
 			if(null != thumbpic) {
-				thumbpic = uploadManager.getQueryString(thumbpic, ImageType.PROFILE_PIC, Size.PThumb);
+				thumbpic = uploadManager.getQueryString(thumbpic, ImageType.PROFILE_PIC, Size.PThumb, networkUser.getUsername());
 			}
 			newReference.setThumbnail_url(thumbpic);
 			newReference.setMutualfriends(dbReference.getMutualfriends());

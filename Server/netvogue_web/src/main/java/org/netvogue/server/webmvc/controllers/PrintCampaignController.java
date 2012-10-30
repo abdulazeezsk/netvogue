@@ -15,6 +15,9 @@ import org.netvogue.server.neo4japi.domain.PrintCampaignPhoto;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.PrintCampaignService;
 import org.netvogue.server.neo4japi.service.UserService;
+import org.netvogue.server.webmvc.converters.ImageURLsConverter;
+import org.netvogue.server.webmvc.converters.PrintCampaignConverter;
+import org.netvogue.server.webmvc.converters.PrintCampaignPhotoConverter;
 import org.netvogue.server.webmvc.domain.CampaignJSONRequest;
 import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonRequest;
@@ -42,7 +45,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class PrintCampaignController {
 	@Autowired NetvogueUserDetailsService 	userDetailsService;
 	@Autowired UserService 					userService;
+	@Autowired ImageURLsConverter			imageURLsConverter;
 	@Autowired PrintCampaignService			printcampaignService;
+	@Autowired PrintCampaignConverter		printcampaignConverter;
+	@Autowired PrintCampaignPhotoConverter	printcampaignPhotoConverter;
 	@Autowired ConversionService			conversionService;
 
 	@Autowired
@@ -68,7 +74,7 @@ public class PrintCampaignController {
 		
 		campaigns.setName(user.getName());
 		campaigns.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-		campaigns.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		campaigns.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 		Set<PrintCampaign> campaignTemp = new LinkedHashSet<PrintCampaign>();
 		Iterable<org.netvogue.server.neo4japi.domain.PrintCampaign> dbPrintCampaigns;
 		if(galleryname.isEmpty()) {
@@ -83,7 +89,7 @@ public class PrintCampaignController {
 		while ( first.hasNext() ){
 			org.netvogue.server.neo4japi.domain.PrintCampaign dbPrintCampaign = first.next() ;
 			System.out.println("Print Campaign name: " + dbPrintCampaign.getPrintcampaignname());
-			campaignTemp.add(conversionService.convert(dbPrintCampaign, PrintCampaign.class));
+			campaignTemp.add(printcampaignConverter.convert(dbPrintCampaign, user.getUsername()));
 		}
 		campaigns.setGalleries(campaignTemp);
 		
@@ -114,7 +120,7 @@ public class PrintCampaignController {
 		if(0 == pagenumber) {
 			photos.setName(user.getName());
 			photos.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-			photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+			photos.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 		}
 		org.netvogue.server.neo4japi.domain.PrintCampaign printcampaign = printcampaignService.getPrintCampaign(galleryid);
 		if(null == printcampaign) {
@@ -134,7 +140,7 @@ public class PrintCampaignController {
 		Iterator<PrintCampaignPhoto> first = dbPhotos.iterator();
 		while ( first.hasNext() ){
 			PrintCampaignPhoto dbPhoto = first.next() ;
-			photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
+			photosTemp.add(printcampaignPhotoConverter.convert(dbPhoto, user.getUsername()));
 		}
 		photos.setPhotos(photosTemp);
 		
@@ -224,6 +230,9 @@ public class PrintCampaignController {
 	public @ResponseBody UploadedFileResponse AddPhotostoGallery(Model model, 
 			@RequestParam("files[]") List<MultipartFile> fileuploads, @RequestParam("galleryid") String galleryId) {
 		System.out.println("Add photos: Gallery Id:" + galleryId + "No:of Photos:" + fileuploads.size());
+		User user = userDetailsService.getUserFromSession();
+		if(null == user)
+			return null;
 		UploadedFileResponse response = new UploadedFileResponse();
 		
 		if(galleryId.isEmpty()) {
@@ -240,11 +249,11 @@ public class PrintCampaignController {
 		
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
-			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.PRINT_CAMPAIGN);
+			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.PRINT_CAMPAIGN, user.getUsername());
 			PrintCampaignPhoto newPhoto = new PrintCampaignPhoto((String)uploadMap.get(UploadManager.FILE_ID));
 			printcampaign.addPhotos(newPhoto);
 			
-			JSONFileData.add(conversionService.convert(newPhoto, PhotoWeb.class));
+			JSONFileData.add(printcampaignPhotoConverter.convert(newPhoto, user.getUsername()));
 		}
 		StringBuffer error = new StringBuffer();
 		if(ResultStatus.SUCCESS == printcampaignService.SavePrintCampaign(printcampaign, error)) {  

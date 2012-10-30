@@ -7,6 +7,7 @@ import java.util.Set;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.NotificationService;
+import org.netvogue.server.webmvc.converters.ImageURLsConverter;
 import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.Notification;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class NotificationController {
 	@Autowired NotificationService notificationService;
+	@Autowired ImageURLsConverter	imageURLsConverter;
 	@Autowired ConversionService	conversionService;
 	@Autowired NetvogueUserDetailsService userDetailsService; 
 
@@ -36,7 +38,7 @@ public class NotificationController {
 		
 		response.setName(user.getName());
 		response.setProfileid(user.getUsername());
-		response.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		response.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 		Set<Notification> notificationsTemp = new LinkedHashSet<Notification>();
 		
 		String username = user.getUsername();
@@ -68,7 +70,7 @@ public class NotificationController {
 		Notifications response = new Notifications();
 		
 		response.setName(user.getName());
-		response.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+		response.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 		Set<Notification> notificationsTemp = new LinkedHashSet<Notification>();
 		
 		String username = user.getUsername();

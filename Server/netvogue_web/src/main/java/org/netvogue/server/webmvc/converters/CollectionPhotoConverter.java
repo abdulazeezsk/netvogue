@@ -6,23 +6,27 @@ import org.netvogue.server.aws.core.UploadManager;
 import org.netvogue.server.neo4japi.domain.CollectionPhoto;
 import org.netvogue.server.webmvc.domain.PhotoWeb;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
-public class CollectionPhotoConverter implements Converter<CollectionPhoto, PhotoWeb> {
+@Component
+public class CollectionPhotoConverter /*implements Converter<CollectionPhoto, PhotoWeb>*/ {
 
 	@Autowired
 	private UploadManager uploadManager;
 	
-	public PhotoWeb convert(CollectionPhoto source) {
+	public PhotoWeb convert(CollectionPhoto source, String username) {
 		PhotoWeb newPhoto = new PhotoWeb();
 		newPhoto.setLabel(source.getCollectionphotoname());
 		newPhoto.setSeasonname(source.getDescription());
 		newPhoto.setUniqueid(source.getCollectionphotouniqueid());
 		
-		String addlink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION, Size.CAdd);
-		String thumblink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION, Size.CThumb);
-		String mainlink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION);
-		String leftlink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION, Size.CLeft);
+		String addlink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION, 
+				Size.CAdd, username);
+		String thumblink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION, 
+				Size.CThumb, username);
+		String mainlink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION, username);
+		String leftlink = uploadManager.getQueryString(source.getCollectionphotouniqueid(), ImageType.COLLECTION, 
+				Size.CLeft, username);
 		newPhoto.setAdd_url(addlink);
 		newPhoto.setThumbnail_url(thumblink);
 		newPhoto.setPiclink(mainlink);

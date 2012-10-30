@@ -22,6 +22,9 @@ import org.netvogue.server.neo4japi.service.CollectionData;
 import org.netvogue.server.neo4japi.service.CollectionPhotoData;
 import org.netvogue.server.neo4japi.service.CollectionService;
 import org.netvogue.server.neo4japi.service.UserService;
+import org.netvogue.server.webmvc.converters.CollectionConverter;
+import org.netvogue.server.webmvc.converters.CollectionPhotoConverter;
+import org.netvogue.server.webmvc.converters.ImageURLsConverter;
 import org.netvogue.server.webmvc.domain.Collection;
 import org.netvogue.server.webmvc.domain.CollectionJSONRequest;
 import org.netvogue.server.webmvc.domain.Collections;
@@ -50,7 +53,10 @@ public class CollectionController {
 	@Autowired NetvogueUserDetailsService 	userDetailsService;
 	@Autowired BoutiqueService  boutiqueService;
 	@Autowired UserService 					userService;
+	@Autowired ImageURLsConverter			imageURLsConverter;
 	@Autowired CollectionService			collectionService;
+	@Autowired CollectionConverter			collectionConverter;
+	@Autowired CollectionPhotoConverter		collectionPhotoConverter;
 	@Autowired ConversionService			conversionService;
 
 	@Autowired
@@ -77,7 +83,7 @@ public class CollectionController {
 		
 		if(0 == pagenumber) {
 			collections.setName(user.getName());
-			collections.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+			collections.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 		}
 		Set<Collection> collectionTemp = new LinkedHashSet<Collection>();
 		Iterable<CollectionData> dbCollections;
@@ -104,7 +110,7 @@ public class CollectionController {
 		while ( first.hasNext() ){
 			CollectionData dbCollection = first.next();
 			
-			Collection collection = conversionService.convert(dbCollection.getCollection(), Collection.class);
+			Collection collection = collectionConverter.convert(dbCollection.getCollection(), user.getUsername());
 			collection.setBrandname(dbCollection.getName());
 			collectionTemp.add(collection);
 			
@@ -138,7 +144,7 @@ public class CollectionController {
 		
 		if(0 == pagenumber) {
 			photos.setName(user.getName());
-			photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+			photos.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 			photos.setGalleryname(collectionService.getCollection(galleryid).getCollectionseasonname());
 		}
 		
@@ -156,7 +162,7 @@ public class CollectionController {
 		while ( first.hasNext() ){
 			CollectionPhotoData dbPhoto = first.next() ;
 			
-			PhotoWeb newPhoto = conversionService.convert(dbPhoto.getCollectionPhoto(), PhotoWeb.class);
+			PhotoWeb newPhoto = collectionPhotoConverter.convert(dbPhoto.getCollectionPhoto(), user.getUsername());
 			photos.setBrandname(dbPhoto.getName());
 			photosTemp.add(newPhoto);
 		}
@@ -279,6 +285,10 @@ public class CollectionController {
 	public @ResponseBody UploadedFileResponse AddPhotostoGallery(Model model, 
 			@RequestParam("files[]") List<MultipartFile> fileuploads, @RequestParam("galleryid") String galleryId) {
 		System.out.println("Add photos: Gallery Id:" + galleryId + "No:of Photos:" + fileuploads.size());
+		User user = userDetailsService.getUserFromSession();
+		if(null == user)
+			return null;
+		
 		UploadedFileResponse response = new UploadedFileResponse();
 		
 		if(galleryId.isEmpty()) {
@@ -295,11 +305,11 @@ public class CollectionController {
 		
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
-			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.COLLECTION);
+			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.COLLECTION, user.getUsername());
 			CollectionPhoto newPhoto = new CollectionPhoto((String)uploadMap.get(UploadManager.FILE_ID));
 			collection.addPhotos(newPhoto);
 			
-			JSONFileData.add(conversionService.convert(newPhoto, PhotoWeb.class));
+			JSONFileData.add(collectionPhotoConverter.convert(newPhoto, user.getUsername()));
 		}
 		StringBuffer error = new StringBuffer();
 		if(ResultStatus.SUCCESS == collectionService.SaveCollection(collection, error)) {  

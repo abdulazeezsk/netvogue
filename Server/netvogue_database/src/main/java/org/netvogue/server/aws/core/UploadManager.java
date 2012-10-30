@@ -27,15 +27,15 @@ public class UploadManager {
 	public UploadManager() {
 	}
 
-	public List<Map<String, Object>> processUpload(LinkedList<MultipartFile> files,ImageType imageType) {
+	public List<Map<String, Object>> processUpload(LinkedList<MultipartFile> files,ImageType imageType, String username) {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		for ( MultipartFile file : files ) {
-			list.add(processUpload(file,imageType));
+			list.add(processUpload(file, imageType, username));
 		}
 		return list;
 	}
 	
-	public Map<String, Object> processUpload(MultipartFile file,ImageType imageType) {
+	public Map<String, Object> processUpload(MultipartFile file,ImageType imageType, String username) {
         Map<String, Object> map = null;
 		try {
 			String uniqueId = UUID.randomUUID().toString();
@@ -62,7 +62,7 @@ public class UploadManager {
 //      };
 
 	        
-	        Upload upload = transferManager.upload(bucketName, uniqueId, file.getBytes(), metaData, imageType);
+	        Upload upload = transferManager.upload(bucketName, uniqueId, file.getBytes(), metaData, imageType, username);
 	        
 	        String RESTlink = transferManager.getQueryString(bucketName+"/"+ imageType.getKey() , uniqueId + "-" + Size.GThumb.toString());
 	        
@@ -81,17 +81,18 @@ public class UploadManager {
         return map;
 	}
 	
-	public String getQueryString(String key, ImageType imageType) {
+	public String getQueryString(String key, ImageType imageType, String username) {
 		String RESTLink = null;
         String bucketName = BucketName.DEV.getName();
-		RESTLink = transferManager.getQueryString(bucketName+"/"+ imageType.getKey(), key);
+		RESTLink = transferManager.getQueryString(bucketName + "/" + username + "/" + imageType.getKey(), key);
 		return RESTLink;
 	}
 	
-	public String getQueryString(String key, ImageType imageType, Size imageSize) {
+	public String getQueryString(String key, ImageType imageType, Size imageSize, String username) {
 		String RESTLink = null;
         String bucketName = BucketName.DEV.getName();
-		RESTLink = transferManager.getQueryString(bucketName+"/"+ imageType.getKey(), key + "-" + imageSize.toString());
+		RESTLink = transferManager.getQueryString(bucketName+ "/" + username + "/" + imageType.getKey(), 
+													key + "-" + imageSize.toString());
 		return RESTLink;
 	}
 }

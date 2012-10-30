@@ -16,8 +16,9 @@ import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.StatusUpdateData;
 import org.netvogue.server.neo4japi.service.StatusUpdateService;
 import org.netvogue.server.neo4japi.service.UserService;
+import org.netvogue.server.webmvc.converters.ImageURLsConverter;
+import org.netvogue.server.webmvc.converters.StatusUpdateDataConverter;
 import org.netvogue.server.webmvc.domain.ContactInfo;
-import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.StatusUpdate;
@@ -38,6 +39,7 @@ public class StatusUpdateController {
 	
 	@Autowired NetvogueUserDetailsService userDetailsService;
 	@Autowired UserService 			userService;
+	@Autowired ImageURLsConverter	imageURLsConverter;
 	@Autowired ConversionService	conversionService;
 	@Autowired StatusUpdateService	statusUpdateService; 
 	@Autowired UploadManager 		uploadManager;
@@ -63,7 +65,7 @@ public class StatusUpdateController {
 			updates.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
 			//Set profile pic
 			if(null != user.getProfilePicLink()) {
-				updates.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+				updates.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 			}
 		
 			//Get ContactInfo
@@ -121,7 +123,8 @@ public class StatusUpdateController {
 				newTemp.setProfileid(user.getUsername());
 				String profilepic = user.getProfilePicLink();
 				if(null != profilepic) {
-					String topurl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PTop);
+					String topurl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, 
+							Size.PTop, user.getUsername());
 					newTemp.setLeft_url(topurl);
 				}
 				updatesTemp.add(newTemp);
@@ -149,7 +152,7 @@ public class StatusUpdateController {
 			update.setProfileid(user.getUsername());
 			String profilepic = user.getProfilePicLink();
 			if(null != profilepic) {
-				String topurl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PTop);
+				String topurl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PTop, user.getUsername());
 				update.setLeft_url(topurl);
 			}
 			

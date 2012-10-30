@@ -15,10 +15,12 @@ import org.netvogue.server.neo4japi.domain.EditorialPhoto;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.EditorialService;
 import org.netvogue.server.neo4japi.service.UserService;
+import org.netvogue.server.webmvc.converters.EditorialConverter;
+import org.netvogue.server.webmvc.converters.EditorialPhotoConverter;
+import org.netvogue.server.webmvc.converters.ImageURLsConverter;
 import org.netvogue.server.webmvc.domain.CampaignJSONRequest;
 import org.netvogue.server.webmvc.domain.Editorial;
 import org.netvogue.server.webmvc.domain.Editorials;
-import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.PhotoInfoJsonRequest;
@@ -42,7 +44,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class EditorialController {
 	@Autowired NetvogueUserDetailsService 	userDetailsService;
 	@Autowired UserService 					userService;
+	@Autowired ImageURLsConverter			imageURLsConverter;
 	@Autowired EditorialService				editorialService;
+	@Autowired EditorialConverter			editorialConverter;
+	@Autowired EditorialPhotoConverter		editorialPhotoConverter;
 	@Autowired ConversionService			conversionService;
 
 	@Autowired
@@ -67,7 +72,7 @@ public class EditorialController {
 		if(0 == pagenumber) {
 			campaigns.setName(user.getName());
 			campaigns.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-			campaigns.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+			campaigns.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 		}
 		Set<Editorial> campaignTemp = new LinkedHashSet<Editorial>();
 		Iterable<org.netvogue.server.neo4japi.domain.Editorial> dbCampaigns;
@@ -83,7 +88,7 @@ public class EditorialController {
 		while ( first.hasNext() ){
 			org.netvogue.server.neo4japi.domain.Editorial dbCampaign = first.next() ;
 			System.out.println("Get Editorial" + dbCampaign.getEditorialname());
-			campaignTemp.add(conversionService.convert(dbCampaign, Editorial.class));
+			campaignTemp.add(editorialConverter.convert(dbCampaign, user.getUsername()));
 		}
 		campaigns.setGalleries(campaignTemp);
 		
@@ -115,7 +120,7 @@ public class EditorialController {
 		if(0 == pagenumber) {
 			photos.setName(user.getName());
 			photos.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-			photos.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+			photos.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 			photos.setGalleryname(editorialService.getEditorial(galleryid).getEditorialname());
 		}
 		
@@ -132,7 +137,7 @@ public class EditorialController {
 		Iterator<EditorialPhoto> first = dbPhotos.iterator();
 		while ( first.hasNext() ){
 			EditorialPhoto dbPhoto = first.next() ;
-			photosTemp.add(conversionService.convert(dbPhoto, PhotoWeb.class));
+			photosTemp.add(editorialPhotoConverter.convert(dbPhoto, user.getUsername()));
 		}
 		photos.setPhotos(photosTemp);
 			
@@ -222,6 +227,10 @@ public class EditorialController {
 	public @ResponseBody UploadedFileResponse AddPhotostoGallery(Model model, 
 			@RequestParam("files[]") List<MultipartFile> fileuploads, @RequestParam("galleryid") String galleryId) {
 		System.out.println("Add photos: Gallery Id:" + galleryId + "No:of Photos:" + fileuploads.size());
+		User user = userDetailsService.getUserFromSession();
+		if(null == user)
+			return null;
+		
 		UploadedFileResponse response = new UploadedFileResponse();
 		
 		if(galleryId.isEmpty()) {
@@ -238,11 +247,11 @@ public class EditorialController {
 		
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
-			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.EDITORIAL);
+			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.EDITORIAL, user.getUsername());
 			EditorialPhoto newPhoto = new EditorialPhoto((String)uploadMap.get(UploadManager.FILE_ID));
 			editorial.addPhotos(newPhoto);
 			
-			JSONFileData.add(conversionService.convert(newPhoto, PhotoWeb.class));
+			JSONFileData.add(editorialPhotoConverter.convert(newPhoto, user.getUsername()));
 		}
 		StringBuffer error = new StringBuffer();
 		if(ResultStatus.SUCCESS == editorialService.SaveEditorial(editorial, error)) {  

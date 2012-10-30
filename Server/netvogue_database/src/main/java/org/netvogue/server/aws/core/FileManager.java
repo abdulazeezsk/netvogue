@@ -134,9 +134,9 @@ public class FileManager extends TransferManager {
 	}
 	
 	public Upload upload(String bucketName,String fileName,byte[] buffer, ObjectMetadata metadata,
-								ImageType imageType) {
+								ImageType imageType, String username) {
 		
-		String imageKey = imageType.getKey() + "/" + fileName;
+		String imageKey = username + "/" + imageType.getKey() + "/" + fileName;
 		Size[] sizes = imageType.getSizes();
 		
 		

@@ -26,7 +26,8 @@ public class StatusUpdateDataConverter implements Converter<StatusUpdateData, St
 		response.setProfileid(user.getUsername());
 		String profilepic = user.getProfilePicLink();
 		if(null != profilepic) {
-			String topurl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, Size.PTop);
+			String topurl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, 
+					Size.PTop, user.getUsername());
 			response.setLeft_url(topurl);
 		}
 		org.netvogue.server.neo4japi.domain.StatusUpdate update = source.getUpdate(); 

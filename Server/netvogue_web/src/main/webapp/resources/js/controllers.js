@@ -968,7 +968,7 @@ function MyCtrlEditorial($scope, $routeParams, currentvisitedprofile, mygallery)
     			$scope.nomoredataavailable = true;							
     		mygallery.setphotoslocally(data, pagenumber);
         	$scope.updatedata();
-        	$scope.gettingphotos = true;
+        	$scope.gettingphotos = false;
         	$scope.gettingmorephotos = false;
         }).error(function(data) {
         	$scope.gettingphotos = false;
@@ -1210,11 +1210,11 @@ function MyCtrlCollection($scope, $routeParams, currentvisitedprofile, mycollect
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     $scope.getphotos = function() {
     	mycollection.photos($routeParams, $scope.galleryid, "", pagenumber).success(function(data) {
-    		if(data.collections.length < netvogue.COLLECTIONPHOTOPAGE_LIMIT)
+    		if(data.photos.length < netvogue.COLLECTIONPHOTOPAGE_LIMIT)
     			$scope.nomoredataavailable = true;							
     		mycollection.setphotoslocally(data, pagenumber);
         	$scope.updatedata();
-        	$scope.gettingphotos = true;
+        	$scope.gettingphotos = false;
         	$scope.gettingmorephotos = false;
         }).error(function(data) {
         	$scope.gettingphotos = true;

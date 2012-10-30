@@ -34,7 +34,7 @@ public class PrintCampaign {
 	User	createdBy;
 	
 	@RelatedTo(type="PRINTCAMPAIGNPHOTO", direction=Direction.OUTGOING)
-	@Fetch Set<PrintCampaignPhoto>	photosAdded =  new HashSet<PrintCampaignPhoto>();
+	Set<PrintCampaignPhoto>	photosAdded =  new HashSet<PrintCampaignPhoto>();
 	
 	public PrintCampaign() {
 		
@@ -45,7 +45,6 @@ public class PrintCampaign {
 		description			= desc;
 		createdBy			= createdByTemp;
 		printcampaignid 	= UUID.randomUUID().toString();
-		profilePicLink 		= "http://placehold.it/231x306";
 	}
 
 	public Long getNodeId() {

@@ -35,7 +35,7 @@ public class Stylesheet {
 	User	createdBy;
 	
 	@RelatedTo(type="SS_STYLE", direction=Direction.OUTGOING)
-	@Fetch Set<Style>	styles =  new HashSet<Style>();
+	Set<Style>	styles =  new HashSet<Style>();
 	
 	public Stylesheet() {
 		
@@ -45,7 +45,6 @@ public class Stylesheet {
 		stylesheetname = name;
 		createdBy	= createdByTemp;
 		stylesheetid = UUID.randomUUID().toString();
-		profilePicLink = "http://placehold.it/220X320";
 	}
 
 	public Long getNodeId() {

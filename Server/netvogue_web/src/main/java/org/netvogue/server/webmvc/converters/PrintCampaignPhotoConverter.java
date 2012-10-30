@@ -6,23 +6,28 @@ import org.netvogue.server.aws.core.UploadManager;
 import org.netvogue.server.neo4japi.domain.PrintCampaignPhoto;
 import org.netvogue.server.webmvc.domain.PhotoWeb;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
-public class PrintCampaignPhotoConverter implements Converter<PrintCampaignPhoto, PhotoWeb> {
+@Component
+public class PrintCampaignPhotoConverter /*implements Converter<PrintCampaignPhoto, PhotoWeb>*/ {
 
 	@Autowired
 	private UploadManager uploadManager;
 	
-	public PhotoWeb convert(PrintCampaignPhoto source) {
+	public PhotoWeb convert(PrintCampaignPhoto source, String username) {
 		PhotoWeb newPhoto = new PhotoWeb();
 		newPhoto.setLabel(source.getPrintcampaignphotoname());
 		newPhoto.setSeasonname(source.getDescription());
 		newPhoto.setUniqueid(source.getPrintcampaignphotouniqueid());
 		
-		String addlink   = uploadManager.getQueryString(source.getPrintcampaignphotouniqueid(), ImageType.PRINT_CAMPAIGN, Size.PCAdd);
-		String thumblink = uploadManager.getQueryString(source.getPrintcampaignphotouniqueid(), ImageType.PRINT_CAMPAIGN, Size.PCThumb);
-		String mainlink = uploadManager.getQueryString(source.getPrintcampaignphotouniqueid(), ImageType.PRINT_CAMPAIGN);
-		String leftlink = uploadManager.getQueryString(source.getPrintcampaignphotouniqueid(), ImageType.PRINT_CAMPAIGN, Size.PCLeft);
+		String addlink   = uploadManager.getQueryString(source.getPrintcampaignphotouniqueid(), ImageType.PRINT_CAMPAIGN, 
+				Size.PCAdd, username);
+		String thumblink = uploadManager.getQueryString(source.getPrintcampaignphotouniqueid(), ImageType.PRINT_CAMPAIGN, 
+				Size.PCThumb, username);
+		String mainlink = uploadManager.getQueryString(source.getPrintcampaignphotouniqueid(), ImageType.PRINT_CAMPAIGN,
+				username);
+		String leftlink = uploadManager.getQueryString(source.getPrintcampaignphotouniqueid(), ImageType.PRINT_CAMPAIGN, 
+				Size.PCLeft, username);
 		newPhoto.setAdd_url(addlink);
 		newPhoto.setThumbnail_url(thumblink);
 		newPhoto.setPiclink(mainlink);

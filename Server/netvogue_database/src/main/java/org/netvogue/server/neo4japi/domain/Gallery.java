@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.neo4j.graphdb.Direction;
-import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
@@ -34,7 +33,7 @@ public class Gallery {
 	User	createdBy;
 	
 	@RelatedTo(type="PHOTO", direction=Direction.OUTGOING)
-	@Fetch Set<Photo>	photosAdded =  new HashSet<Photo>();
+	Set<Photo>	photosAdded =  new HashSet<Photo>();
 	
 	public Gallery() {
 		
@@ -44,7 +43,6 @@ public class Gallery {
 		galleryname = name;
 		createdBy	= createdByTemp;
 		galleryid = UUID.randomUUID().toString();
-		profilePicLink = "http://placehold.it/220x150";
 	}
 
 	public Long getNodeId() {

@@ -50,7 +50,6 @@ public class Collection {
 		collectionseasonname = seasonname;
 		createdBy	= createdByTemp;
 		collectionid = UUID.randomUUID().toString();
-		profilePicLink = "http://placehold.it/231x306";
 	}
 
 	public Long getNodeId() {

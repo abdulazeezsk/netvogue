@@ -24,6 +24,9 @@ import org.netvogue.server.neo4japi.service.StyleData;
 import org.netvogue.server.neo4japi.service.StylesheetData;
 import org.netvogue.server.neo4japi.service.StylesheetService;
 import org.netvogue.server.neo4japi.service.UserService;
+import org.netvogue.server.webmvc.converters.ImageURLsConverter;
+import org.netvogue.server.webmvc.converters.StyleResponseConverter;
+import org.netvogue.server.webmvc.converters.StylesheetConverter;
 import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.PhotoWeb;
@@ -55,7 +58,10 @@ public class StyleSheetController {
 	@Autowired NetvogueUserDetailsService 	userDetailsService;
 	@Autowired BoutiqueService  			boutiqueService;
 	@Autowired UserService 					userService;
+	@Autowired ImageURLsConverter			imageURLsConverter;
 	@Autowired StylesheetService			stylesheetService;
+	@Autowired StylesheetConverter			stylesheetConverter;
+	@Autowired StyleResponseConverter		styleConverter;
 	@Autowired ConversionService			conversionService;
 
 	@Autowired
@@ -75,7 +81,7 @@ public class StyleSheetController {
 		
 		if(0 == pagenumber) {
 			stylesheets.setName(loggedinUser.getName());
-			stylesheets.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
+			stylesheets.setProfilepic(imageURLsConverter.convert(loggedinUser.getProfilePicLink(), loggedinUser.getUsername()));
 		}
 		Set<Stylesheet> stylesheetTemp = new LinkedHashSet<Stylesheet>();
 		Iterable<StylesheetData> dbStylesheets;
@@ -103,7 +109,7 @@ public class StyleSheetController {
 		Iterator<StylesheetData> first = dbStylesheets.iterator();
 		while ( first.hasNext() ){
 			StylesheetData dbStylesheet = first.next() ;
-			Stylesheet newResponse = conversionService.convert(dbStylesheet.getStylesheet(), Stylesheet.class);
+			Stylesheet newResponse = stylesheetConverter.convert(dbStylesheet.getStylesheet(), loggedinUser.getUsername());
 			newResponse.setBrandname(dbStylesheet.getName());
 			stylesheetTemp.add(newResponse);
 		}
@@ -134,7 +140,7 @@ public class StyleSheetController {
 		
 		if(0 == pagenumber) {
 			styles.setName(loggedinUser.getName());
-			styles.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
+			styles.setProfilepic(imageURLsConverter.convert(loggedinUser.getProfilePicLink(), loggedinUser.getUsername()));
 		}
 		
 		//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
@@ -159,7 +165,7 @@ public class StyleSheetController {
 		Iterator<StyleData> first = dbStyles.iterator();
 		while ( first.hasNext() ){
 			StyleData dbStyle = first.next() ;
-			StyleResponse newResponse = conversionService.convert(dbStyle.getStyle(), StyleResponse.class);
+			StyleResponse newResponse = styleConverter.convert(dbStyle.getStyle(), loggedinUser.getUsername());
 			styles.setBrandname(dbStyle.getName());
 			stylesTemp.add(newResponse);
 		}
@@ -181,7 +187,7 @@ public class StyleSheetController {
 		}
 		
 		styles.setName(loggedinUser.getName());
-		styles.setProfilepic(conversionService.convert(loggedinUser.getProfilePicLink(), ImageURLsResponse.class));
+		styles.setProfilepic(imageURLsConverter.convert(loggedinUser.getProfilePicLink(), loggedinUser.getUsername()));
 		//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
 		Set<StyleResponse> stylesTemp = new LinkedHashSet<StyleResponse>();
 		Iterable<StyleData> dbStyles;
@@ -199,7 +205,7 @@ public class StyleSheetController {
 		Iterator<StyleData> first = dbStyles.iterator();
 		while ( first.hasNext() ){
 			StyleData dbStyle = first.next() ;
-			StyleResponse newResponse = conversionService.convert(dbStyle.getStyle(), StyleResponse.class);
+			StyleResponse newResponse = styleConverter.convert(dbStyle.getStyle(), loggedinUser.getUsername());
 			styles.setBrandname(dbStyle.getName());
 			stylesTemp.add(newResponse);
 		}
@@ -302,7 +308,7 @@ public class StyleSheetController {
 			stylesheet.addStyles(createdStyle);
 			if(ResultStatus.SUCCESS == stylesheetService.SaveStylesheet(stylesheet, error)) {  
 				response.setStatus(true);
-				response.setStyle(conversionService.convert(createdStyle, StyleResponse.class));
+				response.setStyle(styleConverter.convert(createdStyle, loggedinUser.getUsername()));
 			}
 			else
 				response.setError(error);
@@ -314,6 +320,10 @@ public class StyleSheetController {
 	public @ResponseBody UploadedFileResponse AddImagestoStyle(Model model, 
 			@RequestParam("files[]") List<MultipartFile> fileuploads, @RequestParam("stylesheetid") String stylesheetId) {
 		System.out.println("Add photos: Stylesheet Id:" + stylesheetId + "No:of Photos:" + fileuploads.size());
+		User user = userDetailsService.getUserFromSession();
+		if(null == user)
+			return null;
+		
 		UploadedFileResponse response = new UploadedFileResponse();
 		
 		if(stylesheetId.isEmpty()) {
@@ -330,12 +340,14 @@ public class StyleSheetController {
 		
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
-			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.STYLE);
+			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.STYLE, user.getUsername());
 			PhotoWeb newPhoto = new PhotoWeb();
-			String thumburl = uploadManager.getQueryString((String)uploadMap.get(UploadManager.FILE_ID), ImageType.STYLE, Size.SThumb);
+			String thumburl = uploadManager.getQueryString(
+					(String)uploadMap.get(UploadManager.FILE_ID), ImageType.STYLE, Size.SThumb, user.getUsername());
 			System.out.println("Image path is/Thumnail url is" + thumburl);
 			newPhoto.setThumbnail_url(thumburl);
-			String lefturl = uploadManager.getQueryString((String)uploadMap.get(UploadManager.FILE_ID), ImageType.STYLE, Size.SLeft);
+			String lefturl = uploadManager.getQueryString(
+					(String)uploadMap.get(UploadManager.FILE_ID), ImageType.STYLE, Size.SLeft, user.getUsername());
 			newPhoto.setLeft_url(lefturl);
 			newPhoto.setUniqueid((String)uploadMap.get(UploadManager.FILE_ID));
 			JSONFileData.add(newPhoto);

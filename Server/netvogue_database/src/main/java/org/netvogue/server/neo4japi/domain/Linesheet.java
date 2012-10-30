@@ -36,7 +36,7 @@ public class Linesheet {
 	User	createdBy;
 	
 	@RelatedTo(type="LS_STYLE", direction=Direction.OUTGOING)
-	@Fetch Set<Style>	styles =  new HashSet<Style>();
+	Set<Style>	styles =  new HashSet<Style>();
 	
 	public Linesheet() {
 		
@@ -47,7 +47,6 @@ public class Linesheet {
 		createdBy		= createdByTemp;
 		deliveryDate	= deliverydate;
 		linesheetid 	= UUID.randomUUID().toString();
-		profilePicLink 	= "http://placehold.it/220X320";
 	}
 
 	public Long getNodeId() {

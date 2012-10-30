@@ -20,11 +20,14 @@ public class SearchConverter implements Converter<User, SearchResponse> {
 		response.setCountry(source.getCountry());
 		if(null != source.getUserType())
 			response.setUsertype(source.getUserType().toString());
-		if(null != source.getProfilePicLink()) {
-			String smallpic = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.PROFILE_PIC); 
+		String profilepic = source.getProfilePicLink();
+		if(null != profilepic) {
+			String smallpic = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC,
+					source.getUsername()); 
 			response.setSmallpic(smallpic);
 			
-			String thumbpic = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.PROFILE_PIC);
+			String thumbpic = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC,
+					source.getUsername());
 			response.setThumbpic(thumbpic);
 		}
 		return response;

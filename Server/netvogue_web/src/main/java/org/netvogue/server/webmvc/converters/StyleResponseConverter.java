@@ -12,14 +12,15 @@ import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.webmvc.domain.PhotoWeb;
 import org.netvogue.server.webmvc.domain.StyleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
-public class StyleResponseConverter implements Converter<Style, StyleResponse>{
+@Component
+public class StyleResponseConverter /*implements Converter<Style, StyleResponse>*/{
 
 	@Autowired
 	private UploadManager uploadManager;
 	
-	public StyleResponse convert(Style source) {
+	public StyleResponse convert(Style source, String username) {
 		StyleResponse response = new StyleResponse();
 		response.setStyleid(source.getStyleid());
 		response.setStylename(source.getStylename());
@@ -30,8 +31,10 @@ public class StyleResponseConverter implements Converter<Style, StyleResponse>{
 		response.setAvailableColors(source.getAvailableColors());
 		
 		//Profile pic
-		String thumbprofilepic =  uploadManager.getQueryString(source.getProfilePicLink(), ImageType.STYLE, Size.SThumb);
-		String leftprofilelink = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.STYLE, Size.SLeft);
+		String thumbprofilepic =  uploadManager.getQueryString(source.getProfilePicLink(), ImageType.STYLE, 
+				Size.SThumb, username);
+		String leftprofilelink = uploadManager.getQueryString(source.getProfilePicLink(), ImageType.STYLE, 
+				Size.SLeft, username);
 		response.setProfilethumbpic(thumbprofilepic);
 		response.setProfileleftpic(leftprofilelink);
 
@@ -50,9 +53,9 @@ public class StyleResponseConverter implements Converter<Style, StyleResponse>{
 		Set<String> images = source.getAvailableImages();
 		if(null != images) {
 			for(String image: images){
-				String thumblink = uploadManager.getQueryString(image, ImageType.STYLE, Size.SThumb);
-				String mainlink = uploadManager.getQueryString(image, ImageType.STYLE);
-				String leftlink = uploadManager.getQueryString(image, ImageType.STYLE, Size.SLeft);
+				String thumblink = uploadManager.getQueryString(image, ImageType.STYLE, Size.SThumb, username);
+				String mainlink = uploadManager.getQueryString(image, ImageType.STYLE, username);
+				String leftlink = uploadManager.getQueryString(image, ImageType.STYLE, Size.SLeft, username);
 				PhotoWeb imagelinks = new PhotoWeb(image, mainlink, thumblink, leftlink);
 				imageslinks.add(imagelinks);
 			}

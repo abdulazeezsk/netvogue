@@ -34,7 +34,7 @@ public class Editorial {
 	User	createdBy;
 	
 	@RelatedTo(type="EDITORIALPHOTO", direction=Direction.OUTGOING)
-	@Fetch Set<EditorialPhoto>	photosAdded =  new HashSet<EditorialPhoto>();
+	Set<EditorialPhoto>	photosAdded =  new HashSet<EditorialPhoto>();
 	
 	public Editorial() {
 		
@@ -45,7 +45,6 @@ public class Editorial {
 		description   	= desc;
 		createdBy		= createdByTemp;
 		editorialid 	= UUID.randomUUID().toString();
-		profilePicLink 	= "http://placehold.it/231x306";
 	}
 
 	public Long getNodeId() {

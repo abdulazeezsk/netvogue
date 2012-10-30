@@ -19,7 +19,7 @@
         	<list>
             	<bean class="org.netvogue.server.webmvc.converters.UserConverterFactory" />
             	<bean class="org.netvogue.server.webmvc.converters.ProductLineConverter" />
-            	<bean class="org.netvogue.server.webmvc.converters.GalleryConverter" />
+            	<!--  <bean class="org.netvogue.server.webmvc.converters.GalleryConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.PrintCampaignConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.EditorialConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.CollectionConverter" />
@@ -28,11 +28,11 @@
             	<bean class="org.netvogue.server.webmvc.converters.PhotoConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.PrintCampaignPhotoConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.EditorialPhotoConverter" />
-            	<bean class="org.netvogue.server.webmvc.converters.CollectionPhotoConverter" />
+            	<bean class="org.netvogue.server.webmvc.converters.CollectionPhotoConverter" />  -->
             	<bean class="org.netvogue.server.webmvc.converters.SearchConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.StyleRequestConverter" />
-            	<bean class="org.netvogue.server.webmvc.converters.StyleResponseConverter" />
-            	<bean class="org.netvogue.server.webmvc.converters.ImageURLsConverter" />
+            	<!--  <bean class="org.netvogue.server.webmvc.converters.StyleResponseConverter" />
+            	<bean class="org.netvogue.server.webmvc.converters.ImageURLsConverter" /> -->
             	<bean class="org.netvogue.server.webmvc.converters.NetworkConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.NotificationConverter" />
             	<bean class="org.netvogue.server.webmvc.converters.StatusUpdateConverter" />

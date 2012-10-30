@@ -24,6 +24,10 @@ import org.netvogue.server.neo4japi.service.LinesheetService;
 import org.netvogue.server.neo4japi.service.StyleData;
 import org.netvogue.server.neo4japi.service.StylesheetService;
 import org.netvogue.server.neo4japi.service.UserService;
+import org.netvogue.server.webmvc.converters.ImageURLsConverter;
+import org.netvogue.server.webmvc.converters.LinesheetConverter;
+import org.netvogue.server.webmvc.converters.StyleResponseConverter;
+import org.netvogue.server.webmvc.converters.StylesheetConverter;
 import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
@@ -49,8 +53,12 @@ public class LinesheetController {
 	@Autowired NetvogueUserDetailsService 	userDetailsService;
 	@Autowired BoutiqueService  			boutiqueService;
 	@Autowired UserService 					userService;
+	@Autowired ImageURLsConverter			imageURLsConverter;
 	@Autowired LinesheetService				linesheetService;
 	@Autowired StylesheetService			stylesheetService;
+	@Autowired LinesheetConverter			linesheetConverter;
+	@Autowired StylesheetConverter			stylesheetConverter;
+	@Autowired StyleResponseConverter		styleConverter;
 	@Autowired ConversionService			conversionService;
 
 	@Autowired
@@ -108,7 +116,7 @@ public class LinesheetController {
 		}
 		if(0 == pagenumber) {
 			linesheets.setName(user.getName());
-			linesheets.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+			linesheets.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 		}
 		Set<Linesheet> linesheetTemp = new LinkedHashSet<Linesheet>();
 		Iterable<LinesheetData> dbLinesheets;
@@ -145,7 +153,7 @@ public class LinesheetController {
 		while ( first.hasNext() ){
 			LinesheetData dbSheet = first.next();
 			
-			Linesheet sheet = conversionService.convert(dbSheet.getLinesheet(), Linesheet.class);
+			Linesheet sheet = linesheetConverter.convert(dbSheet.getLinesheet(), user.getUsername());
 			sheet.setBrandname(dbSheet.getName());
 			linesheetTemp.add(sheet);
 		}
@@ -183,7 +191,7 @@ public class LinesheetController {
 		
 		if(0 == pagenumber) {
 			styles.setName(user.getName());
-			styles.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+			styles.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 		}
 		
 		//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
@@ -209,7 +217,7 @@ public class LinesheetController {
 		while ( first.hasNext() ){
 			StyleData dbStyle = first.next() ;
 			
-			StyleResponse newResponse = conversionService.convert(dbStyle.getStyle(), StyleResponse.class);
+			StyleResponse newResponse = styleConverter.convert(dbStyle.getStyle(), user.getUsername());
 			styles.setBrandname(dbStyle.getName()); //See for better way of implementation
 			stylesTemp.add(newResponse);
 		}

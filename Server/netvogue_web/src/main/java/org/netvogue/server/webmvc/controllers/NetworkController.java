@@ -14,6 +14,7 @@ import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.NetworkService;
 import org.netvogue.server.neo4japi.service.UserService;
+import org.netvogue.server.webmvc.converters.ImageURLsConverter;
 import org.netvogue.server.webmvc.domain.ContactInfo;
 import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonResponse;
@@ -37,6 +38,7 @@ public class NetworkController {
 
 	@Autowired NetvogueUserDetailsService userDetailsService;
 	@Autowired UserService 			userService;
+	@Autowired ImageURLsConverter	imageURLsConverter;
 	@Autowired NetworkService		networkService;
 	@Autowired ConversionService	conversionService;
 	@Autowired UploadManager 		uploadManager;
@@ -59,7 +61,7 @@ public class NetworkController {
 		if(0 == pagenumber) {
 			response.setName(user.getName());
 			response.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-			response.setProfilepic(conversionService.convert(user.getProfilePicLink(), ImageURLsResponse.class));
+			response.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 			
 			//Set Contact info as well
 			//Get ContactInfo
@@ -120,7 +122,7 @@ public class NetworkController {
 			thumbpic = networkUser.getProfilePicLink();
 			
 			if(null != thumbpic) {
-				thumbpic = uploadManager.getQueryString(thumbpic, ImageType.PROFILE_PIC, Size.PThumb);
+				thumbpic = uploadManager.getQueryString(thumbpic, ImageType.PROFILE_PIC, Size.PThumb, networkUser.getUsername());
 			}
 			newNetwork.setThumbnail_url(thumbpic);
 			networksTemp.add(newNetwork);
