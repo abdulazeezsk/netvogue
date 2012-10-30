@@ -453,6 +453,11 @@ function MyCtrlAddStyle($scope, $routeParams, $location, currentvisitedprofile, 
 	$scope.deleteimage = function(uniqueid) {
 		$scope.newstyle.removeimage(uniqueid);
 	};
+	
+	$scope.stylesorderchanged = function() {
+		console.log("came here");
+		$scope.mainimage = $scope.newstyle.availableImages[0].thumbnail_url;
+	};
 }
 function MyCtrlAddLinesheets($scope, $routeParams, currentvisitedprofile, mylinesheet, mystylesheet) {
 
