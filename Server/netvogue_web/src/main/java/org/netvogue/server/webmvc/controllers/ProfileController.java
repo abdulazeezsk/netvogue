@@ -128,7 +128,7 @@ public class ProfileController {
 				brand.setBrandusername(product.getUsername());
 				if(null != product.getProfilePicLink()) {
 					String thumburl = uploadManager.getQueryString(product.getProfilePicLink(), ImageType.PROFILE_PIC, 
-							Size.PThumb, user.getUsername());
+							Size.PThumb, product.getUsername());
 					brand.setProfilepic(thumburl);
 				}
 				brands.add(brand);
