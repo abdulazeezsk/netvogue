@@ -110,7 +110,7 @@ public class CollectionController {
 		while ( first.hasNext() ){
 			CollectionData dbCollection = first.next();
 			
-			Collection collection = collectionConverter.convert(dbCollection.getCollection(), user.getUsername());
+			Collection collection = collectionConverter.convert(dbCollection.getCollection(), dbCollection.getUsername());
 			collection.setBrandname(dbCollection.getName());
 			collectionTemp.add(collection);
 			
@@ -162,7 +162,7 @@ public class CollectionController {
 		while ( first.hasNext() ){
 			CollectionPhotoData dbPhoto = first.next() ;
 			
-			PhotoWeb newPhoto = collectionPhotoConverter.convert(dbPhoto.getCollectionPhoto(), user.getUsername());
+			PhotoWeb newPhoto = collectionPhotoConverter.convert(dbPhoto.getCollectionPhoto(), dbPhoto.getUsername());
 			photos.setBrandname(dbPhoto.getName());
 			photosTemp.add(newPhoto);
 		}

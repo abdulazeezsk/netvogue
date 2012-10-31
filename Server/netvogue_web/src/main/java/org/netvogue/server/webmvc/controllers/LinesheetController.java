@@ -217,7 +217,7 @@ public class LinesheetController {
 		while ( first.hasNext() ){
 			StyleData dbStyle = first.next() ;
 			
-			StyleResponse newResponse = styleConverter.convert(dbStyle.getStyle(), user.getUsername());
+			StyleResponse newResponse = styleConverter.convert(dbStyle.getStyle(), dbStyle.getUsername());
 			styles.setBrandname(dbStyle.getName()); //See for better way of implementation
 			stylesTemp.add(newResponse);
 		}

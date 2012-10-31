@@ -10,6 +10,9 @@ public interface CollectionPhotoData {
 	@ResultColumn("photos")
 	CollectionPhoto getCollectionPhoto();
 	
+	@ResultColumn("username")
+	String getUsername();
+	
 	@ResultColumn("name")
 	String getName();
 }

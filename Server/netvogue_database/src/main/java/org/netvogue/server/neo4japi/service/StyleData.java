@@ -10,6 +10,9 @@ public interface StyleData {
 	@ResultColumn("styles")
 	Style getStyle();
 	
+	@ResultColumn("username")
+	String getUsername();
+	
 	@ResultColumn("name")
 	String getName();
 	
