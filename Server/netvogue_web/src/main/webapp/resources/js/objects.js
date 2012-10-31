@@ -312,11 +312,11 @@ netvogue.stylesheetjsonrequest = function(name, category, id) {
 netvogue.stylejsonrequest = function(stylesheetid) {
 	this.stylesheetid	= stylesheetid;
 	this.styleid;
-	this.stylename 		= "isha"; 
-	this.styleno		= "1234";
-	this.description	= "First Style";
-	this.fabrication	= "Cotton";
-	this.price			= 10000;
+	this.stylename 		= ""; 
+	this.styleno		= "";
+	this.description	= "";
+	this.fabrication	= "";
+	this.price			= 0000;
 	this.availableSizes = [];
 	this.availableColors= [];
 	this.availableImages= [];
