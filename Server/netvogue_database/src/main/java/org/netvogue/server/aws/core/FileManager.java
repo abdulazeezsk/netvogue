@@ -146,10 +146,10 @@ public class FileManager extends TransferManager {
 				Upload temp = upload(bucketName,imageKey+ "-" + size.toString(), buffer, metadata, size);
 				if(firstImage) {
 					//temp.waitForCompletion();
-					temp.waitForUploadResult();
+					//temp.waitForUploadResult();
 					firstImage = false;
 				}
-				//temp.waitForUploadResult();
+				temp.waitForUploadResult();
 				System.out.println("input" + buffer + " : "+ temp.getDescription());
 			}
 		} catch (AmazonServiceException e) {

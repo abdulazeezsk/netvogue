@@ -257,7 +257,7 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 		$scope.newsfeeds 		= mytimeline.getupdates(routeparams);
 		$scope.getcontactinfo 	= addresstostring($scope.contactinfo);
 		
-		createpusherchannel();
+		//createpusherchannel();
 	};
 	
 	$scope.getupdates = function(routeparams) {
