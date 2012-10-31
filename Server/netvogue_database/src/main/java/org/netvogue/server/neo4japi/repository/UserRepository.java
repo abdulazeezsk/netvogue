@@ -189,7 +189,7 @@ public interface UserRepository extends GraphRepository<User> {
 											long fromPrice, long toPrice, int skip, int limit);
 	
 	@Query( "START n=node:search(username={0}) " +
-			"MATCH n-[r:NETWORK]-user WHERE r.status? = 'CONFIRMED' AND user.name = {7} " +
+			"MATCH n-[r:NETWORK]-user WHERE r.status? = 'CONFIRMED' AND user.name =~ {7} " +
 			"WITH user START categories = node:productline({2}) " +
 			"MATCH user-[:LINESHEET]->linesheet-[:Linesheet_Category]-categories " +
 			"WHERE linesheet.linesheetname =~ {1} " +
