@@ -15,7 +15,7 @@ public class ImageURLsConverter /*implements Converter<String, ImageURLsResponse
 	
 	public ImageURLsResponse convert(String source, String username) {
 		ImageURLsResponse response = new ImageURLsResponse();
-		if(null != source) {
+		if(null != source && !source.isEmpty()) {
 			String thumburl = uploadManager.getQueryString(source, ImageType.PROFILE_PIC, Size.PThumb, username);
 			response.setThumbnail_url(thumburl);
 			String lefturl = uploadManager.getQueryString(source, ImageType.PROFILE_PIC, Size.PTop, username);

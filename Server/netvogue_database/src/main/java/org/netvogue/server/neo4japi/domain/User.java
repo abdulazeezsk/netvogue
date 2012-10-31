@@ -1,7 +1,6 @@
 package org.netvogue.server.neo4japi.domain;
 
 //Netvogue specific imports
-import org.neo4j.graphdb.Direction;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
 
 //Spring Framework imports
@@ -37,7 +36,7 @@ public class User {
 	@Indexed(indexName="search", indexType=IndexType.FULLTEXT)
 	String name;
 	
-	String profilePicLink;
+	String profilePicLink = new String();
 
 	@Indexed
 	USER_TYPE userType;
