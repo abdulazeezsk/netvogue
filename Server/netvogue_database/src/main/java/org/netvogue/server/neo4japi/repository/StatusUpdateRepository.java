@@ -21,7 +21,7 @@ public interface StatusUpdateRepository extends GraphRepository<StatusUpdate> {
 			"WHERE ALL(r in rels WHERE r.status? = 'CONFIRMED') " +
 			"WITH user " +
 			"MATCH user-[:STATUS]-oldsu-[:NEXT*0..]-update " +
-			"return update, user SKIP {2} LIMIT {1} ")
+			"return update, user SKIP {1} LIMIT {2} ")
 	Iterable<StatusUpdateData> getAllStatusUpdates(String username, int skip, int limit);
 	
 	@Query("START n=node:search(username={0}) MATCH n-[r?:STATUS]->oldsu DELETE r " +
