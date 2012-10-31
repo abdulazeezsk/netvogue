@@ -10,6 +10,9 @@ public interface LinesheetData {
 	@ResultColumn("linesheet")
 	Linesheet getLinesheet();
 	
+	@ResultColumn("username")
+	String getUsername();
+	
 	@ResultColumn("name")
 	String getName();
 }

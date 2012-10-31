@@ -163,7 +163,7 @@ public interface UserRepository extends GraphRepository<User> {
 	
 	//queries related to linesheets
 	@Query( "START n=node:search(username={0}) MATCH n-[:LINESHEET]->linesheet " +
-			"RETURN n.name as name, linesheet ORDER BY linesheet.createdDate DESC " +
+			"RETURN n.name as name, n.username as username, linesheet ORDER BY linesheet.createdDate DESC " +
 			"SKIP {1} LIMIT {2}")
 	Iterable<LinesheetData> getLinesheets(String username, int skip, int limit);
 	
@@ -171,7 +171,7 @@ public interface UserRepository extends GraphRepository<User> {
 			"MATCH n-[r:NETWORK]-user WHERE r.status? = 'CONFIRMED' " +
 			"WITH user " +
 			"MATCH user-[:LINESHEET]->linesheet " +
-			"RETURN user.name as name, linesheet ORDER BY linesheet.createdDate DESC " +
+			"RETURN user.name as name, n.username as username, linesheet ORDER BY linesheet.createdDate DESC " +
 			"SKIP {1} LIMIT {2}")
 	Iterable<LinesheetData> getMyNetworkLinesheets(String username, int skip, int limit);
 	
@@ -182,7 +182,7 @@ public interface UserRepository extends GraphRepository<User> {
 			"WITH n,linesheet MATCH linesheet-[?:LS_STYLE]-style " +
 			"WHERE (style=null AND 0 = {5} AND 0 = {6}) OR " +
 			"(style.price >= {5} AND style.price <= {6}) " +
-			"RETURN n.name as name, linesheet ORDER BY linesheet.createdDate DESC " +
+			"RETURN n.name as name, n.username as username, linesheet ORDER BY linesheet.createdDate DESC " +
 			"SKIP {7} LIMIT {8}")
 	Iterable<LinesheetData> searchLinesheets(String username, String linesheetname, String category,
 											String fromdate, String todate,
@@ -197,7 +197,7 @@ public interface UserRepository extends GraphRepository<User> {
 			"WITH user,linesheet MATCH linesheet-[?:LS_STYLE]-style " +
 			"WHERE (style=null AND 0 = {5} AND 0 = {6}) OR " +
 			"(style.price >= {5} AND style.price <= {6}) " +
-			"RETURN user.name as name, linesheet ORDER BY linesheet.createdDate DESC " +
+			"RETURN user.name as name, n.username as username, linesheet ORDER BY linesheet.createdDate DESC " +
 			"SKIP {8} LIMIT {9}")
 	Iterable<LinesheetData> searchMyNetworkLinesheets(String username, String linesheetname, String category,
 														String fromdate, String todate,

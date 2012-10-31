@@ -153,7 +153,7 @@ public class LinesheetController {
 		while ( first.hasNext() ){
 			LinesheetData dbSheet = first.next();
 			
-			Linesheet sheet = linesheetConverter.convert(dbSheet.getLinesheet(), user.getUsername());
+			Linesheet sheet = linesheetConverter.convert(dbSheet.getLinesheet(), dbSheet.getUsername());
 			sheet.setBrandname(dbSheet.getName());
 			linesheetTemp.add(sheet);
 		}
