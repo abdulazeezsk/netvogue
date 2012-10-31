@@ -117,7 +117,7 @@ public interface UserRepository extends GraphRepository<User> {
 	
 	//queries related to collections
 	@Query( "START n=node:search(username={0}) MATCH n-[:COLLECTION]->collection " +
-			"RETURN n.name as name, collection ORDER BY collection.createdDate DESC " +
+			"RETURN n.name as name, n.username as username, collection ORDER BY collection.createdDate DESC " +
 			"SKIP {1} LIMIT {2}")
 	Iterable<CollectionData> getCollections(String username, int skip, int limit);
 	
@@ -125,14 +125,14 @@ public interface UserRepository extends GraphRepository<User> {
 			"MATCH n-[r:NETWORK]-user WHERE r.status? = 'CONFIRMED' " +
 			"WITH user " +
 			"MATCH user-[:COLLECTION]->collection " +
-			"RETURN user.name as name, collection ORDER BY collection.createdDate DESC " +
+			"RETURN user.name as name, user.username as username, collection ORDER BY collection.createdDate DESC " +
 			"SKIP {1} LIMIT {2}")
 	Iterable<CollectionData> getMyNetworkCollections(String username, int skip, int limit);
 	
 	@Query( "START n=node:search(username={0}), categories = node:productline({2}) " +
 			"MATCH n-[:COLLECTION]->collection-[:Collection_Category]-categories " +
 			"WHERE collection.collectionseasonname =~ {1} " +
-			"RETURN DISTINCT n.name as name, collection ORDER BY collection.createdDate DESC " +
+			"RETURN DISTINCT n.name as name, n.username as username, collection ORDER BY collection.createdDate DESC " +
 			"SKIP {3} LIMIT {4}")
 	Iterable<CollectionData> searchCollections(String username, String seasonname, String category,
 												int skip, int limit);
@@ -142,7 +142,7 @@ public interface UserRepository extends GraphRepository<User> {
 			"WITH user START categories = node:productline({2}) " +
 			"MATCH user-[:COLLECTION]->collection-[:Collection_Category]-categories " +
 			"WHERE collection.collectionseasonname =~ {1} " +
-			"RETURN DISTINCT user.name as name, collection ORDER BY collection.createdDate DESC " +
+			"RETURN DISTINCT user.name as name, user.username as username, collection ORDER BY collection.createdDate DESC " +
 			"SKIP {4} LIMIT {5}")
 	Iterable<CollectionData> searchMyNetworkCollections(String username, String seasonname, 
 					String category, String brandname, int skip, int limit);
@@ -171,7 +171,7 @@ public interface UserRepository extends GraphRepository<User> {
 			"MATCH n-[r:NETWORK]-user WHERE r.status? = 'CONFIRMED' " +
 			"WITH user " +
 			"MATCH user-[:LINESHEET]->linesheet " +
-			"RETURN user.name as name, n.username as username, linesheet ORDER BY linesheet.createdDate DESC " +
+			"RETURN user.name as name, user.username as username, linesheet ORDER BY linesheet.createdDate DESC " +
 			"SKIP {1} LIMIT {2}")
 	Iterable<LinesheetData> getMyNetworkLinesheets(String username, int skip, int limit);
 	
@@ -197,7 +197,7 @@ public interface UserRepository extends GraphRepository<User> {
 			"WITH user,linesheet MATCH linesheet-[?:LS_STYLE]-style " +
 			"WHERE (style=null AND 0 = {5} AND 0 = {6}) OR " +
 			"(style.price >= {5} AND style.price <= {6}) " +
-			"RETURN user.name as name, n.username as username, linesheet ORDER BY linesheet.createdDate DESC " +
+			"RETURN user.name as name, user.username as username, linesheet ORDER BY linesheet.createdDate DESC " +
 			"SKIP {8} LIMIT {9}")
 	Iterable<LinesheetData> searchMyNetworkLinesheets(String username, String linesheetname, String category,
 														String fromdate, String todate,
