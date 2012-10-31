@@ -226,7 +226,6 @@ function MyCtrlAddNewsletter($scope, $routeParams, $location, mygallery, current
 		}).error(function(data) {
 			
 		});
-		alert(label + seasonname + photoid);
 	};
 	
 	$scope.deletephoto = function(photoid) {
