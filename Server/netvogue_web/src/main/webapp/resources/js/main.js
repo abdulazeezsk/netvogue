@@ -13,7 +13,7 @@ function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search, m
 	    $scope.getcontactinfo 	= addresstostring($scope.contactinfo);
 	    
 		currentvisitedprofile.setmyprofileid($scope.myprofileid);
-		createpusherchannel($scope.myprofileid);
+		//createpusherchannel($scope.myprofileid);
 		//createpubnubchannel($scope.myprofileid);
 	};
 	
