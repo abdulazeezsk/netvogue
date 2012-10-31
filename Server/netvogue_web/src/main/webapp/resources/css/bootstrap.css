@@ -5095,7 +5095,7 @@ float:left;
 {
 width: 271px;
 height: 356px;
-float:left;
+clear:both;
 }
 
 .thumbnailz {
