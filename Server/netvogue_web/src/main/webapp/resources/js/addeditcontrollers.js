@@ -147,7 +147,6 @@ function MyCtrlAddPrintCampaign($scope, $routeParams, $location, mygallery, curr
 		}).error(function(data) {
 			
 		});
-		alert(label + seasonname + photoid);
 	};
 	
 	$scope.deletephoto = function(photoid) {
@@ -310,7 +309,6 @@ function MyCtrlAddCollections($scope, $routeParams, $location, currentvisitedpro
 		}).error(function(data) {
 			
 		});
-		alert(label + seasonname + photoid);
 	};
 	
 	$scope.deletephoto = function(photoid) {
