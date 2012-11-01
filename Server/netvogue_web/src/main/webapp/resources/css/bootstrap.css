@@ -5100,7 +5100,7 @@ clear:both;
 
 .thumbnailz {
 	line-height: 1;
-	border: 1px solid silver;
+	border: 1px solid #ddd;
 }
 
 a.thumbnailz:hover {

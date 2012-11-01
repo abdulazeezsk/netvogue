@@ -2,13 +2,13 @@
 	<div class="box  col2" ng-repeat="photo in photogallery">
 		<a id="single_image" class="fancybox"  ng-href="{{photo.piclink}}"
 			title="{{photo.label}}"><img alt="Stanley" class="fade_spot" /></a>
-		<h3>
+		<!-- <h3>
 			<span style="border-bottom: 1px solid black;color:#20ACB8;font-weight:normal;font-size:17px;">{{galleryname}}</span>
-		</h3>
+		</h3> -->
 		<h3>
-			<span style="font-weight:normal;font-size:14px;">{{photo.label}}</span>
+			<span style="border-bottom: 1px solid black;font-weight:normal;font-size:14px;">{{photo.label}}</span>
 		</h3>
-		<p>date</p>
+		<!-- <p>date</p> -->
 		<p>{{photo.seasonname}}</p>
 	</div>
 </div>
