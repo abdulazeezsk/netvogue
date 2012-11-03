@@ -5,6 +5,7 @@ public enum CategoryType {
 	SHOES("SHOES"),
    	HANDBAGS("HANDBAGS"),
    	WATCHES("WATCHES"),
+   	JEWELLERY("JEWELLERY"),
    	OTHERS("OTHERS");
    	
    	String desc;

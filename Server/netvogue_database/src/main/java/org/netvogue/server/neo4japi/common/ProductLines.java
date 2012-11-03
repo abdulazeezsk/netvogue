@@ -20,7 +20,16 @@ public enum ProductLines {
 	HATS(		"Hats", 		CategoryType.OTHERS,  new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
 	LUGGAGE(	"Luggage", 		CategoryType.OTHERS,  new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
 	GIFTS(		"Gifts", 		CategoryType.OTHERS,  new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
-	CANDLES(	"Candles", 		CategoryType.OTHERS,  new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE});
+	CANDLES(	"Candles", 		CategoryType.OTHERS,  new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	ANKLETS(	"Anklets", 		CategoryType.JEWELLERY,new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	BANGLES(	"Bangles", 		CategoryType.JEWELLERY,new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	BRACELETS(	"Bracelets", 	CategoryType.JEWELLERY,new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	EARRINGS(	"Earrings", 	CategoryType.JEWELLERY,new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	NECKLACES(	"Necklaces", 	CategoryType.JEWELLERY,new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	PENDANT_SETS("Pendant Sets",CategoryType.JEWELLERY,new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	PENDANTS(	"PENDANTS", 	CategoryType.JEWELLERY,new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	RINGS(		"Rings", 		CategoryType.JEWELLERY,new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),
+	TOE_RINGS(	"Toe Rings", 	CategoryType.JEWELLERY,new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE});
 
 	private  String desc;
 	private  CategoryType category;
