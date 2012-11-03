@@ -172,6 +172,7 @@ netvogue.parentcategory = new function() {
 	this.shoes	 = "SHOES";
 	this.handbags= "HANDBAGS";
 	this.watches = "WATCHES";
+	this.jewellery = "JEWELLERY";
 	this.others  = "OTHERS";
 };
 //Default Productlines
@@ -189,11 +190,20 @@ netvogue.defaultproductlines = [
 							   	new netvogue.productline("Mens Bags", 	netvogue.parentcategory.handbags),
 							   	new netvogue.productline("Handbags", 	netvogue.parentcategory.handbags),
 							   	new netvogue.productline("Watches", 	netvogue.parentcategory.watches),
+							   	new netvogue.productline("Anklets", 	netvogue.parentcategory.jewellery),
+							   	new netvogue.productline("Bangaless", 	netvogue.parentcategory.jewellery),
+							   	new netvogue.productline("Bracelets", 	netvogue.parentcategory.jewellery),
+							   	new netvogue.productline("Earrings", 	netvogue.parentcategory.jewellery),
+							   	new netvogue.productline("Necklaces", 	netvogue.parentcategory.jewellery),
+							   	new netvogue.productline("Pendant Sets",netvogue.parentcategory.jewellery),
+							   	new netvogue.productline("Pendants", 	netvogue.parentcategory.jewellery),
+							   	new netvogue.productline("Rings",	 	netvogue.parentcategory.jewellery),
+							   	new netvogue.productline("Toe Rings", 	netvogue.parentcategory.jewellery),
 							   	new netvogue.productline("Jewelry", 	netvogue.parentcategory.others),
 							   	new netvogue.productline("Hats", 		netvogue.parentcategory.others),
 							   	new netvogue.productline("Luggage", 	netvogue.parentcategory.others),
 							   	new netvogue.productline("Gifts", 		netvogue.parentcategory.others),
-							   	new netvogue.productline("Candles", 	netvogue.parentcategory.others)
+							   	new netvogue.productline("Bangles", 	netvogue.parentcategory.others),
                                 ];
 
 netvogue.getparentcategory = function(productlinename) {
