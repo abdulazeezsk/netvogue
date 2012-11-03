@@ -5604,7 +5604,7 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
  .carried {
 	min-width: 90px;
 	min-height: 72px;
-	max-width: 90px;
+	max-width: 102px;
 	max-height: 72px;
 	overflow-x: hidden;
 }
