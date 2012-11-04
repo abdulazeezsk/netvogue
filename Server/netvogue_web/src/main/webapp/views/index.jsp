@@ -28,13 +28,13 @@
     <div ng-view>
     </div>
     <!-- footer -->
-	<div class="ywfooter" style="max-height:10px;">
+	<!-- <div class="ywfooter" style="max-height:10px;">
 		<div class="ywfooter_in">
 			<ul class="footbar pull-left" >
 				<li  id="YourWindow" ><span>© 2012 NETVOGUE</span></li>
 			</ul>
 		</div>
-	</div>
+	</div> -->
 	<!-- footer -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="lib/jquery/jquery.js" type="text/javascript"></script>
