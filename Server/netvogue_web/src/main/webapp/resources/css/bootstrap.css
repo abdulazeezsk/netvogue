@@ -5074,26 +5074,25 @@ height: 75px;
 
 .addswatches
 {
-width: 300px;
-height: 75px;	
+width: 300px;	
 }
 
 .imageprevw
 {
-width: 290px;
-height: 356px;
+width: 257px;
+height: 365px;
 float:left;
 }
 
 .styles-specs
 {
 width: 400px;
-height: 356px;
+height: 365px;
 float:left;
 }
 .moreviews-styles
 {
-width: 274px;
+width: 257px;
 height: 356px;
 clear:both;
 }
@@ -5115,6 +5114,20 @@ margin: 5px 0;
 cursor: pointer;
 }
 
+
+.leftcolumn
+{
+	width:257px;
+	height:575px;
+	float:left;
+}
+
+.rightcolumn
+{
+	width:400px;
+	height:575px;
+	float:right;
+}
 
 
 
