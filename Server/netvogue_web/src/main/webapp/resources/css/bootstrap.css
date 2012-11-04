@@ -5157,6 +5157,17 @@ cursor: pointer;
 	width: 220x;
 }
 
+.subHeadingAccountset_no_underline {
+	color: black;
+	font: normal 11px  Helvetica, Arial, sans-serif;;
+	text-transform: uppercase;
+}
+
+.settings_msg {
+	color: black;
+	font: normal 9px  Helvetica, Arial, sans-serif;;
+	text-transform: uppercase;
+}
 
 /*Home screen Style Begin ============================================================= */
 
