@@ -252,7 +252,6 @@ function MyCtrlRegistration($scope, $http, $timeout, $location) {
             	$timeout(function() {
             		window.location.href = "Netvogue.html";
     		      }, 1000);
-            	alert('Registration is Successful2');
             	
             } else {
             	angular.element(event.srcElement).button('reset');

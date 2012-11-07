@@ -96,7 +96,7 @@
                             Password</label>
                         <div class="controls">
                             <input type="password" ng-model="entity.password" class="span3" placeholder="Password"
-                                name="uPassword" required maxlength="10" />
+                                name="uPassword" required ng-minlength="6" maxlength="12" />
                             <div ng-show="form.uPassword.$dirty && form.uPassword.$invalid">
                                 <span ng-show="form.uPassword.$error.required" class="validation_msg">Password Is Required</span>
                             </div>
@@ -107,7 +107,7 @@
                             Confirm Password</label>
                         <div class="controls">
                             <input type="password" ng-model="confirmpassword" class="span3" placeholder="Confirm Password"
-                                name="uConfirmPassword" required maxlength="10" same-as="{{entity.password}}" />
+                                name="uConfirmPassword" required ng-minlength="6" maxlength="12" same-as="{{entity.password}}" />
                             <div ng-show="form.uConfirmPassword.$dirty && form.uConfirmPassword.$invalid">
                                 <span ng-show="form.uConfirmPassword.$error.required" class="validation_msg">Confirm
                                     Password Is Required</span> <span ng-show="form.uConfirmPassword.$error.sameAs" class="validation_msg">
@@ -158,7 +158,7 @@
                             State</label>
                         <div class="controls">
                             <input type="text" ng-model="entity.state" class="span3" placeholder="State" name="uState"
-                                required maxlength="25" ng-pattern="/^\w*$/" />
+                                required maxlength="25" ng-pattern="/^[A-Za-z ]*$/" />
                             <div ng-show="form.uState.$dirty && form.uState.$invalid">
                                 <span ng-show="form.uState.$error.required" class="validation_msg">State Is Required</span>
                                 <span ng-show="form.uState.$error.pattern" class="validation_msg">State Is Invalid</span>
@@ -209,7 +209,7 @@
                             Mobile</label>
                         <div class="controls">
                             <input type="text" ng-model="entity.mobile" class="span3" placeholder="Mobile" name="uMobile"
-                                maxlength="10" required ng-minlength="10" ng-pattern="/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/" />
+                                ng-minlength="10" maxlength="10" required ng-pattern="/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/" />
                             <div ng-show="form.uMobile.$dirty && form.uMobile.$invalid">
                                 <span ng-show="form.uMobile.$error.required" class="validation_msg">Mobile Number Is
                                     Required</span> <span ng-show="form.uMobile.$error.pattern" class="validation_msg">Mobile
@@ -223,7 +223,7 @@
                             Telephone</label>
                         <div class="controls">
                             <input type="text" ng-model="entity.telephone" class="span3" placeholder="Telephone"
-                                ng-minlength="8" name="uTelephone" required maxlength="8" ng-pattern="/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/" />
+                                ng-minlength="8" name="uTelephone" required maxlength="12" ng-pattern="/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/" />
                             <div ng-show="form.uTelephone.$dirty && form.uTelephone.$invalid">
                                 <span ng-show="form.uTelephone.$error.required" class="validation_msg">Telephone Number
                                     Is Required</span> <span ng-show="form.uTelephone.$error.pattern" class="validation_msg">

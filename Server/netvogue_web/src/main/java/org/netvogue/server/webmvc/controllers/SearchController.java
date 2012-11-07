@@ -116,8 +116,12 @@ public class SearchController {
 			else
 				System.out.println("product line is null");
 		}
-		
-		Set<String> userscarried = new HashSet<String>(Arrays.asList(usersCarried.split(",")));
+		Set<String> userscarried;
+		if(usersCarried.isEmpty()){
+			userscarried = new HashSet<String>();
+		} else {
+			userscarried = new HashSet<String>(Arrays.asList(usersCarried.split(",")));
+		}
 		Iterable<User> users = userService.doAdvancedSearch(user_type, name, location, productlines, userscarried,
 				fromPrice, toPrice, pagenumber);
 		
