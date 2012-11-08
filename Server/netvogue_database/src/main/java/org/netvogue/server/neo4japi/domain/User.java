@@ -58,9 +58,9 @@ public class User {
 
 	long 	mobileNo;
 	
-	int 	telephoneNo1;
+	long 	telephoneNo1;
 	
-	int 	telephoneNo2;
+	long 	telephoneNo2;
 	
 	String 	website;
 	
@@ -237,19 +237,19 @@ public class User {
 		this.mobileNo = mobileNo;
 	}
 
-	public int getTelephoneNo1() {
+	public long getTelephoneNo1() {
 		return telephoneNo1;
 	}
 
-	public void setTelephoneNo1(int telephoneNo1) {
+	public void setTelephoneNo1(long telephoneNo1) {
 		this.telephoneNo1 = telephoneNo1;
 	}
 
-	public int getTelephoneNo2() {
+	public long getTelephoneNo2() {
 		return telephoneNo2;
 	}
 
-	public void setTelephoneNo2(int telephoneNo2) {
+	public void setTelephoneNo2(long telephoneNo2) {
 		this.telephoneNo2 = telephoneNo2;
 	}
 	
@@ -384,11 +384,23 @@ public class User {
 	
 	public boolean deleteUsersCarried(String usercarried) {
 		for(User user: usersCarried) {
+			System.out.println("Users carried1 " + user.getUsername() + " name:" + user.getName());
+			System.out.println("Nodeid is " + user.getNodeId());
+			System.out.println("Nodeid is " + user.hashCode());
 			if(usercarried.equals(user.getUsername())) {
-				usersCarried.remove(user);
-				return true;
+				try{
+					
+				if(usersCarried.remove(user))
+						return true;
+				else
+					System.out.println("error while removing it");
+				} catch (Exception e) {
+					System.out.println("error while removing it" + e.toString());
+				}
 			}
+			System.out.println("Users carried2" + user.getUsername() + " name:" + user.getName());
 		}
+		System.out.println("Couldn't find user carried");
 		return false;
 	}
 	

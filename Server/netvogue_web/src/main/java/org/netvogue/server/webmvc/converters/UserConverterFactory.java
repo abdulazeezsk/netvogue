@@ -56,7 +56,7 @@ public class UserConverterFactory implements ConverterFactory<BoutiqueNew, User>
 			serviceUser.setAddress(boutiqueNew.getAddress());
 			serviceUser.setZipCode(Integer.parseInt(boutiqueNew.getZipcode()));
 			serviceUser.setMobileNo(Long.parseLong(boutiqueNew.getMobile()));
-			serviceUser.setTelephoneNo1(Integer.parseInt(boutiqueNew.getTelephone()));
+			serviceUser.setTelephoneNo1(Long.parseLong(boutiqueNew.getTelephone()));
 			serviceUser.setWebsite(boutiqueNew.getWebsite());
 			serviceUser.setYearofEst(boutiqueNew.getEstdyear());
 			serviceUser.setFromPrice(boutiqueNew.getFromprice().longValue());
