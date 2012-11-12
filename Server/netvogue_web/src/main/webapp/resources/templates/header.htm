@@ -1,16 +1,16 @@
 <!-- header -->
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
                 class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-            </a><a class="brand span2" href="#/corner.htm">NETVOGUE
+            </a><a class="brand span2" href="#/corner.htm">VEAWE
             </a>
             <div class="nav-collapse" style="position:relative;right:10px;">
                 <ul class="nav">
-                    <li style="visibility: hidden" ><a href="#"><i class="icon-envelope icon-Black"></i><span class="bubble">1</span></a></li>
+                    <li style="visibility: hidden" ><a href="#"><i class="icon-envelope icon-White"></i><span class="bubble">1</span></a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                        class="icon-globe icon-Black"></i>
+                        class="icon-globe icon-white"></i>
                         <span class="bubble" ng-show="unreadnotifications > 0">{{unreadnotifications}}</span>
                         <b class="caret"></b></a>
                         <ul id="notification-comments" class="notification-menu span5 notify-info">
@@ -36,7 +36,7 @@
                         </ul>
             </div>
             <div class="navbar-search dropdown" style="position:relative;left:-14px;" ng-class="{open: focused && searchText.length > 0}">
-	            <input type="text" ng-model="searchText" style="width:310px;" class="search-query data-toggle" 
+	            <input type="text" ng-model="searchText" style="width:250px;" class="search-query data-toggle" 
 	            			placeholder="Search" focused="focused" ng-change="getsearchResults(searchText)">
 	            <ul id="Ul1" class="notification-menu span5 notify-info">
 	                <li ng-repeat="item in searchResults | filter:searchText">
