@@ -3,112 +3,443 @@
 <head>
 <title>NetVogue</title>
 <link href="css/bootstrap.css" rel="stylesheet" />
-<link href="css/StyleSheet.css" rel="stylesheet" />
-<style type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400'
+	rel='stylesheet' type='text/css' />
+<!-- <link href="css/StyleSheet.css" rel="stylesheet" /> -->
+<style>
+
+/* GLOBAL STYLES
+    -------------------------------------------------- */
+/* Padding below the footer and lighter body text */
 body {
-	padding-top: 60px;
-	/* 60px to make the container go all the way to the bottom of the topbar */
+	padding-bottom: 40px;
+	color: #5a5a5a;
+}
+
+/* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+	position: relative;
+	z-index: 10;
+	margin-top: 20px;
+	margin-bottom: -90px;
+	/* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+}
+
+/* Remove border and change up box shadow for more contrast */
+.navbar .navbar-inner {
+	border: 0;
+	-webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, .25);
+	-moz-box-shadow: 0 2px 10px rgba(0, 0, 0, .25);
+	box-shadow: 0 2px 10px rgba(0, 0, 0, .25);
+}
+
+/* Downsize the brand/project name a bit */
+.navbar .brand {
+	padding: 14px 20px 16px;
+	/* Increase vertical padding to match navbar links */
+	font-size: 16px;
+	font-weight: bold;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, .5);
+}
+
+/* Navbar links: increase padding for taller navbar */
+.navbar .nav>li>a {
+	padding: 15px 20px;
+}
+
+/* Offset the responsive button for proper vertical alignment */
+.navbar .btn-navbar {
+	margin-top: 10px;
+}
+
+/* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+	margin-bottom: 60px;
+}
+
+.carousel .container {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.carousel-control {
+	background-color: transparent;
+	border: 0;
+	font-size: 120px;
+	margin-top: 0;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, .4);
+}
+
+.carousel .item {
+	height: 500px;
+}
+
+/* .carousel img {
+	min-width: 90%;
+	height: 500px;
+} */
+
+.carousel-caption {
+	background-color: transparent;
+	position: static;
+	max-width: 550px;
+	padding: 0 20px;
+	margin-bottom: 100px;
+}
+
+.carousel-caption h1,.carousel-caption .lead {
+	margin: 0;
+	line-height: 1.25;
+	color: #fff;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, .4);
+}
+
+.carousel-caption .btn {
+	margin-top: 10px;
+}
+
+/* MARKETING CONTENT
+    -------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .span4 {
+	text-align: center;
+}
+
+.marketing h2 {
+	font-weight: normal;
+}
+
+.marketing .span4 p {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+/* Featurettes
+    ------------------------- */
+.featurette-divider {
+	margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+
+.featurette {
+	padding-top: 120px;
+	/* Vertically center images part 1: add padding above and below text. */
+	overflow: hidden;
+	/* Vertically center images part 2: clear their floats. */
+}
+
+.featurette-image {
+	margin-top: -120px;
+	/* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+}
+
+/* Give some space on the sides of the floated elements so text doesn't run right into it. */
+.featurette-image.pull-left {
+	margin-right: 40px;
+}
+
+.featurette-image.pull-right {
+	margin-left: 40px;
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+	font-size: 50px;
+	font-weight: 300;
+	line-height: 1;
+	letter-spacing: -1px;
+}
+
+/* RESPONSIVE CSS
+    -------------------------------------------------- */
+@media ( max-width : 979px) {
+	.container.navbar-wrapper {
+		margin-bottom: 0;
+		width: auto;
+	}
+	.navbar-inner {
+		border-radius: 0;
+		margin: -20px 0;
+	}
+	.featurette {
+		height: auto;
+		padding: 0;
+	}
+	.featurette-image.pull-left,.featurette-image.pull-right {
+		display: block;
+		float: none;
+		max-width: 40%;
+		margin: 0 auto 20px;
+	}
+}
+
+@media ( max-width : 767px) {
+	.navbar-inner {
+		margin: -20px;
+	}
+	.carousel {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+	.carousel .container {
+		
+	}
+	.carousel-caption {
+		width: 65%;
+		padding: 0 70px;
+		margin-bottom: 40px;
+	}
+	.carousel-caption h1 {
+		font-size: 30px;
+	}
+	.carousel-caption .lead,.carousel-caption .btn {
+		font-size: 18px;
+	}
+	.marketing .span4+.span4 {
+		margin-top: 40px;
+	}
+	.featurette-heading {
+		font-size: 30px;
+	}
+	.featurette .lead {
+		font-size: 18px;
+		line-height: 1.5;
+	}
 }
 </style>
 </head>
 <body>
-	<!-- header -->
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
+
+
+
+	<!-- NAVBAR
+    ================================================== -->
+	<!-- Wrap the .navbar in .container to center it on the page and provide easy way to target it with .navbar-wrapper. -->
+	<div class="container navbar-wrapper">
+
+		<div class="navbar navbar-inverse">
+			<div class="navbar-inner">
+				<!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
 				<a class="btn btn-navbar" data-toggle="collapse"
-					data-target=".nav-collapse"><span class="icon-bar"></span><span
-					class="icon-bar"></span><span class="icon-bar"></span> </a><a
-					class="brand" href="Netvogue.html">NETVOGUE</a>
-				<div class="nav-collapse pull-right">
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <span class="brand" style="font-family: 'Lato', sans-serif; font-weight: 100;" href="#">VEAWE</span>
+				<!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="blog.html">Blog</a></li>
-						<li><a href="about_Us.html">About Us</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">Sign Up <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="brand_Registration.html">Brand</a></li>
-								<li><a href="boutique_Registration.html">Boutique</a></li>
-							</ul></li>
-						<li class="dropdown" id="menu1"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#menu1">Login <b class="caret"></b></a>
-							<div class="login-menu">
-								<form style="margin: 0px" accept-charset="UTF-8"
-									action="j_spring_security_check" method="post">
-									<fieldset class='textbox' style="padding: 10px">
-										<div>
-											<span>Email or username</span> <input id="j_username"
-												name="j_username" style="margin-top: 8px" type="text"
-												class="span4" placeholder="Email or username" /> <span>Passsword</span>
-											<input id="j_password" name="j_password"
-												style="margin-top: 8px" type="password" class="span4"
-												placeholder="Passsword" />
-											<div>
-												<input type="checkbox" /> <span class="checkbx_text">Remember
-													me</span> <span class="checkbx_text">|</span> <span
-													class="checkbx_text"><a href="resend_password.html">Forgot
-														password</a></span> <span class="login_btn pull-right">
-													<button type="submit" class="btn btn-primary">Log
-														In</button>
-												</span>
-											</div>
-										</div>
-									</fieldset>
-								</form>
-							</div></li>
+						<li><a href="#">Designers</a></li>
+						<li><a href="#">Retailers</a></li>
+						<!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
 					</ul>
+					<form class="navbar-form pull-right" action="j_spring_security_check" method="post" >
+						<input class="span3" type="text" id="j_username" name="j_username" placeholder="Email" /> <input
+							id="j_password" name="j_password" class="span3" type="password" placeholder="Password" />
+						<button type="submit"  style="font-family: 'Lato', sans-serif; font-weight: 100;" class="btn btn-inverse">Sign in</button>
+					</form>
 				</div>
-				<!-- /.nav-collapse -->
+				<!--/.nav-collapse -->
 			</div>
-			<!-- /.container -->
+			<!-- /.navbar-inner -->
 		</div>
-		<!-- /.navbar-inner -->
+		<!-- /.navbar -->
+
 	</div>
-	<!-- /.navbar -->
-	<!-- header -->
-	<!--body-->
-	<div>
+	<!-- /.container -->
+
+
+
+	<!-- Carousel
+    ================================================== -->
+	<div id="myCarousel" class="carousel slide">
+		<div class="carousel-inner">
+			<div class="item">
+				<img src="img/NY_FASHION_KARAN_3.jpeg" alt="" />
+				<div class="container">
+					<div class="carousel-caption">
+						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">A
+							Market Place to</h1>
+						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">Showcase
+							and Discover</h1>
+						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">Fashion
+							Design</h1>
+						<a class="btn btn-large btn-primary" href="#">Sign up today</a>
+					</div>
+				</div>
+			</div>
+			<div class="item active">
+				<img src="img/NY_FASHION_KARAN_3.jpeg" alt="" />
+				<div class="container">
+					<div class="carousel-caption">
+						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">A
+							Market Place to</h1>
+						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">Showcase
+							and Discover</h1>
+						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">Fashion
+							Design</h1>
+					<a href="brand_Registration.html" style="font-family: 'Lato', sans-serif; font-weight: 100;" class="btn btn-large btn-inverse" href="#">Sign up as Designer</a>
+					<a href="boutique_Registration.html" style="font-family: 'Lato', sans-serif; font-weight: 100;" class="btn btn-large btn-inverse" href="#">Sign up as Boutique</a>
+						
+					</div>
+				</div>
+			</div>
+			<div class="item">
+				<img src="img/NY_FASHION_KARAN_3.jpeg" alt="" />
+				<div class="container">
+					<div class="carousel-caption">
+						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">A
+							Market Place to</h1>
+						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">Showcase
+							and Discover</h1>
+						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">Fashion
+							Design</h1>
+
+						<a class="btn btn-large btn-primary" href="#">Browse gallery</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="es-nav">
+						<span class="es-nav-prev" style="display: none; ">Previous</span>
+						<span class="es-nav-next" style="display: none; ">Next</span>
+					</div> -->
+	 <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+	</div>
+	<!-- /.carousel -->
+
+
+
+	<!-- Marketing messaging and featurettes
+    ================================================== -->
+	<!-- Wrap the rest of the page in another container to center all the content. -->
+
+	<div class="container marketing">
+
+		<!-- Three columns of text below the carousel -->
 		<div class="row">
-			<div class="minimum_height"></div>
+			<div class="span4">
+				<img class="img" style="max-height:200px;max-width:240px;" src="img/donna_karan_adriana_lima_1.jpg" />
+				<h2>Heading</h2>
+				<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis
+					euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.
+					Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+					Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+				<!--    <p><a class="btn" href="#">View details »</a></p> -->
+			</div>
+			<!-- /.span4 -->
+			<div class="span4">
+				<img class="img" style="max-height:200px;max-width:240px;" src="img/donna_karan_adriana_lima_2.jpg" />
+				<h2>Heading</h2>
+				<p>Duis mollis, est non commodo luctus, nisi erat porttitor
+					ligula, eget lacinia odio sem nec elit. Cras mattis consectetur
+					purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo,
+					tortor mauris condimentum nibh, ut fermentum massa justo sit amet
+					risus.</p>
+				<!--  <p><a class="btn" href="#">View details »</a></p> -->
+			</div>
+			<!-- /.span4 -->
+			<div class="span4">
+				<img class="img" style="max-height:200px;max-width:240px;" src="img/donna_karan_adriana_lima_3.jpg" />
+				<h2>Heading</h2>
+				<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
+					egestas eget quam. Vestibulum id ligula porta felis euismod semper.
+					Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
+					nibh, ut fermentum massa justo sit amet risus.</p>
+				<!--  <p><a class="btn" href="#">View details »</a></p> -->
+			</div>
+			<!-- /.span4 -->
 		</div>
-	</div>
-	<!-- footer -->
-	<div class="ywfooter">
-		<div class="ywfooter_in">
-			<ul class="footbar pull-left" style="padding-top:4px;" >
-				<li  id="YourWindow"><span>� 2012 NETVOGUE</span> <span></li>
-			</ul>
+		<!-- /.row -->
 
-			<ul class="footbar pull-right">
-				<li  id="itemPinterest1"><a
-					onmouseover="document.getElementById('pinterest1').src ='img/facebook-on.jpeg';"
-					onmouseout="document.getElementById('pinterest1').src ='img/facebook.jpeg';"
-					href="#" title="Go to Facebook page"> <img id="pinterest1"
-						src="img/facebook.jpeg" border="0" alt="Facebook" />
-				</a></li>
-				<li id="itemPinterest2"><a
-					onmouseover="document.getElementById('pinterest2').src ='img/twitter-on.jpeg';"
-					onmouseout="document.getElementById('pinterest2').src ='img/twitter.jpeg';"
-					href="#" title="Go to Twitter page"><img id="pinterest2"
-						src="img/twitter.jpeg" border="0" alt="Twitter"></a></li>
 
-				<li id="itemPinterest3"><a
-					onmouseover="document.getElementById('pinterest3').src ='img/Pinterest-logo-on.jpeg';"
-					onmouseout="document.getElementById('pinterest3').src ='img/Pinterest.jpeg';"
-					href="#" title="Go to Pinterest page"><img id="pinterest3"
-						src="img/Pinterest.jpeg" border="0" alt="Pinterest"></a></li>
+		<!-- START THE FEATURETTES -->
 
-				<li id="itemPinterest4"><a
-					onmouseover="document.getElementById('pinterest').src ='img/blog-on.jpeg';"
-					onmouseout="document.getElementById('pinterest').src ='img/blog.jpeg';"
-					href="#" title="Go to Blog page"><img id="pinterest"
-						src="img/blog.jpeg" border="0" alt="Blog "></a></li>
-			</ul>
+		<hr class="featurette-divider" />
+
+		<div class="featurette">
+			<img class="featurette-image pull-right"
+				src="img/Virtues-AW11634408972018427500.jpeg" />
+			<h2 class="featurette-heading">
+				First featurette headling. <span class="muted">It'll blow
+					your mind.</span>
+			</h2>
+			<p class="lead">Donec ullamcorper nulla non metus auctor
+				fringilla. Vestibulum id ligula porta felis euismod semper. Praesent
+				commodo cursus magna, vel scelerisque nisl consectetur. Fusce
+				dapibus, tellus ac cursus commodo.</p>
 		</div>
+
+		<hr class="featurette-divider" />
+
+		<div class="featurette">
+			<img class="featurette-image pull-left"
+				src="img/Virtues-AW11634408972018427500.jpeg" />
+			<h2 class="featurette-heading">
+				Oh yeah, it's that good. <span class="muted">See for
+					yourself.</span>
+			</h2>
+			<p class="lead">Donec ullamcorper nulla non metus auctor
+				fringilla. Vestibulum id ligula porta felis euismod semper. Praesent
+				commodo cursus magna, vel scelerisque nisl consectetur. Fusce
+				dapibus, tellus ac cursus commodo.</p>
+		</div>
+
+		<hr class="featurette-divider" />
+
+		<div class="featurette">
+			<img class="featurette-image pull-right"
+				src="img/Virtues-AW11634408972018427500.jpeg">
+				<h2 class="featurette-heading">
+					And lastly, this one. <span class="muted">Checkmate.</span>
+				</h2>
+				<p class="lead">Donec ullamcorper nulla non metus auctor
+					fringilla. Vestibulum id ligula porta felis euismod semper.
+					Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+					Fusce dapibus, tellus ac cursus commodo.</p>
+		</div>
+
+		<hr class="featurette-divider" />
+
+		<!-- /END THE FEATURETTES -->
+
+
+		<!-- FOOTER -->
+		<footer>
+		<p class="pull-right">
+			<a href="#">Back to top</a>
+		</p>
+		<p>
+		2012 Company, Inc.<a href="#">About</a> | <a href="#">Contact</a> | <a href="#">Privacy</a> | <a href="#">Terms</a>
+		</p>
+		</footer>
+
 	</div>
-	<!-- footer -->
+	<!-- /.container -->
+
+
+
+	<!-- Le javascript
+    ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="lib/jquery/jquery.js" type="text/javascript"></script>
 	<script src="lib/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+	<script>
+		!function($) {
+			$(function() {
+				// carousel demo
+				$('#myCarousel').carousel()
+			})
+		}(window.jQuery)
+	</script>
+
+
 </body>
 </html>
