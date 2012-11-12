@@ -132,7 +132,7 @@
 		<!-- middle pane -->
 		<!-- right pane -->
 		<div class="span3">
-			<div ui-if="!isMyProfile && networkstatus != 'CONFIRMED'">
+		<div ui-if="!isMyProfile && networkstatus != 'CONFIRMED'">
 				<ul class="thumbnails">
 					<li class="span2">
 						<div class="add_to_network" ng-show="networkstatus == 'NONE'">
@@ -150,8 +150,29 @@
 					</li>
 				</ul>
 			</div>
+		<div class="underline">
+					<span class="subHeading_no_underline ">TRENDING
+					</span>
+		</div>
+				<ul class="nav nav-tab nav-stacked">
+					<li ng-repeat="trend in trending">
+						<div class="trendfeed fade_spot">
+							<div class="img">
+								<a href="#/{{trend.trendlistitemID}}"> <img alt=""
+									ng-src="{{trend.trendpiclink}}" class="pull-left"></a>
+							</div>
+							<div class="trendfeed_text">
+								<p>
+									<a class="network_entity_name" style="text-decoration:none;color:black;" href="#/{{trend.trendlistitemID}}" title="">{{trend.trendlistitem}}</a>
+								</p>
+								<p class="network_entity_name" style="text-decoration:none;color:black;" >{{trend.post}}</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			<div class="divi2"></div>
 			<div>
-				<div ui-if="0 == references.length">
+				 <div ui-if="0 == references.length">
 					<h4 class="reference_head">References</h4>
 					<ul class="nav nav-tab nav-stacked">
 						<li ng-repeat="reference in references|limitTo:2">
@@ -161,33 +182,15 @@
 										ng-src="{{reference.thumbnail_url}}" class="pull-left"></a>
 								</div>
 								<div class="referencefeed_text">
-									<h3>
-										<a ng-href="#/{{reference.profileid}}/profile" title="">{{reference.name}}</a>
-									</h3>
-									<h2>{{reference.mutualfriends}} Mutual Contact</h2>
+									<p>
+										<a class="network_entity_name" style="text-decoration:none;color:black;" ng-href="#/{{reference.profileid}}/profile" title="">{{reference.name}}</a>
+									</p>
+									<p>{{reference.mutualfriends}} Mutual Contact</p>
 								</div>
 							</div>
 						</li>
 					</ul>
 				</div>
-				<div class="divi2"></div>
-				<h4 class="trending_head">TRENDING</h4>
-				<ul class="nav nav-tab nav-stacked">
-					<li ng-repeat="trend in trending">
-						<div class="trendfeed fade_spot">
-							<div class="img">
-								<a href="#/{{trend.trendlistitemID}}"> <img alt=""
-									ng-src="{{trend.trendpiclink}}" class="pull-left"></a>
-							</div>
-							<div class="trendfeed_text">
-								<h3>
-									<a href="#/{{trend.trendlistitemID}}" title="">{{trend.trendlistitem}}</a>
-								</h3>
-								<p>{{trend.post}}</p>
-							</div>
-						</div>
-					</li>
-				</ul>
 			</div>
 		</div>
 		<!-- right pane -->
