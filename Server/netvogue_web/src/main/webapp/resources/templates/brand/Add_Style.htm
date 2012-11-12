@@ -3,9 +3,10 @@
 	<div class="row">
 		<!-- right pannel -->
 		<div class="span3">
-
-
-			<h4 class="leftpane_entity_heading">Brand</h4>
+			<div class="underline">
+				<span ui-if="!iambrand" class="leftpane_entity">Boutique </span> <span
+					ui-if="iambrand" class="leftpane_entity">Brand </span>
+			</div>
 			<div class="divi2"></div>
 
 			<ul class="thumbnails">
@@ -31,22 +32,22 @@
 								</a>
 							</div>
 							<div class="leftpanefeed_text">
-								<h3>
-									<a title="">{{brandname}}</a>
-								</h3>
-								<h2>
-									<a title="">{{style.styleno}}</a>
-								</h2>
-								<h2 style="margin-top: 5px;">
+								<p style="margin-bottom:5px;font-size:12px;">
+									<a class="vw-feed" style="text-decoration:none;color:black;">{{brandname}}</a>
+								</p>
+								<p style="margin-bottom:5px;font-size:12px;">
+									<a class="vw-feed-sub" style="text-decoration:none;color:black;" title="">{{style.styleno}}</a>
+								</p>
+								<p style="margin-top: 5px;">
 									<span
 										style="font-weight: normal; font-size: 12px; cursor: pointer; text-transform: uppercase;">
 										<span class="WebRupee"
 										style="font-size: 12px; margin-right: 3px;">Rs.</span>{{style.price}}
 									</span>
-								</h2>
+								</p>
 								<p style="margin-top: 3px; font-weight: bold;">
-									<span><a ng-click="editstyle(style)">Edit</a></span> <span
-										class="divider">/</span> <span><a
+									<span><a style="color:black;" ng-click="editstyle(style)">Edit</a></span> <span
+										class="divider">/</span> <span><a style="color:black;"
 										ng-click="deletestyle(style.styleid)">Delete</a></span>
 								</p>
 							</div>
@@ -61,7 +62,7 @@
 			<!-- header -->
 			<div>
 				<div
-					style="border-bottom: 1px solid black; position: relative; top: -2px;">
+					style="border-bottom: 1px solid black;">
 					<span class="left ywbreadcrumb header_width"> <a
 						class="nonactive" href="#/stylesheets">Lookbooks</a> <span
 						class="ywdivider">/</span> <a class="nonactive"
@@ -98,16 +99,16 @@
 					</div>
 					<div class="rightcolumn">
 						<div>
-						<div id="stylecontainer" styleupload-plugin>
+							<div id="stylecontainer" styleupload-plugin>
 								<span class="left fileinput-button"> <span
 									class="rightpane_add_btn">Choose Files</span> <input
 									id="styleupload" type="file" name="files[]" multiple
 									data-url="stylesheet/addstyleimages"
 									onchange="angular.element(this).scope().filesadded(this)">
 								</span>
-								</div> 
-								<br>
-								
+							</div>
+							<br>
+
 							<div>
 								<div
 									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
@@ -203,11 +204,11 @@
 										ng-model="newstyle.price" placeholder="Add price here" />
 								</div>
 
-								
+
 							</div>
-							
+
 							<!-- Bags -->
-							<div style="display:none;" >
+							<div style="display: none;">
 								<div
 									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
 									<u>Style Number </u>
@@ -243,10 +244,10 @@
 								</div>
 							</div>
 							<!-- bags  -->
-							
-							
+
+
 							<!-- shoes -->
-							<div style="display:none;" >
+							<div style="display: none;">
 								<div
 									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
 									<u>Style Number </u>
@@ -306,9 +307,9 @@
 								</div>
 							</div>
 							<!-- shoes  -->
-							
+
 							<!-- jewllery -->
-							<div style="display:none;" >
+							<div style="display: none;">
 								<div
 									style="font-weight: Bold; font-size: 12px; cursor: pointer; text-transform: uppercase;">
 									<u>Style Number </u>
@@ -344,16 +345,16 @@
 								</div>
 							</div>
 							<!-- jewllery  -->
-							
+
 							<div class="pull-right">
-									<button type="button" class="btn" ng-click="exitstylepane()">
-										<i class=""></i><span>Exit</span>
-									</button>
-									<button type="button" class="btn btn-primary"
-										ng-disabled="form.$invalid" ng-click="updatestyle()">
-										<i class=""></i><span>Add to Lookbook</span>
-									</button>
-								</div>
+								<button type="button" class="btn" ng-click="exitstylepane()">
+									<i class=""></i><span>Exit</span>
+								</button>
+								<button type="button" class="btn btn-primary"
+									ng-disabled="form.$invalid" ng-click="updatestyle()">
+									<i class=""></i><span>Add to Lookbook</span>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
