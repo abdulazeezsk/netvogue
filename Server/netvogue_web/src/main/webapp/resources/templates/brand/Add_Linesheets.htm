@@ -16,14 +16,15 @@
 					</div>
 				</li>
 			</ul>
-			<div class="leftpane_subheading">FILTERS</div>
+			<div class="leftpane_subheading">Lookbooks</div>
 			<div class="divi2"></div>
 			<div>
-				<span class="leftpane_filter_name">Stylesheets</span> <input
-					type="text" class="span3" />
+				<!-- <span class="leftpane_filter_name">C</span>  -->
+				<input	type="text" placeholder="Find More Styles From Lookbooks" class="span3" />
 			</div>
 			<div>
 				<h4 class="leftpane_subheading">Styles</h4>
+				 <img  src="img/ajax-loadersmall.gif">
 				<ul class="nav nav-tab nav-stacked">
 					<li ng-repeat="style in allstyles">
 						<div class="leftpanefeed fade_spot">
@@ -56,19 +57,6 @@
 		<!-- left pane -->
 		<!-- right pane -->
 		<div class="span9">
-			<!-- <div>
-				<span class="left rightpane_subHeading header_width"> <a
-					style="text-decoration: none;" href="#/linesheets">Line Sheets</a>
-					<span class="divider">/</span> <span> <a
-						style="text-decoration: none;"
-						ng-href="#/styles?id={{linesheetid}}&&cat={{category}}">Rebecca
-							Minkoff {{linesheetname}}</a></span></span>
-				<div class="divi2 right_pane_underline"></div>
-				<span class="left right_pane_info" style="width: 75%"> Styles
-					in this linesheet </span>
-				<div class="divi2 right_pane_underline"></div>
-			</div> -->
-			
 			<!-- header -->
 			<div>
 				<div
@@ -77,10 +65,6 @@
 						href="#/linesheets" >Linesheets</a> <span class="ywdivider">/</span> <a class="nonactive"
 						ng-href="#/styles?id={{linesheetid}}&&cat={{category}}" >{{brandname}} {{linesheetname}}</a> <span class="ywdivider">/</span> <span>
 						Organize</span></span> 
-						<!-- <span
-						class="right"> <a ng-href="#/photos?id={{galleryid}}"
-						class="rightpane_back_btn nodeco">Back</a>
-					</span> -->
 				</div>
 				<div style="border-bottom: 1px solid black;margin-bottom:10px">
 					<span class="left right_pane_info">Styles
@@ -96,24 +80,8 @@
 						<button type="button" class="close" data-dismiss="alert">
 							<small>x</small>
 						</button>
-						Add the styles from all available stylesheets for this category
+						Add styles to linesheet from all available lookbooks
 					</div>
-					<!-- <ul class="thumbnails">
-						<li ng-repeat="style in styles">
-							<div class="thumbnail">
-								<img ng-src="{{style.profilethumbpic}}" alt="">
-							</div>
-							<div class="caption">
-								<h5>{{style.stylename}}</h5>
-								<h6>
-									<p>{{style.description}}</p>
-								</h6>
-								<p>
-									<a ng-click="deletestyle(style)" class="btn btn-primary">Remove</a>
-								</p>
-							</div>
-						</li> -->
-
 					<ul class="nav nav-tab nav-stacked" ui-sortable
 						ng-model="existingfiles" id="container" class="clearfix">
 						<li ng-repeat="style in styles" style="postion: absloute;">
