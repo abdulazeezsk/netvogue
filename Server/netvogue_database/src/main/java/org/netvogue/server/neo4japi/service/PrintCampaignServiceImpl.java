@@ -66,9 +66,9 @@ public class PrintCampaignServiceImpl implements PrintCampaignService {
 			return ResultStatus.FAILURE;
 		}
 	}
-	public ResultStatus deletePrintCampaign(String printCampaignId, StringBuffer error)  {
+	public ResultStatus deletePrintCampaign(String printCampaignId, Iterable<String> photosids, StringBuffer error)  {
 		try {
-			printcampaignRepo.deletePrintCampaign(printCampaignId);
+			photosids = printcampaignRepo.deletePrintCampaign(printCampaignId);
 			System.out.println("deleted gallery:" + printCampaignId);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {

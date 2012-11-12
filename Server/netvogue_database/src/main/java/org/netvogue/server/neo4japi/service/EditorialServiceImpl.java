@@ -66,9 +66,9 @@ public class EditorialServiceImpl implements EditorialService {
 			return ResultStatus.FAILURE;
 		}
 	}
-	public ResultStatus deleteEditorial(String editorialid, StringBuffer error)  {
+	public ResultStatus deleteEditorial(String editorialid, Iterable<String> photosids, StringBuffer error)  {
 		try {
-			editorialRepo.deleteEditorial(editorialid);
+			photosids = editorialRepo.deleteEditorial(editorialid);
 			System.out.println("deleted editorial:" + editorialid);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {

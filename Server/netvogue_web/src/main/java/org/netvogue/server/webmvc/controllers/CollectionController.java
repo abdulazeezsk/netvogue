@@ -272,7 +272,8 @@ public class CollectionController {
 			response.setError("Galleryid is empty");
 			return response;
 		}
-		if(ResultStatus.SUCCESS == collectionService.deleteCollection(galleryid, error)) {  
+		Iterable<String> photoids = null;
+		if(ResultStatus.SUCCESS == collectionService.deleteCollection(galleryid, photoids, error)) {  
 			response.setStatus(true);
 		}
 		else

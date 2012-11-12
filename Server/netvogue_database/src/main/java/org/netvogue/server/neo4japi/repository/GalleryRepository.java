@@ -20,7 +20,7 @@ public interface GalleryRepository extends GraphRepository<Gallery>{
 			"WITH n, rels, p, collect(p.photouniqueid) as photosid " +
 			"FOREACH(rel IN rels: DELETE rel) DELETE p " +
 			"WITH n, photosid MATCH n<-[r]-() DELETE n, r " +
-			"RETURN photosid;
+			"RETURN photosid")
 	Iterable<String> deleteGallery(String galleryId);
 	
 	@Query( "START n=node:galleryid(galleryid={0}) MATCH n-[:PHOTO]->p " +

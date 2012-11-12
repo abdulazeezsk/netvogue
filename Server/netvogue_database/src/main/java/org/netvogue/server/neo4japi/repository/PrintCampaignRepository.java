@@ -22,10 +22,12 @@ public interface PrintCampaignRepository extends GraphRepository<PrintCampaign> 
 	@Query("START p = node:printcampaignid(printcampaignid={0}) SET p.profilePicLink = {1}")
 	void setProfilepic(String printcampaignid, String uniqueid);
 	
-	@Query("START n=node:printcampaignid(printcampaignid={0}) MATCH n-[rels*0..]->p " +
+	@Query("START n=node:printcampaignid(printcampaignid={0}) MATCH n-[rels*1..]->p " +
+			"WITH n, rels, p, collect(p.printcampaignphotouniqueid) as photosid " +
 			"FOREACH(rel IN rels: DELETE rel) DELETE p " +
-			"WITH n MATCH n<-[r]-() DELETE n, r")
-	void deletePrintCampaign(String printcampaignid);
+			"WITH n, photosid MATCH n<-[r]-() DELETE n, r " +
+			"RETURN photosid")
+	Iterable<String> deletePrintCampaign(String printcampaignid);
 	
 	@Query( "START n=node:printcampaignid(printcampaignid={0}) " +
 			"MATCH n-[:PRINTCAMPAIGNPHOTO]->p " +

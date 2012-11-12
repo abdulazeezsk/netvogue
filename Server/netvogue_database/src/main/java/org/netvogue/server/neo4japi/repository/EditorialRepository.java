@@ -22,10 +22,12 @@ public interface EditorialRepository extends GraphRepository<Editorial> {
 	@Query("START p = node:editorialid(editorialid={0}) SET p.profilePicLink = {1}")
 	void setProfilepic(String editorialid, String uniqueid);
 	
-	@Query("START n=node:editorialid(editorialid={0}) MATCH n-[rels*0..]->p " +
+	@Query("START n=node:editorialid(editorialid={0}) MATCH n-[rels*1..]->p " +
+			"WITH n, rels, p, collect(p.editorialphotouniqueid) as photosid " +
 			"FOREACH(rel IN rels: DELETE rel) DELETE p " +
-			"WITH n MATCH n<-[r]-() DELETE n, r")
-	void deleteEditorial(String editorialid);
+			"WITH n, photosid MATCH n<-[r]-() DELETE n, r " +
+			"RETURN photosid")
+	Iterable<String> deleteEditorial(String editorialid);
 	
 	@Query( "START n=node:editorialid(editorialid={0}) " +
 			"MATCH n-[:EDITORIALPHOTO]->p " +
