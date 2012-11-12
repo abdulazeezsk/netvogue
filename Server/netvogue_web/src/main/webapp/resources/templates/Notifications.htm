@@ -3,8 +3,10 @@
     <div class="row">
         <!-- left-pane -->
         <div class="span3">
-            <h4 class="leftpane_entity_heading">
-                Boutique</h4>
+           <div class="underline">
+				<span ui-if="!iambrand" class="leftpane_entity">Boutique </span> <span
+					ui-if="iambrand" class="leftpane_entity">Brand </span>
+			</div>
             <div class="divi2">
             </div>
            <ul class="thumbnails">
