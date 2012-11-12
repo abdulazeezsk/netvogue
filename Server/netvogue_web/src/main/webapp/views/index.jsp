@@ -7,13 +7,16 @@
     <link href="css/StyleSheet.css" rel="stylesheet" type="text/css" />
     <link href="css/jquery.fileupload-ui.css" rel="stylesheet" type="text/css" />
     <link href="css/select2.css" rel="stylesheet" type="text/css" />
-   	<!-- <link href="css/styles.css" rel="stylesheet" type="text/css" /> -->
+     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400'
+	rel='stylesheet' type='text/css' />
+    <link href="css/veawe.css" rel="stylesheet" type="text/css" />
     <link href="css/style.css" rel="stylesheet" type="text/css" />
  	<link href="css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
     <link href="css/elastislide.css" rel="stylesheet" type="text/css" />
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
     <link href="css/jquery.tree.css" rel="stylesheet" type="text/css"  />
     <link href="css/angular-ui.css" rel="stylesheet" type="text/css" />
+   
     <style type="text/css">
         body
         {
