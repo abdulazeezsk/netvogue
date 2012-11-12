@@ -111,10 +111,10 @@
 						<div style="position: relative;">
 							<img ng-src="{{linesheet.gallerypic}}" width="220" height="300">
 							<div class="masklayer">
-								<h1 class="editdel" ui-if="isMyProfile">
+								<h1 class="editdel" ui-if="isMyProfile && iambrand">
 									<a ng-click="deletelinesheet(linesheet.galleryid)"
-										title="Delete"><i class="icon-trash icon-white"></i></a> <a
-										ng-click="editlinesheet(linesheet.galleryid, linesheet.galleryname, linesheet.category, linesheet.deliverydate)"
+										title="Delete"><i class="icon-trash icon-white"></i></a> 
+									<a ng-click="editlinesheet(linesheet.galleryid, linesheet.galleryname, linesheet.category, linesheet.deliverydate)"
 										title="Edit"><i class="icon-edit icon-white"></i></a>
 								</h1>
 								<!-- <h1 class="linesheet-brandname">{{linesheet.brandname}}</h1>
