@@ -3,8 +3,10 @@
     <div class="row">
        <!-- left-pane -->
         <div class="span3">
-            <h4 class="leftpane_entity_heading">
-                Boutique</h4>
+           <div class="underline">
+				<span ui-if="!iambrand" class="leftpane_entity">Boutique </span> <span
+					ui-if="iambrand" class="leftpane_entity">Brand </span>
+			</div>
             <div class="divi2">
             </div>
             <ul class="thumbnails">
@@ -31,15 +33,15 @@
             <div class="divi2 right_pane_underline">
             </div>
             <ul class="nav nav-tabs" id="myTab">
-                <li ng-class="{active: tabposition == 0}"><a href="#about_us" data-toggle="tab">About
+                <li ng-class="{active: tabposition == 0}"><a style="color:black;" href="#about_us" data-toggle="tab">About
                     Us</a></li>
-                <li ng-class="{active: tabposition == 1}"><a href="#product_line" data-toggle="tab">
+                <li ng-class="{active: tabposition == 1}"><a style="color:black;" href="#product_line" data-toggle="tab">
                     Product Line</a></li>
-                <li ng-class="{active: tabposition == 2}" ui-if="!iambrand"><a href="#brands_carried" data-toggle="tab">
+                <li ng-class="{active: tabposition == 2}" ui-if="!iambrand"><a style="color:black;" href="#brands_carried" data-toggle="tab">
                     Brands Carried</a></li>
-                <li ng-class="{active: tabposition == 2}" ui-if="iambrand"><a href="#brands_carried" data-toggle="tab">
+                <li ng-class="{active: tabposition == 2}" ui-if="iambrand"><a style="color:black;" href="#brands_carried" data-toggle="tab">
                     Stockists</a></li>
-                <li ng-class="{active: tabposition == 3}"><a href="#contact_info" data-toggle="tab">
+                <li ng-class="{active: tabposition == 3}"><a style="color:black;" href="#contact_info" data-toggle="tab">
                     Contact Info</a></li>
             </ul>
             <div class="tab-content">
@@ -117,9 +119,9 @@
                                     <span class="brand_image"><a href="#">
                                         <img alt="" ng-src="{{brandscarried.getItem(brand).profilepic}}" class="pull-left"></a> </span>
                                     <span class="network_text">
-                                        <h3>
-                                            <span><a ng-href="#/{{brandscarried.getItem(brand).brandusername}}/profile">{{brand}}</a></span>
-                                        </h3>
+                                        <p style="margin-bottom:5px;font-size:12px;">
+                                            <span><a style="color:black;" ng-href="#/{{brandscarried.getItem(brand).brandusername}}/profile">{{brand}}</a></span>
+                                        </p>
                                     </span><span class="btn-group pull-right">
                                         <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
                                             Action <span class="caret"></span>
