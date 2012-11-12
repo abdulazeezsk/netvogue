@@ -153,8 +153,8 @@ button {
 .centered { margin: 0 auto; }
 
 .box {
-  margin: 5px;
-  padding: 5px;
+  margin-top: 5px;
+  padding-right: 10px;
   font-size: 11px;
   line-height: 1.4em;
   float: left;
