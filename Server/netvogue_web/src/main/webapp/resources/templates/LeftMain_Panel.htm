@@ -3,7 +3,7 @@
 		<li class="span2">
 			<div style="position: relative;">
 				<a ng-href="{{links.profile}}"> <img ng-src={{profilepic.thumbnail_url}}
-					width="140" height="100" alt="" /></a>
+					width="140" style="max-height:105px;" alt="" /></a>
 				<div ng-class={masklayer:isMyProfile}>
 					<h1 class="fileup" ng-show="isMyProfile">
 						<span class="fileinput-button"> <span><i
@@ -16,7 +16,7 @@
 			</div>
 			<div class="underline">
 				<div class="profile-address">
-					<h5 ng-bind="entityname"></h5>
+					<h5  style="font-family: 'Lato', sans-serif; font-weight: 400;" ng-bind="entityname"></h5>
 					<p ng-show="contactinfo != null">Estd {{contactinfo.yearest}}</p>
 					<address ng-bind="getcontactinfo"></address>
 				</div>
@@ -66,7 +66,7 @@
 				<li ng-show="isMyProfile" class="leftmenu_tabs"><a
 					href="#invite" data-toggle="modal">Send Invite</a></li>
 				<!--     <li class="nav-header">Inspire </li>
-    <li><a ng-href="{{links.printcampaign}}">Blog</a> </li>-->
+   				 <li><a ng-href="{{links.printcampaign}}">Blog</a> </li>-->
 			</ul>
 		</li>
 	</ul>
