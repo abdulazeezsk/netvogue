@@ -213,7 +213,10 @@ public class GalleryController {
 			response.setError("Galleryid is empty");
 			return response;
 		}
-		if(ResultStatus.SUCCESS == galleryService.deleteGallery(galleryid, error)) {  
+		
+		Iterable<String> deletedPhotoIds = null;
+		if(ResultStatus.SUCCESS == galleryService.deleteGallery(galleryid, deletedPhotoIds, error)) {
+			//Delete all photo ids from here
 			response.setStatus(true);
 		}
 		else

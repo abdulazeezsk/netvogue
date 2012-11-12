@@ -16,9 +16,12 @@ public interface GalleryRepository extends GraphRepository<Gallery>{
 	@Query("START p = node:galleryid(galleryid={0}) SET p.profilePicLink = {1}")
 	void setProfilepic(String galleryid, String uniqueid);
 	
-	@Query("START n=node:galleryid(galleryid={0}) MATCH n-[rels*0..]->p FOREACH(rel IN rels: DELETE rel) DELETE p " +
-			"WITH n MATCH n<-[r]-() DELETE n, r")
-	void deleteGallery(String galleryId);
+	@Query(	"START n=node:galleryid(galleryid={0}) MATCH n-[rels*1..]->p " +
+			"WITH n, rels, p, collect(p.photouniqueid) as photosid " +
+			"FOREACH(rel IN rels: DELETE rel) DELETE p " +
+			"WITH n, photosid MATCH n<-[r]-() DELETE n, r " +
+			"RETURN photosid;
+	Iterable<String> deleteGallery(String galleryId);
 	
 	@Query( "START n=node:galleryid(galleryid={0}) MATCH n-[:PHOTO]->p " +
 			"RETURN p ORDER BY p.createdDate DESC " +

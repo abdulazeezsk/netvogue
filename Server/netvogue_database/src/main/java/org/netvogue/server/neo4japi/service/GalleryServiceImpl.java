@@ -1,5 +1,7 @@
 package org.netvogue.server.neo4japi.service;
 
+import java.util.Set;
+
 import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.Utils;
@@ -45,9 +47,9 @@ public class GalleryServiceImpl implements GalleryService {
 		}
 	}
 	
-	public ResultStatus deleteGallery(String galleryId, StringBuffer error)  {
+	public ResultStatus deleteGallery(String galleryId, Iterable<String> deletedPhotoIds, StringBuffer error)  {
 		try {
-			galleryRepo.deleteGallery(galleryId);
+			deletedPhotoIds = galleryRepo.deleteGallery(galleryId);
 			System.out.println("deleted gallery:" + galleryId);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
