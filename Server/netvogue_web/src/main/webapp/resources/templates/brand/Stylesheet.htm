@@ -3,7 +3,10 @@
 	<div class="row">
 		<!-- left pane -->
 		<div class="span3">
-			<h4 class="leftpane_entity_heading">Brand</h4>
+			<div class="underline">
+				<span ui-if="!iambrand" class="leftpane_entity">Boutique </span> <span
+					ui-if="iambrand" class="leftpane_entity">Brand </span>
+			</div>
 			<div class="divi2"></div>
 			<ul class="thumbnails">
 				<li class="span3">
@@ -62,7 +65,7 @@
 
 			<!-- header pane -->
 			<div
-				style="border-bottom: 1px solid black; position: relative; top: -2px;">
+				style="border-bottom: 1px solid black;">
 				<span class="left ywbreadcrumb header_width"> <a
 					class="nonactive" ng-href="#/stylesheets">Lookbooks</a> <span
 					class="ywdivider">/</span> <span> {{brandname}}
@@ -96,13 +99,13 @@
 										href="#/addstyle?id={{stylesheetid}}&&cat={{category}}&&styleid={{style.styleid}}"
 										title="Edit"><i class="icon-edit icon-white"></i></a>
 								</h1>
-								<h1 class="style-brandname" style="text-align: center;">
+								<!-- <h1 class="style-brandname" style="text-align: center;">
 									{{brandname}}</h1>
 								<h1 class="style-seasonname">
 									<i>{{stylesheetname}}</i>
-								</h1>
+								</h1> -->
 								<h1 class="style-name">
-									<u>Style:</u>
+									<u>Style</u>
 								</h1>
 								<h1 class="name">
 									<i>{{style.styleno}}</i>
