@@ -1,99 +1,106 @@
 <!--body-->
 <div class="container minimum_height">
-    <div class="row">
-        <!-- left pannel -->
-        <div ng-include src="'templates/LeftMain_Panel.htm'">
-        </div>
-        <!-- middle pannel -->
-        <div class="span7">
-            <h4 class="subHeading_no_underline">
-                NETWORK</h4>
-            <div class="divi2 topborderline">
-            </div>
-            <ul class="nav nav-tab nav-stacked">
-                <li ng-repeat="network in mynetwork">
-                    <div class="network">
-                        <span class="brand_image"><a ng-href="#/{{network.profileid}}/profile">
-                            <img alt="" ng-src="{{network.thumbnail_url}}" class="pull-left"></a> </span>
-                        <span class="network_text">
-                                <h3>
-                                    <span><a ng-href="#/{{network.profileid}}/profile">{{network.name}}</a></span>
-                                   </h3>
-                                     <h2>
-                                    <span>{{network.usertype}}</span></h2>
-                                     <h2>
-                                    <span>{{network.city}}, {{network.country}}</span>
-                                    </h2>
-                            </span>
-                            <span class="btn-group pull-right" ng-show="isMyProfile">
-                                <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
-                                    Action <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                	<li ng-show="network.networkstatus == 'PENDING' || !network.networkstatus == 'BLOCK'">
-                                		<a ng-click="confirmnetwork(network.profileid)">Accept</a></li>
-                                    <li><a ng-hide="network.networkstatus == 'BLOCK'" ng-click="deletenetwork(network.profileid)">Delete</a></li>
-                                    <li><a ng-hide="network.networkstatus == 'BLOCK'" ng-click="blocknetwork(network.profileid)">Block</a></li>
-                                    <li><a ng-show="network.networkstatus == 'BLOCK'" ng-click="unblocknetwork(network.profileid)">UnBlock</a></li>
-  									 <li class="divider"></li>
-  									<li><a><i class="icon-cog icon-black"></i>Settings</a></li>
-  									                              
-                                </ul>
-                            </span>
-                    </div>
-                </li>
-            </ul>
-            <div get-more="getmorenetworks()">
-				<div ng-show="gettingmorenetworks">
-					<center><img src="img/ajax-loadersmall.gif"><br></center>
-				</div>
-				<div ng-show="nomoredataavailable1">
-					End of data
-				</div>
+	<div class="row">
+		<!-- left pane -->
+		<div ng-include src="'templates/LeftMain_Panel.htm'"></div>
+		<!-- middle pane -->
+		<div class="span7">
+			<div class="underline">
+				<span class="subHeading_no_underline">NETWORK </span>
 			</div>
-        </div>
-        <!-- middle pannel -->
-        <!-- right pannel -->
-        <div class="span3" style="vertical-align: top">
-           <div>
-                <h4 class="trending_head">
-                    References</h4>
-                <ul class="nav nav-tab nav-stacked">
-                    <li ng-repeat="reference in references| limitTo:2">
-                        <div class="referencefeed  fade_spot">
-                            <div class="imgntwrk">
+			<ul class="nav nav-tab nav-stacked">
+				<li ng-repeat="network in mynetwork">
+					<div class="network">
+						<span class="brand_image"><a
+							ng-href="#/{{network.profileid}}/profile"> <img alt=""
+								ng-src="{{network.thumbnail_url}}" class="pull-left"></a> </span> <span
+							class="network_text">
+							<p style="margin-bottom:5px;font-size:12px;">
+								<span><a ng-href="#/{{network.profileid}}/profile">{{network.name}}</a></span>
+							</p>
+							<p style="margin-bottom:3px;text-transform: uppercase;font-size:10px;">
+								<span>{{network.usertype}}</span>
+							</p>
+							<p style="text-transform: capitalize;font-size:10px;">
+								<span>{{network.city}}, {{network.country}}</span>
+							</p>
+						</span> <span class="btn-group pull-right" ng-show="isMyProfile">
+							<button class="btn btn-inverse dropdown-toggle"
+								data-toggle="dropdown">
+								Action <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li
+									ng-show="network.networkstatus == 'PENDING' || !network.networkstatus == 'BLOCK'">
+									<a ng-click="confirmnetwork(network.profileid)">Accept</a>
+								</li>
+								<li><a ng-hide="network.networkstatus == 'BLOCK'"
+									ng-click="deletenetwork(network.profileid)">Delete</a></li>
+								<li><a ng-hide="network.networkstatus == 'BLOCK'"
+									ng-click="blocknetwork(network.profileid)">Block</a></li>
+								<li><a ng-show="network.networkstatus == 'BLOCK'"
+									ng-click="unblocknetwork(network.profileid)">UnBlock</a></li>
+								<li class="divider"></li>
+								<li><a><i class="icon-cog icon-black"></i>Settings</a></li>
+
+							</ul>
+						</span>
+					</div>
+				</li>
+			</ul>
+			<div get-more="getmorenetworks()">
+				<div ng-show="gettingmorenetworks">
+					<center>
+						<img src="img/ajax-loadersmall.gif"><br>
+					</center>
+				</div>
+				<div ng-show="nomoredataavailable1">End of data</div>
+			</div>
+		</div>
+		<!-- middle pane -->
+		<!-- right pane -->
+		<div class="span3" style="vertical-align: top">
+			<div class="span3">
+				<div class="underline">
+					<span class="subHeading_no_underline ">references </span>
+				</div>
+				<ul class="nav nav-tab nav-stacked">
+					<li ng-repeat="reference in references| limitTo:2">
+						<div class="referencefeed  fade_spot">
+							<div class="imgntwrk">
 								<a ng-href="#/{{reference.profileid}}/profile"> <img alt=""
 									ng-src="{{reference.thumbnail_url}}" class="pull-left"></a>
 							</div>
 							<div class="referencefeed_text">
-								<h3>
-									<a ng-href="#/{{reference.profileid}}/profile" title="">{{reference.name}}</a>
-								</h3>
-								<h2>{{reference.mutualfriends}} Mutual Contact</h2>
+								<p>
+									<a class="network_entity_name"
+										style="text-decoration: none; color: black;"
+										ng-href="#/{{reference.profileid}}/profile" title="">{{reference.name}}</a>
+								</p>
+								<p class="network_entity_name">{{reference.mutualfriends}}
+									Mutual Contact</p>
 							</div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- right pannel -->
-    </div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- right pane -->
+	</div>
 </div>
 <!-- modal -->
 <div class="modal  hide" id="invite">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">
-        </button>
-        <h4 class="subHeading_no_underline">
-            Send Invite</h4>
-    </div>
-    <div class="modal-body">
-        <input type="text" style="width: 500px;" placeholder="Enter email" />
-        <textarea style="width: 500px;" rows="9" placeholder="Type a message"></textarea>
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">Close</a> <a href="#" class="btn btn-primary">
-            Send Request</a>
-    </div>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"></button>
+		<h4 class="subHeading_no_underline">Send Invite</h4>
+	</div>
+	<div class="modal-body">
+		<input type="text" style="width: 500px;" placeholder="Enter email" />
+		<textarea style="width: 500px;" rows="9" placeholder="Type a message"></textarea>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a> <a href="#"
+			class="btn btn-primary"> Send Request</a>
+	</div>
 </div>
 <!-- modal -->
