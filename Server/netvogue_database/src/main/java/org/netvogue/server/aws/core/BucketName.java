@@ -1,7 +1,7 @@
 package org.netvogue.server.aws.core;
 
 public enum BucketName {
-	DEV("netvoguedev"),
+	//DEV("netvoguedev"),
 	PROD("netvogueprod"),
 	TEST("netvoguetest");
 	

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,7 +47,7 @@ public class UploadManager {
 	        metaData.setContentType(file.getContentType());
 	        metaData.setContentLength(file.getSize());
 	        
-	        String bucketName = BucketName.DEV.getName();
+	        String bucketName = Constants.bucketname;
 	        System.out.println("Bucket Name: " + bucketName);
 //			ProgressListener progressListener = new ProgressListener() {
 //          public void progressChanged(ProgressEvent progressEvent) {
@@ -84,14 +85,14 @@ public class UploadManager {
 	
 	public String getQueryString(String key, ImageType imageType, String username) {
 		String RESTLink = null;
-        String bucketName = BucketName.DEV.getName();
+        String bucketName = Constants.bucketname;
 		RESTLink = transferManager.getQueryString(bucketName + "/" + username + "/" + imageType.getKey(), key);
 		return RESTLink;
 	}
 	
 	public String getQueryString(String key, ImageType imageType, Size imageSize, String username) {
 		String RESTLink = null;
-        String bucketName = BucketName.DEV.getName();
+		String bucketName = Constants.bucketname;
 		RESTLink = transferManager.getQueryString(bucketName+ "/" + username + "/" + imageType.getKey(), 
 													key + "-" + imageSize.toString());
 		return RESTLink;
@@ -99,7 +100,8 @@ public class UploadManager {
 	
 	public ResultStatus deletePhotosById(String photoId, ImageType imageType,
 			String userName) {
-		return transferManager.deletePhotosById(BucketName.DEV.getName(),
+		String bucketName = Constants.bucketname;
+		return transferManager.deletePhotosById(bucketName,
 				userName + "/" + imageType.getKey() + "/" + photoId);
 	}
 	
