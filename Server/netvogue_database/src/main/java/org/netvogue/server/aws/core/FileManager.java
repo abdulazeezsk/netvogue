@@ -5,7 +5,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -16,15 +18,26 @@ import javax.imageio.ImageIO;
 import org.apache.commons.codec.binary.Base64;
 import org.netvogue.server.aws.core.Scalr.Method;
 import org.netvogue.server.aws.core.Scalr.Mode;
+import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.DeleteObjectsRequest;
+import com.amazonaws.services.s3.model.DeleteObjectsRequest.KeyVersion;
+import com.amazonaws.services.s3.model.DeleteObjectsResult;
+import com.amazonaws.services.s3.model.ListObjectsRequest;
+import com.amazonaws.services.s3.model.MultiObjectDeleteException;
+import com.amazonaws.services.s3.model.MultiObjectDeleteException.DeleteError;
+import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.ProgressEvent;
 import com.amazonaws.services.s3.model.ProgressListener;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
 
@@ -212,6 +225,7 @@ public class FileManager extends TransferManager {
 	}
 	
 	public Upload upload(String bucketName,String key,byte[] bytes) {
+		System.out.println("bucketName: " + bucketName);
 		Upload upload = upload(bucketName, key, bytes, new ObjectMetadata());
 		return upload;
 	}
@@ -242,6 +256,72 @@ public class FileManager extends TransferManager {
 	public Upload upload(String bucketName,String key,InputStream input) {
 		Upload upload = upload(bucketName, key, input, new ObjectMetadata());
 		return upload;
+	}
+	
+	public ResultStatus deletePhotosById(String bucketName, String photoId) {
+		AmazonS3 s3Client = null;
+		AWSCredentials credentials = null;
+		ObjectListing objectListing = null;
+		ListObjectsRequest listObjectsRequest = null;
+		List<KeyVersion> keys = null;
+		try {
+			System.out.println("photoId in transfer manager: " + photoId);
+			credentials = new BasicAWSCredentials(accesskey, secureKey);
+			s3Client = new AmazonS3Client(credentials);
+			keys = new ArrayList<KeyVersion>();
+			listObjectsRequest = new ListObjectsRequest().withBucketName(
+					bucketName).withPrefix(photoId);
+			String key = null;
+			do {
+				objectListing = s3Client.listObjects(listObjectsRequest);
+				for (S3ObjectSummary objectSummary : objectListing
+						.getObjectSummaries()) {
+					key = objectSummary.getKey();
+					KeyVersion keyVersion = new KeyVersion(key);
+					keys.add(keyVersion);
+					System.out.println(" - " + key + "  " + "(size = "
+							+ objectSummary.getSize() + ")");
+				}
+				listObjectsRequest.setMarker(objectListing.getNextMarker());
+			} while (objectListing.isTruncated());
+
+			// Multi-object delete by specifying only keys (no version ID).
+			DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest(
+					bucketName).withQuiet(false);
+			multiObjectDeleteRequest.setKeys(keys);
+			DeleteObjectsResult delObjRes = s3Client
+					.deleteObjects(multiObjectDeleteRequest);
+			System.out.format("Successfully deleted all the %s items.\n",
+					delObjRes.getDeletedObjects().size());
+			// s3Client.deleteObject(new DeleteObjectRequest(bucketName,
+			// photoId));
+		} catch (MultiObjectDeleteException mode) {
+			for (DeleteError deleteError : mode.getErrors()) {
+				System.out.format("Object Key: %s\t%s\t%s\n",
+						deleteError.getKey(), deleteError.getCode(),
+						deleteError.getMessage());
+			}
+		} catch (AmazonServiceException ase) {
+			System.out.println("Caught an AmazonServiceException.");
+			System.out.println("Error Message:    " + ase.getMessage());
+			System.out.println("HTTP Status Code: " + ase.getStatusCode());
+			System.out.println("AWS Error Code:   " + ase.getErrorCode());
+			System.out.println("Error Type:       " + ase.getErrorType());
+			System.out.println("Request ID:       " + ase.getRequestId());
+			ase.printStackTrace();
+			return ResultStatus.FAILURE;
+		} catch (AmazonClientException ace) {
+			System.out.println("Caught an AmazonClientException.");
+			System.out.println("Error Message: " + ace.getMessage());
+			ace.printStackTrace();
+			return ResultStatus.FAILURE;
+		} catch (Exception ex) {
+			System.out.println("Caught an AmazonClientException.");
+			System.out.println("Error Message: " + ex.getMessage());
+			ex.printStackTrace();
+			return ResultStatus.FAILURE;
+		}
+		return ResultStatus.SUCCESS;
 	}
 
 }

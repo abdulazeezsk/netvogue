@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,7 +47,7 @@ public class UploadManager {
 	        metaData.setContentLength(file.getSize());
 	        
 	        String bucketName = BucketName.DEV.getName();
-	        
+	        System.out.println("Bucket Name: " + bucketName);
 //			ProgressListener progressListener = new ProgressListener() {
 //          public void progressChanged(ProgressEvent progressEvent) {
 //              
@@ -95,4 +96,11 @@ public class UploadManager {
 													key + "-" + imageSize.toString());
 		return RESTLink;
 	}
+	
+	public ResultStatus deletePhotosById(String photoId, ImageType imageType,
+			String userName) {
+		return transferManager.deletePhotosById(BucketName.DEV.getName(),
+				userName + "/" + imageType.getKey() + "/" + photoId);
+	}
+	
 }

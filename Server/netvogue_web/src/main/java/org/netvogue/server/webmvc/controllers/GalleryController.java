@@ -20,7 +20,6 @@ import org.netvogue.server.webmvc.converters.ImageURLsConverter;
 import org.netvogue.server.webmvc.converters.PhotoConverter;
 import org.netvogue.server.webmvc.domain.Galleries;
 import org.netvogue.server.webmvc.domain.Gallery;
-import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.PhotoInfoJsonRequest;
@@ -312,22 +311,30 @@ public class GalleryController {
 		return response;
 	}
 
-	@RequestMapping(value="gallery/deletephoto", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse DeletePhoto(@RequestBody String photoid) {
-		System.out.println("Delete Photo:" + photoid);
+	@RequestMapping(value = "gallery/deletephoto", method = RequestMethod.POST)
+	public @ResponseBody
+	JsonResponse DeletePhoto(@RequestBody String photoid) {
 		StringBuffer error = new StringBuffer();
-		
 		JsonResponse response = new JsonResponse();
-		if(!photoid.isEmpty()) {
-			if(ResultStatus.SUCCESS == galleryService.deletePhoto(photoid, error)) {  
+		System.out.println("Delete Photo:" + photoid);
+		User user = userDetailsService.getUserFromSession();
+		if (null == user) {
+			response.setError("user info missing");
+			return response;
+		}
+		if (!photoid.isEmpty()) {
+			if (ResultStatus.SUCCESS == galleryService.deletePhoto(photoid,
+					error)) {
 				response.setStatus(true);
-			}
-			else
+				ResultStatus status = uploadManager.deletePhotosById(photoid,
+						ImageType.GALLERY, user.getUsername());
+				System.out.println("Result Status of deleting from S3: "
+						+ status.toString());
+			} else
 				response.setError(error.toString());
 		} else {
 			response.setError("photoid is empty");
 		}
-		
 		return response;
 	}
 }
