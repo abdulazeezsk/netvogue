@@ -3,7 +3,10 @@
 	<div class="row">
 		<!-- left pane -->
 		<div class="span3">
-			<h4 class="leftpane_entity_heading">Boutique</h4>
+			<div class="underline">
+				<span ui-if="!iambrand" class="leftpane_entity">Boutique </span> <span
+					ui-if="iambrand" class="leftpane_entity">Brand </span>
+			</div>
 			<div class="divi2"></div>
 			<ul class="thumbnails">
 				<li class="span3">
@@ -31,22 +34,21 @@
 			<div ui-if="isbrandsearch == 'true'">
 				<span class="leftpane_filter_name">Brand</span> <input type="text"
 					class="span3" placeholder="Brand name" ng-model="search.name"
-					ng-change="getsearchResults()" /> 
-					
-				<span class="leftpane_filter_name">Stockists</span>
+					ng-change="getsearchResults()" /> <span
+					class="leftpane_filter_name">Stockists</span>
 				<!-- <input type="text" class="span3" placeholder="Stockists" /> -->
 				<select data-placeholder="Select a Stockist"
 					ui-select2="{width:'element'}" ng-model="search.stockists" multiple>
 					<option value="{{st.username}}" ng-repeat="st in usersavailable">{{st.name}}</option>
 
-				</select> <br> <span class="leftpane_filter_name">LOCATION</span> 
-					<input type="text" class="span3" placeholder="Location"
-						ng-model="search.location" ng-change="getsearchResults()" /> 
-					<span class="leftpane_filter_name">Price range</span> <br> 
-					<input type="text" class="spanpricerange-leftpane" ng-model="search.fromprice"
-						placeholder="From price" required />
-					- <input type="text" class="spanpricerange-leftpane" ng-model="search.toprice"
-						placeholder="To price" required />
+				</select> <br> <span class="leftpane_filter_name">LOCATION</span> <input
+					type="text" class="span3" placeholder="Location"
+					ng-model="search.location" ng-change="getsearchResults()" /> <span
+					class="leftpane_filter_name">Price range</span> <br> <input
+					type="text" class="spanpricerange-leftpane"
+					ng-model="search.fromprice" placeholder="From price" required /> -
+				<input type="text" class="spanpricerange-leftpane"
+					ng-model="search.toprice" placeholder="To price" required />
 			</div>
 			<div ui-if="isbrandsearch == 'false'">
 				<span class="leftpane_filter_name">Boutique</span> <input
@@ -73,7 +75,8 @@
 				<span class="leftpane_filter_name">CATEGORY</span>
 			</div>
 			<div>
-				<div checkbox-tree ng-model="searchFilter" ng-change="getsearchResults()"></div>
+				<div checkbox-tree ng-model="searchFilter"
+					ng-change="getsearchResults()"></div>
 			</div>
 		</div>
 		<!-- left pane -->
@@ -83,8 +86,7 @@
 		<div class="span9">
 
 
-			<div
-				style="border-bottom: 1px solid black; position: relative; top: -2px;">
+			<div style="border-bottom: 1px solid black;">
 				<span class="left rightpane_subHeading"> Directory </span>
 			</div>
 			<div style="border-bottom: 1px solid black;">
@@ -102,7 +104,7 @@
 				<ul class="thumbnails">
 					<li ng-repeat="user in advancedsearch">
 						<div style="position: relative;">
-							<img ng-src="{{user.thumbpic}}" width="220" height="150">
+							<img ng-src="{{user.thumbpic}}" style="max-height:150px;max-width:210px;min-height:150px;min-width:210px;overflow-x: hidden;overflow-y: hidden;">
 							<div class="masklayer">
 								<h1 class="usertype">
 									<u>{{user.usertype}}</u>
@@ -122,18 +124,18 @@
 					</li>
 				</ul>
 				<div get-more="getmoreresults()">
-   					<div ng-show="gettingmoreresults">
-   						<center><img src="img/ajax-loadersmall.gif"><br></center>
-   					</div>
-   					<div ng-show="nomoredataavailable1">
-   						End of data
-   					</div>
+					<div ng-show="gettingmoreresults">
+						<center>
+							<img src="img/ajax-loadersmall.gif"><br>
+						</center>
+					</div>
+					<div ng-show="nomoredataavailable1">End of data</div>
 				</div>
 			</div>
 		</div>
 		<!-- right pane -->
 	</div>
-	
+
 </div>
 
 <!--body-->
