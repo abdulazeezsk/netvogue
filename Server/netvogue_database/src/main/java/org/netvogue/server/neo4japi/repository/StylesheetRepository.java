@@ -3,7 +3,6 @@ package org.netvogue.server.neo4japi.repository;
 import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.neo4japi.domain.Stylesheet;
 import org.netvogue.server.neo4japi.service.StyleData;
-import org.netvogue.server.neo4japi.service.StylesheetPhotosData;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
 
@@ -15,11 +14,11 @@ public interface StylesheetRepository extends GraphRepository<Stylesheet> {
 	@Query("START p = node:stylesheetid(stylesheetid={0}) SET p.stylesheetname = {1}")
 	void editStylesheet(String stylesheetid, String name);
 	
-	@Query("START n=node:stylesheetid(stylesheetid={0}) MATCH n-[rels*1..]->p " +
+	@Query(	"START n=node:stylesheetid(stylesheetid={0}) MATCH n-[rels*1..]->p " +
 			"WITH n, rels, p, collect(p.availableImages) as photosid " +
 			"FOREACH(rel IN rels: DELETE rel) DELETE p " +
 			"WITH n, photosid MATCH n<-[r]-() DELETE n, r " +
-			"RETURN photosid")
+			"RETURN DISTINCT photosid")
 	Iterable<Iterable<String>> deleteStylesheet(String stylesheetid);
 	
 	@Query( "START n=node:styleid(styleid={0}) RETURN n")
@@ -46,7 +45,10 @@ public interface StylesheetRepository extends GraphRepository<Stylesheet> {
 	Iterable<StyleData> searchStyles(String stylesheetid, String styleno, String fabrication, 
 											long fromprice, long toprice, int skip, int limit);
 	
-	@Query("START p = node:styleid(styleid={0}) MATCH p-[r]-() DELETE p, r")
-	void deleteStyle(String styleid);
+	@Query("START p = node:styleid(styleid={0}) MATCH p-[r]-() " +
+			"WITH p.availableImages as photoids, p, r " +
+			"DELETE p, r " +
+			"RETURN DISTINCT photoids")
+	Iterable<Iterable<String>> deleteStyle(String styleid);
 	
 }

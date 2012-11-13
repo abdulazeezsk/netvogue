@@ -113,13 +113,13 @@ public class StylesheetServiceImpl implements StylesheetService {
 		}
 		return null;
 	}
-	public ResultStatus deleteStyle(String styleId, String error)  {
+	public ResultStatus deleteStyle(String styleId, Iterable<Iterable<String>> photoids, String error)  {
 		if(null == styleId || styleId.isEmpty()){
 			error = "styleId is empty";
 			return ResultStatus.FAILURE;
 		}
 		try {
-			stylesheetRepo.deleteStyle(styleId);
+			photoids = stylesheetRepo.deleteStyle(styleId);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
 			System.out.println("There was an error while deleting Style" + styleId + " - " + e.toString());

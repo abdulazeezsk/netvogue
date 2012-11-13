@@ -414,13 +414,14 @@ public class StyleSheetController {
 	//Change these things once the whole application is completed
 	//All these queries must be changed, as anyone can delete these things if they just have userid Azeez
 	@RequestMapping(value="stylesheet/deletestyle", method=RequestMethod.POST)
-	public @ResponseBody JsonResponse DeletePhoto(@RequestBody String photoid) {
-		System.out.println("Delete Photo:" + photoid);
+	public @ResponseBody JsonResponse DeleteStyle(@RequestBody String styleid) {
+		System.out.println("Delete Style:" + styleid);
 		String error = "";
 		
 		JsonResponse response = new JsonResponse();
-		if(!photoid.isEmpty()) {
-			if(ResultStatus.SUCCESS == stylesheetService.deleteStyle(photoid, error)) {  
+		Iterable<Iterable<String>> photoids = null;
+		if(!styleid.isEmpty()) {
+			if(ResultStatus.SUCCESS == stylesheetService.deleteStyle(styleid, photoids, error)) {  
 				response.setStatus(true);
 			}
 			else
@@ -428,7 +429,7 @@ public class StyleSheetController {
 		} else {
 			response.setError("photoid is empty");
 		}
-		
+		System.out.println("Style deleted" + styleid);
 		return response;
 	}
 }
