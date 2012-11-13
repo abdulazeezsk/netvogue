@@ -1,5 +1,7 @@
 package org.netvogue.server.neo4japi.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.netvogue.server.neo4japi.common.Constants;
@@ -47,16 +49,21 @@ public class GalleryServiceImpl implements GalleryService {
 		}
 	}
 	
-	public ResultStatus deleteGallery(String galleryId, Iterable<String> deletedPhotoIds, StringBuffer error)  {
+	public List<String> deleteGallery(String galleryId, StringBuffer error)  {
+		List<String> galleryIdList = null;
+		Iterable<String> deletedPhotoIds = null;
 		try {
 			deletedPhotoIds = galleryRepo.deleteGallery(galleryId);
-			System.out.println("deleted gallery:" + galleryId);
-			return ResultStatus.SUCCESS;
+			System.out.println("deleted gallery:" + galleryId);			
+			galleryIdList = new ArrayList<String>();
+			for (String string : deletedPhotoIds) {
+				galleryIdList.add(string);
+			}			
 		} catch(Exception e) {
 			System.out.println("There was an error while deleting gallery:" + galleryId + " - " + e.toString());
-			error.append(e.toString());
-			return ResultStatus.FAILURE;
+			error.append(e.toString());			
 		}
+		return galleryIdList;
 	}
 	
 	public ResultStatus setProfilepic(String galleryid, String uniqueid, StringBuffer error) {

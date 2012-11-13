@@ -105,4 +105,11 @@ public class UploadManager {
 				userName + "/" + imageType.getKey() + "/" + photoId);
 	}
 	
+	public ResultStatus deletePhotosList(List<String> photoIdsList, ImageType imageType,
+			String userName) {
+		String bucketName = Constants.bucketname;
+		return transferManager.deletePhotosList(photoIdsList, bucketName,
+				userName + "/" + imageType.getKey() + "/");
+	}
+	
 }
