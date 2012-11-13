@@ -417,7 +417,7 @@ body {
 			<a href="#">Back to top</a>
 		</p>
 		<p>
-		2012 Company, Inc.<a href="#">About</a> | <a href="#">Contact</a> | <a href="#">Privacy</a> | <a href="#">Terms</a>
+		© 2012 Company, Inc.<a href="#">About</a> | <a href="#">Contact</a> | <a href="#">Privacy</a> | <a href="#">Terms</a>
 		</p>
 		</footer>
 
