@@ -32,20 +32,18 @@
 								</a>
 							</div>
 							<div class="leftpanefeed_text">
-								<p style="margin-bottom:5px;font-size:12px;">
-									<a class="vw-feed" style="text-decoration:none;color:black;">{{brandname}}</a>
+								<p>
+									<a>{{brandname}}</a>
 								</p>
-								<p style="margin-bottom:5px;font-size:12px;">
-									<a class="vw-feed-sub" style="text-decoration:none;color:black;" title="">{{style.styleno}}</a>
+								<p>
+									<span>{{style.styleno}}</span>
 								</p>
-								<p style="margin-top: 5px;">
-									<span
-										style="font-weight: normal; font-size: 12px; cursor: pointer; text-transform: uppercase;">
-										<span class="WebRupee"
-										style="font-size: 12px; margin-right: 3px;">Rs.</span>{{style.price}}
+								<p class="rupee">
+									<span>
+										<span class="WebRupee rs">Rs.</span>{{style.price}}
 									</span>
 								</p>
-								<p style="margin-top: 3px; font-weight: bold;">
+								<p class="pull-right">
 									<span><a style="color:black;" ng-click="editstyle(style)">Edit</a></span> <span
 										class="divider">/</span> <span><a style="color:black;"
 										ng-click="deletestyle(style.styleid)">Delete</a></span>

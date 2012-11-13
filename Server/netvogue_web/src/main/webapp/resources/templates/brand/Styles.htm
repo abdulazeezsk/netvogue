@@ -54,18 +54,18 @@
 									ng-src="{{linesheet.leftpic}}" class="pull-left"></a>
 							</div>
 							<div class="leftpanefeed_text">
-								<p style="margin-bottom:5px;font-size:12px;">
-									<a class="vw-feed" style="text-decoration:none;color:black;" ng-click="setlinesheet(linesheet.galleryid)" title="">{{brandname}}</a>
+								<p>
+									<a ng-click="setlinesheet(linesheet.galleryid)" title="">{{brandname}}</a>
 								</p>
-								<p style="margin-bottom:5px;font-size:12px;">
-									<a class="vw-feed-sub" style="text-decoration:none;color:black;" ng-click="setlinesheet(linesheet.galleryid)" title="">{{linesheet.galleryname}}</a>
+								<p>
+									<span ng-click="setlinesheet(linesheet.galleryid)" title="">{{linesheet.galleryname}}</span>
 								</p>
-								<p style="margin-top: 3px;">
-									<span class="vw-feed-sub" style="text-decoration:none;color:black;" ng-click="setlinesheet(linesheet.galleryid)" title="">Delivery
+								<p>
+									<span ng-click="setlinesheet(linesheet.galleryid)" title="">Delivery
 										Date</span>
 								</p>
 								<p>
-									<span class="vw-feed-sub" style="text-decoration:none;color:black;" ng-click="setlinesheet(linesheet.galleryid)" title="">26-Aug-2012</span>
+									<span ng-click="setlinesheet(linesheet.galleryid)" title="">26-Aug-2012</span>
 								</p>
 								<p>{{style.stylename}}</p>
 							</div>
@@ -103,9 +103,9 @@
 					</div>
 					<ul class="thumbnails">
 						<li  ng-repeat="style in styles">
-							<div style="position: relative;">
+							<div class="rgt-thumb-relative">
 								<img ng-src="{{style.profilethumbpic}}" 
-									width="220" height="300" style="max-height: 300px; max-width:220px; min-width: 220px; min-height: 300px;" alt="" title="">
+								class="style-images">
 								<div class="masklayer">
 									<!-- <h1 class="style-brandname" style="text-align:center;" >
 									{{brandname}}
@@ -113,23 +113,23 @@
 									<h1 class="style-seasonname" >
 										<i>{{linesheetname}}</i>
 									</h1> -->
-									<h1 class="style-name">
+									<p class="style-name">
 										<u>Style</u>
-									</h1>
-									<h1 class="name">
+									</p>
+									<p class="name">
 										<i>{{style.styleno}}</i>
-									</h1>
-									<h1 class="pricez">
-									<span class="WebRupee" style="font-size: 15px;margin-left:3px;">Rs.</span>
-									<span class="regular-price"  id="product-price-11072"> <span
+									</p>
+									<p class="pricez">
+									<span class="WebRupee rs">Rs.</span>
+									<span class="regular-price"> <span
 										class="price">{{style.price}}</span>
 									</span>
-									</h1>
+									</p>
 									  <p>
-										 <a ui-if="isMyProfile"   style="color:white;text-decoration:none;" title="Click here to add details"
+										 <a ui-if="isMyProfile"   class="view"
 										ng-href="#/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" >
 										View </a>
-										 <a ui-if="!isMyProfile"   style="color:white;text-decoration:none;" title="Click here to add details"
+										 <a ui-if="!isMyProfile"   class="view"
 										ng-href="#/{{profileid}}/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" >
 										View </a>
 									</p>

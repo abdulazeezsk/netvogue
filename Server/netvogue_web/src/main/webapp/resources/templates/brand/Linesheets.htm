@@ -108,8 +108,8 @@
 
 				<ul class="thumbnails">
 					<li ng-repeat="linesheet in linesheets">
-						<div style="position: relative;">
-							<img ng-src="{{linesheet.gallerypic}}" style="max-height: 300px; max-width:220px; min-width: 220px; min-height: 300px;">
+						<div class="rgt-thumb-relative">
+							<img ng-src="{{linesheet.gallerypic}}" class="style-images">
 							<div class="masklayer">
 								<h1 class="editdel" ui-if="isMyProfile && iambrand">
 									<a ng-click="deletelinesheet(linesheet.galleryid)"
@@ -121,18 +121,18 @@
 								<h1 class="linesheet-season-name">
 									<i>{{linesheet.galleryname}}</i>
 								</h1> -->
-								<h1 class="linesheet-delivery-date">
+								<p class="linesheet-delivery-date">
 									<u>Delivery Date</u>
-								</h1>
-								<h1 class="date">
+								</p>
+								<p class="date">
 									<i>{{linesheet.deliverydate}}</i>
-								</h1>
+								</p>
 								<p>
 									<a ui-if="isMyProfile"
-										style="color: white; text-decoration: none;"
+										class="view"
 										ng-href="#/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}">
 										View </a> <a ui-if="!isMyProfile"
-										style="color: white; text-decoration: none;"
+										class="view"
 										ng-href="#/{{profileid}}/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}">
 										View </a>
 								</p>

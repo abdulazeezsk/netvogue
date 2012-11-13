@@ -71,8 +71,8 @@
 				
 				<ul class="thumbnails">
 					<li ng-repeat="collection in collections">
-						<div style="position: relative;">
-							<img ng-src="{{collection.gallerypic}}" style="max-height: 300px; max-width:220px; min-width: 220px; min-height: 300px;">
+						<div class="rgt-thumb-relative">
+							<img ng-src="{{collection.gallerypic}}" class="style-images">
 							<div class="masklayer">
 								<h1 class="editdel" ui-if="isMyProfile && iambrand">
 									<a ng-click="deletecollection(collection.galleryid)"
@@ -81,11 +81,11 @@
 										title="Edit"><i class="icon-edit icon-white"></i></a>
 								</h1>
 								<p>
-									<a ui-if="isMyProfile"  style="color: white; text-decoration: none;"
-										ng-href="#/collection?id={{collection.galleryid}}" title="Click here to view details">View
-									</a> <a ui-if="!isMyProfile"  style="color: white; text-decoration: none;"
+									<a ui-if="isMyProfile"  class="view"
+										ng-href="#/collection?id={{collection.galleryid}}" >View
+									</a> <a ui-if="!isMyProfile"  class="view"
 										ng-href="#/{{profileid}}/collection?id={{collection.galleryid}}"
-										title="Click here to view details" > View </a>
+										 > View </a>
 								</p>
 							</div>
 						</div>

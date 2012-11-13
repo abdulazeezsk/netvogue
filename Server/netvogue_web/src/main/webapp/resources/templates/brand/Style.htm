@@ -35,16 +35,15 @@
 									ng-src="{{style.profileleftpic}}" class="pull-left"></a>
 							</div>
 							<div class="leftpanefeed_text">
-								<p style="margin-bottom:5px;font-size:12px;">
-									<a class="vw-feed" style="text-decoration:none;color:black;" ng-click="setmainstyle(style)" title="">{{brandname}}</a>
+								<p>
+									<a  ng-click="setmainstyle(style)" title="">{{brandname}}</a>
 								</p>
-								<p style="margin-bottom:5px;font-size:10px;">
-									<a class="vw-feed-sub" style="text-decoration:none;color:black;" ng-click="setmainstyle(style)" title="">{{style.styleno}}</a>
+								<p>
+									<span  ng-click="setmainstyle(style)" title="">{{style.styleno}}</span>
 								</p>
-								<p style="margin-top: 5px;">
-									<span
-										style="font-weight: normal; font-size: 12px; cursor: pointer; text-transform: uppercase;">
-										<span class="WebRupee" style="font-size: 12px;margin-right:3px;">Rs.</span>{{style.price}}
+								<p class="rupee">
+									<span>
+										<span class="WebRupee rs">Rs.</span>{{style.price}}
 									</span>
 								</p>
 							</div>
