@@ -3987,12 +3987,14 @@ input[type="submit"].btn.btn-mini {
 
 .nav .dropdown-toggle .caret {
   margin-top: 6px;
-  border-top-color: #0088cc;
+  border-top-color: #fff;
+  /* border-top-color: #0088cc; */
   border-bottom-color: #0088cc;
 }
 
 .nav .dropdown-toggle:hover .caret {
-  border-top-color: #005580;
+  border-top-color: #fff;
+  /* border-top-color: #005580; */
   border-bottom-color: #005580;
 }
 
