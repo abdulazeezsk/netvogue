@@ -611,8 +611,8 @@ function MyCtrlPrintcampaign($scope, $routeParams, $location, currentvisitedprof
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	
-	$scope.galleryname = "new";
-	$scope.gallerydesc = "description";	
+	$scope.galleryname = "";
+	$scope.gallerydesc = "";	
 	
 	$scope.searchgalleryname = ""; 
 	
@@ -830,8 +830,8 @@ function MyCtrlNewsletter($scope, $routeParams, $location, currentvisitedprofile
 	$scope.isMyProfile = currentvisitedprofile.isMyProfile();
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 	
-	$scope.galleryname = "new";
-	$scope.gallerydesc = "description";	
+	$scope.galleryname = "";
+	$scope.gallerydesc = "";	
 	
 	//Related to search
 	$scope.searchgalleryname = ""; 
@@ -1055,8 +1055,8 @@ function MyCtrlCollections($scope, $routeParams, $location, currentvisitedprofil
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 
 	//Related to new collection
-	$scope.collectionname 		= "new";
-	$scope.collectiondesc 		= "description";
+	$scope.collectionname 		= "";
+	$scope.collectiondesc 		= "";
 	$scope.collectioncategory	= "";
 	$scope.defaultcategories	= netvogue.defaultproductlines;
 	$scope.gettingcollections = true;
@@ -1301,8 +1301,8 @@ function MyCtrlStylesheets($scope, $routeParams, $location, currentvisitedprofil
 	$scope.backButton = currentvisitedprofile.getBackHistory();
 
 	//Related to new stylesheet
-	$scope.stylesheetname = "new";
-	$scope.stylesheetcat  = "description";
+	$scope.stylesheetname = "";
+	$scope.stylesheetcat  = "";
 	$scope.defaultcategories	= netvogue.defaultproductlines;
 	
 	//Related to search
@@ -1582,7 +1582,7 @@ function MyCtrlLinesheets($scope, $routeParams, $location, currentvisitedprofile
 	var pagenumber = 0;
 	
 	//Related to new stylesheet
-	$scope.linesheetname = "new";
+	$scope.linesheetname = "";
 	$scope.linesheetcat  = "";
 	$scope.deliverydate  = "";
 	$scope.defaultcategories	= netvogue.defaultproductlines;

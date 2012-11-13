@@ -10,7 +10,7 @@ public interface StylesheetService {
 	
 	public Stylesheet getStylesheet(String id);
 	public ResultStatus editStylesheet(String id, String name, String error);
-	public ResultStatus deleteStylesheet(String id, String error);
+	public ResultStatus deleteStylesheet(String id, Iterable<Iterable<String>> photoids, String error);
 	
 	public Style getStyle(String styleid, String error);
 	public Iterable<StyleData> getStylesbyCategory(String username, String category);

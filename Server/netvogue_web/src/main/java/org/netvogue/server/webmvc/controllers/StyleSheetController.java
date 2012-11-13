@@ -276,8 +276,11 @@ public class StyleSheetController {
 			return response;
 		}
 		
+		Iterable<Iterable<String>> photoids = null;
 		//Make sure that styles inside this stylesheet are not part of any linesheets
-		if(ResultStatus.SUCCESS == stylesheetService.deleteStylesheet(stylesheetId, error)) {  
+		if(ResultStatus.SUCCESS == stylesheetService.deleteStylesheet(stylesheetId, photoids, error)) {
+			//This is different to other ones...here each String itself is an array separated by commas
+			//parse that into individual strings and delete
 			response.setStatus(true);
 		}
 		else

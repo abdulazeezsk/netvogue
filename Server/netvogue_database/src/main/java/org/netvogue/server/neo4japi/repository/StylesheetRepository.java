@@ -3,6 +3,7 @@ package org.netvogue.server.neo4japi.repository;
 import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.neo4japi.domain.Stylesheet;
 import org.netvogue.server.neo4japi.service.StyleData;
+import org.netvogue.server.neo4japi.service.StylesheetPhotosData;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
 
@@ -14,10 +15,12 @@ public interface StylesheetRepository extends GraphRepository<Stylesheet> {
 	@Query("START p = node:stylesheetid(stylesheetid={0}) SET p.stylesheetname = {1}")
 	void editStylesheet(String stylesheetid, String name);
 	
-	@Query("START n=node:stylesheetid(stylesheetid={0}) MATCH n-[rels*0..]->p " +
+	@Query("START n=node:stylesheetid(stylesheetid={0}) MATCH n-[rels*1..]->p " +
+			"WITH n, rels, p, collect(p.availableImages) as photosid " +
 			"FOREACH(rel IN rels: DELETE rel) DELETE p " +
-			"WITH n MATCH n<-[r]-() DELETE n, r")
-	void deleteStylesheet(String stylesheetid);
+			"WITH n, photosid MATCH n<-[r]-() DELETE n, r " +
+			"RETURN photosid")
+	Iterable<Iterable<String>> deleteStylesheet(String stylesheetid);
 	
 	@Query( "START n=node:styleid(styleid={0}) RETURN n")
 	Style getStyle(String styleid);

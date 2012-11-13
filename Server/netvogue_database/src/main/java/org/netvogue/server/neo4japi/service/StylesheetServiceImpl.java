@@ -57,9 +57,10 @@ public class StylesheetServiceImpl implements StylesheetService {
 		}
 	}
 	
-	public ResultStatus deleteStylesheet(String stylesheetId, String error)  {
+	public ResultStatus deleteStylesheet(String stylesheetId,  Iterable<Iterable<String>> photoids, String error)  {
 		try {
-			stylesheetRepo.deleteStylesheet(stylesheetId);
+			photoids = stylesheetRepo.deleteStylesheet(stylesheetId);
+			//stylesheetRepo.deleteStylesheet(stylesheetId);
 			System.out.println("deleted style sheet:" + stylesheetId);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {
