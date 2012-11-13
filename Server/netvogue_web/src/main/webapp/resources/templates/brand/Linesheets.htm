@@ -171,18 +171,26 @@
 				<!-- <input type="text" ng-model="linesheetname" class="span4"
 					placeholder="Enter linesheet season" /> -->
 					<select id="e10" class="populate span4" ng-model="linesheetname">
-					<option value="">Spring Summer</option>
-					<option value="">Fall Winter</option>
+					<option value="">Spring Summer 2012</option>
+					<option value="">Fall Winter 2012</option>
+					<option value="">Spring Summer 2013</option>
+					<option value="">Fall Winter 2013</option>
+					<option value="">Spring Summer 2014</option>
+					<option value="">Fall Winter 2014</option>
+					<option value="">Spring Summer 2015</option>
+					<option value="">Fall Winter 2015</option>
+					<option value="">Spring Summer 2016</option>
+					<option value="">Fall Winter 2016</option>
 				</select>
 					
 			</div>
-						<span class="leftpane_filter_name">Year</span>
+		<!-- 				<span class="leftpane_filter_name">Year</span>
 			<div>
 				 <input type="number"  class="span4" placeholder="Year"
                                 name="seasonyear" maxlength="4" required ng:pattern="/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/"
                                 min="1900" max="2030" ng-minlength="4" />
 					
-			</div>
+			</div> -->
 			<span class="leftpane_filter_name">Category</span> 
 			<div>
 				<select id="e1" class="populate span4" ng-model="linesheetcat"
@@ -206,7 +214,7 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Close</a> <a
+			<a href="#" class="btn btn-inverse" data-dismiss="modal">Close</a> <a
 				class="btn btn-primary" data-dismiss="modal"
 				ng-click="createlinesheet()"> Create linesheet</a>
 		</div>
