@@ -84,35 +84,13 @@ netvogue.hashtable = function(obj)
     };
 };
 
-netvogue.productline 	= function(productlinename, category) {
-	this.productlinename	= productlinename;
-   	this.selected			= "no";
-   	this.id					= productlinename;
-   	this.category			= category;
-};
-
-netvogue.brandsavailable= function(username, name) {
-	this.username 	= username;
-	this.name 		= name;
-};
 netvogue.entity 		= function() {
 	this.email 			= "";
 	this.password		= "";
 	this.username		= "";
 	this.name			= "";
-	this.country		= "India";
-	this.state			= "AP";
-	this.city			= "Hyderabad";
-	this.address		= "Hitech City";
-	this.zipcode		= "500029";
-	this.mobile			= "9000766605";
-	this.telephone		= "23456789";
-	this.website		= "http://netvogue.org";
-	this.estdyear		= 1989;
-	this.fromprice		= 0;
-	this.toprice		= 0;
-	this.productlines	= [];
-	this.brandsselected = [];
+	this.primarycontact = "";
+	this.mobile			= "";
 };
 /* Add and Edit Controllers */
 var app = angular.module('netVogue', []);
@@ -120,51 +98,6 @@ var app = angular.module('netVogue', []);
 function MyCtrlRegistration($scope, $http, $timeout, $location) {
 	$scope.entity 		= new netvogue.entity();
 	
-	//Related to brands carried/Stockists
-	$scope.brandsentered	= ""; //USer input in text box
-	$scope.brands 			= []; //List of brands for searching
-	$scope.brandscarried	= new netvogue.hashtable();  //Names entered in control
-	var brandsReceived		= new netvogue.hashtable();
-	
-	//Cities related information
-	$scope.cities = [
-	                 'Hyderabad', 'Bangalore', 'New Delhi', 'Mumbai', 'Madras', 'Kolkatta'
-	                ];
-	$scope.productscarried = [
-                              	new netvogue.productline("Womens RTW", 	"APPAREL"),
-								new netvogue.productline("Denim", 		"APPAREL"),
-							   	new netvogue.productline("Outerwear", 	"APPAREL"),
-							   	new netvogue.productline("Activewear", 	"APPAREL"),
-							   	new netvogue.productline("Mens RTW", 	"APPAREL"),
-							   	new netvogue.productline("Lingerie", 	"APPAREL"),
-							   	new netvogue.productline("Swimwear", 	"APPAREL"),
-							   	new netvogue.productline("Kids", 		"APPAREL"),
-							   	new netvogue.productline("Mens Shoe", 	"SHOES"),
-							   	new netvogue.productline("Womens Shoe", "SHOES"),
-							   	new netvogue.productline("Mens Bags", 	"HANDBAGS"),
-							   	new netvogue.productline("Handbags", 	"HANDBAGS"),
-							   	new netvogue.productline("Watches", 	"WATCHES"),
-							   	new netvogue.productline("Jewelry", 	"OTHERS"),
-							   	new netvogue.productline("Hats", 		"OTHERS"),
-							   	new netvogue.productline("Luggage", 	"OTHERS"),
-							   	new netvogue.productline("Gifts", 		"OTHERS"),
-							   	new netvogue.productline("Candles", 	"OTHERS")
-		                 	 ];
-	$scope.addBrandsCarried = function(brandscarried) {
-		if("" == brandscarried) {
-			return;
-		}
-		
-		var username = brandsReceived.getItem(brandscarried);
-		if(null == username)
-			username = brandscarried;
-    	
-		$scope.brandscarried.setItem(brandscarried, username);
-		$scope.brandsentered = "";
-	};
-	$scope.removeBrandsCarried = function(key) {
-		$scope.brandscarried.removeItem(key);
-	};
 	$scope.emailchanged = function(email, ctrl, key) {
 		if("" == email) {
 			return;
@@ -210,36 +143,10 @@ function MyCtrlRegistration($scope, $http, $timeout, $location) {
         	ctrl.$setValidity(key, false);
         });
 	};
-	$scope.brandsenteredchanged = function(brandsentered) {
-		if("" == brandsentered){
-			return
-		}
-		var datatosend = {
-				"username" : brandsentered
-		};
-		var config = {
-                method: "GET",
-                params: datatosend,
-                url: entity + "/usersavailable"
-            };
-        $http(config).success(function(data) {
-            $scope.brands.splice(0, $scope.brands.length);
-        	for(var user in data){
-        		//Check if this data is already in brands carried. Then dont add it here.
-        		if(undefined == $scope.brandscarried.getItem(data[user].name))
-        			$scope.brands.push(data[user].name);
-            	brandsReceived.setItem(data[user].name, data[user].username);
-            };
-        });
-	};
+	
 	$scope.addEntity	= function(event) {
 		angular.element(event.srcElement).button('loading');
-		for(brand in $scope.productscarried) {
-			if($scope.productscarried[brand].selected == true) {
-				$scope.entity.productlines.push($scope.productscarried[brand].id);
-			}
-		}
-		$scope.entity.brandsselected = $scope.brandscarried.values();
+		
 		var config = {
                 method: "POST",
                 data: $scope.entity,

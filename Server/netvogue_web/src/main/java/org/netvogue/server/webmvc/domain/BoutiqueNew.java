@@ -28,6 +28,12 @@ public class BoutiqueNew {
 	private String 	name;
 	
 	@NotEmpty
+	@Size(min=10,max=10)
+	private String mobile;
+	
+	private String 	primarycontact;
+	
+	/*@NotEmpty
 	@Size(max=25)
 	private String 	country;
 	
@@ -68,9 +74,9 @@ public class BoutiqueNew {
 	private Long toprice;
 	
 	private String[] productlines;
-	private String[] brandsselected;
+	private String[] brandsselected;*/
 
-     public String getUsername() {
+    public String getUsername() {
 		return username;
 	}
 
@@ -78,6 +84,23 @@ public class BoutiqueNew {
 		this.username = username;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -86,20 +109,28 @@ public class BoutiqueNew {
 		this.name = name;
 	}
 
-	public String getZipcode() {
-		return zipcode;
-	}
-
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
-	}
-
 	public String getMobile() {
 		return mobile;
 	}
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+
+	public String getPrimarycontact() {
+		return primarycontact;
+	}
+
+	public void setPrimarycontact(String primarycontact) {
+		this.primarycontact = primarycontact;
+	}
+
+	/*public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
 	}
 
 	public Integer getEstdyear() {
@@ -126,18 +157,6 @@ public class BoutiqueNew {
 		this.brandsselected = brandsselected;
 	}
 	
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	public String getAddress() {
 		return address;
 	}
@@ -189,7 +208,7 @@ public class BoutiqueNew {
 
 	public void setToprice(Long toprice) {
 		this.toprice = toprice;
-	}
+	}*/
 
 	@Override
 	public String toString() {
@@ -197,7 +216,9 @@ public class BoutiqueNew {
 		temp = "\nEmail:" 		+ email 	+ "\n";
 		temp = "Username:" 		+ username 	+ "\n";
 		temp+= "Boutique Name:" + name + "\n";
-		temp+= "Country:" 		+ country 	+ "\n";
+		temp+= "Primary Contact"+ primarycontact + "\n";
+		temp+= "Mobile:" 		+ mobile 	+ "\n";
+		/*temp+= "Country:" 		+ country 	+ "\n";
 		temp+= "State:" 		+ state 	+ "\n";
 		temp+= "City:" 			+ city 		+ "\n";
 		temp+= "Address:" 		+ address 	+ "\n";
@@ -215,8 +236,8 @@ public class BoutiqueNew {
 		temp+= "BrandsSelected:"+ "\n";
 		for(int i=0; i < brandsselected.length; i++) {
 			temp+= "\t" + brandsselected[i].toString() 	+ "\n";
-		}
-		temp = "Email:" 		+ email;
+		}*/
+		//temp = "Email:" 		+ email;
 		return temp;
 	}
 }

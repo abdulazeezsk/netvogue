@@ -50,12 +50,13 @@ public class UserConverterFactory implements ConverterFactory<BoutiqueNew, User>
 			}
 			serviceUser.setName(boutiqueNew.getName());
 			serviceUser.setUsername(boutiqueNew.getUsername());
-			serviceUser.setCountry(boutiqueNew.getCountry());
+			serviceUser.setPrimarycontact(boutiqueNew.getPrimarycontact());
+			serviceUser.setMobileNo(Long.parseLong(boutiqueNew.getMobile()));
+			/*serviceUser.setCountry(boutiqueNew.getCountry());
 			serviceUser.setState(boutiqueNew.getState());
 			serviceUser.setCity(boutiqueNew.getCity());
 			serviceUser.setAddress(boutiqueNew.getAddress());
 			serviceUser.setZipCode(Integer.parseInt(boutiqueNew.getZipcode()));
-			serviceUser.setMobileNo(Long.parseLong(boutiqueNew.getMobile()));
 			serviceUser.setTelephoneNo1(Long.parseLong(boutiqueNew.getTelephone()));
 			serviceUser.setWebsite(boutiqueNew.getWebsite());
 			serviceUser.setYearofEst(boutiqueNew.getEstdyear());
@@ -71,7 +72,7 @@ public class UserConverterFactory implements ConverterFactory<BoutiqueNew, User>
 			for(String userName: usersCarried) {
 				User user = boutiqueService.GetOrCreateUser(userName);
 				serviceUser.updateUsersCarried(user);
-			}
+			}*/
 			return (T) serviceUser;
 		}
 	}

@@ -59,7 +59,7 @@ body {
 		</div>
 	</div>
 
-	<div class="container">
+	<div class="container" ng-controller="MyCtrlRegistration">
 
 		<!-- Main hero unit for a primary marketing message or call to action -->
 		<!--  <div class="hero-unit">
@@ -122,12 +122,12 @@ body {
                  </span>
 				
 				<label style="font-family: 'Lato', sans-serif; font-weight: 400;" >Primary
-				Conatct</label>
-				 <input type="text" class="span5"
-				placeholder="Primary Conatct Person"> 
+				Contact</label>
+				 <input type="text" class="span5" ng-model="entity.primarycontact"
+				placeholder="Primary Contact Person"> 
 				<label style="font-family: 'Lato', sans-serif; font-weight: 400;" >Mobile
 				 Number</label> 
-				<input type="text" class="span5"
+				<input type="text" class="span5" ng-model="entity.mobile"
 				placeholder="Primary Conatct Mobile"> 
 				<label style="font-family: 'Lato', sans-serif; font-weight: 400;"
 				class="checkbox"> <input type="checkbox"> I Agree to Terms & Conditions
