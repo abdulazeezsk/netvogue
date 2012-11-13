@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -289,6 +290,93 @@ public class FileManager extends TransferManager {
 			DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest(
 					bucketName).withQuiet(false);
 			multiObjectDeleteRequest.setKeys(keys);
+			DeleteObjectsResult delObjRes = s3Client
+					.deleteObjects(multiObjectDeleteRequest);
+			System.out.format("Successfully deleted all the %s items.\n",
+					delObjRes.getDeletedObjects().size());
+			// s3Client.deleteObject(new DeleteObjectRequest(bucketName,
+			// photoId));
+		} catch (MultiObjectDeleteException mode) {
+			for (DeleteError deleteError : mode.getErrors()) {
+				System.out.format("Object Key: %s\t%s\t%s\n",
+						deleteError.getKey(), deleteError.getCode(),
+						deleteError.getMessage());
+			}
+		} catch (AmazonServiceException ase) {
+			System.out.println("Caught an AmazonServiceException.");
+			System.out.println("Error Message:    " + ase.getMessage());
+			System.out.println("HTTP Status Code: " + ase.getStatusCode());
+			System.out.println("AWS Error Code:   " + ase.getErrorCode());
+			System.out.println("Error Type:       " + ase.getErrorType());
+			System.out.println("Request ID:       " + ase.getRequestId());
+			ase.printStackTrace();
+			return ResultStatus.FAILURE;
+		} catch (AmazonClientException ace) {
+			System.out.println("Caught an AmazonClientException.");
+			System.out.println("Error Message: " + ace.getMessage());
+			ace.printStackTrace();
+			return ResultStatus.FAILURE;
+		} catch (Exception ex) {
+			System.out.println("Caught an AmazonClientException.");
+			System.out.println("Error Message: " + ex.getMessage());
+			ex.printStackTrace();
+			return ResultStatus.FAILURE;
+		}
+		return ResultStatus.SUCCESS;
+	}
+	
+	public ResultStatus deletePhotosList(List<String> photoIdsList,
+			String bucketName, String prefixKey) {
+		AmazonS3 s3Client = null;
+		AWSCredentials credentials = null;
+		ObjectListing objectListing = null;
+		ListObjectsRequest listObjectsRequest = null;
+		List<String> keys = null;
+		List<KeyVersion> keyVersions = null;
+		try {
+			System.out.println("photoId in transfer manager: " + prefixKey);
+			credentials = new BasicAWSCredentials(accesskey, secureKey);
+			s3Client = new AmazonS3Client(credentials);
+			keys = new ArrayList<String>();
+			listObjectsRequest = new ListObjectsRequest().withBucketName(
+					bucketName).withPrefix(prefixKey);
+			String key = null;
+			do {
+				objectListing = s3Client.listObjects(listObjectsRequest);
+				for (S3ObjectSummary objectSummary : objectListing
+						.getObjectSummaries()) {
+					key = objectSummary.getKey();
+					// KeyVersion keyVersion = new KeyVersion(key);
+					keys.add(key);
+					System.out.println(" - " + key + "  " + "(size = "
+							+ objectSummary.getSize() + ")");
+				}
+				listObjectsRequest.setMarker(objectListing.getNextMarker());
+			} while (objectListing.isTruncated());
+
+			keyVersions = new ArrayList<KeyVersion>();
+			for (Iterator<String> iterator = keys.iterator(); iterator
+					.hasNext();) {
+				String string = iterator.next();
+				System.out.println("string: " + string);
+				for (int i = 0; i < photoIdsList.size(); i++) {
+					String str = photoIdsList.get(i);
+					System.out.println("str: " + str);
+					if (string.contains(str)) {
+						System.out.println("Matching string: " + string
+								+ " matching str: " + str);
+						KeyVersion keyVersion = new KeyVersion(string);
+						keyVersions.add(keyVersion);
+						break;
+					} else {
+						continue;
+					}
+				}
+			}
+			// Multi-object delete by specifying only keys (no version ID).
+			DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest(
+					bucketName).withQuiet(false);
+			multiObjectDeleteRequest.setKeys(keyVersions);
 			DeleteObjectsResult delObjRes = s3Client
 					.deleteObjects(multiObjectDeleteRequest);
 			System.out.format("Successfully deleted all the %s items.\n",

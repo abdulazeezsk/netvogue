@@ -213,11 +213,24 @@ public class GalleryController {
 			response.setError("Galleryid is empty");
 			return response;
 		}
-		
-		Iterable<String> deletedPhotoIds = null;
-		if(ResultStatus.SUCCESS == galleryService.deleteGallery(galleryid, deletedPhotoIds, error)) {
+		User user = userDetailsService.getUserFromSession();
+		if (null == user) {
+			response.setError("user info missing");
+			return response;
+		}
+		List<String> galleryIdsList = galleryService.deleteGallery(galleryid, error);
+		if(null != galleryIdsList) {
 			//Delete all photo ids from here
-			response.setStatus(true);
+			for (Iterator<String> iterator = galleryIdsList.iterator(); iterator
+					.hasNext();) {
+				String string = iterator.next();
+				System.out.println("photo id in gallery: " + string);
+			}
+			ResultStatus status = uploadManager.deletePhotosList(galleryIdsList,
+					ImageType.GALLERY, user.getUsername());
+			System.out.println("Result Status of deleting gallery from S3: "
+					+ status.toString());
+			response.setStatus(true);			
 		}
 		else
 			response.setError(error.toString());

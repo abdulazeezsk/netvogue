@@ -1,6 +1,6 @@
 package org.netvogue.server.neo4japi.service;
 
-import java.util.Set;
+import java.util.List;
 
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.Gallery;
@@ -12,7 +12,7 @@ public interface GalleryService {
 	
 	public Gallery GetGallery(String GalleryId);
 	public ResultStatus editGalleryName(String galleryId, String name, StringBuffer error);
-	public ResultStatus deleteGallery(String galleryId, Iterable<String> deletedPhotoIds, StringBuffer error);
+	public List<String> deleteGallery(String galleryId, StringBuffer error);
 	public ResultStatus setProfilepic(String galleryid, String uniqueid, StringBuffer error);
 	
 	public Iterable<Photo> GetPhotos(String galleryId, int pagenumber);
