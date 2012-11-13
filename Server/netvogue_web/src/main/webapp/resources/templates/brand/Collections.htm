@@ -72,7 +72,7 @@
 				<ul class="thumbnails">
 					<li ng-repeat="collection in collections">
 						<div style="position: relative;">
-							<img ng-src="{{collection.gallerypic}}" width="220" height="300">
+							<img ng-src="{{collection.gallerypic}}" style="max-height: 300px; max-width:220px; min-width: 220px; min-height: 300px;">
 							<div class="masklayer">
 								<h1 class="editdel" ui-if="isMyProfile && iambrand">
 									<a ng-click="deletecollection(collection.galleryid)"

@@ -91,7 +91,7 @@
 					<li ng-repeat="style in styles">
 						<div style="position: relative;">
 							<img ng-src="{{style.profilethumbpic}}" width="220" height="300"
-								alt="" title="">
+								alt="" title="" style="max-height: 300px; max-width:220px; min-width: 220px; min-height: 300px;" >
 							<div class="masklayer">
 								<h1 class="editdel" ui-if="isMyProfile">
 									<a ng-click="deletestyle(style.styleid)" title="Delete"><i

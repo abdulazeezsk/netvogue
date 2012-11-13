@@ -62,7 +62,7 @@
 				<ul class="thumbnails">
 					<li ng-repeat="stylesheet in stylesheets">
 						<div style="position: relative;">
-							<img ng-src="{{stylesheet.gallerypic}}" width="220" height="300">
+							<img ng-src="{{stylesheet.gallerypic}}" style="max-height: 300px; max-width:220px; min-width: 220px; min-height: 300px;">
 							<div class="masklayer">
 								<h1 class="editdel" ui-if="isMyProfile">
 									<a

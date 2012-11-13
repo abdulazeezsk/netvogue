@@ -109,7 +109,7 @@
 				<ul class="thumbnails">
 					<li ng-repeat="linesheet in linesheets">
 						<div style="position: relative;">
-							<img ng-src="{{linesheet.gallerypic}}" width="220" height="300">
+							<img ng-src="{{linesheet.gallerypic}}" style="max-height: 300px; max-width:220px; min-width: 220px; min-height: 300px;">
 							<div class="masklayer">
 								<h1 class="editdel" ui-if="isMyProfile && iambrand">
 									<a ng-click="deletelinesheet(linesheet.galleryid)"
