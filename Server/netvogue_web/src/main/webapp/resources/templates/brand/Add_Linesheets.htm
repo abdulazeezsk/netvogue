@@ -33,20 +33,20 @@
 									ng-src="{{style.profileleftpic}}" class="pull-left"></a>
 							</div>
 							<div class="leftpanefeed_text">
-							<h3>
-									<a ng-click="setmainstyle(style)" title="">{{brandname}}</a>
-								</h3>
-								<h2>
-									<a ng-click="setmainstyle(style)" title="">{{style.styleno}}</a>
-								</h2>
-								<h2 style="margin-top: 5px;">
+							<p style="margin-bottom:5px;font-size:12px;">
+									<a class="vw-feed" style="text-decoration:none;color:black;" ng-click="setmainstyle(style)" title="">{{brandname}}</a>
+								</p>
+								<p style="margin-bottom:5px;font-size:12px;">
+									<a class="vw-feed-sub" style="text-decoration:none;color:black;" ng-click="setmainstyle(style)" title="">{{style.styleno}}</a>
+								</p>
+								<p style="margin-top: 5px;">
 									<span
 										style="font-weight: normal; font-size: 12px; cursor: pointer; text-transform: uppercase;">
 										<span class="WebRupee" style="font-size: 12px;margin-right:3px;">Rs.</span>{{style.price}}
 									</span>
-								</h2>
-								<p style="margin-top:3px;font-weight:bold;">
-									<a ng-click="addstyle(style)">ADD</a>
+								</p>
+								<p  style="margin-top:3px;font-weight:bold;">
+									<a style="color:black;" ng-click="addstyle(style)">ADD</a>
 								</p>
 							</div>
 						</div>
