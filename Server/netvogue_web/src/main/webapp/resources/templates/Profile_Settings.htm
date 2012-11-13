@@ -105,10 +105,10 @@
                         </div>
                         <input type="text" id="txt_brands_carried" class="span3" placeholder="Enter Brand Name" 
                         	 	ng-model="brandsentered" ng-change="brandsenteredchanged(brandsentered)" ui-jq="typeahead" ui-options="{ source: brands }"/>
-                        <button class="btn btn-primary  addbrands_btn" ui-if="!iambrand" ng-click="addBrandsCarried(brandsentered)">
+                        <button class="btn btn-inverse addbrands_btn" ui-if="!iambrand" ng-click="addBrandsCarried(brandsentered)">
                             ADD BRAND
                         </button>
-                        <button class="btn btn-primary  addbrands_btn" ui-if="iambrand" ng-click="addBrandsCarried(brandsentered)">
+                        <button class="btn btn-inverse  addbrands_btn" ui-if="iambrand" ng-click="addBrandsCarried(brandsentered)">
                             ADD STOCKIST
                         </button>
                         <div class="divi2 right_pane_underline">
