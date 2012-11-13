@@ -68,8 +68,7 @@ font-family: "Lato Neue", Lato, Arial, sans-serif;
 	float: left;
 	margin: 0 0 0 8px;
 	word-wrap: break-word;
-	font: normal 10px  Lato, Arial, sans-serif;;
-	font-weight: bold;
+	font: normal 12px  Lato, Arial, sans-serif;;
 }
 
 .leftpane_profile_img{
@@ -114,17 +113,42 @@ font-size:14px;
 	width: 110px;
 }
 
-.leftpanefeed_text h3 {
-	font: bold 9px  Lato, Arial, sans-serif;;
-	padding: 0;
-}
-.leftpanefeed_text h2 {
-	font: normal 9px  Lato, Arial, sans-serif;;
-	padding: 0;
-}
 .leftpanefeed_text p {
-	font: normal 9px  Lato, Arial, sans-serif;;
+	font: normal 12px  Lato, Arial, sans-serif;;
+	padding: 0;
+	margin-bottom:5px;
 }
+
+.leftpanefeed_text .rupee {
+	font: normal 12px  Lato, Arial, sans-serif;;
+	padding: 0;
+	margin-bottom:5px;
+	margin-top: 5px;
+	cursor: pointer;
+	text-transform: uppercase;
+}
+.leftpanefeed_text .rs {
+	font-size: 12px;
+	margin-right:3px;
+}
+
+
+
+/* .vw-feed{
+	width: 150px;
+	float: left;
+	color:#000;
+	word-wrap: break-word;
+	font: bold 10px  Lato, Arial, sans-serif;
+}
+
+.vw-feed-sub{
+	width: 150px;
+	float: left;
+	color:#000;
+	word-wrap: break-word;
+	font: normal 10px  Lato, Arial, sans-serif;
+} */
 
 
 .profile-address {
@@ -215,7 +239,13 @@ font-size:14px;
 .rightpane_back_btn a:hover{
 	text-decoration: none;
 }
-
+.style-images
+{
+	max-height: 300px;
+	 max-width:220px;
+	  min-width: 220px;
+	   min-height: 300px;
+}
 .header_width
 {
 width:600px;	
@@ -865,9 +895,9 @@ input.spanaddstyle_txt1,textarea.spanaddstyle_txt1,.uneditable-input.spanaddstyl
 }
 .desc
 {
-	font: normal 10px  Lato, Arial, sans-serif;
+	font: normal 12px  Lato, Arial, sans-serif;
 	font-weight:lighter;
-	color: #000000;
+	color: #000;
 	height: 10px;
 	margin: 10px 0 0 0;
 	width: 100%;
@@ -1228,21 +1258,6 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 }
 
 
-.vw-feed{
-	width: 150px;
-	float: left;
-	color:#000;
-	word-wrap: break-word;
-	font: bold 10px  Lato, Arial, sans-serif;
-}
-
-.vw-feed-sub{
-	width: 150px;
-	float: left;
-	color:#000;
-	word-wrap: break-word;
-	font: normal 10px  Lato, Arial, sans-serif;
-}
 
 /*Network page style================================================================================ */
 
@@ -2201,6 +2216,7 @@ opacity:0;
 {
 	position:absolute;
 	margin-top:250px;
+	margin-left:3px;
 	color:white;
 	font:bold 12px Lato, Arial, sans-serif;
 	text-align:center;
@@ -2236,6 +2252,7 @@ opacity:0;
 {
 	position:absolute;
 	margin-top:220px;
+	margin-left:3px;
 	color:white;
 	font:bold 12px Lato, Arial, sans-serif;
 	text-align:center;
@@ -2247,6 +2264,7 @@ opacity:0;
 {
 	position:absolute;
 	margin-top:235px;
+	margin-left:3px;
 	color:white;
 	font:bold 12px Lato, Arial, sans-serif;
 	text-align:center;
@@ -2341,15 +2359,18 @@ opacity:0;
 {
 	position:absolute;
 	margin-top:240px;
+	margin-left:3px;
 	color:white;
 	font:bold 12px Lato, Arial, sans-serif;
 	padding-top:5px;
 	padding-bottom:5px;
+	text-transform:capitalize;
 }
 .masklayer .date
 {
 	position:absolute;
 	margin-top:255px;
+	margin-left:3px;
 	color:white;
 	font:bold 12px Lato, Arial, sans-serif;
 	padding-top:5px;
@@ -2374,6 +2395,22 @@ opacity:0;
 	display:inline;
 }
 
+.rgt-thumb-relative
+{
+	position: relative;
+}
+
+.rgt-thumb-relative-mar
+{
+	position: relative;
+	margin-top: 20px;
+}
+
+.view
+{
+	color: white; 
+	text-decoration: none;
+}
 
 
 .linesheet-designer
