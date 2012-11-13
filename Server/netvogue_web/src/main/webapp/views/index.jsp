@@ -66,6 +66,7 @@
     <script src="js/services.js" 					type="text/javascript"></script>
     <script src="js/controllers.js" 				type="text/javascript"></script>
     <script src="js/addeditcontrollers.js" 			type="text/javascript"></script>
+    <script src="js/ecommercecontrollers.js" 		type="text/javascript"></script>
     <script src="js/filters.js" 					type="text/javascript"></script>
     <script src="js/directives.js" 					type="text/javascript"></script>
     <script src="js/constants.js" 					type="text/javascript"></script>
