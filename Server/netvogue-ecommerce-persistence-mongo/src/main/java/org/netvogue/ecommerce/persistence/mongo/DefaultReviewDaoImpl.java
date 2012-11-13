@@ -1,4 +1,4 @@
-package org.netvogue.ecommernce.persistence.mongo;
+package org.netvogue.ecommerce.persistence.mongo;
 
 import org.netvogue.ecommerce.domain.model.Review;
 import org.netvogue.ecommerce.domain.model.User;
