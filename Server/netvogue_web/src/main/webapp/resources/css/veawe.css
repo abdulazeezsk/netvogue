@@ -19,7 +19,7 @@
  * @copyright  Copyright (c) 2012 Yourwindow
  */
 
-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-family: "Lato Neue", Lato, Arial, sans-serif;
 /* Leftpane Style ============================================================= */
 
 /* @font-face
@@ -42,14 +42,14 @@ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 .leftpane_entity
 {
 	color: black;
-	font: normal 14px  Helvetica, Arial, sans-serif;;
+	font: normal 14px  Lato, Arial, sans-serif;;
 	text-transform: uppercase;
 	width: 220x;
 }
 
 .leftpane_entity_heading{
 	color: black;
-	font: normal 14px  Helvetica, Arial, sans-serif;;
+	font: normal 14px  Lato, Arial, sans-serif;;
 	text-transform: uppercase;
 	border-bottom: solid 1px rgba(0, 0, 0, 1);
 	width: 220x;
@@ -57,7 +57,7 @@ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .leftpane_subheading{
 	color: Black;
-	font: normal 12px  Helvetica, Arial, sans-serif;;
+	font: normal 12px  Lato, Arial, sans-serif;;
 	text-transform: uppercase;
 	border-bottom: solid 1px rgba(0, 0, 0, 1);
 	width: 220x;
@@ -68,7 +68,7 @@ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	float: left;
 	margin: 0 0 0 8px;
 	word-wrap: break-word;
-	font: normal 10px  Helvetica, Arial, sans-serif;;
+	font: normal 10px  Lato, Arial, sans-serif;;
 	font-weight: bold;
 }
 
@@ -78,13 +78,13 @@ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 leftpane_filter_heading{
-font-family: Helvetica, Arial, sans-serif;
+font-family: Lato, Arial, sans-serif;
 font-size:14px;	
 }
 
 .leftpane_filter_name{
     color: black;
-	font: normal 12px  Helvetica, Arial, sans-serif;;
+	font: normal 12px  Lato, Arial, sans-serif;;
 	text-transform: uppercase;
 }
 
@@ -115,25 +115,25 @@ font-size:14px;
 }
 
 .leftpanefeed_text h3 {
-	font: bold 9px  Helvetica, Arial, sans-serif;;
+	font: bold 9px  Lato, Arial, sans-serif;;
 	padding: 0;
 }
 .leftpanefeed_text h2 {
-	font: normal 9px  Helvetica, Arial, sans-serif;;
+	font: normal 9px  Lato, Arial, sans-serif;;
 	padding: 0;
 }
 .leftpanefeed_text p {
-	font: normal 9px  Helvetica, Arial, sans-serif;;
+	font: normal 9px  Lato, Arial, sans-serif;;
 }
 
 
 .profile-address {
-	font: normal 11px  Helvetica, Arial, sans-serif;
+	font: normal 11px  Lato, Arial, sans-serif;
 	text-align: left;
 }
 
 .profile-pricerange {
-	font: normal 11px  Helvetica, Arial, sans-serif;
+	font: normal 11px  Lato, Arial, sans-serif;
 	text-align: left;
 }
 
@@ -161,7 +161,7 @@ font-size:14px;
 
 .rightpane_subHeading{
 	color: black;
-	font: normal 14px  Helvetica, Arial, sans-serif;
+	font: normal 14px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 }
 
@@ -171,7 +171,7 @@ font-size:14px;
 
 /* info para at the top of the page */
 .right_pane_info{
-	font: normal 10px  Helvetica, Arial, sans-serif;;
+	font: normal 10px  Lato, Arial, sans-serif;;
 	text-transform: uppercase;
 	padding: 5px 0px 5px 0px;
 }
@@ -179,7 +179,7 @@ font-size:14px;
 .rightpane_add_btn{
 	width: 80px;
 	margin: 0 0 0 8px;
-	font: normal 10px Helvetica, Arial, sans-serif;
+	font: normal 10px Lato, Arial, sans-serif;
 	text-transform: uppercase;
 	position: relative;
 	top: 3px;
@@ -190,7 +190,7 @@ font-size:14px;
 {
 	width: 80px;
 	margin: 0 0 0 8px;
-	font: normal 10px  Helvetica, Arial, sans-serif;;
+	font: normal 10px  Lato, Arial, sans-serif;;
 	font-weight: bold;
 	text-transform: uppercase;
 	position: relative;
@@ -204,7 +204,7 @@ font-size:14px;
 {
 	width: 80px;
 	margin: 0 0 0 8px;
-	font: normal 10px  Helvetica, Arial, sans-serif;;
+	font: normal 10px  Lato, Arial, sans-serif;;
 	font-weight: bold;
 	text-transform: uppercase;
 	position: relative;
@@ -235,7 +235,7 @@ width:600px;
 
 
 .title h3 {
-	font: normal 13px  Helvetica, Arial, sans-serif;
+	font: normal 13px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 	position: absolute;
 	display: block;
@@ -257,7 +257,7 @@ width:600px;
 }
 
 .campaigntitle h3 {
-	font: normal 13px  Helvetica, Arial, sans-serif;
+	font: normal 13px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 	position: absolute;
 	display: block;
@@ -268,17 +268,17 @@ width:600px;
 
 
 .title h4 {
-	font: normal 13px  Helvetica, Arial, sans-serif;
+	font: normal 13px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 }
 
 .title p {
-	font: normal 11px  Helvetica, Arial, sans-serif;
+	font: normal 11px  Lato, Arial, sans-serif;
 }
 
 .ywbreadcrumb{
 	color: #000;
-	font: normal 12px  Helvetica, Arial, sans-serif;;
+	font: normal 12px  Lato, Arial, sans-serif;;
 	/* text-transform:capitalize; */
 	text-transform: uppercase;
 }
@@ -306,7 +306,7 @@ text-decoration: none;
 
 .heading_btn{
 	color: black;
-	font: normal 14px  Helvetica, Arial, sans-serif;
+	font: normal 14px  Lato, Arial, sans-serif;
 	text-transform:capitalize;
 }
 
@@ -373,13 +373,13 @@ border-bottom:1px solid black;
 }
 
 .advertisement_text h3 {
-	font: normal 9px  Helvetica, Arial, sans-serif;
+	font: normal 9px  Lato, Arial, sans-serif;
 	font-weight: bold;
 	padding: 0;
 }
 
 .advertisement_text p {
-	font: normal 9px  Helvetica, Arial, sans-serif;
+	font: normal 9px  Lato, Arial, sans-serif;
 }
 
 
@@ -389,14 +389,14 @@ border-bottom:1px solid black;
 
 .ywstylename
 {
-	font: normal 14px Helvetica, Arial, sans-serif;
+	font: normal 14px Lato, Arial, sans-serif;
 	border-bottom:1px solid #000;
 	text-transform:uppercase;
 }
 
 .ywstyledesc
 {
-	font: normal 10px Helvetica, Arial, sans-serif;
+	font: normal 10px Lato, Arial, sans-serif;
 	border-bottom:1px solid #000;
 }
  
@@ -481,7 +481,7 @@ cursor: pointer;
 
 .subHeading {
 	color: black;
-	font: normal 14px  Helvetica, Arial, sans-serif;;
+	font: normal 14px  Lato, Arial, sans-serif;;
 	text-transform: uppercase;
 	border-bottom: solid 1px rgba(0, 0, 0, 1);
 	width: 100%;
@@ -489,13 +489,13 @@ cursor: pointer;
 
 .subHeading_no_underline {
 	color: black;
-	font: normal 14px  Helvetica, Arial, sans-serif;;
+	font: normal 14px  Lato, Arial, sans-serif;;
 	text-transform: uppercase;
 }
 
 .subHeading_advertisement {
 	color: black;
-	font: normal 14px  Helvetica, Arial, sans-serif;;
+	font: normal 14px  Lato, Arial, sans-serif;;
 	text-transform: uppercase;
 	border-bottom: solid 1px rgba(0, 0, 0, 1);
 	width: 220x;
@@ -503,13 +503,13 @@ cursor: pointer;
 
 .subHeadingAccountset_no_underline {
 	color: black;
-	font: normal 11px  Helvetica, Arial, sans-serif;;
+	font: normal 11px  Lato, Arial, sans-serif;;
 	text-transform: uppercase;
 }
 
 .settings_msg {
 	color: black;
-	font: normal 9px  Helvetica, Arial, sans-serif;;
+	font: normal 9px  Lato, Arial, sans-serif;;
 	text-transform: uppercase;
 }
 
@@ -528,7 +528,7 @@ cursor: pointer;
 /* Footer Style Begin ============================================================= */
 
 /* .ywfooter {
-	font: normal 12px  Helvetica, Arial, sans-serif;;
+	font: normal 12px  Lato, Arial, sans-serif;;
 	color: #000000;
 	border-top: solid 1px #999999;
 	height: 43px;
@@ -630,7 +630,7 @@ float: right;
 }
 
 .validation_msg {
-	font: normal 9px  Helvetica, Arial, sans-serif;;
+	font: normal 9px  Lato, Arial, sans-serif;;
 	font-weight: normal;
 }
 
@@ -638,7 +638,7 @@ float: right;
 	width: 80px;
 	color:#000;
 	margin: 0 0 0 8px;
-	font: normal 10px  Helvetica, Arial, sans-serif;;
+	font: normal 10px  Lato, Arial, sans-serif;;
 	font-weight: bold;
 	text-transform: uppercase;
 	position: relative;
@@ -663,7 +663,7 @@ float: right;
 	background-image: none;
 	border-color: transparent;
 	cursor: pointer;
-	font: normal 9px  Helvetica, Arial, sans-serif;;
+	font: normal 9px  Lato, Arial, sans-serif;;
 	font-weight: bold;
 	text-transform: uppercase;
 	color: @linkColor;
@@ -803,7 +803,7 @@ float: right;
 .spanedt_txt
 {
 	width: 199px;
-	font: normal 11px  Helvetica, Arial, sans-serif;
+	font: normal 11px  Lato, Arial, sans-serif;
 	border-top: solid 1px #999999;
 	margin: 0 0 0 0;
 }
@@ -817,7 +817,7 @@ input.spanedt_txt,textarea.spanedt_txt,.uneditable-input.spanedt_txt{
 .spanedt_txt1
 {
 	width: 400px;
-	font: normal 11px  Helvetica, Arial, sans-serif;
+	font: normal 11px  Lato, Arial, sans-serif;
 	position:relative;
 	top: 3px;
 }
@@ -835,7 +835,7 @@ input.spanedt_txt1,textarea.spanedt_txt1,.uneditable-input.spanedt_txt1{
 .spanaddstyle_txt
 {
 	width: 225px;
-	font: normal 11px  Helvetica, Arial, sans-serif;
+	font: normal 11px  Lato, Arial, sans-serif;
 }
 
 input.spanaddstyle_txt,textarea.spanaddstyle_txt,.uneditable-input.spanaddstyle_txt{
@@ -845,7 +845,7 @@ input.spanaddstyle_txt,textarea.spanaddstyle_txt,.uneditable-input.spanaddstyle_
 .spanaddstyle_txt1
 {
 	width: 150px;
-	font: normal 11px  Helvetica, Arial, sans-serif;
+	font: normal 11px  Lato, Arial, sans-serif;
 }
 
 input.spanaddstyle_txt1,textarea.spanaddstyle_txt1,.uneditable-input.spanaddstyle_txt{1
@@ -855,7 +855,7 @@ input.spanaddstyle_txt1,textarea.spanaddstyle_txt1,.uneditable-input.spanaddstyl
 
 .titleName
 {
-	font: normal 14px  Helvetica, Arial, sans-serif;
+	font: normal 14px  Lato, Arial, sans-serif;
 	color: #000000;
 	border-top: solid 1px #999999;
 	height: 20px;
@@ -865,7 +865,7 @@ input.spanaddstyle_txt1,textarea.spanaddstyle_txt1,.uneditable-input.spanaddstyl
 }
 .desc
 {
-	font: normal 10px  Helvetica, Arial, sans-serif;
+	font: normal 10px  Lato, Arial, sans-serif;
 	font-weight:lighter;
 	color: #000000;
 	height: 10px;
@@ -909,7 +909,7 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 
 .noInfo {
 	text-transform: uppercase;
-	font-family:  Helvetica, Arial, sans-serif;
+	font-family:  Lato, Arial, sans-serif;
 	font-size: 17px;
 	color: Gray;
 	margin-left: 175px;
@@ -918,7 +918,8 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 
 .aboutus {
 	font-size: 11px;
-	font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+	font-family:  Lato, Arial, sans-serif;
+	/* font-family: 'lucida grande',tahoma,verdana,arial,sans-serif; */
 	text-align: left;
 }
 
@@ -941,7 +942,7 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 	padding: 5px 10px;
 	list-style-type: none;
 	list-style-position: inside;
-	font: normal 10px  Helvetica, Arial, sans-serif;
+	font: normal 10px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 }
 /*product line ends here  */
@@ -967,7 +968,7 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 	list-style-type: none;
 	list-style-position: inside;
 	text-align: center;
-	font: normal 10px  Helvetica, Arial, sans-serif;
+	font: normal 10px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 }
 
@@ -984,13 +985,13 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 .contatus_profile_title
 {
 	color: black;
-	font: bold 12px  Helvetica, Arial, sans-serif;
+	font: bold 12px  Lato, Arial, sans-serif;
 	text-transform: capitalize;
 }
 
 .contatus_profile {
 	color: black;
-	font: normal 12px  Helvetica, Arial, sans-serif;
+	font: normal 12px  Lato, Arial, sans-serif;
 	text-transform: capitalize;
 	width: 55px;
 	valign:top;
@@ -1009,21 +1010,21 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 /*contactUs in the  profile page ends here  */
 
 .productline_text ,  .brandscarried_text  ,  .seasonname_text {
-	font: normal 10px  Helvetica, Arial, sans-serif;
+	font: normal 10px  Lato, Arial, sans-serif;
 	text-transform: capitalize;
 	text-align: center;
 }
 
 
 .newsletter_text,.video_text {
-	font: normal 10px  Helvetica, Arial, sans-serif;
+	font: normal 10px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 	text-align: center;
 	text-decoration: underline;
 }
 
 .printcampaign_text h3 {
-	font: normal 13px  Helvetica, Arial, sans-serif;
+	font: normal 13px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 }
 
@@ -1047,7 +1048,7 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 }
 
 .search h3 {
-	font: normal 13px  Helvetica, Arial, sans-serif;
+	font: normal 13px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 }
 
@@ -1056,7 +1057,7 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 }
 
 .search h4 {
-	font: normal 13px  Helvetica, Arial, sans-serif;
+	font: normal 13px  Lato, Arial, sans-serif;
 	border: none;
 	padding: 2px 0 0 0;
 	text-align: center;
@@ -1069,7 +1070,7 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 
 .trending_head {
 	color: black;
-	font: normal 14px  Helvetica, Arial, sans-serif;
+	font: normal 14px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 	border-bottom: solid 1px rgba(0, 0, 0, 1);
 	width: 220x;
@@ -1113,20 +1114,24 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 	width: 110px;
 }
 
-.trendfeed_text h3 {
-	font: bold 9px  Helvetica, Arial, sans-serif;
+.trendfeed_text p {
+	font: normal 11px  Lato, Arial, sans-serif;
 	padding: 0;
+	margin-bottom:3px;
 	text-transform:capitalize;
 }
 
-.trendfeed_text p {
-	 font: normal 9px  Helvetica, Arial, sans-serif; 
-	text-transform:capitalize;
+.trendfeed_text .description{
+	width: 150px;
+	float: left;
+	color:#000;
+	word-wrap: break-word;
+	font: normal 10px  Lato, Arial, sans-serif;
 }
 
 .reference_head {
 	color: black;
-	font: normal 14px  Helvetica, Arial, sans-serif;
+	font: normal 14px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 	border-bottom: solid 1px rgba(0, 0, 0, 1);
 	width: 220x;
@@ -1169,17 +1174,38 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 	width: 110px;
 }
 
-.referencefeed h3 {
-	font: bold 9px  Helvetica, Arial, sans-serif;
+
+.referencefeed_text p {
+	font: normal 11px  Lato, Arial, sans-serif;
 	padding: 0;
+	margin-bottom:3px;
 	text-transform:capitalize;
+	/* color:#000; */
 }
 
+.referencefeed_text .mutualcontacts{
+	width: 150px;
+	float: left;
+	color:#000;
+	word-wrap: break-word;
+	font: normal 10px  Lato, Arial, sans-serif;
+}
+
+
+/* .referencefeed_text a: hover {
+	font: normal 10px  Lato, Arial, sans-serif;
+	padding: 0;
+	font-weight: 100;
+	text-transform:capitalize;
+	color:#000;
+} */
+
+/* 
 .referencefeed h2 {
-	font: normal 9px  Helvetica, Arial, sans-serif;
+	font: normal 9px  Lato, Arial, sans-serif;
 	padding: 0;
 	text-transform:capitalize;
-}
+} */
 
 .networklist {
 	width: 100%;
@@ -1207,7 +1233,7 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 	float: left;
 	color:#000;
 	word-wrap: break-word;
-	font: bold 10px  Helvetica, Arial, sans-serif;
+	font: bold 10px  Lato, Arial, sans-serif;
 }
 
 .vw-feed-sub{
@@ -1215,7 +1241,7 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 	float: left;
 	color:#000;
 	word-wrap: break-word;
-	font: normal 10px  Helvetica, Arial, sans-serif;
+	font: normal 10px  Lato, Arial, sans-serif;
 }
 
 /*Network page style================================================================================ */
@@ -1238,36 +1264,35 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 	max-height:72px;
 	overflow-x: hidden;
 }
-.network_entity_name{
+/* .network_entity_name{
 	width: 150px;
 	float: left;
 	color:#000;
 	word-wrap: break-word;
-	font: normal 10px  Helvetica, Arial, sans-serif;
+	font: normal 10px  Lato, Arial, sans-serif;
 	font-weight: bold;
 }
-
+mutualcontacts */
 
 .network_text {
 	float: left;
 	width: 110px;
 }
 
-.network_text h3 {
-	font: bold 12px  Helvetica, Arial, sans-serif;
-	padding: 0;
-	text-transform:capitalize;
-}
-
-.network_text h2 {
-	font: normal 10px  Helvetica, Arial, sans-serif;
-	padding: 0;
-	text-transform:capitalize;
-}
-
 .network_text p {
-	font: normal 9px  Helvetica, Arial, sans-serif;
+	font: normal 12px  Lato, Arial, sans-serif;
+	padding: 0;
+	text-transform:capitalize;
+	margin-bottom:5px;
 }
+
+.network_text .networkdetails {
+	font: normal 10px  Lato, Arial, sans-serif;
+	padding: 0;
+	text-transform:capitalize;
+	margin-bottom:3px;
+}
+
 
 .notificationfeed {
 	width: 400px;
@@ -1285,7 +1310,7 @@ input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-inp
 	height: 50px;
 	display: inline-block;
 	margin-left: 5px;
-	font: normal 10px  Helvetica, Arial, sans-serif;
+	font: normal 10px  Lato, Arial, sans-serif;
 	font-weight: bold;
 }
 
@@ -1373,7 +1398,7 @@ input.spanlogin,textarea.spanlogin,.uneditable-input.spanlogin {
 } */
 
 .notify-info {
-	font: normal 10px  Helvetica, Arial, sans-serif;
+	font: normal 10px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 	padding: 5px 0px 5px 0px;
 	word-wrap: break-word;
@@ -1669,7 +1694,7 @@ a.messagesContent:hover .preview {
 }
 
 .notify-info {
-	font: normal 10px  Helvetica, Arial, sans-serif;
+	font: normal 10px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 	padding: 5px 0px 5px 0px;
 	word-wrap: break-word;
@@ -1875,16 +1900,11 @@ ul.n-wizard-brand-list {
 	width: 425px;
 }
 
-.newsfeed_text h3 {
-	font: normal 11px  Helvetica, Arial, sans-serif;
-	font-weight: bold;
-	padding: 0;
-	text-transform:capitalize;
-}
-
 .newsfeed_text p {
-	font: normal 11px  Helvetica, Arial, sans-serif;
+	font: normal 11px  Lato, Arial, sans-serif;
 	text-align: left;
+	margin-bottom: 5px;
+	text-transform:capitalize;
 }
 
 
@@ -1896,7 +1916,7 @@ ul.n-wizard-brand-list {
 	float: left;
 	margin: 0 0 0 8px;
 	word-wrap: break-word;
-	font: normal 10px  Helvetica, Arial, sans-serif;
+	font: normal 10px  Lato, Arial, sans-serif;
 	font-weight: bold;
 }
 
@@ -1905,7 +1925,7 @@ ul.n-wizard-brand-list {
 	float: left;
 	margin: 0 0 0 8px;
 	word-wrap: break-word;
-	font: normal 10px  Helvetica, Arial, sans-serif;
+	font: normal 10px  Lato, Arial, sans-serif;
 	font-weight: normal;
 }
 
@@ -1919,17 +1939,17 @@ ul.n-wizard-brand-list {
 }
 
 .brandtitle_price h3 {
-	font: normal 13px  Helvetica, Arial, sans-serif;
+	font: normal 13px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 }
 
 .brandtitle_price h4 {
-	font: normal 13px  Helvetica, Arial, sans-serif;
+	font: normal 13px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 }
 
 .brandtitle_price p {
-	font: normal 11px  Helvetica, Arial, sans-serif;
+	font: normal 11px  Lato, Arial, sans-serif;
 }
 
 .edit_discription {
@@ -1956,13 +1976,13 @@ ul.n-wizard-brand-list {
 }
 
 .edit_text h3 {
-	font: normal 9px  Helvetica, Arial, sans-serif;
+	font: normal 9px  Lato, Arial, sans-serif;
 	font-weight: bold;
 	padding: 0;
 }
 
 .edit_text p {
-	font: normal 9px  Helvetica, Arial, sans-serif;
+	font: normal 9px  Lato, Arial, sans-serif;
 }
 
 /*  organise ================================================================================= */
@@ -2081,7 +2101,7 @@ ul.n-wizard-brand-list {
 
 
 .presstitle h3 {
-	font: normal 13px  Helvetica, Arial, sans-serif;
+	font: normal 13px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 	position: absolute;
 	display: block;
@@ -2117,7 +2137,7 @@ opacity:0;
 	margin-top:85px;
 	margin-left:2px;
 	color:white;
-	font:bold 12px Helvetica, Arial, sans-serif;
+	font:bold 12px Lato, Arial, sans-serif;
 	text-align:center;
 	padding-top:5px;
 	padding-bottom:5px;
@@ -2130,7 +2150,7 @@ opacity:0;
 	margin-top:1px;
 	margin-left:2px;
 	color:white;
-	font:bold 12px Helvetica, Arial, sans-serif;
+	font:bold 12px Lato, Arial, sans-serif;
 	text-align:center;
 	padding-top:5px;
 	padding-bottom:5px;
@@ -2143,7 +2163,7 @@ opacity:0;
 	margin-top:100px;
 	margin-left:2px;
 	color:white;
-	font:bold 12px Helvetica, Arial, sans-serif;
+	font:bold 12px Lato, Arial, sans-serif;
 	text-align:center;
 	padding-top:5px;
 	padding-bottom:5px;
@@ -2156,7 +2176,7 @@ opacity:0;
 	margin-top:115px;
 	margin-left:2px;
 	color:white;
-	font:bold 12px Helvetica, Arial, sans-serif;
+	font:bold 12px Lato, Arial, sans-serif;
 	text-align:center;
 	padding-top:5px;
 	padding-bottom:5px;
@@ -2168,7 +2188,7 @@ opacity:0;
 	position:absolute;
 	margin-top:60px;
 	color:white;
-	font:bold 15px Helvetica, Arial, sans-serif;
+	font:bold 15px Lato, Arial, sans-serif;
 	text-align:center;
 	margin-left:90px;
 	text-decoration:none;
@@ -2182,7 +2202,7 @@ opacity:0;
 	position:absolute;
 	margin-top:250px;
 	color:white;
-	font:bold 12px Helvetica, Arial, sans-serif;
+	font:bold 12px Lato, Arial, sans-serif;
 	text-align:center;
 	padding-top:5px;
 	padding-bottom:5px;
@@ -2194,7 +2214,7 @@ opacity:0;
 	position:absolute;
 	margin-top:180px;
 	color:white;
-	font:bold 12px Helvetica, Arial, sans-serif;
+	font:bold 12px Lato, Arial, sans-serif;
 	text-align:center;
 	padding-top:5px;
 	padding-bottom:5px;
@@ -2205,7 +2225,7 @@ opacity:0;
 	position:absolute;
 	margin-top:195px;
 	color:white;
-	font:bold 12px Helvetica, Arial, sans-serif;
+	font:bold 12px Lato, Arial, sans-serif;
 	text-align:center;
 	padding-top:5px;
 	padding-bottom:5px;
@@ -2217,7 +2237,7 @@ opacity:0;
 	position:absolute;
 	margin-top:220px;
 	color:white;
-	font:bold 12px Helvetica, Arial, sans-serif;
+	font:bold 12px Lato, Arial, sans-serif;
 	text-align:center;
 	padding-top:5px;
 	padding-bottom:5px;
@@ -2228,7 +2248,7 @@ opacity:0;
 	position:absolute;
 	margin-top:235px;
 	color:white;
-	font:bold 12px Helvetica, Arial, sans-serif;
+	font:bold 12px Lato, Arial, sans-serif;
 	text-align:center;
 	padding-top:5px;
 	padding-bottom:5px;
@@ -2239,7 +2259,7 @@ opacity:0;
 	position:absolute;
 	margin-top:120px;
 	color:white;
-	font:bold 15px Helvetica, Arial, sans-serif;
+	font:bold 15px Lato, Arial, sans-serif;
 	text-align:center;
 	margin-left:90px;
 	text-decoration:none;
@@ -2277,7 +2297,7 @@ opacity:0;
 	position:absolute;
 	margin-top:2px;
 	color:white;
-	font:bold 15px Helvetica, Arial, sans-serif;
+	font:bold 15px Lato, Arial, sans-serif;
 	margin-right:180px;
 	text-decoration:none;
 	padding-top:5px;
@@ -2288,7 +2308,7 @@ opacity:0;
 	position:absolute;
 	margin-top:120px;
 	color:white;
-	font:bold 15px Helvetica, Arial, sans-serif;
+	font:bold 15px Lato, Arial, sans-serif;
 	text-align:center;
 	margin-left:90px;
 	text-decoration:none;
@@ -2302,7 +2322,7 @@ opacity:0;
 	position:absolute;
 	margin-top:200px;
 	color:white;
-	font:bold 12px Helvetica, Arial, sans-serif;
+	font:bold 12px Lato, Arial, sans-serif;
 	padding-top:5px;
 	padding-bottom:5px;
 }
@@ -2312,7 +2332,7 @@ opacity:0;
 	position:absolute;
 	margin-top:215px;
 	color:white;
-	font:bold 12px Helvetica, Arial, sans-serif;
+	font:bold 12px Lato, Arial, sans-serif;
 	padding-top:5px;
 	padding-bottom:5px;
 }
@@ -2322,7 +2342,7 @@ opacity:0;
 	position:absolute;
 	margin-top:240px;
 	color:white;
-	font:bold 12px Helvetica, Arial, sans-serif;
+	font:bold 12px Lato, Arial, sans-serif;
 	padding-top:5px;
 	padding-bottom:5px;
 }
@@ -2331,7 +2351,7 @@ opacity:0;
 	position:absolute;
 	margin-top:255px;
 	color:white;
-	font:bold 12px Helvetica, Arial, sans-serif;
+	font:bold 12px Lato, Arial, sans-serif;
 	padding-top:5px;
 	padding-bottom:5px;
 }
@@ -2365,7 +2385,7 @@ opacity:0;
 
 .linesheet-designer .designer
 {
-	font: normal 12px  Helvetica, Arial, sans-serif;
+	font: normal 12px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 	text-align:center;
 }
@@ -2381,7 +2401,7 @@ opacity:0;
 
 .linesheet-season .season
 {
-	font: normal 12px  Helvetica, Arial, sans-serif;
+	font: normal 12px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 	text-align:center;
 }
@@ -2397,7 +2417,7 @@ opacity:0;
 
 .linesheet-style .name
 {
-	font: normal 12px  Helvetica, Arial, sans-serif;
+	font: normal 12px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 	text-align:center;
 }
@@ -2413,7 +2433,7 @@ opacity:0;
 
 .search-user .user
 {
-	font: normal 12px  Helvetica, Arial, sans-serif;
+	font: normal 12px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 	text-align:center;
 }

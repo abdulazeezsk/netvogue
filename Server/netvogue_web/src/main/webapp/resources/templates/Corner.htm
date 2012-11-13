@@ -43,7 +43,7 @@
 								ng-src="{{news.left_url}}" class="pull-left"></a>
 						</div>
 						<div class="newsfeed_text">
-							<p style="margin-bottom: 5px;">
+							<p>
 								<a ng-href="#/{{news.profileid}}/profile" title="">{{news.name}}</a>
 							</p>
 							<p>{{news.status}}</p>
@@ -75,7 +75,7 @@
 							<div class="referencefeed_text">
 								<p>
 									<a ng-href="#/{{network.profileid}}/profile"
-									style="text-decoration:none;color:black;" class="network_entity_name">{{network.name}}</a>
+									>{{network.name}}</a>
 								</p>
 							</div>
 						</div>
@@ -101,9 +101,9 @@
 							</div>
 							<div class="trendfeed_text">
 								<p>
-									<a class="network_entity_name" style="text-decoration:none;color:black;" href="#/{{trend.trendlistitemID}}" title="">{{trend.trendlistitem}}</a>
+									<a  href="#/{{trend.trendlistitemID}}" title="">{{trend.trendlistitem}}</a>
 								</p>
-								<p>{{trend.post}}</p>
+								<p class="description">{{trend.post}}</p>
 							</div>
 						</div>
 					</li>
@@ -121,9 +121,9 @@
 							</div>
 							<div class="referencefeed_text">
 								<p>
-									<a class="network_entity_name" style="text-decoration:none;color:black;" ng-href="#/{{reference.profileid}}/profile" title="">{{reference.name}}</a>
+									<a ng-href="#/{{reference.profileid}}/profile" title="">{{reference.name}}</a>
 								</p>
-								<p class="network_entity_name" >{{reference.mutualfriends}} Mutual Contact</p>
+								<p class="mutualcontacts" >{{reference.mutualfriends}} Mutual Contact</p>
 							</div>
 						</div>
 					</li>

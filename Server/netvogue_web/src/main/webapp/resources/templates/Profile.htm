@@ -163,9 +163,9 @@
 							</div>
 							<div class="trendfeed_text">
 								<p>
-									<a class="network_entity_name" style="text-decoration:none;color:black;" href="#/{{trend.trendlistitemID}}" title="">{{trend.trendlistitem}}</a>
+									<a href="#/{{trend.trendlistitemID}}" title="">{{trend.trendlistitem}}</a>
 								</p>
-								<p class="network_entity_name" style="text-decoration:none;color:black;" >{{trend.post}}</p>
+								<p class="description">{{trend.post}}</p>
 							</div>
 						</div>
 					</li>
@@ -183,9 +183,9 @@
 								</div>
 								<div class="referencefeed_text">
 									<p>
-										<a class="network_entity_name" style="text-decoration:none;color:black;" ng-href="#/{{reference.profileid}}/profile" title="">{{reference.name}}</a>
+										<a ng-href="#/{{reference.profileid}}/profile" title="">{{reference.name}}</a>
 									</p>
-									<p>{{reference.mutualfriends}} Mutual Contact</p>
+									<p class="mutualcontacts" >{{reference.mutualfriends}} Mutual Contact</p>
 								</div>
 							</div>
 						</li>
