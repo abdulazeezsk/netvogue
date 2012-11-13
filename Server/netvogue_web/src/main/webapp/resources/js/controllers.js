@@ -1544,7 +1544,7 @@ function MyCtrlStylesPreview($scope, $routeParams, currentvisitedprofile, mystyl
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     mystylesheet.styles($routeParams, $scope.stylesheetid, "").success(function(data) {
-    	mystylesheet.setstyleslocally(data, $routeParams);
+    	mystylesheet.setstyleslocally(data, 0);
     	$scope.updatedata();
     }).error(function(data) {
     	
@@ -1886,7 +1886,7 @@ function MyCtrlStyle($scope, $routeParams, currentvisitedprofile, mylinesheet) {
     //Get all the profile data from the Server through AJAX everytime user comes here. 
     //This should be functionality in all pages except user goes to edit pages through 'edit'. ex: profilesettings, editcollections etc
     mylinesheet.styles($routeParams, $scope.linesheetid, "").success(function(data) {
-    	mylinesheet.setstyleslocally(data);
+    	mylinesheet.setstyleslocally(data, 0);
     	$scope.updatedata();
     }).error(function(data) {
     	
