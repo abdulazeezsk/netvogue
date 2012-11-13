@@ -117,6 +117,7 @@ font-size:14px;
 	font: normal 12px  Lato, Arial, sans-serif;;
 	padding: 0;
 	margin-bottom:5px;
+	text-transform:capitalize;
 }
 
 .leftpanefeed_text .rupee {
