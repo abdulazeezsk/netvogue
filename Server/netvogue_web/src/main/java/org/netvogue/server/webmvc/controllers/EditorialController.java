@@ -214,7 +214,8 @@ public class EditorialController {
 			response.setError("Galleryid is empty");
 			return response;
 		}
-		if(ResultStatus.SUCCESS == editorialService.deleteEditorial(galleryid, error)) {  
+		Iterable<String> photoids = null;
+		if(ResultStatus.SUCCESS == editorialService.deleteEditorial(galleryid, photoids, error)) {  
 			response.setStatus(true);
 		}
 		else

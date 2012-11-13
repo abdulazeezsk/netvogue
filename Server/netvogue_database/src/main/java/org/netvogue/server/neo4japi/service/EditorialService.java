@@ -12,7 +12,7 @@ public interface EditorialService {
 	public ResultStatus editEditorial(String editorialid, String name, String desc, StringBuffer error);
 	public ResultStatus editEditorialName(String editorialId, String name, StringBuffer error);
 	public ResultStatus setProfilepic(String editorialid, String uniqueid, StringBuffer error);
-	public ResultStatus deleteEditorial(String editorialId, StringBuffer error);
+	public ResultStatus deleteEditorial(String editorialId, Iterable<String> photosids, StringBuffer error);
 	
 	public Iterable<EditorialPhoto> getPhotos(String editorialId, int pagenumber);
 	public Iterable<EditorialPhoto> searchPhotoByName(Editorial editorial, String name, int pagenumber);

@@ -11,10 +11,10 @@
 			<ul class="thumbnails">
 				<li class="span3">
 					<div>
-						<span> <a href="#profile"> <img alt=""
+						<span> <a ng-href="#profile"> <img alt=""
 								ng-src={{profilepic.thumbnail_url}}
 								class="pull-left leftpane_profile_img"></a>
-						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span> <span> <a ng-href="#profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
 					</div>
 				</li>
@@ -96,7 +96,7 @@
 								<h1 class="editdel" ui-if="isMyProfile">
 									<a ng-click="deletestyle(style.styleid)" title="Delete"><i
 										class="icon-trash icon-white"></i></a><a
-										href="#/addstyle?id={{stylesheetid}}&&cat={{category}}&&styleid={{style.styleid}}"
+										ng-href="#/addstyle?id={{stylesheetid}}&&cat={{category}}&&styleid={{style.styleid}}"
 										title="Edit"><i class="icon-edit icon-white"></i></a>
 								</h1>
 								<!-- <h1 class="style-brandname" style="text-align: center;">

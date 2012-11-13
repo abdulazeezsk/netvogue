@@ -275,8 +275,11 @@ public class StyleSheetController {
 			return response;
 		}
 		
+		Iterable<Iterable<String>> photoids = null;
 		//Make sure that styles inside this stylesheet are not part of any linesheets
-		if(ResultStatus.SUCCESS == stylesheetService.deleteStylesheet(stylesheetId, error)) {  
+		if(ResultStatus.SUCCESS == stylesheetService.deleteStylesheet(stylesheetId, photoids, error)) {
+			//This is different to other ones...here each String itself is an array separated by commas
+			//parse that into individual strings and delete
 			response.setStatus(true);
 		}
 		else
@@ -410,10 +413,16 @@ public class StyleSheetController {
 	//Change these things once the whole application is completed
 	//All these queries must be changed, as anyone can delete these things if they just have userid Azeez
 	@RequestMapping(value="stylesheet/deletestyle", method=RequestMethod.POST)
+<<<<<<< HEAD
 	public @ResponseBody JsonResponse DeletePhoto(@RequestBody String photoid) {
 		System.out.println("Delete Style Sheet Photo:" + photoid);
+=======
+	public @ResponseBody JsonResponse DeleteStyle(@RequestBody String styleid) {
+		System.out.println("Delete Style:" + styleid);
+>>>>>>> origin/master
 		String error = "";
 		JsonResponse response = new JsonResponse();
+<<<<<<< HEAD
 		User user = userDetailsService.getUserFromSession();
 		if (null == user) {
 			response.setError("user info missing");
@@ -422,6 +431,11 @@ public class StyleSheetController {
 		if (!photoid.isEmpty()) {
 			if (ResultStatus.SUCCESS == stylesheetService.deleteStyle(photoid,
 					error)) {
+=======
+		Iterable<Iterable<String>> photoids = null;
+		if(!styleid.isEmpty()) {
+			if(ResultStatus.SUCCESS == stylesheetService.deleteStyle(styleid, photoids, error)) {  
+>>>>>>> origin/master
 				response.setStatus(true);
 				ResultStatus status = uploadManager.deletePhotosById(photoid,
 						ImageType.STYLE, user.getUsername());
@@ -433,7 +447,11 @@ public class StyleSheetController {
 		} else {
 			response.setError("photoid is empty");
 		}
+<<<<<<< HEAD
 
+=======
+		System.out.println("Style deleted" + styleid);
+>>>>>>> origin/master
 		return response;
 	}
 }

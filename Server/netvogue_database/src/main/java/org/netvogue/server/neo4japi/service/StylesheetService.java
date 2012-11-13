@@ -10,13 +10,13 @@ public interface StylesheetService {
 	
 	public Stylesheet getStylesheet(String id);
 	public ResultStatus editStylesheet(String id, String name, String error);
-	public ResultStatus deleteStylesheet(String id, String error);
+	public ResultStatus deleteStylesheet(String id, Iterable<Iterable<String>> photoids, String error);
 	
 	public Style getStyle(String styleid, String error);
 	public Iterable<StyleData> getStylesbyCategory(String username, String category);
 	public Iterable<StyleData> getStyles(String StylesheetId, int pagenumber);
 	public Iterable<StyleData> searchStyles(String stylesheetId, String styleno, String fabrication, 
 			long fromPrice, long toPrice, int pagenumber);
-	public ResultStatus deleteStyle(String styleId, String error);
+	public ResultStatus deleteStyle(String styleId, Iterable<Iterable<String>> photoids, String error);
 	
 }

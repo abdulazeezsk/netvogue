@@ -41,6 +41,8 @@ public class User {
 	@Indexed
 	USER_TYPE userType;
 	
+	String primarycontact;
+	
 	String aboutUs;
 	
 	String 	address;
@@ -164,6 +166,15 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getPrimarycontact() {
+		return primarycontact;
+	}
+
+	public void setPrimarycontact(String primarycontact) {
+		this.primarycontact = primarycontact;
+	}
+
 	public String getProfilePicLink() {
 		return profilePicLink;
 	}

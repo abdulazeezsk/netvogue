@@ -66,9 +66,9 @@ public class CollectionServiceImpl implements CollectionService {
 		}
 	}
 	
-	public ResultStatus deleteCollection(String collectionid, StringBuffer error)  {
+	public ResultStatus deleteCollection(String collectionid, Iterable<String> photosids, StringBuffer error)  {
 		try {
-			collectionRepo.deleteCollection(collectionid);
+			photosids = collectionRepo.deleteCollection(collectionid);
 			System.out.println("deleted collection:" + collectionid);
 			return ResultStatus.SUCCESS;
 		} catch(Exception e) {

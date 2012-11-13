@@ -216,7 +216,8 @@ public class PrintCampaignController {
 			response.setError("Galleryid is empty");
 			return response;
 		}
-		if(ResultStatus.SUCCESS == printcampaignService.deletePrintCampaign(galleryid, error)) {  
+		Iterable<String> photoids = null;
+		if(ResultStatus.SUCCESS == printcampaignService.deletePrintCampaign(galleryid, photoids, error)) {  
 			response.setStatus(true);
 		}
 		else

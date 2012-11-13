@@ -995,7 +995,7 @@ angular.module('netVogue.services', []).
         	if(angular.isUndefined(pagenumber))
 	        	  pagenumber = 0;
         	if(0 == pagenumber) {
-        	name = temp.name;
+        		name = temp.name;
 	    		linesheetname = temp.stylesheetname;//We are using same styles for both stylesheet and linesheet
 	    		brandname = temp.brandname;
 	    		angular.copy(temp.styles, styles);

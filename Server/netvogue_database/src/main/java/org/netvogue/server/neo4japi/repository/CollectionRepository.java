@@ -23,10 +23,12 @@ public interface CollectionRepository extends GraphRepository<Collection> {
 	@Query("START p = node:collectionid(collectionid={0}) SET p.profilePicLink = {1}")
 	void setProfilepic(String collectionid, String uniqueid);
 	
-	@Query("START n=node:collectionid(collectionid={0}) MATCH n-[rels*0..]->p " +
+	@Query("START n=node:collectionid(collectionid={0}) MATCH n-[rels*1..]->p " +
+			"WITH n, rels, p, collect(p.collectionphotouniqueid) as photosid " +
 			"FOREACH(rel IN rels: DELETE rel) DELETE p " +
-			"WITH n MATCH n<-[r]-() DELETE n, r")
-	void deleteCollection(String collectionid);
+			"WITH n, photosid MATCH n<-[r]-() DELETE n, r " +
+			"RETURN photosid")
+	Iterable<String> deleteCollection(String collectionid);
 	
 	@Query( "START n=node:collectionid(collectionid={0}) " +
 			"MATCH n-[:COLLECTIONPHOTO]->photos, n-[:COLLECTION]-user " +
