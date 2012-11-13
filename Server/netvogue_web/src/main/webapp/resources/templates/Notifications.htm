@@ -35,8 +35,9 @@
                         <span class="brand_image"><a ng-href="#/{{notification.profileid}}/profile">
                             <img alt="" ng-src="{{notification.thumbnail_url}}" class="pull-left"></a> </span><span
                                 class="network_text">
-                                <h3>
-                                    <span><a ng-href="#/{{notification.profileid}}/profile">{{notification.name}}</a></span></h3>
+                                <p>
+                                    <span><a ng-href="#/{{notification.profileid}}/profile">{{notification.name}}</a>
+                                 </span></p>
                             </span>
                             <span class="btn-group pull-right" ng-show="notification.networkstatus == 'PENDING'">
                                 <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">

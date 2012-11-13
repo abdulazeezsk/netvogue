@@ -8,32 +8,20 @@
  * It is also available through the world-wide-web at this URL:
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@Yourwindowcommerce.com so we can send you a copy immediately.
+ * to license Veawe.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Yourwindow to newer
  * versions in the future. If you wish to customize Yourwindow for your
- * needs please refer to http://www.Yourwindow.com for more information.
+ * needs please refer to www.veawe.com for more information.
  *
- * @copyright  Copyright (c) 2012 Yourwindow
+ * copyright  Copyright (c) 2012 Veawe
  */
 
 font-family: "Lato Neue", Lato, Arial, sans-serif;
 /* Leftpane Style ============================================================= */
 
-/* @font-face
-{
-	font-family: 'lato', sans-serif; 
-	src: url('http://fonts.googleapis.com/css?family=Lato:100,300,400');
-} */
-
-/* @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,100italic,300italic,400italic);
- */
-/* .vw-font
-{
-	font-family: 'Lato', sans-serif;
-} */
 
 .left {
 	float: left;
@@ -132,25 +120,6 @@ font-size:14px;
 	font-size: 12px;
 	margin-right:3px;
 }
-
-
-
-/* .vw-feed{
-	width: 150px;
-	float: left;
-	color:#000;
-	word-wrap: break-word;
-	font: bold 10px  Lato, Arial, sans-serif;
-}
-
-.vw-feed-sub{
-	width: 150px;
-	float: left;
-	color:#000;
-	word-wrap: break-word;
-	font: normal 10px  Lato, Arial, sans-serif;
-} */
-
 
 .profile-address {
 	font: normal 11px  Lato, Arial, sans-serif;
@@ -919,19 +888,19 @@ background: url(../img/red-cross.png);
 
 .spanpricerange
 {
-	width:94px;
+	width:89px;
 }
 input.spanpricerange,textarea.spanpricerange,.uneditable-input.spanpricerange {
-	width: 94px;
+	width: 89px;
 }
 
 .spanpricerange-leftpane
 {
-	width:93px;
+	width:89px;
 }
 input..spanpricerange-leftpane,textarea..spanpricerange-leftpane,.uneditable-input..spanpricerange-leftpane
  {
-	width: 93px;
+	width: 89px;
 }
 
 

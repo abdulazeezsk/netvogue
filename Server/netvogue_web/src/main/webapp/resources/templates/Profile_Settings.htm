@@ -62,8 +62,8 @@
                     <div style="width: 680px; height: 355px;">
                         <textarea id="textarea" rows="16" style="width: 680px;" ng-model="aboutus"></textarea>
                     </div>
-                    <div style="padding-left: 585px;position:absolute;top:530px;">
-                        <button type="submit" class="btn btn-primary" style="" data-loading-text="Saving..."
+                    <div style="padding-left: 578px;position:absolute;top:530px;">
+                        <button type="submit" class="btn btn-inverse" style="" data-loading-text="Saving..."
                             ng-click="updateaboutus(aboutus, $event)">
                             Save changes</button>
                     </div>
@@ -91,7 +91,7 @@
                                 class="Title">{{line.productlinename}}</span></div>
                     </div>
                     <div class="pull-right">
-                        <button type="submit" class="btn btn-primary" style="" data-loading-text="Saving..."
+                        <button type="submit" class="btn btn-inverse" style="" data-loading-text="Saving..."
                         	ng-click="updateproductline(productline, $event)">
                             Save changes</button>
                     </div>
@@ -119,10 +119,11 @@
                                     <span class="brand_image"><a href="#">
                                         <img alt="" ng-src="{{brandscarried.getItem(brand).profilepic}}" class="pull-left"></a> </span>
                                     <span class="network_text">
-                                        <p style="margin-bottom:5px;font-size:12px;">
-                                            <span><a style="color:black;" ng-href="#/{{brandscarried.getItem(brand).brandusername}}/profile">{{brand}}</a></span>
+                                        <p>
+                                           <a  ng-href="#/{{brandscarried.getItem(brand).brandusername}}/profile">{{brand}}</a>
                                         </p>
-                                    </span><span class="btn-group pull-right">
+                                    </span>
+                                    <span class="btn-group pull-right">
                                         <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
                                             Action <span class="caret"></span>
                                         </button>
@@ -237,10 +238,10 @@
 						Well done! You successfully saved Contact info
 					</div>
                         
-                        <div class="controls" style="padding-left: 390px;">
-                            <button type="submit" class="btn btn-primary" data-loading-text="Saving..."
+                        <div class="controls" style="padding-left: 430px;">
+                            <button type="submit" class="btn btn-inverse" data-loading-text="Saving..."
                             	ng-click="updatecontactinfo(contactinfo, $event)">
-                                Save Changes</button>
+                                Save</button>
                         </div>
                     </div>
                     </form>
