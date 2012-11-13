@@ -27,7 +27,6 @@ import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.converters.ImageURLsConverter;
 import org.netvogue.server.webmvc.converters.StyleResponseConverter;
 import org.netvogue.server.webmvc.converters.StylesheetConverter;
-import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.PhotoWeb;
 import org.netvogue.server.webmvc.domain.StyleJSONResponse;
@@ -412,20 +411,29 @@ public class StyleSheetController {
 	//All these queries must be changed, as anyone can delete these things if they just have userid Azeez
 	@RequestMapping(value="stylesheet/deletestyle", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeletePhoto(@RequestBody String photoid) {
-		System.out.println("Delete Photo:" + photoid);
+		System.out.println("Delete Style Sheet Photo:" + photoid);
 		String error = "";
-		
 		JsonResponse response = new JsonResponse();
-		if(!photoid.isEmpty()) {
-			if(ResultStatus.SUCCESS == stylesheetService.deleteStyle(photoid, error)) {  
+		User user = userDetailsService.getUserFromSession();
+		if (null == user) {
+			response.setError("user info missing");
+			return response;
+		}
+		if (!photoid.isEmpty()) {
+			if (ResultStatus.SUCCESS == stylesheetService.deleteStyle(photoid,
+					error)) {
 				response.setStatus(true);
-			}
-			else
+				ResultStatus status = uploadManager.deletePhotosById(photoid,
+						ImageType.STYLE, user.getUsername());
+				System.out.println("Result Status of deleting from S3: "
+						+ status.toString());
+
+			} else
 				response.setError(error);
 		} else {
 			response.setError("photoid is empty");
 		}
-		
+
 		return response;
 	}
 }

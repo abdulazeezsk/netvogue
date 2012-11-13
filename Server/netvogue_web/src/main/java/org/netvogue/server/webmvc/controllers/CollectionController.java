@@ -28,7 +28,6 @@ import org.netvogue.server.webmvc.converters.ImageURLsConverter;
 import org.netvogue.server.webmvc.domain.Collection;
 import org.netvogue.server.webmvc.domain.CollectionJSONRequest;
 import org.netvogue.server.webmvc.domain.Collections;
-import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.PhotoInfoJsonRequest;
@@ -372,13 +371,21 @@ public class CollectionController {
 
 	@RequestMapping(value="collection/deletephoto", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeletePhoto(@RequestBody String photoid) {
-		System.out.println("Delete Photo:" + photoid);
-		StringBuffer error = new StringBuffer();
-		
+		System.out.println("Delete Collections Photo:" + photoid);
+		StringBuffer error = new StringBuffer();		
 		JsonResponse response = new JsonResponse();
+		User user = userDetailsService.getUserFromSession();
+		if (null == user) {
+			response.setError("user info missing");
+			return response;
+		}
 		if(!photoid.isEmpty()) {
 			if(ResultStatus.SUCCESS == collectionService.deletePhoto(photoid, error)) {  
 				response.setStatus(true);
+				ResultStatus status = uploadManager.deletePhotosById(photoid,
+						ImageType.COLLECTION, user.getUsername());
+				System.out.println("Result Status of deleting from S3: "
+						+ status.toString());				
 			}
 			else
 				response.setError(error.toString());
