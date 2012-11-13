@@ -70,11 +70,11 @@
 					<div class="imageprevw">
 						<ul class="thumbnails">
 							<li class="spanstyle" style="display: inline;"><img
-								width="261" height="365" ng-src="{{mainstyle.profilethumbpic}}" alt=""></li>
+							style="max-width: 271px; max-height: 365px; min-width: 271px; min-height: 365px;"	width="261" height="365" ng-src="{{mainstyle.profilethumbpic}}" alt=""></li>
 						</ul>
 					</div>
-					<div class="styles-specs" style="margin-left: 5px;">
-						<span style="width: 400px; margin-left: 10px;">
+					<div class="styles-specs" style="margin-left: 35px;">
+						<span style="width: 400px;">
 							<div>
 								<!-- <span
 									style="font-weight: Bold; font-size: 14px; cursor: pointer; text-transform: uppercase;">
@@ -182,7 +182,7 @@
 				<div class="moreviews-styles">
 					<a ng-repeat="image in mainstyle.availableImages"
 						ng-click="mainstyle.profilethumbpic = image.thumbnail_url"><img
-						class="thumbnailz" width="85" style="max-height: 113px;"
+						class="thumbnailz" style="max-width: 80px; max-height: 113px; min-width: 80px; min-height: 113px;margin:2px;"
 						ng-src="{{image.thumbnail_url}}" alt=""></a>
 				</div>
 			 

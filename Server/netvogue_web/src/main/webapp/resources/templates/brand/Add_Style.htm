@@ -85,7 +85,7 @@
 						<div class="imageprevw">
 							<ul class="thumbnails">
 								<li class="spanstyle" style="display: inline;"><img
-									width="271" height="365" ng-src="{{mainimage}}" alt=""></li>
+									style="max-width: 271px; max-height: 365px;" width="271" height="365" ng-src="{{mainimage}}" alt=""></li>
 							</ul>
 						</div>
 						<div class="moreviews-styles" ui-sortable
@@ -93,7 +93,7 @@
 							ui-options="{update: stylesorderchanged}">
 							<img ng-repeat="eachfile in newstyle.availableImages"
 								class="thumbnailz" width="83" height="113"
-								style="max-width: 83px; max-height: 113px;"
+								style="max-width: 80px; max-height: 113px; min-width: 80px; min-height: 113px;margin:2px;"
 								ng-src="{{eachfile.thumbnail_url}}" alt="">
 						</div>
 					</div>
