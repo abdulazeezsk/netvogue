@@ -168,13 +168,15 @@ body {
 }
 
 a {
-  color: #0088cc;
+   color: #0088cc;
+  /* color: #20ACB8; */
   text-decoration: none;
 }
 
 a:hover {
   color: #005580;
-  text-decoration: underline;
+  /* text-decoration: underline; */
+  text-decoration: none;
 }
 
 .img-rounded {
