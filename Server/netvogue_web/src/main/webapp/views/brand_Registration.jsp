@@ -41,7 +41,7 @@ body {
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="brand" href="#">VEAWE</a>
+				</a> <a class="brand" href="Netvogue.html">VEAWE</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li><a href="#">Designers</a></li>
