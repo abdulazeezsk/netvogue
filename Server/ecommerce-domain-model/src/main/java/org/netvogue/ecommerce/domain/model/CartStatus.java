@@ -1,5 +1,5 @@
 package org.netvogue.ecommerce.domain.model;
 
 public enum CartStatus {
-  PENDING, CONFIRMED, REJECTED;
+  NEW, SAVED, PENDING, CONFIRMED, REJECTED, PARTIALLY_CONFIRMED, EXPIRED;
 }
