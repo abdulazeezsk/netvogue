@@ -15,13 +15,16 @@ public class ShoppingCart {
 
   private String customerId;
 
-  private CartStatus status;
+  private CartStatus status = CartStatus.NEW;
 
   public ShoppingCart(final String customerId) {
     this.customerId = customerId;
   }
 
   public void addItem(final Style style) {
+
+    checkStyleForSameBrand(style);
+
     CartItem item = new CartItem();
     item.setQuantity(1);
     item.setStyle(style);
@@ -43,6 +46,10 @@ public class ShoppingCart {
   }
 
   public void updateQuantity(final String styleId, final int newQuantity) {
+
+    if (newQuantity <= 0) {
+      throw new ShoppingCartException("quantity should be greather than zero");
+    }
 
     for (CartItem item : items) {
       if (item.getStyle().getStyleId() == styleId) {
@@ -94,6 +101,36 @@ public class ShoppingCart {
 
   public void setStatus(final CartStatus status) {
     this.status = status;
+  }
+
+  public void checkOut() {
+    validateCheckoutRules();
+  }
+
+  private void validateCheckoutRules() {
+    if (shippingAddress == null) {
+      throw new ShoppingCartException("shipping address is required");
+    }
+
+    if (paymentMethod == null) {
+      throw new ShoppingCartException("payment method is required");
+    }
+
+    if (items.size() == 0) {
+      throw new ShoppingCartException("there are no items in the cart to checkout");
+    }
+
+    status = CartStatus.VALID;
+  }
+
+  private void checkStyleForSameBrand(final Style style) {
+    for (CartItem item : items) {
+      if (!style.getBrand().getUsername().equals(item.getStyle().getBrand().getUsername())) {
+        throw new ShoppingCartException(
+            "all cart items should be of same brand, you are trying to add a style with different brand than items already in cart");
+      }
+    }
+
   }
 
 }
