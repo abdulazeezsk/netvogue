@@ -1,5 +1,7 @@
 package org.netvogue.server.neo4japi.repository;
 
+import java.util.List;
+
 import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.neo4japi.domain.Stylesheet;
 import org.netvogue.server.neo4japi.service.StyleData;
@@ -19,7 +21,7 @@ public interface StylesheetRepository extends GraphRepository<Stylesheet> {
 			"FOREACH(rel IN rels: DELETE rel) DELETE p " +
 			"WITH n, photosid MATCH n<-[r]-() DELETE n, r " +
 			"RETURN DISTINCT photosid")
-	Iterable<Iterable<String>> deleteStylesheet(String stylesheetid);
+	Iterable<Iterable<List<String>>> deleteStylesheet(String stylesheetid);
 	
 	@Query( "START n=node:styleid(styleid={0}) RETURN n")
 	Style getStyle(String styleid);

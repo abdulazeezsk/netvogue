@@ -1,5 +1,8 @@
 package org.netvogue.server.neo4japi.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.Utils;
@@ -57,17 +60,25 @@ public class StylesheetServiceImpl implements StylesheetService {
 		}
 	}
 	
-	public ResultStatus deleteStylesheet(String stylesheetId,  Iterable<Iterable<String>> photoids, String error)  {
+	public List<String> deleteStylesheet(String stylesheetId, String error)  {
+		List<String> idsList = null;
+		Iterable<Iterable<List<String>>> photoids = null;
 		try {
 			photoids = stylesheetRepo.deleteStylesheet(stylesheetId);
 			//stylesheetRepo.deleteStylesheet(stylesheetId);
 			System.out.println("deleted style sheet:" + stylesheetId);
-			return ResultStatus.SUCCESS;
+			idsList = new ArrayList<String>();
+			for (Iterable<List<String>> iterable : photoids) {
+				for (List<String> list : iterable) {
+					idsList.addAll(list);			
+				}
+			}			
 		} catch(Exception e) {
+			e.printStackTrace();
 			System.out.println("There was an error while deleting stylesheetId:" + stylesheetId + " - " + e.toString());
 			error = e.toString();
-			return ResultStatus.FAILURE;
 		}
+		return idsList;
 	}
 	
 	public Style getStyle(String styleId, String error) {

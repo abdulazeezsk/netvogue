@@ -7,7 +7,6 @@ import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Collection;
-import org.netvogue.server.neo4japi.domain.CollectionPhoto;
 import org.netvogue.server.neo4japi.repository.CollectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.neo4j.support.Neo4jTemplate;
