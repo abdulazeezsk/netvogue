@@ -1,5 +1,8 @@
 package org.netvogue.server.neo4japi.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.Utils;
@@ -66,16 +69,22 @@ public class EditorialServiceImpl implements EditorialService {
 			return ResultStatus.FAILURE;
 		}
 	}
-	public ResultStatus deleteEditorial(String editorialid, Iterable<String> photosids, StringBuffer error)  {
+	public List<String> deleteEditorial(String editorialid, StringBuffer error)  {
+		List<String> idsList = null;
+		Iterable<String> photoids = null;
 		try {
-			photosids = editorialRepo.deleteEditorial(editorialid);
+			photoids = editorialRepo.deleteEditorial(editorialid);
 			System.out.println("deleted editorial:" + editorialid);
-			return ResultStatus.SUCCESS;
+			idsList = new ArrayList<String>();
+			for (String string : photoids) {
+				idsList.add(string);
+			}			
+
 		} catch(Exception e) {
 			System.out.println("There was an error while deleting editorial:" + editorialid + " - " + e.toString());
 			error.append(e.toString());
-			return ResultStatus.FAILURE;
 		}
+		return idsList;
 	}
 	
 	public Iterable<EditorialPhoto> getPhotos(String editorialId, int pagenumber) {

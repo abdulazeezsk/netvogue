@@ -1,5 +1,8 @@
 package org.netvogue.server.neo4japi.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.Utils;
@@ -66,16 +69,21 @@ public class PrintCampaignServiceImpl implements PrintCampaignService {
 			return ResultStatus.FAILURE;
 		}
 	}
-	public ResultStatus deletePrintCampaign(String printCampaignId, Iterable<String> photosids, StringBuffer error)  {
+	public List<String> deletePrintCampaign(String printCampaignId, StringBuffer error)  {
+		List<String> idsList = null;
+		Iterable<String> photoids = null;
 		try {
-			photosids = printcampaignRepo.deletePrintCampaign(printCampaignId);
+			photoids = printcampaignRepo.deletePrintCampaign(printCampaignId);
 			System.out.println("deleted gallery:" + printCampaignId);
-			return ResultStatus.SUCCESS;
+			idsList = new ArrayList<String>();
+			for (String string : photoids) {
+				idsList.add(string);
+			}	
 		} catch(Exception e) {
 			System.out.println("There was an error while deleting print campaign:" + printCampaignId + " - " + e.toString());
 			error.append(e.toString());
-			return ResultStatus.FAILURE;
 		}
+		return idsList;
 	}
 	
 	public Iterable<PrintCampaignPhoto> getPhotos(String printcampaignId, int pagenumber) {

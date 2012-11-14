@@ -2,7 +2,6 @@ package org.netvogue.server.neo4japi.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ResultStatus;

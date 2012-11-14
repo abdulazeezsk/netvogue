@@ -1,5 +1,7 @@
 package org.netvogue.server.neo4japi.service;
 
+import java.util.List;
+
 import org.netvogue.server.neo4japi.common.ResultStatus;import org.netvogue.server.neo4japi.domain.PrintCampaign;
 import org.netvogue.server.neo4japi.domain.PrintCampaignPhoto;
 
@@ -11,7 +13,7 @@ public interface PrintCampaignService {
 	public ResultStatus editPrintCampaign(String printCampaignId, String name, String desc, StringBuffer error);
 	public ResultStatus editPrintCampaignName(String printcampaignId, String name, StringBuffer error);
 	public ResultStatus setProfilepic(String printcampaignid, String uniqueid, StringBuffer error);
-	public ResultStatus deletePrintCampaign(String printcampaignId, Iterable<String> photosids, StringBuffer error);
+	public List<String> deletePrintCampaign(String printcampaignId, StringBuffer error);
 	
 	public Iterable<PrintCampaignPhoto> getPhotos(String printcampaignId, int pagenumber);
 	public Iterable<PrintCampaignPhoto> searchPhotoByName(PrintCampaign printCampaign, String name, int pagenumber);

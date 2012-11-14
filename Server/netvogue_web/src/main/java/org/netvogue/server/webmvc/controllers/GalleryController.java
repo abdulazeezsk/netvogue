@@ -219,13 +219,8 @@ public class GalleryController {
 			return response;
 		}
 		List<String> galleryIdsList = galleryService.deleteGallery(galleryid, error);
-		if(null != galleryIdsList) {
+		if(null != galleryIdsList && galleryIdsList.size() > 0) {
 			//Delete all photo ids from here
-			for (Iterator<String> iterator = galleryIdsList.iterator(); iterator
-					.hasNext();) {
-				String string = iterator.next();
-				System.out.println("photo id in gallery: " + string);
-			}
 			ResultStatus status = uploadManager.deletePhotosList(galleryIdsList,
 					ImageType.GALLERY, user.getUsername());
 			System.out.println("Result Status of deleting gallery from S3: "

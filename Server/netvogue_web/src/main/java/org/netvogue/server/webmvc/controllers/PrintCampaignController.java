@@ -216,9 +216,18 @@ public class PrintCampaignController {
 			response.setError("Galleryid is empty");
 			return response;
 		}
-		Iterable<String> photoids = null;
-		if(ResultStatus.SUCCESS == printcampaignService.deletePrintCampaign(galleryid, photoids, error)) {  
-			response.setStatus(true);
+		User user = userDetailsService.getUserFromSession();
+		if (null == user) {
+			response.setError("user info missing");
+			return response;
+		}
+		List<String> idsList = printcampaignService.deletePrintCampaign(galleryid, error);
+		response.setStatus(true);
+		if(null != idsList && idsList.size() > 0) {  
+			ResultStatus status = uploadManager.deletePhotosList(idsList,
+					ImageType.PRINT_CAMPAIGN, user.getUsername());
+			System.out.println("Result Status of deleting print campaign from S3: "
+					+ status.toString());			
 		}
 		else
 			response.setError(error.toString());

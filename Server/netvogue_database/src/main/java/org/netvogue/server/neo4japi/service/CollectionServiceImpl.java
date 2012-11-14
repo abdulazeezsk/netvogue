@@ -1,5 +1,8 @@
 package org.netvogue.server.neo4japi.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.Utils;
@@ -66,16 +69,21 @@ public class CollectionServiceImpl implements CollectionService {
 		}
 	}
 	
-	public ResultStatus deleteCollection(String collectionid, Iterable<String> photosids, StringBuffer error)  {
+	public List<String> deleteCollection(String collectionid, StringBuffer error)  {
+		List<String> collectionIdsList = null;
+		Iterable<String> photoids = null;
 		try {
-			photosids = collectionRepo.deleteCollection(collectionid);
+			photoids = collectionRepo.deleteCollection(collectionid);
 			System.out.println("deleted collection:" + collectionid);
-			return ResultStatus.SUCCESS;
+			collectionIdsList = new ArrayList<String>();
+			for (String string : photoids) {
+				collectionIdsList.add(string);
+			}			
 		} catch(Exception e) {
 			System.out.println("There was an error while deleting collection:" + collectionid + " - " + e.toString());
-			error.append(e.toString());
-			return ResultStatus.FAILURE;
+			error.append(e.toString());			
 		}
+		return collectionIdsList;
 	}
 	
 	public Iterable<CollectionPhotoData> getPhotos(String collectionid, int pagenumber) {

@@ -271,9 +271,18 @@ public class CollectionController {
 			response.setError("Galleryid is empty");
 			return response;
 		}
-		Iterable<String> photoids = null;
-		if(ResultStatus.SUCCESS == collectionService.deleteCollection(galleryid, photoids, error)) {  
-			response.setStatus(true);
+		User user = userDetailsService.getUserFromSession();
+		if (null == user) {
+			response.setError("user info missing");
+			return response;
+		}
+		List<String> collectionIdsList = collectionService.deleteCollection(galleryid, error);
+		response.setStatus(true);
+		if(null != collectionIdsList && collectionIdsList.size() > 0) {
+			ResultStatus status = uploadManager.deletePhotosList(collectionIdsList,
+					ImageType.COLLECTION, user.getUsername());
+			System.out.println("Result Status of deleting collection from S3: "
+					+ status.toString());		
 		}
 		else
 			response.setError(error.toString());

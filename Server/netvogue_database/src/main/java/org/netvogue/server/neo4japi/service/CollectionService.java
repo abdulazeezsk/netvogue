@@ -1,5 +1,7 @@
 package org.netvogue.server.neo4japi.service;
 
+import java.util.List;
+
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.Collection;
 
@@ -11,7 +13,7 @@ public interface CollectionService {
 	public ResultStatus editCollection(String collectionid, String seasonname, String desc, StringBuffer error);
 	public ResultStatus editCollectionSeasonName(String collectionId, String seasonname, StringBuffer error);
 	public ResultStatus setProfilepic(String collectionid, String uniqueid, StringBuffer error);
-	public ResultStatus deleteCollection(String collectionId, Iterable<String> photosids, StringBuffer error);
+	public List<String> deleteCollection(String collectionId, StringBuffer error);
 	
 	public Iterable<CollectionPhotoData> getPhotos(String collectionId, int pagenumber);
 	public Iterable<CollectionPhotoData> searchPhotoByName(Collection printCampaign, String name, int pagenumber);
