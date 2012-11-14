@@ -160,7 +160,8 @@ textarea {
 
 body {
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
+  font-family: Lato, Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
   color: #333333;
@@ -874,7 +875,8 @@ address {
 code,
 pre {
   padding: 0 3px 2px;
-  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+  /* font-family: Monaco, Menlo, Consolas, "Courier New", monospace; */
+  font-family: Lato, Arial, sans-serif;
   font-size: 12px;
   color: #333333;
   -webkit-border-radius: 3px;
@@ -964,7 +966,8 @@ input,
 button,
 select,
 textarea {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
+  font-family: Lato, Arial, sans-serif;
 }
 
 label {
@@ -4322,7 +4325,8 @@ input[type="submit"].btn.btn-mini {
 .navbar-search .search-query {
   padding: 4px 14px;
   margin-bottom: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
+  font-family: Lato, Arial, sans-serif;
   font-size: 13px;
   font-weight: normal;
   line-height: 1;
