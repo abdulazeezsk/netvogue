@@ -9,4 +9,6 @@ public interface UserDao {
   void deactivateUser(final User user);
 
   void deleteUser(final User user);
+
+  void authenticateUser(final String userId, final String password);
 }
