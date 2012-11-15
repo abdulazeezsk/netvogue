@@ -20,7 +20,6 @@ public class CategoryReadConverter implements Converter<DBObject, Category> {
 
     for (Object obj : productLinesList) {
       BasicDBObject dbObj = (BasicDBObject) obj;
-      System.out.println("while reading:" + dbObj.get("name"));
       ProductLine line = new ProductLine();
       line.setId((String) dbObj.get("_id"));
       line.setName((String) dbObj.get("name"));
