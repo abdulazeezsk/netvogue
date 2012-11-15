@@ -274,13 +274,21 @@ public class StyleSheetController {
 			response.setError("Stylesheetid is empty");
 			return response;
 		}
-		
-		Iterable<Iterable<String>> photoids = null;
+		User user = userDetailsService.getUserFromSession();
+		if (null == user) {
+			response.setError("user info missing");
+			return response;
+		}		
+		List<String> idsList = stylesheetService.deleteStylesheet(stylesheetId, error);
+		response.setStatus(true);
 		//Make sure that styles inside this stylesheet are not part of any linesheets
-		if(ResultStatus.SUCCESS == stylesheetService.deleteStylesheet(stylesheetId, photoids, error)) {
+		if(null != idsList && idsList.size() > 0) {
 			//This is different to other ones...here each String itself is an array separated by commas
 			//parse that into individual strings and delete
-			response.setStatus(true);
+			ResultStatus status = uploadManager.deletePhotosList(idsList,
+					ImageType.STYLE, user.getUsername());
+			System.out.println("Result Status of deleting SS from S3: "
+					+ status.toString());
 		}
 		else
 			response.setError(error);
