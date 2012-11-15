@@ -16,7 +16,7 @@ public class CategoryReadConverter implements Converter<DBObject, Category> {
     category.setId((String) object.get("_id"));
     category.setCategoryType((String) object.get("type"));
 
-    BasicDBList productLinesList = (BasicDBList) object.get("productLines-abc");
+    BasicDBList productLinesList = (BasicDBList) object.get("productLines");
 
     for (Object obj : productLinesList) {
       BasicDBObject dbObj = (BasicDBObject) obj;
