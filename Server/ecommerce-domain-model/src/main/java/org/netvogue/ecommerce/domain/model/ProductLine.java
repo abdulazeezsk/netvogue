@@ -2,11 +2,11 @@ package org.netvogue.ecommerce.domain.model;
 
 public class ProductLine {
 
+  private String id;
+
   private String name;
 
   private String description;
-
-  private Category category;
 
   private String size;
 
@@ -26,20 +26,20 @@ public class ProductLine {
     this.description = description;
   }
 
-  public Category getCategory() {
-    return category;
-  }
-
-  public void setCategory(final Category category) {
-    this.category = category;
-  }
-
   public String getSize() {
     return size;
   }
 
   public void setSize(final String size) {
     this.size = size;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(final String id) {
+    this.id = id;
   }
 
 }

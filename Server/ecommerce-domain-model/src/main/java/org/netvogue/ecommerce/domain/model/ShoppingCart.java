@@ -23,8 +23,6 @@ public class ShoppingCart {
 
   public void addItem(final Style style) {
 
-    checkStyleForSameBrand(style);
-
     CartItem item = new CartItem();
     item.setQuantity(1);
     item.setStyle(style);
@@ -121,16 +119,6 @@ public class ShoppingCart {
     }
 
     status = CartStatus.VALID;
-  }
-
-  private void checkStyleForSameBrand(final Style style) {
-    for (CartItem item : items) {
-      if (!style.getBrand().getUsername().equals(item.getStyle().getBrand().getUsername())) {
-        throw new ShoppingCartException(
-            "all cart items should be of same brand, you are trying to add a style with different brand than items already in cart");
-      }
-    }
-
   }
 
 }

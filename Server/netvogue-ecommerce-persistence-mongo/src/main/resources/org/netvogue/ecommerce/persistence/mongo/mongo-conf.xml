@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <beans xmlns="http://www.springframework.org/schema/beans"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xmlns:context="http://www.springframework.org/schema/context"
@@ -13,9 +12,6 @@
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 
-<context:property-placeholder location="classpath:applicaiton.default.properties,
-												  mongo-{env}.properties,
-												  mongo.properties.${env}"/>
 
 <mongo:mongo host="${mongo.host}" port="${mongo.port}">
   <mongo:options
@@ -27,14 +23,17 @@
      write-timeout="${write.timeout}"/>
   </mongo:mongo>
   
-  <mongo:db-factory dbname="database" mongo-ref="mongo"/>
+  <mongo:db-factory dbname="netvogue-database" mongo-ref="mongo"/>
 
+
+ <mongo:mapping-converter id="mongoConverter" base-package="org.netvogue.ecommerce.persistence.mongo.coverters">
+   <mongo:custom-converters base-package="org.netvogue.ecommerce.persistence.mongo.coverters" />
+ </mongo:mapping-converter>
 
  <bean id="journaSafeMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
     <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
-    <constructor-arg name="writeConcern" value="JOURNAL_SAFE" />
-    <constructor-arg name="writeResultChecking" value="EXCEPTION" />
+    <property name="writeConcern" value="JOURNAL_SAFE" />
+    <property name="writeResultChecking" value="EXCEPTION" />
  </bean>
-  
-
+ 
 </beans>

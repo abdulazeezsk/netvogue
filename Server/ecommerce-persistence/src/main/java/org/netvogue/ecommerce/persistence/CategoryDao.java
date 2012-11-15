@@ -2,15 +2,17 @@ package org.netvogue.ecommerce.persistence;
 
 import org.netvogue.ecommerce.domain.model.Category;
 
-import java.util.Set;
+import java.util.List;
 
 public interface CategoryDao {
 
+  public static String CATEGORY_COLLECTION_NAME = "categories";
+
   void addCategory(Category category);
 
-  void deleteCategory(long categoryId);
+  void deleteCategory(String categoryId);
 
-  Category getCategory(long categoryId);
+  Category getCategory(String categoryId);
 
-  Set<Category> findAllCategories();
+  List<Category> findAllCategories();
 }
