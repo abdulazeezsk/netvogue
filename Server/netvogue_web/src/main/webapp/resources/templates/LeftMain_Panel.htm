@@ -62,6 +62,17 @@
 				<li ng-show="iambrand || (!iambrand && isMyProfile)"
 					class="leftmenu_tabs"><a ng-href="{{links.collections}}">Collections</a>
 				</li>
+				<li class="nav-header" ng-show="!iambrand && isMyProfile">My
+					Orders</li>
+				<li class="nav-header" ng-show="iambrand">My Orders</li>
+				<li ng-show="iambrand || (!iambrand && isMyProfile)"
+					class="leftmenu_tabs"><a ng-href="{{links.linesheets}}">Returned</a></li>
+				<li ng-show="iambrand && (isMyProfile)" class="leftmenu_tabs"><a
+					ng-href="{{links.stylesheets}}">Submited</a></li>
+				<li ng-show="iambrand || (!iambrand && isMyProfile)"
+					class="leftmenu_tabs"><a ng-href="{{links.collections}}">Approved</a>
+				</li>
+				
 				<li ng-show="isMyProfile" class="nav-header">Invite</li>
 				<li ng-show="isMyProfile" class="leftmenu_tabs"><a
 					href="#invite" data-toggle="modal">Send Invite</a></li>

@@ -829,6 +829,21 @@ input.spanedt_txt,textarea.spanedt_txt,.uneditable-input.spanedt_txt{
 	position-bottom: 30px;
 }
 
+
+/* .spancolor
+{
+	width: 60px;
+	font: normal 11px  Lato, Arial, sans-serif;
+	border-top: solid 1px #999999;
+	margin: 0 0 0 0;
+}
+
+input.spancolor,textarea.spancolor,.uneditable-input.spancolor{
+	width: 60px;
+	position:relative;
+	position-bottom: 30px;
+}
+ */
 .spanedt_txt1
 {
 	width: 400px;
@@ -2494,6 +2509,7 @@ opacity:0;
 	position: relative;
 	float: left;
 	clear: both;
+	margin-bottom:2px;
 }
 
 .network1 .brand_image {
