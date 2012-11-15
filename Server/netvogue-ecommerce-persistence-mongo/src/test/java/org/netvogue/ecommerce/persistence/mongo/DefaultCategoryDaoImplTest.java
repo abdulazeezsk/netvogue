@@ -47,7 +47,7 @@ public class DefaultCategoryDaoImplTest {
     Category c1 = new Category();
     c1.setCategoryType("abc");
     c1.setId("22222");
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 2; i++) {
       ProductLine line = new ProductLine();
       line.setDescription("desc-" + i);
       line.setId("prdline-" + i);
@@ -68,7 +68,25 @@ public class DefaultCategoryDaoImplTest {
     Category catg = categoryDao.getCategory(categories.get(1).getId());
     assertNotNull("category:", catg);
 
-    template.dropCollection(CategoryDao.CATEGORY_COLLECTION_NAME);
+    assertEquals("categories prod lines:", 2, catg.getProductlines().size());
+
+    ProductLine line = new ProductLine();
+    line.setDescription("description");
+    line.setId("prdline-" + 2);
+    line.setName("prod-line-name");
+    line.setSize("prod-line-size");
+
+    categoryDao.addProductLine("22222", line);
+
+    List<ProductLine> prodLines = categoryDao.findAllProductLinesByCategory("22222");
+    assertEquals("prodlines size:", 3, prodLines.size());
+
+    categoryDao.deleteProductLine("22222", "prdline-1");
+
+    prodLines = categoryDao.findAllProductLinesByCategory("22222");
+    assertEquals("prodlines size:", 2, prodLines.size());
+
+    // template.dropCollection(CategoryDao.CATEGORY_COLLECTION_NAME);
   }
 
 

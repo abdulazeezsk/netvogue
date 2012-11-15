@@ -1,7 +1,8 @@
 package org.netvogue.ecommerce.domain.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class Category {
 
@@ -9,7 +10,7 @@ public class Category {
 
   private String categoryType;
 
-  private Set<ProductLine> productlines = new HashSet<ProductLine>();
+  private List<ProductLine> productlines = new ArrayList<ProductLine>();
 
   public String getCategoryType() {
     return categoryType;
@@ -27,11 +28,21 @@ public class Category {
     productlines.remove(line);
   }
 
-  public Set<ProductLine> getProductlines() {
+  public void removeProductLine(final String productLineId) {
+    Iterator<ProductLine> it = productlines.iterator();
+    while (it.hasNext()) {
+      ProductLine line = it.next();
+      if (line.getId().equals(productLineId)) {
+        it.remove();
+      }
+    }
+  }
+
+  public List<ProductLine> getProductlines() {
     return productlines;
   }
 
-  public void setProductlines(final Set<ProductLine> productlines) {
+  public void setProductlines(final List<ProductLine> productlines) {
     this.productlines = productlines;
   }
 

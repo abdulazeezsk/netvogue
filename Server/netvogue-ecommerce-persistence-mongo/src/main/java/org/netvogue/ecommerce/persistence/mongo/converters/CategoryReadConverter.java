@@ -1,4 +1,4 @@
-package org.netvogue.ecommerce.persistence.mongo.coverters;
+package org.netvogue.ecommerce.persistence.mongo.converters;
 
 import org.netvogue.ecommerce.domain.model.Category;
 import org.netvogue.ecommerce.domain.model.ProductLine;
@@ -16,15 +16,17 @@ public class CategoryReadConverter implements Converter<DBObject, Category> {
     category.setId((String) object.get("_id"));
     category.setCategoryType((String) object.get("type"));
 
-    BasicDBList productLinesList = (BasicDBList) object.get("productLines");
+    BasicDBList productLinesList = (BasicDBList) object.get("productLines-abc");
 
     for (Object obj : productLinesList) {
       BasicDBObject dbObj = (BasicDBObject) obj;
+      System.out.println("while reading:" + dbObj.get("name"));
       ProductLine line = new ProductLine();
       line.setId((String) dbObj.get("_id"));
       line.setName((String) dbObj.get("name"));
       line.setDescription((String) dbObj.get("description"));
       line.setSize((String) dbObj.get("size"));
+      category.addProductLine(line);
     }
 
     return category;

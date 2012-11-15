@@ -13,17 +13,17 @@ public class DefaultStyleDaoImpl implements StyleDao {
 
   }
 
-  public void deleteStyle(final long styleId) {
+  public void deleteStyle(final String styleId) {
     // TODO Auto-generated method stub
 
   }
 
-  public void activateStyle(final long styleId) {
+  public void activateStyle(final String styleId) {
     // TODO Auto-generated method stub
 
   }
 
-  public void deactivateStyle(final long styleId) {
+  public void deactivateStyle(final String styleId) {
     // TODO Auto-generated method stub
 
   }

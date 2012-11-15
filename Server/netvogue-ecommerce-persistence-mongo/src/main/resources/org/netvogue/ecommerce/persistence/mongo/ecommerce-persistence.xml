@@ -17,11 +17,7 @@
  <bean id="categoryDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultCategoryDaoImpl">
  	<constructor-arg ref="journaSafeMongoTemplate"/>
  </bean>
- 
-  <bean id="productLineDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultProductLineDaoImpl">
- 	<property name="mongoTemplate" ref="journaSafeMongoTemplate"/>
- </bean>
- 
+  
  <bean id="styleDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultStyleDaoImpl">
  	<property name="mongoTemplate" ref="journaSafeMongoTemplate"/>
  </bean>

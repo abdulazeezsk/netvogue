@@ -6,10 +6,10 @@ public interface StyleDao {
 
   void addStyle(Style style);
 
-  void deleteStyle(long styleId);
+  void deleteStyle(String styleId);
 
-  void activateStyle(long styleId);
+  void activateStyle(String styleId);
 
-  void deactivateStyle(long styleId);
+  void deactivateStyle(String styleId);
 
 }

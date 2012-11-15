@@ -26,14 +26,23 @@
   <mongo:db-factory dbname="netvogue-database" mongo-ref="mongo"/>
 
 
- <mongo:mapping-converter id="mongoConverter" base-package="org.netvogue.ecommerce.persistence.mongo.coverters">
-   <mongo:custom-converters base-package="org.netvogue.ecommerce.persistence.mongo.coverters" />
+
+ <bean id="categoryReadConverter" class="org.netvogue.ecommerce.persistence.mongo.converters.CategoryReadConverter"/>
+ <bean id="categoryWriteConverter" class="org.netvogue.ecommerce.persistence.mongo.converters.CategoryWriteConveter"/>
+
+ <mongo:mapping-converter id="mongoConverter">
+  <mongo:custom-converters>
+    <mongo:converter ref="categoryReadConverter"/>
+    <mongo:converter ref="categoryWriteConverter"/>
+  </mongo:custom-converters>
  </mongo:mapping-converter>
+
 
  <bean id="journaSafeMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
     <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
     <property name="writeConcern" value="JOURNAL_SAFE" />
     <property name="writeResultChecking" value="EXCEPTION" />
+    <constructor-arg name="mongoConverter" ref="mongoConverter"/>
  </bean>
  
 </beans>
