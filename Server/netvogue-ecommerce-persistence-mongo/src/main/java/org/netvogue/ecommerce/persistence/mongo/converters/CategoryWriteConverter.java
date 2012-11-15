@@ -8,7 +8,7 @@ import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
-public class CategoryWriteConveter implements Converter<Category, DBObject> {
+public class CategoryWriteConverter implements Converter<Category, DBObject> {
 
   public DBObject convert(final Category category) {
     BasicDBObject dbOject = new BasicDBObject();
@@ -26,7 +26,7 @@ public class CategoryWriteConveter implements Converter<Category, DBObject> {
       list.add(plObj);
     }
 
-    dbOject.put("productLines-abc", list);
+    dbOject.put("productLines", list);
     return dbOject;
   }
 

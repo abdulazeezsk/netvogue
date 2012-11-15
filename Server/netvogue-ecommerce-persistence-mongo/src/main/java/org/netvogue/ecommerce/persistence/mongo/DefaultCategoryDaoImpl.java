@@ -11,6 +11,8 @@ public class DefaultCategoryDaoImpl implements CategoryDao {
 
   private MongoTemplate mongoTemplate;
 
+  public static String CATEGORY_COLLECTION_NAME = "categories";
+
   public DefaultCategoryDaoImpl(final MongoTemplate mongoTemplate) {
     this.mongoTemplate = mongoTemplate;
   }

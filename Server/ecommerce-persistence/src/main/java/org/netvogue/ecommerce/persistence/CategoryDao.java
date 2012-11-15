@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface CategoryDao {
 
-  public static String CATEGORY_COLLECTION_NAME = "categories";
-
   void addCategory(Category category);
 
   void deleteCategory(String categoryId);

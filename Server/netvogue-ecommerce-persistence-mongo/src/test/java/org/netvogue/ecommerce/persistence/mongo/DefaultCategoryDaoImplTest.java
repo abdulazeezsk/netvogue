@@ -15,6 +15,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
+/**
+ *
+ * @author suman : To run this test you need to run mongodb in u r local on default port.
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 public class DefaultCategoryDaoImplTest {
@@ -28,9 +33,9 @@ public class DefaultCategoryDaoImplTest {
 
   @Test
   public void test() {
-    template.dropCollection(CategoryDao.CATEGORY_COLLECTION_NAME);
+    template.dropCollection(DefaultCategoryDaoImpl.CATEGORY_COLLECTION_NAME);
 
-    template.createCollection(CategoryDao.CATEGORY_COLLECTION_NAME);
+    template.createCollection(DefaultCategoryDaoImpl.CATEGORY_COLLECTION_NAME);
 
     Category c = new Category();
     c.setCategoryType("abc");
@@ -86,7 +91,7 @@ public class DefaultCategoryDaoImplTest {
     prodLines = categoryDao.findAllProductLinesByCategory("22222");
     assertEquals("prodlines size:", 2, prodLines.size());
 
-    // template.dropCollection(CategoryDao.CATEGORY_COLLECTION_NAME);
+    template.dropCollection(DefaultCategoryDaoImpl.CATEGORY_COLLECTION_NAME);
   }
 
 

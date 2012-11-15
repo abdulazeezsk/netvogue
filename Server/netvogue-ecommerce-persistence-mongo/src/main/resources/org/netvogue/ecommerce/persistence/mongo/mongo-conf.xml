@@ -28,12 +28,16 @@
 
 
  <bean id="categoryReadConverter" class="org.netvogue.ecommerce.persistence.mongo.converters.CategoryReadConverter"/>
- <bean id="categoryWriteConverter" class="org.netvogue.ecommerce.persistence.mongo.converters.CategoryWriteConveter"/>
+ <bean id="categoryWriteConverter" class="org.netvogue.ecommerce.persistence.mongo.converters.CategoryWriteConverter"/>
+ <bean id="userReadConverter" class="org.netvogue.ecommerce.persistence.mongo.converters.UserReadConverter"/>
+ <bean id="userWriteConverter" class="org.netvogue.ecommerce.persistence.mongo.converters.UserWriteConverter"/>
 
  <mongo:mapping-converter id="mongoConverter">
   <mongo:custom-converters>
     <mongo:converter ref="categoryReadConverter"/>
     <mongo:converter ref="categoryWriteConverter"/>
+    <mongo:converter ref="userReadConverter"/>
+    <mongo:converter ref="userWriteConverter"/>
   </mongo:custom-converters>
  </mongo:mapping-converter>
 

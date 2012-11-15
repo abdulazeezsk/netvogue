@@ -9,7 +9,9 @@ public class User {
 
   private String username;
 
-  private String name;
+  private String firstName;
+
+  private String lastName;
 
   private String profilePicLink = new String();
 
@@ -35,6 +37,8 @@ public class User {
 
   private long telephoneNo2;
 
+  private boolean active = true;
+
   public String getEmail() {
     return email;
   }
@@ -59,12 +63,20 @@ public class User {
     this.username = username;
   }
 
-  public String getName() {
-    return name;
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setName(final String name) {
-    this.name = name;
+  public void setFirstName(final String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(final String lastName) {
+    this.lastName = lastName;
   }
 
   public String getProfilePicLink() {
@@ -161,6 +173,14 @@ public class User {
 
   public void setTelephoneNo2(final long telephoneNo2) {
     this.telephoneNo2 = telephoneNo2;
+  }
+
+  public boolean isActive() {
+    return active;
+  }
+
+  public void setActive(final boolean active) {
+    this.active = active;
   }
 
 }
