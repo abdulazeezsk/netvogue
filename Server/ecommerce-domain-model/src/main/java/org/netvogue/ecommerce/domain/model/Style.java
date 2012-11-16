@@ -18,7 +18,7 @@ public class Style {
 
   private long price;
 
-  private String size;
+  private Set<StyleSize> availableSizes = new HashSet<StyleSize>();
 
   private Set<String> availableColors = new HashSet<String>();
 
@@ -27,6 +27,8 @@ public class Style {
   private User brand;
 
   private ProductLine productLine;
+
+  private boolean active;
 
   // suman : for now not planning to implement. Will do this
   // once basic functionality is done
@@ -88,12 +90,20 @@ public class Style {
     this.price = price;
   }
 
-  public String getSize() {
-    return size;
+  public boolean isActive() {
+    return active;
   }
 
-  public void setSize(final String size) {
-    this.size = size;
+  public void setActive(final boolean active) {
+    this.active = active;
+  }
+
+  public Set<StyleSize> getAvailableSizes() {
+    return availableSizes;
+  }
+
+  public void setAvailableSizes(final Set<StyleSize> availableSizes) {
+    this.availableSizes = availableSizes;
   }
 
   public Set<String> getAvailableColors() {
@@ -127,4 +137,5 @@ public class Style {
   public void setProductLine(final ProductLine productLine) {
     this.productLine = productLine;
   }
+
 }

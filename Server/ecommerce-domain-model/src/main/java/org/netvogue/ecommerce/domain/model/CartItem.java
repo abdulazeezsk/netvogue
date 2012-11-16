@@ -6,12 +6,7 @@ public class CartItem {
 
   private int quantity;
 
-  /**
-   * This holds the brand comments when he rejected the items;
-   */
-  private String comments;
-
-  private CartItemStatus status;
+  private StyleSize size;
 
   public Style getStyle() {
     return style;
@@ -29,20 +24,14 @@ public class CartItem {
     this.quantity = quantity;
   }
 
-  public String getComments() {
-    return comments;
+  public StyleSize getSize() {
+    return size;
   }
 
-  public void setComments(final String comments) {
-    this.comments = comments;
+  public void setSize(final StyleSize size) {
+    this.size = size;
   }
 
-  public CartItemStatus getStatus() {
-    return status;
-  }
 
-  public void setStatus(final CartItemStatus status) {
-    this.status = status;
-  }
 
 }

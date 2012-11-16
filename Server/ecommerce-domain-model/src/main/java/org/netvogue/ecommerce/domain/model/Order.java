@@ -11,7 +11,9 @@ public class Order {
    */
   private String orderId;
 
-  private Set<OrderLineItem> lineItems = new HashSet<OrderLineItem>();
+  private Set<OrderLineItem> originalLineItems = new HashSet<OrderLineItem>();
+
+  private Set<OrderLineItem> finalLineItems = new HashSet<OrderLineItem>();
 
   private OrderTracking orderTracking;
 
@@ -23,11 +25,15 @@ public class Order {
 
   private String resolutionComments;
 
-  private String shoppingCartId;
-
   private PaymentMethod paymentMethod;
 
-  private ShippingAddress shippingAddress;
+  private Address shippingAddress;
+
+  private Address billingAddress;
+
+  private String orderedBy;
+
+  private boolean reviewed = false;
 
   public String getOrderId() {
     return orderId;
@@ -38,19 +44,19 @@ public class Order {
   }
 
   public void addLineItem(final OrderLineItem item) {
-    lineItems.add(item);
+    originalLineItems.add(item);
   }
 
   public void deleteLineItem(final OrderLineItem item) {
-    lineItems.remove(item);
+    originalLineItems.remove(item);
   }
 
   public Set<OrderLineItem> getLinteItems() {
-    return lineItems;
+    return originalLineItems;
   }
 
   public void setLinteItems(final Set<OrderLineItem> lineItems) {
-    this.lineItems = lineItems;
+    originalLineItems = lineItems;
   }
 
   public long getOrderTotal() {
@@ -58,11 +64,11 @@ public class Order {
   }
 
   public Set<OrderLineItem> getLineItems() {
-    return lineItems;
+    return originalLineItems;
   }
 
   public void setLineItems(final Set<OrderLineItem> lineItems) {
-    this.lineItems = lineItems;
+    originalLineItems = lineItems;
   }
 
   public Date getOrderedCreatedDate() {
@@ -89,14 +95,6 @@ public class Order {
     this.resolutionComments = resolutionComments;
   }
 
-  public String getShoppingCartId() {
-    return shoppingCartId;
-  }
-
-  public void setShoppingCartId(final String shoppingCartId) {
-    this.shoppingCartId = shoppingCartId;
-  }
-
   public void setOrderTotal(final long orderTotal) {
     this.orderTotal = orderTotal;
   }
@@ -117,12 +115,52 @@ public class Order {
     this.paymentMethod = paymentMethod;
   }
 
-  public ShippingAddress getShippingAddress() {
+  public Address getShippingAddress() {
     return shippingAddress;
   }
 
-  public void setShippingAddress(final ShippingAddress shippingAddress) {
+  public void setShippingAddress(final Address shippingAddress) {
     this.shippingAddress = shippingAddress;
+  }
+
+  public String getOrderedBy() {
+    return orderedBy;
+  }
+
+  public boolean isReviewed() {
+    return reviewed;
+  }
+
+  public void setReviewed(final boolean reviewed) {
+    this.reviewed = reviewed;
+  }
+
+  public void setOrderedBy(final String orderedBy) {
+    this.orderedBy = orderedBy;
+  }
+
+  public Set<OrderLineItem> getOriginalLineItems() {
+    return originalLineItems;
+  }
+
+  public void setOriginalLineItems(final Set<OrderLineItem> originalLineItems) {
+    this.originalLineItems = originalLineItems;
+  }
+
+  public Set<OrderLineItem> getFinalLineItems() {
+    return finalLineItems;
+  }
+
+  public void setFinalLineItems(final Set<OrderLineItem> finalLineItems) {
+    this.finalLineItems = finalLineItems;
+  }
+
+  public Address getBillingAddress() {
+    return billingAddress;
+  }
+
+  public void setBillingAddress(final Address billingAddress) {
+    this.billingAddress = billingAddress;
   }
 
 }

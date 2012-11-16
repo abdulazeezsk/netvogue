@@ -1,6 +1,6 @@
 package org.netvogue.ecommerce.domain.model;
 
-public class ShippingAddress {
+public class Address {
 
   private String firstName;
 
