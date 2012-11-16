@@ -19,7 +19,7 @@ body {
 	padding-bottom: 40px;
 }
 </style>
-<link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+<!-- <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet"> -->
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -48,9 +48,9 @@ body {
 						<li><a href="#">Designers</a></li>
 						<li><a href="#">Retailers</a></li>
 					</ul>
-					<form class="navbar-form pull-right">
-						<input class="span3" type="text" placeholder="Email"> <input
-							class="span3" type="password" placeholder="Password">
+					<form class="navbar-form pull-right" accept-charset="UTF-8" action="j_spring_security_check" method="post" >
+						<input id="j_username" name="j_username"  class="span3" type="text" placeholder="Email"> <input
+							id="j_password" name="j_password" class="span3" type="password" placeholder="Password">
 						<button type="submit" style="font-family: 'Lato', sans-serif; font-weight: 100;" class="btn btn-inverse" class="btn btn-inverse">Sign in</button>
 					</form>
 				</div>

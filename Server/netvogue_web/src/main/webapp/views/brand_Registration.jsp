@@ -47,9 +47,9 @@ body {
 						<li><a href="#">Designers</a></li>
 						<li><a href="#">Retailers</a></li>
 					</ul>
-					<form class="navbar-form pull-right">
-						<input class="span3" type="text" placeholder="Email"> <input
-							class="span3" type="password" placeholder="Password">
+					<form class="navbar-form pull-right" accept-charset="UTF-8" action="j_spring_security_check" method="post" >
+						<input id="j_username" name="j_username" class="span3" type="text" placeholder="Email"> <input
+							id="j_password" name="j_password" class="span3" type="password" placeholder="Password">
 						<button type="submit" style="font-family: 'Lato', sans-serif; font-weight: 100;" class="btn btn-inverse">Sign in</button>
 					</form>
 				</div>
@@ -115,7 +115,7 @@ body {
 				
 				
 				 <label style="font-family: 'Lato', sans-serif; font-weight: 400;" >Brand Name</label> 
-				 <input type="text" ng-model="entity.name"  placeholder="Boutique Name" name="uBrandName" required maxlength="25" class="span5" placeholder="Brand Name"> 
+				 <input type="text" ng-model="entity.name"  name="uBrandName" required maxlength="25" class="span5" placeholder="Brand Name"> 
 				 <span ng-show="form.uBrandName.$dirty && form.uBrandName.$invalid">
                  <span ng-show="form.uBrandName.$error.required" class="validation_msg" style="font-family: 'Lato', sans-serif; font-weight: 300;color:red;">Required</span>
                  </span>
@@ -133,7 +133,7 @@ body {
 				
 			</label>
 			<button type="submit" ng-disabled="form.$invalid"
-                                data-loading-text="Please wait..." ng-click="addEntity($event)" class="btn btn-inverse pull-right">Submit</button>
+                                data-loading-text="Please wait..." ng-click="addEntity($event)" class="btn  btn-large btn-inverse pull-right">Submit</button>
 		</form>
 
 		<!-- Example row of columns -->
