@@ -51,6 +51,13 @@ font-family: "Lato Neue", Lato, Arial, sans-serif;
 	width: 220x;
 }
 
+.leftpane_subheading-noborder{
+	color: Black;
+	font: normal 12px  Lato, Arial, sans-serif;;
+	text-transform: uppercase;
+	width: 220x;
+}
+
 .leftpane_entity_name{
 	width: 150px;
 	float: left;
