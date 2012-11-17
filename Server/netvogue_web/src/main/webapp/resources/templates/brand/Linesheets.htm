@@ -161,106 +161,111 @@
 	<!--body-->
 	<!-- modal -->
 	<div class="modal  hide" id="Createlinesheet">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"></button>
-			<h4 class="subHeading_no_underline">Create Line sheet</h4>
-		</div>
-		<div class="modal-body">
-			<span class="leftpane_filter_name">SEASON</span>
-			<div>
-				<!-- <input type="text" ng-model="linesheetname" class="span4"
-					placeholder="Enter linesheet season" /> -->
-					<select id="e10" class="populate span4" ng-model="linesheetname">
-					<option value="">-- Choose Season --</option>
-					<option value="Spring Summer 2012">Spring Summer 2012</option>
-					<option value="Fall Winter 2012">Fall Winter 2012</option>
-					<option value="Spring Summer 2013">Spring Summer 2013</option>
-					<option value="Fall Winter 2013">Fall Winter 2013</option>
-					<option value="Spring Summer 2014">Spring Summer 2014</option>
-					<option value="Fall Winter 2014">Fall Winter 2014</option>
-					<option value="Spring Summer 2015">Spring Summer 2015</option>
-					<option value="Fall Winter 2015">Fall Winter 2015</option>
-					<option value="Spring Summer 2016">Spring Summer 2016</option>
-					<option value="Fall Winter 2016">Fall Winter 2016</option>
-				</select>
-					
+		<form name="addform">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"></button>
+				<h4 class="subHeading_no_underline">Create Line sheet</h4>
 			</div>
-		<!-- 				<span class="leftpane_filter_name">Year</span>
-			<div>
-				 <input type="number"  class="span4" placeholder="Year"
-                                name="seasonyear" maxlength="4" required ng:pattern="/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/"
-                                min="1900" max="2030" ng-minlength="4" />
-					
-			</div> -->
-			<span class="leftpane_filter_name">Category</span> 
-			<div>
-				<select id="e1" class="populate span4" ng-model="linesheetcat"
-					ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
-					<option value="">-- Choose Category --</option>
-				</select>
+			<div class="modal-body">
+				<span class="leftpane_filter_name">SEASON</span>
+				<div>
+					<!-- <input type="text" ng-model="linesheetname" class="span4"
+						placeholder="Enter linesheet season" /> -->
+						<select id="e10" class="populate span4" ng-model="linesheetname" required>
+						<option value="">-- Choose Season --</option>
+						<option value="Spring Summer 2012">Spring Summer 2012</option>
+						<option value="Fall Winter 2012">Fall Winter 2012</option>
+						<option value="Spring Summer 2013">Spring Summer 2013</option>
+						<option value="Fall Winter 2013">Fall Winter 2013</option>
+						<option value="Spring Summer 2014">Spring Summer 2014</option>
+						<option value="Fall Winter 2014">Fall Winter 2014</option>
+						<option value="Spring Summer 2015">Spring Summer 2015</option>
+						<option value="Fall Winter 2015">Fall Winter 2015</option>
+						<option value="Spring Summer 2016">Spring Summer 2016</option>
+						<option value="Fall Winter 2016">Fall Winter 2016</option>
+					</select>
+						
+				</div>
+			<!-- 				<span class="leftpane_filter_name">Year</span>
+				<div>
+					 <input type="number"  class="span4" placeholder="Year"
+	                                name="seasonyear" maxlength="4" required ng:pattern="/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/"
+	                                min="1900" max="2030" ng-minlength="4" />
+						
+				</div> -->
+				<span class="leftpane_filter_name">Category</span> 
+				<div>
+					<select id="e1" class="populate span4" ng-model="linesheetcat" required
+						ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
+						<option value="">-- Choose Category --</option>
+					</select>
+				</div>
+				<div>
+					<ul class="nav nav-horizontal left">
+						<li><span class="left" ng-show="isMyProfile"> <input
+								type="radio" name="Date" checked value="true"
+								ng-model="immediate"> Immediates <input type="radio"
+								name="Date" value="false" ng-model="immediate"> Delivery
+								date
+						</span></li>
+					</ul>
+				</div>
+				<div>
+					<input type="text" class="span4" placeholder="Enter delivery date"
+						ng-model="deliverydate" ui-date ng-hide="immediate == 'true'" />
+				</div>
 			</div>
-			<div>
-				<ul class="nav nav-horizontal left">
-					<li><span class="left" ng-show="isMyProfile"> <input
-							type="radio" name="Date" checked value="true"
-							ng-model="immediate"> Immediates <input type="radio"
-							name="Date" value="false" ng-model="immediate"> Delivery
-							date
-					</span></li>
-				</ul>
+			<div class="modal-footer">
+				<a href="#" class="btn" data-dismiss="modal">Close</a> 
+				<button class="btn btn-inverse" data-dismiss="modal" ng-disabled="addform.$invalid"
+					ng-click="createlinesheet()"> Create linesheet</button>
 			</div>
-			<div>
-				<input type="text" class="span4" placeholder="Enter delivery date"
-					ng-model="deliverydate" ui-date ng-hide="immediate == 'true'" />
-			</div>
-		</div>
-		<div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-				class="btn btn-inverse" data-dismiss="modal"
-				ng-click="createlinesheet()"> Create linesheet</a>
-		</div>
+		</form>
 	</div>
 	<!-- modal -->
 	<div ui-modal class="modal  hide" ng-model="showEditLinesheet"
 		id="Editlinesheet">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"></button>
-			<h4 class="subHeading_no_underline">Edit Line sheet</h4>
-		</div>
-		<div class="modal-body">
-			<div>
-				<input type="text" ng-model="editlinesheetname" class="span4"
-					placeholder="Enter linesheet season" />
+		<form name="editform">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"></button>
+				<h4 class="subHeading_no_underline">Edit Line sheet</h4>
 			</div>
-			<div class="divi2"></div>
-			<div>
-				<select id="e1" class="populate span4" ng-model="editlinesheetcat"
-					ng-disabled=true
-					ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
-				</select>
+			<div class="modal-body">
+				<div>
+					<input type="text" ng-model="editlinesheetname" class="span4" required
+						ng-minlength="3" ng-maxlength="20"
+						placeholder="Enter linesheet season" />
+				</div>
+				<div class="divi2"></div>
+				<div>
+					<select id="e1" class="populate span4" ng-model="editlinesheetcat"
+						ng-disabled=true
+						ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
+					</select>
+				</div>
+				<div class="divi2"></div>
+				<div>
+					<ul class="nav nav-horizontal left">
+						<li><span class="left" ng-show="isMyProfile"> <input
+								type="radio" name="Date" checked value="true"
+								ng-model="editimmediate"> Immediates <input type="radio"
+								name="Date" value="false" ng-model="editimmediate">
+								Delivery date
+						</span></li>
+					</ul>
+				</div>
+				<div class="divi2"></div>
+				<div>
+					<input type="text" class="span4" placeholder="Enter delivery date" required
+						ng-model="editdeliverydate" ui-date
+						ng-hide="editimmediate == 'true'" />
+				</div>
 			</div>
-			<div class="divi2"></div>
-			<div>
-				<ul class="nav nav-horizontal left">
-					<li><span class="left" ng-show="isMyProfile"> <input
-							type="radio" name="Date" checked value="true"
-							ng-model="editimmediate"> Immediates <input type="radio"
-							name="Date" value="false" ng-model="editimmediate">
-							Delivery date
-					</span></li>
-				</ul>
+			<div class="modal-footer">
+				<a href="#" class="btn" data-dismiss="modal">Close</a> 
+				<button class="btn btn-inverse" ng-disabled="editform.$invalid" 
+					ng-click="updatelinesheet()"> Edit linesheet</button>
 			</div>
-			<div class="divi2"></div>
-			<div>
-				<input type="text" class="span4" placeholder="Enter delivery date"
-					ng-model="editdeliverydate" ui-date
-					ng-hide="editimmediate == 'true'" />
-			</div>
-		</div>
-		<div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-				class="btn btn-primary" ng-click="updatelinesheet()"> Edit
-				linesheet</a>
-		</div>
+		</form>
 	</div>
 	<!-- modal -->

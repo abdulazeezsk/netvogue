@@ -2501,7 +2501,7 @@ opacity:0;
 
 /*  End here ================================================================================= */
 
-.network1 {
+.mycartstyles {
 	width: 100%;
 	/* border-bottom: solid 1px #999999; */
 	padding: 5px 0 5px 0;
@@ -2512,37 +2512,30 @@ opacity:0;
 	margin-bottom:2px;
 }
 
-.network1 .brand_image {
+.mycartstyles .style_image {
 	float: left;
 	margin: 0 10px 0 0;
-	width: 100px;
-	min-height: 72px;
-	max-height:72px;
+	min-width: 80px;
+	max-width: 80px;
+	min-height: 113px;
+	max-height:113px;
 	overflow-x: hidden;
+	overflow-y: hidden;
 }
-/* .network_entity_name{
-	width: 150px;
-	float: left;
-	color:#000;
-	word-wrap: break-word;
-	font: normal 10px  Lato, Arial, sans-serif;
-	font-weight: bold;
-}
-mutualcontacts */
 
-.network_text {
+.style_text {
 	float: left;
 	width: 110px;
 }
 
-.network_text p {
+.style_text p {
 	font: normal 12px  Lato, Arial, sans-serif;
 	padding: 0;
 	text-transform:capitalize;
 	margin-bottom:5px;
 }
 
-.network_text1 .networkdetails {
+.style_text .styledetails {
 	font: normal 10px  Lato, Arial, sans-serif;
 	padding: 0;
 	text-transform:capitalize;

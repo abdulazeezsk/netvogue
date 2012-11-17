@@ -118,45 +118,50 @@
 
 <!-- modal -->
 <div class="modal  hide" id="CreatePrintcampaign">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"></button>
-		<h4 class="subHeading_no_underline">Create Print Campaign</h4>
-	</div>
-	<div class="modal-body">
-		<div>
-			<input type="text" class="span4" ng-model="galleryname"
-				placeholder="Print campaign name" />
-			<!-- <textarea style="width: 500px;" rows="9" ng-model="gallerydesc"
-				placeholder="Enter description"></textarea> -->
+	<form name="addform">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"></button>
+			<h4 class="subHeading_no_underline">Create Print Campaign</h4>
 		</div>
-	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" data-dismiss="modal"
-			ng-click="creategallery()"> Create print campaign</a>
-	</div>
+		<div class="modal-body">
+			<div>
+				<input type="text" class="span4" ng-model="galleryname" required
+					ng-minlength="3" ng-maxlength="20" 
+					placeholder="Print campaign name" />
+				<!-- <textarea style="width: 500px;" rows="9" ng-model="gallerydesc"
+					placeholder="Enter description"></textarea> -->
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a> 
+			<button class="btn btn-inverse" data-dismiss="modal" ng-disabled="addform.$invalid"
+				ng-click="creategallery()"> Create print campaign</button>
+		</div>
+	</form>
 </div>
 <!-- modal -->
 
 <!-- modal -->
-<div ui-modal class="modal  hide" ng-model="showEditGallery"
-	id="EditPrintcampaign">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"></button>
-		<h4 class="subHeading_no_underline">Edit Print Campaign</h4>
-	</div>
-	<div class="modal-body">
-		<div>
-			<input type="text" class="span4" ng-model="editgalleryname"
-				placeholder="Print campaign name" />
-		<!-- 	<textarea style="width: 500px;" rows="9" ng-model="editgallerydesc"
-				placeholder="Enter description"></textarea> -->
+<div ui-modal class="modal  hide" ng-model="showEditGallery" id="EditPrintcampaign">
+	<form name="editform">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"></button>
+			<h4 class="subHeading_no_underline">Edit Print Campaign</h4>
 		</div>
-	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" ng-click="updategallery()"> Update print
-			campaign</a>
-	</div>
+		<div class="modal-body">
+			<div>
+				<input type="text" class="span4" ng-model="editgalleryname" required
+					ng-minlength="3" ng-maxlength="20" 
+					placeholder="Print campaign name" />
+			<!-- 	<textarea style="width: 500px;" rows="9" ng-model="editgallerydesc"
+					placeholder="Enter description"></textarea> -->
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a> 
+			<button class="btn btn-inverse" ng-disabled="editform.$invalid"
+				ng-click="updategallery()"> Update print campaign</button>
+		</div>
+	</form>
 </div>
 <!-- modal -->

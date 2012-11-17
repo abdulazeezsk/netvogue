@@ -113,61 +113,66 @@
 
 <!-- modal -->
 <div class="modal  hide" id="CreateCollection">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"></button>
-		<h4 class="subHeading_no_underline">Create Collection</h4>
-	</div>
-	<div class="modal-body">
-		<div>
-			<input type="text" class="span4" ng-model="collectionname"
-				placeholder="Collection season name" />
-			<div class="divi2"></div>
-			<div>
-				<select id="e1" class="populate span4" ng-model="collectioncategory"
-					ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
-					<option value="">-- Choose Category --</option>
-				</select>
-			</div>
-			<div class="divi2"></div>
-			<!-- <textarea style="width: 500px;" rows="9" ng-model="collectiondesc"
-				placeholder="Enter description"></textarea> -->
+	<form name="addform">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"></button>
+			<h4 class="subHeading_no_underline">Create Collection</h4>
 		</div>
-	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" data-dismiss="modal"
-			ng-click="createcollection()"> Create collection</a>
-	</div>
+		<div class="modal-body">
+			<div>
+				<input type="text" class="span4" ng-model="collectionname" required
+						ng-minlength="3" ng-maxlength="20" 
+					placeholder="Collection season name" />
+				<div class="divi2"></div>
+				<div>
+					<select id="e1" class="populate span4" ng-model="collectioncategory" required
+						ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
+						<option value="">-- Choose Category --</option>
+					</select>
+				</div>
+				<div class="divi2"></div>
+				<!-- <textarea style="width: 500px;" rows="9" ng-model="collectiondesc"
+					placeholder="Enter description"></textarea> -->
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a> 
+			<button	class="btn btn-inverse" data-dismiss="modal" ng-disabled="addform.$invalid"
+				ng-click="createcollection()"> Create collection</button>
+		</div>
+	</form>
 </div>
 <!-- modal -->
 
 
 <!-- modal -->
-<div ui-modal class="modal  hide" ng-model="showEditCollection"
-	id="EditCollection">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"></button>
-		<h4 class="subHeading_no_underline">Edit Collection</h4>
-	</div>
-	<div class="modal-body">
-		<div>
-			<input type="text" class="span4" ng-model="editcollectionname"
-				placeholder="Collection season name" />
-			<div class="divi2"></div>
-			<div>
-				<select id="e1" class="populate span4" ng-model="editcollectioncat"
-					ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
-				</select>
-			</div>
-			<div class="divi2"></div>
-			<!-- <textarea style="width: 500px;" rows="9"
-				ng-model="editcollectiondesc" placeholder="Enter description"></textarea> -->
+<div ui-modal class="modal  hide" ng-model="showEditCollection" id="EditCollection">
+	<form name="editform">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"></button>
+			<h4 class="subHeading_no_underline">Edit Collection</h4>
 		</div>
-	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" ng-click="updatecollection()"> Update
-			collection</a>
-	</div>
+		<div class="modal-body">
+			<div>
+				<input type="text" class="span4" ng-model="editcollectionname" required
+					ng-minlength="3" ng-maxlength="20"
+					placeholder="Collection season name" />
+				<div class="divi2"></div>
+				<div>
+					<select id="e1" class="populate span4" ng-model="editcollectioncat" required
+						ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
+					</select>
+				</div>
+				<div class="divi2"></div>
+				<!-- <textarea style="width: 500px;" rows="9"
+					ng-model="editcollectiondesc" placeholder="Enter description"></textarea> -->
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a> 
+			<button class="btn btn-inverse" ng-disabled="editform.$invalid" 
+			ng-click="updatecollection()"> Update collection</button>
+		</div>
+	</form>
 </div>
 <!-- modal -->
