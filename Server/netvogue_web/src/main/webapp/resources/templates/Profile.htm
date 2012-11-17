@@ -19,9 +19,17 @@
 				<br />
 				<ul class="thumbnails" ui-if="null != aboutus && '' != aboutus">
 					<li>
-						<div class="aboutus">
+						<div class="aboutus" show-more>
 							<pre
-								style="background-color: white; color: black; border-color: white;">{{aboutus}}</pre>
+								style="background-color: white; color: black; border-color: white;">{{aboutus1}}
+							</pre>
+							<div class="togglecontainer" style="display: none;">
+                        		<pre
+									style="background-color: white; color: black; border-color: white;">{{aboutus2}}
+								</pre>
+                    		</div>
+                    		<a  ng-click="toggle($event)" ui-if="more && '' != aboutus2">More</a>
+                    		<a  ng-click="toggle($event)" ui-if="!more && '' != aboutus2">Less</a>
 						</div>
 					</li>
 				</ul>

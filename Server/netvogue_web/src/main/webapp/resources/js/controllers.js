@@ -34,6 +34,7 @@ function MyCtrlProfile($scope, $routeParams, $timeout, srvprofile, currentvisite
 		$scope.profilepic = "";
 	}
     $scope.links = currentvisitedprofile.getleftpanellinks();
+    $scope.more = true;
     $scope.gettingprofile = true;
     $scope.showCreateNetwork = false;
     
@@ -42,13 +43,16 @@ function MyCtrlProfile($scope, $routeParams, $timeout, srvprofile, currentvisite
     $scope.updatedata = function() {
 	    $scope.entityname  		= srvprofile.getname($routeParams);
 	    $scope.iambrand			= srvprofile.isbrand($routeParams);
-	    $scope.aboutus 			= srvprofile.getaboutus($routeParams);
+	    $scope.aboutus	 		= srvprofile.getaboutus($routeParams);
 	    $scope.profilepic		= srvprofile.getprofilepic($routeParams);
 	    $scope.brandscarried 	= srvprofile.getbrandscarried($routeParams);
 	    $scope.productline 		= srvprofile.getproductline($routeParams);
 	    $scope.contactinfo 		= srvprofile.getcontactinfo($routeParams);
 	    $scope.getcontactinfo 	= addresstostring($scope.contactinfo);
 	    
+	    $scope.aboutus1 = $scope.aboutus.slice(0, netvogue.ABOUTUS_MORE_LENGTH);
+	    $scope.aboutus2 = $scope.aboutus.slice(netvogue.ABOUTUS_MORE_LENGTH);
+
 	    //PENDING CONFIRMED NONE
 	    if(!$scope.isMyProfile) {
 	    	$scope.networkstatus = srvprofile.getnetworkstatus();

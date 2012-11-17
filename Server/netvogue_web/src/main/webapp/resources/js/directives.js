@@ -445,4 +445,20 @@ angular.module('netVogue.directives', []).
             });
         }
     };
+}).directive('showMore', function() { //This is used in search bar
+	  var linkFn;
+	  linkFn = function(scope, element, attrs) {
+		  scope.toggle = function(event) {
+			  angular.element(event.srcElement).parent().find(".togglecontainer").slideToggle("slow");
+			  /*if(scope.more)
+				  scope.aboutus1 = scope.aboutus;
+			  else 
+				  scope.aboutus1 = scope.aboutus.slice(0, 500);*/
+			  scope.more = !scope.more;
+	    	};
+	  };
+	  return {
+		  restrict	: 'A',
+	      link		: linkFn
+	  };
 });
