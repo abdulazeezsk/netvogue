@@ -29,48 +29,74 @@
 			<div class="divi2"></div>
 			<div>
 				<div ng-show="isMyProfile && !iambrand">
-					<span class="leftpane_filter_name">BRAND</span> 
-					<input type="text" class="span3" placeholder="Brand name" 
-							ng-model="searchlinesheets.brandname" ng-change="searchlinesheetsfn()"/>
-				</div> 
-				<span class="leftpane_filter_name">SEASON</span> 
-					<input type="text" class="span3" placeholder="Season name" 
-						ng-model="searchlinesheets.linesheetname" ng-change="searchlinesheetsfn()"/>
+					<span class="leftpane_filter_name">BRAND</span> <input type="text"
+						class="span3" placeholder="Brand name"
+						ng-model="searchlinesheets.brandname"
+						ng-change="searchlinesheetsfn()" />
+				</div>
+				<span class="leftpane_filter_name">SEASON</span> <input type="text"
+					class="span3" placeholder="Season name"
+					ng-model="searchlinesheets.linesheetname"
+					ng-change="searchlinesheetsfn()" />
 			</div>
 			<div>
 				<!-- <div class="leftpane_subheading">DELIVERY DATE</div> -->
 				<span class="leftpane_filter_name">DELIVERY DATE</span>
 				<!-- <div class="divi2"></div> -->
 				<div>
-					<div>
+					<!-- <div>
 						<input type="radio" name="SearchDate" value="all"
-							ng-model="searchdeliverydate" ng-change="searchlinesheetsfn()"> All Available
+							style="margin: 0 0 0 0;" ng-model="searchdeliverydate"
+							ng-change="searchlinesheetsfn()"> All Available
 					</div>
 					<div>
 						<input type="radio" name="SearchDate" checked value="immediates"
-							ng-model="searchdeliverydate" ng-change="searchlinesheetsfn()"> Immediates
+							style="margin: 0 0 0 0;" ng-model="searchdeliverydate"
+							ng-change="searchlinesheetsfn()"> Immediates
 					</div>
 					<div>
-
 						<input type="radio" name="SearchDate" value="daterange"
-							ng-model="searchdeliverydate" ng-change="searchlinesheetsfn()"> Select Date Range
+							style="margin: 0 0 0 0;" ng-model="searchdeliverydate"
+							ng-change="searchlinesheetsfn()"> Select Date Range
+					</div> -->
+					<div>
+						<label name="SearchDate" style="font-family: 'Lato', sans-serif; font-weight: 400;"
+							class="checkbox"> <input type="checkbox"> All Available
+
+						</label>
 					</div>
+					<div>
+						<label name="SearchDate" style="font-family: 'Lato', sans-serif; font-weight: 400;"
+							class="checkbox"> <input type="checkbox"> Immediates
+
+						</label>
+					</div>
+					<div>
+						<label name="SearchDate" style="font-family: 'Lato', sans-serif; font-weight: 400;"
+							class="checkbox"> <input type="checkbox"> Select Date Range
+
+						</label>
+					</div>
+					
 				</div>
 				<div class="divi2"></div>
 				<div ng-show="searchdeliverydate == 'daterange'">
-				<span class="leftpane_filter_name">Date range</span> <br> 
-					<input type="text" class="spanpricerange-leftpane" ng-change="searchlinesheetsfn()"
-						placeholder="Enter from date" ng-model="fromdate" ui-date /> - <input
-						type="text" class="spanpricerange-leftpane" ng-change="searchlinesheetsfn()"
+					<span class="leftpane_filter_name">Date range</span> <br> <input
+						type="text" class="spanpricerange-leftpane"
+						ng-change="searchlinesheetsfn()" placeholder="Enter from date"
+						ng-model="fromdate" ui-date /> - <input type="text"
+						class="spanpricerange-leftpane" ng-change="searchlinesheetsfn()"
 						placeholder="Enter to date" ng-model="todate" ui-date />
 				</div>
 				<div class="divi2"></div>
 
 				<div>
-					<span class="leftpane_filter_name">Price range</span> <br> 
-						<input type="number" class="spanpricerange-leftpane" ng-model="searchlinesheets.fromprice" 
-						ng-change="searchlinesheetsfn()" placeholder="From price" />
-					- 	<input type="number" class="spanpricerange-leftpane" ng-model="searchlinesheets.toprice" 
+					<span class="leftpane_filter_name">Price range</span> <br> <input
+						type="number" class="spanpricerange-leftpane"
+						ng-model="searchlinesheets.fromprice"
+						ng-change="searchlinesheetsfn()" placeholder="From price" /> - <input
+						type="number" class="spanpricerange-leftpane"
+						ng-model="searchlinesheets.toprice"
 						ng-change="searchlinesheetsfn()" placeholder="To price" />
 
 				</div>
@@ -78,32 +104,32 @@
 				<span class="leftpane_filter_name">CATEGORY</span>
 			</div>
 			<div>
-				<div checkbox-tree ng-model="searchFilter" ng-change="searchlinesheetsfn()"></div>
+				<div checkbox-tree ng-model="searchFilter"
+					ng-change="searchlinesheetsfn()"></div>
 			</div>
 		</div>
 		<!-- left-pane -->
 		<!-- right pane -->
 		<div class="span9">
-			
+
 			<!-- header pane -->
-				<div style="border-bottom: 1px solid black;">
-					<span class="left rightpane_subHeading"> Line Sheets </span> <span
+			<div style="border-bottom: 1px solid black;">
+				<span class="left rightpane_subHeading"> Line Sheets </span> <span
 					class="right"> <a ng-href="#{{backButton}}"
 					class="rightpane_back_btn">Back</a></span>
-				</div>
-				<div style="border-bottom: 1px solid black;margin-bottom:10px;">
-					<span class="left right_pane_info"> Find linesheets using the
+			</div>
+			<div style="border-bottom: 1px solid black; margin-bottom: 10px;">
+				<span class="left right_pane_info"> Find linesheets using the
 					filters </span> <span class="right" ui-if="isMyProfile && iambrand">
 					<a data-toggle="modal" ng-href="#Createlinesheet"
 					class="rightpane_add_btn">Create line sheet</a>
 				</span>
-				</div>
-				<!-- header pane -->
-			
+			</div>
+			<!-- header pane -->
+
 			<div>
 				<div ng-show="gettingstylesheets">
-                	<img src="img/ajax-loadersmall.gif" style="float:left;" >
-					<br>
+					<img src="img/ajax-loadersmall.gif" style="float: left;"> <br>
 				</div>
 
 				<ul class="thumbnails">
@@ -113,8 +139,8 @@
 							<div class="masklayer">
 								<h1 class="editdel" ui-if="isMyProfile && iambrand">
 									<a ng-click="deletelinesheet(linesheet.galleryid)"
-										title="Delete"><i class="icon-trash icon-white"></i></a> 
-									<a ng-click="editlinesheet(linesheet.galleryid, linesheet.galleryname, linesheet.category, linesheet.deliverydate)"
+										title="Delete"><i class="icon-trash icon-white"></i></a> <a
+										ng-click="editlinesheet(linesheet.galleryid, linesheet.galleryname, linesheet.category, linesheet.deliverydate)"
 										title="Edit"><i class="icon-edit icon-white"></i></a>
 								</h1>
 								<!-- <h1 class="linesheet-brandname">{{linesheet.brandname}}</h1>
@@ -128,11 +154,9 @@
 									<i>{{linesheet.deliverydate}}</i>
 								</p>
 								<p>
-									<a ui-if="isMyProfile"
-										class="view"
+									<a ui-if="isMyProfile" class="view"
 										ng-href="#/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}">
-										View </a> <a ui-if="!isMyProfile"
-										class="view"
+										View </a> <a ui-if="!isMyProfile" class="view"
 										ng-href="#/{{profileid}}/styles?id={{linesheet.galleryid}}&&cat={{linesheet.category}}">
 										View </a>
 								</p>
@@ -148,12 +172,12 @@
 					</li>
 				</ul>
 				<div get-more="getmorelinesheets()">
-   					<div ng-show="gettingmorelinesheets">
-   						<center><img src="img/ajax-loadersmall.gif"><br></center>
-   					</div>
-   					<div ng-show="nomoredataavailable1">
-   						End of data
-   					</div>
+					<div ng-show="gettingmorelinesheets">
+						<center>
+							<img src="img/ajax-loadersmall.gif"><br>
+						</center>
+					</div>
+					<div ng-show="nomoredataavailable1">End of data</div>
 				</div>
 			</div>
 		</div>
@@ -171,7 +195,8 @@
 				<div>
 					<!-- <input type="text" ng-model="linesheetname" class="span4"
 						placeholder="Enter linesheet season" /> -->
-						<select id="e10" class="populate span4" ng-model="linesheetname" required>
+					<select id="e10" class="populate span4" ng-model="linesheetname"
+						required>
 						<option value="">-- Choose Season --</option>
 						<option value="Spring Summer 2012">Spring Summer 2012</option>
 						<option value="Fall Winter 2012">Fall Winter 2012</option>
@@ -184,18 +209,19 @@
 						<option value="Spring Summer 2016">Spring Summer 2016</option>
 						<option value="Fall Winter 2016">Fall Winter 2016</option>
 					</select>
-						
+
 				</div>
-			<!-- 				<span class="leftpane_filter_name">Year</span>
+				<!-- 				<span class="leftpane_filter_name">Year</span>
 				<div>
 					 <input type="number"  class="span4" placeholder="Year"
 	                                name="seasonyear" maxlength="4" required ng:pattern="/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/"
 	                                min="1900" max="2030" ng-minlength="4" />
 						
 				</div> -->
-				<span class="leftpane_filter_name">Category</span> 
+				<span class="leftpane_filter_name">Category</span>
 				<div>
-					<select id="e1" class="populate span4" ng-model="linesheetcat" required
+					<select id="e1" class="populate span4" ng-model="linesheetcat"
+						required
 						ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
 						<option value="">-- Choose Category --</option>
 					</select>
@@ -216,9 +242,10 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<a href="#" class="btn" data-dismiss="modal">Close</a> 
-				<button class="btn btn-inverse" data-dismiss="modal" ng-disabled="addform.$invalid"
-					ng-click="createlinesheet()"> Create linesheet</button>
+				<a href="#" class="btn" data-dismiss="modal">Close</a>
+				<button class="btn btn-inverse" data-dismiss="modal"
+					ng-disabled="addform.$invalid" ng-click="createlinesheet()">
+					Create linesheet</button>
 			</div>
 		</form>
 	</div>
@@ -232,8 +259,8 @@
 			</div>
 			<div class="modal-body">
 				<div>
-					<input type="text" ng-model="editlinesheetname" class="span4" required
-						ng-minlength="3" ng-maxlength="20"
+					<input type="text" ng-model="editlinesheetname" class="span4"
+						required ng-minlength="3" ng-maxlength="20"
 						placeholder="Enter linesheet season" />
 				</div>
 				<div class="divi2"></div>
@@ -256,15 +283,15 @@
 				</div>
 				<div class="divi2"></div>
 				<div>
-					<input type="text" class="span4" placeholder="Enter delivery date" required
-						ng-model="editdeliverydate" ui-date
+					<input type="text" class="span4" placeholder="Enter delivery date"
+						required ng-model="editdeliverydate" ui-date
 						ng-hide="editimmediate == 'true'" />
 				</div>
 			</div>
 			<div class="modal-footer">
-				<a href="#" class="btn" data-dismiss="modal">Close</a> 
-				<button class="btn btn-inverse" ng-disabled="editform.$invalid" 
-					ng-click="updatelinesheet()"> Edit linesheet</button>
+				<a href="#" class="btn" data-dismiss="modal">Close</a>
+				<button class="btn btn-inverse" ng-disabled="editform.$invalid"
+					ng-click="updatelinesheet()">Edit linesheet</button>
 			</div>
 		</form>
 	</div>

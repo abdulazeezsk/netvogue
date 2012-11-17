@@ -22,13 +22,25 @@
 			<div class="leftpane_subheading">FILTERS</div>
 			<div class="divi2"></div>
 			<div>
-				<div>
+				<!-- <div>
 					<input type="radio" name="Date" value="true"
 						style="font: normal 12px Helvetica, Arial, sans-serif;"
 						ng-model="isbrandsearch"> Brands <input type="radio"
 						name="Date" value="false" ng-model="isbrandsearch">
 					Boutiques
-				</div>
+				</div> -->
+				<div>
+						<label name="entity" style="font-family: 'Lato', sans-serif; font-weight: 400;"
+							class="checkbox"> <input type="checkbox"> Brands
+
+						</label>
+					</div>
+					<div>
+						<label name="entity" style="font-family: 'Lato', sans-serif; font-weight: 400;"
+							class="checkbox"> <input type="checkbox"> Boutiques
+
+						</label>
+					</div>
 			</div>
 			<div class="divi2"></div>
 			<div ui-if="isbrandsearch == 'true'">
