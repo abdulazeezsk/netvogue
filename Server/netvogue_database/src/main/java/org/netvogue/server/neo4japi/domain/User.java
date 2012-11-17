@@ -34,7 +34,7 @@ public class User {
 
   String password;
 
-  @Indexed(indexName = "userId", unique = true)
+  @Indexed(indexName = "userid")
   String userId;
 
   @Indexed(indexName = "search", indexType = IndexType.FULLTEXT, unique = true)

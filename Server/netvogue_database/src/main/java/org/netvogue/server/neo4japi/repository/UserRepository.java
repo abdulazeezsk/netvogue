@@ -13,6 +13,7 @@ import org.springframework.data.neo4j.repository.GraphRepository;
 public interface UserRepository extends GraphRepository<User> {
 	User findByemail(String email);
 	User findByusername(String username);
+	User findByuserId(String userid);
 	
 	@Query( "START n=node:email({0}) WHERE n.id <> {1} RETURN n")
 	User findByemailAndId(String email, Long id);

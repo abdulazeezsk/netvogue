@@ -15,6 +15,7 @@ public interface UserService {
 	ResultStatus SaveUser(User user, StringBuffer error);
 	ResultStatus ValidateEmailAndId(String email, Long id);
 	public User getUserByUsername(String username);
+	public User getUserByUserId(String userId);
 	public UserData getUserDataByUsername(String username);
 	public void getBrandsCarriedAndCategories(User user);
 
