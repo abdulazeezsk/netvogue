@@ -61,7 +61,7 @@ angular.module('netVogue', ['netVogue.constants', 'netVogue.filters', 'netVogue.
 	  $routeProvider.when('/:profileid/photos',         { templateUrl: 'templates/Photos.htm',           		   			controller: MyCtrlPhotos });
 	  $routeProvider.when('/viewphotos',             	{ templateUrl: 'templates/View_Photos.htm',     	     			controller: MyCtrlViewPhotos });
 	  $routeProvider.when('/campaign',					{ templateUrl: 'templates/campaign.htm',         			 		controller: MyCtrlCampaign });
-
+	  $routeProvider.when('/invite',					{ templateUrl: 'templates/invite.htm',         			 			controller: MyCtrlInvite });
 	  //Related to ecommerce
 	  $routeProvider.otherwise({redirectTo: homepage});
 	  $routeProvider.when('/mycart',					{ templateUrl: 'templates/mycart.htm',         			 		controller: MyCtrlCart });

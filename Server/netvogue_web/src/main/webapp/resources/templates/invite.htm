@@ -1,0 +1,87 @@
+<!--body-->
+<div class="container minimum_height">
+	<div class="row">
+		<!-- left-pane -->
+		<div class="span3">
+			<div class="underline">
+				<span ui-if="!iambrand" class="leftpane_entity">Boutique </span> <span
+					ui-if="iambrand" class="leftpane_entity">Brand </span>
+			</div>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> 
+							<a ui-if="isMyProfile" ng-href="#profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
+										class="pull-left leftpane_profile_img"></a>
+							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
+										class="pull-left leftpane_profile_img"></a>
+						</span> 
+						<span> 
+							<a ui-if="isMyProfile" ng-href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- left-pane -->
+		<!-- right-pane -->
+		<div class="span9">
+			<div>
+				<span class="left rightpane_subHeading">Invite</span>
+				<div class="divi2 right_pane_underline"></div>
+
+			</div>
+			<span style="border-bottom: 1px solid #000;">INVITE YOUR
+				FRIENDS TO ENJOY THE VEAWE.COM EXPERIENCE AND EARN CREDITS !</span>
+			<div class="span2">Get 25 of your friends to join, you earn Rs
+				10000 as Credit*</div>
+			<div class="span2">Get 50 of your friends to join, you earn Rs
+				15000 as Credit*</div>
+			<div class="span2">Get 75 of your friends to join, you earn Rs
+				20000 as Credit*</div>
+			<div class="span2">Get 100 of your friends to join, you earn Rs
+				25000 as Credit*</div>
+			<div class="divi2"></div>
+			<div class="progress_status_bar">
+				<div class="progress_status_bar1">
+					<div class="progress_status_bar2" style="width: 1%;">
+						<span>1</span>
+					</div>
+				</div>
+			</div>
+			<div>Credits applicable on purchases of Rs 50000 and above.</div>
+			<hr>
+			<div>INVITE YOUR FRIENDS!</div>
+			<div>
+			<input type="text" class="span5" style="margin-bottom: 0px"
+					placeholder="Enter email addresses Seprated by Commas" />
+			<button  class="btn btn-inverse">Send Invite</button>
+			</div>
+			<div class="divi2"></div>
+			<div>SHARE YOUR SPECIAL VEAWE BADGE</div>
+			<div>
+				<ul class="invitebadge" style="margin: 0 0 0 0;" >
+					<li><input type="text" class="span5" style="margin-bottom: 0px"
+						placeholder="http://www.designdeal.com/login/?uid=22667" /></li>
+					<li><a 
+						onmouseover="document.getElementById('pinterest1').src ='img/facebook-on.jpeg';"
+						onmouseout="document.getElementById('pinterest1').src ='img/facebook.jpeg';"
+						href="#" title="Go to Facebook page"> <img id="pinterest1"
+							src="img/facebook.jpeg" border="0" alt="Facebook" />
+					</a></li>
+					<li><a 
+						onmouseover="document.getElementById('pinterest2').src ='img/twitter-on.jpeg';"
+						onmouseout="document.getElementById('pinterest2').src ='img/twitter.jpeg';"
+						href="#" title="Go to Twitter page"><img id="pinterest2"
+							src="img/twitter.jpeg" border="0" alt="Twitter"></a></li>
+				</ul>
+
+			</div>
+
+
+		</div>
+		<!-- right-pane -->
+	</div>
+</div>
