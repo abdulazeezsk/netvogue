@@ -104,28 +104,31 @@
 <!--body-->
 <!-- modal -->
 <div class="modal  hide" id="Createstylesheet">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"></button>
-		<h4 class="subHeading_no_underline">Create Lookbook</h4>
-	</div>
-	<div class="modal-body">
-		<div>
-			<input type="text" class="span4" ng-model="stylesheetname"
-				placeholder="Enter stylesheet season" />
+	<form name="addform">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"></button>
+			<h4 class="subHeading_no_underline">Create Lookbook</h4>
 		</div>
-		<div class="divi2"></div>
-		<div>
-			<select id="e1" class="populate span4" ng-model="stylesheetcat"
-				ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
-				<option value="">-- Choose Category --</option>
-			</select>
+		<div class="modal-body">
+			<div>
+				<input type="text" class="span4" ng-model="stylesheetname" required
+					ng-minlength="3" ng-maxlength="20"
+					placeholder="Enter stylesheet season" />
+			</div>
+			<div class="divi2"></div>
+			<div>
+				<select id="e1" class="populate span4" ng-model="stylesheetcat"
+					ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
+					<option value="">-- Choose Category --</option>
+				</select>
+			</div>
 		</div>
-	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" data-dismiss="modal"
-			ng-click="createstylesheet()"> Create Lookbook</a>
-	</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a> 
+			<button class="btn btn-inverse" data-dismiss="modal" ng-disabled="addform.$invalid"
+				ng-click="createstylesheet()"> Create Lookbook</button>
+		</div>
+	</form>
 </div>
 <!-- modal -->
 
@@ -133,28 +136,31 @@
 <!-- modal -->
 <div ui-modal class="modal  hide" ng-model="showEditStylesheet"
 	id="Editstylesheet">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"></button>
-		<h4 class="subHeading_no_underline">Edit Lookbook</h4>
-	</div>
-	<div class="modal-body">
-		<div>
-			<input type="text" class="span4" ng-model="editstylesheetname"
-				placeholder="Enter stylesheet season" />
+	<form name="editform">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"></button>
+			<h4 class="subHeading_no_underline">Edit Lookbook</h4>
 		</div>
-		<div class="divi2"></div>
-		<div>
-			<select id="e1" class="populate span4" ng-model="editstylesheetcat"
-				ng-disabled=true
-				ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
-				<option value="">-- Choose Category --</option>
-			</select>
+		<div class="modal-body">
+			<div>
+				<input type="text" class="span4" ng-model="editstylesheetname" required
+					ng-minlength="3" ng-maxlength="20"
+					placeholder="Enter stylesheet season" />
+			</div>
+			<div class="divi2"></div>
+			<div>
+				<select id="e1" class="populate span4" ng-model="editstylesheetcat"
+					ng-disabled=true
+					ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
+					<option value="">-- Choose Category --</option>
+				</select>
+			</div>
 		</div>
-	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			class="btn btn-primary" ng-click="updatestylesheet()"> Update
-			Lookbook</a>
-	</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a> 
+			<button class="btn btn-inverse" ng-disabled="editform.$invalid"
+				ng-click="updatestylesheet()"> Update Lookbook</button>
+		</div>
+	</form>
 </div>
 <!-- modal -->
