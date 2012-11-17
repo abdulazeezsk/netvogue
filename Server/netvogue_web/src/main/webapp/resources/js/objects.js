@@ -16,6 +16,7 @@ netvogue.STYLESHEETPAGE_LIMIT = 9;
 netvogue.STYLEPAGE_LIMIT = 9;
 netvogue.LINESHEETPAGE_LIMIT = 9;
 
+netvogue.ABOUTUS_MORE_LENGTH = 500;
 //Initialization
 netvogue.yettocontact  	= true;
 netvogue.firsttimeLogin = false;
