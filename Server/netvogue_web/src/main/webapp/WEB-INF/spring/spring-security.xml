@@ -18,6 +18,7 @@
 	<security:http pattern="/about_Us.html" security="none" />
 	<security:http pattern="/Netvogue.html" security="none" />
 	<security:http pattern="/favicon.ico" security="none" />
+	<security:http pattern="/confirmRegisteration/**" security="none" />
 		 
 	<security:http auto-config="true" >	
 		<security:custom-filter ref="captchaCaptureFilter" before="FORM_LOGIN_FILTER"/>

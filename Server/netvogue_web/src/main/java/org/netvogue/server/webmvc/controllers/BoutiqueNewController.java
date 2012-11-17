@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.netvogue.server.mandrill.util.EmailUtil;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.Boutique;
 import org.netvogue.server.neo4japi.domain.Brand;
@@ -27,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.netvogue.server.mandrill.util.EmailUtil;
 
 @Controller
 public class BoutiqueNewController {
@@ -66,7 +66,7 @@ public class BoutiqueNewController {
       String error = new String();
       if (ResultStatus.SUCCESS == boutiqueService.AddNewBoutique(user, error)) {
         status.setStatus(true);
-        boolean regStatus = EmailUtil.sendConfirmationEmail(user);
+        EmailUtil.sendConfirmationEmail(user);
       } else {
         status.setError(error);
         // userDetailsService.setUserInSession((User)user);
@@ -129,7 +129,7 @@ public class BoutiqueNewController {
     return usersavailable;
   }
 
-  @RequestMapping(value = "/confirmRegisteration/{userId}", method = RequestMethod.POST)
+  @RequestMapping(value = "/confirmRegisteration/{userId}", method = RequestMethod.GET)
   public @ResponseBody
   JsonResponse confirmRegisteration(@PathVariable
   String userId) {
