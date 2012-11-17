@@ -14,7 +14,8 @@
 	<properties>
 		<java-version>1.6</java-version>
         <java-validation-version>1.0.0.GA</java-validation-version>
-        <netvogue-database-api-version>1.0-SNAPSHOT</netvogue-database-api-version>
+		<netvogue-email-api-version>1.0-SNAPSHOT</netvogue-email-api-version>
+        <!--<netvogue-database-api-version>1.0-SNAPSHOT</netvogue-database-api-version>-->
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<commons-fileupload-version>1.2.1</commons-fileupload-version>
 		<hibernate.validator.version>4.2.0.Final</hibernate.validator.version>
@@ -29,10 +30,15 @@
         <exec-maven-plugin-version>1.2.1</exec-maven-plugin-version>
 	</properties>
 	<dependencies>
-        <dependency>
+        <!--<dependency>
             <groupId>org.netvogue.server</groupId>
             <artifactId>netvogue-database-api</artifactId>
             <version>${netvogue-database-api-version}</version>
+        </dependency> -->
+		<dependency>
+            <groupId>org.netvogue.server</groupId>
+            <artifactId>netvogue-email-api</artifactId>
+            <version>${netvogue-email-api-version}</version>
         </dependency>
 		<dependency>
 			<groupId>javax.validation</groupId>

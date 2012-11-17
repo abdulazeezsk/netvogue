@@ -139,7 +139,8 @@
 	</build>
 
 	<modules>
-		<module>netvogue_database</module>
+		<module>netvogue_database</module>	
+		<module>netvogue-email-service</module>			
 		<module>netvogue_web</module>
 	</modules>
 </project>
