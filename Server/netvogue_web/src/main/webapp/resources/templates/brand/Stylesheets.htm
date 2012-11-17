@@ -117,7 +117,7 @@
 			</div>
 			<div class="divi2"></div>
 			<div>
-				<select id="e1" class="populate span4" ng-model="stylesheetcat"
+				<select id="e1" class="populate span4" ng-model="stylesheetcat" required
 					ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
 					<option value="">-- Choose Category --</option>
 				</select>
@@ -149,7 +149,7 @@
 			</div>
 			<div class="divi2"></div>
 			<div>
-				<select id="e1" class="populate span4" ng-model="editstylesheetcat"
+				<select id="e1" class="populate span4" ng-model="editstylesheetcat" required
 					ng-disabled=true
 					ng-options="cat.productlinename as cat.productlinename group by cat.category for cat in defaultcategories">
 					<option value="">-- Choose Category --</option>
