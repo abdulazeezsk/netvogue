@@ -1,5 +1,7 @@
 package org.netvogue.server.webmvc.domain;
 
+import org.netvogue.server.webmvc.common.Constants;
+
 public class Reference {
 
 	String city;
@@ -9,6 +11,9 @@ public class Reference {
 	String profileid;
 	String thumbnail_url;
 	Integer mutualfriends;
+	public Reference() {
+	  this.thumbnail_url = Constants.PROFILE_DefaultPic;
+	}
 	public String getCity() {
 		return city;
 	}

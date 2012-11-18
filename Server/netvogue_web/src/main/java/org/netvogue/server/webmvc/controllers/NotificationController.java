@@ -37,7 +37,8 @@ public class NotificationController {
 		Notifications response = new Notifications();
 		
 		response.setName(user.getName());
-		response.setProfileid(user.getUsername());
+		if(!user.getProfilePicLink().isEmpty())
+		    response.setProfileid(user.getUsername());
 		response.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 		Set<Notification> notificationsTemp = new LinkedHashSet<Notification>();
 		
@@ -70,7 +71,8 @@ public class NotificationController {
 		Notifications response = new Notifications();
 		
 		response.setName(user.getName());
-		response.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+		if(!user.getProfilePicLink().isEmpty())
+		  response.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 		Set<Notification> notificationsTemp = new LinkedHashSet<Notification>();
 		
 		String username = user.getUsername();

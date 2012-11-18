@@ -39,7 +39,8 @@ public class SearchController {
 		UsersResponse response = new UsersResponse();
 		User loggedinUser = userDetailsService.getUserFromSession();
 		response.setName(loggedinUser.getName());
-		response.setProfilepic(imageURLsConverter.convert(loggedinUser.getProfilePicLink(), loggedinUser.getUsername()));
+		if(!loggedinUser.getProfilePicLink().isEmpty())
+		  response.setProfilepic(imageURLsConverter.convert(loggedinUser.getProfilePicLink(), loggedinUser.getUsername()));
 		
 		Set<SearchResponse> allusers = new LinkedHashSet<SearchResponse>();
 		
