@@ -108,6 +108,9 @@ public class User {
   @RelatedTo(type = "NOTIFICATION")
   Set<Notification> notifications = new LinkedHashSet<Notification>();
 
+  @RelatedTo(type = "EMAIL_NOTIFICATION")
+  EmailNotifications emailnotifications = new EmailNotifications();
+
   @RelatedTo(type = "NETWORK")
   private Iterable<User> friends; // revisit this once again
 
@@ -152,6 +155,7 @@ public class User {
    * System.out.println("Azeez: Before: Password entered is" + this.password); this.password = encode(password);
    * System.out.println("Azeez: After: Password entered is" + this.password); }
    */
+
 
   public void updatePassword(String old, String newPass1, String newPass2) {
     if (!password.equals(encode(old))) {
@@ -376,6 +380,8 @@ public class User {
     return false;
   }
 
+
+
   public enum Roles implements GrantedAuthority {
     ROLE_USER, ROLE_ADMIN, ROLE_BOUTIQUE, ROLE_BRAND;
 
@@ -457,6 +463,14 @@ public class User {
 
   public void setNotifications(Set<Notification> notifications) {
     this.notifications = notifications;
+  }
+
+  public EmailNotifications getEmailnotifications() {
+    return emailnotifications;
+  }
+
+  public void setEmailnotifications(EmailNotifications emailnotifications) {
+    this.emailnotifications = emailnotifications;
   }
 
   @Override
