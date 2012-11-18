@@ -32,6 +32,7 @@ public class LoginController  {
 		System.out.println("User has not yet logged in");
 		if (error) {
 			model.addAttribute("error", "You have entered an invalid username or password!");
+			return "login";
 	    }
         return "Netvogue";
     }

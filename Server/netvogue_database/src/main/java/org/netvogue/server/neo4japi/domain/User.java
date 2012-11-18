@@ -121,7 +121,6 @@ public class User {
   public User(String email, String password) {
     // By default account enabled should be false, once the user clicks on confirmation email, this flag should be set
     // to true
-    accountEnabled = false;
     accountExpired = false;
     firstTimeLogin = true;
 

@@ -13,7 +13,7 @@ function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search, m
 	    $scope.getcontactinfo 	= addresstostring($scope.contactinfo);
 	    
 		currentvisitedprofile.setmyprofileid($scope.myprofileid);
-		//createpusherchannel($scope.myprofileid);
+		createpusherchannel($scope.myprofileid);
 		//createpubnubchannel($scope.myprofileid);
 	};
 	
@@ -54,7 +54,6 @@ function CtrlMain($scope, currentvisitedprofile, $route, $routeParams, search, m
 		$scope.pusher = new Pusher('15b40a25fa57725931ad'); // Replace with your app key
 		var channel = $scope.pusher.subscribe(id);
 		channel.bind('notification', function(data) {
-		      alert(data);
 		      $scope.unreadnotifications++ ;
 		      $scope.notifications.push(data);
 		 });

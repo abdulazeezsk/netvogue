@@ -79,7 +79,7 @@ public class ProfileController {
 		profile.setName(user.getName());
 		profile.setAboutus(user.getAboutUs());
 		//Set profile pic
-		if(null != user.getProfilePicLink()) {
+		if(null != user.getProfilePicLink() && !user.getProfilePicLink().isEmpty()) {
 			profile.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 		}
 	

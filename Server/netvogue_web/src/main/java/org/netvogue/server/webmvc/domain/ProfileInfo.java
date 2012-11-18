@@ -2,6 +2,8 @@ package org.netvogue.server.webmvc.domain;
 
 import java.util.Set;
 
+import org.netvogue.server.webmvc.common.Constants;
+
 public class ProfileInfo {
 	String name		 	= "";
 	String profileid 	= "";
@@ -16,7 +18,9 @@ public class ProfileInfo {
 	boolean status = false;
 
 	public ProfileInfo() {
-	
+	      profilepic = new ImageURLsResponse();
+	      profilepic.setThumbnail_url(Constants.PROFILE_DefaultPic);
+	      profilepic.setLeft_url(Constants.PROFILE_DefaultPic);
 	}
 
 	public String getName() {

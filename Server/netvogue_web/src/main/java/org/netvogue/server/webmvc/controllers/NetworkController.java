@@ -62,7 +62,8 @@ public class NetworkController {
 		if(0 == pagenumber) {
 			response.setName(user.getName());
 			response.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-			response.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+			if(!user.getProfilePicLink().isEmpty())
+			  response.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 
 			//Set Contact info as well
 			//Get ContactInfo
