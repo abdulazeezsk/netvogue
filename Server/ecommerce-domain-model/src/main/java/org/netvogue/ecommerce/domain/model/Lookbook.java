@@ -1,22 +1,23 @@
 package org.netvogue.ecommerce.domain.model;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Lookbook {
 
   private String id;
 
-  private String lookbookName;
-
   private Date createdDate = new Date();
 
-  private Category productcategory;
+  private ProductLine productLine;
+
+  private Category category;
 
   private User createdBy;
 
-  private Set<Style> styles = new HashSet<Style>();
+  private Season season;
+
+  private int year;
+
 
   public String getId() {
     return id;
@@ -27,11 +28,7 @@ public class Lookbook {
   }
 
   public String getLookbookName() {
-    return lookbookName;
-  }
-
-  public void setLookbookName(final String lookbookName) {
-    this.lookbookName = lookbookName;
+    return season.name()+" " + year;
   }
 
   public Date getCreatedDate() {
@@ -42,12 +39,20 @@ public class Lookbook {
     this.createdDate = createdDate;
   }
 
-  public Category getProductcategory() {
-    return productcategory;
+  public ProductLine getProductLine() {
+    return productLine;
   }
 
-  public void setProductcategory(final Category productcategory) {
-    this.productcategory = productcategory;
+  public void setProductLine(final ProductLine productLine) {
+    this.productLine = productLine;
+  }
+
+  public Season getSeason() {
+    return season;
+  }
+
+  public void setSeason(final Season season) {
+    this.season = season;
   }
 
   public User getCreatedBy() {
@@ -58,16 +63,21 @@ public class Lookbook {
     this.createdBy = createdBy;
   }
 
-  public void addStyle(final Style style) {
-    styles.add(style);
+  public Category getCategory() {
+    return category;
   }
 
-  public Set<Style> getStyles() {
-    return styles;
+  public void setCategory(final Category category) {
+    this.category = category;
   }
 
-  public void setStyles(final Set<Style> styles) {
-    this.styles = styles;
+  public int getYear() {
+    return year;
   }
+
+  public void setYear(final int year) {
+    this.year = year;
+  }
+
 
 }

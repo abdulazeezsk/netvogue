@@ -18,4 +18,7 @@ public interface LookbookDao {
   List<Lookbook> findAllLookbooks();
 
   List<Lookbook> findLookbooksByuser(final String userName);
+
+  Lookbook getLookbookById(final String lookBookId);
+
 }

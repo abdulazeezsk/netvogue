@@ -52,7 +52,7 @@ public class DefaultUserDaoImplTest {
     User userFromDB = userDao.getActiveUser("psuman");
     assertNotNull(userFromDB);
 
-    userFromDB.setActive(false);
+    userFromDB.setCity("BANG");
 
     userDao.updateUser(userFromDB);
 

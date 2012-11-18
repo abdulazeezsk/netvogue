@@ -26,7 +26,7 @@ public class ShoppingCart {
   public void deleteItem(final String styleId) {
     CartItem itemToDelte = null;
     for (CartItem item : items) {
-      if (item.getStyle().getStyleId() == styleId) {
+      if (item.getStyle().getId() == styleId) {
         itemToDelte = item;
         break;
       }
@@ -44,7 +44,7 @@ public class ShoppingCart {
     }
 
     for (CartItem item : items) {
-      if (item.getStyle().getStyleId() == styleId && item.getSize().equals(size)) {
+      if (item.getStyle().getId() == styleId && item.getSize().equals(size)) {
         item.setQuantity(newQuantity);
         break;
       }

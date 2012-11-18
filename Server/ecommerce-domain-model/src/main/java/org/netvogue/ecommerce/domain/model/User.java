@@ -1,6 +1,7 @@
 package org.netvogue.ecommerce.domain.model;
 
 
+
 public class User {
 
   private String email;

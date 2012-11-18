@@ -11,6 +11,7 @@ public class UserWriteConverter implements Converter<User, DBObject> {
   public DBObject convert(final User user) {
 
     BasicDBObject dbOject = new BasicDBObject();
+
     dbOject.put("firstName", user.getFirstName());
     dbOject.put("lastName", user.getLastName());
     dbOject.put("userName", user.getUsername());
