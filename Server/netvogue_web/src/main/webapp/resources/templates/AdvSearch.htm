@@ -30,14 +30,14 @@
 					Boutiques
 				</div> -->
 				<div>
-						<label name="entity" style="font-family: 'Lato', sans-serif; font-weight: 400;"
-							class="checkbox"> <input type="checkbox"> Brands
+						<label name="entity" style="cursor: pointer;"
+							class="checkbox"> <input  type="checkbox" id="check1" onclick="unCheck(this, 'check2');" > Brands
 
 						</label>
 					</div>
 					<div>
-						<label name="entity" style="font-family: 'Lato', sans-serif; font-weight: 400;"
-							class="checkbox"> <input type="checkbox"> Boutiques
+						<label name="entity" style="cursor: pointer;"
+							class="checkbox"> <input  type="checkbox"  id="check2" onclick="unCheck(this, 'check1');" > Boutiques
 
 						</label>
 					</div>
@@ -95,17 +95,24 @@
 
 
 		<!-- right pane -->
+		
 		<div class="span9">
 
 
-			<div style="border-bottom: 1px solid black;">
-				<span class="left rightpane_subHeading"> Discover </span>
+			<!-- <div style="border-bottom: 1px solid black;">
+				Discover
+			</div> -->
+			<div class="underline">
+				<span  class="leftpane_entity">Discover </span> 
 			</div>
-			<div style="border-bottom: 1px solid black;">
-				<span class="left right_pane_info"> Use the filters below to
+			<div class="underline">
+				<span  class="right_pane_info">Use the filters below to
 					discover Brands and boutiques you know based on Name,location and
-					more. </span>
+					more. </span> 
 			</div>
+			<!-- <div style="border-bottom: 1px solid black;">
+				<span class="left right_pane_info">  </span>
+			</div> -->
 
 
 			<div>
@@ -151,3 +158,8 @@
 </div>
 
 <!--body-->
+<script type="text/javascript">
+function unCheck(el, n){
+document.getElementById(n).checked = false;
+}
+</script>
