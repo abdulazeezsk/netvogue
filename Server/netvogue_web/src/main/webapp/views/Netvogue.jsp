@@ -237,6 +237,7 @@ body {
 					<ul class="nav">
 						<li><a href="#">Brands</a></li>
 						<li><a href="#">Retailers</a></li>
+						<li><a href="#">Apply</a></li>
 						<!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
 					</ul>
 					<form class="navbar-form pull-right" action="j_spring_security_check" method="post" >

@@ -44,8 +44,9 @@ body {
 				</a> <a class="brand" href="Netvogue.html">VEAWE</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="#">Designers</a></li>
+						<li><a href="#">Brands</a></li>
 						<li><a href="#">Retailers</a></li>
+						<li><a href="#">Apply</a></li>
 					</ul>
 					<form class="navbar-form pull-right" accept-charset="UTF-8" action="j_spring_security_check" method="post" >
 						<input id="j_username" name="j_username" class="span3" type="text" placeholder="Email"> <input
@@ -66,7 +67,7 @@ body {
         <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
       </div> -->
 		<form novalidate  name="form">
-			<h2 style="font-family: 'Lato', sans-serif; font-weight: 300;" >Hello Designers! Lets Get You Started</h2>
+			<h2 style="font-family: 'Lato', sans-serif; font-weight: 300;" >Hello Brands! Lets Get You Started</h2>
 			<label style="font-family: 'Lato', sans-serif; font-weight: 400;" >Email Address</label>
 			
 			 <input type="text" ng-model="entity.email" class="span5"  maxlength="50" name="uEmail" required ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/"

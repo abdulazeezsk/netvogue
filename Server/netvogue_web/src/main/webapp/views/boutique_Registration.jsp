@@ -45,8 +45,9 @@ body {
 				</a> <a class="brand" href="Netvogue.html">VEAWE</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="#">Designers</a></li>
+						<li><a href="#">Brands</a></li>
 						<li><a href="#">Retailers</a></li>
+						<li><a href="#">Apply</a></li>
 					</ul>
 					<form class="navbar-form pull-right" accept-charset="UTF-8" action="j_spring_security_check" method="post" >
 						<input id="j_username" name="j_username"  class="span3" type="text" placeholder="Email"> <input
@@ -116,7 +117,7 @@ body {
 				
 				
 				 <label style="font-family: 'Lato', sans-serif; font-weight: 400;" >Store Name</label> 
-				 <input type="text" ng-model="entity.name"  placeholder="Boutique Name" name="uBrandName" required maxlength="25" class="span5" placeholder="Store Name"> 
+				 <input type="text" ng-model="entity.name"  name="uBrandName" required maxlength="25" class="span5" placeholder="Store Name"> 
 				 <span ng-show="form.uBrandName.$dirty && form.uBrandName.$invalid">
                  <span ng-show="form.uBrandName.$error.required" class="validation_msg" style="font-family: 'Lato', sans-serif; font-weight: 300;color:red;">Required</span>
                  </span>

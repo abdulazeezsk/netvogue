@@ -47,6 +47,7 @@ body {
 					<ul class="nav">
 						<li><a href="#">Brands</a></li>
 						<li><a href="#">Retailers</a></li>
+						<li><a href="#">Apply</a></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
