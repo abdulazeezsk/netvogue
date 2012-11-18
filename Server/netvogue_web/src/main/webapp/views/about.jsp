@@ -259,49 +259,28 @@ body {
 
 	<!-- Carousel
     ================================================== -->
-	<div id="myCarousel" class="carousel slide">
-		<div class="carousel-inner">
-			<div class="item">
-				<img src="img/NY_FASHION_KARAN_3.jpeg" alt="" />
-				<div class="container">
-					<div class="carousel-caption">
-						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">The Future of Wholesale Market Place</h1>
-						<a class="btn btn-large btn-inverse" href="#"  >See How it Works</a>
-					</div>
-				</div>
-			</div>
-			<div class="item active">
-				<img src="img/NY_FASHION_KARAN_3.jpeg" alt="" />
-				<div class="container">
-					<div class="carousel-caption">
-						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">A
-							Market Place to</h1>
-						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">Showcase
-							and Discover</h1>
-						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">Fashion
-							Design</h1>
-					<a href="brand_Registration.html"  class="btn btn-large btn-inverse fontlato" href="#">Sign up as Brand</a>
-					<a href="boutique_Registration.html" class="btn btn-large btn-inverse" href="#">Sign up as Retailer</a>
-						
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<img src="img/NY_FASHION_KARAN_3.jpeg" alt="" />
-				<div class="container">
-					<div class="carousel-caption">
-						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">Featured Designers/Retailers</h1>
-						<a class="btn btn-large btn-inverse" href="#" >Browse gallery</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- <div class="es-nav">
-						<span class="es-nav-prev" style="display: none; ">Previous</span>
-						<span class="es-nav-next" style="display: none; ">Next</span>
-					</div> -->
-	 <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+	<div class="container">
+	<div class="hero-unit" style="height: 350px;">
+          <div class="center">
+            <img class="AngularJS-large" src="img/AngularJS-large.png">
+          </div>
+          <div class="center">
+            <h1>We Deliver Efficiencies And Cost-Savings To Our Members</h1>
+          </div>
+         <!--  <div class="center">
+            <a class="btn btn-large" href="https://github.com/angular/angular.js">
+              <i class="icon-github-sign"></i> View on GitHub
+            </a>
+            <span class="spacer"></span>
+
+            <a class="btn btn-large btn-primary" href="" ng-click="lightbox('stable')">
+              <i class="icon-download-alt icon-large"></i> Download
+              <span class="version"> (<span>1.0.2/1.1.0</span>) </span>
+            </a>
+
+          </div> -->
+         
+      </div>
 	</div>
 	<!-- /.carousel -->
 

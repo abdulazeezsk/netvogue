@@ -34,7 +34,7 @@ body {
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png"> -->
 </head>
 
-<body ng-app="netVogue">
+<body ng-app="netVogue" >
 
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
@@ -49,6 +49,11 @@ body {
 						<li><a href="#">Retailers</a></li>
 						<li><a href="#">Apply</a></li>
 					</ul>
+					<form class="navbar-form pull-right" accept-charset="UTF-8" action="j_spring_security_check" method="post" >
+						<input id="j_username" name="j_username"  class="span3" type="text" placeholder="Email"> <input
+							id="j_password" name="j_password" class="span3" type="password" placeholder="Password">
+						<button type="submit" style="font-family: 'Lato', sans-serif; font-weight: 100;" class="btn btn-inverse" class="btn btn-inverse">Sign in</button>
+					</form>
 				</div>
 				<!--/.nav-collapse -->
 			</div>
@@ -62,66 +67,22 @@ body {
         <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
         <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
       </div> -->
-		<form novalidate name="form">
-			<h2 style="font-family: 'Lato', sans-serif; font-weight: 300;">Wrong
-				Username/Email and password combination.</h2>
-			<label>Username
-				or email</label> <input type="text" ng-model="entity.email" class="span5"
-				maxlength="50" name="uEmail" required
-				ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/"
-				ui-validate="{oldemail:emailchanged}"
-				placeholder="Username or email">
-				
-				
-				
-				 <label>Password</label>
-			<input type="password" ng-model="entity.password" class="span5"
-				placeholder="Password" ng-model="entity.password" name="uPassword"
-				required maxlength="10">
-				<span>
-				Forgot your <a href="forgotpassword.html" title="" tabindex="-1">password</a>?
-				</span>
-				
-				 <div class="captcha js-captcha hidden">
-                            <script type="text/javascript">
-                                var RecaptchaOptions = {
-                                    theme: 'white',
-                                    lang: 'en'
-                                };
-								</script>
-                            <script type="text/javascript" src="https://www.google.com/recaptcha/api/challenge?k=6LfbTAAAAAAAAE0hk8Vnfd1THHnn9lJuow6fgulO&amp;lang=en"></script>
-                            <script type="text/javascript" src="https://www.google.com/recaptcha/api/js/recaptcha.js"></script>
-                            <div id="recaptcha_widget_div" class=" recaptcha_nothad_incorrect_sol recaptcha_isnot_showing_audio">
-                                <div id="recaptcha_area">
-                                </div>
-                            </div>
-                            <script>
-                                Recaptcha.widget = Recaptcha
-											.$("recaptcha_widget_div");
-                                Recaptcha.challenge_callback();
-								</script>
-                        </div>
-				
-				<div class="span5">
-			<button type="submit"
-				data-loading-text="Please wait..." style="margin-right:20px;" 
-				class="btn btn-inverse pull-right">Submit</button>
-				</div>
-		</form>
+		<form novalidate  name="form">
+			<h2 style="font-family: 'Lato', sans-serif; font-weight: 300;" >Privacy</h2>
 
 		<!-- Example row of columns -->
-		<div class="row"></div>
+		<div class="row">
+		</div> 
 
 		<hr>
 
 		<footer>
-			<p class="pull-right">
-				<a href="#">Back to top</a>
-			</p>
-			<p>
-				© 2012 Company, Inc.<a href="#">About</a> | <a href="#">Contact</a>
-				| <a href="#">Privacy</a> | <a href="#">Terms</a>
-			</p>
+		<p class="pull-right">
+			<a href="#">Back to top</a>
+		</p>
+		<p>
+		© 2012 Company, Inc.<a href="#">About</a> | <a href="#">Contact</a> | <a href="#">Privacy</a> | <a href="#">Terms</a>
+		</p>
 		</footer>
 
 	</div>
@@ -130,15 +91,15 @@ body {
 	<!-- Le javascript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-
-	<script type="text/javascript">
-		var entity = "boutique";
-	</script>
-	<script src="lib/jquery/jquery.js" type="text/javascript"></script>
-	<script src="lib/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-	<script src="lib/angular/angular.js" type="text/javascript"></script>
-	<script src="js/regcontroller.js" type="text/javascript"></script>
-
-
+	
+	 <script type="text/javascript">
+        var entity = "boutique";
+    </script>
+    <script src="lib/jquery/jquery.js" type="text/javascript"></script>
+    <script src="lib/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+    <script src="lib/angular/angular.js" type="text/javascript"></script>
+    <script src="js/regcontroller.js" type="text/javascript"></script>
+	
+	
 </body>
 </html>
