@@ -22,6 +22,7 @@ public class CategoryWriteConverter implements Converter<Category, DBObject> {
     dbOject.put("_class", Category.class.getName());
 
     BasicDBList list = new BasicDBList();
+
     for (ProductLine pl : category.getProductlines()) {
       BasicDBObject plObj = new BasicDBObject();
       plObj.put("name", pl.getName());

@@ -1,6 +1,7 @@
 package org.netvogue.ecommerce.persistence.mongo;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,15 +54,52 @@ public class DefaultUserDaoImplTest {
     assertNotNull(userFromDB);
 
     userFromDB.setCity("BANG");
+    userFromDB.setActive(false);
 
     userDao.updateUser(userFromDB);
 
-//    try {
-    userFromDB = userDao.getActiveUser("psuman");
-//    } catch(final RuntimeException e) {
-//      userFromDB = null;
-//    }
-//    assertNull(userFromDB);
+    User userFromDB1;
+    try {
+      userFromDB1 = userDao.getActiveUser("psuman");
+    } catch (final RuntimeException e) {
+      userFromDB1 = null;
+    }
+    assertNull(userFromDB1);
+
+
+    userDao.reActivateUser("psuman");
+
+    User userFromDB2;
+    try {
+      userFromDB2 = userDao.getActiveUser("psuman");
+    } catch (final RuntimeException e) {
+      userFromDB2 = null;
+    }
+    assertNotNull(userFromDB2);
+
+    userDao.deactivateUser("psuman");
+
+    User userFromDB3;
+    try {
+      userFromDB3 = userDao.getActiveUser("psuman");
+    } catch (final RuntimeException e) {
+      userFromDB3 = null;
+    }
+    assertNull(userFromDB3);
+
+
+    userDao.deleteUser("psuman");
+
+
+    User userFromDB4;
+    try {
+      userFromDB4 = userDao.getUser("psuman");
+    } catch (final RuntimeException e) {
+      userFromDB4 = null;
+    }
+    assertNull(userFromDB4);
+//      userDao.deleteUser("psuman");
+
 
     // template.dropCollection(DefaultUserDaoImpl.USER_COLLECTION_NAME);
   }
