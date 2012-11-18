@@ -16,7 +16,6 @@ import org.netvogue.server.mandrill.model.MandrillRecipient;
 import org.netvogue.server.mandrill.model.MandrillTemplatedMessageRequest;
 import org.netvogue.server.mandrill.model.MergeVar;
 import org.netvogue.server.mandrill.model.TemplateContent;
-import org.netvogue.server.mandrill.model.response.message.SendMessageResponse;
 import org.netvogue.server.mandrill.request.MandrillMessagesRequest;
 import org.netvogue.server.mandrill.request.MandrillRESTRequest;
 import org.netvogue.server.neo4japi.domain.User;
@@ -44,21 +43,20 @@ public class EmailUtil {
       props.load(EmailUtil.class.getClassLoader().getResourceAsStream("mandrill.properties"));
     } catch (IOException io) {
       System.out.println("Exception in reading applicaton properties: " + io.getMessage());
-      config.setApiKey(props.getProperty("apiKey"));
-      config.setApiVersion("1.0");
-      config.setBaseURL("https://mandrillapp.com/api");
-      request.setConfig(config);
-      client = new DefaultHttpClient();
-      request.setHttpClient(client);
-      request.setObjectMapper(mapper);
-      messagesRequest.setRequest(request);
     }
+    props.list(System.out);
+    config.setApiKey(props.getProperty("apiKey"));
+    config.setApiVersion("1.0");
+    config.setBaseURL("https://mandrillapp.com/api");
+    request.setConfig(config);
+    client = new DefaultHttpClient();
+    request.setHttpClient(client);
+    request.setObjectMapper(mapper);
+    messagesRequest.setRequest(request);
 
   }
 
   public static boolean sendConfirmationEmail(User user) {
-    SendMessageResponse messageResponse = null;
-
     MandrillTemplatedMessageRequest request = new MandrillTemplatedMessageRequest();
     MandrillMessage message = new MandrillMessage();
     Map<String, String> headers = new HashMap<String, String>();
@@ -82,15 +80,16 @@ public class EmailUtil {
     globalMergeVars.add(new MergeVar("REGISTRATION_URL", registrationURL));
     message.setGlobal_merge_vars(globalMergeVars);
     try {
-      messageResponse = messagesRequest.sendTemplatedMessage(request);
+      messagesRequest.sendTemplatedMessage(request);
       return true;
     } catch (RequestFailedException e) {
-      // List<MessageResponse> messageResponses = messageResponse.getList();
-
-      e.printStackTrace();
-
+      System.out.println(e.getMessage());
       return false;
     }
+
+  }
+
+  public static void sendNetworkRequestEmail(User user) {
 
   }
 
