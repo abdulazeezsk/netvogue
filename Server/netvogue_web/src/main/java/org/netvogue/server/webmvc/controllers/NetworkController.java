@@ -16,7 +16,6 @@ import org.netvogue.server.neo4japi.service.NetworkService;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.converters.ImageURLsConverter;
 import org.netvogue.server.webmvc.domain.ContactInfo;
-import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.Network;
 import org.netvogue.server.webmvc.domain.Networks;
@@ -42,7 +41,7 @@ public class NetworkController {
 	@Autowired NetworkService		networkService;
 	@Autowired ConversionService	conversionService;
 	@Autowired UploadManager 		uploadManager;
-	
+
 	@RequestMapping(value={"network/getnetworks", "network/getnetworks/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody Networks GetNetworks(@ModelAttribute("profileid") String profileid,
 					@RequestParam(value="pagenumber", required=false, defaultValue="0") int pagenumber,
@@ -51,7 +50,7 @@ public class NetworkController {
 		User user = userDetailsService.getUserFromSession();
 		String loggedinuser = user.getUsername();
 		Networks response = new Networks();
-		
+
 		if(!profileid.isEmpty()) {
 			user = userService.getUserByUsername(profileid);
 			if(user == null) {
@@ -62,7 +61,7 @@ public class NetworkController {
 			response.setName(user.getName());
 			response.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
 			response.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
-			
+
 			//Set Contact info as well
 			//Get ContactInfo
 			ContactInfo contactInfo = new ContactInfo();
@@ -79,27 +78,27 @@ public class NetworkController {
 			contactInfo.setYearest(user.getYearofEst());
 			contactInfo.setFromprice(user.getFromPrice());
 			contactInfo.setToprice(user.getToPrice());
-			
+
 			response.setContactinfo(contactInfo);
 		}
-		
+
 		Set<Network> networksTemp = new LinkedHashSet<Network>();
-		
+
 		String username = user.getUsername();
-		Iterable<org.netvogue.server.neo4japi.domain.Network> dbNetworks = 
+		Iterable<org.netvogue.server.neo4japi.domain.Network> dbNetworks =
 									networkService.getNetworks(user.getUsername(), onlyconfirmed, pagenumber);
 		if(null == dbNetworks) {
 			System.out.println("No networks found: ");
 			return response;
 		}
-		
+
 		Iterator<org.netvogue.server.neo4japi.domain.Network> first = dbNetworks.iterator();
 		while ( first.hasNext() ){
 			org.netvogue.server.neo4japi.domain.Network dbNetwork = first.next() ;
 			if(
-				(dbNetwork.getStatus() != NetworkStatus.CONFIRMED && !loggedinuser.equals(username))	
-			 ||	(dbNetwork.getStatus() == NetworkStatus.PENDING && loggedinuser.equals(dbNetwork.getRequestBy().getUsername()))
-			 || (dbNetwork.getStatus() == NetworkStatus.BLOCK && !loggedinuser.equals(dbNetwork.getBreakupby()))
+				dbNetwork.getStatus() != NetworkStatus.CONFIRMED && !loggedinuser.equals(username)
+			 ||	dbNetwork.getStatus() == NetworkStatus.PENDING && loggedinuser.equals(dbNetwork.getRequestBy().getUsername())
+			 || dbNetwork.getStatus() == NetworkStatus.BLOCK && !loggedinuser.equals(dbNetwork.getBreakupby())
 			  )	 {
 				System.out.println("Ignoring this" + dbNetwork.getStatus().toString());
 				System.out.println("Loggedinuser" + loggedinuser);
@@ -108,7 +107,7 @@ public class NetworkController {
 			}
 			Network newNetwork = conversionService.convert(dbNetwork, Network.class);
 			String thumbpic = "";
-			
+
 			User networkUser = dbNetwork.getRequestBy();
 			if(username.equals(networkUser.getUsername())) {
 				networkUser = dbNetwork.getRequestTo();
@@ -118,22 +117,22 @@ public class NetworkController {
 			newNetwork.setCountry(networkUser.getCountry());
 			newNetwork.setUsertype(networkUser.getUserType() == USER_TYPE.BRAND? "BRAND": "BOUTIQUE");
 			newNetwork.setName(networkUser.getName());
-			
+
 			thumbpic = networkUser.getProfilePicLink();
-			
+
 			if(null != thumbpic) {
 				thumbpic = uploadManager.getQueryString(thumbpic, ImageType.PROFILE_PIC, Size.PThumb, networkUser.getUsername());
 			}
 			newNetwork.setThumbnail_url(thumbpic);
 			networksTemp.add(newNetwork);
-		}		
-		
+		}
+
 		response.setNetworks(networksTemp);
-		
+
 		System.out.println("Sent Networks:" + response.getNetworks().size());
 		return response;
 	}
-	
+
 	@RequestMapping(value="network/createnetwork", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse createNetwork(@RequestBody String profileid) {
 		System.out.println("Create Network: id is:" + profileid);
@@ -143,11 +142,12 @@ public class NetworkController {
 			response.setError("Username is empty");
 			return response;
 		}
-		
+
 		User user = userDetailsService.getUserFromSession();
-		org.netvogue.server.neo4japi.domain.Notification newNotification =  
+		org.netvogue.server.neo4japi.domain.Notification newNotification =
 				new org.netvogue.server.neo4japi.domain.Notification(user);
-		if(ResultStatus.SUCCESS == networkService.CreateNetwork(user, profileid, newNotification, error)) {
+		User otherUser = networkService.CreateNetwork(user, profileid, newNotification, error);
+		if(null != otherUser) {
 			//Add notification to pubsub node here //Azeez
 			//Make this call asynchronous
 			ObjectMapper mapper = new ObjectMapper();
@@ -161,14 +161,14 @@ public class NetworkController {
 				return response;
 			}
 			response.setStatus(true);
-		}
-		else
-			response.setError(error);
-		
+		} else {
+      response.setError(error);
+    }
+
 		System.out.println("Created Network" + error);
 		return response;
 	}
-	
+
 	@RequestMapping(value="network/confirmnetwork", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse confirmNetwork(@RequestBody String profileid) {
 		System.out.println("Confirm Network: id is:" + profileid);
@@ -178,9 +178,9 @@ public class NetworkController {
 			response.setError("Username is empty");
 			return response;
 		}
-		
+
 		User user = userDetailsService.getUserFromSession();
-		org.netvogue.server.neo4japi.domain.Notification newNotification = 
+		org.netvogue.server.neo4japi.domain.Notification newNotification =
 				new org.netvogue.server.neo4japi.domain.Notification(user, NetworkStatus.CONFIRMED);;
 		if(ResultStatus.SUCCESS == networkService.ConfirmNetwork(user, profileid, newNotification, error)) {
 			//Add notification to pubsub node here //Azeez
@@ -198,15 +198,15 @@ public class NetworkController {
 				return response;
 			}
 			response.setStatus(true);
-			//Add notification to pubsub node here //Azeez 
-		}
-		else
-			response.setError(error);
-		
+			//Add notification to pubsub node here //Azeez
+		} else {
+      response.setError(error);
+    }
+
 		System.out.println("Confirmed Network");
 		return response;
 	}
-	
+
 	@RequestMapping(value="network/deletenetwork", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse deleteNetwork(@RequestBody String profileid) {
 		System.out.println("Delete Network: id is:" + profileid);
@@ -216,18 +216,18 @@ public class NetworkController {
 			response.setError("Username is empty");
 			return response;
 		}
-		
+
 		User user = userDetailsService.getUserFromSession();
-		if(ResultStatus.SUCCESS == networkService.DeleteNetwork(user.getUsername(), profileid, error)) {  
+		if(ResultStatus.SUCCESS == networkService.DeleteNetwork(user.getUsername(), profileid, error)) {
 			response.setStatus(true);
-		}
-		else
-			response.setError(error);
-		
+		} else {
+      response.setError(error);
+    }
+
 		System.out.println("Network deleted");
 		return response;
 	}
-	
+
 	@RequestMapping(value="network/blocknetwork", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse blockNetwork(@RequestBody String profileid) {
 		System.out.println("Block Network: id is:" + profileid);
@@ -237,18 +237,18 @@ public class NetworkController {
 			response.setError("Username is empty");
 			return response;
 		}
-		
+
 		User user = userDetailsService.getUserFromSession();
-		if(ResultStatus.SUCCESS == networkService.BlockNetwork(user.getUsername(), profileid, error)) {  
+		if(ResultStatus.SUCCESS == networkService.BlockNetwork(user.getUsername(), profileid, error)) {
 			response.setStatus(true);
-		}
-		else
-			response.setError(error);
-		
+		} else {
+      response.setError(error);
+    }
+
 		System.out.println("Network blocked");
 		return response;
 	}
-	
+
 	@RequestMapping(value="network/unblocknetwork", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse unblockNetwork(@RequestBody String profileid) {
 		System.out.println("unblock Network: id is:" + profileid);
@@ -258,14 +258,14 @@ public class NetworkController {
 			response.setError("Username is empty");
 			return response;
 		}
-		
+
 		User user = userDetailsService.getUserFromSession();
-		if(ResultStatus.SUCCESS == networkService.UnblockNetwork(user.getUsername(), profileid, error)) {  
+		if(ResultStatus.SUCCESS == networkService.UnblockNetwork(user.getUsername(), profileid, error)) {
 			response.setStatus(true);
-		}
-		else
-			response.setError(error);
-		
+		} else {
+      response.setError(error);
+    }
+
 		System.out.println("unblocked Network");
 		return response;
 	}
