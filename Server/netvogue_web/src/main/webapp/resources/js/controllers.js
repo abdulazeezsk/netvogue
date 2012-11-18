@@ -79,7 +79,8 @@ function MyCtrlProfile($scope, $routeParams, $timeout, srvprofile, currentvisite
     	$scope.showCreateNetwork = true;
     };
     
-    $scope.createnetwork = function() {
+    $scope.createnetwork = function(event) {
+    	angular.element(event.srcElement).button('loading');
     	mynetwork.createnetwork($scope.profileid).success(function(data) {
         	if(data.status == true) {
         		$scope.networkstatus = "PENDING";

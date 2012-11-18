@@ -214,8 +214,9 @@
         <textarea style="width: 500px;" rows="9" placeholder="Type a message"></textarea>
     </div>-->
 	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			ng-click="createnetwork()" class="btn btn-primary"> Send request</a>
+		<a href="#" class="btn" data-dismiss="modal">Close</a> 
+		<button data-loading-text="Please wait..." 
+				ng-click="createnetwork($event)" class="btn btn-inverse"> Send request</button>
 	</div>
 </div>
 <!-- modal -->
