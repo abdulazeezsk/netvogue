@@ -8,9 +8,11 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
+import org.netvogue.server.mandrill.util.EmailUtil;
 import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.neo4japi.domain.EmailNotifications;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.NetworkService;
 import org.netvogue.server.neo4japi.service.UserService;
@@ -160,6 +162,10 @@ public class NetworkController {
 			} catch (Exception e) {
 				System.out.println("Error in pusher" + error);
 				return response;
+			}
+			EmailNotifications flags = otherUser.getEmailnotifications();
+			if(null == flags || null != flags && true == flags.isNetworkRequestFlag()){
+			  boolean emailFlag = EmailUtil.sendNetworkRequestEmail(otherUser, user.getUsername());
 			}
 			response.setStatus(true);
 		} else {

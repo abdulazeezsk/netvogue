@@ -242,7 +242,7 @@ body {
 					<form class="navbar-form pull-right" action="j_spring_security_check" method="post" >
 						<input class="span3" type="text" id="j_username" name="j_username" placeholder="Email" /> <input
 							id="j_password" name="j_password" class="span3" type="password" placeholder="Password" />
-						<button type="submit"  style="font-family: 'Lato', sans-serif; font-weight: 100;" class="btn btn-inverse">Sign in</button>
+						<button type="submit"   class="btn btn-inverse fts">Sign in</button>
 					</form>
 				</div>
 				<!--/.nav-collapse -->
@@ -265,7 +265,7 @@ body {
 				<div class="container">
 					<div class="carousel-caption">
 						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">The Future of Wholesale Market Place</h1>
-						<a class="btn btn-large btn-inverse" href="#">See How it Works</a>
+						<a class="btn btn-large btn-inverse" href="#" style="font-family: 'Lato', sans-serif; font-weight: 100;" >See How it Works</a>
 					</div>
 				</div>
 			</div>
@@ -279,7 +279,7 @@ body {
 							and Discover</h1>
 						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">Fashion
 							Design</h1>
-					<a href="brand_Registration.html" style="font-family: 'Lato', sans-serif; font-weight: 100;" class="btn btn-large btn-inverse" href="#">Sign up as Brand</a>
+					<a href="brand_Registration.html"  class="btn btn-large btn-inverse fontlato" href="#">Sign up as Brand</a>
 					<a href="boutique_Registration.html" style="font-family: 'Lato', sans-serif; font-weight: 100;" class="btn btn-large btn-inverse" href="#">Sign up as Retailer</a>
 						
 					</div>
@@ -290,7 +290,7 @@ body {
 				<div class="container">
 					<div class="carousel-caption">
 						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">Featured Designers/Retailers</h1>
-						<a class="btn btn-large btn-inverse" href="#">Browse gallery</a>
+						<a class="btn btn-large btn-inverse" href="#" style="font-family: 'Lato', sans-serif; font-weight: 100;">Browse gallery</a>
 					</div>
 				</div>
 			</div>
@@ -399,7 +399,7 @@ body {
 			<a href="#">Back to top</a>
 		</p>
 		<p>
-		Â© 2012 Company, Inc.<a href="#">About</a> | <a href="#">Contact</a> | <a href="#">Privacy</a> | <a href="#">Terms</a>
+		© 2012 Company, Inc.<a href="#">About</a> | <a href="#">Contact</a> | <a href="#">Privacy</a> | <a href="#">Terms</a>
 		</p>
 		</footer>
 
