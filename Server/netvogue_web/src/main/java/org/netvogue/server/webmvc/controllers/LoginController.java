@@ -12,14 +12,13 @@ import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
 
 @Controller
-@RequestMapping({"/Netvogue.html", "/"})
 @SessionAttributes("user")
 public class LoginController  {
 
 	@Autowired BoutiqueService 				boutiqueService;
 	@Autowired NetvogueUserDetailsService	userDetailsService;
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value= {"/Netvogue.html", "/"}, method = RequestMethod.GET)
 	public String showForm(@RequestParam(value = "login_error", required = false) boolean error, Model model) {
 		
 		User user = userDetailsService.getUserFromSession();
@@ -34,6 +33,12 @@ public class LoginController  {
 			model.addAttribute("error", "You have entered an invalid username or password!");
 			return "login";
 	    }
-        return "Netvogue";
-    }
+           return "Netvogue";
+        }
+	
+	@RequestMapping(value= {"/forgotpassword.html", "/"}, method = RequestMethod.GET)
+       public String forgotPassword() {
+	  
+	  return "resend_Password";
+	}
 }
