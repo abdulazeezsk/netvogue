@@ -81,7 +81,7 @@ body {
 				placeholder="Password" ng-model="entity.password" name="uPassword"
 				required maxlength="10">
 				<span>
-				Forgot your <a href="resend_password.html" title="" tabindex="-1">password</a>?
+				Forgot your <a href="forgotpassword.html" title="" tabindex="-1">password</a>?
 				</span>
 				
 				 <div class="captcha js-captcha hidden">
