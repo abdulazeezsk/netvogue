@@ -6,6 +6,7 @@ import org.netvogue.ecommerce.domain.model.User;
 import org.netvogue.ecommerce.persistence.UserDao;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import java.util.List;
 
@@ -24,33 +25,31 @@ public class DefaultUserDaoImpl implements UserDao {
   }
 
   public void updateUser(final User user) {
-    List<User> usersFromDB = mongoTemplate.find(new Query(where("userName").is(user.getUsername())), User.class, USER_COLLECTION_NAME);
+    List<User> usersFromDB = mongoTemplate.find(new Query(where("userName").is(user.getUsername())), User.class,
+        USER_COLLECTION_NAME);
     checkUserExistance(usersFromDB, user.getUsername());
     User userFromDB = usersFromDB.get(0);
     applyChanges(userFromDB, user);
-    mongoTemplate.save(userFromDB);
+    mongoTemplate.save(userFromDB, USER_COLLECTION_NAME);
   }
 
-  public void deactivateUser(final User user) {
-    List<User> usersFromDB = mongoTemplate.find(new Query(where("userName").is(user.getUsername())), User.class, USER_COLLECTION_NAME);
-    checkUserExistance(usersFromDB, user.getUsername());
-    usersFromDB.get(0).setActive(false);
+  public void deactivateUser(final String userName) {
+    mongoTemplate.findAndModify(new Query(where("userName").is(userName)), Update.update("active", false), User.class,
+        USER_COLLECTION_NAME);
   }
 
-  public void reActivateUser(final User user) {
-    List<User> usersFromDB = mongoTemplate.find(new Query(where("userName").is(user.getUsername())), User.class, USER_COLLECTION_NAME);
-    checkUserExistance(usersFromDB, user.getUsername());
-    usersFromDB.get(0).setActive(true);
+  public void reActivateUser(final String userName) {
+    mongoTemplate.findAndModify(new Query(where("userName").is(userName)), Update.update("active", true), User.class,
+        USER_COLLECTION_NAME);
   }
 
-  public void deleteUser(final User user) {
-    List<User> usersFromDB = mongoTemplate.find(new Query(where("userName").is(user.getUsername())), User.class, USER_COLLECTION_NAME);
-    checkUserExistance(usersFromDB, user.getUsername());
-    mongoTemplate.remove(usersFromDB.get(0), USER_COLLECTION_NAME);
+  public void deleteUser(final String userName) {
+    mongoTemplate.remove(new Query(where("userName").is(userName)), USER_COLLECTION_NAME);
   }
 
   public boolean authenticateUser(final String userName, final String password) {
-    List<User> usersFromDB = mongoTemplate.find(new Query(where("userName").is(userName)), User.class, USER_COLLECTION_NAME);
+    List<User> usersFromDB = mongoTemplate.find(new Query(where("userName").is(userName)), User.class,
+        USER_COLLECTION_NAME);
     if (usersFromDB.get(0).getPassword().equals(password)) {
       return true;
     }
@@ -59,7 +58,8 @@ public class DefaultUserDaoImpl implements UserDao {
   }
 
   public User getUser(final String userName) {
-    List<User> usersFromDB = mongoTemplate.find(new Query(where("userName").is(userName)), User.class, USER_COLLECTION_NAME);
+    List<User> usersFromDB = mongoTemplate.find(new Query(where("userName").is(userName)), User.class,
+        USER_COLLECTION_NAME);
     checkUserExistance(usersFromDB, userName);
     return usersFromDB.get(0);
   }
@@ -88,25 +88,24 @@ public class DefaultUserDaoImpl implements UserDao {
     }
   }
 
-  private void applyChanges(final User originalUser, final User newUser) {
-    originalUser.setAboutUs(newUser.getAboutUs());
-    originalUser.setActive(newUser.isActive());
-    originalUser.setAddress(newUser.getAddress());
-    originalUser.setCity(newUser.getCity());
-    originalUser.setCountry(newUser.getCountry());
-    originalUser.setEmail(newUser.getEmail());
-    originalUser.setFirstName(newUser.getFirstName());
-    originalUser.setLastName(newUser.getLastName());
-    originalUser.setMobileNo(newUser.getMobileNo());
-    originalUser.setPassword(newUser.getPassword());
-    originalUser.setPrimarycontact(newUser.getPrimarycontact());
-    originalUser.setProfilePicLink(newUser.getProfilePicLink());
-    originalUser.setState(newUser.getState());
-    originalUser.setTelephoneNo1(newUser.getTelephoneNo1());
-    originalUser.setTelephoneNo2(newUser.getTelephoneNo2());
-    originalUser.setUserType(newUser.getUserType());
-    originalUser.setZipCode(newUser.getZipCode());
+  private void applyChanges(final User originalUserDeatails, final User newUserDetails) {
+    originalUserDeatails.setAboutUs(newUserDetails.getAboutUs());
+    originalUserDeatails.setActive(newUserDetails.isActive());
+    originalUserDeatails.setAddress(newUserDetails.getAddress());
+    originalUserDeatails.setCity(newUserDetails.getCity());
+    originalUserDeatails.setCountry(newUserDetails.getCountry());
+    originalUserDeatails.setEmail(newUserDetails.getEmail());
+    originalUserDeatails.setFirstName(newUserDetails.getFirstName());
+    originalUserDeatails.setLastName(newUserDetails.getLastName());
+    originalUserDeatails.setMobileNo(newUserDetails.getMobileNo());
+    originalUserDeatails.setPassword(newUserDetails.getPassword());
+    originalUserDeatails.setPrimarycontact(newUserDetails.getPrimarycontact());
+    originalUserDeatails.setProfilePicLink(newUserDetails.getProfilePicLink());
+    originalUserDeatails.setState(newUserDetails.getState());
+    originalUserDeatails.setTelephoneNo1(newUserDetails.getTelephoneNo1());
+    originalUserDeatails.setTelephoneNo2(newUserDetails.getTelephoneNo2());
+    originalUserDeatails.setUserType(newUserDetails.getUserType());
+    originalUserDeatails.setZipCode(newUserDetails.getZipCode());
   }
-
 
 }

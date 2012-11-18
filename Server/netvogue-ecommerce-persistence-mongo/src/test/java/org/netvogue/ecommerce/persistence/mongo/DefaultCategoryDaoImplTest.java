@@ -39,25 +39,19 @@ public class DefaultCategoryDaoImplTest {
 
     Category c = new Category();
     c.setCategoryType("abc");
-    c.setId("11111");
     for (int i = 0; i < 3; i++) {
       ProductLine line = new ProductLine();
       line.setDescription("desc-" + i);
-      line.setId("prdline-" + i);
       line.setName("prdlinename-" + i);
-      line.setSize("size-" + i);
       c.addProductLine(line);
     }
 
     Category c1 = new Category();
     c1.setCategoryType("abc");
-    c1.setId("22222");
     for (int i = 0; i < 2; i++) {
       ProductLine line = new ProductLine();
       line.setDescription("desc-" + i);
-      line.setId("prdline-" + i);
       line.setName("prdlinename-" + i);
-      line.setSize("size-" + i);
       c1.addProductLine(line);
     }
 
@@ -66,7 +60,7 @@ public class DefaultCategoryDaoImplTest {
 
     List<Category> categories = categoryDao.findAllCategories();
     assertEquals("categories:", 2, categories.size());
-
+    System.out.println("category id:" + categories.get(0).getId());
     categoryDao.deleteCategory(categories.get(0).getId());
     assertEquals("categories:", 1, categoryDao.findAllCategories().size());
 
@@ -77,18 +71,16 @@ public class DefaultCategoryDaoImplTest {
 
     ProductLine line = new ProductLine();
     line.setDescription("description");
-    line.setId("prdline-" + 2);
     line.setName("prod-line-name");
-    line.setSize("prod-line-size");
 
-    categoryDao.addProductLine("22222", line);
+    categoryDao.addProductLine(categories.get(1).getId(), line);
 
-    List<ProductLine> prodLines = categoryDao.findAllProductLinesByCategory("22222");
+    List<ProductLine> prodLines = categoryDao.findAllProductLinesByCategory(categories.get(1).getId());
     assertEquals("prodlines size:", 3, prodLines.size());
 
-    categoryDao.deleteProductLine("22222", "prdline-1");
+    categoryDao.deleteProductLine(categories.get(1).getId(), "prdlinename-1");
 
-    prodLines = categoryDao.findAllProductLinesByCategory("22222");
+    prodLines = categoryDao.findAllProductLinesByCategory(categories.get(1).getId());
     assertEquals("prodlines size:", 2, prodLines.size());
 
     template.dropCollection(DefaultCategoryDaoImpl.CATEGORY_COLLECTION_NAME);

@@ -2,13 +2,9 @@ package org.netvogue.ecommerce.domain.model;
 
 public class ProductLine {
 
-  private String id;
-
   private String name;
 
   private String description;
-
-  private String size;
 
   public String getName() {
     return name;
@@ -26,20 +22,5 @@ public class ProductLine {
     this.description = description;
   }
 
-  public String getSize() {
-    return size;
-  }
-
-  public void setSize(final String size) {
-    this.size = size;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(final String id) {
-    this.id = id;
-  }
 }
 

@@ -11,6 +11,7 @@ public class UserReadConverter implements Converter<DBObject, User> {
   public User convert(final DBObject dbObj) {
 
     User user = new User();
+    user.setId(dbObj.get("_id").toString());
     user.setFirstName((String) dbObj.get("firstName"));
     user.setLastName((String) dbObj.get("lastName"));
     user.setUsername((String) dbObj.get("userName"));
@@ -25,7 +26,7 @@ public class UserReadConverter implements Converter<DBObject, User> {
     user.setMobileNo((Long) dbObj.get("mobileNo"));
     user.setTelephoneNo1((Long) dbObj.get("telephoneNo1"));
     user.setTelephoneNo2((Long) dbObj.get("telephoneNo2"));
-    user.setActive((Boolean)dbObj.get("active"));
+    user.setActive((Boolean) dbObj.get("active"));
     return user;
   }
 

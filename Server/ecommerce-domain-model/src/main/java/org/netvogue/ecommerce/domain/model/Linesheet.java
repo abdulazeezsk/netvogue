@@ -1,22 +1,23 @@
 package org.netvogue.ecommerce.domain.model;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Linesheet {
 
   private String id;
 
-  private String linesheetname;
-
   private Date createdDate = new Date();
 
-  private Category productcategory;
+  private ProductLine productLine;
+
+  private Category category;
 
   private User createdBy;
 
-  private Set<Style> styles = new HashSet<Style>();
+  private Season season;
+
+  private int year;
+
 
   public String getId() {
     return id;
@@ -26,12 +27,8 @@ public class Linesheet {
     this.id = id;
   }
 
-  public String getLinesheetname() {
-    return linesheetname;
-  }
-
-  public void setLinesheetname(final String linesheetname) {
-    this.linesheetname = linesheetname;
+  public String getLookbookName() {
+    return season.name()+" " + year;
   }
 
   public Date getCreatedDate() {
@@ -42,12 +39,20 @@ public class Linesheet {
     this.createdDate = createdDate;
   }
 
-  public Category getProductcategory() {
-    return productcategory;
+  public ProductLine getProductLine() {
+    return productLine;
   }
 
-  public void setProductcategory(final Category productcategory) {
-    this.productcategory = productcategory;
+  public void setProductLine(final ProductLine productLine) {
+    this.productLine = productLine;
+  }
+
+  public Season getSeason() {
+    return season;
+  }
+
+  public void setSeason(final Season season) {
+    this.season = season;
   }
 
   public User getCreatedBy() {
@@ -58,16 +63,20 @@ public class Linesheet {
     this.createdBy = createdBy;
   }
 
-  public Set<Style> getStyles() {
-    return styles;
+  public Category getCategory() {
+    return category;
   }
 
-  public void setStyles(final Set<Style> styles) {
-    this.styles = styles;
+  public void setCategory(final Category category) {
+    this.category = category;
   }
 
-  public void addStyle(final Style style) {
-    styles.add(style);
+  public int getYear() {
+    return year;
+  }
+
+  public void setYear(final int year) {
+    this.year = year;
   }
 
 }

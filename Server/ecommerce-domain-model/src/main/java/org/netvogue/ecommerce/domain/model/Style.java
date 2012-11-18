@@ -6,11 +6,11 @@ import java.util.Set;
 
 public class Style {
 
-  private String styleId;
+  private String id;
 
-  private String stylename;
+  private String styleName;
 
-  private String styleno;
+  private String styleNo;
 
   private String description;
 
@@ -22,48 +22,68 @@ public class Style {
 
   private Set<String> availableColors = new HashSet<String>();
 
+  Set<String> availableImages = new HashSet<String>();
+
   private Date createdDate;
 
   private User brand;
 
   private ProductLine productLine;
 
+  private Category category;
+
   private boolean active;
 
-  // suman : for now not planning to implement. Will do this
-  // once basic functionality is done
-  private Set<Review> reviews = new HashSet<Review>();
+  private Lookbook lookbook;
 
-  public Set<Review> getReviews() {
-    return reviews;
+  private Linesheet linesheet;
+
+  public Style(final Lookbook lookbook, final String styleName, final String styleNo, final long price) {
+    this.lookbook = lookbook;
+    this.styleName = styleName;
+    this.styleNo = styleNo;
+    this.price = price;
+    active = false;
   }
 
-  public void setReviews(final Set<Review> reviews) {
-    this.reviews = reviews;
+  public Category getCategory() {
+    return category;
   }
 
-  public String getStyleId() {
-    return styleId;
+  public void setCategory(final Category category) {
+    this.category = category;
   }
 
-  public void setStyleId(final String styleId) {
-    this.styleId = styleId;
+  public Lookbook getLookbook() {
+    return lookbook;
   }
 
-  public String getStylename() {
-    return stylename;
+  public void setLookbook(final Lookbook lookbook) {
+    this.lookbook = lookbook;
   }
 
-  public void setStylename(final String stylename) {
-    this.stylename = stylename;
+  public Linesheet getLinesheet() {
+    return linesheet;
   }
 
-  public String getStyleno() {
-    return styleno;
+  public void setLinesheet(final Linesheet linesheet) {
+    this.linesheet = linesheet;
   }
 
-  public void setStyleno(final String styleno) {
-    this.styleno = styleno;
+  public String getStyleName() {
+    return styleName;
+  }
+
+  public void setStyleName(final String styleName) {
+    this.styleName = styleName;
+  }
+
+  public String getStyleNo() {
+    return styleNo;
+  }
+
+  public void setStyleNo(final String styleNo) {
+    this.styleNo = styleNo;
   }
 
   public String getDescription() {
@@ -102,12 +122,20 @@ public class Style {
     return availableSizes;
   }
 
+  public void addSize(final StyleSize size) {
+    availableSizes.add(size);
+  }
+
   public void setAvailableSizes(final Set<StyleSize> availableSizes) {
     this.availableSizes = availableSizes;
   }
 
   public Set<String> getAvailableColors() {
     return availableColors;
+  }
+
+  public void addColor(final String color) {
+    availableColors.add(color);
   }
 
   public void setAvailableColors(final Set<String> availableColors) {
@@ -136,6 +164,34 @@ public class Style {
 
   public void setProductLine(final ProductLine productLine) {
     this.productLine = productLine;
+  }
+
+  public Set<String> getAvailableImages() {
+    return availableImages;
+  }
+
+  public void addImage(final String image) {
+    availableImages.add(image);
+  }
+
+  public void setAvailableImages(final Set<String> availableImages) {
+    this.availableImages = availableImages;
+  }
+
+  public boolean isInLookbook() {
+    return lookbook != null;
+  }
+
+  public boolean isInLinesheet() {
+    return linesheet != null;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(final String id) {
+    this.id = id;
   }
 
 }

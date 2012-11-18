@@ -28,11 +28,11 @@ public class Category {
     productlines.remove(line);
   }
 
-  public void removeProductLine(final String productLineId) {
+  public void removeProductLine(final String name) {
     Iterator<ProductLine> it = productlines.iterator();
     while (it.hasNext()) {
       ProductLine line = it.next();
-      if (line.getId().equals(productLineId)) {
+      if (line.getName().equals(name)) {
         it.remove();
       }
     }

@@ -13,7 +13,7 @@ public class CategoryReadConverter implements Converter<DBObject, Category> {
   public Category convert(final DBObject object) {
 
     Category category = new Category();
-    category.setId((String) object.get("_id"));
+    category.setId(object.get("_id").toString());
     category.setCategoryType((String) object.get("type"));
 
     BasicDBList productLinesList = (BasicDBList) object.get("productLines");
@@ -21,10 +21,8 @@ public class CategoryReadConverter implements Converter<DBObject, Category> {
     for (Object obj : productLinesList) {
       BasicDBObject dbObj = (BasicDBObject) obj;
       ProductLine line = new ProductLine();
-      line.setId((String) dbObj.get("_id"));
       line.setName((String) dbObj.get("name"));
       line.setDescription((String) dbObj.get("description"));
-      line.setSize((String) dbObj.get("size"));
       category.addProductLine(line);
     }
 

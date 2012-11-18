@@ -17,8 +17,10 @@ public interface CategoryDao {
 
   void addProductLine(String categoryId, ProductLine productLine);
 
-  void deleteProductLine(String categoryId, String productLineId);
+  void deleteProductLine(String categoryId, String productLineName);
 
   List<ProductLine> findAllProductLinesByCategory(String categoryId);
+
+  ProductLine getProductLine(final String categoryId, final String productLineName);
 
 }

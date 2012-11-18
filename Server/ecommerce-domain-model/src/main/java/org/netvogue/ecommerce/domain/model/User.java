@@ -1,7 +1,10 @@
 package org.netvogue.ecommerce.domain.model;
 
 
+
 public class User {
+
+  private String id;
 
   private String email;
 
@@ -13,7 +16,7 @@ public class User {
 
   private String lastName;
 
-  private String profilePicLink = new String();
+  private String profilePicLink;
 
   private UserType userType;
 
@@ -182,5 +185,14 @@ public class User {
   public void setActive(final boolean active) {
     this.active = active;
   }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(final String id) {
+    this.id = id;
+  }
+
 
 }

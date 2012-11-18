@@ -19,4 +19,7 @@ public interface LinesheetDao {
 
   List<Linesheet> findLinesheetsByuser(final String userName);
 
+  Linesheet getLinesheetById(final String linesheetId);
+
+
 }

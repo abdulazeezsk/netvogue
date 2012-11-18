@@ -31,13 +31,31 @@
  <bean id="categoryWriteConverter" class="org.netvogue.ecommerce.persistence.mongo.converters.CategoryWriteConverter"/>
  <bean id="userReadConverter" class="org.netvogue.ecommerce.persistence.mongo.converters.UserReadConverter"/>
  <bean id="userWriteConverter" class="org.netvogue.ecommerce.persistence.mongo.converters.UserWriteConverter"/>
-
+ 
+ <bean id="linesheetReadConverter" class="org.netvogue.ecommerce.persistence.mongo.converters.LinesheetReadConverter">
+ 	<property name="categoryDao" ref="categoryDao" />
+ 	<property name="userDao" ref="userDao" />
+ </bean>
+ 
+ <bean id="linesheetWriteConverter" class="org.netvogue.ecommerce.persistence.mongo.converters.LinesheetWriteConverter"/>
+ 
+ <bean id="lookbookReadConverter" class="org.netvogue.ecommerce.persistence.mongo.converters.LinesheetReadConverter">
+ 	<property name="categoryDao" ref="categoryDao" />
+ 	<property name="userDao" ref="userDao" />
+ </bean>
+ 
+ <bean id="lookbookWriteConverter" class="org.netvogue.ecommerce.persistence.mongo.converters.LinesheetWriteConverter" />
+ 
  <mongo:mapping-converter id="mongoConverter">
   <mongo:custom-converters>
     <mongo:converter ref="categoryReadConverter"/>
     <mongo:converter ref="categoryWriteConverter"/>
     <mongo:converter ref="userReadConverter"/>
     <mongo:converter ref="userWriteConverter"/>
+    <mongo:converter ref="linesheetReadConverter"/>
+    <mongo:converter ref="linesheetWriteConverter"/>
+    <mongo:converter ref="linesheetWriteConverter"/>
+    <mongo:converter ref="linesheetReadConverter"/>
   </mongo:custom-converters>
  </mongo:mapping-converter>
 
