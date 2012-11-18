@@ -27,6 +27,7 @@ public class Boutique extends User{
 	public Boutique(String email, String password)
 	{
 		super(email, password);
+		accountEnabled = false;
 		setUserType(USER_TYPE.BOUTIQUE);
 		setRoles(Roles.ROLE_BOUTIQUE);
 	}
