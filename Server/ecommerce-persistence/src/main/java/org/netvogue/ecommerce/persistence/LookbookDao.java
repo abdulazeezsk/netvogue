@@ -1,7 +1,6 @@
 package org.netvogue.ecommerce.persistence;
 
 import org.netvogue.ecommerce.domain.model.Lookbook;
-import org.netvogue.ecommerce.domain.model.Style;
 
 import java.util.List;
 
@@ -11,13 +10,13 @@ public interface LookbookDao {
 
   void deleteLookbook(final String lookbookId);
 
-  void addStyleToLookbook(final String lookbookId, final Style style);
-
-  void deleteStyleFromLookbook(final String lookbookId, final String styleId);
-
   List<Lookbook> findAllLookbooks();
 
-  List<Lookbook> findLookbooksByuser(final String userName);
+  List<Lookbook> findLookbooksByUser(final String userName);
+
+  List<Lookbook> findLookbooksByProductLine(final String productLineName);
+
+  List<Lookbook> findLookbooksByCategory(final String categoryId);
 
   Lookbook getLookbookById(final String lookBookId);
 
