@@ -17,11 +17,14 @@
 			<div class="underline">
 				<div class="profile-address">
 					<h5 ng-bind="entityname"></h5>
-					<p ng-show="contactinfo != null">Estd {{contactinfo.yearest}}</p>
+					<p ng-show="contactinfo.yearest != null && 0 != contactinfo.yearest">Estd {{contactinfo.yearest}}</p>
 					<address ng-bind="getcontactinfo"></address>
 				</div>
 				<div class="profile-pricerange" 
-					ng-hide="(0 == contactinfo.fromprice && 0 == contactinfo.toprice) || (null == contactinfo)">
+					ng-hide="(null == contactinfo) ||
+							 (null == contactinfo.fromprice) ||
+							 (null == contactinfo.toprice) || 
+							 (0 == contactinfo.fromprice && 0 == contactinfo.toprice)">
 					<p>Price range</p>
 					<p>
 						<span class="WebRupee" style="font-size: 15px; margin-left: 3px;">Rs.</span>

@@ -50,7 +50,7 @@ function MyCtrlProfile($scope, $routeParams, $timeout, srvprofile, currentvisite
 	    $scope.contactinfo 		= srvprofile.getcontactinfo($routeParams);
 	    $scope.getcontactinfo 	= addresstostring($scope.contactinfo);
 	    
-	    if("" != $scope.aboutus) {
+	    if(null != $scope.aboutus && "" != $scope.aboutus) {
 	    	$scope.aboutus1 = $scope.aboutus.slice(0, netvogue.ABOUTUS_MORE_LENGTH);
 	    	$scope.aboutus2 = $scope.aboutus.slice(netvogue.ABOUTUS_MORE_LENGTH);
 	    }
