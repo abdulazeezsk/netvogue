@@ -235,9 +235,9 @@ body {
 				<!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="#">Brands</a></li>
-						<li><a href="#">Retailers</a></li>
-						<li><a href="#">Apply</a></li>
+						<li><a href="brands.html">Brands</a></li>
+						<li><a href="retailers.html">Retailers</a></li>
+						<li><a href="apply.html">Apply</a></li>
 						<!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
 					</ul>
 					<form class="navbar-form pull-right" action="j_spring_security_check" method="post" >
@@ -400,7 +400,7 @@ body {
 			<a href="#">Back to top</a>
 		</p>
 		<p>
-		© 2012 Company, Inc.<a href="#">About</a> | <a href="#">Contact</a> | <a href="#">Privacy</a> | <a href="#">Terms</a>
+		© 2012 Company, Inc.<a href="#">About</a> | <a href="#">Contact</a> | <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a>
 		</p>
 		</footer>
 

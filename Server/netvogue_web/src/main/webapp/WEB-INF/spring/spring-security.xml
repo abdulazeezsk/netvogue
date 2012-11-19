@@ -14,12 +14,23 @@
 	<security:http pattern="/lib/**" security="none"/>
 	<security:http pattern="/brand_Registration.html" security="none" />
 	<security:http pattern="/boutique_Registration.html" security="none" />
+	
 	<security:http pattern="/blog.html" security="none" />
-	<security:http pattern="/about_Us.html" security="none" />
 	<security:http pattern="/Netvogue.html" security="none" />
+	<security:http pattern="/brands.html" security="none" />
+	<security:http pattern="/retailers.html" security="none" />
+	<security:http pattern="/apply.html" security="none" />
+	<security:http pattern="/terms.html" security="none" />
+	<security:http pattern="/privacy.html" security="none" />
+	
+	
 	<security:http pattern="/favicon.ico" security="none" />
+	
+	
 	<security:http pattern="/confirmRegisteration/**" security="none" />
 	<security:http pattern="/forgotpassword.html" security="none" />
+	
+	
 	<security:http pattern="/*/unsubscribe/**" security="none" />
 		 
 	<security:http auto-config="true" >	
