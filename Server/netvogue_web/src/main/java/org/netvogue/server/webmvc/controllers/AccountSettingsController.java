@@ -154,7 +154,7 @@ public class AccountSettingsController {
       } else {
         password = PasswordGenerator.generatePassword();
         System.out.println(password);
-        user.setPassword(password);
+        user.setTemporaryPassword(password);
         error = new StringBuffer();
         if (ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
           EmailUtil.sendPasswordEmail(user, password);

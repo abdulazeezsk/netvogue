@@ -156,8 +156,8 @@ public class User {
    */
 
 
-  public void setPassword(String password) {
-    this.password = encode(password);
+  public void setTemporaryPassword(String password) {
+	  this.password = encode(password);
   }
 
   public void updatePassword(String old, String newPass1, String newPass2) {
