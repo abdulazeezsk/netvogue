@@ -129,4 +129,39 @@ public class EmailUtil {
 
   }
 
+  public static boolean sendPasswordEmail(User user, String password) {
+    MandrillTemplatedMessageRequest request = new MandrillTemplatedMessageRequest();
+    MandrillMessage message = new MandrillMessage();
+    Map<String, String> headers = new HashMap<String, String>();
+    message.setFrom_email(props.getProperty("email.from"));
+    message.setFrom_name("Veawe Support");
+    message.setHeaders(headers);
+    message.setSubject("New Password For Veawe");
+    MandrillRecipient[] recipients = new MandrillRecipient[] { new MandrillRecipient(user.getName(), user.getEmail()) };
+    message.setTo(recipients);
+    message.setTrack_clicks(true);
+    message.setTrack_opens(true);
+    String[] tags = new String[] { "tag1", "tag2", "tag3" };
+    message.setTags(tags);
+    request.setMessage(message);
+    List<TemplateContent> content = new ArrayList<TemplateContent>();
+    request.setTemplate_content(content);
+    request.setTemplate_name("New Password Template");
+
+    List<MergeVar> globalMergeVars = new ArrayList<MergeVar>();
+    globalMergeVars.add(new MergeVar("USERNAME", user.getUsername()));
+    globalMergeVars.add(new MergeVar("PASSWORD", password));
+    message.setGlobal_merge_vars(globalMergeVars);
+    try {
+      messagesRequest.sendTemplatedMessage(request);
+      return true;
+    } catch (RequestFailedException e) {
+      System.out.println(e.getMessage());
+      return false;
+    }
+
+
+  }
+
+
 }
