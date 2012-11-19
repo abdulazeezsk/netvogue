@@ -347,14 +347,14 @@ public class ProfileController {
 			StringBuffer error = new StringBuffer();
 			if(ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
 				String profilepic = newUser.getProfilePicLink();
-				brand.setBrandname(newUser.getUsername());
-				brand.setBrandusername(newUser.getName());
-				if(null != profilepic) {
+				brand.setBrandusername(newUser.getUsername());
+				brand.setBrandname(newUser.getName());
+				if(null != profilepic && !profilepic.isEmpty()) {
 					String thumburl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, 
 							Size.PThumb, newUser.getUsername());
 					brand.setProfilepic(thumburl);
 				} else {
-					brand.setProfilepic("");
+					brand.setProfilepic(Constants.PROFILE_DefaultPic);
 				}
 			} 
 		} catch(Exception e) {

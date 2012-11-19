@@ -2032,11 +2032,11 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
         	angular.element(event.srcElement).button('reset');
         });       
     };*/
-    $scope.updatebrandscarried = function (username, addorremoveurl) {
+    $scope.updatebrandscarried = function (username, addorremoveurl, name) {
 		myprofile.posttoserver(username, addorremoveurl).success(function(data) {
     		if(addorremoveurl == "removebrandscarried") {
     			if(data.status == true) {
-    				$scope.brandscarried.removeItem(username);
+    				$scope.brandscarried.removeItem(name);
     			} else {
     	    		alert(data.error);
     	    	}
@@ -2083,14 +2083,14 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
 		if(null == username)
 			username = brandscarried;
     	
-		$scope.updatebrandscarried(username, "addbrandscarried");
+		$scope.updatebrandscarried(username, "addbrandscarried", brandscarried);
 	};
     $scope.removeBrandsCarried = function(key) {
     	var username = $scope.brandscarried.getItem(key).brandusername; //Here it is no brandsreceived its brands carried, as usernames are already added
 		if(null == username)
 			username = brandscarried;
 		
-		$scope.updatebrandscarried(username, "removebrandscarried");
+		$scope.updatebrandscarried(username, "removebrandscarried", key);
     };
     $scope.searchFilter =  new netvogue.searchFilter();
 }

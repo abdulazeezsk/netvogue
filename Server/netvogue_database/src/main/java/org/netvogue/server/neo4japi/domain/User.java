@@ -3,7 +3,6 @@ package org.netvogue.server.neo4japi.domain;
 //Netvogue specific imports
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -427,20 +426,30 @@ public class User {
   }
 
   public boolean deleteUsersCarried(String usercarried) {
-	  Iterator<User> userToIterate = usersCarried.iterator();
-	  while (userToIterate.hasNext()) {
-		  User user = userToIterate.next();
+	  User founduser = null;
+	  for (User user : usersCarried) {
 		  System.out.println("Users carried1 " + user.getUsername() + " name:" + user.getName());
-		  System.out.println("Nodeid is " + user.getNodeId());
-		  System.out.println("Nodeid is " + user.hashCode());
+		  System.out.println("Username we got " + usercarried);
 		  if (usercarried.equals(user.getUsername())) {
-			  userToIterate.remove();
-			  return true;
-          } 
+			  founduser = user;
+			  System.out.println("We found user" + user.hashCode());
+		  }
+		  System.out.println("Users carried2" + user.getUsername() + " name:" + user.getName());
+	  }
+	  try {
+		  if(null != founduser) {
+			  if (usersCarried.remove(founduser)) {
+				  return true;
+			  } else {
+				  System.out.println("error while removing it");
+			  }
+		  }
+      } catch (Exception e) {
+    	  System.out.println("error while removing it" + e.toString());
       }
-    
-      System.out.println("Couldn't find user carried");
-      return false;
+
+	  System.out.println("Couldn't find user carried");
+	  return false;
   }
 
   public void deleteUsersCarried() {
