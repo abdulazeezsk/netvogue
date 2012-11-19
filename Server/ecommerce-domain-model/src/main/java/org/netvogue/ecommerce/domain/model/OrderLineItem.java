@@ -3,13 +3,13 @@ package org.netvogue.ecommerce.domain.model;
 
 public class OrderLineItem {
 
-  private long lineItemId;
+  private String lineItemId;
 
   private Style style;
 
   private int quantity;
 
-  private StyleSize size;
+  private StyleSize styleSize;
 
   private long stylePrice;
 
@@ -31,20 +31,21 @@ public class OrderLineItem {
     this.quantity = quantity;
   }
 
-  public long getLineItemId() {
+  public String getLineItemId() {
     return lineItemId;
   }
 
-  public void setLineItemId(final long lineItemId) {
+  public void setLineItemId(final String lineItemId) {
     this.lineItemId = lineItemId;
   }
 
-  public StyleSize getSize() {
-    return size;
+
+  public StyleSize getStyleSize() {
+    return styleSize;
   }
 
-  public void setSize(final StyleSize size) {
-    this.size = size;
+  public void setStyleSize(final StyleSize styleSize) {
+    this.styleSize = styleSize;
   }
 
   public long getStylePrice() {
@@ -56,7 +57,7 @@ public class OrderLineItem {
   }
 
   public long getLineItemPrice() {
-    return lineItemPrice;
+    return stylePrice*quantity;
   }
 
   public void setLineItemPrice(final long lineItemPrice) {

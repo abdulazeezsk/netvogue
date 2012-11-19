@@ -1,6 +1,7 @@
 package org.netvogue.ecommerce.persistence.mongo;
 
 import org.netvogue.ecommerce.domain.model.Order;
+import org.netvogue.ecommerce.domain.model.OrderReview;
 import org.netvogue.ecommerce.domain.model.OrderStatus;
 import org.netvogue.ecommerce.persistence.OrderManagementDao;
 
@@ -28,6 +29,11 @@ public class DefaultOrderManagementDaoImpl implements OrderManagementDao {
   public List<Order> findOrdersByUserAndByStatus(final String userName, final OrderStatus status) {
     // TODO Auto-generated method stub
     return null;
+  }
+
+  public void addReview(final String orderId, final OrderReview review) {
+    // TODO Auto-generated method stub
+
   }
 
 }

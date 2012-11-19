@@ -6,9 +6,9 @@ import java.util.Set;
 
 public class OrderReview {
 
-  private Set<OrderLineItem> lineItemsAfterReview = new HashSet<OrderLineItem>();
+  private Set<OrderLineItem> lineItems = new HashSet<OrderLineItem>();
 
-  private String reviewedBy;
+  private User reviewedBy;
 
   private Date reviewedDate;
 
@@ -18,21 +18,22 @@ public class OrderReview {
 
   }
 
-  public Set<OrderLineItem> getLineItemsAfterReview() {
-    return lineItemsAfterReview;
+
+  public Set<OrderLineItem> getLineItems() {
+    return lineItems;
   }
 
 
-  public void setLineItemsAfterReview(final Set<OrderLineItem> lineItemsAfterReview) {
-    this.lineItemsAfterReview = lineItemsAfterReview;
+  public void setLineItems(final Set<OrderLineItem> lineItems) {
+    this.lineItems = lineItems;
   }
 
 
-  public String getReviewedBy() {
+  public User getReviewedBy() {
     return reviewedBy;
   }
 
-  public void setReviewedBy(final String reviewedBy) {
+  public void setReviewedBy(final User reviewedBy) {
     this.reviewedBy = reviewedBy;
   }
 
