@@ -36,12 +36,12 @@ public class StyleReadConverter implements Converter<DBObject, Style> {
     Lookbook lookbook = lookbookDao.getLookbookById((String) source.get("lookbookId"));
     Linesheet linesheet = linesheetDao.getLinesheetById((String) source.get("linesheetId"));
 
-    Style style = new Style(lookbook, styleName, styleNo, price);
+    Style style = new Style(styleName, styleNo, price);
     style.setId(((ObjectId) source.get("_id")).toString());
+    style.setLookbook(lookbook);
     style.setLinesheet(linesheet);
     style.setDescription((String) source.get("description"));
     style.setFabrication((String) source.get("fabrication"));
-    style.setActive((Boolean) source.get("active"));
     style.setBrand(userDao.getActiveUser((String) source.get("brand")));
     style.setCreatedDate((Date) source.get("createdDate"));
 

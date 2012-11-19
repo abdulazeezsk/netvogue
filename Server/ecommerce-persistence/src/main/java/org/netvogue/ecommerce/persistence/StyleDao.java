@@ -2,14 +2,32 @@ package org.netvogue.ecommerce.persistence;
 
 import org.netvogue.ecommerce.domain.model.Style;
 
+import java.util.List;
+import java.util.Set;
+
 public interface StyleDao {
 
-  void addStyle(Style style);
+  void addStyleToLookbook(final String lookbookId, Style style);
 
-  void deleteStyle(String styleId);
+  void deleteStyleFromLookbook(String lookbookId, String styleId);
 
-  void activateStyle(String styleId);
+  List<Style> findStylesByBrand(final String userName);
 
-  void deactivateStyle(String styleId);
+  List<Style> findStylesByProductLine(final String productLineNmae);
+
+  List<Style> findStylesByCategory(final String categoryId);
+
+  List<Style> findStylesByLinesheet(final String linesheetId);
+
+  List<Style> findStylesByLookbook(final String lookbookId);
+
+  List<Style> findStylesByPriceRange(final long fromPrice, final long toPrice);
+
+  List<Style> findStylesByPriceRangeAndBrand(final long fromPrice, final long toPrice, final String brandUserName);
+
+  List<Style> findStylesByPriceRangeAndBrands(final long fromPrice, final long toPrice,
+      final Set<String> brandsUserNames);
+
+  Style getStyleById(final String styleId);
 
 }
