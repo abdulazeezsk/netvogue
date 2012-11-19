@@ -18,7 +18,6 @@ public class Lookbook {
 
   private int year;
 
-
   public String getId() {
     return id;
   }
@@ -78,6 +77,5 @@ public class Lookbook {
   public void setYear(final int year) {
     this.year = year;
   }
-
 
 }

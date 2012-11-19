@@ -2,6 +2,7 @@ package org.netvogue.ecommerce.domain.model;
 
 
 
+
 public class User {
 
   private String id;
@@ -193,6 +194,5 @@ public class User {
   public void setId(final String id) {
     this.id = id;
   }
-
 
 }

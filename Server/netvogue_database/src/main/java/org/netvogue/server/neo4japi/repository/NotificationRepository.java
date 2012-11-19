@@ -14,6 +14,11 @@ public interface NotificationRepository extends GraphRepository<Notification> {
 			"RETURN nf ORDER BY nf.notificationDate DESC")
 	Iterable<Notification> getAllNotifications(String username);
 	
+	@Query("START n=node:search(username={0}) " +
+			"MATCH n-[:NOTIFICATION]->nf " +
+			"SET nf.isRead=true ")
+	void markAllNotificationRead(String username);
+	
 	@Query("START n=node:notificationid(notificationid={0}) SET n.isRead=true")
 	void markNotificationRead(String notificationid);
 	

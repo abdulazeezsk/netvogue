@@ -249,8 +249,8 @@ body {
 					class="icon-bar"></span> <span class="icon-bar"></span>
 				</a>
 				<a class="brand" href="#" style="padding-top: 6px; padding-bottom: 0px;">
-           			 <img class="AngularJS-small" src="img/Veawe_Logo.png">
-           			<!--   <img class="AngularJS-small" src="img/AngularJS-small.png"> -->
+           			<!--  <img class="AngularJS-small" src="img/Veawe_Logo.png"> -->
+           			   <img class="AngularJS-small" src="img/AngularJS-small.png">
           		</a>
 				 <!-- <span class="brand" style="font-family: 'Lato', sans-serif; font-weight: 100;" href="#">VEAWE</span> -->
 				<!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
@@ -337,7 +337,7 @@ body {
 		<!-- Three columns of text below the carousel -->
 		<div class="row">
 			<div class="span4">
-				<img class="img" style="max-height:200px;max-width:240px;" src="img/donna_karan_adriana_lima_1.jpg" />
+				<img class="img" style="max-height:200px;max-width:240px;" src="img/Corbis-42-35908853.jpg" />
 				<h3>Business Collaboration</h3>
 				<p>Prospect for designer and retailers  
 					who enhance your business and Collaborate online </p>
@@ -345,7 +345,7 @@ body {
 			</div>
 			<!-- /.span4 -->
 			<div class="span4">
-				<img class="img" style="max-height:200px;max-width:240px;" src="img/donna_karan_adriana_lima_2.jpg" />
+				<img class="img" style="max-height:200px;max-width:240px;" src="img/Corbis-42-35908853.jpg" />
 				<h3>Social Networking</h3>
 				<p>Communicate throughout the year with designer and retailers to discuss upcoming collections, 
 				 Never lose contact again.</p>
@@ -353,7 +353,7 @@ body {
 			</div>
 			<!-- /.span4 -->
 			<div class="span4">
-				<img class="img" style="max-height:200px;max-width:240px;" src="img/donna_karan_adriana_lima_3.jpg" />
+				<img class="img" style="max-height:200px;max-width:240px;" src="img/Corbis-42-35908853.jpg" />
 				<h3>Order Management</h3>
 				<p>Manage the receipt and approval of purchase orders as they are submitted.
 				 Send invoices and maintain all sales records 

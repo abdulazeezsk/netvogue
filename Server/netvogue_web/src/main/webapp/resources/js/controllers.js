@@ -2343,6 +2343,8 @@ function MyCtrlNotifications($scope, $routeParams, currentvisitedprofile, mynoti
 	mynotifications.notifications().success(function(data) {
 		mynotifications.setnotifications(data);
 		$scope.updatenotifications();
+		mynotifications.markallread();
+		$scope.$parent.unreadnotifications = 0;
 	}).error(function(data) {
 		
 	});

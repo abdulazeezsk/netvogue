@@ -18,7 +18,6 @@ public class Linesheet {
 
   private int year;
 
-
   public String getId() {
     return id;
   }

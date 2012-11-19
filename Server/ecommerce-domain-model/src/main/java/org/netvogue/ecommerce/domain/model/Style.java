@@ -22,7 +22,7 @@ public class Style {
 
   private Set<String> availableColors = new HashSet<String>();
 
-  Set<String> availableImages = new HashSet<String>();
+  private Set<String> availableImages = new HashSet<String>();
 
   private Date createdDate;
 
@@ -32,18 +32,14 @@ public class Style {
 
   private Category category;
 
-  private boolean active;
-
   private Lookbook lookbook;
 
   private Linesheet linesheet;
 
-  public Style(final Lookbook lookbook, final String styleName, final String styleNo, final long price) {
-    this.lookbook = lookbook;
+  public Style(final String styleName, final String styleNo, final long price) {
     this.styleName = styleName;
     this.styleNo = styleNo;
     this.price = price;
-    active = false;
   }
 
   public Category getCategory() {
@@ -108,14 +104,6 @@ public class Style {
 
   public void setPrice(final long price) {
     this.price = price;
-  }
-
-  public boolean isActive() {
-    return active;
-  }
-
-  public void setActive(final boolean active) {
-    this.active = active;
   }
 
   public Set<StyleSize> getAvailableSizes() {
