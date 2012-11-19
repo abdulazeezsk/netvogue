@@ -82,13 +82,17 @@ public class UserServiceImpl implements UserService{
 	
 	//Search related
 	public Iterable<User> doBasicSearch(String query) {
-		query = "username:*" + query + "* OR " + "name:*" + query + "*";
-		return userRepo.doBasicSearch(query, Constants.BASICSEARCH_LIMIT, 0);
+		//query = "username:*" + query + "* OR " + "name:*" + query + "*";
+		String finalquery = Utils.SerializeQueryParamWithSpaces("username", query) + " OR ";
+		finalquery += Utils.SerializeQueryParamWithSpaces("name", query);
+		return userRepo.doBasicSearch(finalquery, Constants.BASICSEARCH_LIMIT, 0);
 	}
 	
 	public Iterable<User> getAllUsers(String query) {
-		query = "username:*" + query + "* OR " + "name:*" + query + "*";
-		return userRepo.doBasicSearch(query, Constants.ADVSEARCH_LIMIT, 0);
+		//query = "username:*" + query + "* OR " + "name:*" + query + "*";
+		String finalquery = Utils.SerializeQueryParamWithSpaces("username", query) + " OR ";
+		finalquery += Utils.SerializeQueryParamWithSpaces("name", query);
+		return userRepo.doBasicSearch(finalquery, Constants.ADVSEARCH_LIMIT, 0);
 	}
 	
 	public Iterable<User> doAdvancedSearch(USER_TYPE userType, String name, String location, 

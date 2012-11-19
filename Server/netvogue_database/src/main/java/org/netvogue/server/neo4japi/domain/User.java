@@ -426,26 +426,30 @@ public class User {
   }
 
   public boolean deleteUsersCarried(String usercarried) {
-    for (User user : usersCarried) {
-      System.out.println("Users carried1 " + user.getUsername() + " name:" + user.getName());
-      System.out.println("Nodeid is " + user.getNodeId());
-      System.out.println("Nodeid is " + user.hashCode());
-      if (usercarried.equals(user.getUsername())) {
-        try {
-
-          if (usersCarried.remove(user)) {
-            return true;
-          } else {
-            System.out.println("error while removing it");
-          }
-        } catch (Exception e) {
-          System.out.println("error while removing it" + e.toString());
-        }
+	  User founduser = null;
+	  for (User user : usersCarried) {
+		  System.out.println("Users carried1 " + user.getUsername() + " name:" + user.getName());
+		  System.out.println("Username we got " + usercarried);
+		  if (usercarried.equals(user.getUsername())) {
+			  founduser = user;
+			  System.out.println("We found user" + user.hashCode());
+		  }
+		  System.out.println("Users carried2" + user.getUsername() + " name:" + user.getName());
+	  }
+	  try {
+		  if(null != founduser) {
+			  if (usersCarried.remove(founduser)) {
+				  return true;
+			  } else {
+				  System.out.println("error while removing it");
+			  }
+		  }
+      } catch (Exception e) {
+    	  System.out.println("error while removing it" + e.toString());
       }
-      System.out.println("Users carried2" + user.getUsername() + " name:" + user.getName());
-    }
-    System.out.println("Couldn't find user carried");
-    return false;
+
+	  System.out.println("Couldn't find user carried");
+	  return false;
   }
 
   public void deleteUsersCarried() {
