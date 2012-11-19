@@ -11,10 +11,10 @@
 			<ul class="thumbnails">
 				<li class="span3">
 					<div>
-						<span> <a href="#profile"> <img alt=""
+						<span> <a ng-href="#profile"> <img alt=""
 								ng-src={{profilepic.thumbnail_url}}
 								class="pull-left leftpane_profile_img"></a>
-						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span> <span> <a ng-href="#profile" class="leftpane_entity_name">{{entityname}}</a>
 						</span>
 					</div>
 				</li>
@@ -155,7 +155,7 @@
 							<div>
 								<label
 									style="font-family: 'Lato', sans-serif; font-weight: 400;"
-									class="checkbox"> <input type="checkbox"> 
+									class="checkbox"> <input type="checkbox" ng-model="emailnotifications.networkrequest"> 
 									Email Me when i Get a Network Request
 								</label>
 							</div>

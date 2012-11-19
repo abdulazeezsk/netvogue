@@ -11,7 +11,7 @@ public class EmailNotifications {
 
   boolean networkRequestFlag = true;
 
-  boolean newletterFlag = true;
+  boolean newsletterFlag = true;
 
   public EmailNotifications() {
 
@@ -25,12 +25,12 @@ public class EmailNotifications {
     this.networkRequestFlag = networkRequestFlag;
   }
 
-  public boolean isNewletterFlag() {
-    return newletterFlag;
+  public boolean isNewsletterFlag() {
+    return newsletterFlag;
   }
 
-  public void setNewletterFlag(boolean newletterFlag) {
-    this.newletterFlag = newletterFlag;
+  public void setNewsletterFlag(boolean newsletterFlag) {
+    this.newsletterFlag = newsletterFlag;
   }
 
   public Long getNodeId() {

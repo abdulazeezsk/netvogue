@@ -1447,4 +1447,54 @@ angular.module('netVogue.services', []).
         	  return $http(config);
           }
       };
-  });
+}).service('myaccount', function ($http) {
+	    var accountinfo;
+
+	    return {
+	    	getaccountinfo: function() {
+	    		return accountinfo;
+	    	},
+	    	setaccountinfo: function(account) {
+	    		angular.copy(account, accountinfo);
+	    	},
+	    	getname: function() {
+	    		return accountinfo.name;
+	    	},
+	    	isbrand: function() {
+	    		return accountinfo.isbrand;
+	    	},
+	        getprofilepic: function() {
+	    		return accountinfo.profilepic;
+	    	},
+	    	getemail: function() {
+	    		return accountinfo.email;
+	    	},
+	    	getemailnotifications: function () {
+	        	if(angular.isUndefined(accountinfo.emailnotifications))
+	        		return {};
+	            return accountinfo.emailnotifications;
+	        },
+	        setemailnotifications: function (notifications) {
+	        	accountinfo.emailnotifications = notifications;
+
+	        },
+	        posttoserver: function(profiledata, url) {
+	        	var config = {
+	                      method: "POST",
+	                      data: profiledata,
+	                      url: "profile/" + url
+	            };
+	        	return $http(config);
+	        },
+	        accountinfo: function () {
+	              var config = {
+	                  method: "GET",
+	                  url: "/getaccountdetails/"
+	              };
+	              return $http(config);
+	        },
+	        setAccountLocally: function(temp) {
+	        	 accountinfo = angular.copy(temp);
+	        },
+	    };
+});

@@ -64,8 +64,8 @@ body {
       </div> -->
 		<form novalidate name="form">
 			<h2 style="font-family: 'Lato', sans-serif; font-weight: 300;">Forgot
-				Username/Email or password</h2>
-			<label style="font-family: 'Lato', sans-serif; font-weight: 400;">Username
+				Your password ?</h2>
+			<label>Username
 				or email</label> <input type="text" ng-model="entity.email" class="span5"
 				maxlength="50" name="uEmail" required
 				ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/"

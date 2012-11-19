@@ -36,7 +36,7 @@ public class LoginController  {
            return "Netvogue";
         }
 	
-	@RequestMapping(value= {"/forgotpassword.html", "/"}, method = RequestMethod.GET)
+	@RequestMapping(value= {"/forgotpassword.html"}, method = RequestMethod.GET)
        public String forgotPassword() {
 	  
 	  return "resend_Password";
