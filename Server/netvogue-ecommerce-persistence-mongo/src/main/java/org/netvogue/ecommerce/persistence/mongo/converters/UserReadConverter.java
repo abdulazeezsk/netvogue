@@ -1,5 +1,6 @@
 package org.netvogue.ecommerce.persistence.mongo.converters;
 
+import org.netvogue.ecommerce.domain.model.SubscriptionType;
 import org.netvogue.ecommerce.domain.model.User;
 import org.netvogue.ecommerce.domain.model.UserType;
 import org.springframework.core.convert.converter.Converter;
@@ -9,7 +10,6 @@ import com.mongodb.DBObject;
 public class UserReadConverter implements Converter<DBObject, User> {
 
   public User convert(final DBObject dbObj) {
-
     User user = new User();
     user.setId(dbObj.get("_id").toString());
     user.setFirstName((String) dbObj.get("firstName"));
@@ -27,6 +27,7 @@ public class UserReadConverter implements Converter<DBObject, User> {
     user.setTelephoneNo1((Long) dbObj.get("telephoneNo1"));
     user.setTelephoneNo2((Long) dbObj.get("telephoneNo2"));
     user.setActive((Boolean) dbObj.get("active"));
+    user.setSubscirptionType(SubscriptionType.valueOf(user.getSubscirptionType().toString()));
     return user;
   }
 
