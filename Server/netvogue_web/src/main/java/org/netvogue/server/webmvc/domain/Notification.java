@@ -1,5 +1,7 @@
 package org.netvogue.server.webmvc.domain;
 
+import org.netvogue.server.webmvc.common.Constants;
+
 public class Notification {
 	String notificationid;
 	String text;
@@ -9,6 +11,10 @@ public class Notification {
 	String top_url;
 	String thumbnail_url;
 	boolean isread;
+	
+	public Notification() {
+	  this.thumbnail_url = Constants.PROFILE_DefaultPic;
+	}
 	
 	public String getText() {
 		return text;

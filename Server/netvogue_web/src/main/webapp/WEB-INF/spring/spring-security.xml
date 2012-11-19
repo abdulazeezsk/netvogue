@@ -14,17 +14,31 @@
 	<security:http pattern="/lib/**" security="none"/>
 	<security:http pattern="/brand_Registration.html" security="none" />
 	<security:http pattern="/boutique_Registration.html" security="none" />
+	
 	<security:http pattern="/blog.html" security="none" />
-	<security:http pattern="/about_Us.html" security="none" />
 	<security:http pattern="/Netvogue.html" security="none" />
+	<security:http pattern="/brands.html" security="none" />
+	<security:http pattern="/retailers.html" security="none" />
+	<security:http pattern="/apply.html" security="none" />
+	<security:http pattern="/terms.html" security="none" />
+	<security:http pattern="/privacy.html" security="none" />
+	
+	
 	<security:http pattern="/favicon.ico" security="none" />
+	
+	
 	<security:http pattern="/confirmRegisteration/**" security="none" />
+	<security:http pattern="/forgotpassword.html" security="none" />
+	
+	
+	<security:http pattern="/*/unsubscribe/**" security="none" />
 		 
 	<security:http auto-config="true" >	
 		<security:custom-filter ref="captchaCaptureFilter" before="FORM_LOGIN_FILTER"/>
 		<security:custom-filter ref="captchaVerifierFilter" after="FORM_LOGIN_FILTER"/>
 		
 		<security:intercept-url pattern="/Netvogue.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/forgotpassword.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/boutique_Registration.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/boutique/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/brand_Registration.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />

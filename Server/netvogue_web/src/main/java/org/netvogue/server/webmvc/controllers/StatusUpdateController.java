@@ -204,7 +204,7 @@ public class StatusUpdateController {
 			response.setError(error.toString());
 		
 		
-		System.out.println("delete status update");
+		System.out.println("deleted status update");
 		return response;
 	}
 }

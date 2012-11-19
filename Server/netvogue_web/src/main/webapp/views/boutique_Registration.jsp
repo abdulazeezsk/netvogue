@@ -45,8 +45,9 @@ body {
 				</a> <a class="brand" href="Netvogue.html">VEAWE</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="#">Designers</a></li>
+						<li><a href="#">Brands</a></li>
 						<li><a href="#">Retailers</a></li>
+						<li><a href="#">Apply</a></li>
 					</ul>
 					<form class="navbar-form pull-right" accept-charset="UTF-8" action="j_spring_security_check" method="post" >
 						<input id="j_username" name="j_username"  class="span3" type="text" placeholder="Email"> <input
@@ -80,7 +81,7 @@ body {
               </span>
 				
 				
-				 <label style="font-family: 'Lato', sans-serif; font-weight: 400;" >User Name</label>
+				 <label>User Name</label>
 				 
 				  <input type="text" ng-model="entity.username" class="span5" placeholder="User Name"
 				   name="uUserName" ng-maxlength="25" required maxlength="26" ui-validate="{oldusername:usernamechanged}" >
@@ -90,13 +91,13 @@ body {
                    class="validation_msg"> Username registered</span>
                   </span>
 				  
-				 <label style="font-family: 'Lato', sans-serif; font-weight: 400;" >Password</label>
+				 <label>Password</label>
 				<input type="password" ng-model="entity.password" class="span5" placeholder="Password" ng-model="entity.password" 
                                 name="uPassword" required maxlength="10">
                                 <span ng-show="form.uPassword.$dirty && form.uPassword.$invalid">
                                 <span ng-show="form.uPassword.$error.required" class="validation_msg" style="font-family: 'Lato', sans-serif; font-weight: 300;color:red;">Required</span>
                             </span>
-			 <label style="font-family: 'Lato', sans-serif; font-weight: 400;" >Confirm
+			 <label>Confirm
 				Password</label>
 				
 				
@@ -115,17 +116,17 @@ body {
 				
 				
 				
-				 <label style="font-family: 'Lato', sans-serif; font-weight: 400;" >Store Name</label> 
-				 <input type="text" ng-model="entity.name"  placeholder="Boutique Name" name="uBrandName" required maxlength="25" class="span5" placeholder="Store Name"> 
+				 <label>Store Name</label> 
+				 <input type="text" ng-model="entity.name"  name="uBrandName" required maxlength="25" class="span5" placeholder="Store Name"> 
 				 <span ng-show="form.uBrandName.$dirty && form.uBrandName.$invalid">
                  <span ng-show="form.uBrandName.$error.required" class="validation_msg" style="font-family: 'Lato', sans-serif; font-weight: 300;color:red;">Required</span>
                  </span>
 				
-				<label style="font-family: 'Lato', sans-serif; font-weight: 400;" >Primary
+				<label>Primary
 				Contact</label>
 				 <input type="text" class="span5" ng-model="entity.primarycontact"
 				placeholder="Primary Contact Person"> 
-				<label style="font-family: 'Lato', sans-serif; font-weight: 400;" >Mobile
+				<label>Mobile
 				 Number</label> 
 				<input type="text" class="span5" ng-model="entity.mobile"
 				placeholder="Primary Conatct Mobile"> 

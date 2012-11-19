@@ -213,22 +213,6 @@ body {
 		font-size: 18px;
 		line-height: 1.5;
 	}
-	.navbar .brand
-	{
-	float:left;
-	display:block;
-	padding:8px 20px 12px;
-	margin-left:-20px;
-	font-size:20px;
-	font-weight:200;
-	line-height:1;
-	color:#ffffff;
-	}
-	img.AngularJS-small 
-	{
-	width: 95px;
-	height: 25px;
-	}
 }
 </style>
 </head>
@@ -247,18 +231,13 @@ body {
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a>
-				<a class="brand" href="#" style="padding-top: 6px; padding-bottom: 0px;">
-           			 <img class="AngularJS-small" src="img/Veawe_Logo.png">
-           			<!--   <img class="AngularJS-small" src="img/AngularJS-small.png"> -->
-          		</a>
-				 <!-- <span class="brand" style="font-family: 'Lato', sans-serif; font-weight: 100;" href="#">VEAWE</span> -->
+				</a> <span class="brand" style="font-family: 'Lato', sans-serif; font-weight: 100;" href="#">VEAWE</span>
 				<!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="brands.html">Brands</a></li>
-						<li><a href="retailers.html">Retailers</a></li>
-						<li><a href="apply.html">Apply</a></li>
+						<li><a href="#">Brands</a></li>
+						<li><a href="#">Retailers</a></li>
+						<li><a href="#">Apply</a></li>
 						<!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
 					</ul>
 					<form class="navbar-form pull-right" action="j_spring_security_check" method="post" >
@@ -280,49 +259,28 @@ body {
 
 	<!-- Carousel
     ================================================== -->
-	<div id="myCarousel" class="carousel slide">
-		<div class="carousel-inner">
-			<div class="item">
-				<img src="img/NY_FASHION_KARAN_3.jpeg" alt="" />
-				<div class="container">
-					<div class="carousel-caption">
-						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">The Future of Wholesale Market Place</h1>
-						<a class="btn btn-large btn-inverse" href="#"  >See How it Works</a>
-					</div>
-				</div>
-			</div>
-			<div class="item active">
-				<img src="img/NY_FASHION_KARAN_3.jpeg" alt="" />
-				<div class="container">
-					<div class="carousel-caption">
-						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">A
-							Market Place to</h1>
-						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">Showcase
-							and Discover</h1>
-						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">Fashion
-							Design</h1>
-					<a href="brand_Registration.html"  class="btn btn-large btn-inverse fontlato" href="#">Sign up as Brand</a>
-					<a href="boutique_Registration.html" class="btn btn-large btn-inverse" href="#">Sign up as Retailer</a>
-						
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<img src="img/NY_FASHION_KARAN_3.jpeg" alt="" />
-				<div class="container">
-					<div class="carousel-caption">
-						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">Featured Designers/Retailers</h1>
-						<a class="btn btn-large btn-inverse" href="#" >Browse gallery</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- <div class="es-nav">
-						<span class="es-nav-prev" style="display: none; ">Previous</span>
-						<span class="es-nav-next" style="display: none; ">Next</span>
-					</div> -->
-	 <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+	<div class="container">
+	<div class="hero-unit" style="height: 350px;">
+          <div class="center">
+            <img class="AngularJS-large" src="img/AngularJS-large.png">
+          </div>
+          <div class="center">
+            <h1>We Deliver Efficiencies And Cost-Savings To Our Members</h1>
+          </div>
+         <!--  <div class="center">
+            <a class="btn btn-large" href="https://github.com/angular/angular.js">
+              <i class="icon-github-sign"></i> View on GitHub
+            </a>
+            <span class="spacer"></span>
+
+            <a class="btn btn-large btn-primary" href="" ng-click="lightbox('stable')">
+              <i class="icon-download-alt icon-large"></i> Download
+              <span class="version"> (<span>1.0.2/1.1.0</span>) </span>
+            </a>
+
+          </div> -->
+         
+      </div>
 	</div>
 	<!-- /.carousel -->
 
@@ -421,7 +379,7 @@ body {
 			<a href="#">Back to top</a>
 		</p>
 		<p>
-		© 2012 Company, Inc.<a href="#">About</a> | <a href="#">Contact</a> | <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a>
+		© 2012 Company, Inc.<a href="#">About</a> | <a href="#">Contact</a> | <a href="#">Privacy</a> | <a href="#">Terms</a>
 		</p>
 		</footer>
 

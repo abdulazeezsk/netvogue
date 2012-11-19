@@ -1,5 +1,7 @@
 package org.netvogue.server.webmvc.domain;
 
+import org.netvogue.server.webmvc.common.Constants;
+
 public class Network {
 
 	String networkstatus;
@@ -9,7 +11,12 @@ public class Network {
 	String name;
 	String profileid;
 	String thumbnail_url;
-	public String getNetworkstatus() {
+	
+	public Network() {
+            this.thumbnail_url = Constants.PROFILE_DefaultPic;
+        }
+	
+       public String getNetworkstatus() {
 		return networkstatus;
 	}
 	public void setNetworkstatus(String networkstatus) {

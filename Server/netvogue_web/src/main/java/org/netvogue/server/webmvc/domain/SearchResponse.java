@@ -1,5 +1,7 @@
 package org.netvogue.server.webmvc.domain;
 
+import org.netvogue.server.webmvc.common.Constants;
+
 public class SearchResponse {
 	String username;
 	String name;
@@ -9,6 +11,10 @@ public class SearchResponse {
 	String city;
 	String usertype;
 	
+	public SearchResponse() {
+	  this.thumbpic = Constants.PROFILE_DefaultPic;
+	  this.smallpic = Constants.PROFILE_DefaultPic;
+	}
 	public String getUsername() {
 		return username;
 	}

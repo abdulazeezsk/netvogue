@@ -30,7 +30,7 @@ font-family: "Lato Neue", Lato, Arial, sans-serif;
 .leftpane_entity
 {
 	color: black;
-	font: normal 14px  Lato, Arial, sans-serif;;
+	font: normal 14px  Lato, Arial, sans-serif;
 	text-transform: uppercase;
 	width: 220x;
 }
@@ -187,10 +187,16 @@ font-size:14px;
 
 /* info para at the top of the page */
 .right_pane_info{
-	font: normal 10px  Lato, Arial, sans-serif;;
+	/* font: normal 10px  Lato, Arial, sans-serif;;
 	text-transform: uppercase;
-	padding: 5px 0px 5px 0px;
+	padding: 5px 0px 5px 0px; */
+	
+	color: black;
+	font: normal 10px  Lato, Arial, sans-serif;
+	text-transform: uppercase;
+	/* width: 220x; */
 }
+
 
 .rightpane_add_btn{
 	width: 80px;
@@ -2560,9 +2566,11 @@ opacity:0;
 	text-transform:capitalize;
 	margin-bottom:3px;
 }
-
+/*   invite pgae styles ================================================= */
 .progress_status{ width:100%; float:left;}
 .progress_status_bar{width:660px; height:56px; float:left; background-image:url(../img/prgres-status.gif); background-repeat:no-repeat; margin-left:10px;}
 .progress_status_bar1{width:597px; height:6px; background-color:#ececec; margin:23px 0px 0px 41px;}
 .progress_status_bar2{ height:6px; background-color:#fd9a00;}
 .progress_status_bar2 span{ position:relative; display:block; float:right; margin-top:-24px; color:#fd9a00;}
+
+

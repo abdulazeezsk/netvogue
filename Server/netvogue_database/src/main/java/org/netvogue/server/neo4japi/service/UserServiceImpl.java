@@ -9,6 +9,7 @@ import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Editorial;
+import org.netvogue.server.neo4japi.domain.EmailNotifications;
 import org.netvogue.server.neo4japi.domain.Gallery;
 import org.netvogue.server.neo4japi.domain.PrintCampaign;
 import org.netvogue.server.neo4japi.domain.User;
@@ -34,11 +35,28 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 	
+	public ResultStatus SaveEmailNotifications(EmailNotifications notification, StringBuffer error) {
+	  try {
+           //New Categories node will be created an relationship will also be added for this.
+           //Saving it through Template instead of boutiquerepo so that categories node can also be saved
+             neo4jTemplate.save(notification);
+             System.out.println("Updated Email notifications");
+             return ResultStatus.SUCCESS;
+	    } catch(Exception e) {
+             System.out.println("There was an error for" + " - " + e.toString());
+             error.append(e.toString());
+             return ResultStatus.FAILURE;
+	    }
+	}
+	
 	public void getBrandsCarriedAndCategories(User user) {
 		neo4jTemplate.fetch(user.getUsersCarried());
 		neo4jTemplate.fetch(user.getProductLinesCarried());
 	}
 	
+	public void getEmailNotifications(User user) {
+	        neo4jTemplate.fetch(user.getEmailnotifications());
+	}
 	public UserData getUserDataByUsername(String username) {
 		return userRepo.getUserByusername(username);
 	}

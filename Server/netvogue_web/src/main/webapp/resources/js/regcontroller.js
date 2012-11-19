@@ -154,7 +154,6 @@ function MyCtrlRegistration($scope, $http, $timeout, $location) {
             };
         $http(config).success(function(data) {
             if(data.status == true) {
-            	alert('Registration is Successful');
             	$('#registration').html("<span style='display:block;height:200px;padding-top:150px;'>You have been registered successfully.Our team will contact you shortly</span>");
             	$timeout(function() {
             		window.location.href = "Netvogue.html";

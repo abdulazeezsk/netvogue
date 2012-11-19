@@ -14,6 +14,7 @@ public class Brand extends User{
 	
 	public Brand(String email, String password) {
 		super(email, password);
+		accountEnabled = true;
 		setUserType(USER_TYPE.BRAND);
 		setRoles(Roles.ROLE_BRAND);
 	}

@@ -1360,7 +1360,7 @@ angular.module('netVogue.services', []).
     		var index=0;
     		for(index=0; index <  updates.length; index++) {
     			if(updates[index].statusid == id) {
-    				updatess[index].status = status;
+    				updates[index].status = status;
     				break;
     			}
     		}
@@ -1447,4 +1447,53 @@ angular.module('netVogue.services', []).
         	  return $http(config);
           }
       };
-  });
+}).service('myaccount', function ($http) {
+	    var accountinfo;
+
+	    return {
+	    	getaccountinfo: function() {
+	    		return accountinfo;
+	    	},
+	    	setaccountinfo: function(account) {
+	    		angular.copy(account, accountinfo);
+	    	},
+	    	getname: function() {
+	    		return accountinfo.name;
+	    	},
+	    	isbrand: function() {
+	    		return accountinfo.isbrand;
+	    	},
+	        getprofilepic: function() {
+	    		return accountinfo.profilepic;
+	    	},
+	    	getemail: function() {
+	    		return accountinfo.email;
+	    	},
+	    	getemailnotifications: function () {
+	        	if(angular.isUndefined(accountinfo.emailnotifications))
+	        		return {};
+	            return accountinfo.emailnotifications;
+	        },
+	        setemailnotifications: function (notifications) {
+	        	accountinfo.emailnotifications = notifications;
+	        },
+	        posttoserver: function(datatosend, url) {
+	        	var config = {
+	                      method: "POST",
+	                      data: datatosend,
+	                      url: "/account/" + url
+	            };
+	        	return $http(config);
+	        },
+	        accountinfo: function () {
+	              var config = {
+	                  method: "GET",
+	                  url: "/getaccountdetails/"
+	              };
+	              return $http(config);
+	        },
+	        setAccountLocally: function(temp) {
+	        	 accountinfo = angular.copy(temp);
+	        },
+	    };
+});

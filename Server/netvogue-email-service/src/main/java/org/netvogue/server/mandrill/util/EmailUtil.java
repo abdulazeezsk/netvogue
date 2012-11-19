@@ -16,9 +16,9 @@ import org.netvogue.server.mandrill.model.MandrillRecipient;
 import org.netvogue.server.mandrill.model.MandrillTemplatedMessageRequest;
 import org.netvogue.server.mandrill.model.MergeVar;
 import org.netvogue.server.mandrill.model.TemplateContent;
-import org.netvogue.server.mandrill.model.response.message.SendMessageResponse;
 import org.netvogue.server.mandrill.request.MandrillMessagesRequest;
 import org.netvogue.server.mandrill.request.MandrillRESTRequest;
+import org.netvogue.server.neo4japi.common.UnsubscribeNotificationsType;
 import org.netvogue.server.neo4japi.domain.User;
 
 public class EmailUtil {
@@ -44,21 +44,20 @@ public class EmailUtil {
       props.load(EmailUtil.class.getClassLoader().getResourceAsStream("mandrill.properties"));
     } catch (IOException io) {
       System.out.println("Exception in reading applicaton properties: " + io.getMessage());
-      config.setApiKey(props.getProperty("apiKey"));
-      config.setApiVersion("1.0");
-      config.setBaseURL("https://mandrillapp.com/api");
-      request.setConfig(config);
-      client = new DefaultHttpClient();
-      request.setHttpClient(client);
-      request.setObjectMapper(mapper);
-      messagesRequest.setRequest(request);
     }
+    props.list(System.out);
+    config.setApiKey(props.getProperty("apiKey"));
+    config.setApiVersion("1.0");
+    config.setBaseURL("https://mandrillapp.com/api");
+    request.setConfig(config);
+    client = new DefaultHttpClient();
+    request.setHttpClient(client);
+    request.setObjectMapper(mapper);
+    messagesRequest.setRequest(request);
 
   }
 
   public static boolean sendConfirmationEmail(User user) {
-    SendMessageResponse messageResponse = null;
-
     MandrillTemplatedMessageRequest request = new MandrillTemplatedMessageRequest();
     MandrillMessage message = new MandrillMessage();
     Map<String, String> headers = new HashMap<String, String>();
@@ -78,19 +77,55 @@ public class EmailUtil {
     request.setTemplate_name("Registration Template");
     List<MergeVar> globalMergeVars = new ArrayList<MergeVar>();
     globalMergeVars.add(new MergeVar("USERNAME", user.getUsername()));
+    System.out.println("New User Id is: " + user.getUserId());
     String registrationURL = "http://localhost:8080/confirmRegisteration/" + user.getUserId();
     globalMergeVars.add(new MergeVar("REGISTRATION_URL", registrationURL));
     message.setGlobal_merge_vars(globalMergeVars);
     try {
-      messageResponse = messagesRequest.sendTemplatedMessage(request);
+      messagesRequest.sendTemplatedMessage(request);
       return true;
     } catch (RequestFailedException e) {
-      // List<MessageResponse> messageResponses = messageResponse.getList();
-
-      e.printStackTrace();
-
+      System.out.println(e.getMessage());
       return false;
     }
+
+  }
+
+  public static boolean sendNetworkRequestEmail(User user, String senderName) {
+    MandrillTemplatedMessageRequest request = new MandrillTemplatedMessageRequest();
+    MandrillMessage message = new MandrillMessage();
+    Map<String, String> headers = new HashMap<String, String>();
+    message.setFrom_email(props.getProperty("email.from"));
+    message.setFrom_name("Veawe Support");
+    message.setHeaders(headers);
+    message.setSubject("Network Request Email");
+    MandrillRecipient[] recipients = new MandrillRecipient[] { new MandrillRecipient(user.getName(), user.getEmail()) };
+    message.setTo(recipients);
+    message.setTrack_clicks(true);
+    message.setTrack_opens(true);
+    String[] tags = new String[] { "tag1", "tag2", "tag3" };
+    message.setTags(tags);
+    request.setMessage(message);
+    List<TemplateContent> content = new ArrayList<TemplateContent>();
+    TemplateContent templateContent = new TemplateContent();
+    templateContent.setName("SENDER_NAME");
+    templateContent.setContent(senderName);
+    request.setTemplate_content(content);
+    request.setTemplate_name("Network Request Template");
+
+    List<MergeVar> globalMergeVars = new ArrayList<MergeVar>();
+    globalMergeVars.add(new MergeVar("USERNAME", user.getUsername()));
+    String unsubscribeLink = "http://localhost:8080/" + user.getUserId() + "/unsubscribe?nid=" + UnsubscribeNotificationsType.NETWORK_REQUEST.toString();
+    globalMergeVars.add(new MergeVar("UNSUBSCRIBE_URL", unsubscribeLink));
+    message.setGlobal_merge_vars(globalMergeVars);
+    try {
+      messagesRequest.sendTemplatedMessage(request);
+      return true;
+    } catch (RequestFailedException e) {
+      System.out.println(e.getMessage());
+      return false;
+    }
+
 
   }
 

@@ -14,6 +14,7 @@ public interface StatusUpdateRepository extends GraphRepository<StatusUpdate> {
 	
 	@Query("START n=node:search(username={0}) " +
 		   "MATCH n-[r:STATUS]-oldsu-[:NEXT*0..]-su " +
+		   "WHERE su.isDeleted? = false " +
 		   "return su SKIP {1} LIMIT {2}")
 	Iterable<StatusUpdate> getMyStatusUpdates(String username, int skip, int limit);
 	
@@ -21,6 +22,7 @@ public interface StatusUpdateRepository extends GraphRepository<StatusUpdate> {
 			"WHERE ALL(r in rels WHERE r.status? = 'CONFIRMED') " +
 			"WITH user " +
 			"MATCH user-[:STATUS]-oldsu-[:NEXT*0..]-update " +
+			"WHERE update.isDeleted? = false " +
 			"return update, user SKIP {1} LIMIT {2} ")
 	Iterable<StatusUpdateData> getAllStatusUpdates(String username, int skip, int limit);
 	
@@ -33,8 +35,8 @@ public interface StatusUpdateRepository extends GraphRepository<StatusUpdate> {
 	@Query("START n=node:statusid(statusid={0}) SET n.statusUpdate = {1}")
 	void editStatusUpdate(String id, String message);
 	
-	@Query("START n=node:statusid(statusid={0}) MATCH n<-[:STATUS]-u, n<-[:NEXT]-previous, n-[:NEXT]->next " +
-			"")
+	@Query("START n=node:StatusUpdate(statusid={0})" +
+		"SET n.isDeleted = true ")
 	void deleteStatusUpdate(String id);
 	
 	//Query to delete all status updates and its relationships

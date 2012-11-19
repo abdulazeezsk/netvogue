@@ -102,31 +102,31 @@
 									class="contatus_profile">{{contactinfo.email}}</span>
 							</div>
 						</li>
-						<li>
+						<li ui-if="null != contactinfo.mobile && '' != contactinfo.mobile">
 							<div>
 								<span class="contatus_profile_title">Mobile:</span> <span
 									class="contatus_profile">{{contactinfo.mobile}}</span>
 							</div>
 						</li>
-						<li>
+						<li ui-if="0 != contactinfo.landline1">
 							<div>
 								<span class="contatus_profile_title">Landline:</span>
 								<span class="contatus_profile">{{contactinfo.landline1}}</span>
 							</div>
 						</li>
-						<li>
+						<li ui-if="null != contactinfo.address && '' != contactinfo.address">
 							<div>
 								<span class="contatus_profile_title">Address:</span>
 								<span class="contatus_profile" >{{contactinfo.address}}</span>
 							</div>
 						</li>
-						<li>
+						<li ui-if="null != contactinfo.city && '' != contactinfo.city">
 							<div>
 								<span class="contatus_profile_title">City:</span>
 								<span class="contatus_profile">{{contactinfo.city}}</span>
 							</div>
 						</li>
-						<li>
+						<li ui-if="0 != contactinfo.zip">
 							<div>
 							<span class="contatus_profile_title">Zip:</span>
 								<span class="contatus_profile">{{contactinfo.zip}}</span>
@@ -214,8 +214,9 @@
         <textarea style="width: 500px;" rows="9" placeholder="Type a message"></textarea>
     </div>-->
 	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Close</a> <a
-			ng-click="createnetwork()" class="btn btn-primary"> Send request</a>
+		<a href="#" class="btn" data-dismiss="modal">Close</a> 
+		<button data-loading-text="Please wait..." 
+				ng-click="createnetwork($event)" class="btn btn-inverse"> Send request</button>
 	</div>
 </div>
 <!-- modal -->

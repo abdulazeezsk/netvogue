@@ -79,7 +79,8 @@ function MyCtrlProfile($scope, $routeParams, $timeout, srvprofile, currentvisite
     	$scope.showCreateNetwork = true;
     };
     
-    $scope.createnetwork = function() {
+    $scope.createnetwork = function(event) {
+    	angular.element(event.srcElement).button('loading');
     	mynetwork.createnetwork($scope.profileid).success(function(data) {
         	if(data.status == true) {
         		$scope.networkstatus = "PENDING";
@@ -340,10 +341,10 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 	};
 	
 	$scope.deleteupdate = function(id) {
-		$scope.deletingupdate = true;
+		//$scope.deletingupdate = true;
 		mytimeline.deleteupdate(id).success(function(data) {
 			if(data.status == true) {
-				mytimeline.editupdatelocally(id);
+				mytimeline.deleteupdatelocally(id);
 				$scope.newsfeeds 		= mytimeline.getupdates($scope.routeparams);
 			} else {
 				alert(data.error);
@@ -351,6 +352,7 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 			$scope.deletingupdate = false;
 		}).error(function(data) {
 			alert("error");
+			$scope.deletingupdate = false;
 		});
 	};
 
@@ -2093,7 +2095,7 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
     $scope.searchFilter =  new netvogue.searchFilter();
 }
 
-function MyCtrlAccountSettings($scope, $routeParams, $http, myprofile, srvprofile) {
+function MyCtrlAccountSettings($scope, $routeParams, $http, myaccount) {
 	
 	$scope.$parent.title 	= "Account Settings";
 	$scope.password			= "";
@@ -2101,8 +2103,8 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myprofile, srvprofil
 	
 	//We are getting latest information everytime from server. Not relying on any existing information
 	//Do i really need to get all profile information. isn't name and email id is enough?
-	srvprofile.profileinfo($routeParams).success(function(data) {
-    	srvprofile.setProfileLocally(data);
+	myaccount.accountinfo().success(function(data) {
+		myaccount.setAccountLocally(data);
     	$scope.updatedata();
     }).error(function(data) {
     	
@@ -2111,9 +2113,11 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myprofile, srvprofil
     $scope.updatedata = function() {
     	//Use entityname as name of the variable for boutique/brand name. As we have same name variable in Main controller scope as well.
     	//Main controllers name will get displayed until we get data from server
-    	$scope.entityname  		= myprofile.getname();
-    	$scope.profilepic		= myprofile.getprofilepic();
-    	$scope.email 			= myprofile.getemail();
+    	$scope.entityname  		= myaccount.getname();
+    	$scope.isbrand			= myaccount.isbrand();
+    	$scope.profilepic		= myaccount.getprofilepic();
+    	$scope.email 			= myaccount.getemail();
+    	$scope.emailnotifications = myaccount.getemailnotifications();
 	};
     
     //Set Name
@@ -2181,6 +2185,25 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myprofile, srvprofil
         	alert(data.error);
         	angular.element(event.srcElement).button('reset');
         	$scope.password = "";
+        });
+    };
+    
+    $scope.updateemailnotifications = function (event) {
+    	angular.element(event.srcElement).button('loading');
+    	myaccount.posttoserver($scope.emailnotifications, "emailnotifications").success(function(data) {
+        	if(data.status == true) {
+        		//myprofile.setemail(newemail);
+        		myaccount.setemailnotifications();
+        	} else {
+        		alert(data.error);
+        		$scope.emailnotifications = myaccount.getemailnotifications();
+        	}
+        	angular.element(event.srcElement).button('reset');
+        }).error(function(data) {
+        	alert(data.error);
+        	angular.element(event.srcElement).button('reset');
+        	//data should be replaced with old one in this case
+        	$scope.emailnotifications = myaccount.getemailnotifications();
         });
     };
 }

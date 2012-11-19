@@ -130,11 +130,10 @@ public class BoutiqueNewController {
   }
 
   @RequestMapping(value = "/confirmRegisteration/{userId}", method = RequestMethod.GET)
-  public @ResponseBody
-  JsonResponse confirmRegisteration(@PathVariable
+  public String confirmRegisteration(@PathVariable
   String userId) {
     User user = null;
-    JsonResponse status = new JsonResponse();
+    String redirectPage = "redirect:/Netvogue.html";
     StringBuffer error = null;
     System.out.println("userId entered -------------- " + userId);
     if (null != userId) {
@@ -142,18 +141,16 @@ public class BoutiqueNewController {
       if (null != user) {
         user.setAccountEnabled(true);
         error = new StringBuffer();
-        if (ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
-          status.setStatus(true);
-        } else {
-          status.setError(error.toString());
+        if (ResultStatus.SUCCESS != userService.SaveUser(user, error)) {
+          redirectPage = "Error";
         }
       } else {
-        status.setError("User object not found");
+        redirectPage = "Error";
       }
     } else {
-      status.setError("User Id is null");
+      redirectPage = "Error";
     }
-    return status;
+    return redirectPage;
   }
 
 }
