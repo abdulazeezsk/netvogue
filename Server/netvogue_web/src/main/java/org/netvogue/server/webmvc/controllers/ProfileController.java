@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.netvogue.server.webmvc.common.Constants;
 import org.netvogue.server.webmvc.converters.ImageURLsConverter;
 import org.netvogue.server.webmvc.domain.BrandsCarried;
-import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.PhotoWeb;
 import org.netvogue.server.webmvc.domain.ProductLine;
@@ -126,8 +126,11 @@ public class ProfileController {
 				BrandsCarried brand = new BrandsCarried();
 				brand.setBrandname(product.getName());
 				brand.setBrandusername(product.getUsername());
-				if(null != product.getProfilePicLink()) {
-					String thumburl = uploadManager.getQueryString(product.getProfilePicLink(), ImageType.PROFILE_PIC, 
+				String profilepicLink = product.getProfilePicLink();
+				if(null == profilepicLink || profilepicLink.isEmpty()) {
+					brand.setProfilepic(Constants.PROFILE_DefaultPic);
+				} else {
+					String thumburl = uploadManager.getQueryString(profilepicLink, ImageType.PROFILE_PIC, 
 							Size.PThumb, product.getUsername());
 					brand.setProfilepic(thumburl);
 				}
