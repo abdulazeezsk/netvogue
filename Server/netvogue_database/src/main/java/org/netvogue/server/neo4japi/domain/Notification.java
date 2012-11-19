@@ -35,14 +35,16 @@ public class Notification {
 		
 	}
 	
-	public Notification(User otheruser) {
-		otherUser = otheruser;
+	public Notification(User otheruser, NotificationType type) {
+		this.otherUser = otheruser;
+		this.notificationType = type;
 		this.status = NetworkStatus.PENDING;
 		this.notificationid = UUID.randomUUID().toString();
 	}
 	
-	public Notification(User otheruser, NetworkStatus status) {
-		otherUser = otheruser;
+	public Notification(User otheruser, NotificationType type, NetworkStatus status) {
+		this.otherUser = otheruser;
+		this.notificationType = type;
 		this.status = status;
 		this.notificationid = UUID.randomUUID().toString();
 	}

@@ -156,6 +156,10 @@ public class User {
    */
 
 
+  public void setTemporaryPassword(String password) {
+	  this.password = encode(password);
+  }
+
   public void updatePassword(String old, String newPass1, String newPass2) {
     if (!password.equals(encode(old))) {
       throw new IllegalArgumentException("Existing Password invalid");

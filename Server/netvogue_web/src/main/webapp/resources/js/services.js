@@ -1111,6 +1111,13 @@ angular.module('netVogue.services', []).
     	          };
             return $http(config);
     	},
+    	markallread: function() {
+    		var config = {
+    				method: "POST",
+    	            url: "notifications/markallread"
+    	          };
+            return $http(config);
+    	},
     	markreadlocally: function(id) {
     		var index=0;
     		for(index=0; index <  notifications.length; index++) {
