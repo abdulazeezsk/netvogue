@@ -1476,13 +1476,12 @@ angular.module('netVogue.services', []).
 	        },
 	        setemailnotifications: function (notifications) {
 	        	accountinfo.emailnotifications = notifications;
-
 	        },
-	        posttoserver: function(profiledata, url) {
+	        posttoserver: function(datatosend, url) {
 	        	var config = {
 	                      method: "POST",
-	                      data: profiledata,
-	                      url: "profile/" + url
+	                      data: datatosend,
+	                      url: "/account/" + url
 	            };
 	        	return $http(config);
 	        },

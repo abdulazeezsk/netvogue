@@ -2187,26 +2187,22 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myaccount) {
         });
     };
     
-    $scope.updateemailnotifications = function (newemail, event) {
-    	if(newemail == $scope.email)
-    		return;
+    $scope.updateemailnotifications = function (event) {
     	angular.element(event.srcElement).button('loading');
-    	var datatosend = {
-    						"data" 		: newemail,
-    						"password"	: $scope.password
-    					 };
-    	myprofile.posttoserver(datatosend, "email").success(function(data) {
+    	myaccount.posttoserver($scope.emailnotifications, "emailnotifications").success(function(data) {
         	if(data.status == true) {
-        		myprofile.setemail(newemail);
+        		//myprofile.setemail(newemail);
+        		myaccount.setemailnotifications();
         	} else {
         		alert(data.error);
+        		$scope.emailnotifications = myaccount.getemailnotifications();
         	}
         	angular.element(event.srcElement).button('reset');
-        	$scope.password = "";
         }).error(function(data) {
         	alert(data.error);
         	angular.element(event.srcElement).button('reset');
-        	$scope.password = "";
+        	//data should be replaced with old one in this case
+        	$scope.emailnotifications = myaccount.getemailnotifications();
         });
     };
 }

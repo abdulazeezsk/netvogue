@@ -7,6 +7,7 @@ import org.netvogue.server.neo4japi.common.NetworkStatus;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.Editorial;
+import org.netvogue.server.neo4japi.domain.EmailNotifications;
 import org.netvogue.server.neo4japi.domain.Gallery;
 import org.netvogue.server.neo4japi.domain.PrintCampaign;
 import org.netvogue.server.neo4japi.domain.User;
@@ -20,6 +21,8 @@ public interface UserService {
 	public void getBrandsCarriedAndCategories(User user);
 	public void getEmailNotifications(User user);
 
+	//Email notifications
+	public ResultStatus SaveEmailNotifications(EmailNotifications notification, StringBuffer error);
 	//Search related
 	public Iterable<User> doBasicSearch(String query);
 	public Iterable<User> doAdvancedSearch(USER_TYPE userType, String name, String location, 

@@ -7,10 +7,12 @@ import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.converters.ImageURLsConverter;
 import org.netvogue.server.webmvc.domain.AccountInfo;
 import org.netvogue.server.webmvc.domain.EmailNotifications;
+import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,41 +53,77 @@ public class AccountSettingsController {
 	  return response;
   }
   
+  @RequestMapping(value = "/account/emailnotifications", method = RequestMethod.POST)
+  public @ResponseBody JsonResponse updateEmailNotifications(@RequestBody EmailNotifications notifications) throws Exception {
+	  System.out.println("Update email notifications: ");
+		JsonResponse response = new JsonResponse();
+		User user = userDetailsService.getUserFromSession();
+		boolean isUserChanged = false;
+		
+		org.netvogue.server.neo4japi.domain.EmailNotifications emailNotifications = user.getEmailnotifications();
+	    if(null == emailNotifications) {
+	      emailNotifications = new org.netvogue.server.neo4japi.domain.EmailNotifications();
+	      user.setEmailnotifications(emailNotifications);
+	      isUserChanged = true;
+	    }
+	    
+	    emailNotifications.setNetworkRequestFlag(notifications.isNetworkrequest());
+	    
+	    StringBuffer error = new StringBuffer();
+	    if(isUserChanged) {
+	    	if (ResultStatus.SUCCESS == userService.SaveUser(user, error))
+	    		response.setStatus(true);
+	    } else {
+		    if (ResultStatus.SUCCESS == userService.SaveEmailNotifications(emailNotifications, error))
+		    	response.setStatus(true);
+		    } 
+	    response.setError(error.toString());
+		return response;
+  }
+  
   @RequestMapping(value = "/{userId}/unsubscribe", method = RequestMethod.GET)
   public String unsubscribeNotifications(@PathVariable
   String userId, @RequestParam
   String nid) throws Exception {
-    String redirectPage = null;
-    StringBuffer error = null;
-    System.out.println("User Id in AccountSettingsController: " + userId + " nid: " + nid);
-
-    User user = userDetailsService.getUserFromSession();
-    if (null != user && userId.equals(user.getUserId())) {
-      redirectPage = "Account_Settings";
-    } else {
-      user = userService.getUserByUserId(userId);
-      // This page needs to be designed - Pavan
-      if (null != user) {
-        redirectPage = "Notification";
-      } else {
-        return "Error";
-      }
-    }
+	  String redirectPage = null;
+	  StringBuffer error = null;
+	  boolean isUserChanged = false;
     
-    userService.getEmailNotifications(user);
-    org.netvogue.server.neo4japi.domain.EmailNotifications emailNotifications = user.getEmailnotifications();
-    if(null == emailNotifications) {
-      emailNotifications = new org.netvogue.server.neo4japi.domain.EmailNotifications();
-    }
+	  System.out.println("User Id in AccountSettingsController: " + userId + " nid: " + nid);
+
+	  User user = userDetailsService.getUserFromSession();
+	  if (null != user && userId.equals(user.getUserId())) {
+		  redirectPage = "Account_Settings";
+	  } else {
+		  user = userService.getUserByUserId(userId);
+		  // This page needs to be designed - Pavan
+		  if (null != user) {
+			  redirectPage = "Notification";
+		  } else {
+			  return "Error";
+		  }
+	  }
+    
+	  userService.getEmailNotifications(user);
+	  org.netvogue.server.neo4japi.domain.EmailNotifications emailNotifications = user.getEmailnotifications();
+	  if(null == emailNotifications) {
+		  emailNotifications = new org.netvogue.server.neo4japi.domain.EmailNotifications();
+		  user.setEmailnotifications(emailNotifications);
+		  isUserChanged = true;
+	  }
     //this code has to be changed to use pid request parameter.
     //left it this way as there is only letter type which can be unsubscribed.
-    emailNotifications.setNetworkRequestFlag(false);
-    user.setEmailnotifications(emailNotifications);
-    error = new StringBuffer();
-    if (ResultStatus.FAILURE == userService.SaveUser(user, error)) {
-      redirectPage = "Error";
-    }
-    return redirectPage;
+	  emailNotifications.setNetworkRequestFlag(false);
+	  error = new StringBuffer();
+
+	  if(isUserChanged) {
+		  if (ResultStatus.FAILURE == userService.SaveUser(user, error))
+			  redirectPage = "Error";
+	  } else {
+		  if (ResultStatus.FAILURE == userService.SaveEmailNotifications(emailNotifications, error))
+			  redirectPage = "Error";
+	  } 
+	  return redirectPage;
   }
 
 }
