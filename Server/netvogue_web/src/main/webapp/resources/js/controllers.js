@@ -2094,7 +2094,7 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
     $scope.searchFilter =  new netvogue.searchFilter();
 }
 
-function MyCtrlAccountSettings($scope, $routeParams, $http, myprofile, srvprofile) {
+function MyCtrlAccountSettings($scope, $routeParams, $http, myaccount) {
 	
 	$scope.$parent.title 	= "Account Settings";
 	$scope.password			= "";
@@ -2102,8 +2102,8 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myprofile, srvprofil
 	
 	//We are getting latest information everytime from server. Not relying on any existing information
 	//Do i really need to get all profile information. isn't name and email id is enough?
-	srvprofile.profileinfo($routeParams).success(function(data) {
-    	srvprofile.setProfileLocally(data);
+	myaccount.accountinfo().success(function(data) {
+		myaccount.setAccountLocally(data);
     	$scope.updatedata();
     }).error(function(data) {
     	
@@ -2112,9 +2112,11 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myprofile, srvprofil
     $scope.updatedata = function() {
     	//Use entityname as name of the variable for boutique/brand name. As we have same name variable in Main controller scope as well.
     	//Main controllers name will get displayed until we get data from server
-    	$scope.entityname  		= myprofile.getname();
-    	$scope.profilepic		= myprofile.getprofilepic();
-    	$scope.email 			= myprofile.getemail();
+    	$scope.entityname  		= myaccount.getname();
+    	$scope.isbrand			= myaccount.isbrand();
+    	$scope.profilepic		= myaccount.getprofilepic();
+    	$scope.email 			= myaccount.getemail();
+    	$scope.emailnotifications = myaccount.getemailnotifications();
 	};
     
     //Set Name
@@ -2163,6 +2165,29 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myprofile, srvprofil
     };
     
     $scope.updateemail = function (newemail, event) {
+    	if(newemail == $scope.email)
+    		return;
+    	angular.element(event.srcElement).button('loading');
+    	var datatosend = {
+    						"data" 		: newemail,
+    						"password"	: $scope.password
+    					 };
+    	myprofile.posttoserver(datatosend, "email").success(function(data) {
+        	if(data.status == true) {
+        		myprofile.setemail(newemail);
+        	} else {
+        		alert(data.error);
+        	}
+        	angular.element(event.srcElement).button('reset');
+        	$scope.password = "";
+        }).error(function(data) {
+        	alert(data.error);
+        	angular.element(event.srcElement).button('reset');
+        	$scope.password = "";
+        });
+    };
+    
+    $scope.updateemailnotifications = function (newemail, event) {
     	if(newemail == $scope.email)
     		return;
     	angular.element(event.srcElement).button('loading');

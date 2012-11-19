@@ -39,6 +39,9 @@ public class UserServiceImpl implements UserService{
 		neo4jTemplate.fetch(user.getProductLinesCarried());
 	}
 	
+	public void getEmailNotifications(User user) {
+	        neo4jTemplate.fetch(user.getEmailnotifications());
+	}
 	public UserData getUserDataByUsername(String username) {
 		return userRepo.getUserByusername(username);
 	}

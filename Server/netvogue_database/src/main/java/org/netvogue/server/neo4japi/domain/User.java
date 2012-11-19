@@ -360,6 +360,7 @@ public class User {
 
   public void setAccountEnabled(boolean accountEnabled) {
     this.accountEnabled = accountEnabled;
+    this.accessGrantedDate = new Date();
   }
 
   public boolean getAccountExpired() {

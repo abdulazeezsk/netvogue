@@ -18,6 +18,7 @@ public interface UserService {
 	public User getUserByUserId(String userId);
 	public UserData getUserDataByUsername(String username);
 	public void getBrandsCarriedAndCategories(User user);
+	public void getEmailNotifications(User user);
 
 	//Search related
 	public Iterable<User> doBasicSearch(String query);
