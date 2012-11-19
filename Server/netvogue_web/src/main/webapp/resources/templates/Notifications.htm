@@ -38,7 +38,7 @@
                                 <p>
                                     <span><a ng-href="#/{{notification.profileid}}/profile">{{notification.name}}</a>
                                  </span></p>
-                            </span>
+                            </span> {{notification.text}}
                             <span class="btn-group pull-right" ng-show="notification.networkstatus == 'PENDING'">
                                 <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                     Action <span class="caret"></span>
