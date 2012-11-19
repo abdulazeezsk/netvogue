@@ -3,6 +3,7 @@ package org.netvogue.server.webmvc.converters;
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
+import org.netvogue.server.neo4japi.common.NotificationType;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.webmvc.domain.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,12 @@ public class NotificationConverter implements Converter<org.netvogue.server.neo4
 			response.setTop_url(topurl);
 		}
 		response.setNotificationid(source.getNotificationid());
+		
+		NotificationType type = source.getNotificationType();
+		if(null != type)
+			response.setType(type.toString());
+		else
+			response.setType(NotificationType.NETWORK_REQUEST.toString());
 		return response;
 	}
 }

@@ -2,6 +2,7 @@ package org.netvogue.server.neo4japi.common;
 
 public enum NotificationType {
 	NETWORK_REQUEST,
+	NETWORK_CONFIRMATION,
 	//ADD_COLLECTION_REQUEST_TO_BOUTIQUE,
 	ADD_COLLECTION_REQUEST_TO_BRAND,
 	ORDER_ADD_REQUEST,

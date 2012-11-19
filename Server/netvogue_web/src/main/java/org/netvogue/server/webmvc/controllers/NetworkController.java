@@ -10,6 +10,7 @@ import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
 import org.netvogue.server.mandrill.util.EmailUtil;
 import org.netvogue.server.neo4japi.common.NetworkStatus;
+import org.netvogue.server.neo4japi.common.NotificationType;
 import org.netvogue.server.neo4japi.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.EmailNotifications;
@@ -148,7 +149,7 @@ public class NetworkController {
 
 		User user = userDetailsService.getUserFromSession();
 		org.netvogue.server.neo4japi.domain.Notification newNotification =
-				new org.netvogue.server.neo4japi.domain.Notification(user);
+				new org.netvogue.server.neo4japi.domain.Notification(user, NotificationType.NETWORK_REQUEST);
 		User otherUser = networkService.CreateNetwork(user, profileid, newNotification, error);
 		if(null != otherUser) {
 			//Add notification to pubsub node here //Azeez
@@ -188,7 +189,8 @@ public class NetworkController {
 
 		User user = userDetailsService.getUserFromSession();
 		org.netvogue.server.neo4japi.domain.Notification newNotification =
-				new org.netvogue.server.neo4japi.domain.Notification(user, NetworkStatus.CONFIRMED);;
+				new org.netvogue.server.neo4japi.domain.Notification(user, 
+						NotificationType.NETWORK_CONFIRMATION, NetworkStatus.CONFIRMED);;
 		if(ResultStatus.SUCCESS == networkService.ConfirmNetwork(user, profileid, newNotification, error)) {
 			//Add notification to pubsub node here //Azeez
 			//Make this call asynchronous

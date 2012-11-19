@@ -11,6 +11,7 @@ public class Notification {
 	String top_url;
 	String thumbnail_url;
 	boolean isread;
+	String type;
 	
 	public Notification() {
 	  this.thumbnail_url = Constants.PROFILE_DefaultPic;
@@ -63,5 +64,11 @@ public class Notification {
 	}
 	public void setNotificationid(String notificationid) {
 		this.notificationid = notificationid;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 }
