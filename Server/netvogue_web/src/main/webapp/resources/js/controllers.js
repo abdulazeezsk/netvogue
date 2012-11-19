@@ -2053,9 +2053,6 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
 	};
     //Adding and removing into brands carried control
     $scope.brandsenteredchanged = function(brandsentered){
-		if("" == brandsentered){
-			return
-		}
 		var datatosend = {
 				"username" : brandsentered
 		};
@@ -2092,6 +2089,7 @@ function MyCtrlProfileSettings($scope, $routeParams, $http, myprofile, srvprofil
 		
 		$scope.updatebrandscarried(username, "removebrandscarried", key);
     };
+    $scope.brandsenteredchanged("");
     $scope.searchFilter =  new netvogue.searchFilter();
 }
 

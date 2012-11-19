@@ -10,7 +10,7 @@ import org.springframework.data.neo4j.repository.*;
 import org.springframework.data.repository.query.Param;
 
 public interface BoutiqueRepository extends GraphRepository<Boutique>{
-	@Query( "START n=node:search({0}) WHERE n.userType? = {1} RETURN n")
+	@Query( "START n=node:search({0}) WHERE n.userType! = {1} RETURN n")
 	Iterable<Boutique> findBynameSearch(String query, USER_TYPE userType);
 	
 	@Query("START me=node:search({username}) /" +

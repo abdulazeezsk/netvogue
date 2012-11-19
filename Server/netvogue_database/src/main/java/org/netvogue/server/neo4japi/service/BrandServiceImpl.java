@@ -38,7 +38,7 @@ public class BrandServiceImpl implements BrandService{
 	}
 	
 	public Iterable<Brand> GetBrand(String name) {
-		String query = "name:*" + name + "*";
+		String query = Utils.SerializeQueryParamWithSpaces("name", name);
 		return brandRepo.findBynameSearch(query, USER_TYPE.BRAND);
 	}
 }
