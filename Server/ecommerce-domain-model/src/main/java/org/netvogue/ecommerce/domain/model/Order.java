@@ -11,9 +11,9 @@ public class Order {
   /**
    * Suman: This is netvogue order id. This id uniquely identifies order in netvogue ecommerce db.
    */
-  private String orderId;
+  private String id;
 
-  private Set<OrderLineItem> originalOrderedlLineItems = new HashSet<OrderLineItem>();
+  private Set<OrderLineItem> originalLineItems = new HashSet<OrderLineItem>();
 
   private Set<OrderLineItem> finalizedLineItemsAfterReview = new HashSet<OrderLineItem>();
 
@@ -21,7 +21,7 @@ public class Order {
 
   private long orderTotal;
 
-  private Date orderedCreatedDate;
+  private Date ordereCreatedDate;
 
   private Date orderCompletionDate;
 
@@ -35,33 +35,31 @@ public class Order {
 
   private Address brandAddress;
 
-  private String brandName;
+  private User brand;
 
-  private String orderedBy;
+  private User createdBy;
 
   private List<OrderReview> reviews = new ArrayList<OrderReview>();
 
-  public String getOrderId() {
-    return orderId;
+  public String getId() {
+    return id;
   }
 
-  public void setOrderId(final String orderId) {
-    this.orderId = orderId;
+  public void setId(final String id) {
+    this.id = id;
   }
-
 
   public long getOrderTotal() {
     return orderTotal;
   }
 
 
-
-  public Set<OrderLineItem> getOriginalOrderedlLineItems() {
-    return originalOrderedlLineItems;
+  public Set<OrderLineItem> getOriginalLineItems() {
+    return originalLineItems;
   }
 
-  public void setOriginalOrderedlLineItems(final Set<OrderLineItem> originalOrderedlLineItems) {
-    this.originalOrderedlLineItems = originalOrderedlLineItems;
+  public void setOriginallLineItems(final Set<OrderLineItem> originalLineItems) {
+    this.originalLineItems = originalLineItems;
   }
 
   public Set<OrderLineItem> getFinalizedLineItemsAfterReview() {
@@ -72,12 +70,12 @@ public class Order {
     this.finalizedLineItemsAfterReview = finalizedLineItemsAfterReview;
   }
 
-  public Date getOrderedCreatedDate() {
-    return orderedCreatedDate;
+  public Date getOrdereCreatedDate() {
+    return ordereCreatedDate;
   }
 
-  public void setOrderedCreatedDate(final Date orderedCreatedDate) {
-    this.orderedCreatedDate = orderedCreatedDate;
+  public void setOrdereCreatedDate(final Date ordereCreatedDate) {
+    this.ordereCreatedDate = ordereCreatedDate;
   }
 
   public Date getOrderCompletionDate() {
@@ -124,16 +122,16 @@ public class Order {
     this.shippingAddress = shippingAddress;
   }
 
-  public String getOrderedBy() {
-    return orderedBy;
-  }
-
   public boolean isReviewed() {
     return !reviews.isEmpty();
   }
 
-  public void setOrderedBy(final String orderedBy) {
-    this.orderedBy = orderedBy;
+  public User getCreatedBy() {
+    return createdBy;
+  }
+
+  public void setCreatedBy(final User createdBy) {
+    this.createdBy = createdBy;
   }
 
   public Address getBillingAddress() {
@@ -152,12 +150,16 @@ public class Order {
     this.brandAddress = brandAddress;
   }
 
-  public String getBrandName() {
-    return brandName;
+  public User getBrand() {
+    return brand;
   }
 
-  public void setBrandName(final String brandName) {
-    this.brandName = brandName;
+  public void setBrand(final User brand) {
+    this.brand = brand;
+  }
+
+  public void setOriginalLineItems(final Set<OrderLineItem> originalLineItems) {
+    this.originalLineItems = originalLineItems;
   }
 
   public List<OrderReview> getReviews() {
