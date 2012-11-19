@@ -36,6 +36,8 @@ public class Style {
 
   private Linesheet linesheet;
 
+  private Privacy privacy;
+
   public Style(final String styleName, final String styleNo, final long price) {
     this.styleName = styleName;
     this.styleNo = styleNo;
@@ -180,6 +182,14 @@ public class Style {
 
   public void setId(final String id) {
     this.id = id;
+  }
+
+  public Privacy getPrivacy() {
+    return privacy;
+  }
+
+  public void setPrivacy(final Privacy privacy) {
+    this.privacy = privacy;
   }
 
 }

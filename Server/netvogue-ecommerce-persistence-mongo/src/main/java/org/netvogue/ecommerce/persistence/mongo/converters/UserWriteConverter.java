@@ -33,6 +33,7 @@ public class UserWriteConverter implements Converter<User, DBObject> {
     dbOject.put("telephoneNo1", user.getTelephoneNo1());
     dbOject.put("telephoneNo2", user.getTelephoneNo2());
     dbOject.put("active", user.isActive());
+    dbOject.put("subscriptionType", user.getSubscirptionType().toString());
     dbOject.put("_class", User.class.getName());
 
     return dbOject;

@@ -1,7 +1,5 @@
 package org.netvogue.ecommerce.domain.model;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class OrderLineItem {
 
@@ -16,20 +14,6 @@ public class OrderLineItem {
   private long stylePrice;
 
   private long lineItemPrice;
-
-  private List<OrderLineItemReview> reviewes = new ArrayList<OrderLineItemReview>();
-
-  public void addReview(final OrderLineItemReview review) {
-    reviewes.add(review);
-  }
-
-  public List<OrderLineItemReview> getReviewes() {
-    return reviewes;
-  }
-
-  public void setReviewes(final List<OrderLineItemReview> reviewes) {
-    this.reviewes = reviewes;
-  }
 
   public Style getStyle() {
     return style;

@@ -18,6 +18,10 @@ public class Linesheet {
 
   private int year;
 
+  private String profileLink;
+
+  private Privacy privacy;
+
   public String getId() {
     return id;
   }
@@ -77,5 +81,22 @@ public class Linesheet {
   public void setYear(final int year) {
     this.year = year;
   }
+
+  public Privacy getPrivacy() {
+    return privacy;
+  }
+
+  public void setPrivacy(final Privacy privacy) {
+    this.privacy = privacy;
+  }
+
+  public String getProfileLink() {
+    return profileLink;
+  }
+
+  public void setProfileLink(final String profileLink) {
+    this.profileLink = profileLink;
+  }
+
 
 }

@@ -18,6 +18,10 @@ public class Lookbook {
 
   private int year;
 
+  private String profileLink;
+
+  private Privacy privacy;
+
   public String getId() {
     return id;
   }
@@ -78,4 +82,20 @@ public class Lookbook {
     this.year = year;
   }
 
+  public String getProfileLink() {
+    return profileLink;
+  }
+
+  public void setProfileLink(final String profileLink) {
+    this.profileLink = profileLink;
+  }
+
+
+  public Privacy getPrivacy() {
+    return privacy;
+  }
+
+  public void setPrivacy(final Privacy privacy) {
+    this.privacy = privacy;
+  }
 }

@@ -1,7 +1,9 @@
 package org.netvogue.ecommerce.domain.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Order {
@@ -11,9 +13,9 @@ public class Order {
    */
   private String orderId;
 
-  private Set<OrderLineItem> originalLineItems = new HashSet<OrderLineItem>();
+  private Set<OrderLineItem> originalOrderedlLineItems = new HashSet<OrderLineItem>();
 
-  private Set<OrderLineItem> finalLineItems = new HashSet<OrderLineItem>();
+  private Set<OrderLineItem> finalizedLineItemsAfterReview = new HashSet<OrderLineItem>();
 
   private OrderTracking orderTracking;
 
@@ -31,9 +33,13 @@ public class Order {
 
   private Address billingAddress;
 
+  private Address brandAddress;
+
+  private String brandName;
+
   private String orderedBy;
 
-  private boolean reviewed = false;
+  private List<OrderReview> reviews = new ArrayList<OrderReview>();
 
   public String getOrderId() {
     return orderId;
@@ -43,32 +49,27 @@ public class Order {
     this.orderId = orderId;
   }
 
-  public void addLineItem(final OrderLineItem item) {
-    originalLineItems.add(item);
-  }
-
-  public void deleteLineItem(final OrderLineItem item) {
-    originalLineItems.remove(item);
-  }
-
-  public Set<OrderLineItem> getLinteItems() {
-    return originalLineItems;
-  }
-
-  public void setLinteItems(final Set<OrderLineItem> lineItems) {
-    originalLineItems = lineItems;
-  }
 
   public long getOrderTotal() {
     return orderTotal;
   }
 
-  public Set<OrderLineItem> getLineItems() {
-    return originalLineItems;
+
+
+  public Set<OrderLineItem> getOriginalOrderedlLineItems() {
+    return originalOrderedlLineItems;
   }
 
-  public void setLineItems(final Set<OrderLineItem> lineItems) {
-    originalLineItems = lineItems;
+  public void setOriginalOrderedlLineItems(final Set<OrderLineItem> originalOrderedlLineItems) {
+    this.originalOrderedlLineItems = originalOrderedlLineItems;
+  }
+
+  public Set<OrderLineItem> getFinalizedLineItemsAfterReview() {
+    return finalizedLineItemsAfterReview;
+  }
+
+  public void setFinalizedLineItemsAfterReview(final Set<OrderLineItem> finalizedLineItemsAfterReview) {
+    this.finalizedLineItemsAfterReview = finalizedLineItemsAfterReview;
   }
 
   public Date getOrderedCreatedDate() {
@@ -128,31 +129,11 @@ public class Order {
   }
 
   public boolean isReviewed() {
-    return reviewed;
-  }
-
-  public void setReviewed(final boolean reviewed) {
-    this.reviewed = reviewed;
+    return !reviews.isEmpty();
   }
 
   public void setOrderedBy(final String orderedBy) {
     this.orderedBy = orderedBy;
-  }
-
-  public Set<OrderLineItem> getOriginalLineItems() {
-    return originalLineItems;
-  }
-
-  public void setOriginalLineItems(final Set<OrderLineItem> originalLineItems) {
-    this.originalLineItems = originalLineItems;
-  }
-
-  public Set<OrderLineItem> getFinalLineItems() {
-    return finalLineItems;
-  }
-
-  public void setFinalLineItems(final Set<OrderLineItem> finalLineItems) {
-    this.finalLineItems = finalLineItems;
   }
 
   public Address getBillingAddress() {
@@ -161,6 +142,30 @@ public class Order {
 
   public void setBillingAddress(final Address billingAddress) {
     this.billingAddress = billingAddress;
+  }
+
+  public Address getBrandAddress() {
+    return brandAddress;
+  }
+
+  public void setBrandAddress(final Address brandAddress) {
+    this.brandAddress = brandAddress;
+  }
+
+  public String getBrandName() {
+    return brandName;
+  }
+
+  public void setBrandName(final String brandName) {
+    this.brandName = brandName;
+  }
+
+  public List<OrderReview> getReviews() {
+    return reviews;
+  }
+
+  public void setReviews(final List<OrderReview> reviews) {
+    this.reviews = reviews;
   }
 
 }

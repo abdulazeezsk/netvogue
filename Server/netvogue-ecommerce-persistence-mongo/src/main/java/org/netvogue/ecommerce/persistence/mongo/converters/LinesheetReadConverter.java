@@ -2,6 +2,7 @@ package org.netvogue.ecommerce.persistence.mongo.converters;
 
 import org.netvogue.ecommerce.domain.model.Category;
 import org.netvogue.ecommerce.domain.model.Linesheet;
+import org.netvogue.ecommerce.domain.model.Privacy;
 import org.netvogue.ecommerce.domain.model.ProductLine;
 import org.netvogue.ecommerce.domain.model.Season;
 import org.netvogue.ecommerce.persistence.CategoryDao;
@@ -22,6 +23,8 @@ public class LinesheetReadConverter implements Converter<DBObject, Linesheet> {
     Linesheet linesheet = new Linesheet();
     linesheet.setId(source.get("_id").toString());
     linesheet.setCreatedDate((Date) source.get("createdDate"));
+    linesheet.setProfileLink((String)source.get("profileLink"));
+    linesheet.setPrivacy(Privacy.valueOf((String)source.get("privacy")));
     linesheet.setCreatedBy(userDao.getActiveUser((String) source.get("createdBy")));
 
     Category category = categoryDao.getCategory((String) source.get("categoryId"));
