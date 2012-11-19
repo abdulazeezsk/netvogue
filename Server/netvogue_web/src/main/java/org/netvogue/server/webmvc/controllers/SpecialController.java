@@ -11,6 +11,7 @@ import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.ReferenceData;
 import org.netvogue.server.neo4japi.service.UserService;
+import org.netvogue.server.webmvc.common.Constants;
 import org.netvogue.server.webmvc.domain.Reference;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,9 @@ public class SpecialController {
 			newReference.setName(networkUser.getName());
 			thumbpic = networkUser.getProfilePicLink();
 			
-			if(null != thumbpic) {
+			if(null == thumbpic || thumbpic.isEmpty()) {
+				thumbpic = Constants.PROFILE_DefaultPic;
+			} else {
 				thumbpic = uploadManager.getQueryString(thumbpic, ImageType.PROFILE_PIC, Size.PThumb, networkUser.getUsername());
 			}
 			newReference.setThumbnail_url(thumbpic);
