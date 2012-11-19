@@ -9,6 +9,30 @@ public class Utils {
 		return queryParam;
 	}
 	
+	public static String SerializeQueryParamWithSpaces(String columnname, String queryParam) {
+		String response = "";
+		String[] allvalues = queryParam.split(" ");
+		for(int i=0; i < allvalues.length; i++) {
+			response += (columnname + ":*" + allvalues[i]) + "*";
+			if((i + 1) < allvalues.length) {
+				response += " AND ";
+			}
+		}
+		return response;
+	}
+	
+	public static String SerializeQueryParamWithSpacesNoPattern(String columnname, String queryParam) {
+		String response = "";
+		String[] allvalues = queryParam.split(" ");
+		for(int i=0; i < allvalues.length; i++) {
+			response += (columnname + ":" + allvalues[i]);
+			if((i + 1) < allvalues.length) {
+				response += " AND ";
+			}
+		}
+		return response;
+	}
+	
 	public static String SerializeQueryParamForSet(String columnname, Set<String> categories) {
 		String cat = "" ;
 		if(0 == categories.size()) {

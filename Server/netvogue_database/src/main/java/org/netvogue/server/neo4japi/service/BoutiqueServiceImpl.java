@@ -71,7 +71,7 @@ public class BoutiqueServiceImpl implements BoutiqueService{
 
 	@Override
 	public Iterable<Boutique> GetBoutique(String boutiqueName) {
-		String query = "name:*" + boutiqueName + "*";
+		String query = Utils.SerializeQueryParamWithSpacesNoPattern("name" , boutiqueName);
 		return boutiqueRepo.findBynameSearch(query, USER_TYPE.BOUTIQUE);
 	}
 	
