@@ -22,6 +22,8 @@ public class LookbookWriteConverter implements Converter<Lookbook, DBObject> {
     dbOject.put("productLineName", source.getProductLine().getName());
     dbOject.put("season", source.getSeason().toName());
     dbOject.put("year", source.getYear());
+    dbOject.put("profileLink", source.getProfileLink());
+    dbOject.put("privacy", source.getPrivacy().toString());
     dbOject.put("_class", Lookbook.class.getName());
 
     return dbOject;

@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 import org.netvogue.ecommerce.domain.model.Category;
 import org.netvogue.ecommerce.domain.model.Linesheet;
 import org.netvogue.ecommerce.domain.model.Lookbook;
+import org.netvogue.ecommerce.domain.model.Privacy;
 import org.netvogue.ecommerce.domain.model.ProductLine;
 import org.netvogue.ecommerce.domain.model.Style;
 import org.netvogue.ecommerce.domain.model.StyleSize;
@@ -44,6 +45,7 @@ public class StyleReadConverter implements Converter<DBObject, Style> {
     style.setFabrication((String) source.get("fabrication"));
     style.setBrand(userDao.getActiveUser((String) source.get("brand")));
     style.setCreatedDate((Date) source.get("createdDate"));
+    style.setPrivacy(Privacy.valueOf((String)source.get("privacy")));
 
     Category category = categoryDao.getCategory((String) source.get("categoryId"));
     style.setCategory(category);

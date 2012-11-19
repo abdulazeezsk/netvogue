@@ -2,6 +2,7 @@ package org.netvogue.ecommerce.persistence.mongo.converters;
 
 import org.netvogue.ecommerce.domain.model.Category;
 import org.netvogue.ecommerce.domain.model.Lookbook;
+import org.netvogue.ecommerce.domain.model.Privacy;
 import org.netvogue.ecommerce.domain.model.ProductLine;
 import org.netvogue.ecommerce.domain.model.Season;
 import org.netvogue.ecommerce.persistence.CategoryDao;
@@ -23,6 +24,8 @@ public class LookbookReadConverter implements Converter<DBObject, Lookbook> {
     lookbook.setId(source.get("_id").toString());
     lookbook.setCreatedDate((Date) source.get("createdDate"));
     lookbook.setCreatedBy(userDao.getActiveUser((String) source.get("createdBy")));
+    lookbook.setProfileLink((String)source.get("profileLink"));
+    lookbook.setPrivacy(Privacy.valueOf((String)source.get("privacy")));
 
     Category category = categoryDao.getCategory((String) source.get("categoryId"));
     lookbook.setCategory(category);
