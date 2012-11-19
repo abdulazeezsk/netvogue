@@ -26,6 +26,8 @@ public class StatusUpdate {
 	@RelatedTo(type="STATUS", direction = Direction.INCOMING)
 	User addedBy;
 	
+	boolean isDeleted = false;
+	
 	public StatusUpdate() {
 		
 	}
@@ -75,8 +77,16 @@ public class StatusUpdate {
 		this.addedBy = addedBy;
 	}
 
-	@Override
-    public boolean equals(Object other) {
+	public boolean isDeleted() {
+          return isDeleted;
+       }
+
+       public void setDeleted(boolean isDeleted) {
+           this.isDeleted = isDeleted;
+       }
+
+       @Override
+       public boolean equals(Object other) {
 		if (this == other) 
 			return true;
 		if (nodeId == null) 
@@ -86,8 +96,8 @@ public class StatusUpdate {
 		return nodeId.equals(((User) other).nodeId);    
 	}
 
-    @Override
-    public int hashCode() {
-    	return nodeId == null ? System.identityHashCode(this) : nodeId.hashCode();
-    }
+       @Override
+       public int hashCode() {
+         return nodeId == null ? System.identityHashCode(this) : nodeId.hashCode();
+       }
 }

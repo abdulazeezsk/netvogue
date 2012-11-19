@@ -1360,7 +1360,7 @@ angular.module('netVogue.services', []).
     		var index=0;
     		for(index=0; index <  updates.length; index++) {
     			if(updates[index].statusid == id) {
-    				updatess[index].status = status;
+    				updates[index].status = status;
     				break;
     			}
     		}

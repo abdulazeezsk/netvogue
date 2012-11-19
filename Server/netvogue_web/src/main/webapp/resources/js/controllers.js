@@ -341,10 +341,10 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 	};
 	
 	$scope.deleteupdate = function(id) {
-		$scope.deletingupdate = true;
+		//$scope.deletingupdate = true;
 		mytimeline.deleteupdate(id).success(function(data) {
 			if(data.status == true) {
-				mytimeline.editupdatelocally(id);
+				mytimeline.deleteupdatelocally(id);
 				$scope.newsfeeds 		= mytimeline.getupdates($scope.routeparams);
 			} else {
 				alert(data.error);
@@ -352,6 +352,7 @@ function MyCtrlCorner($scope, $routeParams, $timeout, mytimeline, currentvisited
 			$scope.deletingupdate = false;
 		}).error(function(data) {
 			alert("error");
+			$scope.deletingupdate = false;
 		});
 	};
 
