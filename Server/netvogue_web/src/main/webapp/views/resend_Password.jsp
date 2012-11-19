@@ -62,7 +62,7 @@ body {
         <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
         <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
       </div> -->
-		<form novalidate name="form"  action="j_spring_security_check" method="post">
+		<form novalidate name="form"  action="/resetPassword" method="post">
 			<h2 style="font-family: 'Lato', sans-serif; font-weight: 300;">Forgot
 				Your password ?</h2>
 			<label>Username
