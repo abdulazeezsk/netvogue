@@ -55,63 +55,25 @@ body {
 		</div>
 	</div>
 
-	<div class="container" ng-controller="MyCtrlRegistration">
-
-		<!-- Main hero unit for a primary marketing message or call to action -->
-		<!--  <div class="hero-unit">
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-      </div> -->
+	<div class="container"  ng-controller="MyCtrlRegistration">
 		<form novalidate name="form"  action="/resetPassword" method="post">
 			<h2 style="font-family: 'Lato', sans-serif; font-weight: 300;">Forgot
 				Your password ?</h2>
-			<label>Username
+			<div class="span6"><label>Username
 				or email</label> <input type="text" ng-model="entity.email" class="span5"
 				maxlength="50" name="uEmail" required
 				ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/"
 				ui-validate="{oldemail:emailchanged}"
 				placeholder="Username or email">
-				<span>
-				<button type="submit"
-				data-loading-text="Please wait..." style="margin-right:20px;" 
-				class="btn btn-inverse pull-right">Submit</button>
-				</span>
-				
-				
-				
-				
-				 <!-- <div class="captcha js-captcha hidden">
-                            <script type="text/javascript">
-                                var RecaptchaOptions = {
-                                    theme: 'white',
-                                    lang: 'en'
-                                };
-								</script>
-                            <script type="text/javascript" src="https://www.google.com/recaptcha/api/challenge?k=6LfbTAAAAAAAAE0hk8Vnfd1THHnn9lJuow6fgulO&amp;lang=en"></script>
-                            <script type="text/javascript" src="https://www.google.com/recaptcha/api/js/recaptcha.js"></script>
-                            <div id="recaptcha_widget_div" class=" recaptcha_nothad_incorrect_sol recaptcha_isnot_showing_audio">
-                                <div id="recaptcha_area">
-                                </div>
-                            </div>
-                            <script>
-                                Recaptcha.widget = Recaptcha
-											.$("recaptcha_widget_div");
-                                Recaptcha.challenge_callback();
-								</script>
-                   </div> -->
-				<!-- 
-				<div class="span5">
-			<button type="submit"
-				data-loading-text="Please wait..." style="margin-right:20px;"  ng-click="addEntity($event)"
-				class="btn btn-inverse pull-right">Submit</button>
-				</div> -->
+				<button type="submit" style="margin-bottom: 10px;"
+				data-loading-text="Please wait..." 
+				class="btn btn-inverse">Submit</button>
+			</div>
 		</form>
 
 		<!-- Example row of columns -->
-		<div class="row"></div>
-
+		<div class="row" style="min-height:350px;"></div>
 		<hr>
-
 		<footer>
 			<p class="pull-right">
 				<a href="#">Back to top</a>
