@@ -41,17 +41,20 @@ body {
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="brand" href="Netvogue.html">VEAWE</a>
+				</a>
+				 <a class="brand" href="Netvogue.html"  style="padding-top: 6px; padding-bottom: 0px;">
+           			<!--  <img class="AngularJS-small" src="img/Veawe_Logo.png"> -->
+           			   <img class="AngularJS-small" src="img/AngularJS-small.png">
+          		</a> 
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="#">Brands</a></li>
-						<li><a href="#">Retailers</a></li>
-						<li><a href="#">Apply</a></li>
+						<li><a href="brands.html">Brands</a></li>
+						<li><a href="retailers.html">Retailers</a></li>
 					</ul>
 					<form class="navbar-form pull-right" accept-charset="UTF-8" action="j_spring_security_check" method="post" >
-						<input id="j_username" name="j_username" class="span3" type="text" placeholder="Email"> <input
+						<input id="j_username" name="j_username"  class="span3" type="text" placeholder="Email"> <input
 							id="j_password" name="j_password" class="span3" type="password" placeholder="Password">
-						<button type="submit" style="font-family: 'Lato', sans-serif; font-weight: 100;" class="btn btn-inverse">Sign in</button>
+						<button type="submit" style="font-family: 'Lato', sans-serif; font-weight: 100;" class="btn btn-inverse" class="btn btn-inverse">Sign in</button>
 					</form>
 				</div>
 				<!--/.nav-collapse -->

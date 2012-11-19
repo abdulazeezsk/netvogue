@@ -42,12 +42,15 @@ body {
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="brand" href="Netvogue.html">VEAWE</a>
+				</a> 
+				 <a class="brand" href="Netvogue.html"  style="padding-top: 6px; padding-bottom: 0px;">
+           			<!--  <img class="AngularJS-small" src="img/Veawe_Logo.png"> -->
+           			   <img class="AngularJS-small" src="img/AngularJS-small.png">
+          			</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="#">Brands</a></li>
-						<li><a href="#">Retailers</a></li>
-						<li><a href="#">Apply</a></li>
+						<li><a href="brands.html">Brands</a></li>
+						<li><a href="retailers.html">Retailers</a></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->

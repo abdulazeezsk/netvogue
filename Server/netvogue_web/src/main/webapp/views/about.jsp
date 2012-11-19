@@ -231,13 +231,16 @@ body {
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <span class="brand" style="font-family: 'Lato', sans-serif; font-weight: 100;" href="#">VEAWE</span>
+				</a>
+				 <a class="brand" href="Netvogue.html" style="padding-top: 6px; padding-bottom: 0px;">
+           			<!--  <img class="AngularJS-small" src="img/Veawe_Logo.png"> -->
+           			   <img class="AngularJS-small" src="img/AngularJS-small.png">
+          		</a> 
 				<!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="#">Brands</a></li>
-						<li><a href="#">Retailers</a></li>
-						<li><a href="#">Apply</a></li>
+						<li><a href="brands.html">Brands</a></li>
+						<li><a href="retailers.html">Retailers</a></li>
 						<!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
 					</ul>
 					<form class="navbar-form pull-right" action="j_spring_security_check" method="post" >

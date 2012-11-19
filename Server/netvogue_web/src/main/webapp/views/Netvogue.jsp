@@ -3,6 +3,7 @@
 <head>
 <title>NetVogue</title>
 <link href="css/bootstrap.css" rel="stylesheet" />
+<link href="css/jquery.fancybox-1.3.4.css" rel="stylesheet" />
 <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400'
 	rel='stylesheet' type='text/css' />
 <!-- <link href="css/StyleSheet.css" rel="stylesheet" /> -->
@@ -258,7 +259,7 @@ body {
 					<ul class="nav">
 						<li><a href="brands.html">Brands</a></li>
 						<li><a href="retailers.html">Retailers</a></li>
-						<li><a href="apply.html">Apply</a></li>
+						<!-- <li><a href="apply.html">Apply</a></li> -->
 						<!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
 					</ul>
 					<form class="navbar-form pull-right" action="j_spring_security_check" method="post" >
@@ -287,7 +288,7 @@ body {
 				<div class="container">
 					<div class="carousel-caption">
 						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">The Future of Wholesale Market Place</h1>
-						<a class="btn btn-large btn-inverse" href="#"  >See How it Works</a>
+						<a class="btn btn-large btn-inverse various fancybox.iframe" href="http://www.youtube.com/watch?v=L6D4TnQKqjw&feature=relmfu"  >See How it Works</a>
 					</div>
 				</div>
 			</div>
@@ -435,6 +436,7 @@ body {
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="lib/jquery/jquery.js" type="text/javascript"></script>
 	<script src="lib/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+	<script src="lib/jquery/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
 	<script>
 		!function($) {
 			$(function() {
@@ -443,7 +445,20 @@ body {
 			})
 		}(window.jQuery)
 	</script>
-
-
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	 $(".various").fancybox({
+		maxWidth	: 800,
+		maxHeight	: 600,
+		fitToView	: false,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: false,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+</script>
 </body>
 </html>
