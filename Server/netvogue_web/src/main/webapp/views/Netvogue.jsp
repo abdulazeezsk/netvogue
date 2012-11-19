@@ -213,6 +213,22 @@ body {
 		font-size: 18px;
 		line-height: 1.5;
 	}
+	.navbar .brand
+	{
+	float:left;
+	display:block;
+	padding:8px 20px 12px;
+	margin-left:-20px;
+	font-size:20px;
+	font-weight:200;
+	line-height:1;
+	color:#ffffff;
+	}
+	img.AngularJS-small 
+	{
+	width: 95px;
+	height: 25px;
+	}
 }
 </style>
 </head>
@@ -231,7 +247,12 @@ body {
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <span class="brand" style="font-family: 'Lato', sans-serif; font-weight: 100;" href="#">VEAWE</span>
+				</a>
+				<a class="brand" href="#" style="padding-top: 6px; padding-bottom: 0px;">
+           			 <img class="AngularJS-small" src="img/Veawe_Logo.png">
+           			<!--   <img class="AngularJS-small" src="img/AngularJS-small.png"> -->
+          		</a>
+				 <!-- <span class="brand" style="font-family: 'Lato', sans-serif; font-weight: 100;" href="#">VEAWE</span> -->
 				<!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
 				<div class="nav-collapse collapse">
 					<ul class="nav">
