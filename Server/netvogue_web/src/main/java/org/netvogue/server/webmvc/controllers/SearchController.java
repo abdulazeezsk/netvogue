@@ -12,7 +12,6 @@ import org.netvogue.server.neo4japi.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.converters.ImageURLsConverter;
-import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.SearchResponse;
 import org.netvogue.server.webmvc.domain.UsersResponse;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
@@ -39,7 +38,8 @@ public class SearchController {
 		UsersResponse response = new UsersResponse();
 		User loggedinUser = userDetailsService.getUserFromSession();
 		response.setName(loggedinUser.getName());
-		if(!loggedinUser.getProfilePicLink().isEmpty())
+		String profilepic = loggedinUser.getProfilePicLink();
+		if(null != profilepic && !profilepic.isEmpty())
 		  response.setProfilepic(imageURLsConverter.convert(loggedinUser.getProfilePicLink(), loggedinUser.getUsername()));
 		
 		Set<SearchResponse> allusers = new LinkedHashSet<SearchResponse>();

@@ -21,7 +21,7 @@ public class SearchConverter implements Converter<User, SearchResponse> {
 		if(null != source.getUserType())
 			response.setUsertype(source.getUserType().toString());
 		String profilepic = source.getProfilePicLink();
-		if(null != profilepic) {
+		if(null != profilepic && !profilepic.isEmpty()) {
 			String smallpic = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC,
 					source.getUsername()); 
 			response.setSmallpic(smallpic);
@@ -29,6 +29,7 @@ public class SearchConverter implements Converter<User, SearchResponse> {
 			String thumbpic = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC,
 					source.getUsername());
 			response.setThumbpic(thumbpic);
+			System.out.println("username:" + source.getUsername() + " : profilepic:" + profilepic);
 		}
 		return response;
 	}
