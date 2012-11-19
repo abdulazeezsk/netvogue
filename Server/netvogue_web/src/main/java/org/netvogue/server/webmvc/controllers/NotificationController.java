@@ -94,6 +94,25 @@ public class NotificationController {
 		return response;
 	}
 	
+	@RequestMapping(value="notifications/markallread", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse markAllNotifications() {
+		User user = userDetailsService.getUserFromSession();
+		String username = user.getUsername();
+		
+		System.out.println("Mark all Notifications read: " + username);
+		String error = "";
+		JsonResponse response = new JsonResponse();
+		
+		if(ResultStatus.SUCCESS == notificationService.markAllNotificationRead(username, error)) {  
+			response.setStatus(true);
+		}
+		else
+			response.setError(error);
+		
+		System.out.println("Notifications are read now");
+		return response;
+	}
+	
 	@RequestMapping(value="notifications/markread", method=RequestMethod.GET)
 	public @ResponseBody JsonResponse markNotifications(@RequestBody String id) {
 		System.out.println("Mark Notification read: id is:" + id);

@@ -34,6 +34,21 @@ public class NotificationServiceImpl implements NotificationService {
 		}
 	}
 	
+	public ResultStatus markAllNotificationRead(String username, String error) {
+		if(username.isEmpty()) {
+			error = "username is empty";
+			return null;
+		}
+		try {
+			System.out.println("Marking all notifications read" + username);
+			notificationRepo.markAllNotificationRead(username);
+			return ResultStatus.SUCCESS;
+		} catch(Exception e) {
+			error = e.toString();
+			return ResultStatus.FAILURE;
+		}
+	}
+	
 	public ResultStatus markNotificationRead(String notificationid, String error) {
 		if(notificationid.isEmpty()) {
 			error = "notificationid is empty";

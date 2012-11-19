@@ -7,6 +7,7 @@ public interface NotificationService {
 
 	Iterable<Notification> getUnreadNotifications(String username, String error);
 	Iterable<Notification> getAllNotifications(String username, String error);
+	ResultStatus markAllNotificationRead(String username, String error);
 	ResultStatus markNotificationRead(String notificationid, String error);
 	ResultStatus discardNetwork(String notificationid, String error);
 }
