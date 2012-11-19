@@ -141,14 +141,16 @@ public class AccountSettingsController {
     return redirectPage;
   }
 
-  @RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
+  @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
   public String forgotPassowrd(@RequestBody
   String userName) {
     String password = null;
     String redirectPage = null;
     StringBuffer error = null;
     if (null != userName) {
+      System.out.println("Entered");
       User user = boutiqueService.GetUser(userName);
+      System.out.println(user);
       if (null == user) {
         redirectPage = "Error";
       } else {
