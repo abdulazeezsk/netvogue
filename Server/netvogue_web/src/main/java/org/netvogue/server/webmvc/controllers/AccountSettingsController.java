@@ -142,7 +142,7 @@ public class AccountSettingsController {
   }
 
   @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
-  public String forgotPassowrd(@RequestBody
+  public String forgotPassowrd(@RequestParam("uEmail")
   String userName) {
     String password = null;
     String redirectPage = null;
