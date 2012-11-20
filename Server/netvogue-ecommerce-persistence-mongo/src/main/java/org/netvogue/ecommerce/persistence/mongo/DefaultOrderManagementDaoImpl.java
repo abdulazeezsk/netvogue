@@ -4,6 +4,7 @@ import static org.netvogue.ecommerce.persistence.util.Util.massageAsObjectId;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 import org.netvogue.ecommerce.domain.model.Order;
+import org.netvogue.ecommerce.domain.model.OrderLineItem;
 import org.netvogue.ecommerce.domain.model.OrderReview;
 import org.netvogue.ecommerce.domain.model.OrderStatus;
 import org.netvogue.ecommerce.persistence.OrderManagementDao;
@@ -11,6 +12,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class DefaultOrderManagementDaoImpl implements OrderManagementDao {
@@ -29,7 +31,15 @@ public class DefaultOrderManagementDaoImpl implements OrderManagementDao {
 
   public void deleteOrderLineItem(final String orderId, final String orderLineItemId) {
     Order order = template.findById(massageAsObjectId(orderId), Order.class, ORDER_COLLECTION_NAME);
-    for()
+    Iterator<OrderLineItem> it = order.getOriginalLineItems().iterator();
+    while (it.hasNext()) {
+      OrderLineItem lineItem = it.next();
+      if (lineItem.getLineItemId() == orderLineItemId) {
+        it.remove();
+      }
+    }
+
+    template.save(order, ORDER_COLLECTION_NAME);
   }
 
   public void updateOrderStatus(final String orderId, final OrderStatus status) {
@@ -80,13 +90,13 @@ public class DefaultOrderManagementDaoImpl implements OrderManagementDao {
     template.save(order, ORDER_COLLECTION_NAME);
   }
 
-  public List<Order> findOrdersByTrackingId(final String trackingId) {
+  public Order getOrderByTrackingId(final String trackingId) {
     List<Order> orders = template.find(new Query(where("orderTracking.trackingId").is(trackingId)), Order.class,
         ORDER_COLLECTION_NAME);
     if (orders.size() > 1) {
       throw new RuntimeException("how come there are " + orders.size() + " orders with trackingId:" + trackingId);
     }
-    return orders;
+    return orders.get(0);
   }
 
 }
