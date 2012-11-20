@@ -1,9 +1,10 @@
 package org.netvogue.server.webmvc.domain;
 
 public class AccountInfo extends CommonResponse{
-	
+
 	String email;
 	String name;
+	String password;
 	EmailNotifications emailnotifications;
 
 	public String getEmail() {
@@ -14,11 +15,13 @@ public class AccountInfo extends CommonResponse{
 		this.email = email;
 	}
 
-	public String getName() {
+	@Override
+  public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	@Override
+  public void setName(String name) {
 		this.name = name;
 	}
 
@@ -29,4 +32,12 @@ public class AccountInfo extends CommonResponse{
 	public void setEmailnotifications(EmailNotifications emailnotifications) {
 		this.emailnotifications = emailnotifications;
 	}
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
 }

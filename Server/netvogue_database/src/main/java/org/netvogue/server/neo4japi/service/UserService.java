@@ -23,6 +23,7 @@ public interface UserService {
 
 	//Email notifications
 	public ResultStatus SaveEmailNotifications(EmailNotifications notification, StringBuffer error);
+	public ResultStatus saveEmail(String userName, String email, StringBuffer error);
 	//Search related
 	public Iterable<User> doBasicSearch(String query);
 	public Iterable<User> doAdvancedSearch(USER_TYPE userType, String name, String location, 

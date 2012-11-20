@@ -2168,12 +2168,12 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myaccount) {
     		return;
     	angular.element(event.srcElement).button('loading');
     	var datatosend = {
-    						"data" 		: newemail,
+    						"id" 		: newemail,
     						"password"	: $scope.password
     					 };
-    	myprofile.posttoserver(datatosend, "email").success(function(data) {
+    	myaccount.posttoserver(datatosend, "email").success(function(data) {
         	if(data.status == true) {
-        		myprofile.setemail(newemail);
+        		myaccount.setemail(newemail);
         	} else {
         		alert(data.error);
         	}

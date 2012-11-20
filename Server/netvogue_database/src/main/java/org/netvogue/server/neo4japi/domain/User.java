@@ -170,7 +170,7 @@ public class User {
     password = encode(newPass1);
   }
 
-  private String encode(String password) {
+  public String encode(String password) {
     return new Md5PasswordEncoder().encodePassword(password, SALT);
   }
 

@@ -9,6 +9,7 @@ import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.common.PasswordGenerator;
 import org.netvogue.server.webmvc.converters.ImageURLsConverter;
 import org.netvogue.server.webmvc.domain.AccountInfo;
+import org.netvogue.server.webmvc.domain.AccountUpdateInfo;
 import org.netvogue.server.webmvc.domain.EmailNotifications;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
@@ -91,6 +92,43 @@ public class AccountSettingsController {
       }
     }
     response.setError(error.toString());
+    return response;
+  }
+
+  @RequestMapping(value = "/account/email", method = RequestMethod.POST)
+  public @ResponseBody
+  JsonResponse updateemail(@RequestBody
+  AccountUpdateInfo accountInfo) throws Exception {
+    System.out.println("Updating Email Id in Account Settings");
+    JsonResponse response = new JsonResponse();
+    User user = userDetailsService.getUserFromSession();
+    System.out.println("user password: " + user.getPassword());
+    String accountPassword = user.encode(accountInfo.getPassword());
+    System.out.println("account paswd: " + accountPassword);
+    if (!user.getPassword().equals(accountPassword)) {
+      if (user.getEmail().equalsIgnoreCase(accountInfo.getId())) {
+        response.setStatus(false);
+        response.setError("Please enter a different email id");
+      }else{
+        if (ResultStatus.SUCCESS == boutiqueService.ValidateEmail(accountInfo.getId())){
+          user.setEmail(accountInfo.getId());
+          StringBuffer error = new StringBuffer();
+          if (ResultStatus.SUCCESS == userService.saveEmail(user.getUsername(), accountInfo.getId(), error)) {
+            response.setStatus(true);
+          }else{
+            response.setStatus(false);
+            response.setError(error.toString());
+          }
+        }else{
+          response.setStatus(false);
+          response.setError("This email id already registered");
+        }
+      }
+    } else {
+      response.setStatus(false);
+      response.setError("Please enter the correct password");
+    }
+
     return response;
   }
 
