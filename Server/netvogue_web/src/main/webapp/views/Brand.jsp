@@ -251,7 +251,7 @@ body {
 				</a>
 				<a class="brand" href="Netvogue.html" style="padding-top: 6px; padding-bottom: 0px;">
            			<!--  <img class="AngularJS-small" src="img/Veawe_Logo.png"> -->
-           			   <img class="AngularJS-small" src="img/img/veawe3.png">
+           			   <img class="AngularJS-small" src="img/veawe3.png">
           		</a>
 				 <!-- <span class="brand" style="font-family: 'Lato', sans-serif; font-weight: 100;" href="#">VEAWE</span> -->
 				<!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
