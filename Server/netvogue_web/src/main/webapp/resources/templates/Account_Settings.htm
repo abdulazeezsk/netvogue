@@ -40,12 +40,12 @@
 					<h4 class="subHeadingAccountset_no_underline">Change User Name</h4>
 					<div class="divi2 topborderline"></div>
 					<div class="span9">
-						<form class="form-horizontal css-form" name="form">
+						<form class="form-horizontal css-form" name="userform">
 							<label class="control-label"> User Name</label>
 							<div class="controls">
 								<input type="text" ng-model="newname" class="span3"
-									placeholder="User name" name="uUserName" ng-maxlength="15"
-									required maxlength="26" />
+									placeholder="User name" name="uUserName" ng-maxlength="25"
+									required/>
 							</div>
 							<!-- <div class="divi2"></div>
 							<label class="control-label"> Email id</label>
@@ -57,7 +57,7 @@
 							<div class="divi2"></div>
 							<label class="control-label"> Password</label>
 							<div class="controls">
-								<input type="password" class="span3" ng-model="$scope.password"
+								<input type="password" class="span3" ng-model="password"
 									placeholder="Enter current password">
 							</div>
 							<div class="divi2"></div>
@@ -93,7 +93,7 @@
 							<div class="divi2"></div>
 							<label class="control-label">Current Password</label>
 							<div class="controls">
-								<input type="password" class="span3" ng-model="$scope.password"
+								<input type="password" class="span3" ng-model="password"
 									placeholder="Enter current password">
 							</div>
 							<div class="divi2"></div>
@@ -116,12 +116,11 @@
 					<h4 class="subHeadingAccountset_no_underline">Change Email-Id</h4>
 					<div class="divi2 topborderline"></div>
 					<div class="span9">
-						<form class="form-horizontal css-form" name="form">
+						<form class="form-horizontal css-form" name="emailform">
 							<label class="control-label"> Email id</label>
 							<div class="controls">
 								<input type="text" ng-model="newemail" class="span3"
-									placeholder="Email id" name="uUserEmail" ng-maxlength="15"
-									required maxlength="26" />
+									placeholder="Email id" ng-maxlength="50" required />
 							</div>
 							<div class="divi2"></div>
 							<label class="control-label"> Password</label>
@@ -138,6 +137,7 @@
 							</div>
 							<div class="divi2"></div>
 							<button type="submit" style="margin-left: 550px;"
+								data-loading-text="Saving..."
 								class="btn btn-inverse" ng-click="updateemail($event)">Save
 								changes</button>
 						</form>
@@ -183,8 +183,8 @@
 							<label class="control-label"> Email id</label>
 							<div class="controls">
 								<input type="text" ng-model="newname" class="span3"
-									placeholder="Email id" name="uUserName" ng-maxlength="15"
-									required maxlength="26" />
+									placeholder="Email id" name="uUserName" ng-maxlength="25"
+									required />
 							</div>
 							<div class="divi2"></div>
 							<label class="control-label"> Password</label>

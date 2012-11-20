@@ -2175,7 +2175,7 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myaccount) {
     					 };
     	myaccount.posttoserver(datatosend, "email").success(function(data) {
         	if(data.status == true) {
-        		myaccount.setemail(newemail);
+        		myaccount.setemail($scope.newemail);
         	} else {
         		alert(data.error);
         	}
