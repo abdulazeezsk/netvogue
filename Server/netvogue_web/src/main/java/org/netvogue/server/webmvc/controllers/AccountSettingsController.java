@@ -104,8 +104,8 @@ public class AccountSettingsController {
     User user = userDetailsService.getUserFromSession();
     System.out.println("user password: " + user.getPassword());
     String accountPassword = user.encode(accountInfo.getPassword());
-    System.out.println("account paswd: " + accountPassword);
-    if (!user.getPassword().equals(accountPassword)) {
+    System.out.println("account paswd: " + accountPassword + " " + accountInfo.getId());
+    if (user.getPassword().equals(accountPassword)) {
       if (user.getEmail().equalsIgnoreCase(accountInfo.getId())) {
         response.setStatus(false);
         response.setError("Please enter a different email id");
