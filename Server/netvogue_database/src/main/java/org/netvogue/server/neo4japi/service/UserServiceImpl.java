@@ -49,6 +49,18 @@ public class UserServiceImpl implements UserService{
 	    }
 	}
 	
+      public ResultStatus saveEmail(String userName, String email, StringBuffer error) {
+        try {
+          userRepo.setEmail(userName, email);
+          System.out.println("Updated Email Id");
+          return ResultStatus.SUCCESS;
+        } catch (Exception e) {
+          System.out.println("There was an error while saving email id " + " - " + e.toString());
+          error.append(e.toString());
+          return ResultStatus.FAILURE;
+        }
+      }
+	
 	public void getBrandsCarriedAndCategories(User user) {
 		neo4jTemplate.fetch(user.getUsersCarried());
 		neo4jTemplate.fetch(user.getProductLinesCarried());

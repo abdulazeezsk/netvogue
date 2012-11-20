@@ -2108,6 +2108,8 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myaccount) {
     	
     });
 	  
+	$scope.newemail = "";
+	$scope.password = "";
     $scope.updatedata = function() {
     	//Use entityname as name of the variable for boutique/brand name. As we have same name variable in Main controller scope as well.
     	//Main controllers name will get displayed until we get data from server
@@ -2163,17 +2165,17 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myaccount) {
         });
     };
     
-    $scope.updateemail = function (newemail, event) {
-    	if(newemail == $scope.email)
+    $scope.updateemail = function (event) {
+    	if($scope.newemail == $scope.email)
     		return;
     	angular.element(event.srcElement).button('loading');
     	var datatosend = {
-    						"data" 		: newemail,
+    						"id" 		: $scope.newemail,
     						"password"	: $scope.password
     					 };
-    	myprofile.posttoserver(datatosend, "email").success(function(data) {
+    	myaccount.posttoserver(datatosend, "email").success(function(data) {
         	if(data.status == true) {
-        		myprofile.setemail(newemail);
+        		myaccount.setemail($scope.newemail);
         	} else {
         		alert(data.error);
         	}

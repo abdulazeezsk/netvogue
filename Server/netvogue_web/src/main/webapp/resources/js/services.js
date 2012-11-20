@@ -1476,6 +1476,9 @@ angular.module('netVogue.services', []).
 	    	getemail: function() {
 	    		return accountinfo.email;
 	    	},
+	    	setemail: function (email) {
+		       	accountinfo.email = email;
+		       },
 	    	getemailnotifications: function () {
 	        	if(angular.isUndefined(accountinfo.emailnotifications))
 	        		return {};
@@ -1483,7 +1486,7 @@ angular.module('netVogue.services', []).
 	        },
 	        setemailnotifications: function (notifications) {
 	        	accountinfo.emailnotifications = notifications;
-	        },
+	        },	       
 	        posttoserver: function(datatosend, url) {
 	        	var config = {
 	                      method: "POST",
