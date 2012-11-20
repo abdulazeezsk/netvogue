@@ -39,6 +39,8 @@ public class Order {
 
   private User createdBy;
 
+  private String termsAndCondtionsLink;
+
   private List<OrderReview> reviews = new ArrayList<OrderReview>();
 
   public String getId() {
@@ -172,6 +174,14 @@ public class Order {
 
   public void addReview(final OrderReview review) {
     reviews.add(review);
+  }
+
+  public String getTermsAndCondtionsLink() {
+    return termsAndCondtionsLink;
+  }
+
+  public void setTermsAndCondtionsLink(final String termsAndCondtionsLink) {
+    this.termsAndCondtionsLink = termsAndCondtionsLink;
   }
 
 }

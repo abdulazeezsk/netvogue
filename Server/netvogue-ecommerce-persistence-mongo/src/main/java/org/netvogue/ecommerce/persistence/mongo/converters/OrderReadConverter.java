@@ -123,6 +123,7 @@ public class OrderReadConverter implements Converter<DBObject, Order> {
     }
 
     order.setReviews(reviewsList);
+    order.setTermsAndCondtionsLink((String)source.get("termsAndConditionsLink"));
     return order;
   }
 
