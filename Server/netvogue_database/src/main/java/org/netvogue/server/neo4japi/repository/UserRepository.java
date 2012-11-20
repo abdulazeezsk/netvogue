@@ -26,6 +26,9 @@ public interface UserRepository extends GraphRepository<User> {
 			"collect(DISTINCT uc.profilePicLink) as profilepics")
 	UserData getUserByusername(String username);
 	
+	@Query("START n=node:search(username={0}) SET n.email = {1}")
+	void setEmail(String username, String email);
+	
 	@Query( "START n=node:search({0}) " +
 			"WHERE has(n.userType)" +
 			"RETURN n SKIP {2} LIMIT {1}")
