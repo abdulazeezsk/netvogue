@@ -58,11 +58,11 @@ public class OrderReadConverter implements Converter<DBObject, Order> {
 
     order.setOriginalLineItems(orderLineItems);
 
-    source.get("finalizedLineItemsAfterReview");
+    BasicDBList finalLineItemsFromDb = (BasicDBList)source.get("finalizedLineItemsAfterReview");
 
     Set<OrderLineItem> finalLineItems = new HashSet<OrderLineItem>();
 
-    for (Object obj : originalLineItemsList) {
+    for (Object obj : finalLineItemsFromDb) {
       BasicDBObject dbObj = (BasicDBObject) obj;
       OrderLineItem lineItem = new OrderLineItem();
       lineItem.setLineItemId((String) dbObj.get("lineItemId"));
