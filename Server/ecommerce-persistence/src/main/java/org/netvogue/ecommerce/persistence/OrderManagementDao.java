@@ -20,4 +20,6 @@ public interface OrderManagementDao {
 
   void addReview(final String orderId, final OrderReview review);
 
+  List<Order> findOrdersByTrackingId(final String trackingId);
+
 }

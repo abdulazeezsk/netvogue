@@ -123,6 +123,8 @@ public class OrderWriteConveter implements Converter<Order, DBObject > {
     dbAddress.put("zipCode", address.getZipCode());
     dbAddress.put("country", address.getCountry());
     dbAddress.put("contactNumber", address.getContactNumber());
+    dbAddress.put("_class", Order.class.getName());
+
     return dbAddress;
 
   }

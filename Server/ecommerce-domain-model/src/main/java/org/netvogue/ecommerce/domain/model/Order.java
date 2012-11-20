@@ -170,4 +170,8 @@ public class Order {
     this.reviews = reviews;
   }
 
+  public void addReview(final OrderReview review) {
+    reviews.add(review);
+  }
+
 }
