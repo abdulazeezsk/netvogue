@@ -87,7 +87,6 @@ body {
 	min-width: 90%;
 	height: 500px;
 } */
-
 .carousel-caption {
 	background-color: transparent;
 	position: static;
@@ -214,21 +213,19 @@ body {
 		font-size: 18px;
 		line-height: 1.5;
 	}
-	.navbar .brand
-	{
-	float:left;
-	display:block;
-	padding:8px 20px 12px;
-	margin-left:-20px;
-	font-size:20px;
-	font-weight:200;
-	line-height:1;
-	color:#ffffff;
+	.navbar .brand {
+		float: left;
+		display: block;
+		padding: 8px 20px 12px;
+		margin-left: -20px;
+		font-size: 20px;
+		font-weight: 200;
+		line-height: 1;
+		color: #ffffff;
 	}
-	img.AngularJS-small 
-	{
-	width: 95px;
-	height: 25px;
+	img.AngularJS-small {
+		width: 95px;
+		height: 25px;
 	}
 }
 </style>
@@ -248,12 +245,11 @@ body {
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="Netvogue.html"
+					style="padding-top: 6px; padding-bottom: 0px;"> <!--  <img class="AngularJS-small" src="img/Veawe_Logo.png"> -->
+					<img class="AngularJS-small" src="img/AngularJS-small.png">
 				</a>
-				<a class="brand" href="Netvogue.html"  style="padding-top: 6px; padding-bottom: 0px;">
-           			<!--  <img class="AngularJS-small" src="img/Veawe_Logo.png"> -->
-           			   <img class="AngularJS-small" src="img/AngularJS-small.png">
-          		</a>
-				 <!-- <span class="brand" style="font-family: 'Lato', sans-serif; font-weight: 100;" href="#">VEAWE</span> -->
+				<!-- <span class="brand" style="font-family: 'Lato', sans-serif; font-weight: 100;" href="#">VEAWE</span> -->
 				<!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
 				<div class="nav-collapse collapse">
 					<ul class="nav">
@@ -262,10 +258,12 @@ body {
 						<!-- <li><a href="apply.html">Apply</a></li> -->
 						<!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
 					</ul>
-					<form class="navbar-form pull-right" action="j_spring_security_check" method="post" >
-						<input class="span3" type="text" id="j_username" name="j_username" placeholder="Email" /> <input
-							id="j_password" name="j_password" class="span3" type="password" placeholder="Password" />
-						<button type="submit"   class="btn btn-inverse fts">Sign in</button>
+					<form class="navbar-form pull-right"
+						action="j_spring_security_check" method="post">
+						<input class="span3" type="text" id="j_username" name="j_username"
+							placeholder="Email" /> <input id="j_password" name="j_password"
+							class="span3" type="password" placeholder="Password" />
+						<button type="submit" class="btn btn-inverse fts">Sign in</button>
 					</form>
 				</div>
 				<!--/.nav-collapse -->
@@ -284,12 +282,14 @@ body {
 	<div id="myCarousel" class="carousel slide">
 		<div class="carousel-inner">
 			<div class="item active">
-				<img src="img/NY_FASHION_KARAN_3.jpeg" alt="" />
+				<img src="img/63776.jpg" style="min-width: 1350px;" alt="" />
 				<div class="container">
 					<div class="carousel-caption">
 						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">
-							Discovery Happens Here </h1>
-					<a href="boutique_Registration.html" class="btn btn-large btn-inverse" href="#">Sign up as Retailer</a>
+							Discovery Happens Here</h1>
+						<a href="boutique_Registration.html"
+							class="btn btn-large btn-inverse" href="#">Sign up as
+							Retailer</a>
 					</div>
 				</div>
 			</div>
@@ -298,7 +298,7 @@ body {
 						<span class="es-nav-prev" style="display: none; ">Previous</span>
 						<span class="es-nav-next" style="display: none; ">Next</span>
 					</div> -->
-	 <!-- <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+		<!-- <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
                 <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a> -->
 	</div>
 	<!-- /.carousel -->
@@ -312,80 +312,85 @@ body {
 	<div class="container marketing">
 
 		<!-- Three columns of text below the carousel -->
-		<div class="row">
+	<!-- 	<div class="row">
 			<div class="span4">
-				<img class="img" style="max-height:200px;max-width:240px;" src="img/Corbis-42-35908853.jpg" />
+				<img class="img" style="max-height: 200px; max-width: 240px;"
+					src="img/Corbis-42-35908853.jpg" />
 				<h3>Business Collaboration</h3>
-				<p>Prospect for designer and retailers  
-					who enhance your business and Collaborate online </p>
-				<!--    <p><a class="btn" href="#">View details »</a></p> -->
+				<p>Prospect for designer and retailers who enhance your business
+					and Collaborate online</p>
+				   <p><a class="btn" href="#">View details »</a></p>
 			</div>
-			<!-- /.span4 -->
+			/.span4
 			<div class="span4">
-				<img class="img" style="max-height:200px;max-width:240px;" src="img/Corbis-42-35908853.jpg" />
+				<img class="img" style="max-height: 200px; max-width: 240px;"
+					src="img/Corbis-42-35908853.jpg" />
 				<h3>Social Networking</h3>
-				<p>Communicate throughout the year with designer and retailers to discuss upcoming collections, 
-				 Never lose contact again.</p>
-				<!--  <p><a class="btn" href="#">View details »</a></p> -->
+				<p>Communicate throughout the year with designer and retailers
+					to discuss upcoming collections, Never lose contact again.</p>
+				 <p><a class="btn" href="#">View details »</a></p>
 			</div>
-			<!-- /.span4 -->
+			/.span4
 			<div class="span4">
-				<img class="img" style="max-height:200px;max-width:240px;" src="img/Corbis-42-35908853.jpg" />
+				<img class="img" style="max-height: 200px; max-width: 240px;"
+					src="img/Corbis-42-35908853.jpg" />
 				<h3>Order Management</h3>
-				<p>Manage the receipt and approval of purchase orders as they are submitted.
-				 Send invoices and maintain all sales records 
-				 conveniently online. Say goodbye to paperwork.</p>
-				<!--  <p><a class="btn" href="#">View details »</a></p> -->
+				<p>Manage the receipt and approval of purchase orders as they
+					are submitted. Send invoices and maintain all sales records
+					conveniently online. Say goodbye to paperwork.</p>
+				 <p><a class="btn" href="#">View details »</a></p>
 			</div>
-			<!-- /.span4 -->
-		</div>
+			/.span4
+		</div> -->
 		<!-- /.row -->
 
 
 		<!-- START THE FEATURETTES -->
 
-		<hr class="featurette-divider" />
+		<!-- <hr class="featurette-divider" /> -->
 
 		<div class="featurette">
 			<img class="featurette-image pull-right"
-				src="img/Virtues-AW11634408972018427500.jpeg" />
+				src="img/stock-photo-20842529-woman-using-barcode-reader-through-smart-phone.jpg" />
 			<h2 class="featurette-heading">
-				MERCHANDISED LINESHEETS <!-- <span class="muted">It'll blow
+				Dicover New Brands
+				<!-- <span class="muted">It'll blow
 					your mind.</span> -->
 			</h2>
-			<p class="lead">Give buyers a clear visual Save, send, or print a customized
-					linesheet PDF in just a few clicks Since everything is digital there will no more stacks of paper 
-					line sheets no more email attachments</p>
+			<p class="lead">Now prospect for new brands through a extensive
+				visual database of contemporary and luxury brands</p>
 		</div>
 
 		<hr class="featurette-divider" />
 
 		<div class="featurette">
 			<img class="featurette-image pull-left"
-				src="img/Virtues-AW11634408972018427500.jpeg" />
+				src="img/stock-photo-19924213-boutique-employee-taking-clothing-inventory.jpg" />
 			<h2 class="featurette-heading">
-				MAKE BUYING EASY FOR YOUR RETAILERS<!-- <span class="muted">See for
+				NO MORE HAND WRITTEN ORDERS
+				<!-- <span class="muted">See for
 					yourself.</span> -->
 			</h2>
-			<p class="lead">A retailer can now easily browse collections/line sheets by brand,
-			 delivery date and Product line category, a boutique can get access to line sheet images of brands
-			  and see all the details for each style before the purchase
-			   the style will be added to the cart as the boutique shops.
-			    </p>
+			<p class="lead">Now enjoy the benefits of e-commerce in the 
+			whole sale world, a boutique can now easily browse collections/line 
+			sheets by brand, delivery date and Product line category, a boutique can get 
+			access to line sheet images of brands and see all the details for each style before the purchase the style will be added to the cart as the boutique shops.
+			 Since everything is digital there will no more
+			  stacks of paper line sheets no more email attachments</p>
 		</div>
 
-		<hr class="featurette-divider" />
+		<!-- <hr class="featurette-divider" />
 
 		<div class="featurette">
 			<img class="featurette-image pull-right"
 				src="img/Virtues-AW11634408972018427500.jpeg">
-				<h2 class="featurette-heading">
-					SELL MORE,FASTER
-					& EASIER! <!-- <span class="muted">Checkmate.</span> -->
-				</h2>
-				<p class="lead">Use Veawe to find the retailers that best suit your
-				brand across the country</p>
-		</div>
+			<h2 class="featurette-heading">
+				SELL MORE,FASTER & EASIER!
+				<span class="muted">Checkmate.</span>
+			</h2>
+			<p class="lead">Use Veawe to find the retailers that best suit
+				your brand across the country</p>
+		</div> -->
 
 		<hr class="featurette-divider" />
 
@@ -398,7 +403,8 @@ body {
 			<a href="#">Back to top</a>
 		</p>
 		<p>
-		� 2012 Company, Inc.<a href="#">About</a> | <a href="#">Contact</a> | <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a>
+			� 2012 Company, Inc.<a href="#">About</a> | <a href="#">Contact</a> |
+			<a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a>
 		</p>
 		</footer>
 
@@ -412,7 +418,8 @@ body {
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="lib/jquery/jquery.js" type="text/javascript"></script>
 	<script src="lib/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-	<script src="lib/jquery/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
+	<script src="lib/jquery/jquery.fancybox-1.3.4.pack.js"
+		type="text/javascript"></script>
 	<script>
 		!function($) {
 			$(function() {
@@ -421,20 +428,20 @@ body {
 			})
 		}(window.jQuery)
 	</script>
-<script type="text/javascript">
-jQuery(document).ready(function() {
-	 $(".various").fancybox({
-		maxWidth	: 800,
-		maxHeight	: 600,
-		fitToView	: false,
-		width		: '70%',
-		height		: '70%',
-		autoSize	: false,
-		closeClick	: false,
-		openEffect	: 'none',
-		closeEffect	: 'none'
-	});
-});
-</script>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			$(".various").fancybox({
+				maxWidth : 800,
+				maxHeight : 600,
+				fitToView : false,
+				width : '70%',
+				height : '70%',
+				autoSize : false,
+				closeClick : false,
+				openEffect : 'none',
+				closeEffect : 'none'
+			});
+		});
+	</script>
 </body>
 </html>

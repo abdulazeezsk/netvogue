@@ -284,7 +284,7 @@ body {
 	<div id="myCarousel" class="carousel slide">
 		<div class="carousel-inner">
 			<div class="item active">
-				<img src="img/NY_FASHION_KARAN_3.jpeg" alt="" />
+				<img src="img/P2110406.JPG" alt="" />
 				<div class="container">
 					<div class="carousel-caption">
 						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">
