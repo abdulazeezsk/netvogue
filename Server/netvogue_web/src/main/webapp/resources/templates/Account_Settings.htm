@@ -119,8 +119,8 @@
 						<form class="form-horizontal css-form" name="form">
 							<label class="control-label"> Email id</label>
 							<div class="controls">
-								<input type="text" ng-model="newname" class="span3"
-									placeholder="Email id" name="uUserName" ng-maxlength="15"
+								<input type="text" ng-model="newemail" class="span3"
+									placeholder="Email id" name="uUserEmail" ng-maxlength="15"
 									required maxlength="26" />
 							</div>
 							<div class="divi2"></div>
@@ -138,7 +138,7 @@
 							</div>
 							<div class="divi2"></div>
 							<button type="submit" style="margin-left: 550px;"
-								class="btn btn-inverse" ng-click="updateemail(newemail)">Save
+								class="btn btn-inverse" ng-click="updateemail(newemail, $event)">Save
 								changes</button>
 						</form>
 					</div>
