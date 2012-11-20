@@ -10,7 +10,7 @@ public interface OrderManagementDao {
 
   void placeOrder(Order order);
 
-  void deleteOrderLineItem(final String orderLineItemId);
+  void deleteOrderLineItem(final String orderId, final String orderLineItemId);
 
   void updateOrderStatus(String orderId, OrderStatus status);
 
@@ -20,6 +20,6 @@ public interface OrderManagementDao {
 
   void addReview(final String orderId, final OrderReview review);
 
-  List<Order> findOrdersByTrackingId(final String trackingId);
+  Order getOrderByTrackingId(final String trackingId);
 
 }
