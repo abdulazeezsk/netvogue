@@ -29,7 +29,7 @@ public class StyleReadConverter implements Converter<DBObject, Style> {
     style.setCreatedDate((Date) source.get("createdDate"));
     style.setPrivacy(Privacy.valueOf((String)source.get("privacy")));
     style.setCategory((String) source.get("category"));
-    style.setProductLine((String) source.get("productLineName"));
+    style.setProductLine((String) source.get("productLine"));
 
 
     BasicDBList availableSizes = (BasicDBList) source.get("availableSizes");

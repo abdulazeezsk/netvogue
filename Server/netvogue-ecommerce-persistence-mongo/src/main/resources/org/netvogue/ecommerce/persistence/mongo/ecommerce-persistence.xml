@@ -20,6 +20,8 @@
   
  <bean id="styleDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultStyleDaoImpl">
  	<property name="mongoTemplate" ref="journaSafeMongoTemplate"/>
+ 	<property name="linesheetDao" ref="linesheetDao" />
+ 	<property name="lookbookDao" ref="lookbookDao" />
  </bean>
  
  <bean id="userDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultUserDaoImpl">

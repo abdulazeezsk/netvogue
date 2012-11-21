@@ -41,7 +41,6 @@ public class DefaultStyleDaoImpl implements StyleDao {
       throw new RuntimeException("this style is added to a linesheet:" + lt.getLinesheetName() + ". please remove it from linesheet first");
     }
     mongoTemplate.remove(new Query(where("_id").is(massageAsObjectId(styleId))), STYLES_COLLECTION_NAME);
-    //    mongoTemplate.findAndModify(new Query(where("_id").is(massageAsObjectId(styleId))), new Update().unset(lookbookId), Style.class, STYLES_COLLECTION_NAME);
   }
 
   public void addStyleToLinesheet(final String linesheetId, final String styleId) {
@@ -59,8 +58,8 @@ public class DefaultStyleDaoImpl implements StyleDao {
     return styles;
   }
 
-  public List<Style> findStylesByProductLine(final String productLineNmae) {
-    List<Style> styles = mongoTemplate.find(new Query(where("productLine").is(productLineNmae)), Style.class, STYLES_COLLECTION_NAME);
+  public List<Style> findStylesByProductLine(final String productLineName) {
+    List<Style> styles = mongoTemplate.find(new Query(where("productLine").is(productLineName)), Style.class, STYLES_COLLECTION_NAME);
     return styles;
   }
 
@@ -80,25 +79,23 @@ public class DefaultStyleDaoImpl implements StyleDao {
   }
 
   public List<Style> findStylesByPriceRange(final long fromPrice, final long toPrice) {
-    List<Style> styles = mongoTemplate.find(
-                              new Query(where("price").gte(fromPrice).andOperator(where("price").lte(toPrice))), Style.class,
-                              STYLES_COLLECTION_NAME);
+    List<Style> styles = mongoTemplate.find(new Query(where("price").gte(fromPrice).andOperator(where("price").lte(toPrice))),
+                                            Style.class,
+                                            STYLES_COLLECTION_NAME);
     return styles;
   }
 
   public List<Style> findStylesByPriceRangeAndBrand(final long fromPrice, final long toPrice, final String brandUserName) {
-    List<Style> styles = mongoTemplate.find(
-                              new Query(where("price").gte(fromPrice).andOperator(
-                              where("price").lte(toPrice).andOperator(where("brand").is(brandUserName)))), Style.class,
-                              STYLES_COLLECTION_NAME);
+    List<Style> styles = mongoTemplate.find(new Query(where("price").gte(fromPrice).andOperator(where("price").lte(toPrice).andOperator(where("brand").is(brandUserName)))),
+                                            Style.class,
+                                            STYLES_COLLECTION_NAME);
     return styles;
   }
 
   public List<Style> findStylesByPriceRangeAndBrands(final long fromPrice, final long toPrice, final Set<String> brandsUserNames) {
-    List<Style> styles = mongoTemplate.find(
-                             new Query(where("price").gte(fromPrice).andOperator(
-                             where("price").lte(toPrice).andOperator(where("brand").in(brandsUserNames)))), Style.class,
-                             STYLES_COLLECTION_NAME);
+    List<Style> styles = mongoTemplate.find(new Query(where("price").gte(fromPrice).andOperator(where("price").lte(toPrice).andOperator(where("brand").in(brandsUserNames)))),
+                                            Style.class,
+                                            STYLES_COLLECTION_NAME);
     return styles;
   }
 
