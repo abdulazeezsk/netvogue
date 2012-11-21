@@ -15,7 +15,7 @@ public class Order {
 
   private Set<OrderLineItem> originalLineItems = new HashSet<OrderLineItem>();
 
-  private Set<OrderLineItem> finalizedLineItemsAfterReview = new HashSet<OrderLineItem>();
+  private Set<OrderLineItem> lineItemsAfterReview = new HashSet<OrderLineItem>();
 
   private OrderTracking orderTracking;
 
@@ -64,12 +64,12 @@ public class Order {
     this.originalLineItems = originalLineItems;
   }
 
-  public Set<OrderLineItem> getFinalizedLineItemsAfterReview() {
-    return finalizedLineItemsAfterReview;
+  public Set<OrderLineItem> getLineItemsAfterReview() {
+    return lineItemsAfterReview;
   }
 
-  public void setFinalizedLineItemsAfterReview(final Set<OrderLineItem> finalizedLineItemsAfterReview) {
-    this.finalizedLineItemsAfterReview = finalizedLineItemsAfterReview;
+  public void setLineItemsAfterReview(final Set<OrderLineItem> lineItemsAfterReview) {
+    this.lineItemsAfterReview = lineItemsAfterReview;
   }
 
   public Date getOrdereCreatedDate() {
@@ -177,6 +177,10 @@ public class Order {
 
   public void addReview(final OrderReview review) {
     reviews.add(review);
+    lineItemsAfterReview.clear();
+    for (OrderLineItem lt : review.getLineItems()) {
+      lineItemsAfterReview.add(lt);
+    }
   }
 
   public String getTermsAndCondtionsLink() {

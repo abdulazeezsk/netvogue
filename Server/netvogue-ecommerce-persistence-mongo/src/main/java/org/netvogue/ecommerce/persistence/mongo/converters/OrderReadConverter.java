@@ -56,25 +56,29 @@ public class OrderReadConverter implements Converter<DBObject, Order> {
 
     order.setOriginalLineItems(orderLineItems);
 
-    BasicDBList finalLineItemsFromDb = (BasicDBList)source.get("finalizedLineItemsAfterReview");
+    Object lineItemsAfterReview = source.get("lineItemsAfterReview");
 
-    Set<OrderLineItem> finalLineItems = new HashSet<OrderLineItem>();
+    if (lineItemsAfterReview != null) {
+      BasicDBList finalLineItemsFromDb = (BasicDBList) source.get("lineItemsAfterReview");
 
-    for (Object obj : finalLineItemsFromDb) {
-      BasicDBObject dbObj = (BasicDBObject) obj;
-      OrderLineItem lineItem = new OrderLineItem();
-      lineItem.setLineItemId((String) dbObj.get("lineItemId"));
-      lineItem.setLineItemPrice((Long) dbObj.get("lineItemPrice"));
-      lineItem.setQuantity((Integer) dbObj.get("quantity"));
-      lineItem.setStylePrice((Long) dbObj.get("stylePrice"));
-      lineItem.setStyleSize(StyleSize.valueOf((String) dbObj.get("styleSize")));
-      BasicDBObject dbStyle = (BasicDBObject) dbObj.get("style");
-      Style style = new StyleReadConverter().convert(dbStyle);
-      lineItem.setStyle(style);
-      finalLineItems.add(lineItem);
+      Set<OrderLineItem> finalLineItems = new HashSet<OrderLineItem>();
+
+      for (Object obj : finalLineItemsFromDb) {
+        BasicDBObject dbObj = (BasicDBObject) obj;
+        OrderLineItem lineItem = new OrderLineItem();
+        lineItem.setLineItemId((String) dbObj.get("lineItemId"));
+        lineItem.setLineItemPrice((Long) dbObj.get("lineItemPrice"));
+        lineItem.setQuantity((Integer) dbObj.get("quantity"));
+        lineItem.setStylePrice((Long) dbObj.get("stylePrice"));
+        lineItem.setStyleSize(StyleSize.valueOf((String) dbObj.get("styleSize")));
+        BasicDBObject dbStyle = (BasicDBObject) dbObj.get("style");
+        Style style = new StyleReadConverter().convert(dbStyle);
+        lineItem.setStyle(style);
+        finalLineItems.add(lineItem);
+      }
+
+      order.setLineItemsAfterReview(finalLineItems);
     }
-
-    order.setFinalizedLineItemsAfterReview(finalLineItems);
 
     order.setShippingAddress(toAddress((DBObject) source.get("shippingAddress")));
     order.setBillingAddress(toAddress((DBObject) source.get("billinggAddress")));

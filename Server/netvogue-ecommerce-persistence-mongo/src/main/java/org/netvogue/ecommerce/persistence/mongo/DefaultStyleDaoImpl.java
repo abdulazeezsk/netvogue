@@ -38,7 +38,7 @@ public class DefaultStyleDaoImpl implements StyleDao {
 
     if(style.isInLinesheet()) {
       Linesheet lt = linesheetDao.getLinesheetById(style.getLinesheetId());
-      throw new RuntimeException("this style is added to a linesheet:" + lt.getLinesheetName() + ".please remove it from linesheet first");
+      throw new RuntimeException("this style is added to a linesheet:" + lt.getLinesheetName() + ". please remove it from linesheet first");
     }
     mongoTemplate.remove(new Query(where("_id").is(massageAsObjectId(styleId))), STYLES_COLLECTION_NAME);
     //    mongoTemplate.findAndModify(new Query(where("_id").is(massageAsObjectId(styleId))), new Update().unset(lookbookId), Style.class, STYLES_COLLECTION_NAME);
