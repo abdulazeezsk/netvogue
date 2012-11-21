@@ -2097,7 +2097,9 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myaccount) {
 	
 	$scope.$parent.title 	= "Account Settings";
 	$scope.password			= "";
-		
+	$scope.newemail = "";
+	$scope.newPassword = "";
+	$scope.confirmPassword = "";
 	
 	//We are getting latest information everytime from server. Not relying on any existing information
 	//Do i really need to get all profile information. isn't name and email id is enough?
@@ -2108,8 +2110,7 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myaccount) {
     	
     });
 	  
-	$scope.newemail = "";
-	$scope.password = "";
+
     $scope.updatedata = function() {
     	//Use entityname as name of the variable for boutique/brand name. As we have same name variable in Main controller scope as well.
     	//Main controllers name will get displayed until we get data from server
@@ -2129,7 +2130,7 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myaccount) {
     						"data" 		: newname,
     						"password"	: $scope.password
     					 };
-    	myprofile.posttoserver(datatosend, "name").success(function(data) {
+    	myaccount.posttoserver(datatosend, "name").success(function(data) {
         	if(data.status == true) {
         		myprofile.setname(newname);
         	} else {
@@ -2144,15 +2145,25 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myaccount) {
         });
     };
     
-    $scope.updatepassword = function (newpassword, event) {
-    	if(newpassword == $scope.password)
+    
+    $scope.updatepassword = function (event) {
+    	
+    	var newPassword = $scope.newPassword;
+    	var confirmPassword = $scope.confirmPassword;
+    	var password = $scope.password;
+    	if(newPassword != confirmPassword){    		
     		return;
+    	}    		
+    	if(newPassword == password){
+    		return;
+    	}    		    	
     	angular.element(event.srcElement).button('loading');
     	var datatosend = {
-    						"data" 		: newpassword,
-    						"password"	: $scope.password //Current password
+    						"newPassword" 		: newPassword,
+    						"confirmPassword"   : confirmPassword,
+    						"currentPassword"	: password //Current password
     					 };
-    	myprofile.posttoserver(datatosend, "password").success(function(data) {
+    	myaccount.posttoserver(datatosend, "pwd").success(function(data) {
         	if(!data.status) {
         		alert(data.error);
         	}
@@ -2166,16 +2177,16 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myaccount) {
     };
     
     $scope.updateemail = function (event) {
-    	if($scope.newemail == $scope.email)
+    	if($scope.email == myaccount.getemail())
     		return;
     	angular.element(event.srcElement).button('loading');
     	var datatosend = {
-    						"id" 		: $scope.newemail,
+    						"id" 		: $scope.email,
     						"password"	: $scope.password
     					 };
     	myaccount.posttoserver(datatosend, "email").success(function(data) {
         	if(data.status == true) {
-        		myaccount.setemail($scope.newemail);
+        		myaccount.setemail($scope.email);
         	} else {
         		alert(data.error);
         	}

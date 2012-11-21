@@ -161,7 +161,7 @@ public class User {
   }
 
   public void updatePassword(String old, String newPass1, String newPass2) {
-    if (!password.equals(encode(old))) {
+    if (!password.equals(old)) {
       throw new IllegalArgumentException("Existing Password invalid");
     }
     if (!newPass1.equals(newPass2)) {

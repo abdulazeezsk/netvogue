@@ -60,6 +60,18 @@ public class UserServiceImpl implements UserService{
           return ResultStatus.FAILURE;
         }
       }
+      
+      public ResultStatus savePassword(String userName, String password, StringBuffer error) {
+        try {
+          userRepo.setPassword(userName, password);
+          System.out.println("Updated Password");
+          return ResultStatus.SUCCESS;
+        } catch (Exception e) {
+          System.out.println("There was an error while saving password " + " - " + e.getMessage());
+          error.append(e.toString());
+          return ResultStatus.FAILURE;
+        }
+      }
 	
 	public void getBrandsCarriedAndCategories(User user) {
 		neo4jTemplate.fetch(user.getUsersCarried());
