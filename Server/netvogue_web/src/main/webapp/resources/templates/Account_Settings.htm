@@ -48,8 +48,8 @@
 								<label class="control-label"> Boutique Name</label>
 							</div>
 							<div class="controls">
-								<input type="text" ng-model="newname" class="span3"
-									placeholder="User name" name="uUserName" ng-maxlength="25"
+								<input type="text" ng-model="name" class="span3"
+									placeholder="Profile Name" name="uUserName" ng-maxlength="25"
 									required/>
 							</div>
 							<!-- <div class="divi2"></div>
@@ -62,7 +62,7 @@
 							<div class="divi2"></div>
 							<label class="control-label"> Password</label>
 							<div class="controls">
-								<input type="password" class="span3" ng-model="password"
+								<input type="password" class="span3" ng-model="name_password"
 									placeholder="Enter current password">
 							</div>
 							<div class="divi2"></div>
@@ -74,7 +74,7 @@
 							</div>
 							<div class="divi2"></div>
 							<button type="submit" style="margin-left: 550px;"
-								class="btn btn-inverse" ng-click="updatename(newname)">Save
+								class="btn btn-inverse" ng-click="updatename($event)">Save
 								changes</button>
 						</form>
 					</div>

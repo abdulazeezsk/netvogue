@@ -1464,6 +1464,9 @@ angular.module('netVogue.services', []).
 	    	setaccountinfo: function(account) {
 	    		angular.copy(account, accountinfo);
 	    	},
+	    	setname: function (name) {
+		       	accountinfo.name = name;
+		    },
 	    	getname: function() {
 	    		return accountinfo.name;
 	    	},

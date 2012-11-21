@@ -96,6 +96,41 @@ public class AccountSettingsController {
     return response;
   }
 
+  @RequestMapping(value = "/account/pname", method = RequestMethod.POST)
+  public @ResponseBody
+  JsonResponse updateProfileName(@RequestBody
+  AccountUpdateInfo accountInfo) throws Exception {
+    String newProfileName = null;
+    System.out.println("Updating Profile name");
+    JsonResponse response = new JsonResponse();
+    User user = userDetailsService.getUserFromSession();
+    System.out.println("user password: " + user.getPassword());
+    String accountPassword = user.encode(accountInfo.getPassword());
+    System.out.println("account paswd: " + accountPassword + " " + accountInfo.getId());
+    newProfileName = accountInfo.getId();
+    if (user.getPassword().equals(accountPassword)) {
+      if (user.getName().equalsIgnoreCase(newProfileName)) {
+        response.setStatus(false);
+        response.setError("Please enter a different profile name");
+      } else {
+        user.setName(newProfileName);
+        StringBuffer error = new StringBuffer();
+        if (ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
+          response.setStatus(true);
+        } else {
+          response.setStatus(false);
+          response.setError(error.toString());
+        }
+      }
+    } else {
+      response.setStatus(false);
+      response.setError("Please enter the correct password");
+    }
+
+    return response;
+  }
+
+
   @RequestMapping(value = "/account/email", method = RequestMethod.POST)
   public @ResponseBody
   JsonResponse updateemail(@RequestBody
