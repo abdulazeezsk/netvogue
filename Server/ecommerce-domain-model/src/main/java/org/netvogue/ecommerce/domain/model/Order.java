@@ -35,9 +35,11 @@ public class Order {
 
   private Address brandAddress;
 
-  private User brand;
+  private String brand;
 
-  private User createdBy;
+  private String createdBy;
+
+  private String termsAndCondtionsLink;
 
   private List<OrderReview> reviews = new ArrayList<OrderReview>();
 
@@ -126,12 +128,22 @@ public class Order {
     return !reviews.isEmpty();
   }
 
-  public User getCreatedBy() {
+
+  public String getCreatedBy() {
     return createdBy;
   }
 
-  public void setCreatedBy(final User createdBy) {
+  public void setCreatedBy(final String createdBy) {
     this.createdBy = createdBy;
+  }
+
+
+  public String getBrand() {
+    return brand;
+  }
+
+  public void setBrand(final String brand) {
+    this.brand = brand;
   }
 
   public Address getBillingAddress() {
@@ -150,13 +162,6 @@ public class Order {
     this.brandAddress = brandAddress;
   }
 
-  public User getBrand() {
-    return brand;
-  }
-
-  public void setBrand(final User brand) {
-    this.brand = brand;
-  }
 
   public void setOriginalLineItems(final Set<OrderLineItem> originalLineItems) {
     this.originalLineItems = originalLineItems;
@@ -172,6 +177,14 @@ public class Order {
 
   public void addReview(final OrderReview review) {
     reviews.add(review);
+  }
+
+  public String getTermsAndCondtionsLink() {
+    return termsAndCondtionsLink;
+  }
+
+  public void setTermsAndCondtionsLink(final String termsAndCondtionsLink) {
+    this.termsAndCondtionsLink = termsAndCondtionsLink;
   }
 
 }

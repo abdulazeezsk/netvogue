@@ -18,8 +18,7 @@ public class DefaultLookbookDaoImpl implements LookbookDao {
 
   public static String LOOKBOOKS_COLLECTION_NAME = "lookbooks";
 
-  public DefaultLookbookDaoImpl(final MongoTemplate mongoTemplate) {
-    this.mongoTemplate = mongoTemplate;
+  public DefaultLookbookDaoImpl() {
   }
 
   public void addLookbook(final Lookbook lookbook) {
@@ -73,6 +72,14 @@ public class DefaultLookbookDaoImpl implements LookbookDao {
     }
 
     return lookbooks;
+  }
+
+  public MongoTemplate getMongoTemplate() {
+    return mongoTemplate;
+  }
+
+  public void setMongoTemplate(final MongoTemplate mongoTemplate) {
+    this.mongoTemplate = mongoTemplate;
   }
 
 }

@@ -15,19 +15,31 @@
  <import resource="mongo-conf.xml" />
  
  <bean id="categoryDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultCategoryDaoImpl">
- 	<constructor-arg ref="journaSafeMongoTemplate"/>
+ 	<property name="mongoTemplate" ref="journaSafeMongoTemplate"/>
  </bean>
   
  <bean id="styleDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultStyleDaoImpl">
- 	<constructor-arg ref="journaSafeMongoTemplate"/>
+ 	<property name="mongoTemplate" ref="journaSafeMongoTemplate"/>
  </bean>
  
  <bean id="userDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultUserDaoImpl">
- 	<constructor-arg ref="journaSafeMongoTemplate"/>
+ 	<property name="mongoTemplate" ref="journaSafeMongoTemplate"/>
  </bean>
  
-  <bean id="reviewDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultReviewDaoImpl">
- 	<constructor-arg ref="journaSafeMongoTemplate"/>
+  <bean id="linesheetDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultLinesheetDaoImpl">
+ 	<property name="mongoTemplate" ref="journaSafeMongoTemplate"/>
+ </bean>
+
+ <bean id="lookbookDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultLookbookDaoImpl">
+ 	<property name="mongoTemplate" ref="journaSafeMongoTemplate"/>
+ </bean>
+ 
+ <bean id="orderDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultOrderDaoImpl">
+ 	<property name="mongoTemplate" ref="journaSafeMongoTemplate"/>
+ </bean>
+ 
+ <bean id="reviewDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultReviewDaoImpl">
+ 	<property name="mongoTemplate" ref="journaSafeMongoTemplate"/>
  </bean>
  
 </beans>

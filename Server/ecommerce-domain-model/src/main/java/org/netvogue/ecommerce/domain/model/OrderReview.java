@@ -8,7 +8,7 @@ public class OrderReview {
 
   private Set<OrderLineItem> lineItems = new HashSet<OrderLineItem>();
 
-  private User reviewedBy;
+  private String reviewedBy;
 
   private Date reviewedDate;
 
@@ -28,14 +28,15 @@ public class OrderReview {
     this.lineItems = lineItems;
   }
 
-
-  public User getReviewedBy() {
+  public String getReviewedBy() {
     return reviewedBy;
   }
 
-  public void setReviewedBy(final User reviewedBy) {
+
+  public void setReviewedBy(final String reviewedBy) {
     this.reviewedBy = reviewedBy;
   }
+
 
   public Date getReviewedDate() {
     return reviewedDate;
