@@ -41,7 +41,12 @@
 					<div class="divi2 topborderline"></div>
 					<div class="span9">
 						<form class="form-horizontal css-form" name="userform">
-							<label class="control-label"> User Name</label>
+							<div ui-if="iambrand">
+								<label class="control-label"> Brand Name</label>
+							</div>
+							<div ui-if="!iambrand">
+								<label class="control-label"> User Name</label>
+							</div>
 							<div class="controls">
 								<input type="text" ng-model="newname" class="span3"
 									placeholder="User name" name="uUserName" ng-maxlength="25"
