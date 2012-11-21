@@ -1,8 +1,8 @@
 package org.netvogue.server.webmvc.controllers;
 
 import org.netvogue.server.mandrill.util.EmailUtil;
-import org.netvogue.server.neo4japi.common.ResultStatus;
-import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.common.ResultStatus;
+import org.netvogue.server.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
 import org.netvogue.server.neo4japi.service.UserService;

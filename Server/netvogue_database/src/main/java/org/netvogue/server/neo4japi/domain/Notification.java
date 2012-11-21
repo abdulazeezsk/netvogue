@@ -1,7 +1,7 @@
 package org.netvogue.server.neo4japi.domain;
 
 //Project specific imports
-import org.netvogue.server.neo4japi.common.*;
+import org.netvogue.server.common.*;
 
 //Spring specific imports
 import org.springframework.data.neo4j.annotation.*;

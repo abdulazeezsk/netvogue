@@ -2,7 +2,7 @@ package org.netvogue.server.neo4japi.domain;
 
 import java.util.List;
 
-import org.netvogue.server.neo4japi.common.PrivacySetting;
+import org.netvogue.server.common.PrivacySetting;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;

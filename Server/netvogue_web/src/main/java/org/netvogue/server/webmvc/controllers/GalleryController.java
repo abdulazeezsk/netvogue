@@ -9,8 +9,8 @@ import java.util.Set;
 
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.UploadManager;
-import org.netvogue.server.neo4japi.common.ResultStatus;
-import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.common.ResultStatus;
+import org.netvogue.server.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.Photo;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.GalleryService;

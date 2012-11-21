@@ -3,7 +3,7 @@ package org.netvogue.server.webmvc.converters;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.netvogue.server.neo4japi.common.ProductLineSizes;
+import org.netvogue.server.common.ProductLineSizes;
 import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.webmvc.domain.StyleRequest;
 import org.springframework.core.convert.converter.Converter;

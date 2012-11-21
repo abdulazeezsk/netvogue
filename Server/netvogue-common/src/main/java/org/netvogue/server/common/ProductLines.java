@@ -1,6 +1,6 @@
-package org.netvogue.server.neo4japi.common;
+package org.netvogue.server.common;
 
-import org.netvogue.server.neo4japi.common.ProductLineSizes;
+import org.netvogue.server.common.ProductLineSizes;
 
 public enum ProductLines {
 	WOMENS_RTW(	"Womens RTW",	CategoryType.APPAREL, new ProductLineSizes[]{ProductLineSizes.SMALL, ProductLineSizes.MEDIUM, ProductLineSizes.LARGE}),

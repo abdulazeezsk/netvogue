@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
 import org.apache.commons.codec.binary.Base64;
 import org.netvogue.server.aws.core.Scalr.Method;
 import org.netvogue.server.aws.core.Scalr.Mode;
-import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.common.ResultStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.AmazonClientException;

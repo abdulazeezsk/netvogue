@@ -7,7 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.common.USER_TYPE;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;

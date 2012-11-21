@@ -1,7 +1,7 @@
 package org.netvogue.server.neo4japi.service;
 
 import org.netvogue.server.neo4japi.common.Constants;
-import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.StatusUpdate;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.repository.StatusUpdateRepository;

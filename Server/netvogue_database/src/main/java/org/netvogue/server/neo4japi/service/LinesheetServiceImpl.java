@@ -3,8 +3,7 @@ package org.netvogue.server.neo4japi.service;
 import java.util.Date;
 
 import org.netvogue.server.neo4japi.common.Constants;
-import org.netvogue.server.neo4japi.common.ResultStatus;
-import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Linesheet;
 import org.netvogue.server.neo4japi.repository.LinesheetRepository;

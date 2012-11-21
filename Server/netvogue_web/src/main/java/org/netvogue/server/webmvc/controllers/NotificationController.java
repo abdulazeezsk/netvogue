@@ -4,11 +4,10 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.NotificationService;
 import org.netvogue.server.webmvc.converters.ImageURLsConverter;
-import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.Notification;
 import org.netvogue.server.webmvc.domain.Notifications;

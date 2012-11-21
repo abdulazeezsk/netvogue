@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.netvogue.server.neo4japi.common.Constants;
-import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.aws.common.Constants;
+import org.netvogue.server.common.ResultStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 

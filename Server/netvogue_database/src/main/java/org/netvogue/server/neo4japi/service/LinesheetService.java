@@ -2,7 +2,7 @@ package org.netvogue.server.neo4japi.service;
 
 import java.util.Date;
 
-import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.Linesheet;
 
 public interface LinesheetService {

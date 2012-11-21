@@ -1,10 +1,7 @@
 package org.netvogue.server.neo4japi.common;
 
-import org.netvogue.server.aws.core.BucketName;
-
 public final class Constants {
 
-	public static final String bucketname = BucketName.DEV.getName();
 	public static final int MAX_IMAGES_IN_STYLE = 9;
 	
 	public static final int REFERENCES_PER_CALL = 2;

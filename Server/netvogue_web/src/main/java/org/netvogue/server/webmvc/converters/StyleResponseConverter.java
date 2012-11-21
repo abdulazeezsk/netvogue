@@ -7,7 +7,7 @@ import java.util.Set;
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
-import org.netvogue.server.neo4japi.common.ProductLineSizes;
+import org.netvogue.server.common.ProductLineSizes;
 import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.webmvc.domain.PhotoWeb;
 import org.netvogue.server.webmvc.domain.StyleResponse;

@@ -2,7 +2,7 @@ package org.netvogue.server.neo4japi.service;
 
 import java.util.List;
 
-import org.netvogue.server.neo4japi.common.ResultStatus;import org.netvogue.server.neo4japi.domain.PrintCampaign;
+import org.netvogue.server.common.ResultStatus;import org.netvogue.server.neo4japi.domain.PrintCampaign;
 import org.netvogue.server.neo4japi.domain.PrintCampaignPhoto;
 
 public interface PrintCampaignService {

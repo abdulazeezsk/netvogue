@@ -3,7 +3,7 @@ package org.netvogue.server.webmvc.converters;
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
-import org.netvogue.server.neo4japi.common.NotificationType;
+import org.netvogue.server.common.NotificationType;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.webmvc.domain.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
