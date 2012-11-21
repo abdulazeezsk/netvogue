@@ -53,7 +53,7 @@ public class DefaultLookbookDaoImpl implements LookbookDao {
 
 
   public List<Lookbook> findLookbooksByProductLine(final String productLineName) {
-    List<Lookbook> lookbooks = mongoTemplate.find(new Query(where("productLineName").is(productLineName)), Lookbook.class,
+    List<Lookbook> lookbooks = mongoTemplate.find(new Query(where("productLine").is(productLineName)), Lookbook.class,
         LOOKBOOKS_COLLECTION_NAME);
 
     if (lookbooks == null) {
@@ -63,8 +63,8 @@ public class DefaultLookbookDaoImpl implements LookbookDao {
     return lookbooks;
   }
 
-  public List<Lookbook> findLookbooksByCategory(final String categoryId) {
-    List<Lookbook> lookbooks = mongoTemplate.find(new Query(where("categoryId").is(massageAsObjectId(categoryId))), Lookbook.class,
+  public List<Lookbook> findLookbooksByCategory(final String category) {
+    List<Lookbook> lookbooks = mongoTemplate.find(new Query(where("category").is(category)), Lookbook.class,
         LOOKBOOKS_COLLECTION_NAME);
 
     if (lookbooks == null) {

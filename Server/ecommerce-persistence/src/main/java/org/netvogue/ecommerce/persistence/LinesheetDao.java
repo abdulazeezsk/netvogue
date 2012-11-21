@@ -16,7 +16,7 @@ public interface LinesheetDao {
 
   List<Linesheet> findLinesheetsByProductLine(final String productLineName);
 
-  List<Linesheet> findLinesheetsByCategory(final String categoryId);
+  List<Linesheet> findLinesheetsByCategory(final String categoryType);
 
   Linesheet getLinesheetById(final String linesheetId);
 
