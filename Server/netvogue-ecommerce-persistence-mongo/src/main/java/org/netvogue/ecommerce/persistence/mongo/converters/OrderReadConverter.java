@@ -36,7 +36,7 @@ public class OrderReadConverter implements Converter<DBObject, Order> {
     order.setBrand((String) source.get("brand"));
     order.setCreatedBy((String) source.get("createdBy"));
 
-    BasicDBList originalLineItemsList = (BasicDBList) source.get("originallLineItems");
+    BasicDBList originalLineItemsList = (BasicDBList) source.get("originalLineItems");
 
     Set<OrderLineItem> orderLineItems = new HashSet<OrderLineItem>();
 

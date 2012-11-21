@@ -36,7 +36,7 @@ public class OrderWriteConveter implements Converter<Order, DBObject > {
     }
 
 
-    dbOject.put("originallLineItems", originalLineItemsList);
+    dbOject.put("originalLineItems", originalLineItemsList);
 
 
     if (source.isReviewed()) {
