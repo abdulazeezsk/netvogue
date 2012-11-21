@@ -2151,7 +2151,6 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myaccount) {
     	var newPassword = $scope.newPassword;
     	var confirmPassword = $scope.confirmPassword;
     	var password = $scope.password;
-    	alert(newPassword + " " + confirmPassword + " " + password);
     	if(newPassword != confirmPassword){    		
     		return;
     	}    		

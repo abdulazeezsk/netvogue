@@ -114,7 +114,7 @@ public class AccountSettingsController {
         if (ResultStatus.SUCCESS == boutiqueService.ValidateEmail(accountInfo.getId())){
           user.setEmail(accountInfo.getId());
           StringBuffer error = new StringBuffer();
-          if (ResultStatus.SUCCESS == userService.saveEmail(user.getUsername(), accountInfo.getId(), error)) {
+          if (ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
             response.setStatus(true);
           }else{
             response.setStatus(false);
@@ -140,17 +140,17 @@ public class AccountSettingsController {
     System.out.println("Updating Password in Account Settings");
     JsonResponse response = new JsonResponse();
     User user = userDetailsService.getUserFromSession();
-    System.out.println("user password: " + user.getPassword());
-    String currentPassword = user.encode(passwordObject.getCurrentPassword());
-    System.out.println("crnt password: " + currentPassword);
+    String newPassword = user.encode(passwordObject.getNewPassword());
     try {
-      user.updatePassword(user.getPassword(), passwordObject.getCurrentPassword(), passwordObject.getConfirmPassword());
+      user.updatePassword(user.getPassword(), passwordObject.getNewPassword(), passwordObject.getConfirmPassword());
     } catch (Exception e) {
+      System.out.println("Error in updating password in user object:  " + e.getMessage());
       response.setStatus(false);
       response.setError(e.getMessage());
+      return response;
     }
     StringBuffer error = new StringBuffer();
-    if (ResultStatus.SUCCESS == userService.savePassword(user.getUsername(), currentPassword, error)) {
+    if (ResultStatus.SUCCESS == userService.savePassword(user.getUsername(), newPassword, error)) {
       response.setStatus(true);
     } else {
       response.setStatus(false);
