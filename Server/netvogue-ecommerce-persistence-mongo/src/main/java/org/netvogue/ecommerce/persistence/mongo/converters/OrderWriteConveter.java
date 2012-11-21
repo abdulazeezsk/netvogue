@@ -38,22 +38,25 @@ public class OrderWriteConveter implements Converter<Order, DBObject > {
 
     dbOject.put("originallLineItems", originalLineItemsList);
 
-    BasicDBList finalLineItemsList = new BasicDBList();
 
-    for(OrderLineItem lineItem : source.getFinalizedLineItemsAfterReview()) {
-      BasicDBObject dbLineItem = new BasicDBObject();
-      dbLineItem.put("lineItemId", lineItem.getLineItemId());
-      StyleWriteConverter converter = new StyleWriteConverter();
-      DBObject dbStyle = converter.convert(lineItem.getStyle());
-      dbLineItem.put("style", dbStyle);
-      dbLineItem.put("quantity", lineItem.getQuantity());
-      dbLineItem.put("styleSize", lineItem.getStyleSize().toString());
-      dbLineItem.put("stylePrice", lineItem.getStylePrice());
-      dbLineItem.put("lineItemPrice", lineItem.getLineItemPrice());
-      finalLineItemsList.add(dbLineItem);
+    if (source.isReviewed()) {
+      BasicDBList finalLineItemsList = new BasicDBList();
+
+      for (OrderLineItem lineItem : source.getLineItemsAfterReview()) {
+        BasicDBObject dbLineItem = new BasicDBObject();
+        dbLineItem.put("lineItemId", lineItem.getLineItemId());
+        StyleWriteConverter converter = new StyleWriteConverter();
+        DBObject dbStyle = converter.convert(lineItem.getStyle());
+        dbLineItem.put("style", dbStyle);
+        dbLineItem.put("quantity", lineItem.getQuantity());
+        dbLineItem.put("styleSize", lineItem.getStyleSize().toString());
+        dbLineItem.put("stylePrice", lineItem.getStylePrice());
+        dbLineItem.put("lineItemPrice", lineItem.getLineItemPrice());
+        finalLineItemsList.add(dbLineItem);
+      }
+      dbOject.put("lineItemsAfterReview", finalLineItemsList);
     }
 
-    dbOject.put("finalizedLineItemsAfterReview", finalLineItemsList);
 
     BasicDBObject orderTracking = new BasicDBObject();
     orderTracking.put("company",  source.getOrderTracking().getCompany());

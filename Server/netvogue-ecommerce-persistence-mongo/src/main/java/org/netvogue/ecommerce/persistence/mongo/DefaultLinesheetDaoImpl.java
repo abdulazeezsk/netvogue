@@ -51,7 +51,7 @@ public class DefaultLinesheetDaoImpl implements LinesheetDao {
   }
 
   public List<Linesheet> findLinesheetsByProductLine(final String productLineName) {
-    List<Linesheet> linesheets = mongoTemplate.find(new Query(where("productLineName").is(productLineName)),
+    List<Linesheet> linesheets = mongoTemplate.find(new Query(where("productLine").is(productLineName)),
         Linesheet.class, LINESHEETS_COLLECTION_NAME);
 
     if (linesheets == null) {
@@ -61,8 +61,8 @@ public class DefaultLinesheetDaoImpl implements LinesheetDao {
     return linesheets;
   }
 
-  public List<Linesheet> findLinesheetsByCategory(final String categoryId) {
-    List<Linesheet> linesheets = mongoTemplate.find(new Query(where("categoryId").is(categoryId)), Linesheet.class,
+  public List<Linesheet> findLinesheetsByCategory(final String categoryType) {
+    List<Linesheet> linesheets = mongoTemplate.find(new Query(where("category").is(categoryType)), Linesheet.class,
         LINESHEETS_COLLECTION_NAME);
 
     if (linesheets == null) {

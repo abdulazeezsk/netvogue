@@ -53,11 +53,11 @@ public class StyleWriteConverter implements Converter<Style, DBObject> {
 
 
     dbOject.put("createdDate", Linesheet.class.getName());
-    dbOject.put("brand", source.getBrand().getUsername());
-    dbOject.put("productLine", source.getProductLine().getName());
-    dbOject.put("categoryId", source.getCategory().getId());
-    dbOject.put("lookbookId", source.getLookbook().getId());
-    dbOject.put("linesheetId", source.getLinesheet().getId());
+    dbOject.put("brand", source.getBrand());
+    dbOject.put("productLine", source.getProductLine());
+    dbOject.put("category", source.getCategory());
+    dbOject.put("lookbookId", source.getLookbookId());
+    dbOject.put("linesheetId", source.getLinesheetId());
     dbOject.put("privacy", source.getPrivacy().toString());
 
     return dbOject;

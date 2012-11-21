@@ -26,15 +26,15 @@ public class Style {
 
   private Date createdDate;
 
-  private User brand;
+  private String brand;
 
-  private ProductLine productLine;
+  private String productLine;
 
-  private Category category;
+  private String category;
 
-  private Lookbook lookbook;
+  private String lookbookId;
 
-  private Linesheet linesheet;
+  private String linesheetId;
 
   private Privacy privacy;
 
@@ -44,29 +44,6 @@ public class Style {
     this.price = price;
   }
 
-  public Category getCategory() {
-    return category;
-  }
-
-  public void setCategory(final Category category) {
-    this.category = category;
-  }
-
-  public Lookbook getLookbook() {
-    return lookbook;
-  }
-
-  public void setLookbook(final Lookbook lookbook) {
-    this.lookbook = lookbook;
-  }
-
-  public Linesheet getLinesheet() {
-    return linesheet;
-  }
-
-  public void setLinesheet(final Linesheet linesheet) {
-    this.linesheet = linesheet;
-  }
 
   public String getStyleName() {
     return styleName;
@@ -140,21 +117,6 @@ public class Style {
     this.createdDate = createdDate;
   }
 
-  public User getBrand() {
-    return brand;
-  }
-
-  public void setBrand(final User brand) {
-    this.brand = brand;
-  }
-
-  public ProductLine getProductLine() {
-    return productLine;
-  }
-
-  public void setProductLine(final ProductLine productLine) {
-    this.productLine = productLine;
-  }
 
   public Set<String> getAvailableImages() {
     return availableImages;
@@ -169,11 +131,11 @@ public class Style {
   }
 
   public boolean isInLookbook() {
-    return lookbook != null;
+    return lookbookId != null;
   }
 
   public boolean isInLinesheet() {
-    return linesheet != null;
+    return linesheetId != null;
   }
 
   public String getId() {
@@ -191,5 +153,56 @@ public class Style {
   public void setPrivacy(final Privacy privacy) {
     this.privacy = privacy;
   }
+
+
+  public String getBrand() {
+    return brand;
+  }
+
+
+  public void setBrand(final String brand) {
+    this.brand = brand;
+  }
+
+
+  public String getProductLine() {
+    return productLine;
+  }
+
+
+  public void setProductLine(final String productLine) {
+    this.productLine = productLine;
+  }
+
+
+  public String getCategory() {
+    return category;
+  }
+
+
+  public void setCategory(final String category) {
+    this.category = category;
+  }
+
+
+  public String getLookbookId() {
+    return lookbookId;
+  }
+
+
+  public void setLookbookId(final String lookbookId) {
+    this.lookbookId = lookbookId;
+  }
+
+
+  public String getLinesheetId() {
+    return linesheetId;
+  }
+
+
+  public void setLinesheetId(final String linesheetId) {
+    this.linesheetId = linesheetId;
+  }
+
 
 }

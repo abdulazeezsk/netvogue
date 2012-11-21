@@ -9,7 +9,11 @@ public interface StyleDao {
 
   void addStyleToLookbook(final String lookbookId, Style style);
 
-  void deleteStyleFromLookbook(String lookbookId, String styleId);
+  void unassignLookbook(String styleId);
+
+  void addStyleToLinesheet(final String linesheetId, String styleId);
+
+  void unassignLinesheet(String styleId);
 
   List<Style> findStylesByBrand(final String userName);
 

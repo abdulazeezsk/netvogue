@@ -72,6 +72,18 @@ public class UserServiceImpl implements UserService{
           return ResultStatus.FAILURE;
         }
       }
+      
+      public ResultStatus saveProfileName(String userName, String profileName, StringBuffer error) {
+        try {
+          userRepo.setProfileName(userName, profileName);
+          System.out.println("Updated Profile Name");
+          return ResultStatus.SUCCESS;
+        } catch (Exception e) {
+          System.out.println("There was an error while saving profile Name " + " - " + e.getMessage());
+          error.append(e.toString());
+          return ResultStatus.FAILURE;
+        }
+      }
 	
 	public void getBrandsCarriedAndCategories(User user) {
 		neo4jTemplate.fetch(user.getUsersCarried());
