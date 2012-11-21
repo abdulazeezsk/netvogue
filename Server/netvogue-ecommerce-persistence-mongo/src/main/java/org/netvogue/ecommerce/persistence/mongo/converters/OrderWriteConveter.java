@@ -78,14 +78,14 @@ public class OrderWriteConveter implements Converter<Order, DBObject > {
     DBObject brandAddress = addressToDBObject(source.getBrandAddress());
     dbOject.put("brandAddress", brandAddress) ;
 
-    dbOject.put("brand", source.getBrand().getUsername());
-    dbOject.put("createdBy", source.getCreatedBy().getUsername());
+    dbOject.put("brand", source.getBrand());
+    dbOject.put("createdBy", source.getCreatedBy());
 
     BasicDBList dbReviews = new BasicDBList();
 
     for(OrderReview review : source.getReviews()) {
       BasicDBObject dbReview = new BasicDBObject();
-      dbReview.put("reviewedBy", review.getReviewedBy().getUsername());
+      dbReview.put("reviewedBy", review.getReviewedBy());
       dbReview.put("reviewDate", review.getReviewedDate());
 
       BasicDBList reviewLineItems = new BasicDBList();

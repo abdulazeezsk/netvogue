@@ -18,9 +18,9 @@ public class LinesheetWriteConverter implements Converter<Linesheet, DBObject>{
      }
 
     dbOject.put("createdDate", source.getCreatedDate());
-    dbOject.put("createdBy", source.getCreatedBy().getUsername());
-    dbOject.put("categoryId", source.getCategory().getId());
-    dbOject.put("productLineName", source.getProductLine().getName());
+    dbOject.put("createdBy", source.getCreatedBy());
+    dbOject.put("category", source.getCategory());
+    dbOject.put("productLine", source.getProductLine());
     dbOject.put("season", source.getSeason().toName());
     dbOject.put("year", source.getYear());
     dbOject.put("profileLink", source.getProfileLink());

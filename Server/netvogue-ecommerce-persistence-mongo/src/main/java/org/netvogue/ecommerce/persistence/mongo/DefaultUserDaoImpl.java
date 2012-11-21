@@ -16,8 +16,7 @@ public class DefaultUserDaoImpl implements UserDao {
 
   private MongoTemplate mongoTemplate;
 
-  public DefaultUserDaoImpl(final MongoTemplate mongoTemplate) {
-    this.mongoTemplate = mongoTemplate;
+  public DefaultUserDaoImpl() {
   }
 
   public void addUser(final User user) {
@@ -108,4 +107,11 @@ public class DefaultUserDaoImpl implements UserDao {
     originalUserDeatails.setZipCode(newUserDetails.getZipCode());
   }
 
+  public MongoTemplate getMongoTemplate() {
+    return mongoTemplate;
+  }
+
+  public void setMongoTemplate(final MongoTemplate mongoTemplate) {
+    this.mongoTemplate = mongoTemplate;
+  }
 }

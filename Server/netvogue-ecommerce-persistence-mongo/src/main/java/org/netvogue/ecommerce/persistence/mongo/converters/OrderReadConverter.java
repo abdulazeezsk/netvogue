@@ -9,7 +9,6 @@ import org.netvogue.ecommerce.domain.model.OrderTracking;
 import org.netvogue.ecommerce.domain.model.PaymentMethod;
 import org.netvogue.ecommerce.domain.model.Style;
 import org.netvogue.ecommerce.domain.model.StyleSize;
-import org.netvogue.ecommerce.persistence.UserDao;
 import org.springframework.core.convert.converter.Converter;
 
 import com.mongodb.BasicDBList;
@@ -24,7 +23,6 @@ import java.util.Set;
 
 public class OrderReadConverter implements Converter<DBObject, Order> {
 
-  private UserDao userDao;
 
   public Order convert(final DBObject source) {
 
@@ -35,8 +33,8 @@ public class OrderReadConverter implements Converter<DBObject, Order> {
     order.setOrderTotal((Long) source.get("orderTotal"));
     order.setResolutionComments((String) source.get("resolutionComments"));
     order.setPaymentMethod(PaymentMethod.valueOf((String) source.get("paymentMethod")));
-    order.setBrand(userDao.getUser((String) source.get("brand")));
-    order.setCreatedBy(userDao.getUser((String) source.get("createdBy")));
+    order.setBrand((String) source.get("brand"));
+    order.setCreatedBy((String) source.get("createdBy"));
 
     BasicDBList originalLineItemsList = (BasicDBList) source.get("originallLineItems");
 
@@ -99,7 +97,7 @@ public class OrderReadConverter implements Converter<DBObject, Order> {
       BasicDBObject dbReview = (BasicDBObject) obj;
       OrderReview review = new OrderReview();
       review.setComments(dbReview.getString("comments"));
-      review.setReviewedBy(userDao.getUser(dbReview.getString("reviewedBy")));
+      review.setReviewedBy(dbReview.getString("reviewedBy"));
       review.setReviewedDate((Date) dbReview.get("reviewedBy"));
       Set<OrderLineItem> lineItems = new HashSet<OrderLineItem>();
       BasicDBList dbReviewLineItems = (BasicDBList) dbReview.get("lineItems");
@@ -125,14 +123,6 @@ public class OrderReadConverter implements Converter<DBObject, Order> {
     order.setReviews(reviewsList);
     order.setTermsAndCondtionsLink((String)source.get("termsAndConditionsLink"));
     return order;
-  }
-
-  public UserDao getUserDao() {
-    return userDao;
-  }
-
-  public void setUserDao(final UserDao userDao) {
-    this.userDao = userDao;
   }
 
   private Address toAddress(final DBObject dbObject) {

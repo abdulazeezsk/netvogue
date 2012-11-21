@@ -8,11 +8,11 @@ public class Lookbook {
 
   private Date createdDate = new Date();
 
-  private ProductLine productLine;
+  private String productLine;
 
-  private Category category;
+  private String category;
 
-  private User createdBy;
+  private String createdBy;
 
   private Season season;
 
@@ -42,14 +42,6 @@ public class Lookbook {
     this.createdDate = createdDate;
   }
 
-  public ProductLine getProductLine() {
-    return productLine;
-  }
-
-  public void setProductLine(final ProductLine productLine) {
-    this.productLine = productLine;
-  }
-
   public Season getSeason() {
     return season;
   }
@@ -58,20 +50,25 @@ public class Lookbook {
     this.season = season;
   }
 
-  public User getCreatedBy() {
-    return createdBy;
-  }
 
-  public void setCreatedBy(final User createdBy) {
-    this.createdBy = createdBy;
-  }
-
-  public Category getCategory() {
+  public String getCategory() {
     return category;
   }
 
-  public void setCategory(final Category category) {
+  public void setCategory(final String category) {
     this.category = category;
+  }
+
+  public String getCreatedBy() {
+    return createdBy;
+  }
+
+  public void setCreatedBy(final String createdBy) {
+    this.createdBy = createdBy;
+  }
+
+  public void setProductLine(final String productLine) {
+    this.productLine = productLine;
   }
 
   public int getYear() {
@@ -98,4 +95,9 @@ public class Lookbook {
   public void setPrivacy(final Privacy privacy) {
     this.privacy = privacy;
   }
+
+  public String getProductLine() {
+    return productLine;
+  }
+
 }

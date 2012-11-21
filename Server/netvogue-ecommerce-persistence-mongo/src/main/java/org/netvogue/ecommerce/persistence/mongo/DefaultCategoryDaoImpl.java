@@ -17,8 +17,7 @@ public class DefaultCategoryDaoImpl implements CategoryDao {
 
   public static String CATEGORY_COLLECTION_NAME = "categories";
 
-  public DefaultCategoryDaoImpl(final MongoTemplate mongoTemplate) {
-    this.mongoTemplate = mongoTemplate;
+  public DefaultCategoryDaoImpl() {
   }
 
   public void addCategory(final Category category) {
@@ -68,6 +67,11 @@ public class DefaultCategoryDaoImpl implements CategoryDao {
     throw new RuntimeException("there is no product line exists with id :" + productLineName);
   }
 
+  public MongoTemplate getMongoTemplate() {
+    return mongoTemplate;
+  }
 
-
+  public void setMongoTemplate(final MongoTemplate mongoTemplate) {
+    this.mongoTemplate = mongoTemplate;
+  }
 }

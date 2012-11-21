@@ -24,8 +24,7 @@ public class DefaultStyleDaoImpl implements StyleDao {
 
   private Linesheet linesheetDao;
 
-  public DefaultStyleDaoImpl(final MongoTemplate mongoTemplate) {
-    this.mongoTemplate = mongoTemplate;
+  public DefaultStyleDaoImpl() {
   }
 
   public void addStyleToLookbook(final String lookbookId, final Style style) {
@@ -103,19 +102,19 @@ public class DefaultStyleDaoImpl implements StyleDao {
     this.lookbookDao = lookbookDao;
   }
 
-  public MongoTemplate getMongoTemplate() {
-    return mongoTemplate;
-  }
-
-  public void setMongoTemplate(final MongoTemplate mongoTemplate) {
-    this.mongoTemplate = mongoTemplate;
-  }
-
   public Linesheet getLinesheetDao() {
     return linesheetDao;
   }
 
   public void setLinesheetDao(final Linesheet linesheetDao) {
     this.linesheetDao = linesheetDao;
+  }
+
+  public MongoTemplate getMongoTemplate() {
+    return mongoTemplate;
+  }
+
+  public void setMongoTemplate(final MongoTemplate mongoTemplate) {
+    this.mongoTemplate = mongoTemplate;
   }
 }

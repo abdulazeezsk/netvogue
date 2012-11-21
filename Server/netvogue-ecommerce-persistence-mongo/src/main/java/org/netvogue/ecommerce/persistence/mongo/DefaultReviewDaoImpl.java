@@ -9,8 +9,7 @@ public class DefaultReviewDaoImpl implements ReviewDao {
 
   private MongoTemplate mongoTemplate;
 
-  public DefaultReviewDaoImpl(final MongoTemplate mongoTemplate) {
-    this.mongoTemplate = mongoTemplate;
+  public DefaultReviewDaoImpl() {
   }
 
   public void addReview(final long styleId, final Review review) {
@@ -26,6 +25,14 @@ public class DefaultReviewDaoImpl implements ReviewDao {
   public void voteReview(final long reviewId, final long styleId, final User votedBy) {
     // TODO Auto-generated method stub
 
+  }
+
+  public MongoTemplate getMongoTemplate() {
+    return mongoTemplate;
+  }
+
+  public void setMongoTemplate(final MongoTemplate mongoTemplate) {
+    this.mongoTemplate = mongoTemplate;
   }
 
 }

@@ -8,11 +8,11 @@ public class Linesheet {
 
   private Date createdDate = new Date();
 
-  private ProductLine productLine;
+  private String productLine;
 
-  private Category category;
+  private String category;
 
-  private User createdBy;
+  private String createdBy;
 
   private Season season;
 
@@ -42,11 +42,11 @@ public class Linesheet {
     this.createdDate = createdDate;
   }
 
-  public ProductLine getProductLine() {
+  public String getProductLine() {
     return productLine;
   }
 
-  public void setProductLine(final ProductLine productLine) {
+  public void setProductLine(final String productLine) {
     this.productLine = productLine;
   }
 
@@ -58,20 +58,20 @@ public class Linesheet {
     this.season = season;
   }
 
-  public User getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(final User createdBy) {
-    this.createdBy = createdBy;
-  }
-
-  public Category getCategory() {
+  public String getCategory() {
     return category;
   }
 
-  public void setCategory(final Category category) {
+  public void setCategory(final String category) {
     this.category = category;
+  }
+
+  public String getCreatedBy() {
+    return createdBy;
+  }
+
+  public void setCreatedBy(final String createdBy) {
+    this.createdBy = createdBy;
   }
 
   public int getYear() {

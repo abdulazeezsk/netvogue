@@ -17,20 +17,19 @@ import java.util.List;
 
 public class DefaultOrderManagementDaoImpl implements OrderManagementDao {
 
-  private MongoTemplate template;
+  private MongoTemplate mongoTemplate;
 
   public static String ORDER_COLLECTION_NAME = "orders";
 
-  public DefaultOrderManagementDaoImpl(final MongoTemplate template) {
-    this.template = template;
+  public DefaultOrderManagementDaoImpl() {
   }
 
   public void placeOrder(final Order order) {
-    template.insert(order, ORDER_COLLECTION_NAME);
+    mongoTemplate.insert(order, ORDER_COLLECTION_NAME);
   }
 
   public void deleteOrderLineItem(final String orderId, final String orderLineItemId) {
-    Order order = template.findById(massageAsObjectId(orderId), Order.class, ORDER_COLLECTION_NAME);
+    Order order = mongoTemplate.findById(massageAsObjectId(orderId), Order.class, ORDER_COLLECTION_NAME);
     Iterator<OrderLineItem> it = order.getOriginalLineItems().iterator();
     while (it.hasNext()) {
       OrderLineItem lineItem = it.next();
@@ -39,17 +38,17 @@ public class DefaultOrderManagementDaoImpl implements OrderManagementDao {
       }
     }
 
-    template.save(order, ORDER_COLLECTION_NAME);
+    mongoTemplate.save(order, ORDER_COLLECTION_NAME);
   }
 
   public void updateOrderStatus(final String orderId, final OrderStatus status) {
-    Order order = template.findById(massageAsObjectId(orderId), Order.class, ORDER_COLLECTION_NAME);
+    Order order = mongoTemplate.findById(massageAsObjectId(orderId), Order.class, ORDER_COLLECTION_NAME);
     order.getOrderTracking().setStatus(status);
-    template.save(order, ORDER_COLLECTION_NAME);
+    mongoTemplate.save(order, ORDER_COLLECTION_NAME);
   }
 
   public List<Order> findOrdersByUser(final String userName) {
-    List<Order> orders = template.find(new Query(where("createdBy").is(userName)), Order.class, ORDER_COLLECTION_NAME);
+    List<Order> orders = mongoTemplate.find(new Query(where("createdBy").is(userName)), Order.class, ORDER_COLLECTION_NAME);
     if (orders == null) {
       orders = new ArrayList<Order>();
     }
@@ -57,7 +56,7 @@ public class DefaultOrderManagementDaoImpl implements OrderManagementDao {
   }
 
   public List<Order> findOrdersByBrand(final String userName) {
-    List<Order> orders = template.find(new Query(where("brand").is(userName)), Order.class, ORDER_COLLECTION_NAME);
+    List<Order> orders = mongoTemplate.find(new Query(where("brand").is(userName)), Order.class, ORDER_COLLECTION_NAME);
     if (orders == null) {
       orders = new ArrayList<Order>();
     }
@@ -65,7 +64,7 @@ public class DefaultOrderManagementDaoImpl implements OrderManagementDao {
   }
 
   public List<Order> findOrdersByUserAndByStatus(final String userName, final OrderStatus status) {
-    List<Order> orders = template.find(
+    List<Order> orders = mongoTemplate.find(
         new Query(where("createdBy").is(userName).andOperator(where("orderTracking.status").is(status.toString()))),
         Order.class, ORDER_COLLECTION_NAME);
     if (orders == null) {
@@ -75,7 +74,7 @@ public class DefaultOrderManagementDaoImpl implements OrderManagementDao {
   }
 
   public List<Order> findOrdersByBrandAndStatus(final String userName, final OrderStatus status) {
-    List<Order> orders = template.find(
+    List<Order> orders = mongoTemplate.find(
         new Query(where("brand").is(userName).andOperator(where("orderTracking.status").is(status.toString()))),
         Order.class, ORDER_COLLECTION_NAME);
     if (orders == null) {
@@ -85,18 +84,26 @@ public class DefaultOrderManagementDaoImpl implements OrderManagementDao {
   }
 
   public void addReview(final String orderId, final OrderReview review) {
-    Order order = template.findById(massageAsObjectId(orderId), Order.class, ORDER_COLLECTION_NAME);
+    Order order = mongoTemplate.findById(massageAsObjectId(orderId), Order.class, ORDER_COLLECTION_NAME);
     order.addReview(review);
-    template.save(order, ORDER_COLLECTION_NAME);
+    mongoTemplate.save(order, ORDER_COLLECTION_NAME);
   }
 
   public Order getOrderByTrackingId(final String trackingId) {
-    List<Order> orders = template.find(new Query(where("orderTracking.trackingId").is(trackingId)), Order.class,
+    List<Order> orders = mongoTemplate.find(new Query(where("orderTracking.trackingId").is(trackingId)), Order.class,
         ORDER_COLLECTION_NAME);
     if (orders.size() > 1) {
       throw new RuntimeException("how come there are " + orders.size() + " orders with trackingId:" + trackingId);
     }
     return orders.get(0);
+  }
+
+  public MongoTemplate getMongoTemplate() {
+    return mongoTemplate;
+  }
+
+  public void setMongoTemplate(final MongoTemplate mongoTemplate) {
+    this.mongoTemplate = mongoTemplate;
   }
 
 }
