@@ -70,8 +70,9 @@ public class NotificationController {
 		Notifications response = new Notifications();
 		
 		response.setName(user.getName());
-		if(!user.getProfilePicLink().isEmpty())
-		  response.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+		String profilepic = user.getProfilePicLink();
+		if(null != profilepic && !profilepic.isEmpty())
+			response.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
 		Set<Notification> notificationsTemp = new LinkedHashSet<Notification>();
 		
 		String username = user.getUsername();

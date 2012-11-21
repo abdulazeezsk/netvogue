@@ -72,7 +72,9 @@ public class EditorialController {
 		if(0 == pagenumber) {
 			campaigns.setName(user.getName());
 			campaigns.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-			campaigns.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+			String profilepic = user.getProfilePicLink();
+			if(null != profilepic && !profilepic.isEmpty())
+				campaigns.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
 		}
 		Set<Editorial> campaignTemp = new LinkedHashSet<Editorial>();
 		Iterable<org.netvogue.server.neo4japi.domain.Editorial> dbCampaigns;
@@ -120,7 +122,9 @@ public class EditorialController {
 		if(0 == pagenumber) {
 			photos.setName(user.getName());
 			photos.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-			photos.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+			String profilepic = user.getProfilePicLink();
+			if(null != profilepic && !profilepic.isEmpty())
+				photos.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
 			photos.setGalleryname(editorialService.getEditorial(galleryid).getEditorialname());
 		}
 		

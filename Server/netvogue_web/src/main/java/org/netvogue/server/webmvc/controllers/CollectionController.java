@@ -82,7 +82,9 @@ public class CollectionController {
 		
 		if(0 == pagenumber) {
 			collections.setName(user.getName());
-			collections.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+			String profilepic = user.getProfilePicLink();
+			if(null != profilepic && !profilepic.isEmpty())
+				collections.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
 		}
 		Set<Collection> collectionTemp = new LinkedHashSet<Collection>();
 		Iterable<CollectionData> dbCollections;
@@ -143,7 +145,9 @@ public class CollectionController {
 		
 		if(0 == pagenumber) {
 			photos.setName(user.getName());
-			photos.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+			String profilepic = user.getProfilePicLink();
+			if(null != profilepic && !profilepic.isEmpty())
+				photos.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
 			photos.setGalleryname(collectionService.getCollection(galleryid).getCollectionseasonname());
 		}
 		

@@ -116,7 +116,9 @@ public class LinesheetController {
 		}
 		if(0 == pagenumber) {
 			linesheets.setName(user.getName());
-			linesheets.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+			String profilepic = user.getProfilePicLink();
+			if(null != profilepic && !profilepic.isEmpty())
+				linesheets.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
 		}
 		Set<Linesheet> linesheetTemp = new LinkedHashSet<Linesheet>();
 		Iterable<LinesheetData> dbLinesheets;
@@ -191,7 +193,9 @@ public class LinesheetController {
 		
 		if(0 == pagenumber) {
 			styles.setName(user.getName());
-			styles.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+			String profilepic = user.getProfilePicLink();
+			if(null != profilepic && !profilepic.isEmpty())
+				styles.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
 		}
 		
 		//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez

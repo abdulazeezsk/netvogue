@@ -63,8 +63,9 @@ public class StatusUpdateController {
 			updates.setName(user.getName());
 			updates.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
 			//Set profile pic
-			if(null != user.getProfilePicLink()) {
-				updates.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+			String profilepic = user.getProfilePicLink();
+			if(null != profilepic && !profilepic.isEmpty()) {
+				updates.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
 			}
 		
 			//Get ContactInfo
