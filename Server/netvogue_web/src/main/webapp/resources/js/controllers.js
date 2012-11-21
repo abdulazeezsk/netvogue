@@ -2114,7 +2114,7 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myaccount) {
     $scope.updatedata = function() {
     	//Use entityname as name of the variable for boutique/brand name. As we have same name variable in Main controller scope as well.
     	//Main controllers name will get displayed until we get data from server
-    	$scope.entityname  		= myaccount.getname();
+    	$scope.name  		= myaccount.getname();
     	$scope.isbrand			= myaccount.isbrand();
     	$scope.profilepic		= myaccount.getprofilepic();
     	$scope.email 			= myaccount.getemail();
@@ -2122,17 +2122,18 @@ function MyCtrlAccountSettings($scope, $routeParams, $http, myaccount) {
 	};
     
     //Set Name
-    $scope.updatename = function (newname, event) {
-    	if(newname == $scope.entityname)
+    $scope.updatename = function (event) {
+    	var profileName = $scope.name;
+    	if(profileName == myaccount.getname())
     		return
     	angular.element(event.srcElement).button('loading');
     	var datatosend = {
-    						"data" 		: newname,
-    						"password"	: $scope.password
+    						"id" 		: profileName,
+    						"password"	: $scope.name_password
     					 };
-    	myaccount.posttoserver(datatosend, "name").success(function(data) {
+    	myaccount.posttoserver(datatosend, "pname").success(function(data) {
         	if(data.status == true) {
-        		myprofile.setname(newname);
+        		myaccount.setname(profileName);
         	} else {
         		alert(data.error);
         	}

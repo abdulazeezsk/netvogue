@@ -32,6 +32,9 @@ public interface UserRepository extends GraphRepository<User> {
 	@Query("START n=node:search(username={0}) SET n.password = {1}")
 	void setPassword(String username, String password);
 	
+	@Query("START n=node:search(username={0}) SET n.name = {1}")
+	void setProfileName(String username, String profileName);
+	
 	@Query( "START n=node:search({0}) " +
 			"WHERE has(n.userType)" +
 			"RETURN n SKIP {2} LIMIT {1}")
