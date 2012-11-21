@@ -164,7 +164,7 @@ body {
 	<!-- Placed at the end of the document so the pages load faster -->
 	
 	 <script type="text/javascript">
-        var entity = "brand";
+        var entity = "boutique";
     </script>
     <script src="lib/jquery/jquery.js" type="text/javascript"></script>
     <script src="lib/bootstrap/bootstrap.min.js" type="text/javascript"></script>
