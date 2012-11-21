@@ -1,7 +1,7 @@
 package org.netvogue.server.neo4japi.service;
 
-import org.netvogue.server.neo4japi.common.ProductLines;
-import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.common.ProductLines;
+import org.netvogue.server.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.Boutique;
 import org.netvogue.server.neo4japi.domain.Category;
 import org.netvogue.server.neo4japi.domain.User;

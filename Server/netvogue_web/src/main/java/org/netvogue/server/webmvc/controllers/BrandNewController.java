@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 
-import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.Boutique;
 import org.netvogue.server.neo4japi.domain.Brand;
 import org.netvogue.server.neo4japi.service.BoutiqueService;

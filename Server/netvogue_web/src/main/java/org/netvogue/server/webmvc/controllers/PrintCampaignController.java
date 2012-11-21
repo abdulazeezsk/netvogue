@@ -9,8 +9,8 @@ import java.util.Set;
 
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.UploadManager;
-import org.netvogue.server.neo4japi.common.ResultStatus;
-import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.common.ResultStatus;
+import org.netvogue.server.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.PrintCampaignPhoto;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.PrintCampaignService;
@@ -73,7 +73,9 @@ public class PrintCampaignController {
 		
 		campaigns.setName(user.getName());
 		campaigns.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-		campaigns.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+		String profilepic = user.getProfilePicLink();
+		if(null != profilepic && !profilepic.isEmpty())
+			campaigns.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
 		Set<PrintCampaign> campaignTemp = new LinkedHashSet<PrintCampaign>();
 		Iterable<org.netvogue.server.neo4japi.domain.PrintCampaign> dbPrintCampaigns;
 		if(galleryname.isEmpty()) {
@@ -119,7 +121,9 @@ public class PrintCampaignController {
 		if(0 == pagenumber) {
 			photos.setName(user.getName());
 			photos.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-			photos.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+			String profilepic = user.getProfilePicLink();
+			if(null != profilepic && !profilepic.isEmpty())
+				photos.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
 		}
 		org.netvogue.server.neo4japi.domain.PrintCampaign printcampaign = printcampaignService.getPrintCampaign(galleryid);
 		if(null == printcampaign) {

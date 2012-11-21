@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.netvogue.server.neo4japi.common.Constants;
-import org.netvogue.server.neo4japi.common.ProductLineSizes;
+import org.netvogue.server.common.ProductLineSizes;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;

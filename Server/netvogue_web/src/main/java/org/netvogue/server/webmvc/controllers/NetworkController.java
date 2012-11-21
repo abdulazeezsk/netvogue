@@ -9,10 +9,10 @@ import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
 import org.netvogue.server.mandrill.util.EmailUtil;
-import org.netvogue.server.neo4japi.common.NetworkStatus;
-import org.netvogue.server.neo4japi.common.NotificationType;
-import org.netvogue.server.neo4japi.common.ResultStatus;
-import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.common.NetworkStatus;
+import org.netvogue.server.common.NotificationType;
+import org.netvogue.server.common.ResultStatus;
+import org.netvogue.server.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.EmailNotifications;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.NetworkService;
@@ -63,7 +63,8 @@ public class NetworkController {
 		if(0 == pagenumber) {
 			response.setName(user.getName());
 			response.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
-			if(!user.getProfilePicLink().isEmpty())
+			String profilepicLink = user.getProfilePicLink();
+			if(null != profilepicLink && !profilepicLink.isEmpty())
 			  response.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 
 			//Set Contact info as well

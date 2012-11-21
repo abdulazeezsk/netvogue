@@ -7,6 +7,7 @@ import org.springframework.data.neo4j.support.Neo4jTemplate;
 import org.netvogue.server.neo4japi.domain.Brand;
 import org.netvogue.server.neo4japi.repository.*;
 import org.netvogue.server.neo4japi.common.*;
+import org.netvogue.server.common.*;
 
 public class BrandServiceImpl implements BrandService{
 

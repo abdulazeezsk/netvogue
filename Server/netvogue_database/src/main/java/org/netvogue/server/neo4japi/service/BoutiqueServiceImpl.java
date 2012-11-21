@@ -3,9 +3,9 @@ package org.netvogue.server.neo4japi.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.neo4j.support.Neo4jTemplate;
 
-import org.netvogue.server.neo4japi.common.ProductLines;
-import org.netvogue.server.neo4japi.common.ResultStatus;
-import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.common.ProductLines;
+import org.netvogue.server.common.ResultStatus;
+import org.netvogue.server.common.USER_TYPE;
 import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.*;
 import org.netvogue.server.neo4japi.repository.BoutiqueRefNodeRepository;

@@ -1,4 +1,4 @@
-package org.netvogue.server.neo4japi.common;
+package org.netvogue.server.common;
 
 public enum NotificationType {
 	NETWORK_REQUEST,

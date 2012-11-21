@@ -10,14 +10,13 @@ import java.util.Set;
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
-import org.netvogue.server.neo4japi.common.ResultStatus;
-import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.common.ResultStatus;
+import org.netvogue.server.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.StatusUpdateData;
 import org.netvogue.server.neo4japi.service.StatusUpdateService;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.converters.ImageURLsConverter;
-import org.netvogue.server.webmvc.converters.StatusUpdateDataConverter;
 import org.netvogue.server.webmvc.domain.ContactInfo;
 import org.netvogue.server.webmvc.domain.JsonRequest;
 import org.netvogue.server.webmvc.domain.JsonResponse;
@@ -64,8 +63,9 @@ public class StatusUpdateController {
 			updates.setName(user.getName());
 			updates.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
 			//Set profile pic
-			if(null != user.getProfilePicLink()) {
-				updates.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+			String profilepic = user.getProfilePicLink();
+			if(null != profilepic && !profilepic.isEmpty()) {
+				updates.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
 			}
 		
 			//Get ContactInfo

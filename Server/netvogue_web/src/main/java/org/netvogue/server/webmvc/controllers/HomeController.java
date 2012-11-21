@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.ui.Model;
 
-import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.User;
 
 @Controller

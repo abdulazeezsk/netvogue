@@ -1,6 +1,6 @@
 package org.netvogue.server.neo4japi.repository;
 
-import org.netvogue.server.neo4japi.common.NetworkStatus;
+import org.netvogue.server.common.NetworkStatus;
 import org.netvogue.server.neo4japi.domain.*;
 import org.netvogue.server.neo4japi.service.CollectionData;
 import org.netvogue.server.neo4japi.service.LinesheetData;

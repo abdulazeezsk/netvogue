@@ -4,11 +4,10 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.common.ResultStatus;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.NotificationService;
 import org.netvogue.server.webmvc.converters.ImageURLsConverter;
-import org.netvogue.server.webmvc.domain.ImageURLsResponse;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.Notification;
 import org.netvogue.server.webmvc.domain.Notifications;
@@ -71,8 +70,9 @@ public class NotificationController {
 		Notifications response = new Notifications();
 		
 		response.setName(user.getName());
-		if(!user.getProfilePicLink().isEmpty())
-		  response.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+		String profilepic = user.getProfilePicLink();
+		if(null != profilepic && !profilepic.isEmpty())
+			response.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
 		Set<Notification> notificationsTemp = new LinkedHashSet<Notification>();
 		
 		String username = user.getUsername();

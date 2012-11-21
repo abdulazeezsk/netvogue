@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.netvogue.server.neo4japi.common.Constants;
-import org.netvogue.server.neo4japi.common.ResultStatus;
+import org.netvogue.server.common.ResultStatus;
 import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.PrintCampaign;
 import org.netvogue.server.neo4japi.domain.PrintCampaignPhoto;

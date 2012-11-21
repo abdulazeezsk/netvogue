@@ -1,11 +1,18 @@
 package org.netvogue.server.webmvc.domain;
 
+import org.netvogue.server.webmvc.common.Constants;
+
 public class CommonResponse {
 	String profileid;
 	boolean isbrand;
 	String name;
 	ImageURLsResponse profilepic;
 	
+	public CommonResponse() {
+		profilepic = new ImageURLsResponse();
+	    profilepic.setThumbnail_url(Constants.PROFILE_DefaultPic);
+	    profilepic.setLeft_url(Constants.PROFILE_DefaultPic);
+	}
 	public String getProfileid() {
 		return profileid;
 	}

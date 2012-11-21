@@ -1,7 +1,7 @@
 package org.netvogue.server.neo4japi.domain;
 
-import org.netvogue.server.neo4japi.common.CategoryType;
-import org.netvogue.server.neo4japi.common.ProductLines;
+import org.netvogue.server.common.CategoryType;
+import org.netvogue.server.common.ProductLines;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;

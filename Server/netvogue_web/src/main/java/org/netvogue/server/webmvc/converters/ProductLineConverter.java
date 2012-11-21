@@ -1,6 +1,6 @@
 package org.netvogue.server.webmvc.converters;
 
-import org.netvogue.server.neo4japi.common.ProductLines;
+import org.netvogue.server.common.ProductLines;
 import org.springframework.core.convert.converter.Converter;
 
 public class ProductLineConverter implements Converter<String[], ProductLines[]>{

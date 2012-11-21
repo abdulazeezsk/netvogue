@@ -13,9 +13,9 @@ import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
 import org.netvogue.server.neo4japi.common.Constants;
-import org.netvogue.server.neo4japi.common.ProductLines;
-import org.netvogue.server.neo4japi.common.ResultStatus;
-import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.common.ProductLines;
+import org.netvogue.server.common.ResultStatus;
+import org.netvogue.server.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.Category;
 import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.neo4japi.domain.User;
@@ -80,7 +80,9 @@ public class StyleSheetController {
 		
 		if(0 == pagenumber) {
 			stylesheets.setName(loggedinUser.getName());
-			stylesheets.setProfilepic(imageURLsConverter.convert(loggedinUser.getProfilePicLink(), loggedinUser.getUsername()));
+			String profilepic = loggedinUser.getProfilePicLink();
+			if(null != profilepic && !profilepic.isEmpty())
+				stylesheets.setProfilepic(imageURLsConverter.convert(profilepic, loggedinUser.getUsername()));
 		}
 		Set<Stylesheet> stylesheetTemp = new LinkedHashSet<Stylesheet>();
 		Iterable<StylesheetData> dbStylesheets;
@@ -139,7 +141,9 @@ public class StyleSheetController {
 		
 		if(0 == pagenumber) {
 			styles.setName(loggedinUser.getName());
-			styles.setProfilepic(imageURLsConverter.convert(loggedinUser.getProfilePicLink(), loggedinUser.getUsername()));
+			String profilepic = loggedinUser.getProfilePicLink();
+			if(null != profilepic && !profilepic.isEmpty())
+				styles.setProfilepic(imageURLsConverter.convert(loggedinUser.getProfilePicLink(), loggedinUser.getUsername()));
 		}
 		
 		//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez

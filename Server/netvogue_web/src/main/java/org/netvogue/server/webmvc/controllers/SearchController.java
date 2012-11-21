@@ -7,8 +7,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.netvogue.server.neo4japi.common.ProductLines;
-import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.common.ProductLines;
+import org.netvogue.server.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.converters.ImageURLsConverter;

@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.Set;
 
 import org.netvogue.server.neo4japi.common.Constants;
-import org.netvogue.server.neo4japi.common.NetworkStatus;
-import org.netvogue.server.neo4japi.common.ResultStatus;
-import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.common.NetworkStatus;
+import org.netvogue.server.common.ResultStatus;
+import org.netvogue.server.common.USER_TYPE;
 import org.netvogue.server.neo4japi.common.Utils;
 import org.netvogue.server.neo4japi.domain.Editorial;
 import org.netvogue.server.neo4japi.domain.EmailNotifications;

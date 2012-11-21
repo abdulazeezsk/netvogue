@@ -11,9 +11,9 @@ import java.util.Set;
 
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.UploadManager;
-import org.netvogue.server.neo4japi.common.ProductLines;
-import org.netvogue.server.neo4japi.common.ResultStatus;
-import org.netvogue.server.neo4japi.common.USER_TYPE;
+import org.netvogue.server.common.ProductLines;
+import org.netvogue.server.common.ResultStatus;
+import org.netvogue.server.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.Category;
 import org.netvogue.server.neo4japi.domain.CollectionPhoto;
 import org.netvogue.server.neo4japi.domain.User;
@@ -82,7 +82,9 @@ public class CollectionController {
 		
 		if(0 == pagenumber) {
 			collections.setName(user.getName());
-			collections.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+			String profilepic = user.getProfilePicLink();
+			if(null != profilepic && !profilepic.isEmpty())
+				collections.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
 		}
 		Set<Collection> collectionTemp = new LinkedHashSet<Collection>();
 		Iterable<CollectionData> dbCollections;
@@ -143,7 +145,9 @@ public class CollectionController {
 		
 		if(0 == pagenumber) {
 			photos.setName(user.getName());
-			photos.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+			String profilepic = user.getProfilePicLink();
+			if(null != profilepic && !profilepic.isEmpty())
+				photos.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
 			photos.setGalleryname(collectionService.getCollection(galleryid).getCollectionseasonname());
 		}
 		

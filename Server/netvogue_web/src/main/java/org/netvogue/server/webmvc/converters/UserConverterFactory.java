@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.netvogue.server.neo4japi.common.ProductLines;
+import org.netvogue.server.common.ProductLines;
 import org.netvogue.server.neo4japi.domain.Boutique;
 import org.netvogue.server.neo4japi.domain.Brand;
 import org.netvogue.server.neo4japi.domain.Category;
