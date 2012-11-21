@@ -27,14 +27,14 @@
  </bean>
  
   <bean id="linesheetDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultLinesheetDaoImpl">
- 	<property name="mongoTemplate" ref="journaSafeMongoTemplate"/>
- </bean>
+  	<constructor-arg ref="journaSafeMongoTemplate" />
+  </bean>
 
  <bean id="lookbookDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultLookbookDaoImpl">
  	<property name="mongoTemplate" ref="journaSafeMongoTemplate"/>
  </bean>
  
- <bean id="orderDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultOrderDaoImpl">
+ <bean id="orderDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultOrderManagementDaoImpl">
  	<property name="mongoTemplate" ref="journaSafeMongoTemplate"/>
  </bean>
  
