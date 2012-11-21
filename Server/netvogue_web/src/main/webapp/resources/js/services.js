@@ -1487,7 +1487,7 @@ angular.module('netVogue.services', []).
 	        setemailnotifications: function (notifications) {
 	        	accountinfo.emailnotifications = notifications;
 	        },	       
-	        posttoserver: function(datatosend, url) {
+	        posttoserver: function(datatosend, url) {	        	
 	        	var config = {
 	                      method: "POST",
 	                      data: datatosend,

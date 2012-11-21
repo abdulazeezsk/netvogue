@@ -12,6 +12,7 @@ import org.netvogue.server.webmvc.domain.AccountInfo;
 import org.netvogue.server.webmvc.domain.AccountUpdateInfo;
 import org.netvogue.server.webmvc.domain.EmailNotifications;
 import org.netvogue.server.webmvc.domain.JsonResponse;
+import org.netvogue.server.webmvc.domain.PasswordChangeRequest;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -129,6 +130,32 @@ public class AccountSettingsController {
       response.setError("Please enter the correct password");
     }
 
+    return response;
+  }
+
+  @RequestMapping(value = "/account/pwd", method = RequestMethod.POST)
+  public @ResponseBody
+  JsonResponse updatePassword(@RequestBody
+  PasswordChangeRequest passwordObject) throws Exception {
+    System.out.println("Updating Password in Account Settings");
+    JsonResponse response = new JsonResponse();
+    User user = userDetailsService.getUserFromSession();
+    System.out.println("user password: " + user.getPassword());
+    String currentPassword = user.encode(passwordObject.getCurrentPassword());
+    System.out.println("crnt password: " + currentPassword);
+    try {
+      user.updatePassword(user.getPassword(), passwordObject.getCurrentPassword(), passwordObject.getConfirmPassword());
+    } catch (Exception e) {
+      response.setStatus(false);
+      response.setError(e.getMessage());
+    }
+    StringBuffer error = new StringBuffer();
+    if (ResultStatus.SUCCESS == userService.savePassword(user.getUsername(), currentPassword, error)) {
+      response.setStatus(true);
+    } else {
+      response.setStatus(false);
+      response.setError(error.toString());
+    }
     return response;
   }
 
