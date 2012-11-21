@@ -30,7 +30,7 @@ public class Linesheet {
     this.id = id;
   }
 
-  public String getLookbookName() {
+  public String getLinesheetName() {
     return season.name()+" " + year;
   }
 
