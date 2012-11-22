@@ -47,7 +47,10 @@ public class AccountSettingsController {
 
     response.setName(user.getName());
     response.setIsbrand(USER_TYPE.BRAND == user.getUserType() ? true : false);
-    response.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
+    
+    String profilepic = user.getProfilePicLink();
+    if(null != profilepic && !profilepic.isEmpty())
+    	response.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
     response.setEmail(user.getEmail());
 
     EmailNotifications emailnotifications = new EmailNotifications();
