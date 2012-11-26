@@ -20,8 +20,8 @@ public class UserWriteConverter implements Converter<User, DBObject> {
     dbOject.put("firstName", user.getFirstName());
     dbOject.put("lastName", user.getLastName());
     dbOject.put("userName", user.getUsername());
+    dbOject.put("password", user.getPassword());
     dbOject.put("profilePicLink", user.getProfilePicLink());
-    dbOject.put("userType", user.getUserType().toString());
     dbOject.put("primarycontact", user.getPrimarycontact());
     dbOject.put("aboutUs", user.getAboutUs());
     dbOject.put("address", user.getAddress());
@@ -34,6 +34,7 @@ public class UserWriteConverter implements Converter<User, DBObject> {
     dbOject.put("telephoneNo2", user.getTelephoneNo2());
     dbOject.put("active", user.isActive());
     dbOject.put("subscriptionType", user.getSubscirptionType().toString());
+    dbOject.put("role", user.getRole().toString());
     dbOject.put("_class", User.class.getName());
 
     return dbOject;
