@@ -318,7 +318,7 @@ public class EditorialController {
       JSONFileData.add(editorialPhotoConverter.convert(newPhoto, userName));
       try {
         String key = userName+ "/" + ImageType.EDITORIAL.getKey() + "/" + (String)uploadMap.get("fileId");
-        BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.EDITORIAL, "resize_to_fit" );
+        BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.EDITORIAL, "pad_resize_to_fit" );
       } catch (Exception e) {
         e.printStackTrace();
       }

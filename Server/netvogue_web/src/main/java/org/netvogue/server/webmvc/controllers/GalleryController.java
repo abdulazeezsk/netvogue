@@ -323,7 +323,7 @@ public class GalleryController {
 
       try {
         String key = userName+ "/" + ImageType.GALLERY.getKey() + "/" + (String)uploadMap.get("fileId");
-        BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.GALLERY, "resize_to_fit" );
+        BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.GALLERY, "pad_resize_to_fit" );
       } catch (Exception e) {
         e.printStackTrace();
       }
