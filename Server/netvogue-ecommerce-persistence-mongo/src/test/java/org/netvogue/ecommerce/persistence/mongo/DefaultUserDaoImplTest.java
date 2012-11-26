@@ -32,7 +32,7 @@ public class DefaultUserDaoImplTest {
     User user = new User();
     user.setUsername("psuman");
     user.setAboutUs("aboutus");
-    user.setPassword(new ShaPasswordEncoder().encodePassword("psuman", salt));
+    user.setEncodedPassword(new ShaPasswordEncoder().encodePassword("psuman", salt));
     user.setSalt(salt);
     user.setActive(true);
     user.setAddress("MIG-352");

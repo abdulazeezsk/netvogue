@@ -20,7 +20,7 @@ public class UserWriteConverter implements Converter<User, DBObject> {
     dbOject.put("firstName", user.getFirstName());
     dbOject.put("lastName", user.getLastName());
     dbOject.put("userName", user.getUsername());
-    dbOject.put("password", user.getPassword());
+    dbOject.put("password", user.getEncodedPassword());
     dbOject.put("salt", user.getSalt());
     dbOject.put("profilePicLink", user.getProfilePicLink());
     dbOject.put("primarycontact", user.getPrimarycontact());

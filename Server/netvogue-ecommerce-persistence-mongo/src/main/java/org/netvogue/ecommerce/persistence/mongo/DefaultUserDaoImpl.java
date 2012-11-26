@@ -49,7 +49,7 @@ public class DefaultUserDaoImpl implements UserDao {
   public boolean authenticateUser(final String userName, final String password) {
     List<User> usersFromDB = mongoTemplate.find(new Query(where("userName").is(userName)), User.class,
         USER_COLLECTION_NAME);
-    if (usersFromDB.get(0).getPassword().equals(password)) {
+    if (usersFromDB.get(0).getEncodedPassword().equals(password)) {
       return true;
     }
 
@@ -97,7 +97,7 @@ public class DefaultUserDaoImpl implements UserDao {
     originalUserDeatails.setFirstName(newUserDetails.getFirstName());
     originalUserDeatails.setLastName(newUserDetails.getLastName());
     originalUserDeatails.setMobileNo(newUserDetails.getMobileNo());
-    originalUserDeatails.setPassword(newUserDetails.getPassword());
+    originalUserDeatails.setEncodedPassword(newUserDetails.getEncodedPassword());
     originalUserDeatails.setPrimarycontact(newUserDetails.getPrimarycontact());
     originalUserDeatails.setProfilePicLink(newUserDetails.getProfilePicLink());
     originalUserDeatails.setState(newUserDetails.getState());

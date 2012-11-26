@@ -7,7 +7,7 @@ public class User {
 
   private String email;
 
-  private String password;
+  private String enodedPassword;
 
   private long salt;
 
@@ -55,12 +55,12 @@ public class User {
     this.email = email;
   }
 
-  public String getPassword() {
-    return password;
+  public String getEncodedPassword() {
+    return enodedPassword;
   }
 
-  public void setPassword(final String password) {
-    this.password = password;
+  public void setEncodedPassword(final String password) {
+    enodedPassword = password;
   }
 
   public String getUsername() {
