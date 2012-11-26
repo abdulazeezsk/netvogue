@@ -142,6 +142,7 @@
 		 <module>netvogue-common</module>
 		<module>netvogue_database</module>
 		<module>netvogue-image-persistence</module>
+		<module>netvogue-image-processing-service</module>
 		<module>netvogue-email-service</module>			
 		<module>netvogue_web</module>
   </modules>
