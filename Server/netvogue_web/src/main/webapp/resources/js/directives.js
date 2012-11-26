@@ -348,14 +348,16 @@ angular.module('netVogue.directives', []).
 		        done: function (e, data) {
 		        	scope.$apply(function(scope) {
 		        		if(data.result.status == true) {
-		        			if(true == scope.senttoserver) {
-			        			for(var i=0; i < data.result.filesuploaded.length; i++){
-			        				scope.newstyle.availableImages.push(data.result.filesuploaded[i]);
+		        			$timeout(function() {
+			        			if(true == scope.senttoserver) {
+				        			for(var i=0; i < data.result.filesuploaded.length; i++){
+				        				scope.newstyle.availableImages.push(data.result.filesuploaded[i]);
+				        			};
+				        			scope.mainimage = scope.newstyle.availableImages[0].thumbnail_url;
+				        			scope.senttoserver = false;
+				        			scope.newfiles = [];
 			        			};
-			        			scope.mainimage = scope.newstyle.availableImages[0].thumbnail_url;
-			        			scope.senttoserver = false;
-			        			scope.newfiles = [];
-		        			};
+		        			}, 10000);
 		        		} else {
 		        			alert("error");
 		        		}
