@@ -28,6 +28,11 @@
  	<property name="mongoTemplate" ref="journaSafeMongoTemplate"/>
  </bean>
  
+  <bean id="userSessionDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultSessionDaoImpl">
+ 	<property name="mongoTemplate" ref="journaSafeMongoTemplate"/>
+ </bean>
+ 
+ 
   <bean id="linesheetDao" class="org.netvogue.ecommerce.persistence.mongo.DefaultLinesheetDaoImpl">
   	<constructor-arg ref="journaSafeMongoTemplate" />
   </bean>

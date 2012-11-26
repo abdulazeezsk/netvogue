@@ -1,5 +1,6 @@
 package org.netvogue.ecommerce.domain.model;
 
+
 public class User {
 
   private String id;
@@ -41,6 +42,8 @@ public class User {
   private boolean active = true;
 
   private SubscriptionType subscirptionType;
+
+  private Role role;
 
   public String getEmail() {
     return email;
@@ -201,4 +204,13 @@ public class User {
   public void setSubscirptionType(final SubscriptionType subscirptionType) {
     this.subscirptionType = subscirptionType;
   }
+
+  public Role getRole() {
+    return role;
+  }
+
+  public void setRole(final Role role) {
+    this.role = role;
+  }
+
 }

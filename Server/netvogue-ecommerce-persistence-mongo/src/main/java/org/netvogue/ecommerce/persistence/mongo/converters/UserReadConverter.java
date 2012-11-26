@@ -1,8 +1,8 @@
 package org.netvogue.ecommerce.persistence.mongo.converters;
 
+import org.netvogue.ecommerce.domain.model.Role;
 import org.netvogue.ecommerce.domain.model.SubscriptionType;
 import org.netvogue.ecommerce.domain.model.User;
-import org.netvogue.ecommerce.domain.model.UserType;
 import org.springframework.core.convert.converter.Converter;
 
 import com.mongodb.DBObject;
@@ -15,7 +15,6 @@ public class UserReadConverter implements Converter<DBObject, User> {
     user.setFirstName((String) dbObj.get("firstName"));
     user.setLastName((String) dbObj.get("lastName"));
     user.setUsername((String) dbObj.get("userName"));
-    user.setUserType(UserType.valueOf((String) dbObj.get("userType")));
     user.setPrimarycontact((String) dbObj.get("primarycontact"));
     user.setAboutUs((String) dbObj.get("aboutUs"));
     user.setAddress((String) dbObj.get("address"));
@@ -27,7 +26,9 @@ public class UserReadConverter implements Converter<DBObject, User> {
     user.setTelephoneNo1((Long) dbObj.get("telephoneNo1"));
     user.setTelephoneNo2((Long) dbObj.get("telephoneNo2"));
     user.setActive((Boolean) dbObj.get("active"));
-    user.setSubscirptionType(SubscriptionType.valueOf(user.getSubscirptionType().toString()));
+    user.setSubscirptionType(SubscriptionType.valueOf((String)dbObj.get("subscriptionType")));
+    user.setPassword( (String) dbObj.get("password"));
+    user.setRole(Role.valueOf( (String) dbObj.get("role")));
     return user;
   }
 
