@@ -245,7 +245,6 @@ angular.module('netVogue.directives', []).
 		        done: function (e, data) {
 		        	scope.$apply(function(scope) {		        		
 		        		if(data.result.status == true) {
-		        			$timeout(function() {
 		        			if(true == scope.filesadded) {
 		        				//Worst logic ever -- revisit it once again -- Azeez
 		        				var replyFromServer = [];
@@ -260,7 +259,6 @@ angular.module('netVogue.directives', []).
 			        			scope.filesadded = false;
 			        			//scope.$emit('filesuploaded');
 		        			}
-		        			},1000);
 		        		} else {
 		        			alert("error");
 		        		}
@@ -309,10 +307,8 @@ angular.module('netVogue.directives', []).
 		        done: function (e, data) {
 		        	scope.$apply(function(scope) {
 		        		if(data.result.status == true) {
-		        			$timeout(function() {
 		        			scope.profilepic = data.result.filesuploaded[0];
 		        			scope.$emit('profilepicchanged', scope.profilepic);
-		        			},1000);
 		        		} else {
 		        			alert("error");
 		        		}
@@ -352,7 +348,6 @@ angular.module('netVogue.directives', []).
 		        done: function (e, data) {
 		        	scope.$apply(function(scope) {
 		        		if(data.result.status == true) {
-		        			$timeout(function() {
 		        			if(true == scope.senttoserver) {
 			        			for(var i=0; i < data.result.filesuploaded.length; i++){
 			        				scope.newstyle.availableImages.push(data.result.filesuploaded[i]);
@@ -361,7 +356,6 @@ angular.module('netVogue.directives', []).
 			        			scope.senttoserver = false;
 			        			scope.newfiles = [];
 		        			};
-		        			},1000);
 		        		} else {
 		        			alert("error");
 		        		}
