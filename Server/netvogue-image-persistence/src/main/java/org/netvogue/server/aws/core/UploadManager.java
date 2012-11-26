@@ -65,8 +65,10 @@ public class UploadManager {
 
 	        
 	        Upload upload = transferManager.upload(bucketName, uniqueId, file.getBytes(), metaData, imageType, username);
+	        String key = bucketName+"/"+ username + "/" + imageType.getKey();
+	        String RESTlink = transferManager.getQueryString(key, uniqueId);
 	        
-	        String RESTlink = transferManager.getQueryString(bucketName+"/"+ imageType.getKey() , uniqueId + "-" + Size.GThumb.toString());
+//	        String RESTlink = transferManager.getQueryString(bucketName+"/"+ imageType.getKey() , uniqueId + "-" + Size.GThumb.toString());
 	        
 	        System.out.println(RESTlink);
 	        map = new HashMap<String, Object>();

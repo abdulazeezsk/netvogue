@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.UploadManager;
+import org.netvogue.server.blitline.util.BlitlineUtil;
 import org.netvogue.server.common.ResultStatus;
 import org.netvogue.server.common.USER_TYPE;
 import org.netvogue.server.neo4japi.domain.PrintCampaignPhoto;
@@ -52,15 +53,15 @@ public class PrintCampaignController {
 
 	@Autowired
 	private UploadManager uploadManager;
-		
+
 	@RequestMapping(value={"/getprintcampaigns", "/getprintcampaigns/{profileid}"}, method=RequestMethod.GET)
 	public @ResponseBody PrintCampaigns GetPrintCampaigns(@ModelAttribute("profileid") String profileid,
 												@RequestParam("pagenumber") int pagenumber,
 												@RequestParam("galleryname") String galleryname) {
-		
+
 		System.out.println("Get PrintCampaigns: " + profileid + ":" + galleryname);
 		PrintCampaigns campaigns = new PrintCampaigns();
-		
+
 		User user;
 		if(!profileid.isEmpty()) {
 			user = userService.getUserByUsername(profileid);
@@ -70,12 +71,13 @@ public class PrintCampaignController {
 		} else {
 			 user = userDetailsService.getUserFromSession();
 		}
-		
+
 		campaigns.setName(user.getName());
 		campaigns.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
 		String profilepic = user.getProfilePicLink();
-		if(null != profilepic && !profilepic.isEmpty())
-			campaigns.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
+		if(null != profilepic && !profilepic.isEmpty()) {
+      campaigns.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
+    }
 		Set<PrintCampaign> campaignTemp = new LinkedHashSet<PrintCampaign>();
 		Iterable<org.netvogue.server.neo4japi.domain.PrintCampaign> dbPrintCampaigns;
 		if(galleryname.isEmpty()) {
@@ -93,12 +95,12 @@ public class PrintCampaignController {
 			campaignTemp.add(printcampaignConverter.convert(dbPrintCampaign, user.getUsername()));
 		}
 		campaigns.setGalleries(campaignTemp);
-		
+
 		return campaigns;
 	}
-	
+
 	@RequestMapping(value={"/printcampaign/getphotos", "/printcampaign/getphotos/{profileid}"}, method=RequestMethod.GET)
-	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid, 
+	public @ResponseBody Photos GetPhotos(@ModelAttribute("profileid") String profileid,
 			@RequestParam(value="pagenumber", required=false, defaultValue="0") int pagenumber,
 										  @RequestParam("galleryid") String galleryid,
 										  @RequestParam("photoname") String photoname
@@ -108,7 +110,7 @@ public class PrintCampaignController {
 		if(galleryid.isEmpty()) {
 			return photos;
 		}
-		
+
 		User user;
 		if(!profileid.isEmpty()) {
 			user = userService.getUserByUsername(profileid);
@@ -122,8 +124,9 @@ public class PrintCampaignController {
 			photos.setName(user.getName());
 			photos.setIsbrand(USER_TYPE.BRAND == user.getUserType()?true:false);
 			String profilepic = user.getProfilePicLink();
-			if(null != profilepic && !profilepic.isEmpty())
-				photos.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
+			if(null != profilepic && !profilepic.isEmpty()) {
+        photos.setProfilepic(imageURLsConverter.convert(profilepic, user.getUsername()));
+      }
 		}
 		org.netvogue.server.neo4japi.domain.PrintCampaign printcampaign = printcampaignService.getPrintCampaign(galleryid);
 		if(null == printcampaign) {
@@ -146,36 +149,36 @@ public class PrintCampaignController {
 			photosTemp.add(printcampaignPhotoConverter.convert(dbPhoto, user.getUsername()));
 		}
 		photos.setPhotos(photosTemp);
-		
+
 		return photos;
 	}
-	
+
 	@RequestMapping(value="printcampaign/create", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse CreatePrintCampaign(@RequestBody CampaignJSONRequest request) {
 		System.out.println("Create Print campaiggn");
 		StringBuffer error = new StringBuffer();
 		User loggedinUser = userDetailsService.getUserFromSession();
-		org.netvogue.server.neo4japi.domain.PrintCampaign newPrintcampaign = 
+		org.netvogue.server.neo4japi.domain.PrintCampaign newPrintcampaign =
 				new org.netvogue.server.neo4japi.domain.PrintCampaign(request.getName(), request.getDesc(), loggedinUser);
-		
+
 		JsonResponse response = new JsonResponse();
-		
-		if(ResultStatus.SUCCESS == printcampaignService.SavePrintCampaign(newPrintcampaign, error)) {  
+
+		if(ResultStatus.SUCCESS == printcampaignService.SavePrintCampaign(newPrintcampaign, error)) {
 			response.setStatus(true);
 			response.setIdcreated(newPrintcampaign.getPrintcampaignid());
-		}
-		else
-			response.setError(error.toString());
-		
+		} else {
+      response.setError(error.toString());
+    }
+
 		return response;
 	}
-	
+
 	@RequestMapping(value="printcampaign/edit", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPrintCampaign(@RequestBody CampaignJSONRequest request) {
 		System.out.println("Edit Print Campaign");
 		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
-		
+
 		if(null == request.getId() || request.getId().isEmpty()) {
 			response.setError("printcampaign Id is empty");
 			return response;
@@ -183,16 +186,17 @@ public class PrintCampaignController {
 			response.setError("newgalleryname is empty");
 			return response;
 		}
-		
-		if(ResultStatus.SUCCESS == printcampaignService.editPrintCampaign(request.getId(), 
-							request.getName(), request.getDesc(), error))   
-			response.setStatus(true);
-		else
-			response.setError(error.toString());
-		
+
+		if(ResultStatus.SUCCESS == printcampaignService.editPrintCampaign(request.getId(),
+							request.getName(), request.getDesc(), error)) {
+      response.setStatus(true);
+    } else {
+      response.setError(error.toString());
+    }
+
 		return response;
 	}
-	
+
 	@RequestMapping(value="printcampaign/setprofilepic", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse setProfilepic(@RequestBody JsonRequest profilepic) {
 		System.out.println("Set Profile pic for campaign:" + profilepic.getId());
@@ -202,20 +206,21 @@ public class PrintCampaignController {
 			response.setError("campaignid or profile pic is empty");
 			return response;
 		}
-		if(ResultStatus.SUCCESS == printcampaignService.setProfilepic(profilepic.getId(), profilepic.getValue(), error)) 
-			response.setStatus(true);
-		else
-			response.setError(error.toString());
-		
+		if(ResultStatus.SUCCESS == printcampaignService.setProfilepic(profilepic.getId(), profilepic.getValue(), error)) {
+      response.setStatus(true);
+    } else {
+      response.setError(error.toString());
+    }
+
 		return response;
 	}
-	
+
 	@RequestMapping(value="printcampaign/delete", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeleteCampaign(@RequestBody String galleryid) {
 		System.out.println("Delete Print Campaign:"+ galleryid);
 		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
-		
+
 		if(null == galleryid || galleryid.isEmpty()) {
 			response.setError("Galleryid is empty");
 			return response;
@@ -227,27 +232,28 @@ public class PrintCampaignController {
 		}
 		List<String> idsList = printcampaignService.deletePrintCampaign(galleryid, error);
 		response.setStatus(true);
-		if(null != idsList && idsList.size() > 0) {  
+		if(null != idsList && idsList.size() > 0) {
 			ResultStatus status = uploadManager.deletePhotosList(idsList,
 					ImageType.PRINT_CAMPAIGN, user.getUsername());
 			System.out.println("Result Status of deleting print campaign from S3: "
-					+ status.toString());			
-		}
-		else
-			response.setError(error.toString());
-		
+					+ status.toString());
+		} else {
+      response.setError(error.toString());
+    }
+
 		return response;
 	}
-	
-	@RequestMapping(value="printcampaign/addphotos", method=RequestMethod.POST)
-	public @ResponseBody UploadedFileResponse AddPhotostoGallery(Model model, 
+
+	/*@RequestMapping(value="printcampaign/addphotos", method=RequestMethod.POST)
+	public @ResponseBody UploadedFileResponse AddPhotostoGallery(Model model,
 			@RequestParam("files[]") List<MultipartFile> fileuploads, @RequestParam("galleryid") String galleryId) {
 		System.out.println("Add photos: Gallery Id:" + galleryId + "No:of Photos:" + fileuploads.size());
 		User user = userDetailsService.getUserFromSession();
-		if(null == user)
-			return null;
+		if(null == user) {
+      return null;
+    }
 		UploadedFileResponse response = new UploadedFileResponse();
-		
+
 		if(galleryId.isEmpty()) {
 			response.setError("Gallery Id is empty");
 			return response;
@@ -257,73 +263,128 @@ public class PrintCampaignController {
 			response.setError("No Print Campaign is present with this id");
 			return response;
 		}
-		
+
 		List<PhotoWeb> JSONFileData= new ArrayList<PhotoWeb>();
-		
+
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
 			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.PRINT_CAMPAIGN, user.getUsername());
 			PrintCampaignPhoto newPhoto = new PrintCampaignPhoto((String)uploadMap.get(UploadManager.FILE_ID));
 			printcampaign.addPhotos(newPhoto);
-			
+
 			JSONFileData.add(printcampaignPhotoConverter.convert(newPhoto, user.getUsername()));
 		}
 		StringBuffer error = new StringBuffer();
-		if(ResultStatus.SUCCESS == printcampaignService.SavePrintCampaign(printcampaign, error)) {  
+		if(ResultStatus.SUCCESS == printcampaignService.SavePrintCampaign(printcampaign, error)) {
 			response.setStatus(true);
 			response.setFilesuploaded(JSONFileData);
-		}
-		else
-			response.setError(error.toString());
+		} else {
+      response.setError(error.toString());
+    }
 		return response;
-	}
-	
+	}*/
+
+  @RequestMapping(value = "printcampaign/addphotos", method = RequestMethod.POST)
+  public @ResponseBody
+  UploadedFileResponse AddPhotostoGallery(Model model, @RequestParam("files[]")
+  List<MultipartFile> fileuploads, @RequestParam("galleryid")
+  String galleryId) {
+    String userName = null;
+    System.out.println("Add photos: Gallery Id:" + galleryId + "No:of Photos:" + fileuploads.size());
+    User user = userDetailsService.getUserFromSession();
+    if (null == user) {
+      return null;
+    }
+    userName = user.getUsername();
+    UploadedFileResponse response = new UploadedFileResponse();
+
+    if (galleryId.isEmpty()) {
+      response.setError("Gallery Id is empty");
+      return response;
+    }
+    org.netvogue.server.neo4japi.domain.PrintCampaign printcampaign = printcampaignService.getPrintCampaign(galleryId);
+    if (null == printcampaign) {
+      response.setError("No Print Campaign is present with this id");
+      return response;
+    }
+
+    List<PhotoWeb> JSONFileData = new ArrayList<PhotoWeb>();
+
+    for (MultipartFile fileupload : fileuploads) {
+      System.out.println("Came here" + fileupload.getOriginalFilename());
+      Map<String, Object> uploadMap = uploadManager.processUpload(fileupload, ImageType.PRINT_CAMPAIGN,
+          user.getUsername());
+      PrintCampaignPhoto newPhoto = new PrintCampaignPhoto((String) uploadMap.get(UploadManager.FILE_ID));
+      printcampaign.addPhotos(newPhoto);
+
+      JSONFileData.add(printcampaignPhotoConverter.convert(newPhoto, userName));
+      try {
+        String key = userName+ "/" + ImageType.PRINT_CAMPAIGN.getKey() + "/" + (String)uploadMap.get("fileId");
+        BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.PRINT_CAMPAIGN, "resize_to_fit" );
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    StringBuffer error = new StringBuffer();
+    if (ResultStatus.SUCCESS == printcampaignService.SavePrintCampaign(printcampaign, error)) {
+      response.setStatus(true);
+      response.setFilesuploaded(JSONFileData);
+    } else {
+      response.setError(error.toString());
+    }
+    return response;
+  }
+
 	@RequestMapping(value="printcampaign/editphotoinfo", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPhotoInfo(@RequestBody PhotoInfoJsonRequest photoInfo) {
 		System.out.println("Edit Photo Info:" + photoInfo.toString());
 		StringBuffer error = new StringBuffer();
 		JsonResponse response = new JsonResponse();
 		String photoId = photoInfo.getPhotoid();
-		if(null == photoId || photoId.isEmpty())
-			response.setError("photoid is empty");
-		if(ResultStatus.SUCCESS == printcampaignService.editPhotoInfo(photoInfo.getPhotoid(), photoInfo.getPhotoname(), 
-													photoInfo.getSeasonname(), error))
-			response.setStatus(true);
-		else
-			response.setError(error.toString());
-		
+		if(null == photoId || photoId.isEmpty()) {
+      response.setError("photoid is empty");
+    }
+		if(ResultStatus.SUCCESS == printcampaignService.editPhotoInfo(photoInfo.getPhotoid(), photoInfo.getPhotoname(),
+													photoInfo.getSeasonname(), error)) {
+      response.setStatus(true);
+    } else {
+      response.setError(error.toString());
+    }
+
 		return response;
 	}
-	
+
 	@RequestMapping(value="printcampaign/editphotoname", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPhotoName(@RequestBody JsonRequest request) {
 		System.out.println("Edit Photo Name");
 		StringBuffer error = new StringBuffer();
-		
+
 		JsonResponse response = new JsonResponse();
-		
-		if(ResultStatus.SUCCESS == printcampaignService.editPhotoName(request.getId(), request.getValue(), error))   
-			response.setStatus(true);
-		else
-			response.setError(error.toString());
-		
+
+		if(ResultStatus.SUCCESS == printcampaignService.editPhotoName(request.getId(), request.getValue(), error)) {
+      response.setStatus(true);
+    } else {
+      response.setError(error.toString());
+    }
+
 		return response;
 	}
-	
+
 	@RequestMapping(value="printcampaign/editphotoseasonname", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditPhotoSeasonName(@RequestParam("photoname") String photoname,
-														  @RequestParam("seasonname") String seasonname, 
+														  @RequestParam("seasonname") String seasonname,
 														  @RequestParam("photoid") String photoid) {
 		System.out.println("Edit Photo Name");
 		StringBuffer error = new StringBuffer();
-		
+
 		JsonResponse response = new JsonResponse();
-		
-		if(ResultStatus.SUCCESS == printcampaignService.editPhotoInfo(photoid, photoname, seasonname, error))   
-			response.setStatus(true);
-		else
-			response.setError(error.toString());
-		
+
+		if(ResultStatus.SUCCESS == printcampaignService.editPhotoInfo(photoid, photoname, seasonname, error)) {
+      response.setStatus(true);
+    } else {
+      response.setError(error.toString());
+    }
+
 		return response;
 	}
 
@@ -346,8 +407,9 @@ public class PrintCampaignController {
 						ImageType.PRINT_CAMPAIGN, user.getUsername());
 				System.out.println("Result Status of deleting from S3: "
 						+ status.toString());
-			} else
-				response.setError(error.toString());
+			} else {
+        response.setError(error.toString());
+      }
 		} else {
 			response.setError("photoid is empty");
 		}

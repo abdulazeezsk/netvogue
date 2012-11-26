@@ -7,26 +7,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.netvogue.server.webmvc.common.Constants;
-import org.netvogue.server.webmvc.converters.ImageURLsConverter;
-import org.netvogue.server.webmvc.domain.BrandsCarried;
-import org.netvogue.server.webmvc.domain.JsonResponse;
-import org.netvogue.server.webmvc.domain.PhotoWeb;
-import org.netvogue.server.webmvc.domain.ProductLine;
-import org.netvogue.server.webmvc.domain.ProfileInfo;
-import org.netvogue.server.webmvc.domain.ContactInfo;
-import org.netvogue.server.webmvc.domain.UploadedFileResponse;
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
+import org.netvogue.server.blitline.util.BlitlineUtil;
 import org.netvogue.server.common.NetworkStatus;
 import org.netvogue.server.common.ProductLines;
 import org.netvogue.server.common.ResultStatus;
 import org.netvogue.server.common.USER_TYPE;
-import org.netvogue.server.neo4japi.domain.*;
+import org.netvogue.server.neo4japi.domain.Category;
+import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
 import org.netvogue.server.neo4japi.service.UserData;
 import org.netvogue.server.neo4japi.service.UserService;
+import org.netvogue.server.webmvc.common.Constants;
+import org.netvogue.server.webmvc.converters.ImageURLsConverter;
+import org.netvogue.server.webmvc.domain.BrandsCarried;
+import org.netvogue.server.webmvc.domain.ContactInfo;
+import org.netvogue.server.webmvc.domain.JsonResponse;
+import org.netvogue.server.webmvc.domain.PhotoWeb;
+import org.netvogue.server.webmvc.domain.ProductLine;
+import org.netvogue.server.webmvc.domain.ProfileInfo;
+import org.netvogue.server.webmvc.domain.UploadedFileResponse;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -43,7 +45,7 @@ import org.springframework.web.multipart.MultipartFile;
 //This controllers handles both profile and profile settings page
 @Controller
 public class ProfileController {
-	
+
 	@Autowired NetvogueUserDetailsService userDetailsService;
 	@Autowired UserService 		userService;
 	@Autowired ImageURLsConverter	imageURLsConverter;
@@ -82,7 +84,7 @@ public class ProfileController {
 		if(null != user.getProfilePicLink() && !user.getProfilePicLink().isEmpty()) {
 			profile.setProfilepic(imageURLsConverter.convert(user.getProfilePicLink(), user.getUsername()));
 		}
-	
+
 		//Get ContactInfo
 		ContactInfo contactInfo = new ContactInfo();
 		contactInfo.setAddress(user.getAddress());
@@ -100,11 +102,11 @@ public class ProfileController {
 		contactInfo.setToprice(user.getToPrice());
 		//Add it to profile Info
 		profile.setContactinfo(contactInfo);
-		
+
 		//Get Productlines Info
 		if(profileid.isEmpty()) {
 			userService.getBrandsCarriedAndCategories(user);
-			
+
 			Set<Category> productsCarried = user.getProductLinesCarried();
 			int size = productsCarried.size();
 			Set<ProductLine> productLine = new HashSet<ProductLine>();
@@ -116,7 +118,7 @@ public class ProfileController {
 				productLine.add(productTemp);
 			}
 			profile.setProductlines(productLine);
-			
+
 			//Get Brands/Stockists carried info
 			Set<User> brandsCarried = user.getUsersCarried();
 			System.out.println("Get Brands Carried Information:" + brandsCarried.size());
@@ -130,18 +132,18 @@ public class ProfileController {
 				if(null == profilepicLink || profilepicLink.isEmpty()) {
 					brand.setProfilepic(Constants.PROFILE_DefaultPic);
 				} else {
-					String thumburl = uploadManager.getQueryString(profilepicLink, ImageType.PROFILE_PIC, 
+					String thumburl = uploadManager.getQueryString(profilepicLink, ImageType.PROFILE_PIC,
 							Size.PThumb, product.getUsername());
 					brand.setProfilepic(thumburl);
 				}
 				brands.add(brand);
 			}
 			profile.setBrandscarried(brands);
-			
+
 		} else {
 			Set<ProductLine> productLine = new HashSet<ProductLine>();
 			Iterable<ProductLines> productsCarried = userData.getProductlines();
-			
+
 			Iterator<ProductLines> plIterator = productsCarried.iterator();
 			while(plIterator.hasNext()) {
 				ProductLines product = plIterator.next();
@@ -153,12 +155,12 @@ public class ProfileController {
 				}
 			}
 			profile.setProductlines(productLine);
-			
+
 			Set<BrandsCarried> brands = new HashSet<BrandsCarried>();
 			Iterable<String> brandnames = userData.getBrandnames();
 			Iterable<String> brandusernames = userData.getBrandusernames();
 			Iterable<String> brandpics = userData.getprofilepics();
-			
+
 			Iterator<String> nameiterator = brandnames.iterator();
 			Iterator<String> usernameiterator = brandusernames.iterator();
 			Iterator<String> profilepiciterator = brandpics.iterator();
@@ -167,69 +169,71 @@ public class ProfileController {
 				String brandname = nameiterator.next();
 				String brandusername = usernameiterator.next();
 				String profilepic = profilepiciterator.next();
-				if(null == brandname || null == brandusername)
-					break;
+				if(null == brandname || null == brandusername) {
+          break;
+        }
 				brand.setBrandname(brandname);
 				brand.setBrandusername(brandusername);
 				if(null != profilepic) {
-					String thumburl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, 
+					String thumburl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC,
 							Size.PThumb, brandusername);
 					brand.setProfilepic(thumburl);
 				} else {
 					brand.setProfilepic("");
 				}
 				System.out.println("brandname: " + brandname);
-				
+
 				brands.add(brand);
 			}
 			profile.setBrandscarried(brands);
 		}
-		
+
 		profile.setStatus(true);
-		
+
 		System.out.println("ProfileInfo Sent for id:" + profileid);
 		return profile;
 	}
-	
+
 	@RequestMapping(value = "/profile/aboutus", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse setAboutus(@RequestBody String aboutUs) {
 		JsonResponse status = new JsonResponse();
 		User user = userDetailsService.getUserFromSession();
 		try {
 			user.setAboutUs(aboutUs);
-			
+
 			StringBuffer error = new StringBuffer();
-			if(ResultStatus.SUCCESS == userService.SaveUser(user, error))
-				status.setStatus(true);
-			else
-				status.setError(error.toString());
+			if(ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
+        status.setStatus(true);
+      } else {
+        status.setError(error.toString());
+      }
 		} catch(Exception e) {
 			status.setError(e.toString());
 		}
 		return status;
 	}
-	
-	@RequestMapping(value = "/profile/profilepic", method=RequestMethod.POST)
-	public @ResponseBody UploadedFileResponse setProfilePic(Model model, 
+
+	/*@RequestMapping(value = "/profile/profilepic", method=RequestMethod.POST)
+	public @ResponseBody UploadedFileResponse setProfilePic(Model model,
 			@RequestParam("files[]") MultipartFile fileupload) {
 		System.out.println("Set Profile Pic: ");
 		UploadedFileResponse response = new UploadedFileResponse();
-			
+
 		User user = userDetailsService.getUserFromSession();
 		if(null == user) {
 			response.setError("User is not logged in");
 			return response;
 		}
-		
+
 		List<PhotoWeb> JSONFileData= new ArrayList<PhotoWeb>();
-		
+
 		System.out.println("Came here" + fileupload.getOriginalFilename());
 		Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.PROFILE_PIC, user.getUsername());
 		user.setProfilePicLink((String)uploadMap.get(UploadManager.FILE_ID));
 		StringBuffer error = new StringBuffer();
 		if(ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
 			response.setStatus(true);
-		
+
 			PhotoWeb newPhoto = new PhotoWeb();
 			String thumburl = uploadManager.getQueryString(
 					(String)uploadMap.get(UploadManager.FILE_ID), ImageType.PROFILE_PIC, Size.PThumb, user.getUsername());
@@ -240,23 +244,71 @@ public class ProfileController {
 			newPhoto.setLeft_url(lefturl);
 			newPhoto.setUniqueid((String)uploadMap.get(UploadManager.FILE_ID));
 			JSONFileData.add(newPhoto);
-			
+
 			response.setFilesuploaded(JSONFileData);
 		} else {
 			response.setError(error.toString());
 		}
-	
+
 		return response;
-	}
-	
+	}*/
+
+  @RequestMapping(value = "/profile/profilepic", method = RequestMethod.POST)
+  public @ResponseBody
+  UploadedFileResponse setProfilePic(Model model, @RequestParam("files[]")
+  MultipartFile fileupload) {
+    String userName = null;
+    System.out.println("Set Profile Pic: ");
+    UploadedFileResponse response = new UploadedFileResponse();
+
+    User user = userDetailsService.getUserFromSession();
+    if (null == user) {
+      response.setError("User is not logged in");
+      return response;
+    }
+    userName = user.getUsername();
+    List<PhotoWeb> JSONFileData = new ArrayList<PhotoWeb>();
+
+    System.out.println("Came here" + fileupload.getOriginalFilename());
+    Map<String, Object> uploadMap = uploadManager.processUpload(fileupload, ImageType.PROFILE_PIC, userName);
+    user.setProfilePicLink((String) uploadMap.get(UploadManager.FILE_ID));
+    try {
+      String key = userName+ "/" + ImageType.PROFILE_PIC.getKey() + "/" + (String)uploadMap.get("fileId");
+      BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.PROFILE_PIC, "resize_to_fit" );
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    StringBuffer error = new StringBuffer();
+    if (ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
+      response.setStatus(true);
+
+      PhotoWeb newPhoto = new PhotoWeb();
+      String thumburl = uploadManager.getQueryString((String) uploadMap.get(UploadManager.FILE_ID),
+          ImageType.PROFILE_PIC, Size.PThumb, user.getUsername());
+      System.out.println("Image path is/Thumnail url is" + thumburl);
+      newPhoto.setThumbnail_url(thumburl);
+      String lefturl = uploadManager.getQueryString((String) uploadMap.get(UploadManager.FILE_ID),
+          ImageType.PROFILE_PIC, Size.PTop, user.getUsername());
+      newPhoto.setLeft_url(lefturl);
+      newPhoto.setUniqueid((String) uploadMap.get(UploadManager.FILE_ID));
+      JSONFileData.add(newPhoto);
+
+      response.setFilesuploaded(JSONFileData);
+    } else {
+      response.setError(error.toString());
+    }
+
+    return response;
+  }
+
 	@RequestMapping(value = "/profile/contactinfo", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse setContactInfo(@RequestBody ContactInfo contactInfo) {
 		System.out.println("Update Contact Info: ");
 		JsonResponse status = new JsonResponse();
 		User user = userDetailsService.getUserFromSession();
 		try {
-		
-		//if(ResultStatus.SUCCESS == userService.ValidateEmailAndId(contactInfo.getEmail(), user.getNodeId())) { 
+
+		//if(ResultStatus.SUCCESS == userService.ValidateEmailAndId(contactInfo.getEmail(), user.getNodeId())) {
 			user.setAddress(contactInfo.getAddress());
 			user.setCity(contactInfo.getCity());
 			user.setState(contactInfo.getState());
@@ -270,15 +322,16 @@ public class ProfileController {
 			user.setYearofEst(contactInfo.getYearest());
 			user.setFromPrice(contactInfo.getFromprice().longValue());
 			user.setToPrice(contactInfo.getToprice().longValue());
-			
+
 			StringBuffer error = new StringBuffer();
-			if(ResultStatus.SUCCESS == userService.SaveUser(user, error))
-				status.setStatus(true);
-			else
-				status.setError(error.toString());
+			if(ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
+        status.setStatus(true);
+      } else {
+        status.setError(error.toString());
 		/*} else {
 			status.setError("Email is already existing.Try another one");
 		}*/
+      }
 		} catch(Exception e) {
 			status.setError(e.toString());
 			System.out.println(e.toString());
@@ -286,7 +339,7 @@ public class ProfileController {
 		System.out.println("Updated Contact Info: ");
 		return status;
 	}
-	
+
 	@RequestMapping(value = "/profile/productline", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse setProductline(@RequestBody ArrayList<String> productLines) {
 		JsonResponse status = new JsonResponse();
@@ -302,17 +355,18 @@ public class ProfileController {
 				user.updateCategories(cat);
 			}
 			StringBuffer error = new StringBuffer();
-			if(ResultStatus.SUCCESS == userService.SaveUser(user, error))
-				status.setStatus(true);
-			else
-				status.setError(error.toString());
+			if(ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
+        status.setStatus(true);
+      } else {
+        status.setError(error.toString());
+      }
 		} catch(Exception e) {
 			System.out.println("Exception is:" + e.getMessage());
 			status.setError(e.toString());
 		}
 		return status;
 	}
-	
+
 	@RequestMapping(value = "/profile/brandscarried", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse setBrandsCarried(@RequestBody ArrayList<String> brandsCarried) {
 		JsonResponse status = new JsonResponse();
@@ -325,17 +379,18 @@ public class ProfileController {
 				user.updateUsersCarried(newUser);
 			}
 			StringBuffer error = new StringBuffer();
-			if(ResultStatus.SUCCESS == userService.SaveUser(user, error))
-				status.setStatus(true);
-			else
-				status.setError(error.toString());
+			if(ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
+        status.setStatus(true);
+      } else {
+        status.setError(error.toString());
+      }
 		} catch(Exception e) {
 			System.out.println("Exception is:" + e.getMessage());
 			status.setError(e.toString());
 		}
 		return status;
 	}
-	
+
 	@RequestMapping(value = "/profile/addbrandscarried", method=RequestMethod.POST)
 	public @ResponseBody BrandsCarried addBrandsCarried(@RequestBody String brandsCarried) {
 		System.out.println("Add brands carried");
@@ -350,19 +405,19 @@ public class ProfileController {
 				brand.setBrandusername(newUser.getUsername());
 				brand.setBrandname(newUser.getName());
 				if(null != profilepic && !profilepic.isEmpty()) {
-					String thumburl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC, 
+					String thumburl = uploadManager.getQueryString(profilepic, ImageType.PROFILE_PIC,
 							Size.PThumb, newUser.getUsername());
 					brand.setProfilepic(thumburl);
 				} else {
 					brand.setProfilepic(Constants.PROFILE_DefaultPic);
 				}
-			} 
+			}
 		} catch(Exception e) {
 			System.out.println("Exception is:" + e.getMessage());
 		}
 		return brand;
 	}
-	
+
 	@RequestMapping(value = "/profile/removebrandscarried", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse removeBrandsCarried(@RequestBody String brandsCarried) {
 		System.out.println("Remove brands carried" + brandsCarried);
@@ -373,14 +428,15 @@ public class ProfileController {
 			if(user.deleteUsersCarried(brandsCarried)) {
 				System.out.println("After removing:" + user.getUsersCarried().size());
 				StringBuffer error = new StringBuffer();
-				if(ResultStatus.SUCCESS == userService.SaveUser(user, error))
-					status.setStatus(true);
-				else
-					status.setError(error.toString());
+				if(ResultStatus.SUCCESS == userService.SaveUser(user, error)) {
+          status.setStatus(true);
+        } else {
+          status.setError(error.toString());
+        }
 			} else {
 				status.setError("User doesn't exist");
 			}
-		
+
 		} catch(Exception e) {
 			System.out.println("Exception is:" + e.getMessage());
 			status.setError(e.toString());

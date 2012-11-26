@@ -12,10 +12,11 @@ import java.util.Set;
 import org.netvogue.server.aws.core.ImageType;
 import org.netvogue.server.aws.core.Size;
 import org.netvogue.server.aws.core.UploadManager;
-import org.netvogue.server.neo4japi.common.Constants;
+import org.netvogue.server.blitline.util.BlitlineUtil;
 import org.netvogue.server.common.ProductLines;
 import org.netvogue.server.common.ResultStatus;
 import org.netvogue.server.common.USER_TYPE;
+import org.netvogue.server.neo4japi.common.Constants;
 import org.netvogue.server.neo4japi.domain.Category;
 import org.netvogue.server.neo4japi.domain.Style;
 import org.netvogue.server.neo4japi.domain.User;
@@ -67,7 +68,7 @@ public class StyleSheetController {
 	private UploadManager uploadManager;
 
 	@RequestMapping(value="getstylesheets", method=RequestMethod.GET)
-	public @ResponseBody Stylesheets GetStylesheets( 
+	public @ResponseBody Stylesheets GetStylesheets(
 			@RequestParam(value="pagenumber", required=false, defaultValue="0") int pagenumber,
 						@RequestParam(value="stylesheetname", required=false, defaultValue="") String stylesheetname,
 						@RequestParam(value="category", required=false, defaultValue="") String categories) {
@@ -77,12 +78,13 @@ public class StyleSheetController {
 		if(USER_TYPE.BRAND != loggedinUser.getUserType()) {
 			return stylesheets;
 		}
-		
+
 		if(0 == pagenumber) {
 			stylesheets.setName(loggedinUser.getName());
 			String profilepic = loggedinUser.getProfilePicLink();
-			if(null != profilepic && !profilepic.isEmpty())
-				stylesheets.setProfilepic(imageURLsConverter.convert(profilepic, loggedinUser.getUsername()));
+			if(null != profilepic && !profilepic.isEmpty()) {
+        stylesheets.setProfilepic(imageURLsConverter.convert(profilepic, loggedinUser.getUsername()));
+      }
 		}
 		Set<Stylesheet> stylesheetTemp = new LinkedHashSet<Stylesheet>();
 		Iterable<StylesheetData> dbStylesheets;
@@ -97,9 +99,9 @@ public class StyleSheetController {
 					if(null != productLine) {
 						System.out.println("product line is:" + productLine.toString());
 						productlines.add(productLine.toString());
-					}
-					else
-						System.out.println("product line is null");
+					} else {
+            System.out.println("product line is null");
+          }
 				}
 			}
 			dbStylesheets = userService.searchStylesheets(loggedinUser, stylesheetname, productlines, pagenumber);
@@ -115,10 +117,10 @@ public class StyleSheetController {
 			stylesheetTemp.add(newResponse);
 		}
 		stylesheets.setStylesheets(stylesheetTemp);
-		
+
 		return stylesheets;
 	}
-	
+
 	@RequestMapping(value="stylesheet/getstyles", method=RequestMethod.GET)
 	public @ResponseBody Styles GetStyles(@RequestParam("stylesheetid") String stylesheetid,
 						@RequestParam(value="pagenumber", required=false, defaultValue="0") int pagenumber,
@@ -132,34 +134,36 @@ public class StyleSheetController {
 				"\n fabrication" + fabrication +
 				"\n fromprice" + fromPrice +
 				"\n toprice" + toPrice);
-		
+
 		Styles styles = new Styles();
 		User loggedinUser = userDetailsService.getUserFromSession();
 		if(stylesheetid.isEmpty() || USER_TYPE.BRAND != loggedinUser.getUserType()) {
 			return styles;
 		}
-		
+
 		if(0 == pagenumber) {
 			styles.setName(loggedinUser.getName());
 			String profilepic = loggedinUser.getProfilePicLink();
-			if(null != profilepic && !profilepic.isEmpty())
-				styles.setProfilepic(imageURLsConverter.convert(loggedinUser.getProfilePicLink(), loggedinUser.getUsername()));
+			if(null != profilepic && !profilepic.isEmpty()) {
+        styles.setProfilepic(imageURLsConverter.convert(loggedinUser.getProfilePicLink(), loggedinUser.getUsername()));
+      }
 		}
-		
+
 		//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
 		org.netvogue.server.neo4japi.domain.Stylesheet s = stylesheetService.getStylesheet(stylesheetid);
-		if(null == s)
-			return styles;
+		if(null == s) {
+      return styles;
+    }
 		styles.setStylesheetname(s.getStylesheetname());
 		Set<StyleResponse> stylesTemp = new LinkedHashSet<StyleResponse>();
 		Iterable<StyleData> dbStyles;
 		if(	(null == styleno || styleno.isEmpty()) &&
-		    (null == fabrication || fabrication.isEmpty()) &&	
-			(0 == fromPrice) && (0 == toPrice)
+		    (null == fabrication || fabrication.isEmpty()) &&
+			0 == fromPrice && 0 == toPrice
 			) {
 			dbStyles = stylesheetService.getStyles(stylesheetid, pagenumber);
 		} else {
-			dbStyles = stylesheetService.searchStyles(stylesheetid, styleno, fabrication, 
+			dbStyles = stylesheetService.searchStyles(stylesheetid, styleno, fabrication,
 										fromPrice, toPrice, pagenumber);
 		}
 		if(null == dbStyles) {
@@ -173,12 +177,12 @@ public class StyleSheetController {
 			stylesTemp.add(newResponse);
 		}
 		styles.setStyles(stylesTemp);
-		
+
 		return styles;
 	}
-	
+
 	@RequestMapping(value="stylesheet/getstylesbycat", method=RequestMethod.GET)
-	public @ResponseBody Styles GetStylesByCategory( 
+	public @ResponseBody Styles GetStylesByCategory(
 										  @RequestParam("category") String category,
 										  @RequestParam(value="searchquery", required=false) String searchquery
 											 ) {
@@ -188,7 +192,7 @@ public class StyleSheetController {
 		if(category.isEmpty()|| USER_TYPE.BRAND != loggedinUser.getUserType()) {
 			return styles;
 		}
-		
+
 		styles.setName(loggedinUser.getName());
 		styles.setProfilepic(imageURLsConverter.convert(loggedinUser.getProfilePicLink(), loggedinUser.getUsername()));
 		//This must be stored in session attributes from last query..shoudn't get it from database every time - Azeez
@@ -214,44 +218,44 @@ public class StyleSheetController {
 		}
 		System.out.println("No:of Styles: " + stylesTemp.size());
 		styles.setStyles(stylesTemp);
-		
+
 		return styles;
 	}
-	
+
 	@RequestMapping(value="stylesheet/create", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse CreateStylesheet(@RequestBody StylesheetJsonRequest request) {
 		System.out.println("Create Stylesheet");
 		String error = "";
 		JsonResponse response = new JsonResponse();
-		
+
 		User loggedinUser = userDetailsService.getUserFromSession();
 		if(loggedinUser.getUserType() != USER_TYPE.BRAND) {
 			response.setError("Only brands can create stylesheets");
 			return response;
 		}
-		org.netvogue.server.neo4japi.domain.Stylesheet newStylesheet = new org.netvogue.server.neo4japi.domain.Stylesheet(request.getName(), loggedinUser); 
-		
+		org.netvogue.server.neo4japi.domain.Stylesheet newStylesheet = new org.netvogue.server.neo4japi.domain.Stylesheet(request.getName(), loggedinUser);
+
 		if(null != request.getCategory()) {
 			ProductLines productLine = ProductLines.getValueOf(request.getCategory());
 			Category cat = boutiqueService.getOrCreateCategory(productLine);
 			newStylesheet.setProductcategory(cat);
 		}
-		if(ResultStatus.SUCCESS == stylesheetService.SaveStylesheet(newStylesheet, error)) {  
+		if(ResultStatus.SUCCESS == stylesheetService.SaveStylesheet(newStylesheet, error)) {
 			response.setStatus(true);
 			response.setIdcreated(newStylesheet.getStylesheetid());
-		}
-		else
-			response.setError(error);
-		
+		} else {
+      response.setError(error);
+    }
+
 		return response;
 	}
-	
+
 	@RequestMapping(value="stylesheet/edit", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse EditStylesheet(@RequestBody StylesheetJsonRequest request) {
 		System.out.println("Edit Stylesheet");
 		String error = "";
 		JsonResponse response = new JsonResponse();
-		
+
 		if(null == request.getId() || request.getId().isEmpty()) {
 			response.setError("stylesheet Id is empty");
 			return response;
@@ -259,21 +263,22 @@ public class StyleSheetController {
 			response.setError("new name is empty");
 			return response;
 		}
-		
-		if(ResultStatus.SUCCESS == stylesheetService.editStylesheet(request.getId(), request.getName(), error))   
-			response.setStatus(true);
-		else
-				response.setError(error);	
+
+		if(ResultStatus.SUCCESS == stylesheetService.editStylesheet(request.getId(), request.getName(), error)) {
+      response.setStatus(true);
+    } else {
+      response.setError(error);
+    }
 		return response;
 	}
-	
+
 	//Think about the categories as well
 	@RequestMapping(value="stylesheet/delete", method=RequestMethod.POST)
 	public @ResponseBody JsonResponse DeleteStylesheet(@RequestBody String stylesheetId) {
 		System.out.println("Delete Stylesheet:"+ stylesheetId);
 		String error = "";
 		JsonResponse response = new JsonResponse();
-		
+
 		if(null == stylesheetId || stylesheetId.isEmpty()) {
 			response.setError("Stylesheetid is empty");
 			return response;
@@ -282,7 +287,7 @@ public class StyleSheetController {
 		if (null == user) {
 			response.setError("user info missing");
 			return response;
-		}		
+		}
 		List<String> idsList = stylesheetService.deleteStylesheet(stylesheetId, error);
 		response.setStatus(true);
 		//Make sure that styles inside this stylesheet are not part of any linesheets
@@ -293,20 +298,20 @@ public class StyleSheetController {
 					ImageType.STYLE, user.getUsername());
 			System.out.println("Result Status of deleting SS from S3: "
 					+ status.toString());
-		}
-		else
-			response.setError(error);
-		
+		} else {
+      response.setError(error);
+    }
+
 		return response;
 	}
-	
+
 	@RequestMapping(value ="stylesheet/createstyle",method=RequestMethod.POST)
 	public @ResponseBody StyleJSONResponse CreateStyle(@RequestBody StyleRequest newStyle) throws Exception {
-		
+
 			System.out.println("Create new Style" + newStyle.getStylename());
 			String error = "";
 			StyleJSONResponse response = new StyleJSONResponse();
-			
+
 			User loggedinUser = userDetailsService.getUserFromSession();
 			if(loggedinUser.getUserType() != USER_TYPE.BRAND) {
 				response.setError("Only brands can create styles");
@@ -317,29 +322,30 @@ public class StyleSheetController {
 				response.setError("No stylesheet present with this id");
 				return response;
 			}
-			
+
 			Style createdStyle = conversionService.convert(newStyle, Style.class);
 			stylesheet.addStyles(createdStyle);
-			if(ResultStatus.SUCCESS == stylesheetService.SaveStylesheet(stylesheet, error)) {  
+			if(ResultStatus.SUCCESS == stylesheetService.SaveStylesheet(stylesheet, error)) {
 				response.setStatus(true);
 				response.setStyle(styleConverter.convert(createdStyle, loggedinUser.getUsername()));
-			}
-			else
-				response.setError(error);
-			
+			} else {
+        response.setError(error);
+      }
+
 			return response;
 	}
-	
-	@RequestMapping(value="stylesheet/addstyleimages", method=RequestMethod.POST)
-	public @ResponseBody UploadedFileResponse AddImagestoStyle(Model model, 
+
+/*	@RequestMapping(value="stylesheet/addstyleimages", method=RequestMethod.POST)
+	public @ResponseBody UploadedFileResponse AddImagestoStyle(Model model,
 			@RequestParam("files[]") List<MultipartFile> fileuploads, @RequestParam("stylesheetid") String stylesheetId) {
 		System.out.println("Add photos: Stylesheet Id:" + stylesheetId + "No:of Photos:" + fileuploads.size());
 		User user = userDetailsService.getUserFromSession();
-		if(null == user)
-			return null;
-		
+		if(null == user) {
+      return null;
+    }
+
 		UploadedFileResponse response = new UploadedFileResponse();
-		
+
 		if(stylesheetId.isEmpty()) {
 			response.setError("Stylesheet Id is empty");
 			return response;
@@ -349,9 +355,9 @@ public class StyleSheetController {
 			response.setError("No stylesheet present with this id");
 			return response;
 		}
-		
+
 		List<PhotoWeb> JSONFileData= new ArrayList<PhotoWeb>();
-		
+
 		for ( MultipartFile fileupload : fileuploads ) {
 			System.out.println("Came here" + fileupload.getOriginalFilename());
 			Map<String, Object> uploadMap  = uploadManager.processUpload(fileupload, ImageType.STYLE, user.getUsername());
@@ -372,16 +378,70 @@ public class StyleSheetController {
 		response.setFilesuploaded(JSONFileData);
 		response.setStatus(true);
 		return response;
-	}
-	
+	}*/
+
+  @RequestMapping(value = "stylesheet/addstyleimages", method = RequestMethod.POST)
+  public @ResponseBody
+  UploadedFileResponse AddImagestoStyle(Model model, @RequestParam("files[]")
+  List<MultipartFile> fileuploads, @RequestParam("stylesheetid")
+  String stylesheetId) {
+    String userName = null;
+    System.out.println("Add photos: Stylesheet Id:" + stylesheetId + "No:of Photos:" + fileuploads.size());
+    User user = userDetailsService.getUserFromSession();
+    if (null == user) {
+      return null;
+    }
+    userName = user.getUsername();
+    UploadedFileResponse response = new UploadedFileResponse();
+
+    if (stylesheetId.isEmpty()) {
+      response.setError("Stylesheet Id is empty");
+      return response;
+    }
+    org.netvogue.server.neo4japi.domain.Stylesheet stylesheet = stylesheetService.getStylesheet(stylesheetId);
+    if (null == stylesheet) {
+      response.setError("No stylesheet present with this id");
+      return response;
+    }
+
+    List<PhotoWeb> JSONFileData = new ArrayList<PhotoWeb>();
+
+    for (MultipartFile fileupload : fileuploads) {
+      System.out.println("Came here" + fileupload.getOriginalFilename());
+      Map<String, Object> uploadMap = uploadManager.processUpload(fileupload, ImageType.STYLE, userName);
+      try {
+        String key = userName+ "/" + ImageType.STYLE.getKey() + "/" + (String)uploadMap.get("fileId");
+        BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.STYLE, "resize_to_fit" );
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      PhotoWeb newPhoto = new PhotoWeb();
+      String thumburl = uploadManager.getQueryString((String) uploadMap.get(UploadManager.FILE_ID), ImageType.STYLE,
+          Size.SThumb, user.getUsername());
+      System.out.println("Image path is/Thumnail url is" + thumburl);
+      newPhoto.setThumbnail_url(thumburl);
+      String lefturl = uploadManager.getQueryString((String) uploadMap.get(UploadManager.FILE_ID), ImageType.STYLE,
+          Size.SLeft, user.getUsername());
+      newPhoto.setLeft_url(lefturl);
+      newPhoto.setUniqueid((String) uploadMap.get(UploadManager.FILE_ID));
+      JSONFileData.add(newPhoto);
+      if (JSONFileData.size() == Constants.MAX_IMAGES_IN_STYLE) {
+        break;
+      }
+    }
+    response.setFilesuploaded(JSONFileData);
+    response.setStatus(true);
+    return response;
+  }
+
 	//Check if there is better of response -- Azeez
 	@RequestMapping(value ="stylesheet/editstyle",method=RequestMethod.POST)
 	public @ResponseBody StyleJSONResponse EditStyle(@RequestBody StyleRequest newStyle) throws Exception {
-		
+
 			System.out.println("Edit Style" + newStyle.getStylename() + newStyle.getStyleid());
 			String error = "";
 			StyleJSONResponse response = new StyleJSONResponse();
-			
+
 			User loggedinUser = userDetailsService.getUserFromSession();
 			if(loggedinUser.getUserType() != USER_TYPE.BRAND) {
 				response.setError("Only brands can create and edit styles");
@@ -392,7 +452,7 @@ public class StyleSheetController {
 				response.setError("No stylesheet present with this id");
 				return response;
 			}
-			
+
 			//Other way of doing this is using Cypher query. Use map to send all the properties of node
 			Style styleToEdit = conversionService.convert(newStyle, Style.class);
 			Set<Style> allStyles = stylesheet.getStyles();
@@ -404,12 +464,12 @@ public class StyleSheetController {
 				if(style.getStyleid().equals(styleId)) {
 					style.Copy(styleToEdit);
 					foundStyle = true;
-					if(ResultStatus.SUCCESS == stylesheetService.SaveStyle(style, error)) {  
+					if(ResultStatus.SUCCESS == stylesheetService.SaveStyle(style, error)) {
 						response.setStatus(true);
 						response.setStyle(conversionService.convert(style, StyleResponse.class));
-					}
-					else
-						response.setError(error);
+					} else {
+            response.setError(error);
+          }
 					break;
 				}
 			}
@@ -417,7 +477,7 @@ public class StyleSheetController {
 				response.setError("No style present with this id");
 				return response;
 			}
-				
+
 			return response;
-	}	
+	}
 }
