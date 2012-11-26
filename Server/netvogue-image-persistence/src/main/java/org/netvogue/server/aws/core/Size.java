@@ -18,13 +18,13 @@ public enum Size {
 	PCMain(450, 677),
 	
 	//Editorial
-	EAdd(210, 150),
+	EAdd(220, 150),
 	EThumb(220, 306),
 	ELeft(130, 100),
 	EMain(450, 677),
 	
 	//Collections
-	CAdd(210, 150),
+	CAdd(220, 150),
 	CThumb(231, 306),
 	CLeft(130, 100),
 	CMain(550, 550),

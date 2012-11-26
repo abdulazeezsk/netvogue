@@ -64,7 +64,7 @@ angular.module('netVogue.directives', []).
 		    		var i=0;
 	    			angular.forEach(angular.element(element).find('img'), function(imgElement) {
 	    				console.log("number of elements" + i);
-	    				angular.element(imgElement).attr('src', newValue[i++].thumbnail_url);
+	    				angular.element(imgElement).attr('src', newValue[i++].piclink);
 	    			});
 	    			element.imagesLoaded(function() {
 						scope.$apply( function() {

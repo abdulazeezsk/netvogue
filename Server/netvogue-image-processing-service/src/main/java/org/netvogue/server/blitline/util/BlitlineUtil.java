@@ -25,7 +25,7 @@ public class BlitlineUtil {
 
   private static ObjectMapper mapper = new ObjectMapper();
 
-  private static HttpClient httpClient = new DefaultHttpClient();
+  //private static HttpClient httpClient = new DefaultHttpClient();
 
   static {
     ResourceLoader.loadProperties();
@@ -90,6 +90,7 @@ public class BlitlineUtil {
     StringEntity input = new StringEntity(postData);
     input.setContentType("application/json");
     postRequest.setEntity(input);
+    HttpClient httpClient = new DefaultHttpClient();
     HttpResponse response = httpClient.execute(postRequest);
     BufferedReader br = new BufferedReader(new InputStreamReader((response.getEntity().getContent())));
     StringBuffer sb = new StringBuffer();
