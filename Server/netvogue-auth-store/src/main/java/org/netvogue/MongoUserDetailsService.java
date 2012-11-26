@@ -16,6 +16,7 @@ public class MongoUserDetailsService implements UserDetailsService, Serializable
    *
    */
   private static final long serialVersionUID = 3057104547767816568L;
+
   private UserDao userDao;
 
   public MongoUserDetailsService(final UserDao userDao) {
@@ -23,7 +24,6 @@ public class MongoUserDetailsService implements UserDetailsService, Serializable
   }
 
   public UserDetails loadUserByUsername(final String userName) throws UsernameNotFoundException {
-    // TODO Auto-generated method stub
     final User user = userDao.getActiveUser(userName);
     GrantedAuthority authority = new GrantedAuthority() {
 
@@ -33,9 +33,10 @@ public class MongoUserDetailsService implements UserDetailsService, Serializable
         return user.getRole().toString();
       }
     };
-    org.springframework.security.core.userdetails.User priniple = new org.springframework.security.core.userdetails.User(
-        user.getUsername(), user.getPassword(), Arrays.asList(authority));
-    return priniple;
+
+    NetvogueUserDetails userDetails = new NetvogueUserDetails(user.getUsername(), user.getPassword(), user.getSalt(),
+        Arrays.asList(authority));
+    return userDetails;
   }
 
 }

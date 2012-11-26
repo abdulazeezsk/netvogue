@@ -9,6 +9,8 @@ public class User {
 
   private String password;
 
+  private long salt;
+
   private String username;
 
   private String firstName;
@@ -212,5 +214,15 @@ public class User {
   public void setRole(final Role role) {
     this.role = role;
   }
+
+  public long getSalt() {
+    return salt;
+  }
+
+  public void setSalt(final long salt) {
+    this.salt = salt;
+  }
+
+
 
 }

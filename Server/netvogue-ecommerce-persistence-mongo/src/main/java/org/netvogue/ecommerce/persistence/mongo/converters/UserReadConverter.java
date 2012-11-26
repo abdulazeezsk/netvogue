@@ -27,7 +27,8 @@ public class UserReadConverter implements Converter<DBObject, User> {
     user.setTelephoneNo2((Long) dbObj.get("telephoneNo2"));
     user.setActive((Boolean) dbObj.get("active"));
     user.setSubscirptionType(SubscriptionType.valueOf((String)dbObj.get("subscriptionType")));
-    user.setPassword( (String) dbObj.get("password"));
+    user.setPassword((String) dbObj.get("password"));
+    user.setSalt((Long) dbObj.get("salt"));
     user.setRole(Role.valueOf( (String) dbObj.get("role")));
     return user;
   }
