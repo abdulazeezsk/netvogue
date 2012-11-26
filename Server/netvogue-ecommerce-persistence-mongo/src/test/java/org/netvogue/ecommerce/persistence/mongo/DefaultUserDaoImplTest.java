@@ -28,11 +28,12 @@ public class DefaultUserDaoImplTest {
     template.dropCollection(DefaultUserDaoImpl.USER_COLLECTION_NAME);
 
     template.createCollection(DefaultUserDaoImpl.USER_COLLECTION_NAME);
-
+    long salt = System.nanoTime();
     User user = new User();
     user.setUsername("psuman");
     user.setAboutUs("aboutus");
-    user.setPassword("psuman");
+    user.setPassword(new ShaPasswordEncoder().encodePassword("psuman", salt));
+    user.setSalt(salt);
     user.setActive(true);
     user.setAddress("MIG-352");
     user.setCity("HYD");
