@@ -12,11 +12,12 @@ public class PhotoWeb {
     public PhotoWeb() {
     	
     }
-    public PhotoWeb(String uniqueid, String mainlink, String thumblink, String leftlink) {
+    public PhotoWeb(String uniqueid, String mainlink, String thumblink, String leftlink, String addurl) {
     	this.uniqueid 		= uniqueid;
     	this.piclink		= mainlink;
     	this.thumbnail_url	= thumblink;
     	this.left_url		= leftlink;
+    	this.add_url		= addurl;
     }
 	public String getUniqueid() {
 		return uniqueid;

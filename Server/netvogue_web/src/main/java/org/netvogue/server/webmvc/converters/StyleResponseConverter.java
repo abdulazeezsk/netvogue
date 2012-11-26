@@ -56,7 +56,8 @@ public class StyleResponseConverter /*implements Converter<Style, StyleResponse>
 				String thumblink = uploadManager.getQueryString(image, ImageType.STYLE, Size.SThumb, username);
 				String mainlink = uploadManager.getQueryString(image, ImageType.STYLE, username);
 				String leftlink = uploadManager.getQueryString(image, ImageType.STYLE, Size.SLeft, username);
-				PhotoWeb imagelinks = new PhotoWeb(image, mainlink, thumblink, leftlink);
+				String addlink = uploadManager.getQueryString(image, ImageType.STYLE, Size.SAdd, username);
+				PhotoWeb imagelinks = new PhotoWeb(image, mainlink, thumblink, leftlink, addlink);
 				imageslinks.add(imagelinks);
 			}
 			response.setAvailableImages(imageslinks);
