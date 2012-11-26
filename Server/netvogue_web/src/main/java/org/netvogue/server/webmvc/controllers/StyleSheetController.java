@@ -411,15 +411,18 @@ public class StyleSheetController {
       Map<String, Object> uploadMap = uploadManager.processUpload(fileupload, ImageType.STYLE, userName);
       try {
         String key = userName+ "/" + ImageType.STYLE.getKey() + "/" + (String)uploadMap.get("fileId");
-        BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.STYLE, "resize_to_fit" );
+        BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.STYLE, "pad_resize_to_fit" );
       } catch (Exception e) {
         e.printStackTrace();
       }
       PhotoWeb newPhoto = new PhotoWeb();
       String thumburl = uploadManager.getQueryString((String) uploadMap.get(UploadManager.FILE_ID), ImageType.STYLE,
           Size.SThumb, user.getUsername());
+      String addurl = uploadManager.getQueryString((String) uploadMap.get(UploadManager.FILE_ID), ImageType.STYLE,
+              Size.SAdd, user.getUsername());
       System.out.println("Image path is/Thumnail url is" + thumburl);
       newPhoto.setThumbnail_url(thumburl);
+      newPhoto.setAdd_url(addurl);
       String lefturl = uploadManager.getQueryString((String) uploadMap.get(UploadManager.FILE_ID), ImageType.STYLE,
           Size.SLeft, user.getUsername());
       newPhoto.setLeft_url(lefturl);

@@ -148,7 +148,7 @@ public class FileManager extends TransferManager {
 								ImageType imageType, String username) {
 		
 		String imageKey = username + "/" + imageType.getKey() + "/" + fileName;
-/*		Size[] sizes = imageType.getSizes();
+		Size[] sizes = imageType.getSizes();
 		
 		
 		try {
@@ -159,6 +159,7 @@ public class FileManager extends TransferManager {
 					temp.waitForCompletion();
 					//temp.waitForUploadResult();
 					firstImage = false;
+					break;
 				}
 //				temp.waitForUploadResult();
 				System.out.println("input" + buffer + " : "+ temp.getDescription());
@@ -179,7 +180,7 @@ public class FileManager extends TransferManager {
 			System.out.println("There was an error in Upload manager while uploading different sizes" +  
 													" - " + e.toString());
 			e.printStackTrace();
-		}*/
+		}
 		Upload upload = null;
 		try {
 			upload = upload(bucketName, imageKey, buffer, metadata);

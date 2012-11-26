@@ -374,7 +374,7 @@ public class CollectionController {
       JSONFileData.add(collectionPhotoConverter.convert(newPhoto, user.getUsername()));
       try {
         String key = userName+ "/" + ImageType.COLLECTION.getKey() + "/" + (String)uploadMap.get("fileId");
-        BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.COLLECTION, "resize_to_fit" );
+        BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.COLLECTION, "pad_resize_to_fit" );
       } catch (Exception e) {
         e.printStackTrace();
       }

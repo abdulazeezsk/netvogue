@@ -320,7 +320,7 @@ public class PrintCampaignController {
       JSONFileData.add(printcampaignPhotoConverter.convert(newPhoto, userName));
       try {
         String key = userName+ "/" + ImageType.PRINT_CAMPAIGN.getKey() + "/" + (String)uploadMap.get("fileId");
-        BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.PRINT_CAMPAIGN, "resize_to_fit" );
+        BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.PRINT_CAMPAIGN, "pad_resize_to_fit" );
       } catch (Exception e) {
         e.printStackTrace();
       }
