@@ -424,6 +424,7 @@ public class GalleryController {
 	      @RequestMapping(value="blitlinetest", method=RequestMethod.POST)
 	       public @ResponseBody JsonResponse blitlinePOST() {
 System.out.println("Enter this block please Post method ******************&&&&&&&&&&&&&&&&&&&77");
+System.out.println("Time while receiving: " + System.currentTimeMillis());
 	        return null;
 	      }
 

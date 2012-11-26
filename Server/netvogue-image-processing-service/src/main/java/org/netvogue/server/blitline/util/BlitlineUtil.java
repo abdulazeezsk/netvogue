@@ -47,6 +47,7 @@ public class BlitlineUtil {
     blitlineRequest.setJson(blitlineMessageRequest);
     String dataToSend = mapObjectToJSON(blitlineRequest);
     System.out.println("dataToSend: " + dataToSend);
+    System.out.println("Time while sending: " + System.currentTimeMillis());
     performPostRequest(dataToSend);
   }
 
