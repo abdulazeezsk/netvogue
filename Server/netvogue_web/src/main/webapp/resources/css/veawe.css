@@ -1333,6 +1333,122 @@ mutualcontacts */
 	margin-bottom:3px;
 }
 
+.contactinfo {
+	width: 100%;
+	border-bottom: solid 1px silver;
+	padding: 5px 0 5px 0;
+	min-height: 25px;
+	position: relative;
+	float: left;
+	clear: both;
+}
+
+.contactinfo .brand_image {
+	float: left;
+	margin: 0 10px 0 0;
+	width: 100px;
+	min-height: 72px;
+	max-height:72px;
+	overflow-x: hidden;
+}
+
+.contactinfo_text {
+	float: left;
+	width: 225px;
+}
+
+.contactinfo p {
+	font: normal 12px  Lato, Arial, sans-serif;
+	padding: 0;
+	text-transform:capitalize;
+	margin-bottom:5px;
+}
+
+.contactinfo .contactinfodetails {
+	font: normal 10px  Lato, Arial, sans-serif;
+	padding: 0;
+	text-transform:capitalize;
+	margin-bottom:3px;
+}
+
+
+.revieworder {
+	width: 100%;
+	padding: 5px 0 5px 0;
+	min-height: 25px;
+	position: relative;
+	float: left;
+	clear: both;
+}
+
+.revieworder .brand_image {
+	float: left;
+	margin: 0 10px 0 0;
+	width: 100px;
+	min-height: 72px;
+	max-height:72px;
+	overflow-x: hidden;
+}
+
+.revieworder_text {
+	float: left;
+	width: 225px;
+}
+
+.revieworder_text p {
+	font: normal 12px  Lato, Arial, sans-serif;
+	padding: 0;
+	text-transform:capitalize;
+	margin-bottom:5px;
+}
+
+.revieworder_text .revieworderdetails {
+	font: normal 10px  Lato, Arial, sans-serif;
+	padding: 0;
+	text-transform:capitalize;
+	margin-bottom:3px;
+}
+
+
+.orderinfo {
+	width: 100%;
+	padding: 5px 0 5px 0;
+	min-height: 25px;
+	position: relative;
+	float: left;
+	clear: both;
+}
+
+.orderinfo .brand_image {
+	float: left;
+	margin: 0 10px 0 0;
+	width: 100px;
+	min-height: 72px;
+	max-height:72px;
+	overflow-x: hidden;
+}
+
+.orderinfo_text {
+	float: left;
+	width: 225px;
+}
+
+.orderinfo p {
+	font: normal 12px  Lato, Arial, sans-serif;
+	padding: 0;
+	text-transform:capitalize;
+	margin-bottom:5px;
+}
+
+.orderinfo_text .orderinfodetails {
+	font: normal 10px  Lato, Arial, sans-serif;
+	padding: 0;
+	text-transform:capitalize;
+	margin-bottom:3px;
+}
+
+
+
 
 .notificationfeed {
 	width: 400px;
@@ -2574,3 +2690,25 @@ opacity:0;
 .progress_status_bar2 span{ position:relative; display:block; float:right; margin-top:-24px; color:#fd9a00;}
 
 
+.Colour
+{
+	width:220px;
+	margin-right:5px;
+}
+
+.ordercol
+{
+	width:70px;
+	margin-right:5px;
+}
+
+.ordercoldel
+{
+	width:10px;
+}
+
+.orderinfo
+{
+	font: normal 12px  Lato, Arial, sans-serif;
+	text-transform: uppercase;
+}

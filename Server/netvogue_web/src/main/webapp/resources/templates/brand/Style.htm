@@ -274,116 +274,90 @@
 			2012</h4>
 	</div>
 	<div class="modal-body">
-		<div class="span11">
-			<!-- <div class="span8">
-					<ul class="nav nav-tab nav-stacked">
-						<li>Rebecca Minkoff Spring summer 2012</li>
-					</ul>
-				</div> -->
-			<div class="span2">
-				<ul class="nav nav-tab nav-stacked">
-					<li><img ng-src="images/paste5.jpg"
-						style="margin-top: 2px; max-width: 80px; max-height: 113px; min-width: 80px; min-height: 113px; margin: 2px;"
-						class="pull-left"></li>
-				</ul>
-			</div>
-			<div class="span2">
-				<ul class="nav nav-tab nav-stacked">
-					<li>Style#</li>
-					<li>Rgb1234</li>
-				</ul>
-			</div>
-			<div class="span2">
-				<ul class="nav nav-tab nav-stacked">
-					<li>Delivery Date</li>
-					<li>23-Dec-2012</li>
-				</ul>
-			</div>
-			<div class="span10">
-				<table class="table table-condensed">
-					<thead align="center">
-						<tr>
-							<th>Color</th>
-							<th class="span1" style="text-align:center;">S</th>
-							<th class="span1" style="text-align:center;">M</th>
-							<th class="span1" style="text-align:center;">L</th>
-							<th class="span1" style="text-align:center;">Amt</th>
-							<th class="span1" style="text-align:center;">Total</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="span4">
-							<span><img style="padding-bottom:9px;"  width="20" height="20" src="img/Red.jpeg"></span>
-							<span>	<select id="e10" class="populate span3 pull-left"
-								ng-model="linesheetname">
-									<option value="">Black Gread</option>
-									<option value="">Spring White</option>
-									<option value="">Rigrt Meadc</option>
-							</select></span>
-						
-							</td>
-							
-							<td><input type="text" class="span1"></td>
-							<td><input type="text" class="span1"></td>
-							<td><input type="text" class="span1"></td>
-							<td style="text-align:center;" class="span1" >8,000</td>
-							<td style="text-align:center;" class="span1" >1,60,000</td>
-							<td style="text-align:center;" class="span1" >x</td>
-						</tr>
-						<tr>
-						<td class="span4">
-							<span><img style="padding-bottom:9px;" width="20" height="20" src="img/Red.jpeg"></span>
-							<span>	<select id="e10" class="populate span3 pull-left"
-								ng-model="linesheetname">
-									<option value="">Black Gread</option>
-									<option value="">Spring White</option>
-									<option value="">Rigrt Meadc</option>
-							</select></span>
-						
-							</td>
-							
-							<td><input type="text" class="span1"></td>
-							<td><input type="text" class="span1"></td>
-							<td><input type="text" class="span1"></td>
-							<td style="text-align:center;" class="span1" >75,000</td>
-							<td style="text-align:center;" class="span1" >1,60,000</td>
-							<td style="text-align:center;" class="span1" >x</td>
-						</tr>
-						<tr>
-						<td class="span4">
-							<span><img style="padding-bottom:9px;" width="20" height="20" src="img/Red.jpeg"></span>
-							<span>	<select id="e10" class="populate span3 pull-left"
-								ng-model="linesheetname">
-									<option value="">Black Gread</option>
-									<option value="">Spring White</option>
-									<option value="">Rigrt Meadc</option>
-							</select></span>
-						
-							</td>
-							
-							<td><input type="text" class="span1"></td>
-							<td><input type="text" class="span1"></td>
-							<td><input type="text" class="span1"></td>
-							<td style="text-align:center;" class="span1" >1,00,000</td>
-							<td style="text-align:center;" class="span1" >1,60,000</td>
-							<td style="text-align:center;" class="span1" >x</td>
-						</tr>
-						<tr>
-							<td class="span2"><a>+Add More Colors</a></td>
-							<td style="text-align:center;" >4</td>
-							<td style="text-align:center;" >6</td>
-							<td style="text-align:center;" >8</td>
-							<td style="text-align:center;">Total</td>
-							<td style="text-align:center;">1,60,000</td>
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
+	<div>
+					<div class="span1">
+						<a> <img alt="" style="max-height: 80px; max-width: 50;"
+							ng-src=images/paste4.jpg class="pull-left"></a>
+					</div>
+					<div class="span9">
+						<table class="table condensed-table">
+							<thead>
+								<tr>
+									<th class="Colour">Color</th>
+									<th class="ordercol" style="text-align: center;"></th>
+									<th class="ordercol" style="text-align: center;">S</th>
+									<th class="ordercol" style="text-align: center;">M</th>
+									<th class="ordercol" style="text-align: center;">L</th>
+									<th class="ordercol" style="text-align: center;">Qty</th>
+									<th class="ordercol" style="text-align: center;">Amt</th>
+									<th class="ordercol" style="text-align: center;">Total</th>
+									<th class="ordercol" style="text-align: center;"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="Colour"><span> <select id="e10"
+											style="width: 180px; margin-right: 2px;" class="pull-left"
+											ng-model="linesheetname">
+												<option value="">Black Gread Qwerty</option>
+												<option value="">Spring White</option>
+												<option value="">Rigrt Meadc</option>
+										</select>
+									</span></td>
+									<td class="ordercol" style="text-align: center;"><img
+										style="margin-top: 5px; width: 20px; height: 20px;"
+										src="img/Red.jpeg"></td>
+									<td class="ordercol" style="text-align: center;">1</td>
+									<td class="ordercol" style="text-align: center;">2</td>
+									<td class="ordercol" style="text-align: center;">3</td>
+									<td class="ordercol" style="text-align: center;">6</td>
+									<td class="ordercol" style="text-align: center;">45646</td>
+									<td class="ordercol" style="text-align: center;">45646</td>
+									<td>X</td>
+								</tr>
+								<tr>
+									<td class="Colour"><span> <select id="e10"
+											style="width: 180px; margin-right: 2px;" class="pull-left"
+											ng-model="linesheetname">
+												<option value="">Black Gread Qwerty</option>
+												<option value="">Spring White</option>
+												<option value="">Rigrt Meadc</option>
+										</select>
+									</span></td>
+									<td class="ordercol" style="text-align: center;"><img
+										style="margin-top: 5px; width: 20px; height: 20px;"
+										src="img/Red.jpeg"></td>
+									<td class="ordercol" style="text-align: center;"><input
+										type="text" style="width: 40px; margin-right: 2px;" /></td>
+									<td class="ordercol" style="text-align: center;"><input
+										type="text" style="width: 40px; margin-right: 2px;" /></td>
+									<td class="ordercol" style="text-align: center;"><input
+										type="text" style="width: 40px; margin-right: 2px;" /></td>
+									<td class="ordercol" style="text-align: center;">6</td>
+									<td class="ordercol" style="text-align: center;">45646</td>
+									<td class="ordercol" style="text-align: center;">45646</td>
+									<td>X</td>
+								</tr>
 
-			</div>
-		</div>
+							</tbody>
+							<tfoot>
+								<tr>
+									<th class="Colour" style="text-align: center;">
+									<a style="padding-top:0px;background-color:transparent;border: 0px solid transparent;" >+Add More Colors</a>
+									</th>
+									<th class="ordercol" style="text-align: center;"></th>
+									<th class="ordercol" style="text-align: center;">1</th>
+									<th class="ordercol" style="text-align: center;">2</th>
+									<th class="ordercol" style="text-align: center;">3</th>
+									<th class="ordercol" style="text-align: center;">6</th>
+									<th class="ordercol" style="text-align: center;">421652</th>
+									<th class="ordercol" style="text-align: center;">72381523</th>
+									<th class="ordercol" style="text-align: center;"></th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Add & Keep Shopping</a> <a

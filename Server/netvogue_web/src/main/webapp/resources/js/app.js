@@ -65,8 +65,10 @@ angular.module('netVogue', ['netVogue.constants', 'netVogue.filters', 'netVogue.
 	  //Related to ecommerce
 	  $routeProvider.otherwise({redirectTo: homepage});
 	  $routeProvider.when('/mycart',					{ templateUrl: 'templates/mycart.htm',         			 		controller: MyCtrlCart });
-	  $routeProvider.when('/orders',					{ templateUrl: 'templates/orders.htm',         			 		controller: MyCtrlOrders });
-	  $routeProvider.when('/revieworders',				{ templateUrl: 'templates/orders.htm',         			 		controller: MyCtrlOrders });
+	  $routeProvider.when('/boutiqueorders',			{ templateUrl: 'templates/boutiqueorders.htm',         			controller: MyCtrlBoutiqueOrders });
+	  $routeProvider.when('/brandorders',				{ templateUrl: 'templates/brandorders.htm',         			controller: MyCtrlBrandOrders });
+	  $routeProvider.when('/revieworders',				{ templateUrl: 'templates/Revieworder.htm',         			controller: MyCtrlRevieworders });
+	  $routeProvider.when('/sample',				{ templateUrl: 'templates/sample.htm',         			controller: MyCtrlsample });
 	  
   }]).run( function($rootScope, currentvisitedprofile) {
 

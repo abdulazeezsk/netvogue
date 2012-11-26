@@ -67,6 +67,8 @@ img.AngularJS-small {
 		type="text/javascript"></script>
 	<script src="lib/jquery/jquery.fancybox.pack.js" type="text/javascript"></script>
 	<script src="lib/jquery/jquery.elastislide.js" type="text/javascript"></script>
+	<script type="text/javascript" src="lib/jquery/jquery.cookie.js"></script>
+	<script type="text/javascript" src="lib/jquery/jquery.collapsible.js"></script>
 
 	<script src="lib/angular/angular.js" type="text/javascript"></script>
 	<script src="lib/angular/angular-ui.js" type="text/javascript"></script>

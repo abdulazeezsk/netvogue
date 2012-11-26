@@ -1,0 +1,140 @@
+<!--body-->
+<div class="container minimum_height">
+	<div class="row">
+		<!-- left pane -->
+		<div class="span3">
+			<div class="underline">
+				<span ui-if="!iambrand" class="leftpane_entity">Boutique </span> <span
+					ui-if="iambrand" class="leftpane_entity">Brand </span>
+			</div>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> <a href="#profile"> <img alt=""
+								ng-src={{profilepic.thumbnail_url}}
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+					</div>
+				</li>
+			</ul>
+			<div class="leftpane_subheading">FILTERS</div>
+			<div class="divi2"></div>
+			<div>
+				<div>
+					<span class="leftpane_filter_name">PO#</span> <input type="text"
+						class="span3" placeholder="Enter the purchase order number"
+						ng-model="searchlinesheets.brandname"
+						ng-change="searchlinesheetsfn()" />
+				</div>
+				<div>
+					<span class="leftpane_filter_name">Retailers</span> <input type="text"
+						class="span3" placeholder="Enter retailer name"
+						ng-model="searchlinesheets.brandname"
+						ng-change="searchlinesheetsfn()" />
+				</div>
+				<div>
+					<span class="leftpane_filter_name">linesheet</span> <input type="text"
+						class="span3" placeholder="Enter linesheet name"
+						ng-model="searchlinesheets.linesheetname"
+						ng-change="searchlinesheetsfn()" />
+				</div>
+				<div>
+					<span class="leftpane_filter_name">Status</span> <select id="e10"
+						class="span3" class="pull-left"
+						ng-model="linesheetname">
+						<option value="">All</option>
+						<option value="">New</option>
+						<option value="">Returned</option>
+						<option value="">Reviewed</option>
+						<option value="">Approved</option>
+						<option value="">Confirmed</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<!-- left pane -->
+
+
+		<!-- right pane -->
+
+		<div class="span9">
+
+			<div class="underline">
+				<span class="leftpane_entity">My Orders </span>
+			</div>
+			<div class="underline">
+				<span class="right_pane_info">Use the filters below to search trough orders  </span>
+			</div>
+			<div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th style="text-align: center;">PO#</th>
+							<th style="text-align: center;">Retailer</th>
+							<th style="text-align: center;">Linesheet</th>
+							<th style="text-align: center;">Delivery Date</th>
+							<th style="text-align: center;">Qty</th>
+							<th style="text-align: center;">Total</th>
+							<th style="text-align: center;">Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style="text-align: center;">238</td>
+							<td style="text-align: center;">Still Waters</td>
+							<td style="text-align: center;">Spring summer 2012</td>
+							<td style="text-align: center;">23-dec-2012</td>
+							<td style="text-align: center;">24</td>
+							<td style="text-align: center;">24,0989</td>
+							<td style="text-align: center;"><a>New</a></td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">239</td>
+							<td style="text-align: center;">Modor</td>
+							<td style="text-align: center;">Spring summer 2012</td>
+							<td style="text-align: center;">23-dec-2012</td>
+							<td style="text-align: center;">24</td>
+							<td style="text-align: center;">24,0989</td>
+							<td style="text-align: center;"><a>Reviewed</a></td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">239</td>
+							<td style="text-align: center;">Modor</td>
+							<td style="text-align: center;">Spring summer 2012</td>
+							<td style="text-align: center;">23-dec-2012</td>
+							<td style="text-align: center;">24</td>
+							<td style="text-align: center;">24,0989</td>
+							<td style="text-align: center;"><a>Returned</a></td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">240</td>
+							<td style="text-align: center;">Orchids</td>
+							<td style="text-align: center;">Spring summer 2012</td>
+							<td style="text-align: center;">23-dec-2012</td>
+							<td style="text-align: center;">24</td>
+							<td style="text-align: center;">24,0989</td>
+							<td style="text-align: center;"><a>Approved</a></td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">241</td>
+							<td style="text-align: center;">Cassine</td>
+							<td style="text-align: center;">Spring summer 2012</td>
+							<td style="text-align: center;">23-dec-2012</td>
+							<td style="text-align: center;">24</td>
+							<td style="text-align: center;">24,0989</td>
+							<td style="text-align: center;"><a>Confirmed</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+
+		</div>
+		<!-- right pane -->
+	</div>
+
+</div>
+
+<!--body-->
