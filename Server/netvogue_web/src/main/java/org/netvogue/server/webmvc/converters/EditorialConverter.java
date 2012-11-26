@@ -24,7 +24,7 @@ public class EditorialConverter /*implements Converter<org.netvogue.server.neo4j
 			newEditorial.setGallerypic(Constants.GALLERY_DefaultPic);
 		} else {
 			String thumblink = uploadManager.getQueryString(profilepic, ImageType.EDITORIAL, 
-					Size.EThumb, username);
+					Size.EAdd, username);
 			newEditorial.setGallerypic(thumblink);
 		}
 		newEditorial.setGallerydesc(source.getDescription());

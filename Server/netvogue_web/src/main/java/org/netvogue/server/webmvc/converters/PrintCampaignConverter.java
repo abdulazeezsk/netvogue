@@ -23,7 +23,7 @@ public class PrintCampaignConverter /*implements Converter<org.netvogue.server.n
 			newCampaign.setGallerypic(Constants.GALLERY_DefaultPic);
 		} else {
 			String thumblink = uploadManager.getQueryString(profilepic, ImageType.PRINT_CAMPAIGN, 
-					Size.PCThumb, username);
+					Size.PCAdd, username);
 			newCampaign.setGallerypic(thumblink);
 		}
 		newCampaign.setGallerydesc(source.getDescription());

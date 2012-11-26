@@ -26,7 +26,7 @@ public class GalleryConverter /*implements Converter<org.netvogue.server.neo4jap
 		} else {
 			//String thumblink = uploadManager.getQueryString(dbGallery.getProfilePicLink(), ImageType.GALLERY, Size.GThumb);
 			String thumblink = uploadManager.getQueryString(profilepic, ImageType.GALLERY, 
-					Size.GThumb, username);
+					Size.GAdd, username);
 			gallery.setGallerypic(thumblink);
 		}
 	    gallery.setGallerydesc(dbGallery.getDescription());
