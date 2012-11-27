@@ -226,10 +226,10 @@ angular.module('netVogue.directives', []).
 		var galleryid = {
 				"galleryid" : scope.galleryid
 		};
-		scope.errorCallback = function(event, src) {
+		scope.errorCallback = function(event, src, index) {
 			var imgElement = event.srcElement;
 			$timeout(function() {
-				angular.element(imgElement).attr('src', src);
+				angular.element(imgElement).attr('src', scope.existingfiles[index].add_url);
 			}, 1000);
 		};
 		angular.element(element).ready(function() {
@@ -311,7 +311,7 @@ angular.module('netVogue.directives', []).
 		scope.errorCallback = function(event, src) {
 			var imgElement = event.srcElement;
 			$timeout(function() {
-				angular.element(imgElement).attr('src', src);
+				angular.element(imgElement).attr('src', scope.profilepic);
 			}, 1000);
 		};
 		angular.element(element).ready(function() {
@@ -347,7 +347,13 @@ angular.module('netVogue.directives', []).
 		scope.errorCallback = function(event, src) {
 			var imgElement = event.srcElement;
 			$timeout(function() {
-				angular.element(imgElement).attr('src', src);
+				angular.element(imgElement).attr('src', scope.mainimage);
+			}, 1000);
+		};
+		scope.errorCallbackAdd = function(event, src, index) {
+			var imgElement = event.srcElement;
+			$timeout(function() {
+				angular.element(imgElement).attr('src', scope.newstyle.availableImages[index].add_url);
 			}, 1000);
 		};
 		angular.element(element).ready(function() {

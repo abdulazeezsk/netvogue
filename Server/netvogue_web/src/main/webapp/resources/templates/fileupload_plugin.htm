@@ -8,7 +8,8 @@
 	<li ng-repeat="eachfile in existingfiles" style="postion:absloute;">
 	      <div class="organise">
 			<span class="image">
-			 	<img alt="" ng-src={{eachfile.add_url}} ui-event="{error: 'errorCallback($event, eachfile.add_url)'}">
+			 	<img alt="" ng-src={{eachfile.add_url}} 
+			 		ui-event="{error: 'errorCallback($event, eachfile.add_url, $index)'}">
 			</span>
 			<span style="width:400px;margin-left:10px;"  >
 				<div edit-text data="eachfile"
