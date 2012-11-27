@@ -274,7 +274,7 @@ public class ProfileController {
     user.setProfilePicLink((String) uploadMap.get(UploadManager.FILE_ID));
     try {
       String key = userName+ "/" + ImageType.PROFILE_PIC.getKey() + "/" + (String)uploadMap.get("fileId");
-      BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.PROFILE_PIC, "resize_to_fit" );
+      BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.PROFILE_PIC, "resize_to_fill" );
     } catch (Exception e) {
       e.printStackTrace();
     }
