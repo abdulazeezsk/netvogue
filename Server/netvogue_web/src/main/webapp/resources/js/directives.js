@@ -222,6 +222,16 @@ angular.module('netVogue.directives', []).
 		scope.isEditMode = false;
 		scope.$on('filesadded', function(e, files) {
 			addfiles(files);
+			//Shashank -- While adding images
+			jQuery.blockUI({ css: { 
+	            border: 'none', 
+	            padding: '15px', 
+	            backgroundColor: '#000', 
+	            '-webkit-border-radius': '10px', 
+	            '-moz-border-radius': '10px', 
+	            opacity: .5, 
+	            color: '#fff' 
+	        } }); 
 		});
 		var galleryid = {
 				"galleryid" : scope.galleryid
@@ -267,6 +277,7 @@ angular.module('netVogue.directives', []).
 				        			scope.filesadded = false;
 				        			//scope.$emit('filesuploaded');
 			        			}
+			        			jQuery.unblockUI(); 
 		        			}, 1000);
 		        		} else {
 		        			alert("error");
