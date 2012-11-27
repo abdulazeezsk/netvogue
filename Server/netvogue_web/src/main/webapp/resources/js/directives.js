@@ -262,23 +262,21 @@ angular.module('netVogue.directives', []).
 		        done: function (e, data) {
 		        	scope.$apply(function(scope) {		        		
 		        		if(data.result.status == true) {
-		        			$timeout(function() {
-			        			if(true == scope.filesadded) {
-			        				//Worst logic ever -- revisit it once again -- Azeez
-			        				var replyFromServer = [];
-				        			for(var i=0; i < data.result.filesuploaded.length; i++){
-				        				replyFromServer.push(data.result.filesuploaded[i]);
-				        			};
-				        			for(var i=0; i < scope.existingfiles.length; i++){
-				        				replyFromServer.push(scope.existingfiles[i]);
-				        			};
-				        			scope.existingfiles = angular.copy(replyFromServer);
-				        			scope.newfiles = [];
-				        			scope.filesadded = false;
-				        			//scope.$emit('filesuploaded');
-			        			}
-			        			jQuery.unblockUI(); 
-		        			}, 1000);
+		        			if(true == scope.filesadded) {
+		        				//Worst logic ever -- revisit it once again -- Azeez
+		        				var replyFromServer = [];
+			        			for(var i=0; i < data.result.filesuploaded.length; i++){
+			        				replyFromServer.push(data.result.filesuploaded[i]);
+			        			};
+			        			for(var i=0; i < scope.existingfiles.length; i++){
+			        				replyFromServer.push(scope.existingfiles[i]);
+			        			};
+			        			scope.existingfiles = angular.copy(replyFromServer);
+			        			scope.newfiles = [];
+			        			scope.filesadded = false;
+			        			//scope.$emit('filesuploaded');
+		        			}
+		        			jQuery.unblockUI(); 
 		        		} else {
 		        			alert("error");
 		        		}
@@ -324,8 +322,11 @@ angular.module('netVogue.directives', []).
 			var imgElement = event.srcElement;
 			angular.element(imgElement).attr('src', '/img/loading.gif');
 			$timeout(function() {
-				angular.element(imgElement).attr('src', scope.profilepic);
+				angular.element(imgElement).attr('src', scope.profilepic.thumbnail_url);
 			}, 1000);
+		};
+		scope.loadCallback = function() {
+			scope.$emit('profilepicchanged', scope.profilepic);
 		};
 		angular.element(element).ready(function() {
 			jQuery('#profileupload').fileupload({
@@ -334,10 +335,7 @@ angular.module('netVogue.directives', []).
 		        done: function (e, data) {
 		        	scope.$apply(function(scope) {
 		        		if(data.result.status == true) {
-		        			$timeout(function() {
-		        				scope.profilepic = data.result.filesuploaded[0];
-		        				scope.$emit('profilepicchanged', scope.profilepic);
-		        			}, 1000);
+		        			scope.profilepic = data.result.filesuploaded[0];
 		        		} else {
 		        			alert("error");
 		        		}
@@ -391,16 +389,14 @@ angular.module('netVogue.directives', []).
 		        done: function (e, data) {
 		        	scope.$apply(function(scope) {
 		        		if(data.result.status == true) {
-		        			$timeout(function() {
-			        			if(true == scope.senttoserver) {
-				        			for(var i=0; i < data.result.filesuploaded.length; i++){
-				        				scope.newstyle.availableImages.push(data.result.filesuploaded[i]);
-				        			};
-				        			scope.mainimage = scope.newstyle.availableImages[0].thumbnail_url;
-				        			scope.senttoserver = false;
-				        			scope.newfiles = [];
+		        			if(true == scope.senttoserver) {
+			        			for(var i=0; i < data.result.filesuploaded.length; i++){
+			        				scope.newstyle.availableImages.push(data.result.filesuploaded[i]);
 			        			};
-		        			}, 1000);
+			        			scope.mainimage = scope.newstyle.availableImages[0].thumbnail_url;
+			        			scope.senttoserver = false;
+			        			scope.newfiles = [];
+		        			};
 		        		} else {
 		        			alert("error");
 		        		}

@@ -2,7 +2,7 @@ package org.netvogue.server.aws.core;
 
 public enum Size {
 	//Profile pic
-	PThumb(220, 306),
+	PThumb(220, 150),
 	PTop(130, 100),
 	
 	//Gallery
