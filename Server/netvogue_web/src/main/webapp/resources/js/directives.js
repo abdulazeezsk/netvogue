@@ -228,6 +228,7 @@ angular.module('netVogue.directives', []).
 		};
 		scope.errorCallback = function(event, src, index) {
 			var imgElement = event.srcElement;
+			angular.element(imgElement).attr('src', '/img/loading.gif');
 			$timeout(function() {
 				angular.element(imgElement).attr('src', scope.existingfiles[index].add_url);
 			}, 1000);
@@ -310,6 +311,7 @@ angular.module('netVogue.directives', []).
 	linkFn = function(scope, element, attrs, ngModel) {
 		scope.errorCallback = function(event, src) {
 			var imgElement = event.srcElement;
+			angular.element(imgElement).attr('src', '/img/loading.gif');
 			$timeout(function() {
 				angular.element(imgElement).attr('src', scope.profilepic);
 			}, 1000);
@@ -346,12 +348,14 @@ angular.module('netVogue.directives', []).
 		};
 		scope.errorCallback = function(event, src) {
 			var imgElement = event.srcElement;
+			angular.element(imgElement).attr('src', '/img/loading.gif');
 			$timeout(function() {
 				angular.element(imgElement).attr('src', scope.mainimage);
 			}, 1000);
 		};
 		scope.errorCallbackAdd = function(event, src, index) {
 			var imgElement = event.srcElement;
+			angular.element(imgElement).attr('src', '/img/loading.gif');
 			$timeout(function() {
 				angular.element(imgElement).attr('src', scope.newstyle.availableImages[index].add_url);
 			}, 1000);
