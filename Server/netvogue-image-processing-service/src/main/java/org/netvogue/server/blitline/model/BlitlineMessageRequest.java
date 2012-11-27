@@ -9,6 +9,7 @@ public class BlitlineMessageRequest {
   String application_id = ResourceLoader.getProperty("application_id");
   String src;
   String type = "postback";
+  boolean content_type_json = true;
   String postback_url = ResourceLoader.getProperty("postback_url");
   List<BlitlineFunction> functions;
   
@@ -42,5 +43,11 @@ public class BlitlineMessageRequest {
   public void setType(String type) {
     this.type = type;
   }
+public boolean isContent_type_json() {
+	return content_type_json;
+}
+public void setContent_type_json(boolean content_type_json) {
+	this.content_type_json = content_type_json;
+}
 
 }
