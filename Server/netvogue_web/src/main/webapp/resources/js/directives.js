@@ -238,7 +238,7 @@ angular.module('netVogue.directives', []).
 		};
 		scope.errorCallback = function(event, src, index) {
 			var imgElement = event.srcElement;
-			angular.element(imgElement).attr('src', '/img/loading.gif');
+			angular.element(imgElement).attr('src', 'img/ajax-loader1.gif');
 			$timeout(function() {
 				angular.element(imgElement).attr('src', scope.existingfiles[index].add_url);
 			}, 1000);
