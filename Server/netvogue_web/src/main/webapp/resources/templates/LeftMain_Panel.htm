@@ -3,7 +3,9 @@
 		<li class="span2">
 			<div style="position: relative;">
 				<a ng-href="{{links.profile}}"> <img ng-src={{profilepic.thumbnail_url}}
-					width="140" style="max-height:105px;" alt="" /></a>
+					width="140" style="max-height:105px;" 
+					ui-event="{error: 'errorCallback($event, profilepic.thumbnail_url)'}" />
+				</a>
 				<div ng-class={masklayer:isMyProfile}>
 					<h1 class="fileup" ng-show="isMyProfile">
 						<span class="fileinput-button"> <span><i

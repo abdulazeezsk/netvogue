@@ -266,7 +266,7 @@ angular.module('netVogue.directives', []).
 				        			scope.filesadded = false;
 				        			//scope.$emit('filesuploaded');
 			        			}
-		        			}, 3000);
+		        			}, 1000);
 		        		} else {
 		        			alert("error");
 		        		}
@@ -308,6 +308,12 @@ angular.module('netVogue.directives', []).
 }).directive('profileuploadPlugin', function($timeout) {
 	var linkFn;
 	linkFn = function(scope, element, attrs, ngModel) {
+		scope.errorCallback = function(event, src) {
+			var imgElement = event.srcElement;
+			$timeout(function() {
+				angular.element(imgElement).attr('src', src);
+			}, 1000);
+		};
 		angular.element(element).ready(function() {
 			jQuery('#profileupload').fileupload({
 		        dataType: 'json',
@@ -315,8 +321,10 @@ angular.module('netVogue.directives', []).
 		        done: function (e, data) {
 		        	scope.$apply(function(scope) {
 		        		if(data.result.status == true) {
-		        			scope.profilepic = data.result.filesuploaded[0];
-		        			scope.$emit('profilepicchanged', scope.profilepic);
+		        			$timeout(function() {
+		        				scope.profilepic = data.result.filesuploaded[0];
+		        				scope.$emit('profilepicchanged', scope.profilepic);
+		        			}, 1000);
 		        		} else {
 		        			alert("error");
 		        		}
@@ -335,6 +343,12 @@ angular.module('netVogue.directives', []).
 		scope.newfiles = [];
 		var stylesheetid = {
 				"stylesheetid": scope.stylesheetid
+		};
+		scope.errorCallback = function(event, src) {
+			var imgElement = event.srcElement;
+			$timeout(function() {
+				angular.element(imgElement).attr('src', src);
+			}, 1000);
 		};
 		angular.element(element).ready(function() {
 			jQuery('#styleupload').fileupload({
@@ -365,7 +379,7 @@ angular.module('netVogue.directives', []).
 				        			scope.senttoserver = false;
 				        			scope.newfiles = [];
 			        			};
-		        			}, 10000);
+		        			}, 1000);
 		        		} else {
 		        			alert("error");
 		        		}
