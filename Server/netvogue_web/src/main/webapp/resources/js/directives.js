@@ -226,6 +226,12 @@ angular.module('netVogue.directives', []).
 		var galleryid = {
 				"galleryid" : scope.galleryid
 		};
+		scope.errorCallback = function(event, src) {
+			var imgElement = event.srcElement;
+			$timeout(function() {
+				angular.element(imgElement).attr('src', src);
+			}, 1000);
+		};
 		angular.element(element).ready(function() {
 			jQuery('#fileupload').fileupload({
 		        dataType: 'json',
@@ -245,20 +251,22 @@ angular.module('netVogue.directives', []).
 		        done: function (e, data) {
 		        	scope.$apply(function(scope) {		        		
 		        		if(data.result.status == true) {
-		        			if(true == scope.filesadded) {
-		        				//Worst logic ever -- revisit it once again -- Azeez
-		        				var replyFromServer = [];
-			        			for(var i=0; i < data.result.filesuploaded.length; i++){
-			        				replyFromServer.push(data.result.filesuploaded[i]);
-			        			};
-			        			for(var i=0; i < scope.existingfiles.length; i++){
-			        				replyFromServer.push(scope.existingfiles[i]);
-			        			};
-			        			scope.existingfiles = angular.copy(replyFromServer);
-			        			scope.newfiles = [];
-			        			scope.filesadded = false;
-			        			//scope.$emit('filesuploaded');
-		        			}
+		        			$timeout(function() {
+			        			if(true == scope.filesadded) {
+			        				//Worst logic ever -- revisit it once again -- Azeez
+			        				var replyFromServer = [];
+				        			for(var i=0; i < data.result.filesuploaded.length; i++){
+				        				replyFromServer.push(data.result.filesuploaded[i]);
+				        			};
+				        			for(var i=0; i < scope.existingfiles.length; i++){
+				        				replyFromServer.push(scope.existingfiles[i]);
+				        			};
+				        			scope.existingfiles = angular.copy(replyFromServer);
+				        			scope.newfiles = [];
+				        			scope.filesadded = false;
+				        			//scope.$emit('filesuploaded');
+			        			}
+		        			}, 3000);
 		        		} else {
 		        			alert("error");
 		        		}
