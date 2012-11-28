@@ -12,6 +12,14 @@ public class NetvogueUserDetails extends User {
 
   private long salt;
 
+  private org.netvogue.ecommerce.domain.model.User domainUser;
+
+  public NetvogueUserDetails(final String username, final String password, final long salt, final org.netvogue.ecommerce.domain.model.User domainUser, final Collection<? extends GrantedAuthority> authorities) {
+    super(username, password, true, true, true, true, authorities);
+    this.salt = salt;
+    this.domainUser = domainUser;
+}
+
 
   public NetvogueUserDetails(final String username, final String password, final long salt, final Collection<? extends GrantedAuthority> authorities) {
       super(username, password, true, true, true, true, authorities);
@@ -36,5 +44,16 @@ public class NetvogueUserDetails extends User {
   public void setSalt(final long salt) {
     this.salt = salt;
   }
+
+
+  public org.netvogue.ecommerce.domain.model.User getDomainUser() {
+    return domainUser;
+  }
+
+
+  public void setDomainUser(final org.netvogue.ecommerce.domain.model.User domainUser) {
+    this.domainUser = domainUser;
+  }
+
 
 }

@@ -34,8 +34,8 @@ public class MongoUserDetailsService implements UserDetailsService, Serializable
       }
     };
 
-    NetvogueUserDetails userDetails = new NetvogueUserDetails(user.getUsername(), user.getPassword(), user.getSalt(),
-        Arrays.asList(authority));
+    NetvogueUserDetails userDetails = new NetvogueUserDetails(user.getUsername(), user.getEncodedPassword(),
+        user.getSalt(), user, Arrays.asList(authority));
     return userDetails;
   }
 
