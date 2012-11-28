@@ -44,7 +44,29 @@ public class BlitlineUtil {
 		List<BlitlineFunction> list = new ArrayList<BlitlineFunction>();
 		Size[] sizes = imageType.getSizes();
 		for (Size size : sizes) {
-			function = createBlitlineFunction(functionName, size, uniqueId);
+			function = createBlitlineFunction(functionName, size, uniqueId, null);
+			list.add(function);
+		}
+		blitlineMessageRequest.setFunctions(list);
+		blitlineRequest.setJson(blitlineMessageRequest);
+		String dataToSend = mapObjectToJSON(blitlineRequest);
+		System.out.println("dataToSend: " + dataToSend);
+		System.out.println("Time while sending: " + System.currentTimeMillis());
+		BlitlineResponse response = performPostRequest(dataToSend);
+		System.out.println(mapObjectToJSON(response));
+//		return response;
+	}
+	
+	public static void sendBlitlineRequestwithParams(String srcURL, String uniqueId,
+			ImageType imageType, String functionName, Map<String, String> paramsMap) throws Exception {
+		BlitlineFunction function = null;
+		BlitlineRequest blitlineRequest = new BlitlineRequest();
+		BlitlineMessageRequest blitlineMessageRequest = new BlitlineMessageRequest();
+		blitlineMessageRequest.setSrc(srcURL);
+		List<BlitlineFunction> list = new ArrayList<BlitlineFunction>();
+		Size[] sizes = imageType.getSizes();
+		for (Size size : sizes) {
+			function = createBlitlineFunction(functionName, size, uniqueId, paramsMap);
 			list.add(function);
 		}
 		blitlineMessageRequest.setFunctions(list);
@@ -58,12 +80,17 @@ public class BlitlineUtil {
 	}
 
 	private static BlitlineFunction createBlitlineFunction(String functionName,
-			Size size, String uniqueId) {
+			Size size, String uniqueId, Map<String, String> paramsMap) {
 		BlitlineFunction function = new BlitlineFunction();
 		function.setName(functionName);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("height", String.valueOf(size.getHeight()));
 		map.put("width", String.valueOf(size.getWidth()));
+		if (null != paramsMap && paramsMap.size() > 0) {
+			for (Map.Entry<String, String> entry : paramsMap.entrySet()) {
+				map.put(entry.getKey(), entry.getValue());
+			}
+		}
 		function.setParams(map);
 		SaveParameters parameters = createSaveParameters(uniqueId,
 				size.toString());
