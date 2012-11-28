@@ -1,6 +1,7 @@
 package org.netvogue.server.webmvc.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -274,7 +275,9 @@ public class ProfileController {
     user.setProfilePicLink((String) uploadMap.get(UploadManager.FILE_ID));
     try {
       String key = userName+ "/" + ImageType.PROFILE_PIC.getKey() + "/" + (String)uploadMap.get("fileId");
-      BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.PROFILE_PIC, "resize_to_fill" );
+      Map<String, String> map = new HashMap<String,String>();
+      map.put("gravity", "NorthGravity");
+      BlitlineUtil.sendBlitlineRequestwithParams((String)uploadMap.get("queryString"),key,ImageType.PROFILE_PIC, "resize_to_fill", map );
     } catch (Exception e) {
       e.printStackTrace();
     }
