@@ -222,9 +222,26 @@ angular.module('netVogue.directives', []).
 		scope.isEditMode = false;
 		scope.$on('filesadded', function(e, files) {
 			addfiles(files);
+			//Shashank -- While adding images
+			jQuery.blockUI({ css: { 
+	            border: 'none', 
+	            padding: '15px', 
+	            backgroundColor: '#000', 
+	            '-webkit-border-radius': '10px', 
+	            '-moz-border-radius': '10px', 
+	            opacity: .5, 
+	            color: '#fff' 
+	        } }); 
 		});
 		var galleryid = {
 				"galleryid" : scope.galleryid
+		};
+		scope.errorCallback = function(event, src, index) {
+			var imgElement = event.srcElement;
+			angular.element(imgElement).attr('src', 'img/ajax-loader1.gif');
+			$timeout(function() {
+				angular.element(imgElement).attr('src', scope.existingfiles[index].add_url);
+			}, 1000);
 		};
 		angular.element(element).ready(function() {
 			jQuery('#fileupload').fileupload({
@@ -259,6 +276,7 @@ angular.module('netVogue.directives', []).
 			        			scope.filesadded = false;
 			        			//scope.$emit('filesuploaded');
 		        			}
+		        			jQuery.unblockUI(); 
 		        		} else {
 		        			alert("error");
 		        		}
@@ -300,6 +318,16 @@ angular.module('netVogue.directives', []).
 }).directive('profileuploadPlugin', function($timeout) {
 	var linkFn;
 	linkFn = function(scope, element, attrs, ngModel) {
+		scope.errorCallback = function(event, src) {
+			var imgElement = event.srcElement;
+			angular.element(imgElement).attr('src', '/img/loading.gif');
+			$timeout(function() {
+				angular.element(imgElement).attr('src', scope.profilepic.thumbnail_url);
+			}, 1000);
+		};
+		scope.loadCallback = function() {
+			scope.$emit('profilepicchanged', scope.profilepic);
+		};
 		angular.element(element).ready(function() {
 			jQuery('#profileupload').fileupload({
 		        dataType: 'json',
@@ -308,7 +336,6 @@ angular.module('netVogue.directives', []).
 		        	scope.$apply(function(scope) {
 		        		if(data.result.status == true) {
 		        			scope.profilepic = data.result.filesuploaded[0];
-		        			scope.$emit('profilepicchanged', scope.profilepic);
 		        		} else {
 		        			alert("error");
 		        		}
@@ -327,6 +354,20 @@ angular.module('netVogue.directives', []).
 		scope.newfiles = [];
 		var stylesheetid = {
 				"stylesheetid": scope.stylesheetid
+		};
+		scope.errorCallback = function(event, src) {
+			var imgElement = event.srcElement;
+			angular.element(imgElement).attr('src', '/img/loading.gif');
+			$timeout(function() {
+				angular.element(imgElement).attr('src', scope.mainimage);
+			}, 1000);
+		};
+		scope.errorCallbackAdd = function(event, src, index) {
+			var imgElement = event.srcElement;
+			angular.element(imgElement).attr('src', '/img/loading.gif');
+			$timeout(function() {
+				angular.element(imgElement).attr('src', scope.newstyle.availableImages[index].add_url);
+			}, 1000);
 		};
 		angular.element(element).ready(function() {
 			jQuery('#styleupload').fileupload({
@@ -348,16 +389,14 @@ angular.module('netVogue.directives', []).
 		        done: function (e, data) {
 		        	scope.$apply(function(scope) {
 		        		if(data.result.status == true) {
-		        			$timeout(function() {
-			        			if(true == scope.senttoserver) {
-				        			for(var i=0; i < data.result.filesuploaded.length; i++){
-				        				scope.newstyle.availableImages.push(data.result.filesuploaded[i]);
-				        			};
-				        			scope.mainimage = scope.newstyle.availableImages[0].thumbnail_url;
-				        			scope.senttoserver = false;
-				        			scope.newfiles = [];
+		        			if(true == scope.senttoserver) {
+			        			for(var i=0; i < data.result.filesuploaded.length; i++){
+			        				scope.newstyle.availableImages.push(data.result.filesuploaded[i]);
 			        			};
-		        			}, 10000);
+			        			scope.mainimage = scope.newstyle.availableImages[0].thumbnail_url;
+			        			scope.senttoserver = false;
+			        			scope.newfiles = [];
+		        			};
 		        		} else {
 		        			alert("error");
 		        		}

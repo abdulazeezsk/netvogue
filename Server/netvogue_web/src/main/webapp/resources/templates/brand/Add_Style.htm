@@ -83,7 +83,9 @@
 						<div class="imageprevw">
 							<ul class="thumbnails">
 								<li class="spanstyle" style="display: inline;"><img
-									style="max-width: 271px; max-height: 365px;" width="271" height="365" ng-src="{{mainimage}}" alt=""></li>
+									style="max-width: 271px; max-height: 365px;" width="271" height="365" 
+									ng-src="{{mainimage}}" alt=""
+									ui-event="{error: 'errorCallback($event, mainimage)'}"></li>
 							</ul>
 						</div>
 						<div class="moreviews-styles" ui-sortable
@@ -92,7 +94,8 @@
 							<img ng-repeat="eachfile in newstyle.availableImages"
 								class="thumbnailz" width="83" height="113"
 								style="max-width: 80px; max-height: 113px; min-width: 80px; min-height: 113px;margin:2px;"
-								ng-src="{{eachfile.add_url}}" alt="">
+								ng-src="{{eachfile.add_url}}" alt=""
+								ui-event="{error: 'errorCallbackAdd($event, eachfile.add_url, $index)'}">
 						</div>
 					</div>
 					<div class="rightcolumn">

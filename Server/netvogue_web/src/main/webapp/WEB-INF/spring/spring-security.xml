@@ -23,7 +23,7 @@
 	<security:http pattern="/terms.html" security="none" />
 	<security:http pattern="/privacy.html" security="none" />
 	<security:http pattern="/resetPassword" security="none" />
-	<security:http pattern="/blitlinetest" security="none" />
+	<security:http pattern="/bl/response" security="none" />
 	
 	
 	

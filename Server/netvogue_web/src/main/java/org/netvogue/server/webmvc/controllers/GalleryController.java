@@ -325,6 +325,7 @@ public class GalleryController {
         String key = userName+ "/" + ImageType.GALLERY.getKey() + "/" + (String)uploadMap.get("fileId");
         BlitlineUtil.sendBlitlineRequest((String)uploadMap.get("queryString"),key,ImageType.GALLERY, "pad_resize_to_fit" );
       } catch (Exception e) {
+    	  System.out.println("Error in sending Blitline request");
         e.printStackTrace();
       }
     }
@@ -421,16 +422,4 @@ public class GalleryController {
 		return response;
 	}
 
-	      @RequestMapping(value="blitlinetest", method=RequestMethod.POST)
-	       public @ResponseBody JsonResponse blitlinePOST() {
-System.out.println("Enter this block please Post method ******************&&&&&&&&&&&&&&&&&&&77");
-System.out.println("Time while receiving: " + System.currentTimeMillis());
-	        return null;
-	      }
-
-	      @RequestMapping(value="blitlinetest", method=RequestMethod.GET)
-             public @ResponseBody JsonResponse blitlineGET() {
-System.out.println("Enter this block please GET method ******************&&&&&&&&&&&&&&&&&&&77");
-              return null;
-            }
 }

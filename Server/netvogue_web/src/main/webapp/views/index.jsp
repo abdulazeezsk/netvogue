@@ -61,15 +61,7 @@ img.AngularJS-small {
 	<script src="lib/jquery/jquery-ui.min.js" type="text/javascript"></script>
 	<script src="lib/jquery/jquery.placeholder.js" type="text/javascript"></script>
 	<script src="lib/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-	<script src="lib/jquery/jquery.progressbar.js" type="text/javascript"></script>
-	<script src="lib/jquery/jquery.masonry.js" type="text/javascript"></script>
-	<script src="lib/jquery/jquery.infinitescroll.min.js"
-		type="text/javascript"></script>
-	<script src="lib/jquery/jquery.fancybox.pack.js" type="text/javascript"></script>
-	<script src="lib/jquery/jquery.elastislide.js" type="text/javascript"></script>
-	<script type="text/javascript" src="lib/jquery/jquery.cookie.js"></script>
-	<script type="text/javascript" src="lib/jquery/jquery.collapsible.js"></script>
-
+	
 	<script src="lib/angular/angular.js" type="text/javascript"></script>
 	<script src="lib/angular/angular-ui.js" type="text/javascript"></script>
 	<script src="lib/angular/select2.js" type="text/javascript"></script>
@@ -93,7 +85,16 @@ img.AngularJS-small {
 	<script src="js/main.js" type="text/javascript"></script>
 	<script src="js/utils.js" type="text/javascript"></script>
 
-
+	<script src="lib/jquery/jquery.progressbar.js" type="text/javascript"></script>
+	<script src="lib/jquery/jquery.masonry.js" type="text/javascript"></script>
+	<script src="lib/jquery/jquery.infinitescroll.min.js"
+		type="text/javascript"></script>
+	<script src="lib/jquery/jquery.fancybox.pack.js" type="text/javascript"></script>
+	<script src="lib/jquery/jquery.elastislide.js" type="text/javascript"></script>
+	<script type="text/javascript" src="lib/jquery/jquery.cookie.js"></script>
+	<script type="text/javascript" src="lib/jquery/jquery.collapsible.js"></script>
+	<script type="text/javascript" src="lib/jquery/jquery.blockUI.js"></script>
+	
 
 	<script src="lib/fileupload/jquery.iframe-transport.js"></script>
 	<script src="lib/fileupload/jquery.fileupload.js"></script>
