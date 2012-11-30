@@ -41,7 +41,7 @@ All projects will inherit from it either directly or indirectly.
 
 		<!-- spring versions -->
 		<spring-framework.version>3.1.2.RELEASE</spring-framework.version>
-        <spring-data-neo4j.version>2.1.0-RELEASE</spring-data-neo4j.version>
+        <spring-data-neo4j.version>2.1.0.RELEASE</spring-data-neo4j.version>
 		<neo4j.version>1.8</neo4j.version>
 
 
