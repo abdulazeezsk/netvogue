@@ -47,11 +47,6 @@
             <artifactId>netvogue-blitline-api</artifactId>
             <version>${netvogue-blitline-api-version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.netvogue</groupId>
-            <artifactId>netvogue-auth-store</artifactId>
-            <version>${netvogue-auth-store-version}</version>
-        </dependency>
       <!--  <dependency>
             <groupId>org.netvogue.server</groupId>
             <artifactId>netvogue-image-persistence</artifactId>
@@ -78,7 +73,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${spring-framework.version}</version>
+			<version>${org.springframework-version}</version>
 		</dependency>
 		
 		<dependency>
