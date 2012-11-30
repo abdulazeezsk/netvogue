@@ -44,6 +44,8 @@ All projects will inherit from it either directly or indirectly.
         <spring-data-neo4j.version>2.1.0.RELEASE</spring-data-neo4j.version>
 		<neo4j.version>1.8</neo4j.version>
 
+		<!-- test verions -->
+		<junit-version>4.7</junit-version>
 
 		<!-- cobertura code coverage tool pluging -->
 		<maven-assembly-plugin.version>2.2-beta-2</maven-assembly-plugin.version>
@@ -403,7 +405,16 @@ All projects will inherit from it either directly or indirectly.
 				<version>${spring-framework.version}</version>
 				<scope>compile</scope>
 			</dependency>
-			
+			<dependency>
+	    		<groupId>org.springframework.security</groupId>
+	    		<artifactId>spring-security-config</artifactId>
+	    		<version>${spring-framework.version}</version>
+  	   		</dependency>
+       		<dependency>
+	    		<groupId>org.springframework.security</groupId>
+	    		<artifactId>spring-security-web</artifactId>
+	    		<version>${spring-framework.version}</version>
+       		</dependency>
 			<dependency>
         		<groupId>com.yammer.dropwizard</groupId>
         		<artifactId>dropwizard-core</artifactId>
@@ -489,6 +500,12 @@ All projects will inherit from it either directly or indirectly.
 			<!-- runtime scope dependencys -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
 				<artifactId>jcl-over-slf4j</artifactId>
 				<version>${slf4j.version}</version>
 				<scope>runtime</scope>
@@ -502,9 +519,26 @@ All projects will inherit from it either directly or indirectly.
 			<dependency>
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
-				<version>1.2.16</version>
-				<scope>runtime</scope>
+				<version>${log4j.version}</version>
 				<optional>true</optional>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.mail</groupId>
+						<artifactId>mail</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.jms</groupId>
+						<artifactId>jms</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.sun.jdmk</groupId>
+						<artifactId>jmxtools</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.sun.jmx</groupId>
+						<artifactId>jmxri</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			
 			<!-- test scope -->
@@ -526,6 +560,12 @@ All projects will inherit from it either directly or indirectly.
 				<version>${json-path-assert.version}</version>
 				<scope>test</scope>
 			</dependency>
+			<dependency>
+	      		<groupId>junit</groupId>
+	      		<artifactId>junit</artifactId>
+	      		<version>${junit-version}</version>
+	      		<scope>test</scope>
+	    </dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -547,6 +587,10 @@ All projects will inherit from it either directly or indirectly.
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 		</dependency>
+		<dependency>
+	      	<groupId>junit</groupId>
+	      	<artifactId>junit</artifactId>
+	    </dependency>
 	</dependencies>
 
 	<!-- reporting plugins -->
