@@ -7,7 +7,7 @@
 	<packaging>war</packaging>
 	<parent>
 		<groupId>org.netvogue.server</groupId>
-		<artifactId>netvogue-parent</artifactId>
+		<artifactId>netvogue-webapp</artifactId>
 		<version>1.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
    </parent>
@@ -29,6 +29,8 @@
         <maven-compiler-plugin-version>2.3.2</maven-compiler-plugin-version>
         <exec-maven-plugin-version>1.2.1</exec-maven-plugin-version>
 		<netvogue-blitline-api-version>1.0-SNAPSHOT</netvogue-blitline-api-version>
+		<netvogue-auth-store-version>0.0.1-SNAPSHOT</netvogue-auth-store-version>
+		<netvogue-master-pom-version>1.0-SNAPSHOT</netvogue-master-pom-version>
 	</properties>
 	<dependencies>
         <!--<dependency>
@@ -45,6 +47,11 @@
             <groupId>org.netvogue.server</groupId>
             <artifactId>netvogue-blitline-api</artifactId>
             <version>${netvogue-blitline-api-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netvogue</groupId>
+            <artifactId>netvogue-auth-store</artifactId>
+            <version>${netvogue-auth-store-version}</version>
         </dependency>
       <!--  <dependency>
             <groupId>org.netvogue.server</groupId>
@@ -72,7 +79,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>${spring-framework.version}</version>
 		</dependency>
 		
 		<dependency>

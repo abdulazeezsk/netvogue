@@ -2,23 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.netvogue.server</groupId>
-	<artifactId>netvogue-parent</artifactId>
+	<artifactId>netvogue-webapp</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>NetvogueServer</name>
-    <parent>
-		<groupId>org.netvogue.server</groupId>
-		<artifactId>netvogue-head</artifactId>
+    	<parent>
+		<groupId>org.netvogue</groupId>
+		<artifactId>netvogue-master-pom</artifactId>
 		<version>1.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
-    </parent>
+    	</parent>
 	<url>http://maven.apache.org</url>
-    <properties>
-        <org.springframework-version>3.1.2.RELEASE</org.springframework-version>
-        <org.slf4j-version>1.5.10</org.slf4j-version>
-        <org.log4j-version>1.2.16</org.log4j-version>
-        <junit-version>4.7</junit-version>
-    </properties>
     <repositories>
   		<repository>
 			<id>spring-maven-release</id>
@@ -44,7 +37,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>${org.springframework-version}</version>
 			<exclusions>
 				<!-- Exclude Commons Logging in favor of SLF4j -->
 				<exclusion>
@@ -58,14 +50,14 @@
 		<dependency>
 	    	<groupId>org.springframework.security</groupId>
 	    	<artifactId>spring-security-config</artifactId>
-	    	<version>${org.springframework-version}</version>
+	    	<version>${spring-framework.version}</version>
 	    	<type>jar</type>
 	    	<scope>compile</scope>
   	   </dependency>
        <dependency>
 	    	<groupId>org.springframework.security</groupId>
 	    	<artifactId>spring-security-web</artifactId>
-	    	<version>${org.springframework-version}</version>
+	    	<version>${spring-framework.version}</version>
 	    	<type>jar</type>
 	    	<scope>compile</scope>
        </dependency>
@@ -74,52 +66,29 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${org.slf4j-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>${org.log4j-version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.mail</groupId>
-					<artifactId>mail</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.jms</groupId>
-					<artifactId>jms</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jdmk</groupId>
-					<artifactId>jmxtools</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jmx</groupId>
-					<artifactId>jmxri</artifactId>
-				</exclusion>
-			</exclusions>
-			<!--  <scope>runtime</scope> -->
+			<scope>compile</scope>
 		</dependency>
-        
-        <dependency>
-	      <groupId>junit</groupId>
-	      <artifactId>junit</artifactId>
-	      <version>${junit-version}</version>
-	      <scope>test</scope>
-	    </dependency>
-	    
+		
+		<dependency>
+      		<groupId>junit</groupId>
+      		<artifactId>junit</artifactId>
+      		<version>4.7</version>
+      		<scope>test</scope>
+    	</dependency>	    
     </dependencies>
 	<build>
 		<plugins>
@@ -143,7 +112,7 @@
 		<module>netvogue_database</module>
 		<module>netvogue-image-persistence</module>
 		<module>netvogue-image-processing-service</module>
-		<module>netvogue-email-service</module>			
-		<module>netvogue_web</module>
+		<module>netvogue-email-service</module>
+		<module>netvogue_web</module>			
   </modules>
 </project>
