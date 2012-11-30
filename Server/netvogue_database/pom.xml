@@ -8,17 +8,13 @@
 		<groupId>org.netvogue.server</groupId>
 		<artifactId>netvogue-webapp</artifactId>
 		<version>1.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
   </parent>
   <name>NetvogueDatabaseAPI</name>
   <url>http://maven.apache.org</url>
 
     <properties>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    	<spring-data-neo4j.version>2.1.0.RC4</spring-data-neo4j.version>
     	<org.jackson-version>1.9.7</org.jackson-version>
-		<neo4j.version>1.8</neo4j.version>
-        <junit-version>4.7</junit-version>
         <maven-eclipse-plugin-version>2.9</maven-eclipse-plugin-version>
         <maven-compiler-plugin-version>2.3.2</maven-compiler-plugin-version>
   	</properties>
