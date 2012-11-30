@@ -73,8 +73,14 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>${spring-framework.version}</version>
 		</dependency>
+		
+		<!--  <dependency>
+            <groupId>org.netvogue</groupId>
+            <artifactId>netvogue-auth-store</artifactId>
+            <version>${netvogue-auth-store-version}</version>
+        </dependency> -->
 		
 		<dependency>
 			<groupId>org.hibernate</groupId>
