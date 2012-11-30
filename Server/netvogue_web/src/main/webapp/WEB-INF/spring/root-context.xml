@@ -8,6 +8,9 @@
 						http://www.springframework.org/schema/mvc/spring-mvc.xsd"> 
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="fileManager" class="org.netvogue.server.aws.core.FileManager" factory-method="getSharedInstance"/>
+	<bean id="uploadManager" class="org.netvogue.server.aws.core.UploadManager" />
+	
 	<import resource="classpath:neo4j-application-context.xml" />  
 	
 </beans>

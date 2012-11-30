@@ -53,6 +53,4 @@
 	<bean id="NotificationService" 	class="org.netvogue.server.neo4japi.service.NotificationServiceImpl" />
 	<bean id="StatusUpdateService" 	class="org.netvogue.server.neo4japi.service.StatusUpdateServiceImpl" />
 	
-	<bean id="fileManager" class="org.netvogue.server.aws.core.FileManager" factory-method="getSharedInstance"/>
-	<bean id="uploadManager" class="org.netvogue.server.aws.core.UploadManager" />
 </beans>
