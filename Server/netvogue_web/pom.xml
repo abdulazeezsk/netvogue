@@ -47,11 +47,11 @@
             <artifactId>netvogue-blitline-api</artifactId>
             <version>${netvogue-blitline-api-version}</version>
         </dependency>
-      <!--  <dependency>
+      	<dependency>
             <groupId>org.netvogue.server</groupId>
             <artifactId>netvogue-image-persistence</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency> -->
+        </dependency>
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
@@ -76,11 +76,11 @@
 			<version>${spring-framework.version}</version>
 		</dependency>
 		
-		<!--  <dependency>
+		<dependency>
             <groupId>org.netvogue</groupId>
             <artifactId>netvogue-auth-store</artifactId>
             <version>${netvogue-auth-store-version}</version>
-        </dependency> -->
+        </dependency>
 		
 		<dependency>
 			<groupId>org.hibernate</groupId>

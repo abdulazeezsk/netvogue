@@ -3,22 +3,24 @@
   <groupId>org.netvogue</groupId>
   <artifactId>netvogue-auth-store</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
+  <parent>
+		<groupId>org.netvogue</groupId>
+		<artifactId>netvogue-master-pom</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../netvogue-master-pom/pom.xml</relativePath>
+    </parent>
   <dependencies>
-  <dependency>
+  		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>3.1.3.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>3.1.3.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>3.1.3.RELEASE</version>
 		</dependency>
 		
 	    <dependency>
