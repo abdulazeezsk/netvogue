@@ -61,7 +61,7 @@ All projects will inherit from it either directly or indirectly.
 		<maven-failsafe-plugin.version>2.11</maven-failsafe-plugin.version>
 		<maven-compiler-plugin.version>2.0.2</maven-compiler-plugin.version>
 
-		<jetty.version>6.1.10</jetty.version>
+		<jetty.version>8.1.5.v20120716</jetty.version>
 		<jersey.version>1.9.1</jersey.version>
 		<jaxb.api.version>2.0</jaxb.api.version>
 		<jaxb.impl.version>2.0.3</jaxb.impl.version>
@@ -607,6 +607,14 @@ All projects will inherit from it either directly or indirectly.
 	      		<version>${junit-version}</version>
 	      		<scope>test</scope>
 	    </dependency>
+	    
+	     <!--  jetty dependencies -->
+	       <dependency>
+	       	  <groupId>org.eclipse.jetty</groupId>
+	       	  <artifactId>jetty-webapp</artifactId>
+	       	  <version>${jetty.version}</version>
+	       </dependency>
+	       	       
 		</dependencies>
 	</dependencyManagement>
 

@@ -1,37 +1,120 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-     
-  <parent>
-      <groupId>org.netvogue</groupId>
-  	  <artifactId>netvogue-restful-services-master-pom</artifactId>
-  	  <version>1.0-SNAPSHOT</version>
-  </parent>
-  
-    <modelVersion>4.0.0</modelVersion>
-  
-  <groupId>org.netvogue</groupId>
-  <artifactId>netvogue-customer-service</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <name>netvogue-customer-service Jersey Webapp</name>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-  <dependencies>
-    <dependency>
-      	<groupId>org.netvogue</groupId>
-  		<artifactId>netvogue-ecommerce-domain-model</artifactId>
-  		<version>1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      	<groupId>org.netvogue</groupId>
-  		<artifactId>netvogue-ecommerce-persistence</artifactId>
-  		<version>1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      	<groupId>org.netvogue</groupId>
-  		<artifactId>netvogue-ecommerce-persistence-mongo</artifactId>
-  		<version>1.0-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
-  
+	<parent>
+		<groupId>org.netvogue</groupId>
+		<artifactId>netvogue-restful-services-master-pom</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.netvogue</groupId>
+	<artifactId>netvogue-customer-service</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+	<packaging>jar</packaging>
+
+	<name>netvogue-customer-service Jersey Webapp</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.netvogue</groupId>
+			<artifactId>netvogue-ecommerce-domain-model</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.netvogue</groupId>
+			<artifactId>netvogue-ecommerce-persistence</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.netvogue</groupId>
+			<artifactId>netvogue-ecommerce-persistence-mongo</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>1.6</version>
+				<configuration>
+					<createDependencyReducedPom>true</createDependencyReducedPom>
+					<filters>
+						<filter>
+							<artifact>*:*</artifact>
+							<excludes>
+								<exclude>META-INF/*.SF</exclude>
+								<exclude>META-INF/*.DSA</exclude>
+								<exclude>META-INF/*.RSA</exclude>
+							</excludes>
+						</filter>
+					</filters>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>org.netvogue.customer.service.Main</mainClass>
+								</transformer>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                        				<resource>META-INF/spring.handlers</resource>
+                    			</transformer>
+                    			<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                        				<resource>META-INF/spring.schemas</resource>
+                    			</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>
