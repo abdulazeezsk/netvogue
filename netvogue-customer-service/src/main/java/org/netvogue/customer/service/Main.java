@@ -3,6 +3,7 @@ package org.netvogue.customer.service;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.springframework.web.context.ContextLoaderListener;
 
 import com.sun.jersey.spi.spring.container.servlet.SpringServlet;
@@ -10,6 +11,8 @@ import com.sun.jersey.spi.spring.container.servlet.SpringServlet;
 public class Main {
 
   public static void main(final String args[]) throws Exception {
+
+    int MAX_THREADS = 100;
 
     String webPort = System.getenv("PORT");
     if (webPort == null || webPort.isEmpty()) {
@@ -33,6 +36,7 @@ public class Main {
 
     context.addServlet(holder, "/*");
 
+    server.setThreadPool(new QueuedThreadPool(MAX_THREADS));
     server.start();
     context.getServletHandler().initialize();
     server.join();
