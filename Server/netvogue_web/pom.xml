@@ -30,17 +30,24 @@
 		<netvogue-blitline-api-version>1.0-SNAPSHOT</netvogue-blitline-api-version>
 		<netvogue-auth-store-version>0.0.1-SNAPSHOT</netvogue-auth-store-version>
 		<netvogue-master-pom-version>1.0-SNAPSHOT</netvogue-master-pom-version>
+		<netvogue-database-api-version>1.0-SNAPSHOT</netvogue-database-api-version>
+		<netvogue-common.version>1.0-SNAPSHOT</netvogue-common.version>
 	</properties>
 	<dependencies>
-        <!--<dependency>
+        <dependency>
             <groupId>org.netvogue.server</groupId>
             <artifactId>netvogue-database-api</artifactId>
             <version>${netvogue-database-api-version}</version>
-        </dependency> -->
+        </dependency>
         <dependency>
             <groupId>org.netvogue.server</groupId>
             <artifactId>netvogue-email-api</artifactId>
             <version>${netvogue-email-api-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netvogue.server</groupId>
+            <artifactId>netvogue-common</artifactId>
+            <version>${netvogue-common.version}</version>
         </dependency>
 		<dependency>
             <groupId>org.netvogue.server</groupId>
@@ -127,6 +134,11 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>${jstl-version}</version>
+		</dependency>
+		
+		<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-core-asl</artifactId>
 		</dependency>
     </dependencies>
     <build>
