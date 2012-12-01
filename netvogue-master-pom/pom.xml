@@ -468,6 +468,12 @@ All projects will inherit from it either directly or indirectly.
 				<version>${jackson.version}</version>
 			</dependency>
             
+            <dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+            
 			<!-- Neo4j dependencies -->
 			<dependency>
 				<groupId>org.springframework.data</groupId>
