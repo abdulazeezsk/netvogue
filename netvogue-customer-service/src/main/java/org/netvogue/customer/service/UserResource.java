@@ -9,8 +9,10 @@ import org.netvogue.ecommerce.domain.model.User;
 import org.netvogue.ecommerce.persistence.UserDao;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -24,7 +26,7 @@ import java.util.Map;
 /**
  * Suman : Need to add exception handling. I am planning to write generic module which can be used by all rest services.
  */
-@Path("/user")
+@Path("/users")
 public class UserResource {
 
   private UserDao userDao;
@@ -33,19 +35,18 @@ public class UserResource {
   private Converter<User, UserRepresentation> userToUserRepconverter = new UserToUserRepresentationConverter();
 
   @POST
-  @Path("authenticate")
+  @Path("/${userName}/authenticate")
   @Consumes("application/json")
   @Produces("application/json")
-  public Response authenticate(final String body) throws Exception {
+  public Response authenticate(@PathParam("userName") final String userName, final String body) throws Exception {
     ObjectMapper mapper = new ObjectMapper();
 
-    Map<String, String> map = mapper.readValue(new StringReader(body), new TypeReference<Map<String, String>>() {
+    mapper.readValue(new StringReader(body), new TypeReference<Map<String, String>>() {
     });
 
-    User user = userDao.getActiveUser(map.get("userName"));
+    User user = userDao.getActiveUser(userName);
 
     Map<String, String> requiredUserProps = new HashMap<String, String>();
-    requiredUserProps.put("userName", user.getUsername());
     requiredUserProps.put("password", user.getEncodedPassword());
     requiredUserProps.put("salt", String.valueOf(user.getSalt()));
     requiredUserProps.put("role", user.getRole().toString());
@@ -57,8 +58,7 @@ public class UserResource {
     return Response.ok(writer.toString()).build();
   }
 
-  @POST
-  @Path("register")
+  @PUT
   @Consumes("application/json")
   @Produces("application/json")
   public Response register(final String body) throws Exception {
@@ -76,7 +76,7 @@ public class UserResource {
 
 
   @GET
-  @Path("/${userName}/findDqetails")
+  @Path("/${userName}")
   @Consumes("application/json")
   @Produces("application/json")
   public Response findUserDetails(@PathParam("userName") final String userName) throws Exception {
@@ -93,7 +93,7 @@ public class UserResource {
   }
 
   @POST
-  @Path("/${userName}/addLookBook")
+  @Path("/${userName}/lookbooks")
   @Consumes("application/json")
   @Produces("application/json")
   public Response addLookbook(@PathParam("userName") final String userName, final String lookbookDetails) {
@@ -102,7 +102,7 @@ public class UserResource {
   }
 
   @POST
-  @Path("/${userName}/addLineSheet")
+  @Path("/${userName}/linesheets")
   @Consumes("application/json")
   @Produces("application/json")
  public Response addLinesheet(@PathParam("userName") final String userName, final String linesheetDetails) {
@@ -111,7 +111,7 @@ public class UserResource {
  }
 
   @POST
-  @Path("/${userName}/addStyleToLookbook/${lookbookId}")
+  @Path("/${userName}/lookbooks/${lookbookId}/styles")
   @Consumes("application/json")
   @Produces("application/json")
   public Response addStyleToLookbook(@PathParam("userName") final String userName,
@@ -123,7 +123,7 @@ public class UserResource {
 
 
   @POST
-  @Path("/${userName}/addStyleToLinesheet/${linesheetId}")
+  @Path("/${userName}/linesheets/${linesheetId}/styles")
   @Consumes("application/json")
   @Produces("application/json")
  public Response addStyleToLinesheet(@PathParam("userName") final String userName,
@@ -132,8 +132,8 @@ public class UserResource {
    return null;
  }
 
-  @POST
-  @Path("/${userName}/deleteStyle/${styleId}/FromLinesheet/${linesheetId}")
+  @DELETE
+  @Path("/${userName}/linesheets/${linesheetId}/styles/${styleId}")
   @Consumes("application/json")
   @Produces("application/json")
   public Response deleteStyleFromLinesheet(@PathParam("userName") final String userName,
@@ -143,7 +143,7 @@ public class UserResource {
   }
 
   @POST
-  @Path("/${userName}/deleteStyle/${styleId}/FromLookbook/${lookbookId}")
+  @Path("/${userName}/lookbooks/${lookbookId}/styles/${styleId}")
   @Consumes("application/json")
   @Produces("application/json")
   public Response deleteStyleFromLookbook(@PathParam("userName") final String userName,
@@ -153,8 +153,8 @@ public class UserResource {
   }
 
 
-  @POST
-  @Path("/${userName}/deleteLookbook/${lookbookId}")
+  @DELETE
+  @Path("/${userName}/lookbooks/${lookbookId}")
   @Consumes("application/json")
   @Produces("application/json")
   public Response deleteLookbook(@PathParam("userName") final String userName,
@@ -163,8 +163,8 @@ public class UserResource {
   }
 
 
-  @POST
-  @Path("/${userName}/deleteLinesheet/${linesheetId}")
+  @DELETE
+  @Path("/${userName}/linesheets/${linesheetId}")
   @Consumes("application/json")
   @Produces("application/json")
   public Response deleteLinesheet(@PathParam("userName") final String userName,
@@ -173,7 +173,7 @@ public class UserResource {
   }
 
   @GET
-  @Path("/${userName}/findLookBooks")
+  @Path("/${userName}/lookbooks/")
   @Consumes("application/json")
   @Produces("application/json")
   public Response findLookBooksByUser(@PathParam("userName")  final String userName) {
@@ -182,16 +182,25 @@ public class UserResource {
   }
 
   @GET
-  @Path("/${userName}/findLinesheets")
+  @Path("/${userName}/lookbooks/${lookbookId}")
   @Consumes("application/json")
   @Produces("application/json")
-  public Response findLinesheetsByUser(@PathParam("userName")  final String userName) {
+  public Response findLookBookById(@PathParam("userName")  final String userName, @PathParam("lookbookId")  final String lookbookId) {
 
     return null;
   }
 
   @GET
-  @Path("/${userName}/findStylesByLinesheet/${linesheetId}")
+  @Path("/${userName}/linesheets/${linesheetId}")
+  @Consumes("application/json")
+  @Produces("application/json")
+  public Response findLinesheetById(@PathParam("userName")  final String userName, @PathParam("linesheetId")  final String linesheetId) {
+
+    return null;
+  }
+
+  @GET
+  @Path("/${userName}/linesheets/${linesheetId}/styles")
   @Consumes("application/json")
   @Produces("application/json")
   public Response findStylesByLinesheet(@PathParam("userName")  final String userName, @PathParam("linesheetId")  final String linesheetId) {
@@ -200,10 +209,10 @@ public class UserResource {
   }
 
   @GET
-  @Path("/${userName}/findStylesByLookbook/${linesheetId}")
+  @Path("/${userName}/lookbooks/${lookbookId}/styles")
   @Consumes("application/json")
   @Produces("application/json")
-  public Response findStylesByLookbook(@PathParam("userName")  final String userName, @PathParam("linesheetId")  final String linesheetId) {
+  public Response findStylesByLookbook(@PathParam("userName")  final String userName, @PathParam("lookbookId")  final String lookbookId) {
 
     return null;
   }
