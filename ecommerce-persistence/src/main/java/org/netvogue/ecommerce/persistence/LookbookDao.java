@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface LookbookDao {
 
-  void addLookbook(final Lookbook lookbook);
+  String addLookbook(final Lookbook lookbook);
 
   void deleteLookbook(final String lookbookId);
 

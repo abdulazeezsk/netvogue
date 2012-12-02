@@ -1,4 +1,4 @@
-package org.netvogue.customer.service;
+package org.netvogue.customer.service.representations;
 
 public class UserRepresentation {
 

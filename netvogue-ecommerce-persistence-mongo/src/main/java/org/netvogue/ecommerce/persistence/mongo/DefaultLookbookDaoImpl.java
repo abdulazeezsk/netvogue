@@ -21,8 +21,9 @@ public class DefaultLookbookDaoImpl implements LookbookDao {
   public DefaultLookbookDaoImpl() {
   }
 
-  public void addLookbook(final Lookbook lookbook) {
+  public String addLookbook(final Lookbook lookbook) {
     mongoTemplate.insert(lookbook, LOOKBOOKS_COLLECTION_NAME);
+    return lookbook.getId();
   }
 
   public void deleteLookbook(final String lookbookId) {

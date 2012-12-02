@@ -18,6 +18,9 @@
    
    <bean id="userResource" class="org.netvogue.customer.service.UserResource">
      <property name="userDao" ref="userDao" />
+     <property name="lookbookDao" ref="lookbookDao" />
+     <property name="linesheetDao" ref="linesheetDao" />
+     <property name="styleDao" ref="styleDao" />
    </bean> 
 
 </beans>

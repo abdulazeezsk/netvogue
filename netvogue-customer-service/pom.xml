@@ -18,22 +18,14 @@
 	<packaging>jar</packaging>
 
 	<name>netvogue-customer-service Jersey Webapp</name>
-	
+
 	<properties>
 		<main.class>org.netvogue.customer.service.Main</main.class>
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-		</dependency>
 
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-		</dependency>
-
+		<!--  internal dependencies -->
 		<dependency>
 			<groupId>org.netvogue</groupId>
 			<artifactId>netvogue-ecommerce-domain-model</artifactId>
@@ -49,6 +41,23 @@
 			<groupId>org.netvogue</groupId>
 			<artifactId>netvogue-ecommerce-persistence-mongo</artifactId>
 			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.netvogue</groupId>
+			<artifactId>netvogue-rest-services-utils</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
+		<!--  external dependencies -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
 		</dependency>
 
 		<dependency>

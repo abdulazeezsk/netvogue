@@ -1,6 +1,6 @@
 package org.netvogue.customer.service.converters;
 
-import org.netvogue.customer.service.UserRepresentation;
+import org.netvogue.customer.service.representations.UserRepresentation;
 import org.netvogue.ecommerce.domain.model.User;
 
 public class UserToUserRepresentationConverter implements Converter<User, UserRepresentation> {
