@@ -32,10 +32,11 @@ public class Main {
     ServletHolder holder = new ServletHolder(new SpringServlet());
     holder.setInitParameter("com.sun.jersey.config.property.packages", "org.netvogue.customer.service;org.netvogue.rest.exceptions");
     holder.setInitParameter("contextConfigLocation", "classpath:/org/netvogue/customer/service/application-context.xml");
-    holder.setInitParameter("contextConfigLocation", "classpath:/org/netvogue/customer/service/application-context.xml");
-    holder.setInitParameter("com.sun.jersey.config.feature.Trace", "true");
+//    holder.setInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true");
+
 
     if(System.getProperty("REQUEST_TRACE") != null) {
+      holder.setInitParameter("com.sun.jersey.config.feature.Trace", "true");
       holder.setInitParameter("com.sun.jersey.spi.container.ContainerResponseFilters", "com.sun.jersey.api.container.filter.LoggingFilter");
       holder.setInitParameter("com.sun.jersey.spi.container.ContainerRequestFilters", "com.sun.jersey.api.container.filter.LoggingFilter");
     }

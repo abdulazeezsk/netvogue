@@ -1,4 +1,4 @@
-package org.netvogue.customer.service.converters;
+package org.netvogue.customer.service.converter;
 
 public interface Converter<S, T> {
 

@@ -1,5 +1,6 @@
-package org.netvogue.customer.service.converters;
+package org.netvogue.customer.service.converters.input;
 
+import org.netvogue.customer.service.converter.Converter;
 import org.netvogue.customer.service.representations.UserRepresentation;
 import org.netvogue.ecommerce.domain.model.Role;
 import org.netvogue.ecommerce.domain.model.SubscriptionType;
