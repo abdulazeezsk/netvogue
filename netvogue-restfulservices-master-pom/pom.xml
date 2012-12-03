@@ -10,6 +10,7 @@
 		<groupId>org.netvogue</groupId>
 		<artifactId>netvogue-master-pom</artifactId>
 		<version>1.0-SNAPSHOT</version>
+		<relativePath>../netvogue-master-pom/pom.xml</relativePath>
 	</parent>
 
 	<groupId>org.netvogue</groupId>
