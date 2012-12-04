@@ -4,6 +4,5 @@ export NEO4J_PASSWORD=""
 echo " ************** Running Maven install ********* "
 mvn clean install
 
-echo " ************** Running the build using webapp runner ********* "
 export env=local
 java -jar target/netvogueweb.jar 

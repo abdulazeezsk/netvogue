@@ -257,10 +257,10 @@ body {
 				<!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="brands.html">Brands</a></li>
-						<li><a href="retailers.html">Retailers</a></li>
-						<!-- <li><a href="apply.html">Apply</a></li> -->
-						<!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
+						<li><a href="brands.jsp">Brands</a></li>
+						<li><a href="retailers.jsp">Retailers</a></li>
+						<!-- <li><a href="apply.jsp">Apply</a></li> -->
+						<!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.jsp#dropdowns -->
 					</ul>
 					<form class="navbar-form pull-right" action="j_spring_security_check" method="post" >
 						<input class="span3" type="text" id="j_username" name="j_username" placeholder="Email" /> <input
@@ -302,8 +302,8 @@ body {
 							and Discover</h1>
 						<h1 style="font-family: 'Lato', sans-serif; font-weight: 100;">Fashion
 							Design</h1>
-					<a href="brand_Registration.html"  class="btn btn-large btn-inverse fontlato" href="#">Sign up as Brand</a>
-					<a href="boutique_Registration.html" class="btn btn-large btn-inverse" href="#">Sign up as Retailer</a>
+					<a href="brand_Registration.jsp"  class="btn btn-large btn-inverse fontlato" href="#">Sign up as Brand</a>
+					<a href="boutique_Registration.jsp" class="btn btn-large btn-inverse" href="#">Sign up as Retailer</a>
 						
 					</div>
 				</div>
@@ -422,7 +422,7 @@ body {
 			<a href="#">Back to top</a>
 		</p>
 		<p>
-		© 2012 Company, Inc.<a href="#">About</a> | <a href="#">Contact</a> | <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a>
+		© 2012 Company, Inc.<a href="#">About</a> | <a href="#">Contact</a> | <a href="privacy.jsp">Privacy</a> | <a href="terms.jsp">Terms</a>
 		</p>
 		</footer>
 
