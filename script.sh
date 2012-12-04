@@ -1,8 +1,8 @@
-export NEO4J_REST_URL=http://localhost:7474/db/data
-export NEO4J_LOGIN=""
-export NEO4J_PASSWORD=""
-echo " ************** Running Maven install ********* "
+cd netvogue-master-pom
 mvn clean install
-
-echo " ************** Running the build using webapp runner ********* "
-java -jar Server/netvogue_web/target/dependency/webapp-runner.jar Server/netvogue_web/target/netvogueweb.war
+cd ../netvogue-restfulservices-master-pom
+mvn clean install
+cd ../Server/
+mvn clean install
+cd netvogue_web/
+sh script.sh
