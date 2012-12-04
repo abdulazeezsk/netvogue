@@ -12,16 +12,16 @@
 	<security:http pattern="/img/**" security="none"/>
 	<security:http pattern="/js/**" security="none"/>
 	<security:http pattern="/lib/**" security="none"/>
-	<security:http pattern="/brand_Registration.html" security="none" />
-	<security:http pattern="/boutique_Registration.html" security="none" />
+	<security:http pattern="/brand_Registration.jsp" security="none" />
+	<security:http pattern="/boutique_Registration.jsp" security="none" />
 	
-	<security:http pattern="/blog.html" security="none" />
-	<security:http pattern="/Netvogue.html" security="none" />
-	<security:http pattern="/brands.html" security="none" />
-	<security:http pattern="/retailers.html" security="none" />
-	<security:http pattern="/apply.html" security="none" />
-	<security:http pattern="/terms.html" security="none" />
-	<security:http pattern="/privacy.html" security="none" />
+	<security:http pattern="/blog.jsp" security="none" />
+	<security:http pattern="/Netvogue.jsp" security="none" />
+	<security:http pattern="/brands.jsp" security="none" />
+	<security:http pattern="/retailers.jsp" security="none" />
+	<security:http pattern="/apply.jsp" security="none" />
+	<security:http pattern="/terms.jsp" security="none" />
+	<security:http pattern="/privacy.jsp" security="none" />
 	<security:http pattern="/resetPassword" security="none" />
 	<security:http pattern="/bl/response" security="none" />
 	
@@ -31,7 +31,7 @@
 	
 	
 	<security:http pattern="/confirmRegisteration/**" security="none" />
-	<security:http pattern="/forgotpassword.html" security="none" />
+	<security:http pattern="/forgotpassword.jsp" security="none" />
 	
 	
 	<security:http pattern="/*/unsubscribe/**" security="none" />
@@ -40,11 +40,11 @@
 		<security:custom-filter ref="captchaCaptureFilter" before="FORM_LOGIN_FILTER"/>
 		<security:custom-filter ref="captchaVerifierFilter" after="FORM_LOGIN_FILTER"/>
 		
-		<security:intercept-url pattern="/Netvogue.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/forgotpassword.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/boutique_Registration.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/Netvogue.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/forgotpassword.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/boutique_Registration.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/boutique/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/brand_Registration.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/brand_Registration.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/brand/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		
 		<security:intercept-url pattern="/home.htm" access="ROLE_BOUTIQUE,ROLE_BRAND"/>
@@ -54,8 +54,8 @@
  		<security:intercept-url pattern="/*/boutique/**" access="ROLE_BOUTIQUE"/>
 		
 		<!-- Form Login and Logout configuration -->
-		<security:form-login 	login-page="/Netvogue.html" default-target-url="/home.htm" 
-																authentication-failure-url="/Netvogue.html?login_error=true"/>
+		<security:form-login 	login-page="/Netvogue.jsp" default-target-url="/home.htm" 
+																authentication-failure-url="/Netvogue.jsp?login_error=true"/>
 		<security:logout 		logout-url="/userLogout" logout-success-url="/" invalidate-session="true"/>
 	</security:http>
 	
@@ -68,7 +68,7 @@
 				p:useProxy="false" 
 				p:proxyPort="" 
 				p:proxyHost=""
-				p:failureUrl="/Netvogue.html?login_error=true"
+				p:failureUrl="/Netvogue.jsp?login_error=true"
 				p:captchaCaptureFilter-ref="captchaCaptureFilter"
 				p:privateKey="6Lf_mdESAAAAAJecV8B5FvEj_JIysuV4dGOG-MF8"/>
 	

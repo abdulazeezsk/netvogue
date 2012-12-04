@@ -4,7 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>netvogue-webmvc</artifactId>
 	<name>NetvogueWeb</name>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
+	
 	<parent>
 		<groupId>org.netvogue.server</groupId>
 		<artifactId>netvogue-webapp</artifactId>
@@ -76,19 +77,19 @@
 			<artifactId>commons-io</artifactId>
 			<version>${commons-io-version}</version>
 		</dependency>
-		
+				
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring-framework.version}</version>
 		</dependency>
 		
-		<dependency>
+		<!--  <dependency>
             <groupId>org.netvogue</groupId>
             <artifactId>netvogue-auth-store</artifactId>
             <version>${netvogue-auth-store-version}</version>
-        </dependency>
-		
+        </dependency> -->
+        
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -137,9 +138,20 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-jsp</artifactId>
+		</dependency>
+		
+		<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-core-asl</artifactId>
 		</dependency>
+	
     </dependencies>
     <build>
         <plugins>
@@ -184,6 +196,53 @@
                 </execution>
             </executions>
         </plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-shade-plugin</artifactId>
+					<version>1.6</version>
+					<inherited>true</inherited>
+					<configuration>
+						<createDependencyReducedPom>true</createDependencyReducedPom>
+						<filters>
+							<filter>
+								<artifact>*:*</artifact>
+								<excludes>
+									<exclude>META-INF/*.SF</exclude>
+									<exclude>META-INF/*.DSA</exclude>
+									<exclude>META-INF/*.RSA</exclude>
+								</excludes>
+							</filter>
+						</filters>
+					</configuration>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>shade</goal>
+							</goals>
+							<configuration>
+								<transformers>
+									<transformer
+										implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+									<transformer
+										implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+										<mainClass>org.netvogue.server.Main</mainClass>
+									</transformer>
+									<transformer
+										implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+										<resource>META-INF/spring.handlers</resource>
+									</transformer>
+									<transformer
+										implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+										<resource>META-INF/spring.schemas</resource>
+									</transformer>
+								</transformers>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
         </plugins>
         <finalName>netvogueweb</finalName>
     </build>
