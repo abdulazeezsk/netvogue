@@ -1,14 +1,7 @@
 package org.netvogue.server.webmvc.controllers;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
-import org.netvogue.server.mandrill.util.EmailUtil;
 import org.netvogue.server.common.ResultStatus;
+import org.netvogue.server.mandrill.util.EmailUtil;
 import org.netvogue.server.neo4japi.domain.Boutique;
 import org.netvogue.server.neo4japi.domain.Brand;
 import org.netvogue.server.neo4japi.domain.User;
@@ -18,6 +11,8 @@ import org.netvogue.server.neo4japi.service.UserService;
 import org.netvogue.server.webmvc.domain.BoutiqueNew;
 import org.netvogue.server.webmvc.domain.JsonResponse;
 import org.netvogue.server.webmvc.domain.UsersAvailable;
+import org.netvogue.server.webmvc.rest.invoker.RestInvoker;
+import org.netvogue.server.webmvc.rest.invoker.RestServiceContext;
 import org.netvogue.server.webmvc.security.NetvogueUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -28,6 +23,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 @Controller
 public class BoutiqueNewController {
@@ -47,19 +49,26 @@ public class BoutiqueNewController {
   @Autowired
   ConversionService conversionService;
 
+  @Autowired
+  RestInvoker restInvoker;
+
+  @Autowired
+  RestServiceContext customerServiceContext;
+
   @RequestMapping("boutique_Registration.html")
-  public String Boutique_RegistrationStep1(HttpServletRequest request) throws Exception {
+  public String Boutique_RegistrationStep1(final HttpServletRequest request) throws Exception {
     return "boutique_Registration";
   }
 
   @RequestMapping(value = "/boutique/doregistration", method = RequestMethod.POST)
   public @ResponseBody
   JsonResponse DoRegistration(@RequestBody
-  @Valid
+  @Valid final
   BoutiqueNew boutiqueNew) throws Exception {
 
     System.out.println("Boutique_RegistrationStep--------------" + boutiqueNew.toString());
     JsonResponse status = new JsonResponse();
+
     if (ResultStatus.SUCCESS == boutiqueService.ValidateEmail(boutiqueNew.getEmail())
         && ResultStatus.SUCCESS == boutiqueService.ValidateUsername(boutiqueNew.getUsername())) {
       Boutique user = conversionService.convert(boutiqueNew, Boutique.class);
@@ -90,7 +99,7 @@ public class BoutiqueNewController {
 
   @RequestMapping(value = "/boutique/emailavailability", method = RequestMethod.GET)
   public @ResponseBody
-  boolean EmailAvailabilityStatus(@RequestParam
+  boolean EmailAvailabilityStatus(@RequestParam final
   String email) {
     System.out.println("email id  -------------- " + email);
     boolean emailAvailable = true;
@@ -102,7 +111,7 @@ public class BoutiqueNewController {
 
   @RequestMapping(value = "/boutique/usernameavailability", method = RequestMethod.GET)
   public @ResponseBody
-  boolean UsernameAvailabilityStatus(@RequestParam
+  boolean UsernameAvailabilityStatus(@RequestParam final
   String username) {
     System.out.println("username  -------------- " + username);
     boolean usernameAvailable = true;
@@ -115,7 +124,7 @@ public class BoutiqueNewController {
   // This search is for brands
   @RequestMapping(value = "/boutique/usersavailable", method = RequestMethod.GET)
   public @ResponseBody
-  Set<UsersAvailable> UsersAvailable(@RequestParam
+  Set<UsersAvailable> UsersAvailable(@RequestParam final
   String username) {
     System.out.println("username entered -------------- " + username);
     Set<UsersAvailable> usersavailable = new HashSet<UsersAvailable>();
@@ -130,7 +139,7 @@ public class BoutiqueNewController {
   }
 
   @RequestMapping(value = "/confirmRegisteration/{userId}", method = RequestMethod.GET)
-  public String confirmRegisteration(@PathVariable
+  public String confirmRegisteration(@PathVariable final
   String userId) {
     User user = null;
     String redirectPage = "redirect:/Netvogue.html";

@@ -14,6 +14,8 @@
         
    <!--  <import resource="classpath:/org/netvogue/ecommerce/persistence/mongo/ecommerce-persistence.xml" /> --> 
 	
+   <context:property-placeholder location="classpath:netvogue-${env}.properties"/>
+   
    <import resource="spring-security.xml" />
 	
 	
@@ -25,6 +27,11 @@
 	<bean id="restInvoker" class="org.netvogue.server.webmvc.rest.invoker.RestInvoker">
 		<constructor-arg ref="jerseyClient" />
 	</bean>
+    
+    <bean id="customerServiceContext" class="org.netvogue.server.webmvc.rest.invoker.RestServiceContext">
+		<constructor-arg value="${customer.service.base.url}" />
+	</bean>
+	
 		
 	<import resource="classpath:neo4j-application-context.xml" />  
 	
