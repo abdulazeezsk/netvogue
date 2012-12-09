@@ -30,6 +30,7 @@ public class UserReadConverter implements Converter<DBObject, User> {
     user.setEncodedPassword((String) dbObj.get("password"));
     user.setSalt((Long) dbObj.get("salt"));
     user.setRole(Role.valueOf( (String) dbObj.get("role")));
+    user.setEmail((String) dbObj.get("email"));
     return user;
   }
 
