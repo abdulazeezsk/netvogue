@@ -11,7 +11,7 @@ public class UserRepresentationToUserConverter implements Converter<UserRepresen
 
   @Override
   public User convert(final UserRepresentation source) {
-    long salt = System.nanoTime();
+    //long salt = System.nanoTime();
     User user = new User();
     user.setAboutUs(source.getAboutUs());
     user.setActive(true);
@@ -19,7 +19,8 @@ public class UserRepresentationToUserConverter implements Converter<UserRepresen
     user.setCity(source.getCity());
     user.setCountry(user.getCountry());
     user.setEmail(source.getEmail());
-    user.setEncodedPassword(new ShaPasswordEncoder().encodePassword(source.getPassword(), salt));
+    //user.setEncodedPassword(new ShaPasswordEncoder().encodePassword(source.getPassword(), salt));
+    user.setEncodedPassword(source.getPassword());
     user.setFirstName(source.getFirstName());
     user.setLastName(source.getLastName());
     user.setMobileNo(source.getMobileNo());

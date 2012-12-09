@@ -83,7 +83,7 @@ public class BoutiqueNewController {
     rep.setEmail(boutiqueNew.getEmail());
     rep.setUsername(boutiqueNew.getUsername());
     rep.setPassword(encoder.encodePassword(boutiqueNew.getPassword(), salt));
-    rep.setPassword(boutiqueNew.getPassword());
+    //rep.setPassword(boutiqueNew.getPassword());
 
     rep.setMobileNo(Long.valueOf(boutiqueNew.getMobile()));
     rep.setPrimarycontact(boutiqueNew.getPrimarycontact());
@@ -98,9 +98,11 @@ public class BoutiqueNewController {
     ClientResponse res = restInvoker.invokePUT(customerServiceContext.getBaseUrl(), new HashMap<String, String>(), w.toString());
 
     if(res.getStatus() == 201) {
+    	System.out.println("Boutique Registration is successful" + boutiqueNew.getUsername());
         status.setStatus(true);
        // EmailUtil.sendConfirmationEmail(user);
     } else {
+    	System.out.println("Boutique Registration is unsuccessful" + boutiqueNew.getUsername());
     	status.setStatus(false);
     }
 

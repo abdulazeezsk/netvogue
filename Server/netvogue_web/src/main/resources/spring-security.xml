@@ -47,15 +47,15 @@
 		<security:intercept-url pattern="/brand_Registration.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/brand/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		
-		<security:intercept-url pattern="/home.htm" access="ROLE_BOUTIQUE,ROLE_BRAND"/>
+		<!-- <security:intercept-url pattern="/home.htm" access="ROLE_BOUTIQUE,ROLE_BRAND"/>
 		<security:intercept-url pattern="/templates/**" access="ROLE_BOUTIQUE,ROLE_BRAND"/>
- 		<security:intercept-url pattern="/**" access="ROLE_BOUTIQUE,ROLE_BRAND"/>
+ 		<security:intercept-url pattern="/**" access="ROLE_BOUTIQUE,ROLE_BRAND"/>  -->
 		<!-- Security related to Boutiques --> 
  		<security:intercept-url pattern="/*/boutique/**" access="ROLE_BOUTIQUE"/>
 		
 		<!-- Form Login and Logout configuration -->
 		<security:form-login 	login-page="/Netvogue.jsp" default-target-url="/home.htm" 
-																authentication-failure-url="/Netvogue.jsp?login_error=true"/>
+														authentication-failure-url="/Netvogue.jsp?login_error=true"/>
 		<security:logout 		logout-url="/userLogout" logout-success-url="/" invalidate-session="true"/>
 	</security:http>
 	
@@ -75,9 +75,9 @@
 	<!-- Declare an authentication-manager to use a custom userDetailsService -->
 	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="NetvogueUserDetailsService">
-           <!--   <security:password-encoder hash="sha">
+           <security:password-encoder hash="sha">
                 <security:salt-source user-property="salt"/>
-            </security:password-encoder> -->
+           </security:password-encoder>
         </security:authentication-provider>
 	</security:authentication-manager>
 	

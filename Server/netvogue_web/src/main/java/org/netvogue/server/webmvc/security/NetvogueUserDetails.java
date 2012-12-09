@@ -20,6 +20,8 @@ public class NetvogueUserDetails extends User {
 		super(username, password, true, true, true, true, authorities);
 		this.salt = salt;
 		this.domainUser = domainUser;
+		System.out.println("User password:" + domainUser.getPassword());
+		System.out.println("User salt:" + salt);
 	}
 
 	public NetvogueUserDetails(final String username, final String password,
@@ -27,6 +29,7 @@ public class NetvogueUserDetails extends User {
 			final Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, true, true, true, true, authorities);
 		this.salt = salt;
+		System.out.println("User salt1:" + salt);
 	}
 
 	public NetvogueUserDetails(final String username, final String password,
@@ -37,6 +40,7 @@ public class NetvogueUserDetails extends User {
 		super(username, password, enabled, accountNonExpired,
 				credentialsNonExpired, accountNonLocked, authorities);
 		this.salt = salt;
+		System.out.println("User salt2:" + salt);
 
 	}
 

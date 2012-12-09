@@ -47,7 +47,7 @@ public class DefaultUserDaoImplTest {
     user.setPrimarycontact("suman");
     user.setProfilePicLink("http://mylink.com");
     user.setSubscirptionType(SubscriptionType.FREE);
-    user.setRole(Role.BOUTIQUE);
+    user.setRole(Role.ROLE_BOUTIQUE);
     user.setZipCode(1234);
 
     userDao.addUser(user);

@@ -3,4 +3,5 @@ export NEO4J_LOGIN=""
 export NEO4J_PASSWORD=""
 export env=local
 mvn clean install
-java -jar target/netvogueweb.jar 
+kill $(ps -eo pid,command | grep "netvogueweb.jar" | grep -v grep | awk '{print $1}')
+java -jar target/netvogueweb.jar &

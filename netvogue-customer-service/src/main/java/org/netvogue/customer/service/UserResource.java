@@ -76,6 +76,7 @@ public class UserResource {
     mapper.readValue(new StringReader(body), new TypeReference<Map<String, String>>() {
     });
 
+    System.out.println("Authenticate username" + userName);
     User user = userDao.getActiveUser(userName);
 
     Map<String, String> requiredUserProps = new HashMap<String, String>();
@@ -86,7 +87,7 @@ public class UserResource {
     StringWriter writer = new StringWriter();
 
     mapper.writeValue(writer, requiredUserProps);
-
+    System.out.println("Sent user details for authentication" + userName);
     return Response.ok(writer.toString()).build();
   }
 

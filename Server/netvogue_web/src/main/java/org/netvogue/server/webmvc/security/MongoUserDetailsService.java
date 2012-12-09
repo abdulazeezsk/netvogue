@@ -15,11 +15,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-public class MongoUserDetailsService implements UserDetailsService,
-		NetvogueUserDetailsService, Serializable {
+public class MongoUserDetailsService implements NetvogueUserDetailsService, Serializable {
 
 	/**
    *
