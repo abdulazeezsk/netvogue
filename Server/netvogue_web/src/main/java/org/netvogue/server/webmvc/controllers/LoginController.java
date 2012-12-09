@@ -20,8 +20,9 @@ public class LoginController  {
 	
 	@RequestMapping(value= {"/Netvogue.html", "/"}, method = RequestMethod.GET)
 	public String showForm(@RequestParam(value = "login_error", required = false) boolean error, Model model) {
-		
+		System.out.println("inside login controller:");
 		User user = userDetailsService.getUserFromSession();
+		System.out.println("user inside login controller:" + user);
 		if(null != user) {
 			System.out.println("User identified");
 			

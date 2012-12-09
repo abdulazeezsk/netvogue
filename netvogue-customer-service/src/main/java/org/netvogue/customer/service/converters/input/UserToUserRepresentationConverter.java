@@ -25,6 +25,7 @@ public class UserToUserRepresentationConverter implements Converter<User, UserRe
     rep.setUsername(source.getUsername());
     rep.setSubscirptionType(source.getSubscirptionType().toString());
     rep.setZipCode(source.getZipCode());
+    rep.setSalt(source.getSalt());
     return rep;
   }
 }

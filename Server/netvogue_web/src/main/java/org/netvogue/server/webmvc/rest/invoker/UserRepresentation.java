@@ -1,4 +1,4 @@
-package org.netvogue.customer.service.representations;
+package org.netvogue.server.webmvc.rest.invoker;
 
 public class UserRepresentation {
 
@@ -191,5 +191,4 @@ public class UserRepresentation {
 	public void setSalt(long salt) {
 		this.salt = salt;
 	}
-
 }

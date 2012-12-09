@@ -75,12 +75,17 @@
 	<!-- Declare an authentication-manager to use a custom userDetailsService -->
 	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="NetvogueUserDetailsService">
-            <security:password-encoder hash="md5">
-                <security:salt-source system-wide="cewuiqwzie"/>
-            </security:password-encoder>
+           <!--   <security:password-encoder hash="sha">
+                <security:salt-source user-property="salt"/>
+            </security:password-encoder> -->
         </security:authentication-provider>
 	</security:authentication-manager>
 	
-	<bean id="NetvogueUserDetailsService" class="org.netvogue.server.webmvc.security.NetvogueUserDetailsServiceImpl"/>
+	<!--  <bean id="NetvogueUserDetailsService" class="org.netvogue.server.webmvc.security.NetvogueUserDetailsServiceImpl"/> -->
+	
+	<bean id="NetvogueUserDetailsService" class="org.netvogue.server.webmvc.security.MongoUserDetailsService">
+		<constructor-arg ref="restInvoker" />
+		<constructor-arg ref="customerServiceContext" />
+	</bean>
 	
 </beans>

@@ -1,57 +1,59 @@
 package org.netvogue.server.webmvc.security;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-
+import org.netvogue.server.webmvc.rest.invoker.UserRepresentation;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.netvogue.server.neo4japi.domain.User;
+import org.springframework.security.core.userdetails.User;
 
-public class NetvogueUserDetails implements UserDetails {
+import java.util.Collection;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private final User user;
-	
-	NetvogueUserDetails(User user) {
-		this.user = user;
-	}
-	
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		User.Roles[] roles = user.getRoles();
-        if (roles ==null) return Collections.emptyList();
-        return Arrays.<GrantedAuthority>asList(roles);
-	}
+public class NetvogueUserDetails extends User {
 
-	public String getPassword() {
-		System.out.println("Password stored is" + user.getPassword());
-		return user.getPassword();
+	private static final long serialVersionUID = 6468055483876432771L;
+
+	private long salt;
+
+	private UserRepresentation domainUser;
+
+	public NetvogueUserDetails(final String username, final String password,
+			final long salt, final UserRepresentation domainUser,
+			final Collection<? extends GrantedAuthority> authorities) {
+		super(username, password, true, true, true, true, authorities);
+		this.salt = salt;
+		this.domainUser = domainUser;
 	}
 
-	public String getUsername() {
-		return user.getEmail();
+	public NetvogueUserDetails(final String username, final String password,
+			final long salt,
+			final Collection<? extends GrantedAuthority> authorities) {
+		super(username, password, true, true, true, true, authorities);
+		this.salt = salt;
 	}
 
-	public boolean isAccountNonExpired() {
-		return true;
+	public NetvogueUserDetails(final String username, final String password,
+			final boolean enabled, final boolean accountNonExpired,
+			final boolean credentialsNonExpired,
+			final boolean accountNonLocked, final long salt,
+			final Collection<? extends GrantedAuthority> authorities) {
+		super(username, password, enabled, accountNonExpired,
+				credentialsNonExpired, accountNonLocked, authorities);
+		this.salt = salt;
+
 	}
 
-	public boolean isAccountNonLocked() {
-		return true;
+	public long getSalt() {
+		return salt;
 	}
 
-	public boolean isCredentialsNonExpired() {
-		return true;
+	public void setSalt(final long salt) {
+		this.salt = salt;
 	}
 
-	public boolean isEnabled() {
-		return user.getAccountEnabled();
+	public UserRepresentation getDomainUser() {
+		return domainUser;
 	}
 
-	public User getUser() {
-        return user;
-    }
+	public void setDomainUser(final UserRepresentation domainUser) {
+		this.domainUser = domainUser;
+	}
+
 }
