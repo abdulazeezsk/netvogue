@@ -32,7 +32,6 @@
 		<netvogue-auth-store-version>0.0.1-SNAPSHOT</netvogue-auth-store-version>
 		<netvogue-master-pom-version>1.0-SNAPSHOT</netvogue-master-pom-version>
 		<netvogue-database-api-version>1.0-SNAPSHOT</netvogue-database-api-version>
-		<netvogue-common.version>1.0-SNAPSHOT</netvogue-common.version>
 	</properties>
 	<dependencies>
         <dependency>

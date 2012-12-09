@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.netvogue.server.common.RestStatusCodes;
 import org.netvogue.server.common.ResultStatus;
+import org.netvogue.server.mandrill.util.EmailUtil;
+import org.netvogue.server.neo4japi.domain.Boutique;
 import org.netvogue.server.neo4japi.domain.Brand;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.domain.User.Roles;
@@ -75,51 +78,50 @@ public class BoutiqueNewController {
     System.out.println("Boutique_RegistrationStep--------------" + boutiqueNew.toString());
     JsonResponse status = new JsonResponse();
     
-    ShaPasswordEncoder encoder = new ShaPasswordEncoder();
-    
-    long salt = System.nanoTime();
-    
-    UserRepresentation rep = new UserRepresentation();
-    rep.setEmail(boutiqueNew.getEmail());
-    rep.setUsername(boutiqueNew.getUsername());
-    rep.setPassword(encoder.encodePassword(boutiqueNew.getPassword(), salt));
-    //rep.setPassword(boutiqueNew.getPassword());
-
-    rep.setMobileNo(Long.valueOf(boutiqueNew.getMobile()));
-    rep.setPrimarycontact(boutiqueNew.getPrimarycontact());
-    rep.setRole(Roles.ROLE_BOUTIQUE.toString());
-    rep.setSubscirptionType("FREE");
-    rep.setSalt(salt);
-    
-    ObjectMapper mapper = new ObjectMapper();
-    StringWriter w = new StringWriter();
-    mapper.writeValue(w, rep);
-
-    ClientResponse res = restInvoker.invokePUT(customerServiceContext.getBaseUrl(), new HashMap<String, String>(), w.toString());
-
-    if(res.getStatus() == 201) {
-    	System.out.println("Boutique Registration is successful" + boutiqueNew.getUsername());
-        status.setStatus(true);
-       // EmailUtil.sendConfirmationEmail(user);
+    if (ResultStatus.SUCCESS == boutiqueService.ValidateEmail(boutiqueNew.getEmail())
+            && ResultStatus.SUCCESS == boutiqueService.ValidateUsername(boutiqueNew.getUsername())) {
+	    ShaPasswordEncoder encoder = new ShaPasswordEncoder();
+	    
+	    long salt = System.nanoTime();
+	    
+	    UserRepresentation rep = new UserRepresentation();
+	    rep.setEmail(boutiqueNew.getEmail());
+	    rep.setUsername(boutiqueNew.getUsername());
+	    rep.setPassword(encoder.encodePassword(boutiqueNew.getPassword(), salt));
+	    //rep.setPassword(boutiqueNew.getPassword());
+	
+	    rep.setMobileNo(Long.valueOf(boutiqueNew.getMobile()));
+	    rep.setPrimarycontact(boutiqueNew.getPrimarycontact());
+	    rep.setRole(Roles.ROLE_BOUTIQUE.toString());
+	    rep.setSubscirptionType("FREE");
+	    rep.setSalt(salt);
+	    
+	    ObjectMapper mapper = new ObjectMapper();
+	    StringWriter w = new StringWriter();
+	    mapper.writeValue(w, rep);
+	
+	    ClientResponse res = restInvoker.invokePUT(customerServiceContext.getBaseUrl(), new HashMap<String, String>(), w.toString());
+	
+	    if(res.getStatus() == RestStatusCodes.SUCCESS) {
+	    	System.out.println("Boutique Registration is successful" + boutiqueNew.getUsername());
+	        status.setStatus(true);
+	        // EmailUtil.sendConfirmationEmail(user);
+	        Boutique user = conversionService.convert(boutiqueNew, Boutique.class);
+		    String error = new String();
+		    if (ResultStatus.SUCCESS == boutiqueService.AddNewBoutique(user, error)) {
+		    	status.setStatus(true);
+		        EmailUtil.sendConfirmationEmail(user);
+		    } else {
+		        status.setError(error);
+		        // userDetailsService.setUserInSession((User)user);
+		    }
+	    } else {
+	    	System.out.println("Boutique Registration is unsuccessful" + boutiqueNew.getUsername());
+	    	status.setStatus(false);
+	    }
     } else {
-    	System.out.println("Boutique Registration is unsuccessful" + boutiqueNew.getUsername());
-    	status.setStatus(false);
+      status.setError("Kindly give other username or email.");
     }
-
-//    if (ResultStatus.SUCCESS == boutiqueService.ValidateEmail(boutiqueNew.getEmail())
-//        && ResultStatus.SUCCESS == boutiqueService.ValidateUsername(boutiqueNew.getUsername())) {
-//      Boutique user = conversionService.convert(boutiqueNew, Boutique.class);
-//      String error = new String();
-//      if (ResultStatus.SUCCESS == boutiqueService.AddNewBoutique(user, error)) {
-//        status.setStatus(true);
-//        EmailUtil.sendConfirmationEmail(user);
-//      } else {
-//        status.setError(error);
-//        // userDetailsService.setUserInSession((User)user);
-//      }
-//    } else {
-//      status.setError("Kindly give other username or email.");
-//    }
     /*
      * if(!result.hasErrors()){
      * System.out.println("Boutique_Registration--Validation is successful for "+boutiqueNew.toString());

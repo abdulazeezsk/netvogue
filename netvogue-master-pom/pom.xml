@@ -70,6 +70,9 @@ All projects will inherit from it either directly or indirectly.
 		<spring-data-mongo.version>1.0.4.RELEASE</spring-data-mongo.version>
 		<mongo-driver.version>2.7.1</mongo-driver.version>
 		
+		<!-- Netvogue versions -->
+		<netvogue-common.version>1.0-SNAPSHOT</netvogue-common.version>
+		
 	</properties>
 	<repositories>
   		<repository>

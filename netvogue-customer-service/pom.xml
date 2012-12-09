@@ -50,6 +50,12 @@
 			<artifactId>netvogue-rest-services-utils</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.netvogue.server</groupId>
+            <artifactId>netvogue-common</artifactId>
+            <version>${netvogue-common.version}</version>
+        </dependency>
 
 		<!--  external dependencies -->
 		<dependency>
