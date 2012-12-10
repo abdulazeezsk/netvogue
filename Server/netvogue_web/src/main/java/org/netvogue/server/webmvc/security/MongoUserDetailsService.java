@@ -17,12 +17,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-public class MongoUserDetailsService implements NetvogueUserDetailsService, Serializable {
+public class MongoUserDetailsService /*implements NetvogueUserDetailsService, Serializable*/ {
 
 	/**
    *
    */
-	private static final long serialVersionUID = 3057104547767816568L;
+	/*private static final long serialVersionUID = 3057104547767816568L;
 
 	private RestInvoker restInvoker;
 
@@ -86,6 +86,6 @@ public class MongoUserDetailsService implements NetvogueUserDetailsService, Seri
 			return user;
 		}
 		return null;
-	}
+	}*/
 
 }

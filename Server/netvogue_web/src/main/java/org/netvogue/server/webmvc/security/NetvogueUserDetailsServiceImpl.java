@@ -13,9 +13,9 @@ import org.netvogue.server.neo4japi.domain.Boutique;
 import org.netvogue.server.neo4japi.domain.User;
 import org.netvogue.server.neo4japi.service.BoutiqueService;
 
-public class NetvogueUserDetailsServiceImpl /*implements NetvogueUserDetailsService*/ {
+public class NetvogueUserDetailsServiceImpl implements NetvogueUserDetailsService {
 
-	/*@Autowired BoutiqueService 		boutiqueService;
+	@Autowired BoutiqueService 		boutiqueService;
 	@Autowired ConversionService	conversionService; 
 
 	public UserDetails loadUserByUsername(String loginName)
@@ -57,7 +57,7 @@ public class NetvogueUserDetailsServiceImpl /*implements NetvogueUserDetailsServ
         	boutiqueService.AddNewBoutique(conversionService.convert(boutiqueNew, Boutique.class));
 		} else {
 			throw new RuntimeException("Boutique already registered with : "+email);
-		} // close comments here
+		} */
         
         //setUserInSession(newUser);
         return null;
@@ -70,5 +70,4 @@ public class NetvogueUserDetailsServiceImpl /*implements NetvogueUserDetailsServ
         context.setAuthentication(authentication);
         System.out.println("User has been set");
     }
-*/
 }
