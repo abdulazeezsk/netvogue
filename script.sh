@@ -21,4 +21,4 @@ export env=local
 kill $(ps -eo pid,command | grep "netvogueweb-customer-service-1.0-SNAPSHOT.jar" | grep -v grep | awk '{print $1}')
 java -jar target/netvogue-customer-service-1.0-SNAPSHOT.jar &
 kill $(ps -eo pid,command | grep "netvogueweb.jar" | grep -v grep | awk '{print $1}')
-java -jar ../Server/netvogue_web/target/netvogueweb.jar &
+java -jar ../Server/netvogue_web/target/netvogueweb.jar
