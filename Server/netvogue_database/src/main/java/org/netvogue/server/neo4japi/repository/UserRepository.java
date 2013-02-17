@@ -76,13 +76,13 @@ public interface UserRepository extends GraphRepository<User> {
 	NetworkStatus getNetworkStatus(String username1, String username2);
 	
 	//Related to references
-	@Query(	"START n=node:search(username={0}) MATCH n-[rels:NETWORK*2.2]-references " +
+	@Query(	"START n=node:search(username={0}) MATCH n-[rels:NETWORK*2..2]-references " +
 			"WHERE ALL(r in rels WHERE r.status? = 'CONFIRMED') and not(n-[:NETWORK]-references) " +
-			"WITH n, references " +
-			"MATCH mutualfriends = n-[f1?:NETWORK]-(mf)-[f2?:NETWORK]-references " +
-			"WHERE f1.status = 'CONFIRMED' and f2.status = 'CONFIRMED' " +
-			"RETURN references, count(distinct mutualfriends) as mutualfriends " +
-			"ORDER BY count(mutualfriends) DESC " +
+			//"WITH n, references " +
+			//"MATCH mutualfriends = n-[f1?:NETWORK]-(mf)-[f2?:NETWORK]-references " +
+			//"WHERE f1.status = 'CONFIRMED' and f2.status = 'CONFIRMED' " +
+			"RETURN references, count(distinct rels) as mutualfriends " +
+			"ORDER BY mutualfriends DESC " +
 			"SKIP 0 LIMIT 2")
 	Iterable<ReferenceData> getReferences(String username, int pagenumber, int resultsperpage);
 	

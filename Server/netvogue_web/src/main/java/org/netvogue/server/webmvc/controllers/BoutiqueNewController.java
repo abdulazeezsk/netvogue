@@ -69,7 +69,7 @@ public class BoutiqueNewController {
     return "boutique_Registration";
   }
 
-  @RequestMapping(value = "/boutique/doregistration", method = RequestMethod.POST)
+/*  @RequestMapping(value = "/boutique/doregistration", method = RequestMethod.POST)
   public @ResponseBody
   JsonResponse DoRegistration(@RequestBody
   @Valid final
@@ -100,9 +100,9 @@ public class BoutiqueNewController {
 	    StringWriter w = new StringWriter();
 	    mapper.writeValue(w, rep);
 	
-	    ClientResponse res = restInvoker.invokePUT(customerServiceContext.getBaseUrl(), new HashMap<String, String>(), w.toString());
+//	    ClientResponse res = restInvoker.invokePUT(customerServiceContext.getBaseUrl(), new HashMap<String, String>(), w.toString());
 	
-	    if(res.getStatus() == RestStatusCodes.SUCCESS) {
+	    if (ResultStatus.SUCCESS == boutiqueService.AddNewBoutique(user, error)) {
 	    	System.out.println("Boutique Registration is successful" + boutiqueNew.getUsername());
 	        status.setStatus(true);
 	        // EmailUtil.sendConfirmationEmail(user);
@@ -119,6 +119,43 @@ public class BoutiqueNewController {
 	    	System.out.println("Boutique Registration is unsuccessful" + boutiqueNew.getUsername());
 	    	status.setStatus(false);
 	    }
+    } else {
+      status.setError("Kindly give other username or email.");
+    }
+    
+     * if(!result.hasErrors()){
+     * System.out.println("Boutique_Registration--Validation is successful for "+boutiqueNew.toString());
+     * if(ResultStatus.SUCCESS == boutiqueService.ValidateEmail(boutiqueNew.getEmail())) { Boutique user =
+     * conversionService.convert(boutiqueNew, Boutique.class); boutiqueService.AddNewBoutique(user);
+     * userDetailsService.setUserInSession((User)user); status.setStatus(true); } } else { List<FieldError> allErrors =
+     * result.getFieldErrors(); String errorMessage = new String(); for (FieldError objectError : allErrors) {
+     * errorMessage += objectError.getField() + "  " + objectError.getDefaultMessage(); errorMessage += "\n"; }
+     * status.setError(errorMessage); }
+     
+
+    return status;
+  }*/
+  
+  @RequestMapping(value = "/boutique/doregistration", method = RequestMethod.POST)
+  public @ResponseBody
+  JsonResponse DoRegistration(@RequestBody
+  @Valid final
+  BoutiqueNew boutiqueNew) throws Exception {
+
+    System.out.println("Boutique_RegistrationStep--------------" + boutiqueNew.toString());
+    JsonResponse status = new JsonResponse();
+
+    if (ResultStatus.SUCCESS == boutiqueService.ValidateEmail(boutiqueNew.getEmail())
+        && ResultStatus.SUCCESS == boutiqueService.ValidateUsername(boutiqueNew.getUsername())) {
+      Boutique user = conversionService.convert(boutiqueNew, Boutique.class);
+      String error = new String();
+      if (ResultStatus.SUCCESS == boutiqueService.AddNewBoutique(user, error)) {
+        status.setStatus(true);
+        EmailUtil.sendConfirmationEmail(user);
+      } else {
+        status.setError(error);
+        // userDetailsService.setUserInSession((User)user);
+      }
     } else {
       status.setError("Kindly give other username or email.");
     }
