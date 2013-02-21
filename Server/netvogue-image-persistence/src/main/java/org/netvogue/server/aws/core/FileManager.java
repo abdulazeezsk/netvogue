@@ -48,11 +48,11 @@ public class FileManager extends TransferManager {
 		super(credentials);
 	}
 
-	private static String accesskey = "AKIAJPHEXCL7WIP7ITSQ";
+	private static String accesskey = "AKIAIAVZNUHQNJWNULUQ";
 	private static FileManager transferManager;
 	private static SecretKeySpec signingKey = null;
 	private static Mac mac = null;
-	private static String secureKey = "yWbD67M+VidV+4G/6oMdfiSzg0ouVo2kD58+9yqV";
+	private static String secureKey = "cTL1qREucUc6W8K3zb352q50Or+jbspXNHitjfQy";
 	
 	public static FileManager getSharedInstance() throws Exception {
 		
