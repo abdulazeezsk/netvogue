@@ -1420,7 +1420,7 @@ function MyCtrlStylesheet($scope, $routeParams, currentvisitedprofile, mystylesh
 	}
 	
 	if($scope.$parent.iambrand == false) {
-		$location.url("stylesheets");
+		//$location.url("stylesheets");
 	}
 	
     $scope.stylesheetid = "";
