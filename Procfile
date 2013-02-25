@@ -1,1 +1,1 @@
-web:    java $JAVA_OPTS -jar --port $PORT Server/netvogue_web/target/netvogueweb.jar
+web:    java $JAVA_OPTS -jar Server/netvogue_web/target/netvogueweb.jar
