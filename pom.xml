@@ -28,5 +28,6 @@
 		<module>netvogue-master-pom</module>
 		<module>netvogue-restfulservices-master-pom</module>
 		<module>Server</module>
+  </modules>
 	</modules>
 </project>
