@@ -16,3 +16,12 @@ target
 .gitignore
 org.eclipse.core.resources.prefs
 Server/netvogue_web/.settings/org.eclipse.core.resources.prefs
+Server/netvogue-common/.classpath
+Server/netvogue-admin/.classpath
+Server/netvogue-email-service/.classpath
+Server/netvogue-image-persistence/.classpath
+Server/netvogue-image-processing-service/.classpath
+Server/netvogue-database/.classpath
+Server/netvogue_web/.settings/org.eclipse.core.resources.prefs
+Server/netvogue_web/.settings/org.eclipse.wst.common.component
+
