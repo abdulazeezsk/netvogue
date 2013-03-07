@@ -1,0 +1,124 @@
+<!--body-->
+<div class="container minimum_height">
+	<div class="row">
+		<!-- left pane -->
+		<div class="span3">
+			<div class="underline">
+				<span ui-if="!iambrand" class="leftpane_entity">USER </span> <span
+					ui-if="iambrand" class="leftpane_entity">USER </span>
+			</div>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> <a href="#profile"> <img alt=""
+								ng-src={{profilepic.thumbnail_url}}
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+					</div>
+				</li>
+			</ul>
+			<div class="leftpane_subheading">FILTERS</div>
+			<div class="divi2"></div>
+			<div>
+				<span class="leftpane_filter_name">Boutique</span> <input
+					type="text" class="span3" placeholder="Boutique name"
+					ng-model="search.name" ng-change="getsearchResults()" /> <span
+					class="leftpane_filter_name"> Brands Carried</span>
+				<!-- <input type="text" class="span3" placeholder="Brands carried" />  -->
+
+				<select data-placeholder="Select a Brands carried"
+					ui-select2="{width:'element'}" ng-model="search.stockists" multiple>
+					<option value="{{st.username}}" ng-repeat="st in usersavailable">{{st.name}}</option>
+				</select> <br> <span class="leftpane_filter_name">LOCATION</span> <input
+					type="text" class="span3" placeholder="Location"
+					ng-model="search.location" ng-change="getsearchResults()" /> <span
+					class="leftpane_filter_name">Price range</span> <br> <input
+					type="text" class="spanpricerange-leftpane"
+					placeholder="From price" required ng-minlength="6" maxlength="6" />
+				- <input type="text" ng-model class="spanpricerange-leftpane"
+					placeholder="To price" required ng-minlength="6" maxlength="6" />
+
+
+			</div>
+			<div>
+				<span class="leftpane_filter_name">CATEGORY</span>
+			</div>
+			<div>
+				<div checkbox-tree ng-model="searchFilter"
+					ng-change="getsearchResults()"></div>
+			</div>
+		</div>
+		<!-- left pane -->
+
+
+		<!-- right pane -->
+		
+		<div class="span9">
+
+
+			<!-- <div style="border-bottom: 1px solid black;">
+				Discover
+			</div> -->
+			<div class="underline">
+				<span  class="leftpane_entity">Discover </span> 
+			</div>
+			<div class="underline">
+				<span  class="right_pane_info">Use the filters below to
+					discover Brands and boutiques you know based on Name,location and
+					more. </span> 
+			</div>
+			<!-- <div style="border-bottom: 1px solid black;">
+				<span class="left right_pane_info">  </span>
+			</div> -->
+
+
+			<div>
+				<div class="divi2"></div>
+				<div ng-show="searching">
+					<img src="img/ajax-loadersmall.gif" style="float: left;"><br>
+				</div>
+				<ul class="thumbnails">
+					<li ng-repeat="user in advancedsearch">
+						<div class="rgt-thumb-relative">
+							<img ng-src="{{user.thumbpic}}" style="max-height:150px;max-width:210px;min-height:150px;min-width:210px;overflow-x: hidden;overflow-y: hidden;">
+							<div class="masklayer">
+								<h1 class="usertype">
+									<u>{{user.usertype}}</u>
+								</h1>
+								<h1 class="username">{{user.name}}</h1>
+								<h1 class="userlocation">{{user.city}},{{user.country}}</h1>
+								<p class="viewdetails">
+									<a style="color: white; text-decoration: none;"
+										ng-href="#/{{user.username}}/profile"> View </a>
+								</p>
+
+							</div>
+						</div>
+						<div class="search-user">
+							<h1 class="user">{{user.name}}</h1>
+						</div>
+					</li>
+				</ul>
+				<div get-more="getmoreresults()">
+					<div ng-show="gettingmoreresults">
+						<center>
+							<img src="img/ajax-loadersmall.gif"><br>
+						</center>
+					</div>
+					<div ng-show="nomoredataavailable1">End of data</div>
+				</div>
+			</div>
+		</div>
+		<!-- right pane -->
+	</div>
+
+</div>
+
+<!--body-->
+<script type="text/javascript">
+function unCheck(el, n){
+document.getElementById(n).checked = false;
+}
+</script>

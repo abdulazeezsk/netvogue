@@ -77,6 +77,7 @@ img.AngularJS-small {
 	<script src="js/app.js" type="text/javascript"></script>
 	<script src="js/services.js" type="text/javascript"></script>
 	<script src="js/controllers.js" type="text/javascript"></script>
+	<script src="js/usercontrollers.js" type="text/javascript"></script>
 	<script src="js/addeditcontrollers.js" type="text/javascript"></script>
 	<script src="js/ecommercecontrollers.js" type="text/javascript"></script>
 	<script src="js/filters.js" type="text/javascript"></script>

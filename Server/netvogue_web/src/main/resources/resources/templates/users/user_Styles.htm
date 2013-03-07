@@ -1,0 +1,112 @@
+<!--body-->
+<div class="container minimum_height">
+	<div class="row">
+		<!-- left-pane -->
+		<div class="span3">
+			<div class="underline">
+				<span ui-if="!iambrand" class="leftpane_entity">Boutique </span> <span
+					ui-if="iambrand" class="leftpane_entity">Brand </span>
+			</div>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> 
+							<a ui-if="isMyProfile" ng-href="#profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
+										class="pull-left leftpane_profile_img"></a>
+							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile"> <img alt="" ng-src={{profilepic.thumbnail_url}}
+										class="pull-left leftpane_profile_img"></a>
+						</span> 
+						<span> 
+							<a ui-if="isMyProfile" ng-href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+							<a ui-if="!isMyProfile" ng-href="#/{{profileid}}/profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- left-pane -->
+		<!-- right pane -->
+		<div class="span9">
+			<div>
+				
+				<!-- header pane -->
+				<div style="border-bottom: 1px solid black;">
+					<span class="left ywbreadcrumb header_width"> 
+						<a ui-if="isMyProfile" class="nonactive" ng-href="#/linesheets" >Linesheets</a>
+						<a ui-if="!isMyProfile" class="nonactive" ng-href="#/{{profileid}}/linesheets" >Linesheets</a> 
+						<span class="ywdivider">/</span> <span>
+						{{brandname}} {{linesheetname}}</span></span>
+				</div>
+				<div style="border-bottom: 1px solid black;margin-bottom:10px;">
+					<span class="left right_pane_info">  </span> 
+					<span class="right" ui-if="isMyProfile && iambrand"> <a
+						href="#/addlinesheets?id={{linesheetid}}&&cat={{category}}" class="rightpane_add_btn">Organize</a>
+					</span>
+				</div>
+				<!-- header pane -->
+
+				<div>
+					<div ng-show="gettingstyles">
+                		<img src="img/ajax-loadersmall.gif" style="float:left;" >
+						<br>
+					</div>
+					<ul class="thumbnails">
+						<li  ng-repeat="style in styles">
+							<div class="rgt-thumb-relative">
+								<img ng-src="{{style.profilethumbpic}}" 
+								class="style-images">
+								<div class="masklayer">
+									<!-- <h1 class="style-brandname" style="text-align:center;" >
+									{{brandname}}
+									</h1>
+									<h1 class="style-seasonname" >
+										<i>{{linesheetname}}</i>
+									</h1> -->
+									<p class="style-name">
+										<u>Style</u>
+									</p>
+									<p class="name">
+										<i>{{style.styleno}}</i>
+									</p>
+									<p class="pricez">
+									<span class="WebRupee rs">Rs.</span>
+									<span class="regular-price"> <span
+										class="price">{{style.price}}</span>
+									</span>
+									</p>
+									  <p>
+										 <a ui-if="isMyProfile"   class="view"
+										ng-href="#/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" >
+										View </a>
+										 <a ui-if="!isMyProfile"   class="view"
+										ng-href="#/{{profileid}}/style?id={{linesheetid}}&&cat={{category}}&&styleid={{style.styleid}}" >
+										View </a>
+									</p>
+								</div>
+							</div>
+							<div class="linesheet-designer">
+									<h1 class="designer" >
+										{{brandname}} </h1>
+							</div>
+							<div class="linesheet-style">
+									<h1 class="name" >
+										{{style.styleno}} </h1> 
+								</div>
+						</li>
+					</ul>
+					<div get-more="getmorestyles()">
+	   					<div ng-show="gettingmorestyles">
+	   						<center><img src="img/ajax-loadersmall.gif"><br></center>
+	   					</div>
+	   					<div ng-show="nomoredataavailable1">
+	   						End of data
+	   					</div>
+					</div>
+				</div>
+			</div>
+			<!-- right pane -->
+		</div>
+	</div>
+</div>
+<!--body-->

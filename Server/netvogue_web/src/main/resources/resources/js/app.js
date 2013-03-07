@@ -68,8 +68,15 @@ angular.module('netVogue', ['netVogue.constants', 'netVogue.filters', 'netVogue.
 	  $routeProvider.when('/boutiqueorders',			{ templateUrl: 'templates/boutiqueorders.htm',         			controller: MyCtrlBoutiqueOrders });
 	  $routeProvider.when('/brandorders',				{ templateUrl: 'templates/brandorders.htm',         			controller: MyCtrlBrandOrders });
 	  $routeProvider.when('/revieworders',				{ templateUrl: 'templates/Revieworder.htm',         			controller: MyCtrlRevieworders });
-	  $routeProvider.when('/sample',				{ templateUrl: 'templates/sample.htm',         			controller: MyCtrlsample });
-	  
+	  $routeProvider.when('/sample',					{ templateUrl: 'templates/sample.htm',         					controller: MyCtrlsample });
+	  $routeProvider.when('/mycorner',					{ templateUrl: 'templates/users/user_Corner.htm',         		controller: MyCtrlUserCorner });
+	  $routeProvider.when('/discover',					{ templateUrl: 'templates/users/userAdvancedSearch.htm',        controller: MyCtrlUserSearch });
+	  $routeProvider.when('/Following',					{ templateUrl: 'templates/users/user_Following.htm',         	controller: MyCtrlUserFollowing });
+	  $routeProvider.when('/userAccountSettings',		{ templateUrl: 'templates/users/user_AccountSettings.htm',      controller: MyCtrlUserAccountSettings });
+	  $routeProvider.when('/boutiqueLine',				{ templateUrl: 'templates/users/line.htm',      				controller: MyCtrlBoutiqueLine });
+	  $routeProvider.when('/boutiqueStyles',			{ templateUrl: 'templates/users/user_Styles.htm',      			controller: MyCtrlBoutiqueStyles });
+	  $routeProvider.when('/boutiqueStyle',				{ templateUrl: 'templates/users/user_Style.htm',      			controller: MyCtrlBoutiqueStyle });
+
   }]).run( function($rootScope, currentvisitedprofile) {
 
 	    // register listener to watch route changes
