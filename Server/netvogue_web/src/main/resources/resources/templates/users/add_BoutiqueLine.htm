@@ -1,0 +1,34 @@
+<!--body-->
+<div class="container minimum_height">
+	<div class="row">
+		<!-- left-pane -->
+		<div class="span3">
+			<div class="underline">
+				<span ui-if="!iambrand" class="leftpane_entity">User </span> <span
+					ui-if="iambrand" class="leftpane_entity">User </span>
+			</div>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> <a ng-href="#profile"> <img alt=""
+								ng-src={{profilepic.thumbnail_url}}
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a ng-href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- left-pane -->
+		<!-- right-pane -->
+		<div class="span9">
+			<div class="underline">
+				<span  class="leftpane_entity">Add Line </span> 
+			</div>				
+
+		
+		</div>
+		<!-- right-pane -->
+	</div>
+</div>
