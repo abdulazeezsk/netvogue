@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Activate User</title>
+</head>
+<body>
+	<div class="span6">
+		<form name="mainForm" ng-submit="deactivateUser()">
+			<!--   <div class="controls controls-row">-->
+			<div>
+				<label for="username" >User Name</label>
+				 <input ng-model="username" type="text" class="span3" placeholder="Name">
+			</div>
+			<div>
+				<label for="email" >Email</label>
+				 <input ng-model="email" type="email" class="span3" placeholder="Email address">
+				 <span class="error" ng-show="mainForm.email.$error.email">invalid email</span>
+			</div>
+			<!--   </div>-->
+
+			<div class="controls">
+				<button id="contact-submit" type="submit"
+					class="btn btn-primary input-medium pull-right">Submit</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
