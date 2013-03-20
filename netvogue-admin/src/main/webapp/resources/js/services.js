@@ -23,8 +23,7 @@ angular.module('netvogue-admin.services', []).value('version', '0.1').service(
 		}).service(
 				'myadmin', function($http) {
 					return {
-						manageUser : function(datatosend, url) {
-							alert("test2");
+						manageUser : function(datatosend, url) {							
 							var config = {
 								method : "PUT",
 								data : datatosend,
