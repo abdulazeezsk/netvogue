@@ -77,7 +77,7 @@ angular.module('netVogue', ['netVogue.constants', 'netVogue.filters', 'netVogue.
 	  $routeProvider.when('/boutiqueStyles',			{ templateUrl: 'templates/users/user_Styles.htm',      			controller: MyCtrlBoutiqueStyles });
 	  $routeProvider.when('/boutiqueStyle',				{ templateUrl: 'templates/users/user_Style.htm',      			controller: MyCtrlBoutiqueStyle });
 	  $routeProvider.when('/addboutiqueLine',			{ templateUrl: 'templates/users/add_BoutiqueLine.htm',      	controller: MyCtrlAddBoutiqueLine });
-	  $routeProvider.when('/addboutiqueStyle',			{ templateUrl: 'templates/users/add_Styles.htm',      			controller: MyCtrlAddBoutiqueStyle });
+	  $routeProvider.when('/addboutiqueStyle',			{ templateUrl: 'templates/users/add_styles.htm',      			controller: MyCtrlAddBoutiqueStyle });
 	  $routeProvider.when('/brandline',					{ templateUrl: 'templates/brand/Add_Linesheet.htm',      		controller: MyCtrlAddBrandLine });
 
   }]).run( function($rootScope, currentvisitedprofile) {
