@@ -22,3 +22,9 @@ function MyCtrlBoutiqueStyle($scope, $location) {
 function MyCtrlAddBoutiqueLine($scope, $location) {
 
 }
+function MyCtrlAddBrandLine($scope, $location) {
+
+}
+function MyCtrlAddBoutiqueStyle($scope, $location) {
+
+}
