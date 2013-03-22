@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>netvogue-webmvc</artifactId>
 	<name>NetvogueWeb</name>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	
 	<parent>
 		<groupId>org.netvogue.server</groupId>
@@ -136,7 +136,7 @@
 			<version>${jstl-version}</version>
 		</dependency>
 		
-		<dependency>
+	<!--  	<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-webapp</artifactId>
 		</dependency>
@@ -144,7 +144,7 @@
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-jsp</artifactId>
-		</dependency>
+		</dependency> -->
 		
 		<dependency>
 				<groupId>org.codehaus.jackson</groupId>
@@ -187,7 +187,7 @@
                             <artifactItem>
                                 <groupId>com.github.jsimone</groupId>
                                 <artifactId>webapp-runner</artifactId>
-                                <version>7.0.22.3</version>
+                                <version>7.0.34.2</version>
                                 <destFileName>webapp-runner.jar</destFileName>
                             </artifactItem>
                         </artifactItems>
@@ -196,7 +196,7 @@
             </executions>
         </plugin>
 
-				<plugin>
+		<!--  		<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-shade-plugin</artifactId>
 					<version>1.6</version>
@@ -240,7 +240,7 @@
 							</configuration>
 						</execution>
 					</executions>
-				</plugin>
+				</plugin>-->
 
         </plugins>
         <finalName>netvogueweb</finalName>

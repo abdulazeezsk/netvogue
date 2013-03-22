@@ -1,0 +1,158 @@
+<!--body-->
+<div class="container minumum_height">
+	<div class="row">
+		<!-- left pane -->
+		<div ng-include src="'templates/LeftMain_Panel.htm'"></div>
+		<!-- left pane -->
+		
+		<!-- middle pane -->
+		<div class="span7">
+			<div class="underline">
+					<span class="subHeading_no_underline">{{entityname}}
+					</span>
+			</div>
+			<div class="divi2"></div>
+			<textarea class="span7" id="textarea" rows="3"
+				placeholder="What are you working on?" ng-model="newupdate">
+            </textarea>
+			<img ng-show="addingupdate" src="img/ajax-loadersmall.gif"
+				style="float: left; margin-left: 5px;">
+				
+			<button class="btn btn-inverse pull-right" ng-click="addupdate()"
+				ng-disabled="addingupdate">Post</button>
+			<div class="divi2"></div>
+			<span class="btn-group pull-right">
+				<button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+					sort <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a ng-click="getmyupdates()">My Timeline</a></li>
+					<li><a ng-click="getallupdates()">Everyone</a></li>
+				</ul>
+			</span>
+			<ul class="nav nav-tab nav-stacked">
+				<li ng-repeat="news in newsfeeds">
+					<div class="newsfeed">
+						<div>
+							<a ng-click="deleteupdate(news.statusid)" title="Delete post"
+								class="pull-right" style="margin-left: 3px;"> <i
+								class="icon-remove icon-Black"></i>
+							</a>
+						</div>
+						<div class="brand_image">
+							<a ng-href="#/{{news.profileid}}/profile"> <img alt=""
+								ng-src="{{news.left_url}}" class="pull-left"></a>
+						</div>
+						<div class="newsfeed_text">
+							<p>
+								<a ng-href="#/{{news.profileid}}/profile" title="">{{news.name}}</a>
+							</p>
+							<p style="color: gray;">23 November<p>
+							<p>{{news.status}}</p>
+						</div>
+						<div>
+							<img ng-show="deletingupdate" src="img/ajax-loadersmall.gif"
+								style="float: right; margin-right: 5px;">
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- middle pane -->
+		
+		
+		<!-- right pane -->
+		<div class="span3">
+		<div class="underline">
+					<span class="subHeading_no_underline ">Network
+					</span>
+		</div>
+				<ul class="nav nav-tab nav-stacked">
+					<li ng-repeat="network in mynetwork | limitTo:4">
+						<div class="referencefeed  fade_spot">
+							<div>
+								<a ng-href="#/{{network.profileid}}/profile"> <img alt="" class="imgntwrk"
+									ng-src="{{network.thumbnail_url}}" class="pull-left"></a>
+							</div>
+							<div class="referencefeed_text">
+								<p>
+									<a ng-href="#/{{network.profileid}}/profile"
+									>{{network.name}}</a>
+								</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<!--  <div get-more="getmoreupdates()">
+					<div ng-show="gettingmoreupdates">
+						<center>
+							<img src="img/ajax-loadersmall.gif"><br>
+						</center>
+					</div>
+					<div ng-show="nomoredataavailable1">End of data</div>
+				</div> --!>
+			<div class="divi2"></div>
+			<div>
+				<h4 class="trending_head">TRENDING</h4>
+				<ul class="nav nav-tab nav-stacked">
+					<li ng-repeat="trend in trending">
+						<div class="trendfeed fade_spot">
+							<div class="img">
+								<a href="#/{{trend.trendlistitemID}}"> <img alt=""
+									ng-src="{{trend.trendpiclink}}" class="pull-left"></a>
+							</div>
+							<div class="trendfeed_text">
+								<p>
+									<a  href="#/{{trend.trendlistitemID}}" title="">{{trend.trendlistitem}}</a>
+								</p>
+								<p class="description">{{trend.post}}</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="divi2"></div>
+			<div>
+				<h4 class="reference_head">References</h4>
+				<ul class="nav nav-tab nav-stacked">
+					<li ng-repeat="reference in references|limitTo:2">
+						<div class="referencefeed  fade_spot">
+							<div>
+								<a ng-href="#/{{reference.profileid}}/profile"> <img alt="" class="imgntwrk"
+									ng-src="{{reference.thumbnail_url}}" class="pull-left"></a>
+							</div>
+							<div class="referencefeed_text">
+								<p>
+									<a ng-href="#/{{reference.profileid}}/profile" title="">{{reference.name}}</a>
+								</p>
+								<p class="mutualcontacts" >{{reference.mutualfriends}} Mutual Contact</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- right pane -->
+		
+		
+	</div>
+</div>
+<!-- body -->
+
+
+<!-- modal -->
+<div class="modal  hide" id="invite">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"></button>
+		<h4 class="subHeading_no_underline">Send Invite</h4>
+	</div>
+	<div class="modal-body">
+		<input type="text" style="width: 500px;" placeholder="Enter email" />
+		<textarea style="width: 500px;" rows="9" placeholder="Type a message"></textarea>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a> <a href="#"
+			class="btn btn-primary"> Send Request</a>
+	</div>
+</div>
+<!-- modal -->

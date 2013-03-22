@@ -6,4 +6,4 @@ call mvn clean install
 
 call echo " ************** Running the build using webapp runner ********* "
 call SET env=local
-call java -jar target/netvogueweb.jar
+call java -jar target/dependency/webapp-runner.jar target/netvogueweb.war

@@ -1,0 +1,127 @@
+<!--body-->
+<div class="container minimum_height">
+	<div class="row">
+		<!-- left pane -->
+		<div class="span3">
+			<div class="underline">
+				<span ui-if="!iambrand" class="leftpane_entity">Boutique </span> <span
+					ui-if="iambrand" class="leftpane_entity">Brand </span>
+			</div>
+			<div class="divi2"></div>
+			<ul class="thumbnails">
+				<li class="span3">
+					<div>
+						<span> <a href="#profile"> <img alt=""
+								ng-src={{profilepic.thumbnail_url}}
+								class="pull-left leftpane_profile_img"></a>
+						</span> <span> <a href="#profile" class="leftpane_entity_name">{{entityname}}</a>
+						</span>
+					</div>
+				</li>
+			</ul>
+			<div class="leftpane_subheading">Lookbooks</div>
+			<div class="divi2"></div>
+			<div>
+				<!-- <span class="leftpane_filter_name">C</span>  -->
+				<input	type="text" placeholder="Find More Styles From Lookbooks" class="span3" />
+			</div>
+			<div>
+				<h4 class="leftpane_subheading">Styles</h4>
+				 <img  src="img/ajax-loadersmall.gif">
+				<ul class="nav nav-tab nav-stacked">
+					<li ng-repeat="style in allstyles">
+						<div class="leftpanefeed fade_spot">
+							<div class="feedimage">
+								<a href="#/{{style.stylelistitemid}}"> <img alt=""
+									ng-src="{{style.profileleftpic}}" class="pull-left"></a>
+							</div>
+							<div class="leftpanefeed_text">
+								<p>
+									<a ng-click="setmainstyle(style)" >{{brandname}}</a>
+								</p>
+								<p>
+									<span ng-click="setmainstyle(style)" >{{style.styleno}}</span>
+								</p>
+								<p class="rupee">
+									<span>
+										<span class="WebRupee rs">Rs.</span>{{style.price}}
+									</span>
+								</p>
+								<p class="pull-right">
+									<a style="color:black;" ng-click="addstyle(style)">ADD STYLE</a>
+								</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- left pane -->
+		<!-- right pane -->
+		<div class="span9">
+			<!-- header -->
+			<div>
+				<div
+					style="border-bottom: 1px solid black;">
+					<span class="left ywbreadcrumb header_width"> <a class="nonactive"
+						href="#/linesheets" >Linesheets</a> <span class="ywdivider">/</span> <a class="nonactive"
+						ng-href="#/styles?id={{linesheetid}}&&cat={{category}}" >{{brandname}} {{linesheetname}}</a> <span class="ywdivider">/</span> <span>
+						Organize</span></span> 
+				</div>
+				<div style="border-bottom: 1px solid black;margin-bottom:10px">
+					<span class="left right_pane_info">Styles
+					in this linesheet</span> 
+				</div>
+			</div>
+			<!-- header -->
+			
+			<div>
+				<!-- data pane -->
+				<div>
+					<div class="alert alert-info">
+						<button type="button" class="close" data-dismiss="alert">
+							<small>x</small>
+						</button>
+						Add styles to linesheet from all available lookbooks
+					</div>
+					<ul class="nav nav-tab nav-stacked" ui-sortable
+						ng-model="existingfiles" id="container" class="clearfix">
+						<li ng-repeat="style in styles" style="postion: absloute;">
+							<div class="organiselinesheet">
+								<span class="image"><img
+									ng-src="{{style.profilethumbpic}}" alt=""> </span> <span
+									style="width: 400px; margin-left: 10px;">
+									<div>
+										<span
+											style="font-weight: normal; font-size: 14px; cursor: pointer; text-transform: uppercase;">
+											{{style.styleno}} </span>
+										
+										<span ng-hide="isEditMode" class="btn-group pull-right">
+											<button class="btn btn-inverse dropdown-toggle"
+												data-toggle="dropdown">
+												Action <span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a ng-click="deletestyle(style)">Delete</a></li>
+												<li class="divider"></li>
+												<li><a href="#">Set as cover</a></li>
+												<li class="divider"></li>
+												<li><a href="#">Public</a></li>
+												<li><a href="#">Private</a></li>
+												<li><a href="#">Network</a></li>
+											</ul>
+										</span>
+										<br><br>
+										<p class="desc">{{style.description}}</p>
+									</div>
+								</span>
+						</li>
+					</ul>
+				</div>
+				<!-- data pane -->
+			</div>
+		</div>
+		<!-- right pane -->
+	</div>
+</div>
+<!--body-->

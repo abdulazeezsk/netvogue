@@ -1,0 +1,238 @@
+<!--body-->
+<div class="container minimum_height">
+	<div class="row">
+		<!-- left pane -->
+		<div ng-include src="'templates/LeftMain_Panel.htm'"></div>
+		<!-- left pane -->
+		<!-- middle pane -->
+		<div class="span7">
+			<div>
+				<div class="underline">
+					<span class="subHeading_no_underline">{{entityname}}<span
+						class="right" ng-show="isMyProfile"><a
+							href="#profilesettings?t=0" class="add_edit">EDIT</a></span>
+					</span>
+				</div>
+				<div ui-if="null == aboutus || '' == aboutus">
+					<p class="noInfo">No Info Available</p>
+				</div>
+				<ul class="thumbnails" ui-if="null != aboutus && '' != aboutus">
+					<li>
+						<div class="aboutus" show-more>
+							<pre
+								style="background-color: white; color: black; border-color: white;">{{aboutus1}}
+							</pre>
+							<div class="togglecontainer" style="display: none;">
+                        		<pre
+									style="background-color: white; color: black; border-color: white;">{{aboutus2}}
+								</pre>
+                    		</div>
+                    		<a  class="pull-right" ng-click="toggle($event)" ui-if="more && '' != aboutus2">Show more</a>
+                    		<a  class="pull-right" ng-click="toggle($event)" ui-if="!more && '' != aboutus2">Hide</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<div class="underline">
+					<span class="subHeading_no_underline">Product Line<span
+						class="right" ng-show="isMyProfile"><a
+							href="#profilesettings?t=1" class="add_edit">EDIT</a></span>
+					</span>
+				</div>
+				<div ui-if="0 == productline.length">
+					<p class="noInfo">No Info Available</p>
+				</div>
+				<div class="ProductLine" ui-if="0 != productline.length">
+					<ul>
+						<li
+							ng-repeat="product in productline | orderBy:product.productlinename"
+							ng-show="product.selected">
+							<div>
+								<input type="checkbox" class="productline_text"
+									checked="checked" disabled="disabled" />
+								{{product.productlinename}}
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="divi2"></div>
+			</div>
+			<div>
+				<div class="underline">
+					<span class="subHeading_no_underline" ui-if="!iambrand">Brands
+						Carried <span class="right" ng-show="isMyProfile"> <a
+							href="#profilesettings?t=2" class="add_edit">EDIT</a></span>
+					</span> <span class="subHeading_no_underline" ui-if="iambrand">Stockists
+						<span class="right" ng-show="isMyProfile"> <a
+							href="#profilesettings?t=2" class="add_edit">EDIT</a></span>
+					</span>
+				</div>
+				<div ui-if="0 == brandscarried.length">
+					<p class="noInfo">No Info Available</p>
+				</div>
+				<div class="BrandsCarried" ui-if="0 != brandscarried.length">
+					<ul>
+						<li ng-repeat="brand in brandscarried">
+							<div class="thumbnail_noborder">
+								<img class="carried" ng-src="{{brand.profilepic}}" alt="">
+								<h5 class="brandscarried_text">{{brand.brandname}}</h5>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="divi2"></div>
+			</div>
+			<div>
+				<div class="underline">
+					<span class="subHeading_no_underline">Contact Info<span
+						class="right" ng-show="isMyProfile"><a
+							href="#profilesettings?t=3" class="add_edit">EDIT</a></span>
+					</span>
+				</div>
+				<br />
+				<div ui-if="null == contactinfo">
+					<p class="noInfo">No Info Available</p>
+				</div>
+				<div ui-if="null != contactinfo">
+					<ul class="contatus">
+						<li>
+							<div>
+								<span class="contatus_profile_title">Email:</span> <span
+									class="contatus_profile">{{contactinfo.email}}</span>
+							</div>
+						</li>
+						<li ui-if="null != contactinfo.mobile && '' != contactinfo.mobile">
+							<div>
+								<span class="contatus_profile_title">Mobile:</span> <span
+									class="contatus_profile">{{contactinfo.mobile}}</span>
+							</div>
+						</li>
+						<li ui-if="0 != contactinfo.landline1">
+							<div>
+								<span class="contatus_profile_title">Landline:</span>
+								<span class="contatus_profile">{{contactinfo.landline1}}</span>
+							</div>
+						</li>
+						<li ui-if="null != contactinfo.address && '' != contactinfo.address">
+							<div>
+								<span class="contatus_profile_title">Address:</span>
+								<span class="contatus_profile" >{{contactinfo.address}}</span>
+							</div>
+						</li>
+						<li ui-if="null != contactinfo.city && '' != contactinfo.city">
+							<div>
+								<span class="contatus_profile_title">City:</span>
+								<span class="contatus_profile">{{contactinfo.city}}</span>
+							</div>
+						</li>
+						<li ui-if="0 != contactinfo.zip">
+							<div>
+							<span class="contatus_profile_title">Zip:</span>
+								<span class="contatus_profile">{{contactinfo.zip}}</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- middle pane -->
+		<!-- right pane -->
+		<div class="span3">
+		<div ui-if="!isMyProfile && networkstatus != 'CONFIRMED'">
+				<ul class="thumbnails">
+					<li class="span2">
+						<div class="add_to_network" ng-show="networkstatus == 'NONE'">
+							<a style="text-decoration: none;">
+								<button class="btn btn-inverse" ng-click="shownetwork()">
+									Add to my network</button>
+							</a>
+						</div>
+						<div class="add_to_network" ng-show="networkstatus == 'PENDING'">
+						<a style="text-decoration: none;">
+								<button class="btn btn-inverse" style="cursor: default;">
+									Request is pending </button>
+							</a>
+				    	</div>
+					</li>
+				</ul>
+			</div>
+		<div class="underline">
+					<span class="subHeading_no_underline ">TRENDING
+					</span>
+		</div>
+				<ul class="nav nav-tab nav-stacked">
+					<li ng-repeat="trend in trending">
+						<div class="trendfeed fade_spot">
+							<div class="img">
+								<a href="#/{{trend.trendlistitemID}}"> <img alt=""
+									ng-src="{{trend.trendpiclink}}" class="pull-left"></a>
+							</div>
+							<div class="trendfeed_text">
+								<p>
+									<a href="#/{{trend.trendlistitemID}}" title="">{{trend.trendlistitem}}</a>
+								</p>
+								<p class="description">{{trend.post}}</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			<div class="divi2"></div>
+			<div>
+				 <div ui-if="0 == references.length">
+					<h4 class="reference_head">References</h4>
+					<ul class="nav nav-tab nav-stacked">
+						<li ng-repeat="reference in references|limitTo:2">
+							<div class="referencefeed fade_spot">
+								<div class="imgntwrk">
+									<a ng-href="#/{{reference.profileid}}/profile"> <img alt=""
+										ng-src="{{reference.thumbnail_url}}" class="pull-left"></a>
+								</div>
+								<div class="referencefeed_text">
+									<p>
+										<a ng-href="#/{{reference.profileid}}/profile" title="">{{reference.name}}</a>
+									</p>
+									<p class="mutualcontacts" >{{reference.mutualfriends}} Mutual Contact</p>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- right pane -->
+	</div>
+</div>
+<!-- modal -->
+<div ui-modal class="modal  hide" ng-model="showCreateNetwork"
+	id="myModal">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"></button>
+		<h4 class="subHeading_no_underline">Add To Network</h4>
+	</div>
+	<!--<div class="modal-body">
+        <textarea style="width: 500px;" rows="9" placeholder="Type a message"></textarea>
+    </div>-->
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a> 
+		<button data-loading-text="Please wait..." 
+				ng-click="createnetwork($event)" class="btn btn-inverse"> Send request</button>
+	</div>
+</div>
+<!-- modal -->
+<!-- modal -->
+<div class="modal  hide" id="invite">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"></button>
+		<h4 class="subHeading_no_underline">Send Invite</h4>
+	</div>
+	<div class="modal-body">
+		<input type="text" style="width: 500px;" placeholder="Enter email" />
+		<textarea style="width: 500px;" rows="9" placeholder="Type a message"></textarea>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a> <a href="#"
+			class="btn btn-primary"> Send request</a>
+	</div>
+</div>
+<!-- modal -->
