@@ -20,6 +20,10 @@
 	<mvc:resources mapping="/lib/**" 		location="/resources/lib/" />
 	<mvc:resources mapping="/templates/**" 	location="/resources/templates/" />
 	<!--  <mvc:resources mapping="/views/**" location="/views/" /> -->
+	
+	<mvc:interceptors>
+      <beans:bean class="org.netvogue.server.admin.interceptors.LoggerInterceptor" />
+    </mvc:interceptors>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

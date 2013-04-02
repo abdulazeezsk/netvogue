@@ -44,6 +44,8 @@
 		</dependency>	
 		
 		<!-- Logging -->
+		<!-- the slf4j-api is the only and the one and only one artifact you want to depend in compile scope. -->
+		<!-- http://blogs.cservenak.com/2011/04/slf4j-logging-maven.html -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -55,6 +57,7 @@
 			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- http://www.slf4j.org/faq.html#need_to_recompile -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
@@ -64,7 +67,7 @@
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
+			<version>1.2.16</version>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.mail</groupId>

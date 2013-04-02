@@ -66,9 +66,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
+import org.netvogue.server.neo4japi.domain.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.netvogue.server.neo4japi.domain.User;
 
 public class NetvogueUserDetails implements UserDetails {
 
@@ -77,6 +79,9 @@ public class NetvogueUserDetails implements UserDetails {
          */
         private static final long serialVersionUID = 1L;
         private final User user;
+        
+        private static final Logger logger = LoggerFactory
+    			.getLogger(NetvogueUserDetails.class);
         
         NetvogueUserDetails(User user) {
                 this.user = user;
@@ -89,7 +94,7 @@ public class NetvogueUserDetails implements UserDetails {
         }
 
         public String getPassword() {
-                System.out.println("Password stored is" + user.getPassword());
+                logger.debug("Password stored is" + user.getPassword());
                 return user.getPassword();
         }
 

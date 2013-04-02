@@ -33,8 +33,8 @@ public class AdminController {
 	@RequestMapping(value = "/admin/deactivateUser", method = RequestMethod.PUT)
 	public @ResponseBody
 	JsonResponse deactivateUser(@RequestBody final UserInfo userinfo) {
-		// logger.debug("Method - deactivateUser and user name is:  " +
-		// userinfo.getUserName());
+		 logger.debug("Method - deactivateUser and user name is:  " +
+		 userinfo.getUserName());
 		JsonResponse response = null;
 		String username = userinfo.getUserName();
 		String email = userinfo.getEmail();
@@ -50,7 +50,7 @@ public class AdminController {
 
 	private JsonResponse deactivateByUserName(String username) {
 		logger.debug("Method - deactivateUser and user name is:  " + username);
-		System.out.println("username: " + username);
+//		System.out.println("username: " + username);
 		JsonResponse response = new JsonResponse();
 		try {
 			if (ResultStatus.SUCCESS == adminService
@@ -72,7 +72,7 @@ public class AdminController {
 	private JsonResponse deactivateUserByEmail(String emailId) {
 		logger.debug("Method - deactivateUser and user email id is:  "
 				+ emailId);
-		System.out.println("email: " + emailId);
+//		System.out.println("email: " + emailId);
 		JsonResponse response = new JsonResponse();
 		try {
 			if (ResultStatus.SUCCESS == adminService
@@ -93,6 +93,8 @@ public class AdminController {
 	@RequestMapping(value = "/admin/activateUser", method = RequestMethod.PUT)
 	public @ResponseBody
 	JsonResponse activateUser(@RequestBody final UserInfo userinfo) {
+		logger.debug("Method - activateUser and user name is:  " +
+				 userinfo.getUserName());
 		JsonResponse response = null;
 		String username = userinfo.getUserName();
 		String email = userinfo.getEmail();
@@ -111,7 +113,7 @@ public class AdminController {
 
 	private JsonResponse activateByUserName(String username) {
 		logger.debug("Method - activateUser and user name is:  " + username);
-		System.out.println("username: " + username);
+//		System.out.println("username: " + username);
 		JsonResponse response = new JsonResponse();
 		try {
 			if (ResultStatus.SUCCESS == adminService
@@ -132,7 +134,7 @@ public class AdminController {
 
 	private JsonResponse activateUserByEmail(String emailId) {
 		logger.debug("Method - activateUser and user email id is:  " + emailId);
-		System.out.println("email: " + emailId);
+//		System.out.println("email: " + emailId);
 		JsonResponse response = new JsonResponse();
 		try {
 			if (ResultStatus.SUCCESS == adminService
@@ -154,7 +156,7 @@ public class AdminController {
 	public @ResponseBody
 	List<Map<String, Object>> getBoutiques(
 			@RequestParam("userType") String userType) throws Exception {
-		System.out.println("Testing usertype " + userType);
+		logger.info("Testing usertype " + userType);
 		List<Map<String, Object>> userList = adminService.getAllUsers(userType);
 		return userList;
 	}
