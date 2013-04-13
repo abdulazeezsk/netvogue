@@ -304,6 +304,7 @@ body {
 							Design</h1>
 					<a href="brand_Registration.jsp"  class="btn btn-large btn-inverse fontlato" href="#">Sign up as Brand</a>
 					<a href="boutique_Registration.jsp" class="btn btn-large btn-inverse" href="#">Sign up as Retailer</a>
+					<a href="boutique_Registration.jsp" class="btn btn-large btn-inverse" href="#">Sign up as User</a>
 						
 					</div>
 				</div>
